@@ -1,0 +1,150 @@
+@font-face {
+  font-family: Eina;
+  font-weight: 400;
+  src: url(~static/fonts/eina-03-regular.woff) format("woff"),
+  url(~static/fonts/Eina03-Regular.ttf) format("ttf");
+}
+@font-face {
+  font-family: Eina;
+  font-weight: 600;
+  src: url(~static/fonts/eina-03-semibold.woff) format("woff"),
+  url(~static/fonts/Eina03-SemiBold.ttf) format("ttf");
+}
+
+*{
+  box-sizing: border-box;
+}
+*:focus {
+  outline: 0 !important;
+}
+html, body{
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Eina','Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+#__nuxt{
+  height: 100%;
+}
+#__layout{
+  height: 100%;
+}
+
+.absolute-center-h-v{
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.absolute-center-v{
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+.border-light-gray{
+  @apply border border-solid border-gray-400;
+}
+
+svg,
+.svg-inline,
+.svg-inline--fa{
+  display: inline-block;
+}
+.svg-inline--fa.fa-w-10{
+  width: auto;
+  display: inline-block;
+}
+
+.gradient-bg{
+  background-image: linear-gradient(54deg,#ff00c7,#441184);
+}
+
+/*Transition*/
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+}
+
+/*Form*/
+select{
+  max-width: fit-content;
+  min-width: fit-content;
+}
+.field{
+  @apply text-gray-600 text-xl px-3 outline-none border border-solid border-gray-700 w-full;
+}
+.field--border-light{
+  @apply border-gray-400;
+}
+.field--border-none{
+  @apply border-0;
+}
+
+
+
+/*Buttons*/
+.btn{
+  @apply py-2 text-sm font-semibold text-center rounded-sm border border-solid outline-none cursor-pointer;
+  transition: all 0.3s;
+}
+.btn:hover{
+  @apply shadow-md;
+}
+
+.btn-small{
+  @apply px-3 text-sm font-normal py-0;
+  height: 30px;
+}
+.btn-small svg{
+  vertical-align: text-bottom;
+  display: inline-block;
+}
+.btn-small--white{
+  @apply text-gray-600 border-gray-500 bg-white;
+}
+
+.pill-button{
+  @apply rounded-full border-gray-500 py-1 bg-gray-200 text-gray-700 leading-loose;
+}
+.pill-button--ideeza{
+  @apply text-white bg-ideeza border-0;
+}
+.btn--ideeza{
+  @apply bg-ideeza text-white border-ideeza;
+}
+.btn--ideeza-dark{
+  @apply bg-ideeza-dark text-white border-ideeza-dark;
+}
+.btn-normal{
+  @apply px-1 font-thin rounded-none leading-none;
+  min-width: fit-content;
+}
+
+.vc-arrows-container{
+  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+
+}
+
+.vc-weekday{
+  color: black !important;
+  font-size: 15px !important;
+}
+.ideeza-arrow{
+  @apply text-ideeza;
+}
+
+@screen lg{
+  .btn{
+    @apply text-lg;
+  }
+  .btn-small{
+    @apply text-sm font-normal py-0;
+  }
+  .btn-normal{
+    min-width: 185px;
+  }
+}

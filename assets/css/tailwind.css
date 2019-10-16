@@ -1,0 +1,15 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@responsive {
+  .w-max-content{
+    min-width: max-content;
+  }
+
+  .w-fit-content{
+    min-width: fit-content;
+  }
+}
+
+
