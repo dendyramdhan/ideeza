@@ -20,7 +20,8 @@
     "lodash": "^4.17.15",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
-    "v-calendar": "^1.0.0-beta.22"
+    "v-calendar": "^1.0.0-beta.22",
+    "v-click-outside": "^2.1.4"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0"

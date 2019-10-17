@@ -4,7 +4,7 @@
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:py-10 lg:px-10">
+    <div class="flex-grow">
       <nuxt-child></nuxt-child>
 
     </div>
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-  import LeftMenu from '~/components/user/settings/left-side-menu.vue'
+  import LeftMenu from '~/components/user/common-left-side-menu.vue'
 
   export default {
     layout: 'user',
-    name: "settings-index",
+    name: "blog-index",
     components: {
       LeftMenu
     },
@@ -39,5 +39,7 @@
 </script>
 
 <style scoped>
+
+
 
 </style>
