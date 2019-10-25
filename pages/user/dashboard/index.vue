@@ -4,12 +4,12 @@
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-10 lg:pl-2 mb-20">
+    <div class="flex-grow lg:pt-10 lg:px-2  mb-20">
 
       <!--Status Cards-->
-      <div class="lg:flex">
+      <div class="lg:flex w-full cards-wrapper">
         <!--Money Earned-->
-        <div class="lg:mr-5 mr-0 mt-5 lg:mt-0">
+        <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
           <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Money Earned</h1>
           <div class="mx-auto lg:mx-none status-card bg-white shadow-md mt-5 p-3">
             <div class="text-right"><font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/></div>
@@ -21,7 +21,7 @@
         </div>
 
         <!--FeedBack-->
-        <div class="lg:mr-5 mr-0 mt-5 lg:mt-0">
+        <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
           <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Feedback</h1>
           <div class="status-card bg-white shadow-md mt-5 p-3">
             <div class="text-right"><font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/></div>
@@ -33,7 +33,7 @@
         </div>
 
         <!--Likes-->
-        <div class="mt-5 lg:mt-0">
+        <div class="card-container mt-5 lg:mt-0">
           <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Feedback</h1>
           <div class="status-card bg-white shadow-md mt-5 p-3">
             <div class="text-right"><font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/></div>
@@ -46,7 +46,7 @@
       </div>
 
 
-      <div class="lg:flex mt-10">
+      <div class="xl:flex mt-10">
         <!--Success Stories-->
         <div class="lg:mr-5">
           <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Success Stories</h1>
@@ -299,6 +299,9 @@
 </script>
 
 <style scoped>
+  .cards-wrapper{
+    max-width: 1530px;
+  }
   .status-card{
     width: 100%;
     height: 100px;
@@ -320,10 +323,23 @@
     max-width: 1530px;
   }
 
-  /*Table*/
-  @screen lg{
+  @screen md{
+
     .status-card{
-      width: 490px;
+
+      /*width: 200px;
+      height: 100px;*/
+    }
+
+  }
+
+
+  @screen lg{
+    .card-container{
+      @apply w-1/3;
+    }
+
+    .status-card{
       height: 160px;
     }
     table{
@@ -337,6 +353,13 @@
     }
     tbody tr:last-child td{
       @apply border-b border-solid border-gray-400 py-3 my-3;
+    }
+  }
+
+  @screen xl{
+    .messages{
+      width: 100%;
+      max-width: 630px;
     }
   }
 

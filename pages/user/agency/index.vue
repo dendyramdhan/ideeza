@@ -4,7 +4,7 @@
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-10 lg:pl-20">
+    <div class="flex-grow lg:pt-10 px-2  lg:px-5 xl:pl-20">
       <div class="lg:flex">
         <div class="lg:w-3/4 lg:mr-3 p-8 shadow-md bg-white">
           <!--Agency Header-->
@@ -93,13 +93,13 @@
             </div>
           </div>
         </div>
-        <div class="lg:w-2/6 ">
+        <div class="lg:w-2/6  ">
           <!--Business Managers-->
-          <div class="shadow-md p-5 bg-white mt-10 lg:mt-0">
+          <div class="p-5 bg-white mt-10 lg:mt-0">
             <h1 class="font-semibold text-gray-800 pb-3 mb-3 border-b border-solid border-gray-300">Business
               Managers</h1>
           </div>
-          <div class="flex justify-between items-center bg-white p-5">
+          <div class="flex justify-between items-center bg-white lg:p-1 xl:p-5">
             <div class="flex items-center">
               <img class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
                    src="https://randomuser.me/api/portraits/men/5.jpg">
@@ -109,16 +109,16 @@
               </div>
             </div>
 
-            <button class="btn btn-small btn-small--white">
+            <nuxt-link to="/user/messages" class="btn btn-normal px-3 py-2">
               <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'envelope']"/> Message
-            </button>
+            </nuxt-link>
           </div>
 
           <!--Agency Menvers-->
-          <div class="shadow-md p-5 bg-white mt-10 lg:mt-0">
+          <div class="p-5 bg-white mt-10 lg:mt-0">
             <h1 class="font-semibold text-gray-800 pb-3 mb-3 border-b border-solid border-gray-300">Agency Members</h1>
           </div>
-          <div class="flex justify-between items-center bg-white p-5">
+          <div class="flex justify-between items-center bg-white lg:p-1 xl:p-5">
             <div class="flex items-center">
               <img class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
                    src="https://randomuser.me/api/portraits/men/10.jpg">
@@ -128,11 +128,11 @@
               </div>
             </div>
 
-            <button class="btn btn-small btn-small--white">
+            <nuxt-link to="/user/messages" class="btn btn-normal px-1 py-1">
               <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'envelope']"/> Message
-            </button>
+            </nuxt-link>
           </div>
-          <div class="flex justify-between items-center bg-white p-5">
+          <div class="flex justify-between items-center bg-white lg:p-1 xl:p-5">
             <div class="flex items-center">
               <img class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
                    src="https://randomuser.me/api/portraits/men/10.jpg">
@@ -142,11 +142,11 @@
               </div>
             </div>
 
-            <button class="btn btn-small btn-small--white">
+            <nuxt-link to="/user/messages" class="btn btn-normal px-1 py-1">
               <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'envelope']"/> Message
-            </button>
+            </nuxt-link>
           </div>
-          <div class="flex justify-between items-center bg-white p-5">
+          <div class="flex justify-between items-center bg-white lg:p-1 xl:p-5">
             <div class="flex items-center">
               <img class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
                    src="https://randomuser.me/api/portraits/men/10.jpg">
@@ -156,11 +156,11 @@
               </div>
             </div>
 
-            <button class="btn btn-small btn-small--white">
+            <nuxt-link to="/user/messages" class="btn btn-normal px-1 py-1">
               <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'envelope']"/> Message
-            </button>
+            </nuxt-link>
           </div>
-          <div class="flex justify-between items-center bg-white p-5">
+          <div class="flex justify-between items-center bg-white lg:p-1 xl:p-5">
             <div class="flex items-center">
               <img class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
                    src="https://randomuser.me/api/portraits/men/10.jpg">
@@ -170,9 +170,9 @@
               </div>
             </div>
 
-            <button class="btn btn-small btn-small--white">
+            <nuxt-link to="/user/messages" class="btn btn-normal px-1 py-1">
               <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'envelope']"/> Message
-            </button>
+            </nuxt-link>
           </div>
         </div>
       </div>

@@ -23,7 +23,9 @@
 
     <div class="mt-12 text-center lg:text-left">
       <button class="btn btn-normal btn--ideeza mr-5 py-4 px-10 text-lg">Publish</button>
-      <button class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
+      <nuxt-link to="/user/blog/view">
+        <button class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
+      </nuxt-link>
     </div>
   </div>
 </template>

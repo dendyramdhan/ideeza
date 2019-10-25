@@ -23,9 +23,9 @@
       </div>
       <!--Menu-->
       <div class="flex justify-end">
-        <button class="cart-button bg-transparent rounded-full h-10 w-10 flex items-center justify-center mr-5 hidden lg:flex">
+        <nuxt-link to="/user/cart/overview" class="cart-button bg-transparent rounded-full h-10 w-10 flex items-center justify-center mr-5 hidden lg:flex">
           <img class="cart-icon" src="https://img.icons8.com/ios-glyphs/50/ffffff/shopping-cart.png">
-        </button>
+        </nuxt-link>
         <div class="flex justify-center items-center content-center w-m-c">
           <img class="h-10 w-10 rounded-full mr-2 " src="https://randomuser.me/api/portraits/men/17.jpg">
           <span class="text-white inline-block">John Doe</span>

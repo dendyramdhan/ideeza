@@ -44,13 +44,13 @@
       <table>
         <thead>
           <tr class="text-gray-800 h16">
-            <th class="text-left">Product</th>
-            <th class="text-left">Product No</th>
-            <th class="text-left">Build Time</th>
-            <th class="text-left">Quantity</th>
-            <th class="text-left">Price</th>
-            <th class="text-left">Manufacturers</th>
-            <th class="text-left">Order Status</th>
+            <th class="product-head" >Product</th>
+            <th >Product No</th>
+            <th >Build Time</th>
+            <th >Quantity</th>
+            <th >Price</th>
+            <th >Manufacturers</th>
+            <th >Order Status</th>
             <th></th>
           </tr>
         </thead>
@@ -151,10 +151,22 @@
 </script>
 
 <style scoped>
+  .product-head{
+    @apply text-left;
+  }
   .settings-transaction-history{
     max-width: 1200px;
   }
+  @screen md{
+    thead td,
+    tbody td{
+      @apply text-center px-1;
+    }
+  }
   @screen lg{
+    thead td{
+      @apply text-left;
+    }
     .product{
       width: 290px;
     }

@@ -37,6 +37,7 @@ html, body{
   margin-left: -300px;
 }
 /*Common Styles*/
+
 .absolute-center-h-v{
   position: absolute;
   margin: 0;
@@ -122,7 +123,12 @@ select{
   @apply font-thin rounded-none leading-none;
   min-width: fit-content;
 }
-
+.btn-text-bold{
+  @apply font-semibold;
+}
+.btn--rounded{
+  @apply rounded-lg;
+}
 .pill-button{
   @apply rounded-full border-gray-500 bg-gray-200 text-gray-700 leading-loose;
 }
@@ -130,6 +136,9 @@ select{
   @apply text-white bg-ideeza border-0;
 }
 
+.no-transition{
+  transition: none;
+}
 
 /*Calendar*/
 .vc-arrows-container{
@@ -150,6 +159,10 @@ select{
   /*Border*/
   .heading-border{
     @apply border-solid border-gray-300;
+  }
+
+  .heading-border--dark{
+    @apply border-gray-500;
   }
 
   .w-max-content{

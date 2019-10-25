@@ -8,7 +8,7 @@
 
       <div class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0">
         <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Task List</h1>
-        <div class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative bg-white">
+        <div class="lg:hidden cursor-pointer border-light-gray w-10 h-8 relative bg-white">
           <font-awesome-icon class="ml-1 h-6 text-gray-600 absolute-center-h-v" :icon="['fas', 'sliders-h']"/>
         </div>
       </div>
@@ -16,11 +16,11 @@
 
 
       <div class="w-full overflow-x-hidden">
-        <div class="task-wrapper flex overflow-x-auto">
+        <div class="task-wrapper flex flex-wrap">
 
           <!--Task Col-->
           <div class="task-col">
-            <div class="mx-auto  lg:mx-0 lg:mr-10 pb-5 shadow-md bg-white">
+            <div class="mx-auto  lg:mx-0 lg:mr-8 pb-5 shadow-md bg-white">
               <div class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400">
                 02nd Thursday
               </div>
@@ -132,7 +132,7 @@
 
           <!--Task Col-->
           <div class="hidden lg:block task-col ">
-            <div class="mr-10 pb-5 shadow-md bg-white">
+            <div class="mr-8 pb-5 shadow-md bg-white">
               <div class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400">
                 03rd Friday
               </div>
@@ -206,7 +206,7 @@
 
           <!--Task Col-->
           <div class="hidden lg:block task-col ">
-            <div class="mr-10 pb-5 shadow-md bg-white">
+            <div class="mr-8 pb-5 shadow-md bg-white">
               <div class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400">
                 03rd Friday
               </div>
@@ -376,8 +376,10 @@
 <style scoped>
 
   .task-col{
-    width: 380px;
-    min-width: 380px;
+    @apply mt-5;
+    width: 100%;
+    max-width: 370px;
+    min-width: 360px;
   }
   .task-wrapper{
     max-width: 1200px;
