@@ -11,7 +11,9 @@
           </nuxt-link>
         </div>
         <div class="menu-item">
-          <ProjectsIcon class="fill-current mr-5" /> My Projects
+          <nuxt-link to="/user/projects">
+            <ProjectsIcon class="fill-current mr-5" /> My Projects
+          </nuxt-link>
         </div>
         <div class="menu-item">
           <nuxt-link to="/user/tasklist">
@@ -34,8 +36,9 @@
 
         </div>
         <div class="menu-item">
-
-          <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'bold']"/> Blog
+          <nuxt-link to="/user/blog">
+            <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'bold']"/> Blog
+          </nuxt-link>
 
         </div>
       </div>

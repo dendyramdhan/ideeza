@@ -28,7 +28,15 @@ html, body{
 #__layout{
   height: 100%;
 }
-
+/*main panel*/
+.main-panel{
+  @apply bg-gray-100;
+  transition: all 0.3s ease-in;
+}
+.main-panel.hide-left-bar{
+  margin-left: -300px;
+}
+/*Common Styles*/
 .absolute-center-h-v{
   position: absolute;
   margin: 0;
@@ -87,7 +95,7 @@ select{
 
 /*Buttons*/
 .btn{
-  @apply py-2 text-sm font-semibold text-center rounded-sm border border-solid outline-none cursor-pointer;
+  @apply text-center rounded-sm border border-solid outline-none cursor-pointer;
   transition: all 0.3s;
 }
 .btn:hover{
@@ -95,22 +103,14 @@ select{
 }
 
 .btn-small{
-  @apply px-3 text-sm font-normal py-0;
   height: 30px;
 }
-.btn-small svg{
+.btn svg{
   vertical-align: text-bottom;
   display: inline-block;
 }
 .btn-small--white{
   @apply text-gray-600 border-gray-500 bg-white;
-}
-
-.pill-button{
-  @apply rounded-full border-gray-500 py-1 bg-gray-200 text-gray-700 leading-loose;
-}
-.pill-button--ideeza{
-  @apply text-white bg-ideeza border-0;
 }
 .btn--ideeza{
   @apply bg-ideeza text-white border-ideeza;
@@ -119,10 +119,19 @@ select{
   @apply bg-ideeza-dark text-white border-ideeza-dark;
 }
 .btn-normal{
-  @apply px-1 font-thin rounded-none leading-none;
+  @apply font-thin rounded-none leading-none;
   min-width: fit-content;
 }
 
+.pill-button{
+  @apply rounded-full border-gray-500 bg-gray-200 text-gray-700 leading-loose;
+}
+.pill-button--ideeza{
+  @apply text-white bg-ideeza border-0;
+}
+
+
+/*Calendar*/
 .vc-arrows-container{
   border-bottom: 1px solid lightgray;
   border-top: 1px solid lightgray;
@@ -137,14 +146,21 @@ select{
   @apply text-ideeza;
 }
 
-@screen lg{
-  .btn{
-    @apply text-lg;
+@responsive{
+  /*Border*/
+  .heading-border{
+    @apply border-solid border-gray-300;
   }
-  .btn-small{
-    @apply text-sm font-normal py-0;
+
+  .w-max-content{
+    min-width: max-content;
   }
-  .btn-normal{
-    min-width: 185px;
+
+  .w-fit-content{
+    min-width: fit-content;
+  }
+  .w-content{
+    width: fit-content;
   }
 }
+

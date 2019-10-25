@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="bg-gray-200 flex main-panel">
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <div class="flex-shrink flex flex-col justify-between p-10 bg-white h-full shadow left-side-bar">
       <div class="flex-shrink">
@@ -291,12 +291,7 @@
 </script>
 
 <style scoped>
-  .main-panel{
-    transition: all 0.3s ease-in;
-  }
-  .main-panel.hide-left-bar{
-    margin-left: -300px;
-  }
+
   .left-side-bar{
     width: 300px;
     min-width: 300px;

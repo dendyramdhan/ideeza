@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="bg-gray-200 flex main-panel">
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <LeftMenu/>
 
@@ -272,13 +272,7 @@
 </script>
 
 <style scoped>
-  .main-panel {
-    transition: all 0.3s ease-in;
-  }
 
-  .main-panel.hide-left-bar {
-    margin-left: -300px;
-  }
 
   p {
     @apply mt-5 text-base font-semibold text-gray-500;

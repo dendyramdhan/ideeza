@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="bg-gray-200 flex main-panel">
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <LeftMenu/>
 
@@ -64,8 +64,8 @@
               </div>
             </div>
             <div class="absolute bottom-0 right-0 pr-4 pb-1 lg:pr-20 lg:pb-8 z-30">
-              <button class="btn btn-normal btn--ideeza py-2 text-center block mb-1 lg:mb-3">Read More</button>
-              <button class="btn btn-normal btn--ideeza-dark py-2 text-center block">Try it Yourself</button>
+              <button class="btn btn-normal btn--ideeza py-2 lg:py-3 w-32 lg:w-40 text-center lg:block mb-1 lg:mb-3">Read More</button>
+              <button class="btn btn-normal btn--ideeza-dark py-2 lg:py-3 w-32 lg:w-40 text-center lg:block">Try it Yourself</button>
             </div>
           </div>
         </div>
@@ -299,13 +299,6 @@
 </script>
 
 <style scoped>
-  .main-panel {
-    transition: all 0.3s ease-in;
-  }
-
-  .main-panel.hide-left-bar {
-    margin-left: -300px;
-  }
   .status-card{
     width: 100%;
     height: 100px;
