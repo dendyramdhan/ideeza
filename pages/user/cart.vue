@@ -5,7 +5,7 @@
 
     <!-- Main Contents -->
     <div class="flex-grow">
-      <div class="cart-container">
+      <div class="main-contents">
         <div class="shadow-md bg-white">
           <CartStepper />
           <nuxt-child></nuxt-child>

@@ -4,7 +4,7 @@
     <LeftMenu/>
     <!-- Main Contents -->
     <div class="flex-grow lg:p-10">
-      <div class="profile-panel lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
+      <div class="main-contents lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
         <div class="left-panel">
           <img class="w-full" src="https://i.pravatar.cc/400?img=12" alt="">
 

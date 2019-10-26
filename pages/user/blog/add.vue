@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-container">
+  <div class="main-contents">
     <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Add new article</h1>
 
     <div class="field-container mt-10">

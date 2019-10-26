@@ -1,5 +1,5 @@
 <template>
-    <div class="blog-container">
+    <div class="main-contents">
       <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Your articles</h1>
 
       <div class="lg:flex justify-between items-center my-5">

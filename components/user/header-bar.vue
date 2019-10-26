@@ -27,8 +27,12 @@
           <img class="cart-icon" src="https://img.icons8.com/ios-glyphs/50/ffffff/shopping-cart.png">
         </nuxt-link>
         <div class="flex justify-center items-center content-center w-m-c">
-          <img class="h-10 w-10 rounded-full mr-2 " src="https://randomuser.me/api/portraits/men/17.jpg">
-          <span class="text-white inline-block">John Doe</span>
+          <nuxt-link to="/user/profile" class="flex items-center">
+            <img class="h-10 w-10 rounded-full mr-2 " src="https://randomuser.me/api/portraits/men/17.jpg">
+            <span class="text-white inline-block">John Doe</span>
+          </nuxt-link>
+
+
           <font-awesome-icon class="text-white cursor-pointer ml-5 lg:hidden h-4" :icon="['fas', 'ellipsis-v']"/>
         </div>
       </div>

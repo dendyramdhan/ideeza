@@ -57,8 +57,8 @@
           </td>
           <td class="lg:text-center" >
             <span class="font-semibold block">Manufacturer</span>
-            <div class="block mt-3">PCB way, Cha...  <font-awesome-icon @click="openManufacturer = true" class="mr-3 h-4 cursor-pointer text-ideeza" :icon="['fas', 'pen']"/></div>
-            <div class="block mt-3">Flying car N3, L...  <font-awesome-icon @click="openManufacturer = true" class="mr-3 h-4 cursor-pointer text-ideeza" :icon="['fas', 'pen']"/></div>
+            <div class="block mt-3">PCB way, Cha...  <nuxt-link to="/user/add-service"><font-awesome-icon @click="addManufacturer" class="mr-3 h-4 cursor-pointer text-ideeza" :icon="['fas', 'pen']"/></nuxt-link></div>
+            <div class="block mt-3">Flying car N3, L...  <nuxt-link to="/user/add-service"><font-awesome-icon class="mr-3 h-4 cursor-pointer text-ideeza" :icon="['fas', 'pen']"/></nuxt-link></div>
           </td>
           <td class="lg:text-center" >
             <span class="font-semibold block ">Price</span>
@@ -172,7 +172,11 @@
       mounted() {
         this.$store.commit('cartstepper/set', {position: 2})
       },
+      methods: {
+        addManufacturer () {
 
+        }
+      }
     }
 </script>
 

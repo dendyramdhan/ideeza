@@ -9,7 +9,7 @@
       <h1 class="mb-20 text-gray-800 text-2xl lg:text-4xl lg:mt-10 font-semibold">Order Tracking</h1>
       <Stepper  />
 
-      <div class="track-container mx-auto p-10 my-10 border border-solid border-ideeza">
+      <div class="track-container mx-auto lg:p-10 my-10 border border-solid border-ideeza">
         <nuxt-child></nuxt-child>
 
         <div v-if="trackStep <= 1" class="mt-20 flex justify-center items-center">

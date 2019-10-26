@@ -1,27 +1,34 @@
 <template>
   <div class="">
     <div class="track-heading">Delivering your order</div>
-    <div class="progress-bar">
-      <div class="h-full bg-ideeza flex justify-end items-center relative" :style="`width: ${width}%`">
-        <img class="mr-5" src="~/static/icons/truck-icon.svg" alt="">
-        <div class="percent-container">{{`${width}%`}}</div>
+    <div class="lg:flex">
+      <div class="progress-bar bg-gray-100 w-full lg:w-1/2">
+        <div class="h-full bg-ideeza flex justify-end items-center relative" :style="`width: ${width}%`">
+          <img class="mr-5" src="~/static/icons/truck-icon.svg" alt="">
+          <div class="percent-container">{{`${width}%`}}</div>
+        </div>
+      </div>
+
+      <div class="flex justify-center lg:ml-10 mt-10 w-full lg:w-1/2">
+        <div>
+          <span class="text-base lg:text-xl text-gray-500 font-semibold block">FROM</span>
+          <span class="text-lg lg:text-2xl text-gray-800 font-semibold block">Oklahoma, Ohio</span>
+        </div>
+        <div class="mx-5">
+          <span class="text-base lg:text-xl text-gray-500 font-semibold block">TO</span>
+          <span class="text-lg lg:text-2xl text-gray-800 font-semibold block">Toronto, Canada</span>
+        </div>
+        <div class="">
+          <span class="text-base lg:text-xl text-gray-500 font-semibold block">Estimated time</span>
+          <span class="text-lg lg:text-2xl text-gray-800 font-semibold block">~ 44 minutes left</span>
+        </div>
       </div>
     </div>
 
-    <div class="flex justify-center mt-10">
-      <div>
-        <span class="text-xl text-gray-500 font-semibold block">FROM</span>
-        <span class="text-2xl text-gray-800 font-semibold block">Oklahoma, Ohio</span>
-      </div>
-      <div class="mx-5">
-        <span class="text-xl text-gray-500 font-semibold block">TO</span>
-        <span class="text-2xl text-gray-800 font-semibold block">Toronto, Canada</span>
-      </div>
-      <div class="">
-        <span class="text-xl text-gray-500 font-semibold block">Estimated time</span>
-        <span class="text-2xl text-gray-800 font-semibold block">~ 44 minutes left</span>
-      </div>
+    <div class="mt-10">
+      <img src="~/static/images/track-map.png" class="w-full object-cover object-center" alt="">
     </div>
+
   </div>
 </template>
 
@@ -34,7 +41,7 @@
       },
       data: function(){
         return {
-          width: 40
+          width: 80
         }
       },
       mounted() {
@@ -56,7 +63,7 @@
     bottom: -10px;
   }
   .progress-bar{
-    @apply my-10 w-full border border-solid border-ideeza relative;
+    @apply my-10 border border-solid border-ideeza relative;
     height: 100px;
   }
   .percent-container{

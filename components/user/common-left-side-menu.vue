@@ -1,13 +1,13 @@
 <template>
-  <div class="flex flex-col  p-10 bg-white h-full shadow left-side-bar">
+  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar">
 
       <!--Left Menu-->
-      <div class="left-main-menu ">
+      <div class="left-main-menu p-10 relative w-full">
         <CommonMenuItems />
       </div>
 
 
-    <LeftBotMenu class="flex-srink" />
+    <LeftBotMenu class="flex-shrink sticky bottom-0 p-10 self-end w-full" />
 
 
   </div>
@@ -36,5 +36,7 @@
     width: 300px;
     min-width: 300px;
   }
+  .left-main-menu{
 
+  }
 </style>

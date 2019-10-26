@@ -4,9 +4,9 @@
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-16 lg:px-3 xl:pl-10">
+    <div class="flex-grow">
 
-      <div class="lg:flex">
+      <div class="main-contents lg:flex">
 
         <!--Feed Panel-->
         <div class="feed-panel">

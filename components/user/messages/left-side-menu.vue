@@ -1,15 +1,15 @@
 <template>
-  <div class="flex-shrink flex flex-col  bg-white h-full shadow left-side-bar">
-    <div class="flex-shrink">
+  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar">
 
-      <div class="my-5 flex justify-center items-center">
+
+      <div class="p-10 relative w-full flex justify-center items-center">
         <div @click="activeMenu='messages'" class="font-semibold mr-5 cursor-pointer" :class="{'text-ideeza underline': activeMenu === 'messages'}" >Message box</div>
         <div @click="activeMenu='menu'" class="font-semibold cursor-pointer" :class="{'text-ideeza underline': activeMenu === 'menu'}" >Menu</div>
       </div>
 
-      <div v-if="activeMenu === 'messages'">
+      <div class="relative w-full" v-if="activeMenu === 'messages'">
         <!--Search-->
-        <div class="p-10">
+        <div class="px-10 pb-5">
           <div class="flex bg-gray-200 border border-solid border-gray-500 rounded-sm">
             <div class="flex-shrink flex contents-center p-2 bg-gary-400">
               <img  src="https://img.icons8.com/ios-glyphs/22/a0aec0/search.png" >
@@ -20,7 +20,7 @@
           </div>
         </div>
         <!--Left Menu-->
-        <div class="left-main-menu border-t border-solid border-gray-300 ">
+        <div class="left-main-menu border-t border-solid border-gray-300 z-50 bg-white">
           <div class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 ">
             <div class="grow">
               <div class="flex items-center">
@@ -104,13 +104,12 @@
         </div>
       </div>
 
-      <div v-if="activeMenu === 'menu'" class="px-10">
+      <div v-if="activeMenu === 'menu'" class="px-10 relative w-full">
         <CommonMenu />
       </div>
 
-      <LeftBotMenu class="px-10" />
+      <LeftBotMenu class="flex-shrink sticky bottom-0 p-10 self-end w-full z-10" />
 
-    </div>
 
 
 

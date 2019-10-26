@@ -36,8 +36,9 @@
                          src="https://randomuser.me/api/portraits/women/17.jpg">
                     <img class="h-10 w-10 mr-2 rounded-full"
                          src="https://randomuser.me/api/portraits/men/16.jpg">
-                    <div class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative">
-                      <font-awesome-icon class="absolute-center-h-v mr-1 h-4 text-gray-600 hover:text-gray-800  cursor-pointer " :icon="['fas', 'plus']"/>
+                    <div @click="addNewMember = !addNewMember" class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative " :class="{'active': addNewMember}" >
+                      <font-awesome-icon class="absolute-center-h-v mr-1 h-4 " :icon="['fas', 'plus']"/>
+                      <InvitePopup v-if="addNewMember" />
                     </div>
                   </div>
 
@@ -148,8 +149,8 @@
                          src="https://randomuser.me/api/portraits/women/17.jpg">
                     <img class="h-10 w-10 mr-2 rounded-full"
                          src="https://randomuser.me/api/portraits/men/16.jpg">
-                    <div class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative">
-                      <font-awesome-icon class="absolute-center-h-v mr-1 h-4 text-gray-600 hover:text-gray-800  cursor-pointer " :icon="['fas', 'plus']"/>
+                    <div class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative " >
+                      <font-awesome-icon class="absolute-center-h-v mr-1 h-4" :icon="['fas', 'plus']"/>
                     </div>
                   </div>
 
@@ -340,16 +341,18 @@
 <script>
   import LeftMenu from '~/components/user/common-left-side-menu.vue'
   import CheckBox from '~/components/form/checkbox.vue'
-
+  import InvitePopup from '~/components/user/add-member/add-member-popup.vue'
   export default {
     layout: 'user',
     name: "task-index",
     components: {
       LeftMenu,
-      CheckBox
+      CheckBox,
+      InvitePopup
     },
     data: function () {
       return {
+        addNewMember: false,
         theme: {
           container: {
             light: 'ideeza-date-picker',
@@ -394,7 +397,16 @@
     @apply text-gray-500 text-sm
   }
   .add-member{
-    @apply h-10 w-10 mr-2 bg-gray-300 rounded-full relative;
+    @apply h-10 w-10 mr-2 bg-gray-300 rounded-full relative cursor-pointer text-gray-600;
+  }
+  .add-member:hover{
+    @apply text-gray-800;
+  }
+  .add-member.active{
+    @apply bg-ideeza-dark text-white;
+  }
+  .add-member.active:hover{
+    @apply text-white;
   }
   .important{
     @apply bg-ideeza-dark

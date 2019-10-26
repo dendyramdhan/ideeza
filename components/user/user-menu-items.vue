@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10 left-main-menu ">
+  <div class="left-main-menu ">
     <div class="menu-item">
       <nuxt-link to="/user/dashboard">
         <DashBoardIcon class="fill-current mr-5" /> Dashboard
