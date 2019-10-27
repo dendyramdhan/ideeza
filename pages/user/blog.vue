@@ -5,6 +5,7 @@
 
     <!-- Main Contents -->
     <div class="flex-grow">
+      <div></div>
       <nuxt-child></nuxt-child>
 
     </div>

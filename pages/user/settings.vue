@@ -4,7 +4,7 @@
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:py-10 lg:px-10">
+    <div class="flex-grow">
       <nuxt-child></nuxt-child>
 
     </div>

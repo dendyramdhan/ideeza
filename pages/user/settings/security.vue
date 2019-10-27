@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-security">
+  <div class="settings-security mx-auto">
     <!---->
     <!--Profile Information-->
     <!---->

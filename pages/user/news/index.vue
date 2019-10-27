@@ -4,9 +4,9 @@
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-16 lg:pl-10">
+    <div class="flex-grow">
 
-      <div class="lg:flex">
+      <div class="main-contents lg:flex">
 
         <!--Feed Panel-->
         <div class="feed-panel">
@@ -115,7 +115,7 @@
         </div>
 
         <!--Right Side Bar-->
-        <div class="rigt-bar lg:ml-12">
+        <div class="rigt-bar lg:ml-6 xl:ml-12">
 
           <!--Sponsor-->
           <div class="bg-white shadow-md">
@@ -154,7 +154,7 @@
                 </div>
               </div>
 
-              <button class="btn btn-small btn-small--white">
+              <button class="btn btn-normal px-2 py-2">
                 <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'link']"/> Connect
               </button>
             </div>
@@ -168,7 +168,7 @@
                 </div>
               </div>
 
-              <button class="btn btn-small btn-small--white">
+              <button class="btn btn-normal px-2 py-2">
                 <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'link']"/> Connect
               </button>
             </div>
@@ -182,7 +182,7 @@
                 </div>
               </div>
 
-              <button class="btn btn-small btn-small--white">
+              <button class="btn btn-normal px-2 py-2">
                 <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'link']"/> Connect
               </button>
             </div>
@@ -196,7 +196,7 @@
                 </div>
               </div>
 
-              <button class="btn btn-small btn-small--white">
+              <button class="btn btn-normal px-2 py-2">
                 <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'link']"/> Connect
               </button>
             </div>
@@ -248,7 +248,7 @@
   }
   .feed-avatar{
     width: 80px;
-    height: 80px;
+    /*height: 80px;*/
   }
   .feed-comment-avatar{
     width: 40px;

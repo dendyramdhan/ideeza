@@ -1,5 +1,5 @@
 <template>
-<div class="settings-notifications p-3 lg:p-0 lg:flex">
+<div class="settings-notifications p-2 lg:flex mx-auto">
 
   <!--Column 1-->
   <div class="column lg:mr-10">

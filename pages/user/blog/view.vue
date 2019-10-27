@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-container">
+  <div class="main-contents">
     <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Preview</h1>
 
     <div class="p-0 lg:py-10 lg:pl-10">

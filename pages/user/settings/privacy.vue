@@ -1,5 +1,5 @@
 <template>
-<div class="settings-privacy p-3">
+<div class="settings-privacy mx-auto p-2">
 
   <!---->
   <!--Social Connections-->

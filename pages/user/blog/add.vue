@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-container">
+  <div class="main-contents">
     <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Add new article</h1>
 
     <div class="field-container mt-10">
@@ -23,7 +23,9 @@
 
     <div class="mt-12 text-center lg:text-left">
       <button class="btn btn-normal btn--ideeza mr-5 py-4 px-10 text-lg">Publish</button>
-      <button class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
+      <nuxt-link to="/user/blog/view">
+        <button class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
+      </nuxt-link>
     </div>
   </div>
 </template>

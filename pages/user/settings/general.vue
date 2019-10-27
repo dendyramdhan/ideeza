@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-general">
+  <div class="settings-general mx-auto">
     <!---->
     <!--Profile Information-->
     <!---->

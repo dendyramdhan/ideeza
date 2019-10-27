@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-payment-methods">
+  <div class="main-contents">
     <!---->
     <!--Payment Methods-->
     <!---->

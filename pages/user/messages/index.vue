@@ -4,7 +4,7 @@
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:py-10 lg:px-10">
+    <div class="flex-grow lg:py-10 lg:px-3 xl:px-10">
       <div class="lg:flex">
         <div class="lg:w-3/4 lg:mr-3 shadow-md bg-white">
           <!--Header-->
@@ -145,7 +145,7 @@
             <div class="grow">
               <div class="flex">
                 <div class="mr-5">
-                  <img class="h-16 w-16 rounded-full"
+                  <img class="w-16 rounded-full"
                        src="https://randomuser.me/api/portraits/women/20.jpg">
                 </div>
                 <div>

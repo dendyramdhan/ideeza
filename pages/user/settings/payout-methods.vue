@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-payout-methods">
+  <div class="settings-payout-methods mx-auto">
     <!---->
     <!--Payout Methods-->
     <!---->
