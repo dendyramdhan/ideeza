@@ -1,6 +1,6 @@
 <template>
     <div class="relative" v-click-outside="onClickOutside">
-      <div @click="focus(true)" :class="{'py-4': dropdownStyle === 'normal', 'py-2': dropdownStyle === 'mini'}" class="flex justify-between items-center px-3  w-full bg-white border border-solid border-gray-300">
+      <div @click="focus(true)" :class="{'py-3': dropdownStyle === 'normal', 'py-1': dropdownStyle === 'mini', 'py-0': dropdownStyle === 'tiny'}" class="flex justify-between items-center px-3  w-full bg-white border border-solid border-gray-300">
         <div class="text-gray-800">{{value}}</div>
         <div class="relative mr-2"><font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'chevron-down']"/></div>
       </div>
@@ -32,8 +32,8 @@
           } else {
             this.value = this.placeholder;
           }
-          if(this.styleHeight === 'mini') {
-            this.dropdownStyle = 'mini'
+          if(this.styleHeight === 'mini' || this.styleHeight === 'tiny') {
+            this.dropdownStyle = this.styleHeight
           }
       },
         methods: {

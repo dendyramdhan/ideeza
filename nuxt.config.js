@@ -24,15 +24,23 @@ export default {
   ** Global CSS
   */
   css: [
+    // lib css
+    'codemirror/lib/codemirror.css',
+    // merge css
+    'codemirror/addon/merge/merge.css',
+    // theme css
+    'codemirror/theme/base16-dark.css',
     // CSS file in the project
     '@/assets/css/main.css',
+
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
     { src: '~/plugins/datepicker', ssr: false },
-    { src: '~/plugins/clickoutside', ssr: false }
+    { src: '~/plugins/clickoutside', ssr: false },
+    { src: '~plugins/nuxt-codemirror-plugin.js', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules

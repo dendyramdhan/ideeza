@@ -23,9 +23,11 @@
 
             <!--Agency Details-->
             <div class="mt-5">
+
               <h1 class="text-black font-semibold text-xl">
                 Agency Description
               </h1>
+
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a augue id eros gravida condimentum.
                 Ut

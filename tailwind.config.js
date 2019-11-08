@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       colors: {
         'ideeza': '#ff00c7',
+        'ideeza-100': '#F2EFF1',
         'ideeza-dark': '#431184'
       }
     }

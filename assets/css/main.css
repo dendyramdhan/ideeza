@@ -55,6 +55,18 @@ html, body{
   top: 50%;
   transform: translate(0, -50%);
 }
+.fixed-center-h-v{
+  position: fixed;
+  margin: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.fixed-center-v{
+  position: fixed;
+  top: 50%;
+  transform: translate(0, -50%);
+}
 .border-light-gray{
   @apply border border-solid border-gray-400;
 }
@@ -72,6 +84,21 @@ svg,
 .gradient-bg{
   background-image: linear-gradient(54deg,#ff00c7,#441184);
 }
+.popup-overlay{
+  @apply fixed top-0 left-0 w-full h-full z-40;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.popup-overlay--contents{
+  @apply bg-white shadow-lg z-50;
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
 
 /*Transition*/
 .page-enter-active, .page-leave-active {
