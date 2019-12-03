@@ -51,7 +51,6 @@
     font-weight: bold;
   }
 
-  /* Don't forget to hide the original file input! */
   .file-select > input[type="file"] {
     display: none;
   }

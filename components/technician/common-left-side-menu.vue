@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import CommonMenuItems from '~/components/user/user-menu-items.vue'
-  import LeftBotMenu from '~/components/user/left-menu-bot-items.vue'
+  import CommonMenuItems from '~/components/technician/user-menu-items.vue'
+  import LeftBotMenu from '~/components/technician/left-menu-bot-items.vue'
 
     export default {
         name: "common-left-side-menu",
