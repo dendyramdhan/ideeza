@@ -23,6 +23,9 @@
           <div class="menu-item">
             <nuxt-link to="/user/settings/transaction-history" >Transaction History</nuxt-link>
           </div>
+        <div class="menu-item">
+          <nuxt-link to="/user/settings/account-actions" >Account Actions</nuxt-link>
+        </div>
           <div class="menu-item">
             <nuxt-link to="/user/settings/privacy" >Privacy</nuxt-link>
           </div>
@@ -36,7 +39,6 @@
         <CommonMenu />
       </div>
 
-      <LeftBotMenu class="flex-shrink sticky bottom-0 p-10 self-end w-full z-10" />
 
 
 
@@ -46,11 +48,9 @@
 
 <script>
   import CommonMenu from '~/components/user/user-menu-items.vue'
-  import LeftBotMenu from '~/components/user/left-menu-bot-items.vue'
   export default {
     name: "settings-left-side-menu",
     components: {
-      LeftBotMenu,
       CommonMenu
     },
     data: function () {

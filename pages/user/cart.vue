@@ -9,14 +9,14 @@
         <div class="shadow-md bg-white">
           <CartStepper />
           <nuxt-child></nuxt-child>
-          <div v-if="cartStep < 7" class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative" :class="{'w-half': cartStep === 1}">
+          <div v-if="cartStep < 6" class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative" :class="{'w-half': cartStep === 1}">
             <button @click="moveBack" v-if="cartStep > 0" class="order-2 lg:order-1 my-4 lg:my-0 btn pill-button px-8 py-1"><font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-left']"/> Back</button>
-            <nuxt-link to="/user/dashboard" v-if="cartStep !== 6" class="order-1 lg:order-2 my-4 lg:my-0 btn pill-button px-8 py-1" >Continue shopping</nuxt-link>
-            <div v-if="cartStep === 6" class="order-1 lg:order-2 items-center content-center">
+            <nuxt-link to="/user/dashboard" v-if="cartStep !== 5" class="order-1 lg:order-2 my-4 lg:my-0 btn pill-button px-8 py-1" >Continue shopping</nuxt-link>
+            <div v-if="cartStep === 5" class="order-1 lg:order-2 items-center content-center">
              <span class="text-gray-500 font-semibold">Total Price:</span><span class="text-gray-800 text-xl font-semibold ml-10">$1000,000</span>
             </div>
-            <button v-if="cartStep <= 5 && cartStep !== 1" @click="moveNext" class="order-3 btn pill-button pill-button--ideeza px-8 py-1">Next<font-awesome-icon class="ml-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-right']"/></button>
-            <nuxt-link v-if="cartStep === 6" to="/user/cart/thankyou" class="order-3 btn pill-button pill-button--ideeza px-8 py-1">Confirm order</nuxt-link>
+            <button v-if="cartStep <= 4 && cartStep !== 1" @click="moveNext" class="order-3 btn pill-button pill-button--ideeza px-8 py-1">Next<font-awesome-icon class="ml-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-right']"/></button>
+            <nuxt-link v-if="cartStep === 5" to="/user/cart/thankyou" class="order-3 btn pill-button pill-button--ideeza px-8 py-1">Confirm order</nuxt-link>
           </div>
         </div>
       </div>
@@ -48,7 +48,6 @@
           '/user/cart/overview',
           '/user/cart/options',
           '/user/cart/cart',
-          '/user/cart/services',
           '/user/cart/delivery',
           '/user/cart/payment',
           '/user/cart/confirmation'

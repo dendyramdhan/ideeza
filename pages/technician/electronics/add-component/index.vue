@@ -128,14 +128,24 @@
 
       </div>
 
+      <div v-if="step > 3" class="bg-white shadow-md w-full text-center flex flex-col justify-between items-center font-semibold text-5xl py-32">
+        <div class="mx-auto">
+          <img src="~/static/images/e-processor.png" alt="">
+        </div>
+        <div class="mx-auto">
+          Congratulations!<br>
+          Your component is added
+        </div>
+      </div>
+
       <!--Bot Buttons-->
       <div class="mt-10 w-full mx-auto button-bar flex">
         <div class="w-1/2 text-left">
-          <button v-if="step > 0 && step!==2" @click="back" class="btn pill-button px-16 py-1">Back</button>
+          <button v-if="step > 0 && step!==2 && step < 4" @click="back" class="btn pill-button px-16 py-1">Back</button>
         </div>
         <div class="w-1/2 text-right">
           <button v-if="step < 2" @click="next" class="btn pill-button pill-button--ideeza px-16 py-1">Next</button>
-          <button v-if="step === 3" class="btn pill-button pill-button--ideeza px-16 py-1">Finish</button>
+          <button @click="next" v-if="step === 3" class="btn pill-button pill-button--ideeza px-16 py-1">Finish</button>
         </div>
       </div>
 
@@ -284,7 +294,7 @@
             return 33;
           else if(this.step === 2)
             return 66;
-          else if(this.step === 3)
+          else if(this.step >= 3)
             return 99;
         }
       },
@@ -294,7 +304,7 @@
                     this.step -= 1;
             },
             next() {
-              if(this.step < 3)
+              if(this.step < 4)
                   this.step += 1;
             },
             handle(drawer){

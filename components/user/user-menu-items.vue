@@ -12,7 +12,7 @@
     </div>
     <div class="menu-item">
       <nuxt-link to="/user/tasklist">
-        <TaskIcon class="fill-current mr-5" /> Task List
+        <TaskIcon class="fill-current mr-5" /> My Memo
       </nuxt-link>
     </div>
     <div class="menu-item">

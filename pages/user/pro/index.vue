@@ -113,6 +113,9 @@
                                                                                :icon="['fas', 'wrench']"/>General</span>
           </div>
         </div>
+
+        <Electronics v-if="currentMenu.name === 'Electronics'" />
+
       </div>
     </div>
   </div>
@@ -122,12 +125,14 @@
   import _ from 'lodash'
   import LeftBotMenu from '~/components/user/left-menu-bot-items.vue'
   import LeftMenu from '~/components/user/pro/left-menu.vue'
+  import Electronics from '~/components/user/pro/pro-electronics.vue'
     export default {
       layout: 'user',
       name: "index",
       components: {
         LeftMenu,
-        LeftBotMenu
+        LeftBotMenu,
+        Electronics
       },
       data: function () {
         return {

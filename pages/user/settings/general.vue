@@ -13,7 +13,7 @@
 
       <!--Form Fields-->
       <div class="form-field ">
-        <div class="field-label" >First Name</div>
+        <div class="field-label" >First Name <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']"/></div>
         <div class="field-input flex-grow">
           <input class="field h-10" name="first-name" />
         </div>

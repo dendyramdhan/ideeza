@@ -22,13 +22,9 @@
           <!--4-->
           <div class="stepper-icon-wrapper relative" :class="{'active': step >= 3 }">
             <span  class="absolute-center-h-v" >4</span>
-            <div class="stepper-text stepper-text--code" :class="{'active': step >= 3 }">Code</div>
+            <div class="stepper-text stepper-text--code" :class="{'active': step >= 3 }">General</div>
           </div>
-          <!--5-->
-          <div class="stepper-icon-wrapper relative" :class="{'active': step >= 4 }">
-            <span  class="absolute-center-h-v" >5</span>
-            <div class="stepper-text stepper-text--general" :class="{'active': step >= 4 }">General</div>
-          </div>
+
 
 
         </div>
@@ -39,21 +35,21 @@
       <AddSelectPart @selectType="next" class="mt-10" v-if="step === 0 && addPartSelectType" />
       <AddConfigure @back="step=0" @next="step = 2" class="mt-32" v-if="step === 1"  />
       <AddElectronics @back="step=1" @next="step = 3" class="mt-32" v-if="step === 2"  />
-      <AddCode @back="step=2" @next="step = 4" class="mt-32" v-if="step === 3"  />
-      <AddGeneral @back="step=3" @next="step = 5" class="mt-32" v-if="step === 4"  />
-      <general-review class="mt-32" v-if="step === 5" />
-      <AddFinish class="mt-32" v-if="step === 6" />
+
+      <AddGeneral @back="step=2" @next="step = 4" class="mt-32" v-if="step === 3"  />
+      <general-review class="mt-32" v-if="step === 4" />
+      <AddFinish class="mt-32" v-if="step === 5" />
 
 
 
       <!--Bot Buttons-->
-      <div v-if="step === 0 || (step >= 4 && step !== 6)" class="mt-10 w-full flex">
+      <div v-if="step === 0 || (step >= 3 && step !== 5)" class="mt-10 w-full flex">
         <div class="w-1/2 text-left">
           <button v-if="step > 0 " @click="back" class="btn pill-button px-16 py-0">Back</button>
         </div>
         <div class="w-1/2 text-right">
-          <button v-if="step <= 4" @click="next" class="btn pill-button px-16 py-0">Next</button>
-          <button v-if="step === 5" @click="next" class="btn pill-button pill-button--ideeza px-16 py-1">Finish</button>
+          <button v-if="step <= 3" @click="next" class="btn pill-button px-16 py-0">Next</button>
+          <button v-if="step === 4" @click="next" class="btn pill-button pill-button--ideeza px-16 py-1">Finish</button>
         </div>
       </div>
     </div>
@@ -99,8 +95,8 @@
       },
       computed: {
         overlayWidth () {
-            if(this.step < 5)
-              return this.step * 24.5;
+            if(this.step < 4)
+              return this.step * 33;
             else {
                 return 99;
             }
@@ -112,7 +108,7 @@
                     this.step -= 1;
             },
             next() {
-              if(this.step < 7)
+              if(this.step < 6)
                   this.step += 1;
             },
         }

@@ -56,7 +56,7 @@
           }
       },
       mounted() {
-        this.$store.commit('cartstepper/set', {position: 5})
+        this.$store.commit('cartstepper/set', {position: 4})
       },
       components: {
         'text-field': TextField,

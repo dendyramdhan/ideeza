@@ -6,22 +6,16 @@
         <CommonMenuItems />
       </div>
 
-
-    <LeftBotMenu class="flex-shrink sticky bottom-0 p-10 self-end w-full" />
-
-
   </div>
 </template>
 
 <script>
   import CommonMenuItems from '~/components/user/user-menu-items.vue'
-  import LeftBotMenu from '~/components/user/left-menu-bot-items.vue'
 
     export default {
         name: "common-left-side-menu",
       components: {
         CommonMenuItems,
-        LeftBotMenu,
       }
     }
 </script>

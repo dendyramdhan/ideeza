@@ -122,7 +122,7 @@
         name: "payment",
 
       mounted() {
-        this.$store.commit('cartstepper/set', {position: 6})
+        this.$store.commit('cartstepper/set', {position: 5})
       },
 
     }

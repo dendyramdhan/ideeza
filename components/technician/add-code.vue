@@ -8,7 +8,63 @@
         </div>
         <div class="flex items-center mr-5">
           <span class="mr-2">Language </span>
-          <DropDownField styleHeight="tiny" class="w-32"  />
+          <select v-model="selectedLanguage" @change="languageChange"  class="language-select">
+            <option  value="sh" >
+            Bash
+          </option><option selected  value="c_cpp" >
+            C
+          </option><option  value="c_cpp" >
+            C++
+          </option><option  value="clojure" >
+            Clojure
+          </option><option  value="cobol" >
+            Cobol
+          </option><option  value="coffee" >
+            CoffeeScript
+          </option><option  value="d" >
+            D
+          </option><option  value="elixir" >
+            Elixir
+          </option><option  value="erlang" >
+            Erlang
+          </option><option  value="fsharp" >
+            F#
+          </option><option  value="golang" >
+            Go
+          </option><option  value="haskell" >
+            Haskell
+          </option><option  value="java" >
+            Java
+          </option><option  value="javascript" >
+            Javascript
+          </option><option  value="kotlin" >
+            Kotlin
+          </option><option  value="mysql" >
+            MySQL
+          </option><option  value="perl" >
+            Perl
+          </option><option  value="php" >
+            PHP
+          </option>
+            <option  value="python" >
+              Python
+            </option>
+            <option  value="r" >
+            R
+          </option><option  value="ruby" >
+            Ruby
+          </option><option  value="rust" >
+            Rust
+          </option><option  value="scala" >
+            Scala
+          </option><option  value="scheme" >
+            Scheme
+          </option><option  value="swift" >
+            Swift
+          </option><option  value="vbscript" >
+            VB
+          </option>
+          </select>
         </div>
         <button class="btn pill-button px-5 mr-5">Upload Code</button>
         <button class="btn pill-button px-5 mr-5">Upload Image</button>
@@ -16,15 +72,11 @@
       </div>
     </div>
     <div>
-      <client-only placeholder="Loading...">
-        <codemirror v-model="code"
-                    :options="cmOption"
-                    @cursorActivity="onCmCursorActivity"
-                    @ready="onCmReady"
-                    @focus="onCmFocus"
-                    @blur="onCmBlur">
-        </codemirror>
-      </client-only>
+      <div class="code-container relative w-full bg-black py-5">
+        <div id="editor"></div>
+      </div>
+
+
     </div>
 
 
@@ -32,7 +84,6 @@
 </template>
 
 <script>
-    import 'codemirror/theme/base16-dark.css'
     import  DropDownField from '~/components/form/dropdown-field.vue'
     export default {
         name: "add-code",
@@ -41,44 +92,48 @@
         },
         data: function () {
             return {
-                code: 'int main(){}',
-                cmOption: {
-                    tabSize: 4,
-                    foldGutter: true,
-                    styleActiveLine: true,
-                    lineNumbers: true,
-                    line: true,
-                    keyMap: "sublime",
-                    mode: 'text/x-csrc',
-                    theme: 'base16-dark',
-                    extraKeys: {
-                        'F11'(cm) {
-                            cm.setOption("fullScreen", !cm.getOption("fullScreen"))
-                        },
-                        'Esc'(cm) {
-                            if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false)
-                        }
-                    }
-                }
+              editor: null,
+              contents: null,
+              selectedLanguage: 'c_cpp'
             }
         },
+      mounted() {
+        this.editor = ace.edit("editor", {
+          selectionStyle: "text"
+        });
+        this.languageChange();
+        this.setEditorTheme();
+      },
         methods: {
-            onCmCursorActivity(codemirror) {
-                console.log('onCmCursorActivity', codemirror)
-            },
-            onCmReady(codemirror) {
-                console.log('onCmReady', codemirror)
-            },
-            onCmFocus(codemirror) {
-                console.log('onCmFocus', codemirror)
-            },
-            onCmBlur(codemirror) {
-                console.log('onCmBlur', codemirror)
-            }
+          languageChange() {
+              this.editor.session.setMode('ace/mode/'+this.selectedLanguage);
+          },
+          setEditorTheme() {
+            this.editor.setTheme('ace/theme/monokai');
+          },
+          getEditorContents(){
+            return this.editor.getValue();
+          },
+          setEditorContents(contents) {
+            this.editor.getValue(contents);
+          }
         }
     }
 </script>
 
-<style scoped>
+<style>
+  .code-container{
+    height: 300px;
+  }
+  #editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    word-spacing: normal;
+    font-size: 14px;
+  }
+
 
 </style>

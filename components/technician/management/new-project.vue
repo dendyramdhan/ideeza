@@ -21,7 +21,7 @@
             <div class="mt-5">
               <TextAreaField rows="5" placeholder="Add project description here ...." />
             </div>
-            <button class="mt-5 btn btn-normal btn--ideeza px-6 py-2">Add Task +</button>
+            <button @click="$emit('newTask')" class="mt-5 btn btn-normal btn--ideeza px-6 py-2">Add Task +</button>
           </div>
 
           <div class="lg:ml-20">
