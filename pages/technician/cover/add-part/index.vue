@@ -14,7 +14,7 @@
 
     import Search from '~/components/technician/cover/search.vue'
 
-    import Cover from '~/components/technician/cover/cover.vue'
+    import Cover from '~/components/technician/cover/add-part.vue'
 
     export default {
         name: "index",

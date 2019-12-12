@@ -140,7 +140,7 @@
           </div>
         </div>
         <div class="view-container bg-gray-500">
-
+          <Engine />
         </div>
       </div>
     </div>
@@ -148,6 +148,7 @@
 </template>
 
 <script>
+  import Engine from '~/components/technician/electronics/add-part/engine.vue'
     export default {
         name: "configure",
         data: () => {
@@ -157,6 +158,9 @@
                 activeView: '3D'
             }
         },
+      components: {
+          Engine
+      },
         methods: {
             back () {
                 if(this.step > 1)

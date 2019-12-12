@@ -32,14 +32,16 @@
         </div>
       </template>
     </notifications>
+    <FloatButton />
   </div>
 </template>
 
 <script>
   import navigation from '~/components/user/header-bar.vue'
+  import FloatButton from '~/components/user/float-button/right-bot-float-button.vue'
   import { mapMutations } from 'vuex'
   export default {
-    components: {navigation},
+    components: {navigation, FloatButton},
     mounted() {
       console.log(this.$device.isMobile);
       if(this.$device.isMobile){

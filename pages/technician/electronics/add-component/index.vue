@@ -34,9 +34,16 @@
           <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
         </div>
         <input placeholder="Add more components" class="bg-white flex-grow outline-none h-8 text-gray-800 pr-3">
+
+
       </div>
 
-      <div v-if="step <= 1" class="w-full bg-gray-400 mt-10 components-container"></div>
+      <div v-if="step === 0" class="w-full relative bg-gray-400 mt-10 components-container">
+        <Schematic />
+      </div>
+      <div v-if="step === 1" class="w-full relative bg-gray-400 mt-10 components-container">
+        <Design />
+      </div>
 
       <div v-if="step === 2" class="w-full ">
         <h1 class="text-2xl font-semibold my-5">Choice on code</h1>
@@ -273,6 +280,8 @@
     import TextField from '~/components/form/text-field.vue'
     import TextArea from '~/components/form/text-area.vue'
     import DropDownField from '~/components/form/dropdown-field.vue'
+    import Schematic from '~/components/technician/electronics/add-component/schematics.vue'
+    import Design from '~/components/technician/electronics/add-component/design.vue'
     export default {
         name: "index",
         data: function () {
@@ -284,7 +293,9 @@
       components: {
             TextField,
           TextArea,
-          DropDownField
+          DropDownField,
+        Schematic,
+        Design
       },
       computed: {
         overlayWidth () {
@@ -319,7 +330,7 @@
 
 <style scoped>
   .components-container{
-    height: 400px;
+
   }
   .email-support-container{
     width: 100%;
