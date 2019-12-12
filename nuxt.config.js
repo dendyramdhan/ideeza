@@ -14,6 +14,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto&display=swap' }
+    ],
+    script: [
+      // {src: '/ace/ace.js'}
     ]
   },
   /*
@@ -24,15 +27,8 @@ export default {
   ** Global CSS
   */
   css: [
-    // lib css
-    'codemirror/lib/codemirror.css',
-    // merge css
-    'codemirror/addon/merge/merge.css',
-    // theme css
-    'codemirror/theme/base16-dark.css',
     // CSS file in the project
     '@/assets/css/main.css',
-
   ],
   /*
   ** Plugins to load before mounting the App
@@ -40,7 +36,13 @@ export default {
   plugins: [
     { src: '~/plugins/datepicker', ssr: false },
     { src: '~/plugins/clickoutside', ssr: false },
-    { src: '~plugins/nuxt-codemirror-plugin.js', ssr: false }
+    { src: '~/plugins/dragged-plugin.js', ssr: false },
+    { src: '~/plugins/apex-chart-plugin.js', ssr: false },
+    { src: '~/plugins/ace-editor-plugin.js', ssr: false },
+    { src: '~/plugins/scrollbar-plugin.js', ssr: false },
+    { src: '~/plugins/notification-plugin.js', ssr: false },
+    { src: '~/plugins/table-plugin.js'},
+    {src: '~/plugins/vue2-filters-plugin'}
   ],
   /*
   ** Nuxt.js dev-modules

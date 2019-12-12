@@ -4,9 +4,9 @@
     <LeftMenu/>
     <!-- Main Contents -->
     <div class="flex-grow lg:p-10">
-      <div class="main-contents lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
+      <div class="lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
         <div class="left-panel">
-          <img class="w-full" src="https://i.pravatar.cc/400?img=12" alt="">
+          <img class="w-full" src="https://i.pravatar.cc/400?img=13" alt="">
 
           <div class="mt-10 mb-5 semi-border  relative">
             <span class="font-semibold text-gray-500 pr-3 bg-white">SOCIAL MEDIA</span>
@@ -42,26 +42,26 @@
             </span>
           </div>
         </div>
-        <div class="lg:ml-20 flex-grow">
+        <div class="lg:ml-16 flex-grow">
           <div class="w-full flex justify-between items-top">
             <div class="lg:flex items-top">
-              <div class="text-3xl font-semibold">
+              <div class="text-3xl font-semibold leading-none">
                 John Doe
-                <span class="block font-semibold text-xl text-ideeza-dark">Product Designer</span>
+                <span class="block font-normal text-base text-ideeza-dark mt-3">Product Designer</span>
               </div>
-              <div class="lg:ml-10 text-gray-500 font-semibold text-xl">
-                <font-awesome-icon class="mr-3 h-6" :icon="['fas', 'map-marker-alt']"/>
+              <div class="lg:ml-10 text-gray-500">
+                <font-awesome-icon class="mr-1 h-6 align-middle" :icon="['fas', 'map-marker-alt']"/>
                 New york, NY
               </div>
             </div>
-            <div>
-              <span class="text-gray-500 font-semibold">Report user</span>
-            </div>
+            <nuxt-link to="/user/settings/notifications">
+              <font-awesome-icon class="mr-1 h-4 text-sm inline-block cursor-pointer" :icon="['fas', 'cog']"/>
+            </nuxt-link>
           </div>
-          <div class="lg:mt-20">
-            <span class="font-semibold text-gray-500 block">RATINGS</span>
+          <div class="lg:mt-10">
+            <span class="text-gray-500 block">RATINGS</span>
             <div class="flex items-center">
-              <span class="text-gray-800 font-semibold text-3xl">4,0</span>
+              <span class="text-gray-800 font-semibold text-xl">4,0</span>
               <img class="rating-star" src="~/static/images/star.png" alt="">
               <img class="rating-star" src="~/static/images/star.png" alt="">
               <img class="rating-star" src="~/static/images/star.png" alt="">
@@ -69,58 +69,25 @@
               <img class="rating-star" src="~/static/images/star-gray.png" alt="">
             </div>
           </div>
-          <div class="lg:mt-20 lg:flex items-center">
-            <div class=" flex items-center cursor-pointer text-gray-600 text-xl hover:text-gray-800 font-semibold">
-              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'envelope']"/>
-              <span>Send message</span>
-            </div>
-            <div class="lg:mx-10">
-              <button class="btn btn-normal btn-text-bold text-gray-600 px-10 py-4"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'check']"/> Contacts</button>
-            </div>
-            <div class="lg:mx-10 hidden">
-              <button class="btn btn-normal btn-text-bold text-gray-600 px-10 py-4">Add to Contacts</button>
-            </div>
-            <div class="hidden">
-              <button class="btn btn-normal btn-text-bold text-gray-600 px-10 py-4">Send Agency Invitation</button>
-            </div>
-          </div>
+
 
           <!--Tabs-->
           <div class="tabs-container z-10 relative flex lg:mt-20">
-            <div @click="tabItem='timeline'" class="tab-item" :class="{active: tabItem === 'timeline', 'border-bot': tabItem !== 'timeline'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'eye']"/> Timeline</div>
             <div @click="tabItem='about'" class="tab-item" :class="{active: tabItem === 'about', 'border-bot': tabItem !== 'about'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'user']"/> About</div>
             <div @click="tabItem='projects'" class="tab-item" :class="{active: tabItem === 'projects', 'border-bot': tabItem !== 'projects'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'lightbulb']"/> Projects</div>
+            <div @click="tabItem='timeline'" class="tab-item" :class="{active: tabItem === 'timeline', 'border-bot': tabItem !== 'timeline'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'eye']"/> Shared Projects</div>
+
             <div @click="tabItem='reviews'" class="tab-item" :class="{active: tabItem === 'reviews', 'border-bot': tabItem !== 'reviews'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'star']"/> Reviews</div>
           </div>
           <!--Time line-->
           <div v-if="tabItem === 'timeline'" class="mt-5">
             <!--New Feed-->
-            <div class="mb-10">
-
-              <div class="flex-grow bg-white border border-solid border-gray-700 p-5">
-                <div class="text-ideeza font-semibold text-lg mb-5">
-                  <font-awesome-icon class="mr-1 h-4 inline-block" :icon="['fas', 'pen']"/>
-                  Share Project
-                </div>
-                <div class="bg-gray-200 py-5 px-3 flex justify-center items-center">
-                  <div class="flex-grow">
-                    <input class="w-full px-1 bg-gray-200 text-lg text-gray-600 font-semibold outline-none" placeholder="Lorem ipsum dolores sit ?" >
-                  </div>
-                  <div>
-                    <font-awesome-icon class="mr-1 h-4 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'paperclip']"/>
-                    <font-awesome-icon class="mr-1 h-4 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'camera']"/>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
 
             <div class="flex mb-10 ">
 
-              <div class="flex-grow bg-white border border-solid border-gray-700 p-5">
-                <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between">
-                  <div>John Doe <span class="font-normal">likes a project</span> • <span class="font-normal text-xs">2 hours ago</span></div>
+              <div class="flex-grow bg-white p-5 shadow">
+                <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
+                  <div>Sarah Doe <span class="font-normal">add a new project</span> <span class="text-gray-800">Retro Headphones</span> • <span class="font-normal text-xs">3 weeks ago</span></div>
                   <div>
                     <font-awesome-icon class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
                   </div>
@@ -128,17 +95,32 @@
                 <div class="bg-gray-200">
                   <img class="w-full object-fit object-center" src="~/static/images/car-big.png" alt="">
                 </div>
-                <div class="mt-10">
-                  <button class="btn pill-button px-6 mr-3">Like</button>
-                  <button class="btn pill-button px-6 mr-3">Share</button>
-                  <button class="btn pill-button px-6 mr-3">Comment</button>
+                <div class="mt-10 flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3" :icon="['fas', 'thumbs-up']"/> LIKE
+                    </div>
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3" :icon="['fas', 'share-alt']"/> SHARE
+                    </div>
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3" :icon="['fas', 'comment-dots']"/> COMMENT
+                    </div>
+                  </div>
+
+                  <div class="flex items-center font-semibold">
+                    <div class="mr-6 text-ideeza">26 comments</div>
+                    <div class="mr-6">3 share</div>
+                  </div>
+
+
                 </div>
               </div>
             </div>
 
             <div class="flex mb-10">
 
-              <div class="flex-grow bg-white border border-solid border-gray-700 py-5">
+              <div class="flex-grow bg-white py-5 shadow">
                 <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
                   <div>Sarah Doe <span class="font-normal">add a new project</span> <span class="text-gray-800">Retro Headphones</span> • <span class="font-normal text-xs">3 weeks ago</span></div>
                   <div>
@@ -148,14 +130,26 @@
                 <div class="bg-gray-200 mx-5">
                   <img class="w-full object-fit object-center" src="~/static/images/headphone-big.png" alt="">
                 </div>
-                <div class="mt-10 lg:flex mx-5">
-                  <img class="mt-2 mr-2 lg:mt-0" src="~/static/images/headphone-1.png" alt="">
-                  <img class="mt-2 lg:mt-0" src="~/static/images/headphone-2.png" alt="">
-                </div>
-                <div class="my-10 mx-5">
-                  <button class="btn pill-button pill-button--ideeza px-3 lg:px-6 mr-1 lg:mr-3">Don't Like</button>
-                  <button class="btn pill-button px-3 lg:px-6 mr-1 lg:mr-3">Share</button>
-                  <button class="btn pill-button px-3 lg:px-6 mr-1 lg:mr-3">Comment</button>
+
+                <div class="p-10 flex justify-between items-center">
+                  <div class="flex items-center">
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3" :icon="['fas', 'thumbs-up']"/> LIKE
+                    </div>
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3" :icon="['fas', 'share-alt']"/> SHARE
+                    </div>
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3" :icon="['fas', 'comment-dots']"/> COMMENT
+                    </div>
+                  </div>
+
+                  <div class="flex items-center font-semibold">
+                    <div @click="showComments = !showComments" class="mr-6 text-ideeza cursor-pointer">26 comments</div>
+                    <div class="mr-6">3 share</div>
+                  </div>
+
+
                 </div>
 
                 <div class="text-gray-600 text-lg border-t border-b border-solid border-gray-300 py-5 px-5">
@@ -163,22 +157,108 @@
                 </div>
 
                 <!--Comments-->
-                <div class="border-b border-solid border-gray-300 py-5 px-5">
-                  <div class="flex">
-                    <div class="mr-10 w-16">
+                <div v-if="showComments" class="border-b border-solid border-gray-300 py-5 px-5">
+                  <div class="flex w-full mb-10">
+                    <div class="w-16">
                       <img class="feed-comment-avatar rounded-full" src="https://randomuser.me/api/portraits/men/15.jpg" alt="">
                     </div>
-                    <div >
-                      <div class="text-gray-600 text-lg">
-                        <span class="mr-10 inline-block font-semibold">William Doe</span> Great product, love the design and function of it,
-                        <br>
-                        pcb card is beautifully arranged... keep on going :)
+                    <div class="flex-grow bg-gray-200 rounded p-5" >
+                      <div class="flex justify-between">
+                        <div>
+                          <h2 class="mr-10 font-semibold">William Doe</h2>
+                          <span class="text-xs font-hairline">Consultant at Google Inc.</span>
+                        </div>
+                        <div>3 min ago.</div>
                       </div>
-                      <div class="text-base text-gray-600 mt-5">
-                        <span class="text-ideeza">Like</span> • <span class="text-ideeza">Reply</span> • <span class="text-sm">2 week ago</span>
+                      <p class="text-xs my-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus libero at odio vestibulum, at blandit justo sagittis. Vestibulum eget dui massa.
+                      </p>
+                      <div class="flex items-center">
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'thumbs-up']"/> 90
+                        </div>
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'comment-dots']"/> 90
+                        </div>
                       </div>
                     </div>
                   </div>
+                  <div class="flex w-full pl-16 mb-10">
+                    <div class="w-16">
+                      <img class="feed-comment-avatar rounded-full" src="https://randomuser.me/api/portraits/men/15.jpg" alt="">
+                    </div>
+                    <div class="flex-grow bg-gray-200 rounded p-5" >
+                      <div class="flex justify-between">
+                        <div>
+                          <h2 class="mr-10 font-semibold">William Doe</h2>
+                          <span class="text-xs font-hairline">Consultant at Google Inc.</span>
+                        </div>
+                        <div>3 min ago.</div>
+                      </div>
+                      <p class="text-xs my-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus libero at odio vestibulum, at blandit justo sagittis. Vestibulum eget dui massa.
+                      </p>
+                      <div class="flex items-center">
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'thumbs-up']"/> 90
+                        </div>
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'comment-dots']"/> 90
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex w-full mb-10">
+                    <div class="w-16">
+                      <img class="feed-comment-avatar rounded-full" src="https://randomuser.me/api/portraits/men/15.jpg" alt="">
+                    </div>
+                    <div class="flex-grow bg-gray-200 rounded p-5" >
+                      <div class="flex justify-between">
+                        <div>
+                          <h2 class="mr-10 font-semibold">William Doe</h2>
+                          <span class="text-xs font-hairline">Consultant at Google Inc.</span>
+                        </div>
+                        <div>3 min ago.</div>
+                      </div>
+                      <p class="text-xs my-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus libero at odio vestibulum, at blandit justo sagittis. Vestibulum eget dui massa.
+                      </p>
+                      <div class="flex items-center">
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'thumbs-up']"/> 90
+                        </div>
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'comment-dots']"/> 90
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex w-full mb-10">
+                    <div class="w-16">
+                      <img class="feed-comment-avatar rounded-full" src="https://randomuser.me/api/portraits/men/15.jpg" alt="">
+                    </div>
+                    <div class="flex-grow bg-gray-200 rounded p-5" >
+                      <div class="flex justify-between">
+                        <div>
+                          <h2 class="mr-10 font-semibold">William Doe</h2>
+                          <span class="text-xs font-hairline">Consultant at Google Inc.</span>
+                        </div>
+                        <div>3 min ago.</div>
+                      </div>
+                      <p class="text-xs my-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean cursus libero at odio vestibulum, at blandit justo sagittis. Vestibulum eget dui massa.
+                      </p>
+                      <div class="flex items-center">
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'thumbs-up']"/> 90
+                        </div>
+                        <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                          <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1" :icon="['fas', 'comment-dots']"/> 90
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
                 <!--Write Comments-->
@@ -192,7 +272,13 @@
 
           <!--About-->
           <div class="mt-5" v-if="tabItem === 'about'">
-            <h1 class="text-gray-500 font-semibold txt-xl my-10">CONTACT INFORMATION</h1>
+            <div class="flex justify-between items-center">
+              <h1 class="text-gray-500 font-semibold txt-xl my-10">CONTACT INFORMATION</h1>
+              <nuxt-link to="/user/settings/general">
+                <button class="btn btn-normal btn-small px-2">Edit profile</button>
+              </nuxt-link>
+            </div>
+
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Phone:</div>
               <div class="text-ideeza-dark">+1 22 333 4567</div>
@@ -304,12 +390,19 @@
       },
       data: function() {
         return {
-          tabItem: 'timeline'
+          tabItem: 'timeline',
+          focusMore: false,
+          showComments: false
         }
       },
       computed: {
         leftMenu () {
           return this.$store.state.usermenu.openLeftMenu;
+        }
+      },
+      methods: {
+        onClickOutside() {
+          this.focusMore = false;
         }
       }
     }
@@ -338,8 +431,8 @@
   }
   .rating-star{
     @apply inline ml-3;
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
   }
   .tab-item{
     @apply cursor-pointer z-50 bg-white px-5 py-5 font-semibold text-xl text-gray-500 flex items-center;
@@ -364,6 +457,9 @@
   .project-image{
     @apply mr-2 mb-2;
     max-width: 285px;
+  }
+  .feed-comment-avatar{
+    width: 48px;
   }
   @screen lg{
     .left-panel{

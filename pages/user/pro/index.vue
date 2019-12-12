@@ -15,80 +15,45 @@
 
         <!--Left Menu-->
         <div class="mt-10 ">
-          <div v-if="currentMenu">
+          <div class="menu-button-container" v-if="currentMenu.name === 'Electronics'">
 
-            <div class="cursor-pointer  mb-3 flex relative content-center " @click="mainDropDownActive=!mainDropDownActive">
-              <div class="relative block w-5" ><img :class="{'active': mainDropDownActive}" class="absolute-center-v main-arrow" src="https://img.icons8.com/ios-glyphs/11/ff00c7/chevron-right.png"></div>
-              <div :class="{'text-ideeza': mainDropDownActive}" class="text-lg font-semibold">{{currentMenu.name}}</div>
+            <div class="mb-3 flex relative content-center font-semibold" >
+              Electronics
             </div>
             <!--Sub Menu Items-->
+            <button>Placement</button>
+            <button>Show Top Layer</button>
+            <button>Show Bottom Layer</button>
+            <button>VR</button>
+            <button>Add Text</button>
+            <button>Create Routes</button>
+            <button>Get Data</button>
+            <button>Send Data</button>
+            <button>Save Board</button>
+            <button>Save Component</button>
+            <button>Reset Save Data</button>
+            <button>Empty Board</button>
 
-            <div v-if="currentMenu.children" :class="{'border-b': mainDropDownActive}" class="pb-3 pt-3 border-t border-solid border-gray-300">
-              <transition-group name="left-dropdown">
-                <ul v-if="mainDropDownActive" :class="{active: mainDropDownActive}" v-for="(childItem, index) in currentMenu.children" :key="childItem.id"  class="sub-menu ml-3 text-gray-600 hover:text-black">
-                  <li class="cursor-pointer pb-3 flex relative content-center" @click="changeState(childItem)">
-                    <div v-if="childItem.children" class="relative block w-5" ><img :class="{'active': childItem.isActive}" class="absolute-center-v main-arrow" src="https://img.icons8.com/ios-glyphs/11/718096/chevron-right.png"></div>
-                    <div class="text-lg ">{{childItem.name}}</div>
-                  </li>
-                  <!--Sub Sub Menu Items-->
-                  <li class="sub-menu" :class="{'block': childItem.isActive, 'hidden': !childItem.isActive}" v-if="childItem.children">
+            <hr />
 
-                    <ul v-for="subChildItem in childItem.children" :key="subChildItem.id" class="sub-menu ml-3 text-gray-600">
-                      <li class="cursor-pointer pb-3 flex relative content-center" @click="changeState(subChildItem)">
-                        <div v-if="subChildItem.children" class="relative block w-5" ><img :class="{'active': subChildItem.isActive}" class="absolute-center-v main-arrow" src="https://img.icons8.com/ios-glyphs/11/718096/chevron-right.png"></div>
-                        <div class="text-lg ">{{subChildItem.name}}</div>
-                      </li>
-                      <!--Sub Sub Sub Menu Items-->
-                      <li class="sub-menu" :class="{'block': childItem.isActive, 'hidden': !childItem.isActive}" v-if="subChildItem.children">
-                        <ul v-for="subSubChildItem in subChildItem.children" :key="subSubChildItem.id" class="sub-menu ml-3 text-gray-600">
-                          <li class="cursor-pointer pb-3 flex relative content-center">
-                            <div v-if="subSubChildItem.children" class="relative block w-5" ><img class="absolute-center-v" src="https://img.icons8.com/ios-glyphs/11/718096/chevron-right.png"></div>
-                            <div class="text-lg ">{{subSubChildItem.name}}</div>
-                          </li>
-                          <!--Sub Sub Sub Sub Menu Items-->
-                          <li v-if="subSubChildItem.children" class="cursor-pointer pb-3 flex relative content-center">
-                            <ul v-for="subSubSubChildItem in subSubChildItem.children" :key="subSubSubChildItem.id" class="sub-menu ml-3 text-gray-600">
-                              <li class="cursor-pointer pb-3 flex relative content-center">
-                                <div v-if="subSubSubChildItem.children" class="relative block w-5" ><img class="absolute-center-v" src="https://img.icons8.com/ios-glyphs/11/718096/chevron-right.png"></div>
-                                <div class="text-lg ">{{subSubSubChildItem.name}}</div>
-                              </li>
+            <check-box class="mb-2">Toggle Interaction</check-box>
+            <check-box class="mb-2" >Draw Text</check-box>
+            <check-box class="mb-2">Build Holes</check-box>
+            <check-box class="mb-2">Component Area</check-box>
+            <check-box class="mb-2">Grid</check-box>
+            <check-box class="mb-2">Background</check-box>
+            <div class="flex items-center font-semibold text-lg text-ideeza-black"><input class="mr-3" type="color" > BG Color  </div>
 
+            <hr />
 
-                              <li v-if="subSubSubChildItem.children" class="cursor-pointer pb-3 flex relative content-center">
-                                <ul v-for="lastItem in subSubSubChildItem.children" :key="lastItem.id" class="sub-menu ml-3 text-gray-600">
-                                  <li class="cursor-pointer pb-3 flex relative content-center">
-                                    <div class="text-lg ">{{lastItem.name}}</div>
-                                  </li>
-
-
-                                </ul>
-
-
-                              </li>
-
-                            </ul>
-
-
-                          </li>
-
-                        </ul>
-                      </li>
-
-                    </ul>
-
-                  </li>
-                </ul>
-              </transition-group>
-            </div>
-
-
-
-
+            <nuxt-link class="button" to="/technician/electronics/add-part">Add Part</nuxt-link>
+            <nuxt-link class="button" to="technician/electronics/add-component">Add Component</nuxt-link>
+            <nuxt-link class="button" to="technician/electronics/add-pcb">Add PCB</nuxt-link>
           </div>
         </div>
       </div>
 
-      <LeftBotMenu class="flex-shrink border-t border-solid border-gray-300"/>
+
 
     </div>
 
@@ -113,6 +78,9 @@
                                                                                :icon="['fas', 'wrench']"/>General</span>
           </div>
         </div>
+
+        <Electronics v-if="currentMenu.name === 'Electronics'" />
+        <Cover v-if="currentMenu.name === 'Cover'" />
       </div>
     </div>
   </div>
@@ -120,14 +88,18 @@
 
 <script>
   import _ from 'lodash'
-  import LeftBotMenu from '~/components/user/left-menu-bot-items.vue'
   import LeftMenu from '~/components/user/pro/left-menu.vue'
+  import Electronics from '~/components/user/pro/pro-electronics.vue'
+  import Cover from '~/components/user/pro/pro-cover.vue'
+  import CheckBox from '~/components/form/checkbox.vue'
     export default {
       layout: 'user',
       name: "index",
       components: {
         LeftMenu,
-        LeftBotMenu
+        Electronics,
+        Cover,
+        'check-box': CheckBox
       },
       data: function () {
         return {
@@ -337,5 +309,24 @@
   .left-dropdown-leave-to {
     opacity: 0;
     transform: translateY(10px);
+  }
+  .menu-button-container button{
+    @apply text-center rounded-sm border border-solid outline-none cursor-pointer w-full py-1 mb-2;
+    transition: all 0.2s;;
+  }
+  .menu-button-container button:hover{
+    @apply shadow bg-gray-200;
+  }
+
+  .button{
+    @apply w-full block text-center rounded-sm border border-solid outline-none cursor-pointer w-full py-1 mb-2;
+    transition: all 0.2s;
+  }
+  .button:hover{
+    @apply shadow bg-gray-200;
+  }
+  .menu-button-container hr{
+    @apply border-t-0 border-b border-solid border-gray-300 my-5;
+    height: 1px;
   }
 </style>

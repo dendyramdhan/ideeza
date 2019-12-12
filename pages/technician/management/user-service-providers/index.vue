@@ -49,7 +49,10 @@
         <tbody>
         <tr class="">
           <td >
-            Moran Biten
+            <nuxt-link to="/technician/user-profile">
+              Moran Biten
+            </nuxt-link>
+
 
           </td>
           <td>Service Provider</td>
@@ -76,7 +79,9 @@
         </tr>
         <tr class="bg-white">
           <td >
-            Moran Biten
+            <nuxt-link to="/technician/user-profile">
+              Moran Biten
+            </nuxt-link>
 
           </td>
           <td>Service Provider</td>
@@ -103,7 +108,9 @@
         </tr>
         <tr class="">
           <td >
-            Moran Biten
+            <nuxt-link to="/technician/user-profile">
+              Moran Biten
+            </nuxt-link>
 
           </td>
           <td>Service Provider</td>
@@ -130,7 +137,9 @@
         </tr>
         <tr class="bg-white">
           <td >
-            Moran Biten
+            <nuxt-link to="/technician/user-profile">
+              Moran Biten
+            </nuxt-link>
 
           </td>
           <td>Service Provider</td>
@@ -157,7 +166,9 @@
         </tr>
         <tr class="">
           <td >
-            Moran Biten
+            <nuxt-link to="/technician/user-profile">
+              Moran Biten
+            </nuxt-link>
 
           </td>
           <td>Service Provider</td>

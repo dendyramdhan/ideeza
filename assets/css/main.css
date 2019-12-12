@@ -22,6 +22,12 @@ html, body{
   overflow-x: hidden;
   font-family: 'Eina','Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
+body{
+  @apply text-ideeza-gray-700;
+}
+h1,h2,h3,h4,h5,h6{
+  @apply text-ideeza-black;
+}
 #__nuxt{
   height: 100%;
 }
@@ -55,6 +61,12 @@ html, body{
   top: 50%;
   transform: translate(0, -50%);
 }
+.absolute-center-h{
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
 .fixed-center-h-v{
   position: fixed;
   margin: 0;
@@ -68,7 +80,7 @@ html, body{
   transform: translate(0, -50%);
 }
 .border-light-gray{
-  @apply border border-solid border-gray-400;
+  @apply border-solid border-ideeza-gray-100;
 }
 
 svg,
@@ -138,7 +150,6 @@ select{
   height: 30px;
 }
 .btn svg{
-  vertical-align: text-bottom;
   display: inline-block;
 }
 .btn-small--white{
@@ -154,14 +165,20 @@ select{
   @apply font-thin rounded-none leading-none;
   min-width: fit-content;
 }
+.btn-hollow--ideeza{
+  @apply border-ideeza bg-white text-ideeza;
+}
 .btn-text-bold{
   @apply font-semibold;
+}
+.btn-green{
+  @apply bg-ideeza-green text-white;
 }
 .btn--rounded{
   @apply rounded-lg;
 }
 .pill-button{
-  @apply rounded-full border-gray-500 bg-gray-200 text-gray-700 leading-loose;
+  @apply rounded-full border-ideeza-gray-100 text-ideeza-gray-500 leading-loose;
 }
 .pill-button--ideeza{
   @apply text-white bg-ideeza border-0;
@@ -169,6 +186,12 @@ select{
 
 .no-transition{
   transition: none;
+}
+
+
+.cart-scroll-area{
+  width: 100%;
+  height: 450px;
 }
 
 /*Calendar*/
@@ -184,6 +207,28 @@ select{
 }
 .ideeza-arrow{
   @apply text-ideeza;
+}
+.timeline-diaplay{
+  width: 15px;
+  position: relative;
+}
+.timeline-diaplay:after{
+  @apply border-l border-solid border-ideeza-gray-300 absolute top-0 mt-1 h-full;
+  content:"";
+  z-index: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+.timeline-diaplay:before{
+  @apply bg-ideeza-gray-300 absolute top-0 rounded-full mt-1;
+  content:"";
+  z-index: 1;
+  left: 50%;
+  transform: translate(-50%);
+  width: 14px;
+  height: 14px;
+
 }
 
 @responsive{
@@ -207,4 +252,6 @@ select{
     width: fit-content;
   }
 }
+
+
 

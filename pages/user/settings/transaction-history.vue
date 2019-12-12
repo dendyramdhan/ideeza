@@ -3,12 +3,23 @@
     <!---->
     <!--Orders-->
     <!---->
+
+    <div class="my-10">
+      <div class="flex justify-end items-center text-xl">
+        <h1 class="mr-5">Your balance: </h1> <h1 class="font-semibold">$50</h1>
+      </div>
+
+      <div class="flex justify-end items-center text-lg">
+        <h1 class="mr-5">Fixed price deposits(Not included in deposits): </h1> <h1 class="font-semibold text-ideeza">$23</h1>
+      </div>
+    </div>
+
     <div class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0">
       <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">My Orders</h1>
     </div>
 
     <!--Panel Menu-->
-    <div class="hidden xl:flex mt-10 justify-between">
+    <div class="hidden xl:flex mt-10 justify-between items-center">
       <div class="flex">
         <select class="field field--border-light mr-1 h-12">
           <option>All payout methods</option>
@@ -23,7 +34,9 @@
           <option>Order status</option>
         </select>
       </div>
-      <div>
+      <div class="flex justify-between items-center">
+        <button class="btn btn-normal btn--ideeza px-3 py-3 mr-3">Download invoices</button>
+        <button class="btn btn-normal btn-hollow--ideeza px-3 py-3 mr-3">Download CSV</button>
         <div class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center">
           <div class="h-12 relative w-10">
             <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
@@ -155,7 +168,7 @@
     @apply text-left;
   }
   .settings-transaction-history{
-    max-width: 1200px;
+    max-width: 1500px;
   }
   @screen md{
     thead td,

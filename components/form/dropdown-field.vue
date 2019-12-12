@@ -5,14 +5,14 @@
         <div class="relative mr-2"><font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'chevron-down']"/></div>
       </div>
 
-      <div v-if="hasfocus" class="absolute w-full z-50 bg-white shadow-lg border border-solid border-gray-200 ">
+      <div v-if="hasfocus" class="dropdown-container absolute w-full z-50 bg-white shadow-lg border border-solid border-gray-200 ">
         <div @click="chooseValue(val)" class="p-3 hover:bg-gray-200 cursor-default" :class="{'bg-gray-200': val === value}" v-for="val in data" :key="val">{{val}}</div>
       </div>
     </div>
 </template>
 
 <script>
-  import _ from 'lodash'
+
     export default {
         name: "category-field",
         props: ['placeholder', 'data', 'selected', 'styleHeight'],
@@ -56,5 +56,9 @@
 </script>
 
 <style scoped>
-
+  .dropdown-container{
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 </style>

@@ -4,7 +4,7 @@ export const state = () => ({
 
 export const mutations = {
   incrementStep (state) {
-    if(state.cartStep < 7){
+    if(state.cartStep < 6){
       state.cartStep = state.cartStep + 1;
     }
   },

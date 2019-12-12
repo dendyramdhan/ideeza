@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <div class="flex justify-between items-center bg-white shadow-md  p-4">
       <div class="flex items-center">
         <img src="~/static/images/add-part.png" alt="">
@@ -25,153 +25,108 @@
       </h1>
     </div>
 
-    <div class="flex mb-10 justify-between w-full">
-      <div @click="electronic = 'leg'" :class="{'active': electronic === 'leg'}" class="big-button">Leg Meaning</div>
-      <div @click="electronic = 'chart'" :class="{'active': electronic === 'chart'}" class="big-button">Chart</div>
+    <div v-if="showSelection" class="w-full flex justify-between mt-10">
+      <div class="w-48 ">
+        <div class="container-part-add">
+          <img src="~/static/images/e-chip.png" alt="">
+
+          <button @click="legMeaning" class="btn pill-button px-24 py-0 mt-10">Leg Meaning</button>
+        </div>
+
+      </div>
+
+      <div class="w-48">
+        <div class="container-part-add">
+          <div class="w-full flex flex-col items-center ">
+            <img src="~/static/images/e-bar-chart.png" alt="">
+
+            <button @click="addChart"  class="btn pill-button px-32 py-0 mt-10">Chart</button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="flex">
-      <div class="w-3/5 ">
 
-        <div class="shadow-md bg-white">
+
+    <div v-if="!showSelection" >
+      <div class="flex mb-10 justify-between w-full">
+        <div @click="electronic = 'leg'" :class="{'active': electronic === 'leg'}" class="big-button">Leg Meaning</div>
+        <div @click="electronic = 'chart'" :class="{'active': electronic === 'chart'}" class="big-button">Chart</div>
+      </div>
+
+
           <div v-if="electronic === 'leg'">
-            <div v-for="(leg, index) in legs" :key="index" class="bg-white p-3 flex justify-between items-center">
-              <input placeholder="number" type="text" class="leg-input">
-              <input placeholder="name" type="text" class="leg-input">
-              <select class="select">
-                <option>Property</option>
-              </select>
-              <input placeholder="min" type="text" class="leg-input">
-              <input placeholder="max" type="text" class="leg-input">
-              <div>
-                <font-awesome-icon @click="removeLeg(index)" class="mr-1 h-4 cursor-pointer" :icon="['fas', 'times']"/>
-              </div>
-            </div>
-            <div @click="addLeg" class="text-center bg-gray-200 w-full cursor-pointer p-3 text-gray-600 cursor-pointer" >
-              + Add new leg meaning
-            </div>
+            <leg-meaning @next="$emit('next')" @back="$emit('back')" />
           </div>
 
           <div v-if="electronic === 'chart'">
 
-            <div class="flex items-center bg-white p-3 pb-1 border-b border-solid border-gray-300">
-              <div class="w-32 font-semibold">
-                Chart Title
-              </div>
-              <div class="flex-grow">
-                <input  type="text" class="chart-input w-full">
-              </div>
-            </div>
-            <div class="flex items-center bg-white p-3 pb-1 border-b border-solid border-gray-300">
-              <div class="w-32 font-semibold">
-                Label
-              </div>
-              <div class="flex-grow flex justify-between">
-                <div class="flex items-center">
-                  <span class="text3-xl inline-block ">X</span>
-                  <input  type="text" class="chart-input w-32 mx-2">
-                  <select class="select">
-                    <option>mV</option>
-                  </select>
-                </div>
-                <div class="flex items-center justify-end">
-                  <span class="text3-xl inline-block mr-2">Y</span>
-                  <input  type="text" class="chart-input w-32 mx-2">
-                  <select class="select">
-                    <option>mV</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div v-for="(chart,index) in chartVals" :key="index" class="flex items-center bg-white p-3 pb-1 border-b border-solid border-gray-300">
-              <div class="w-32 font-semibold">
-                Add Value
-              </div>
-              <div class="flex-grow flex justify-between">
-                <div class="flex items-center">
-                  <span class="text3-xl inline-block mr-2">X</span>
-                  <input  type="text" class="chart-input w-48">
-
-                </div>
-                <div class="flex items-center">
-                  <span class="text3-xl inline-block mr-2">Y</span>
-                  <input  type="text" class="chart-input w-48">
-
-                </div>
-                <div>
-                  <font-awesome-icon @click="removeChartValue(index)" class="mr-1 h-4 cursor-pointer" :icon="['fas', 'times']"/>
-                </div>
-              </div>
-            </div>
-
-              <div @click="addChartValue" class="text-center bg-gray-200 w-full cursor-pointer p-3 text-gray-600 cursor-pointer" >
-                + Add new value
-              </div>
+            <bar-chart @next="$emit('next')" @back="$emit('back')"  />
 
           </div>
 
-        </div>
 
-        <!--Navigation-->
-        <div class="flex justify-between mt-10">
-          <button @click="$emit('back')" class="btn pill-button px-16 py-0">Back</button>
-          <button @click="$emit('next')" class="btn pill-button pill-button--ideeza px-16 py-0">Next</button>
-        </div>
-      </div>
 
-      <div class="w-2/5 pl-5">
-        <div v-if="electronic === 'leg'" class="view-container bg-gray-500">
 
-        </div>
-
-        <div v-if="electronic === 'chart'" class="view-container bg-gray-200">
-
-        </div>
-      </div>
     </div>
 
   </div>
 </template>
 
 <script>
+
+  import BarChart from '~/components/charts/bar-chart'
+  import LegMeaning from '~/components/technician/electronics/add-part/add-electronics-meaning'
     export default {
         name: "add-electronics",
         data: () => {
             return {
+              datacollection: null,
+
+                showSelection: true,
                 electronic: 'leg',
-                legs: [
-                    {id: 1},
-                    {id: 1},
-                    {id: 1},
-                    {id: 1},
-                ],
-                chartVals: [
-                    {id: 1},
-                    {id: 1},
-                    {id: 1},
-                    {id: 1},
-                ]
+
+
             }
         },
-        methods: {
-            removeLeg(index) {
-                this.legs.splice(index, 1);
-            },
-            addLeg(){
-              this.legs.push({id: 1});
-            },
+      components: {
+        'bar-chart': BarChart,
+        'leg-meaning': LegMeaning
+      },
+      mounted () {
+
+      },
+      methods: {
+
+
             removeChartValue(index) {
                 this.chartVals.splice(index, 1);
             },
             addChartValue() {
                 this.chartVals.push({id: 1});
-            }
+            },
+            legMeaning() {
+              this.electronic = 'leg';
+              this.showSelection = false;
+            },
+            addChart() {
+              this.electronic = 'chart';
+              this.showSelection = false;
+            },
+
         }
     }
 </script>
 
 <style scoped>
+  .w-48{
+    width: 48%;
+  }
+  .container-part-add {
+    @apply shadow-md mt-2 w-full bg-white flex flex-col items-center justify-center;
+    height: 300px;
+  }
   .view-container{
     height: 400px;
   }

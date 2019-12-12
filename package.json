@@ -16,16 +16,34 @@
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.7",
+    "@ideeza/vue3dengine": "https://firebasestorage.googleapis.com/v0/b/ideezaexamples.appspot.com/o/ideeza-vue3dengine-0.0.19.tgz?alt=media&token=cd7ecb6a-6fa6-4f79-8df6-37c17ae1b3a7",
     "@nuxtjs/device": "^1.2.3",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "apexcharts": "^3.10.1",
+    "array-intersection": "^0.1.2",
+    "axios": "^0.19.0",
+    "chart.js": "^2.9.3",
+    "clone": "^2.1.2",
+    "debounce": "^1.2.0",
     "lodash": "^4.17.15",
+    "merge": "^1.2.1",
+    "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
     "v-calendar": "^1.0.0-beta.22",
     "v-click-outside": "^2.1.4",
-    "vue-codemirror": "^4.0.6"
+    "v-dragged": "0.0.5",
+    "vue-apexcharts": "^1.5.1",
+    "vue-notification": "^1.3.20",
+    "vue-pagination-2": "^2.0.3",
+    "vue-pagination-3": "^2.0.0-beta01",
+    "vue-slider-component": "^3.0.44",
+    "vue-smooth-scrollbar": "^0.1.2",
+    "vue-tables-3": "^2.0.1-beta05",
+    "vue2-filters": "^0.8.0"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^1.0.0"
+    "@nuxtjs/tailwindcss": "^1.0.0",
+    "vue2-ace-editor": "0.0.15"
   }
 }

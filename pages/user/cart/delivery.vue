@@ -9,7 +9,9 @@
     </div>
 
     <!--Shipping form-->
-    <div class="mt-5 lg:flex flex-wrap">
+    <div class="cart-scroll-area">
+      <smooth-scrollbar :options="{alwaysShowTracks: true}">
+        <div class="my-5  lg:flex flex-wrap">
       <div class="lg:w-1/2 lg:pr-5">
         <div class="field-container mt-10">
           <div class="text-lg text-gray-800 mb-2">First name</div>
@@ -59,6 +61,8 @@
         </div>
       </div>
     </div>
+      </smooth-scrollbar>
+    </div>
   </div>
 </template>
 
@@ -75,7 +79,7 @@
           }
       },
       mounted() {
-        this.$store.commit('cartstepper/set', {position: 4})
+        this.$store.commit('cartstepper/set', {position: 3})
       },
       components: {
         'text-field': TextField,
@@ -85,6 +89,10 @@
 </script>
 
 <style scoped>
+  /deep/ .smooth-scrollbar{
+    padding-right: 20px;
+    margin-top: 15px;
+  }
   .services-dropdown{
     width: 270px;
   }
