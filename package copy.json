@@ -16,6 +16,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
     "@fortawesome/vue-fontawesome": "^0.1.7",
+    "@ideeza/vue3dengine": "https://firebasestorage.googleapis.com/v0/b/ideezaexamples.appspot.com/o/ideeza-vue3dengine-0.0.19.tgz?alt=media&token=cd7ecb6a-6fa6-4f79-8df6-37c17ae1b3a7",
     "@nuxtjs/device": "^1.2.3",
     "@nuxtjs/pwa": "^3.0.0-0",
     "apexcharts": "^3.10.1",
