@@ -18,7 +18,7 @@
     </div>
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Image</div>
-      <file-field  />
+      <file-field />
     </div>
 
     <div class="mt-12 text-center lg:text-left">
@@ -31,40 +31,39 @@
 </template>
 
 <script>
-  import TextField from '~/components/form/text-field.vue'
-  import TextArea from '~/components/form/text-area.vue'
-  import CategoryField from '~/components/form/category-field.vue'
-  import FileField from '~/components/form/file-field.vue'
-    export default {
-        name: "add-blog",
-      components: {
-        'text-field': TextField,
-        'text-area': TextArea,
-        'category-field': CategoryField,
-        'file-field': FileField
-      }
-    }
+import TextField from "~/components/form/text-field.vue";
+import TextArea from "~/components/form/text-area.vue";
+import CategoryField from "~/components/form/category-field.vue";
+import FileField from "~/components/form/file-field.vue";
+export default {
+  name: "add-blog",
+  components: {
+    "text-field": TextField,
+    "text-area": TextArea,
+    "category-field": CategoryField,
+    "file-field": FileField
+  }
+};
 </script>
 
 <style scoped>
-  .blog-container{
-    width: 100%;
-    max-width: 1530px;
-    padding: 20px 5px;
-  }
-  .field-container{
-    width: 100%;
-    max-width: 375px;
-  }
-  .textarea{
-    width: 100%;
-    max-width: 700px;
-  }
+.blog-container {
+  width: 100%;
+  max-width: 1530px;
+  padding: 20px 5px;
+}
+.field-container {
+  width: 100%;
+  max-width: 375px;
+}
+.textarea {
+  width: 100%;
+  max-width: 700px;
+}
 
-  @screen lg {
-    .blog-container {
-      padding: 60px 50px;
-    }
-
+@screen lg {
+  .blog-container {
+    padding: 60px 50px;
   }
+}
 </style>
