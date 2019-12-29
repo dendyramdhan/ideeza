@@ -32,7 +32,7 @@
             </div>
           </div>
         </div>
-        <simple-table @selectall="selectall" :fields="['Name','Title','Username','Role','Type','Visibility','Start-End']">
+        <simple-table @selectall="selectall" :fields="['Name','Title','Username','Role','Type','Visibility','Start-End']" :searchbox="true">
           <tr class="flex w-full mb-4" v-for="(user,index) in users">
             <td class="p-4 w-1/7" :class="{'border-b':users.length-1 != index}">
               <div class="flex">
