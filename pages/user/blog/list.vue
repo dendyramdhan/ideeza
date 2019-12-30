@@ -130,50 +130,27 @@
                 />
               </nuxt-link>
 
-      <!--Blog List-->
-      <div class="bg-white shadow-md p-0 lg:p-5">
-        <table>
-          <thead>
-            <tr>
-              <td >
-                <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt="">
-                Article name
-              </td>
-              <td class="flex items-center">
-                <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt="">
-                Date
-              </td>
-              <td>
-                <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt="">
-                Status
-              </td>
-              <td>
-                <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt="">
-                Actions
-              </td>
-              <td class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
-              </td>
-            </tr>
-          </thead>
-          <tbody class="text-gray-800">
-           <tr v-for="tabledata in articles" :key="tabledata">
-            <td class="font-semibold">{{tabledata.ArticlesName}}</td>
-            <td class>{{tabledata.Date}} 
-              <!-- <span v-if="tabledata.flag"></span>
-              <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span> -->
-              </td>
-               <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
-            <td>
-              <p v-if="tabledata.flag == 1 "><span class="text-green-500 font-semibold" >{{tabledata.Status}}</span></p>
-              <p v-else-if="tabledata.flag == 2  "> <span class="font-semibold">{{tabledata.Status}}</span></p>
-              <p v-else-if="tabledata.flag == 3  "><span class="text-red-500 font-semibold">{{tabledata.Status}}</span></p>
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'envelope']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'check']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'times']"
+              />
             </td>
-
-
+            <td></td>
+          </tr>
+          <tr class>
+            <td class="font-semibold">How Ideeza can make the world a better place</td>
+            <td class>1/12/2017</td>
+            <td class="text-green-500 font-semibold">Approved</td>
             <td class="text-gray-500">
-              <nuxt-link :to="{ path: '/user/blog/view', query: { id: tabledata.id}}">
-              <!-- <nuxt-link to="/user/blog/view"> -->
+              <nuxt-link to="/user/blog/view">
                 <font-awesome-icon
                   class="mr-1 h-3 cursor-pointer hover:text-gray-800"
                   :icon="['fas', 'eye']"
@@ -194,26 +171,22 @@
             </td>
             <td></td>
           </tr>
-          </tbody>
-        </table>
-        <!--Table Stats-->
-        <div class="mt-5 relative">
-
-          <!--Paging-->
-          <div class="mx-auto w-content">
-            <span class="inline-block mr-4 cursor-pointer"><font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']"/> Previous</span>
-            1 <span class="text-lg text-ideeza">2</span> 3
-            <span class="inline-block ml-4 cursor-pointer">Next <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']"/></span>
-          </div>
-
-          <div class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0">
-
-
-            <span class="inline-block">Show</span>
-            <select class="inline field ml-2 h-10">
-              <option>1-3</option>
-            </select>
-          </div>
+        </tbody>
+      </table>
+      <!--Table Stats-->
+      <div class="mt-5 relative">
+        <!--Paging-->
+        <div class="mx-auto w-content">
+          <span class="inline-block mr-4 cursor-pointer">
+            <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
+          </span>
+          1
+          <span class="text-lg text-ideeza">2</span> 3
+          <span class="inline-block ml-4 cursor-pointer">
+            Next
+            <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
+          </span>
+        </div>
 
         <div
           class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
@@ -224,26 +197,14 @@
           </select>
         </div>
       </div>
-      
-    
     </div>
   </div>
 </template>
 
 <script>
-import articles from "../../../data/BlogApi.json"; 
 export default {
-  name: "blog-list",
-  data: function() {
-    return {
-      articles: articles, 
-    };
-  } 
+  name: "blog-list"
 };
-
-    // export default {
-    //     name: "blog-list"
-    // }
 </script>
 
 <style scoped>

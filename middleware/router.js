@@ -1,7 +1,9 @@
 export default function ({ route, redirect }) {
-  if (route.fullPath === "/") {
+  // if (route.fullPath === "/") {
+  //   return redirect('/user/dashboard')
+  // }
+  if (route.fullPath === "/user") {
     return redirect('/user/dashboard')
-    // return redirect('/technician/dashboard')
   }
   if (route.fullPath === "/user/settings") {
     return redirect('/user/settings/general')

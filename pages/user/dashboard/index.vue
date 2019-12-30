@@ -7,14 +7,27 @@
     <div class="flex-grow mb-20">
       <div class="main-contents">
         <h1 class="font-semibold lg:text-5xl">Good morning, Moran!</h1>
+
         <div class="mt-10 lg:flex welcome-container">
           <div class="lg:w-1/2 lg:h-full relative text-white">
             <img src="~/static/images/user-dash-main.png" class="object-center object-contain" alt />
             <div class="absolute top-0 left-0 w-full text-center flex flex-col items-center">
-              <h1 class="font-semibold lg:text-5xl mt-10 mb-5 text-white text-center w-full">Let's get you started</h1>
-              <span class="font-semibold block text-3xl mb-3 w-full text-center">Now is your time to change the world.</span>
-              <span class="font-semibold block text-3xl mb-10 w-full text-center">Dream, invent, create.</span>
-              <img @click="showMyIdeeza=true" class="cursor-pointer" src="~/static/images/float-ideeza.png" alt="">
+              <h1
+                class="font-semibold lg:text-5xl mt-10 mb-5 text-white text-center w-full"
+              >Let's get you started</h1>
+              <span
+                class="font-semibold block text-3xl mb-3 w-full text-center"
+              >Now is your time to change the world.</span>
+              <span
+                class="font-semibold block text-3xl mb-10 w-full text-center"
+              >Dream, invent, create.</span>
+
+              <img
+                @click="showMyIdeeza=true"
+                class="cursor-pointer"
+                src="~/static/images/float-ideeza.png"
+                alt
+              />
             </div>
           </div>
           <div class="lg:w-1/2 pl-10">
@@ -36,7 +49,6 @@
                   <span class="text-ideeza-blue-gray text-lg block">Projects</span>
                 </div>
               </div>
-
               <div class="status-button p-6">
                 <div class="flex items-center">
                   <img class="mr-6" src="~/static/icons/users.svg" alt />
@@ -46,7 +58,6 @@
                   <span class="text-ideeza-blue-gray text-lg block">Contacts</span>
                 </div>
               </div>
-
               <div class="status-button p-6">
                 <div class="flex items-center">
                   <img class="mr-6" src="~/static/icons/bullseye.svg" alt />
@@ -67,7 +78,6 @@
                   <div class="font-semibold">Karen Allen logged into a system</div>
                 </div>
               </div>
-
               <div class="table relative mb-5">
                 <div class="table-cell timeline-diaplay"></div>
                 <div class="table-cell pl-5">
@@ -76,116 +86,37 @@
                   <div class="font-semibold">Karen Allen logged into a system</div>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
 
         <div class="flex">
           <div class="w-2/3">
             <h1 class="font-semibold lg:text-3xl my-5">World's last innovation</h1>
-
             <div class="scroll-area">
-
-              <client-only>
-
-                <smooth-scrollbar :options="{alwaysShowTracks: true}">
-                  <div class="flex flex-wrap">
-                    <div class="blog-container mr-2">
-                      <div class="blog-image-container mb-8">
-                        <img src="~/static/images/dashboard-blog-image.png" class="object-center object-contain" alt="">
-                      </div>
-                      <h3 class="font-semibold tex-2xl  mb-2">Google was working with us</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget interdum urna, ac ornare risus. Vivamus
-                      </p>
-                      <div class="flex justify-between items-center mt-5">
-                        <small>21 October, 2019</small>
-                        <button class="btn btn--ideeza px-4 py-2">Read more</button>
-                      </div>
+              <smooth-scrollbar :options="{alwaysShowTracks: true}">
+                <div class="flex flex-wrap">
+                  <div class="blog-container mr-2" v-for="innovation in innovations">
+                    <div class="blog-image-container mb-8">
+                      <img :src="innovation.image_url" class="object-center object-contain" alt />
                     </div>
-                    <div class="blog-container mr-2">
-                      <div class="flex justify-between items-center mb-5">
-                        <small>21 October, 2019</small>
-                        <button class="btn btn--ideeza px-4 py-2">Read more</button>
-                      </div>
-
-                      <h3 class="font-semibold tex-2xl  mb-2">Google was working with us</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget interdum urna, ac ornare risus. Vivamus
-                      </p>
-                      <div class="blog-image-container mt-8">
-                        <img src="~/static/images/dashboard-blog-image.png" class="object-center object-contain" alt="">
-                      </div>
-
-                    </div>
-                    <div class="blog-container mr-2">
-                      <div class="blog-image-container mb-8">
-                        <img src="~/static/images/dashboard-blog-image.png" class="object-center object-contain" alt="">
-                      </div>
-                      <h3 class="font-semibold tex-2xl  mb-2">Google was working with us</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget interdum urna, ac ornare risus. Vivamus
-                      </p>
-                      <div class="flex justify-between items-center mt-5">
-                        <small>21 October, 2019</small>
-                        <button class="btn btn--ideeza px-4 py-2">Read more</button>
-                      </div>
-                    </div>
-                    <div class="blog-container mr-2">
-                      <div class="blog-image-container mb-8">
-                        <img src="~/static/images/dashboard-blog-image.png" class="object-center object-contain" alt="">
-                      </div>
-                      <h3 class="font-semibold tex-2xl  mb-2">Google was working with us</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget interdum urna, ac ornare risus. Vivamus
-                      </p>
-                      <div class="flex justify-between items-center mt-5">
-                        <small>21 October, 2019</small>
-                        <button class="btn btn--ideeza px-4 py-2">Read more</button>
-                      </div>
-                    </div>
-                    <div class="blog-container mr-2">
-                      <div class="blog-image-container mb-8">
-                        <img src="~/static/images/dashboard-blog-image.png" class="object-center object-contain" alt="">
-                      </div>
-                      <h3 class="font-semibold tex-2xl  mb-2">Google was working with us</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget interdum urna, ac ornare risus. Vivamus
-                      </p>
-                      <div class="flex justify-between items-center mt-5">
-                        <small>21 October, 2019</small>
-                        <button class="btn btn--ideeza px-4 py-2">Read more</button>
-                      </div>
-                    </div>
-                    <div class="blog-container mr-2">
-                      <div class="blog-image-container mb-8">
-                        <img src="~/static/images/dashboard-blog-image.png" class="object-center object-contain" alt="">
-                      </div>
-                      <h3 class="font-semibold tex-2xl  mb-2">Google was working with us</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget interdum urna, ac ornare risus. Vivamus
-                      </p>
-                      <div class="flex justify-between items-center mt-5">
-                        <small>21 October, 2019</small>
-                        <button class="btn btn--ideeza px-4 py-2">Read more</button>
-                      </div>
+                    <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
+                    <p>{{innovation.description}}</p>
+                    <div class="flex justify-between items-center mt-5">
+                      <small>{{innovation.date}}</small>
+                      <button class="btn btn--ideeza px-4 py-2">Read more</button>
                     </div>
                   </div>
-                </smooth-scrollbar>
-              </client-only>
-
-
+                  <!-- <li v-for="breed in breeds" :key="breed">
+                    <p class="breed button--green">{{breed}}</p>
+                  </li>-->  
+                </div>
+              </smooth-scrollbar>
             </div>
-
-
           </div>
-
           <div class="w-1/3">
             <h1 class="font-semibold lg:text-3xl my-5">Top projects</h1>
             <div class="scroll-area">
-              <client-only>
               <smooth-scrollbar :options="{alwaysShowTracks: true}">
                 <div class="flex flex-wrap">
                   <div class="w-1/2 p-2" v-for="topproject in topprojects">
@@ -212,17 +143,14 @@
                   </div>
                 </div>
               </smooth-scrollbar>
-              </client-only>
             </div>
           </div>
-
         </div>
       </div>
     </div>
 
     <!--MyIdeeza Popup-->
     <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" />
-
   </div>
 </template>
 

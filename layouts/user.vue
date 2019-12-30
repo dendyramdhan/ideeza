@@ -2,39 +2,36 @@
   <div class="flex flex-col h-full">
     <navigation class="flex-shrink"></navigation>
     <nuxt class="flex-grow" />
-    <client-only>
-      <notifications group="error" position="top right" >
-        <template slot="body" slot-scope="props">
-          <div class="notify notify--error">
-            <div class="flex items-center text-white font-semibold">
-              <img class="mr-3" src="~/static/icons/exclaimation-icon.png" alt="">
-              {{props.item.text}}
-            </div>
-
-            <a class="close cursor-pointer" @click="props.close">
-              <font-awesome-icon class="mr-3 h-3 text-red-200 text-xs" :icon="['fas', 'times']"/>
-            </a>
-
+    <notifications group="error" position="top right" >
+      <template slot="body" slot-scope="props">
+        <div class="notify notify--error">
+          <div class="flex items-center text-white font-semibold">
+            <img class="mr-3" src="~/static/icons/exclaimation-icon.png" alt="">
+            {{props.item.text}}
           </div>
-        </template>
-      </notifications>
-    </client-only>
 
-    <client-only>
-      <notifications group="success" position="top right" >
-        <template slot="body" slot-scope="props">
-          <div class="notify notify--success">
-            <div class="flex items-center text-white font-semibold">
-              <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt="">
-              {{props.item.text}}
-            </div>
-            <a class="close cursor-pointer" @click="props.close">
-              <font-awesome-icon class="mr-3 h-3 text-green-200 text-xs" :icon="['fas', 'times']"/>
-            </a>
+          <a class="close cursor-pointer" @click="props.close">
+            <font-awesome-icon class="mr-3 h-3 text-red-200 text-xs" :icon="['fas', 'times']"/>
+          </a>
+
+        </div>
+      </template>
+    </notifications>
+    <notifications group="success" position="top right" >
+      <template slot="body" slot-scope="props">
+        <div class="notify notify--success">
+          <div class="flex items-center text-white font-semibold">
+            <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt="">
+            {{props.item.text}}
           </div>
-        </template>
-      </notifications>
-    </client-only>
+
+          <a class="close cursor-pointer" @click="props.close">
+            <font-awesome-icon class="mr-3 h-3 text-green-200 text-xs" :icon="['fas', 'times']"/>
+          </a>
+
+        </div>
+      </template>
+    </notifications>
     <FloatButton />
   </div>
 </template>
