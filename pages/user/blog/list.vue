@@ -40,63 +40,43 @@
             </tr>
           </thead>
           <tbody class="text-gray-800">
-            <tr class="">
-              <td class="font-semibold ">How Ideeza can make the world a better place</td>
-              <td class="">1/12/2017</td>
-              <td class="text-green-500 font-semibold">Approved</td>
-              <td class="text-gray-500">
-                <nuxt-link to="/user/blog/view">
-                  <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'eye']"/>
-                </nuxt-link>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'envelope']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'check']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'times']"/>
+           <tr v-for="tabledata in articles" :key="tabledata">
+            <td class="font-semibold">{{tabledata.ArticlesName}}</td>
+            <td class>{{tabledata.Date}} 
+              <!-- <span v-if="tabledata.flag"></span>
+              <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span> -->
               </td>
-              <td></td>
-            </tr>
-            <tr class="">
-              <td class="font-semibold ">How Ideeza can make the world a better place</td>
-              <td class="">1/12/2017</td>
-              <td class="font-semibold">Closed</td>
-              <td class="text-gray-500">
-                <nuxt-link to="/user/blog/view">
-                  <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'eye']"/>
-                </nuxt-link>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'envelope']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'check']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'times']"/>
-              </td>
-              <td></td>
-            </tr>
-            <tr class="">
-              <td class="font-semibold ">How Ideeza can make the world a better place</td>
-              <td class="">1/12/2017</td>
-              <td class="text-red-500 font-semibold">Not Approved</td>
-              <td class="text-gray-500">
-                <nuxt-link to="/user/blog/view">
-                  <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'eye']"/>
-                </nuxt-link>
+               <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
+            <td>
+              <p v-if="tabledata.flag == 1 "><span class="text-green-500 font-semibold" >{{tabledata.Status}}</span></p>
+              <p v-else-if="tabledata.flag == 2  "> <span class="font-semibold">{{tabledata.Status}}</span></p>
+              <p v-else-if="tabledata.flag == 3  "><span class="text-red-500 font-semibold">{{tabledata.Status}}</span></p>
+            </td>
 
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'envelope']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'check']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'times']"/>
-              </td>
-              <td></td>
-            </tr>
-            <tr class="">
-              <td class="font-semibold ">How Ideeza can make the world a better place</td>
-              <td class="">1/12/2017</td>
-              <td class="text-green-500 font-semibold">Approved</td>
-              <td class="text-gray-500">
-                <nuxt-link to="/user/blog/view">
-                  <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'eye']"/>
-                </nuxt-link>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'envelope']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'check']"/>
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'times']"/>
-              </td>
-              <td></td>
-            </tr>
+
+            <td class="text-gray-500">
+              <nuxt-link :to="{ path: '/user/blog/view', query: { id: tabledata.id}}">
+              <!-- <nuxt-link to="/user/blog/view"> -->
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  :icon="['fas', 'eye']"
+                />
+              </nuxt-link>
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'envelope']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'check']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'times']"
+              />
+            </td>
+            <td></td>
+          </tr>
           </tbody>
         </table>
         <!--Table Stats-->
@@ -120,13 +100,25 @@
 
         </div>
       </div>
+      
+    
     </div>
 </template>
 
 <script>
-    export default {
-        name: "blog-list"
-    }
+import articles from "../../../data/BlogApi.json"; 
+export default {
+  name: "blog-list",
+  data: function() {
+    return {
+      articles: articles, 
+    };
+  } 
+};
+
+    // export default {
+    //     name: "blog-list"
+    // }
 </script>
 
 <style scoped>
