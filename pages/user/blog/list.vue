@@ -1,4 +1,4 @@
-<template>
+<template  >
   <div class="main-contents">
     <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Your articles</h1>
 
@@ -7,7 +7,7 @@
         to="/user/blog/add"
         class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
       >
-        Add new article
+        <button @click="uploadUserBlogkey">Add new article</button>
         <span class="ml-5">+</span>
       </nuxt-link>
       <div
@@ -65,101 +65,48 @@
             </td>
           </tr>
         </thead>
-        <tbody class="text-gray-800">
-          <tr class>
-            <td class="font-semibold">How Ideeza can make the world a better place</td>
-            <td class>1/12/2017</td>
-            <td class="text-green-500 font-semibold">Approved</td>
-            <td class="text-gray-500">
-              <nuxt-link to="/user/blog/view">
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'eye']"
-                />
-              </nuxt-link>
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'envelope']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'check']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'times']"
-              />
-            </td>
-            <td></td>
-          </tr>
-          <tr class>
-            <td class="font-semibold">How Ideeza can make the world a better place</td>
-            <td class>1/12/2017</td>
-            <td class="font-semibold">Closed</td>
-            <td class="text-gray-500">
-              <nuxt-link to="/user/blog/view">
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'eye']"
-                />
-              </nuxt-link>
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'envelope']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'check']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'times']"
-              />
-            </td>
-            <td></td>
-          </tr>
-          <tr class>
-            <td class="font-semibold">How Ideeza can make the world a better place</td>
-            <td class>1/12/2017</td>
-            <td class="text-red-500 font-semibold">Not Approved</td>
-            <td class="text-gray-500">
-              <nuxt-link to="/user/blog/view">
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'eye']"
-                />
-              </nuxt-link>
 
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'envelope']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'check']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'times']"
-              />
+        <tbody class="text-gray-800">
+          <tr
+            v-for="tabledata in articles"
+            :key="tabledata"
+            v-if="start < tabledata.id && tabledata.id < end"
+          >
+            <td class="font-semibold">{{tabledata.ArticlesName}}</td>
+            <td class>
+              {{tabledata.Date}}
+              <!-- <span v-if="tabledata.flag"></span>
+              <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
-            <td></td>
-          </tr>
-          <tr class>
-            <td class="font-semibold">How Ideeza can make the world a better place</td>
-            <td class>1/12/2017</td>
-            <td class="text-green-500 font-semibold">Approved</td>
+            <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
+            <td>
+              <p v-if="tabledata.flag == 1 ">
+                <span class="text-green-500 font-semibold">{{tabledata.Status}}</span>
+              </p>
+              <p v-else-if="tabledata.flag == 2  ">
+                <span class="font-semibold">{{tabledata.Status}}</span>
+              </p>
+              <p v-else-if="tabledata.flag == 3  ">
+                <span class="text-red-500 font-semibold">{{tabledata.Status}}</span>
+              </p>
+            </td>
+
             <td class="text-gray-500">
-              <nuxt-link to="/user/blog/view">
+              <nuxt-link :to="{ path: '/user/blog/view', query: { id: tabledata.id}}">
+                <!-- <nuxt-link to="/user/blog/view"> -->
+                <button @click="uploadUserBlogkey2">
+                  <font-awesome-icon
+                    class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                    :icon="['fas', 'eye']"
+                  />
+                </button>
+              </nuxt-link>
+              <nuxt-link :to="{ path: '/user/messages', query: { id: tabledata.id}}">
                 <font-awesome-icon
                   class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'eye']"
+                  :icon="['fas', 'envelope']"
                 />
               </nuxt-link>
-              <font-awesome-icon
-                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                :icon="['fas', 'envelope']"
-              />
               <font-awesome-icon
                 class="mr-1 h-3 cursor-pointer hover:text-gray-800"
                 :icon="['fas', 'check']"
@@ -177,12 +124,20 @@
       <div class="mt-5 relative">
         <!--Paging-->
         <div class="mx-auto w-content">
-          <span class="inline-block mr-4 cursor-pointer">
+          <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
             <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
           </span>
-          1
-          <span class="text-lg text-ideeza">2</span> 3
-          <span class="inline-block ml-4 cursor-pointer">
+
+          <span v-for="inde in [1,2,3] " :key="inde">
+            <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
+              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+            </span>
+            <span v-else>
+              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+            </span>
+          </span>
+
+          <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
             Next
             <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
           </span>
@@ -198,13 +153,74 @@
         </div>
       </div>
     </div>
+    {{Math.ceil(counter)}}
   </div>
 </template>
 
 <script>
+import articles from "../../../data/BlogApi.json";
 export default {
-  name: "blog-list"
+  name: "blog-list",
+  data: function() {
+    return {
+      articles: articles,
+      currentviewpoint: this.$store.state.userBlogStore.offset + 1,
+      index: 0,
+      counter: articles.length / this.$store.state.userBlogStore.scale,
+      start: this.$store.state.userBlogStore.offset * 5 - 0,
+      end: this.$store.state.userBlogStore.offset * 5 + 6
+    };
+  },
+  methods: {
+    selectedkey(e) {
+      this.$store.commit("userBlogStore/selectedkeyChange" , e-1);
+        // $router.go({path:'/news', force: true})
+      console.log(this.currentviewpoint+"_");
+      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1,
+      this.counter = articles.length / this.$store.state.userBlogStore.scale,
+      this.start = this.$store.state.userBlogStore.offset * 5 - 0,
+      this.end = this.$store.state.userBlogStore.offset * 5 + 6
+        // this.$refs.page.$forceUpdate();
+    },
+    increasekey() {
+      if (
+        this.currentviewpoint == this.counter ||
+        this.currentviewpoint > this.counter
+      ) {
+      } else {
+      this.$store.commit("userBlogStore/increasekeyChange");
+      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1,
+      this.counter = articles.length / this.$store.state.userBlogStore.scale,
+      this.start = this.$store.state.userBlogStore.offset * 5 - 0,
+      this.end = this.$store.state.userBlogStore.offset * 5 + 6
+        // $router.go({path:'/news', force: true})
+        // this.$refs.page.$forceUpdate();
+      }
+    },
+    decreasekey() {
+      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
+      } else {
+      this.$store.commit("userBlogStore/decreasekeyChange");
+      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1,
+      this.counter = articles.length / this.$store.state.userBlogStore.scale,
+      this.start = this.$store.state.userBlogStore.offset * 5 - 0,
+      this.end = this.$store.state.userBlogStore.offset * 5 + 6
+        // $router.go({path:'/news', force: true})
+        // this.$refs.page.$forceUpdate();
+      }
+    },
+    uploadUserBlogkey() {
+      this.$store.commit("userBlogStore/viewflagchange1");
+    },
+    uploadUserBlogkey2() {
+      this.$store.commit("userBlogStore/viewflagchange2");
+    }
+  }
 };
+
+// export default {
+//     name: "blog-list"
+// }
 </script>
 
 <style scoped>
