@@ -39,7 +39,7 @@ export default {
     { src: '~/plugins/dragged-plugin.js', ssr: false },
     { src: '~/plugins/apex-chart-plugin.js', ssr: false },
     { src: '~/plugins/ace-editor-plugin.js', ssr: false },
-    { src: '~/plugins/scrollbar-plugin', mode: 'client'},
+    { src: '~/plugins/scrollbar-plugin.js', ssr: false },
     { src: '~/plugins/notification-plugin.js', ssr: false },
     { src: '~/plugins/table-plugin.js' },
     { src: '~/plugins/vue2-filters-plugin' }
