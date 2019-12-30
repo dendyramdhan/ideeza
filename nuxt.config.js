@@ -39,10 +39,10 @@ export default {
     { src: '~/plugins/dragged-plugin.js', ssr: false },
     { src: '~/plugins/apex-chart-plugin.js', ssr: false },
     { src: '~/plugins/ace-editor-plugin.js', ssr: false },
-    { src: '~/plugins/scrollbar-plugin', mode: 'client'},
+    { src: '~/plugins/scrollbar-plugin.js', ssr: false },
     { src: '~/plugins/notification-plugin.js', ssr: false },
-    { src: '~/plugins/table-plugin.js'},
-    {src: '~/plugins/vue2-filters-plugin'}
+    { src: '~/plugins/table-plugin.js' },
+    { src: '~/plugins/vue2-filters-plugin' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -64,11 +64,11 @@ export default {
           icons: ['fas']
         },
         {
-          set:'@fortawesome/free-regular-svg-icons',
+          set: '@fortawesome/free-regular-svg-icons',
           icons: ['far']
         },
         {
-          set:'@fortawesome/free-brands-svg-icons',
+          set: '@fortawesome/free-brands-svg-icons',
           icons: ['fab']
         }
       ]
@@ -88,7 +88,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }

@@ -4,16 +4,7 @@
 
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Article name</div>
-      <input
-        v-model="requestObj.case"
-        name="case"
-        type="text"
-        value
-        id="ServiceCase"
-        placeholder="name"
-        class="w-full bg-white border border-solid border-gray-300 text-lg"
-      />
-      <!-- <text-field placeholder="name"    /> -->
+      <text-field placeholder="name" />
     </div>
 
     <div class="field-container mt-10">
@@ -32,7 +23,7 @@
 
     <div class="mt-12 text-center lg:text-left">
       <button class="btn btn-normal btn--ideeza mr-5 py-4 px-10 text-lg">Publish</button>
-      <nuxt-link :to="{ path: '/user/blog/view', query: { id: counter, name:ArticlesName}}">
+      <nuxt-link to="/user/blog/view">
         <button class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
       </nuxt-link>
     </div>
@@ -40,7 +31,6 @@
 </template>
 
 <script>
-import articles from "../../../data/BlogApi.json";
 import TextField from "~/components/form/text-field.vue";
 import TextArea from "~/components/form/text-area.vue";
 import CategoryField from "~/components/form/category-field.vue";
@@ -52,22 +42,6 @@ export default {
     "text-area": TextArea,
     "category-field": CategoryField,
     "file-field": FileField
-  },
-  data: function() {
-    return {
-      articles: articles,
-      counter: articles.length + 1,
-      ArticlesName: " ",
-      requestObj: {
-        case: 'Bulgaria',
-      }
-    };
-  },
-  methods: {
-    sendMail() {
-      // this call when form submit
-      console.log(this.requestObj.case); // return null
-    }
   }
 };
 </script>
@@ -91,9 +65,5 @@ export default {
   .blog-container {
     padding: 60px 50px;
   }
-}
-
-input {
-  padding: 12px 24px;
 }
 </style>

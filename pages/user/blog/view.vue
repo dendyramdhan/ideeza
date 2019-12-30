@@ -9,60 +9,67 @@
           class="btn btn-normal btn--ideeza-dark px-10 py-4 block lg:inline-block"
         >Back</nuxt-link>
       </div>
-      <!--Blog Preview-->
-      <div class="lg:flex" v-for="descrition in articles" :key="descrition">
-        <div class="lg:flex" v-if="descrition.id == $route.query.id ">
-          <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
-            <img class="w-full" src="~/static/images/blog-image.png" />
-          </div>
-          <div>
-            <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
-              <h1
-                class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
-              >{{descrition.title}}</h1>
-            </div>
-            <div class="lg:my-10 my-3 flex items-center">
-              <div v-for="index in  descrition.rating" :key="index">
-                <font-awesome-icon
-                  class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
-                  :icon="['fas', 'star']"
-                />
-              </div>
-              Comment({{descrition.rating}})
-            </div>
-            <div class="lg:my-10 my-3 flex items-center">
-              <img class="h-12 w-12 mr-5 rounded-full" :src="descrition.profileimage" />
-              <span class="text-gray-800 font-semibold text-xl">{{descrition.ArticlesName}}</span>
-            </div>
 
-            <p class="text-base lg:text-lg">{{descrition.descrition}}-{{$route.query.id }}</p>
+      <!--Blog Preview-->
+      <div class="lg:flex">
+        <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
+          <img class="w-full" src="~/static/images/blog-image.png" />
+        </div>
+        <div>
+          <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
+            <h1
+              class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
+            >Making electro cup</h1>
+            <div>
+              <font-awesome-icon
+                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
+                :icon="['fas', 'star']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
+                :icon="['fas', 'star']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
+                :icon="['fas', 'star']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
+                :icon="['fas', 'star']"
+              />
+              <font-awesome-icon
+                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
+                :icon="['fas', 'star']"
+              />
+            </div>
           </div>
+
+          <div class="lg:my-10 my-3 flex items-center">
+            <img
+              class="h-12 w-12 mr-5 rounded-full"
+              src="https://randomuser.me/api/portraits/women/14.jpg"
+            />
+            <span class="text-gray-800 font-semibold text-xl">Samantha</span>
+          </div>
+
+          <p class="text-base lg:text-lg">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget
+            interdum urna, ac ornare risus. Vivamus finibus nisl at mauris condimentum,
+            vitae semper tellus aliquam. In ante sapien, congue ut feugiat vel, placerat ut
+            erat. Quisque at nulla nisl. Vivamus a egestas magna. Cras condimentum
+            est arcu, eget gravida diam congue sed. Phasellus ut fringilla magna, nec
+            sodales turpis. Aliquam in velit nunc.
+          </p>
         </div>
       </div>
-        <!-- Add preview -->
-    
-        <div class="lg:flex" v-if="articles.id == $route.query.id ">&nbsp;</div>
-        <div v-else>-{{$route.query.id }}--{{$route.query.ArticlesName }}</div>
-     
     </div>
   </div>
 </template>
 
 <script>
-import articles from "../../../data/BlogApi.json";
 export default {
-  name: "blog-view",
-  data: function() {
-    return {
-      articles: articles,
-      size: "1"
-    };
-  }
+  name: "blog-view"
 };
-
-// export default {
-//     name: "blog-view"
-// }
 </script>
 
 <style scoped>

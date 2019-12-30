@@ -11,14 +11,12 @@
                   <font-awesome-icon class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
                 </div>
               </div>
-
               <div class="my-5">
                 <p>
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                   Ipsum has been the industry's standard dummy text ever since
                 </p>
               </div>
-
               <div class="bg-gray-200">
                 <img class="w-full object-fit object-center" src="~/static/images/car-big.png" alt="">
               </div>
