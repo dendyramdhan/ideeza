@@ -9,9 +9,43 @@
           class="btn btn-normal btn--ideeza-dark px-10 py-4 block lg:inline-block"
         >Back</nuxt-link>
       </div>
-
       <!--Blog Preview-->
-      <div class="lg:flex">
+      <div class="lg:flex" v-for="descrition in articles" :key="descrition">
+        <div class="lg:flex" v-if="descrition.id == $route.query.id ">
+          <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
+            <img class="w-full" src="~/static/images/blog-image.png" />
+          </div>
+          <div>
+            <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
+              <h1
+                class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
+              >{{descrition.title}}</h1>
+            </div>
+            <div class="lg:my-10 my-3 flex items-center">
+              <div v-for="index in  descrition.rating" :key="index">
+                <font-awesome-icon
+                  class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
+                  :icon="['fas', 'star']"
+                />
+              </div>
+              Comment({{descrition.rating}})
+            </div>
+            <div class="lg:my-10 my-3 flex items-center">
+              <img class="h-12 w-12 mr-5 rounded-full" :src="descrition.profileimage" />
+              <span class="text-gray-800 font-semibold text-xl">{{descrition.ArticlesName}}</span>
+            </div>
+
+            <p class="text-base lg:text-lg">
+              {{descrition.descrition}}
+              <!-- -{{$route.query.id }} -->
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Add preview -->
+
+      <div class="lg:flex" v-if="this.$store.state.userBlogStore.viewflag == 1 ">&nbsp;</div>
+      <div v-else-if="this.$store.state.userBlogStore.viewflag == 2" class="lg:flex">
         <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
           <img class="w-full" src="~/static/images/blog-image.png" />
         </div>
@@ -19,29 +53,8 @@
           <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
             <h1
               class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
-            >Making electro cup</h1>
-            <div>
-              <font-awesome-icon
-                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
-                :icon="['fas', 'star']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
-                :icon="['fas', 'star']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
-                :icon="['fas', 'star']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
-                :icon="['fas', 'star']"
-              />
-              <font-awesome-icon
-                class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
-                :icon="['fas', 'star']"
-              />
-            </div>
+            >{{this.$store.state.userBlogStore.CategoryName}}</h1>
+            <!-- {{this.$store.state.userBlogStore.viewflag}} -->
           </div>
 
           <div class="lg:my-10 my-3 flex items-center">
@@ -49,27 +62,45 @@
               class="h-12 w-12 mr-5 rounded-full"
               src="https://randomuser.me/api/portraits/women/14.jpg"
             />
-            <span class="text-gray-800 font-semibold text-xl">Samantha</span>
+            <span
+              class="text-gray-800 font-semibold text-xl"
+            >{{this.$store.state.userBlogStore.ArticlesName}}</span>
           </div>
 
           <p class="text-base lg:text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget
-            interdum urna, ac ornare risus. Vivamus finibus nisl at mauris condimentum,
-            vitae semper tellus aliquam. In ante sapien, congue ut feugiat vel, placerat ut
-            erat. Quisque at nulla nisl. Vivamus a egestas magna. Cras condimentum
-            est arcu, eget gravida diam congue sed. Phasellus ut fringilla magna, nec
-            sodales turpis. Aliquam in velit nunc.
+            {{this.$store.state.userBlogStore.DescriptionName}}
+            <!-- -{{$route.query.id }} -->
           </p>
         </div>
+
+        <!-- <p>{{$route.query.id }}</p>
+        <p>{{this.$store.state.userBlogStore.ArticlesName }}</p>
+        <p>{{this.$store.state.userBlogStore.CategoryName }}</p>
+        <p>{{this.$store.state.userBlogStore.DescriptionName }}</p>
+        <p>{{this.$store.state.userBlogStore.Imagename }}</p>
+        <p>
+          <img :src="this.$store.state.userBlogStore.Imageurl" />
+        </p> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import articles from "../../../data/BlogApi.json";
 export default {
-  name: "blog-view"
+  name: "blog-view",
+  data: function() {
+    return {
+      articles: articles,
+      size: "1"
+    };
+  }
 };
+
+// export default {
+//     name: "blog-view"
+// }
 </script>
 
 <style scoped>

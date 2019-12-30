@@ -1,6 +1,6 @@
 <template>
     <div>
-      <input @input="handleInput" :placeholder="placeholder" class="w-full bg-white border border-solid border-gray-300 text-lg ">
+      <input @input="handleInput" placeholder="name"  :value="value" class="w-full bg-white border border-solid border-gray-300 text-lg ">
     </div>
 </template>
 
@@ -8,9 +8,11 @@
     export default {
         name: "text-field",
         props: ['placeholder'],
+        props: ['value'],
         methods: {
           handleInput (e){
             this.$emit('input', e.target.value)
+             this.$store.commit("userBlogStore/savearticlesname", e.target.value);
           }
         }
     }
