@@ -16,7 +16,7 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/admin/orders">
+      <nuxt-link to="/admin/order">
         <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'shopping-cart']"/> Orders
       </nuxt-link>
     </div>

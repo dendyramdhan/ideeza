@@ -16,31 +16,6 @@
 
       </div>
 
-      <div class="flex items-center justify-center w-6/12">
-        <div class="search_section w-full">
-        <div class="searchbox">
-            <button class="btn-search">
-                <img src="~/static/images/search-ico.png" class="img-fluid" alt="search">
-            </button>
-            <input id="search" type="text" name="search" class="search">
-            <div class="searchbox_right_icon">
-                <button class="btn-camera">
-                    <font-awesome-icon class="mr-2" :icon="['fas', 'camera']"/>
-                </button>
-                <button class="btn-microphone">
-                    <font-awesome-icon class="mr-2" :icon="['fas', 'microphone']"/>
-                </button>
-            </div>
-        </div>
-        <div class="toggle_icons">
-            <label class="switch">
-                <input type="checkbox" />
-                <div class="slider round"></div>
-            </label>
-        </div>
-        </div>
-      </div>
-
       <!--Menu-->
       <div class="flex items-center justify-end">
         <div class="flex items-center relative mr-5 " v-click-outside="onClickOutside">
@@ -201,69 +176,5 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-}
-.searchbox {
-    background-color: #F4ECF7;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 2px;
-}
-.searchbox {
-    flex: 0 0 calc(100% - 75px);
-    max-width: calc(100% - 75px);
-}
-.searchbox input {
-    width: 100%;
-    background-color: transparent;
-    border: 0;
-}
-.searchbox button {
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-}
-.searchbox .searchbox_right_icon {
-    display: flex;
-}
-.toggle_icons .switch {
-    display: inline-block;
-    height: 34px;
-    position: relative;
-    width: 60px;
-    margin-bottom: 0;
-    margin-left: 15px;
-    margin-top: 10px;
-}
-.toggle_icons .switch input {
-    display: none;
-}
-.toggle_icons .slider {
-    background-color: #ccc;
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: .4s;
-}
-.toggle_icons .slider.round {
-    border-radius: 34px;
-}
-.toggle_icons .slider:before {
-    background-image: url(~static/images/button_toggle.png);
-    bottom: 2px;
-    content: "";
-    height: 30px;
-    left: 2px;
-    position: absolute;
-    transition: .4s;
-    width: 30px;
-}
-.toggle_icons input:checked + .slider {
-    background-color: #5C0E8C;
-}
-.toggle_icons input:checked + .slider:before {
-    transform: translateX(26px);
 }
 </style>
