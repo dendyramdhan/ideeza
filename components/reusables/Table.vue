@@ -1,119 +1,142 @@
 <template>
-    <div class="bg-white rounded border-ideeza border shadow">
-        <div class="flex justify-between pt-5 pl-5 pr-5 items-center mb-3">
-            <h6 class="text-ideeza font-bold text-sm flex-shrink">Manage Users, Technicians & Service Providers</h6>
-            <div class="flex justify-between flex-none">
-                <div v-if="searchbox" class="flex w-fit-content bg-white justify-center border border-ideeza rounded items-center mr-2 content-center">
-                    <div class="h-12 relative w-10">
-                        <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
-                    </div>
-                    <input placeholder="search users" class="bg-white outline-none h-12 text-gray-800 pr-3">
-                </div>
-                <button class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">
-                    Add New <font-awesome-icon class="text-sm" :icon="['fa', 'plus']"/>
-                </button>
-                <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']"/>
-            </div>
+  <div class="bg-white rounded border-ideeza border shadow">
+    <div class="flex justify-between pt-5 pl-5 pr-5 items-center mb-3">
+      <h6 class="text-ideeza font-bold text-sm flex-shrink">{{title}}</h6>
+      <div class="flex justify-between flex-none">
+        <div v-if="searchbox"
+          class="flex w-fit-content bg-white justify-center border border-ideeza rounded items-center mr-2 content-center">
+          <div class="h-12 relative w-10">
+            <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
+          </div>
+          <input placeholder="Search" class="bg-white outline-none h-12 text-gray-800 pr-3">
         </div>
-        <div class="pl-5 pb-2">
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Delete</button>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Print</button>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Export</button>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Make Manager</button>
-        </div>
-        <div class="overflow-x-auto max-96-vw">
-        <table class="text-left w-full simple-table">
-		<thead class="bg-white flex text-ideeza-dark w-full">
-			<tr class="flex w-full mb-4">
-                <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length" v-for="(field,index) in fields">
-                    <template v-if="index==0">
-                        <input  type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)"/>
-                        <label for="ad">{{field}}</label>
-                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
-                    </template>
-                    <template v-else>
-                        {{field}}
-                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>    
-                    </template>
-                </th>
-            </tr>
-		</thead>
-		<tbody class="bg-grey-light flex flex-col items-center justify-between overflow-y-auto w-full text-ideeza-dark" style="max-height:400px;" >
-			<!-- table rows !-->
-            <slot>
-			</slot>
-		</tbody>
-	</table>
-        </div>
+        <button class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza" @click="$emit('add')">
+          Add New
+          <font-awesome-icon class="text-sm" :icon="['fa', 'plus']" />
+        </button>
+        <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']" />
+      </div>
     </div>
+    <div class="pl-5 pb-2">
+      <slot name="header">
+        <button class="font-bold text-sm mr-3 text-ideeza-dark">Delete</button>
+        <button class="font-bold text-sm mr-3 text-ideeza-dark">Print</button>
+        <button class="font-bold text-sm mr-3 text-ideeza-dark">Export</button>
+        <button class="font-bold text-sm mr-3 text-ideeza-dark">Make Manager</button>
+      </slot>
+    </div>
+    <div class="overflow-x-auto max-96-vw">
+      <table class="text-left w-full simple-table">
+        <thead class="bg-white flex text-ideeza-dark w-full">
+          <tr class="flex w-full mb-4">
+            <slot name="th">
+              <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length"
+                v-for="(field,index) in fields">
+                <template v-if="index==0">
+                  <input type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)" />
+                  <label for="ad">{{field}}</label>
+                  <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']" />
+                </template>
+                <template v-else>
+                  {{field}}
+                  <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']" />
+                </template>
+              </th>
+            </slot>
+          </tr>
+        </thead>
+        <tbody class="bg-grey-light flex flex-col items-center justify-between overflow-y-auto w-full text-ideeza-dark"
+          style="max-height:400px;">
+          <!-- table rows !-->
+          <slot>
+          </slot>
+        </tbody>
+      </table>
+      <slot name="footer">
+      </slot>
+    </div>
+  </div>
 </template>
 <script>
-export default {
+  export default {
     props: {
-        fields: {
-            type: Array,
-            default: () => {
-                return []
-            }
-        },
-        searchbox: {
-            type: Boolean,
-            default: false
+      fields: {
+        type: Array,
+        default: () => {
+          return []
         }
+      },
+      searchbox: {
+        type: Boolean,
+        default: false
+      },
+      title: {
+          type: String,
+          default: 'Table'
+      }
     },
     data() {
-        return {
-            selected: false
-        }
+      return {
+        selected: false
+      }
     }
-}
+  }
+
 </script>
 <style>
-.simple-table tbody td{
+  .simple-table tbody td {
     padding: 0.75rem;
-}
-.simple-table [type="checkbox"]:not(:checked),
-    .simple-table [type="checkbox"]:checked {
+  }
+
+  .simple-table [type="checkbox"]:not(:checked),
+  .simple-table [type="checkbox"]:checked {
     position: absolute;
     left: -9999px;
-}
-.simple-table [type="checkbox"]:not(:checked) + label,
-    .simple-table [type="checkbox"]:checked + label {
+  }
+
+  .simple-table [type="checkbox"]:not(:checked)+label,
+  .simple-table [type="checkbox"]:checked+label {
     position: relative;
     padding-left: 1.95em;
     cursor: pointer;
-}
+  }
 
-    /* checkbox aspect */
-.simple-table [type="checkbox"]:not(:checked) + label:before{
+  /* checkbox aspect */
+  .simple-table [type="checkbox"]:not(:checked)+label:before {
     content: '';
     position: absolute;
-    left: 0; top: 0;
-    width: 1.25em; height: 1.25em;
+    left: 0;
+    top: 0;
+    width: 1.25em;
+    height: 1.25em;
     border: 2px solid #A5C9FF;
     background: #FFF;
     border-radius: 4px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-}
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+  }
 
-@media (max-width: 767px){
-    .max-96-vw{
-        max-width: 96vw;
+  @media (max-width: 767px) {
+    .max-96-vw {
+      max-width: 96vw;
     }
-}
-.simple-table [type="checkbox"]:checked + label:before {
+  }
+
+  .simple-table [type="checkbox"]:checked+label:before {
     content: '';
     position: absolute;
-    left: 0; top: 0;
-    width: 1.25em; height: 1.25em;
+    left: 0;
+    top: 0;
+    width: 1.25em;
+    height: 1.25em;
     border: 2px solid #A5C9FF;
     background: #A5C9FF;
     border-radius: 4px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
-}
-    /* checked mark aspect */
-.simple-table [type="checkbox"]:not(:checked) + label:after,
-    [type="checkbox"]:checked + label:after {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+  }
+
+  /* checked mark aspect */
+  .simple-table [type="checkbox"]:not(:checked)+label:after,
+  [type="checkbox"]:checked+label:after {
     content: '\2713\0020';
     position: absolute;
     top: .22em;
@@ -123,38 +146,43 @@ export default {
     color: #fff;
     transition: all .2s;
     font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
-}
-    /* checked mark aspect changes */
-.simple-table [type="checkbox"]:not(:checked) + label:after {
+  }
+
+  /* checked mark aspect changes */
+  .simple-table [type="checkbox"]:not(:checked)+label:after {
     opacity: 0;
     transform: scale(0);
-}
-.simple-table [type="checkbox"]:checked + label:after {
+  }
+
+  .simple-table [type="checkbox"]:checked+label:after {
     opacity: 1;
     transform: scale(1);
-}
-    /* disabled checkbox */
-.simple-table [type="checkbox"]:disabled:not(:checked) + label:before,
-    [type="checkbox"]:disabled:checked + label:before {
+  }
+
+  /* disabled checkbox */
+  .simple-table [type="checkbox"]:disabled:not(:checked)+label:before,
+  [type="checkbox"]:disabled:checked+label:before {
     box-shadow: none;
     border-color: #bbb;
     background-color: #ddd;
-}
-.simple-table [type="checkbox"]:disabled:checked + label:after {
+  }
+
+  .simple-table [type="checkbox"]:disabled:checked+label:after {
     color: #999;
-}
-.simple-table [type="checkbox"]:disabled + label {
+  }
+
+  .simple-table [type="checkbox"]:disabled+label {
     color: #aaa;
-}
-    /* accessibility */
-.simple-table [type="checkbox"]:checked:focus + label:before,
-.simple-table [type="checkbox"]:not(:checked):focus + label:before {
+  }
+
+  /* accessibility */
+  .simple-table [type="checkbox"]:checked:focus+label:before,
+  .simple-table [type="checkbox"]:not(:checked):focus+label:before {
     border: 2px solid #A5C9FF;
-}
+  }
+
 </style>
 <style>
-
-/* Base for label styling */
-
+  /* Base for label styling */
 
 </style>
