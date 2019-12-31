@@ -12,23 +12,23 @@
           <div class="md:w-2/3 md:mr-3">
         <simple-table @selectall="selectall" :fields="['Name','Email','Title','Date Modified','Role']">
           <tr class="flex w-full mb-4" v-for="(user,index) in users">
-            <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}">
+            <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">
               <input type="checkbox" :id="user.id" v-model="user.selected" />
               <label :for="user.id">{{user.name}}</label>
             </td>
-            <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}">{{user.email}}</td>
-            <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}" v-if="user.type == 1">
-              <button class="px-4 py-2 text-ideeza-dark hover:bg-green-200 bg-green-300 w-full rounded">Regional Manager</button>
+            <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">{{user.email}}</td>
+            <td class="p-2 w-1/5" :class="{'border-b':users.length-1 != index}" v-if="user.type == 1">
+              <button class="px-4 py-2 text-ideeza-dark hover:bg-green-200 bg-green-300 w-full rounded text-xs">Regional Manager</button>
             </td>
-            <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}" v-if="user.type == 2">
-              <button class="px-4 py-1 text-ideeza-dark hover:bg-blue-200 bg-blue-300 text-sm w-full rounded">Assitant to the Regional
+            <td class="p-2 w-1/5" :class="{'border-b':users.length-1 != index}" v-if="user.type == 2">
+              <button class="px-4 py-1 text-ideeza-dark hover:bg-blue-200 bg-blue-300 text-xs w-full rounded">Assitant to the Regional
                 Manager</button>
             </td>
-            <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}" v-if="user.type == 3">
+            <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}" v-if="user.type == 3">
               <button class="px-4 py-2 text-ideeza-dark hover:bg-blue-200 bg-blue-300 w-full rounded">Salesman</button>
             </td>
-            <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}">{{user.date_modified}}</td>
-            <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}">
+            <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">{{user.date_modified}}</td>
+            <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">
               {{user.role==1?'User':'Service provider'}}
               <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500 float-right" :icon="['fa', 'grip-vertical']" />
             </td>
@@ -197,12 +197,12 @@
   </div>
 </template>
 <script>
-  import LeftMenu from '~/components/user/common-left-side-menu.vue'
+  import LeftMenu from '~/components/admin/common-left-side-menu.vue'
   import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
   import SimpleTable from '~/components/reusables/Table.vue'
 
   export default {
-    layout: 'user',
+    layout: 'admin',
     components: {
       LeftMenu,
       MyIdeeza,
@@ -237,6 +237,22 @@
           },
           {
             id: 4,
+            name: 'Michael Scott',
+            email: 'marchas@gmail.com',
+            type: 3,
+            date_modified: '07/04/1927',
+            role: 1
+          },
+          {
+            id: 5,
+            name: 'Michael Scott',
+            email: 'marchas@gmail.com',
+            type: 3,
+            date_modified: '07/04/1927',
+            role: 1
+          },
+          {
+            id: 6,
             name: 'Michael Scott',
             email: 'marchas@gmail.com',
             type: 3,
@@ -345,6 +361,12 @@
     width: 100%;
   }
 .sales-table{
-  height: calc(14rem + 0.75rem);
+  height: calc(13rem + 0.29rem);
+}
+.simple-table tbody td {
+  padding: 0.5rem;
+}
+.simple-table th {
+  font-size: 0.85rem;
 }
 </style>
