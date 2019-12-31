@@ -5,13 +5,26 @@
         <DashBoardIcon class="fill-current mr-5" /> Dashboard
       </nuxt-link>
     </div>
-    <div class="menu-item">
+    <div class="menu-item flex-col">
       <nuxt-link to="/admin/users">
-        <UserIcon class="fill-current mr-5" /> Users
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']"/> Users
+      </nuxt-link>
+      <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Home</nuxt-link>
+      <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Contacts</nuxt-link>
+      <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Marketing</nuxt-link>
+    </div>
+    <div class="menu-item">
+      <nuxt-link to="/admin/service">
+        <UserIcon class="fill-current mr-3" /> Service providers
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/admin/products">
+      <nuxt-link to="/admin/invester">
+        <UserIcon class="fill-current mr-3" /> Investors
+      </nuxt-link>
+    </div>
+    <div class="menu-item">
+      <nuxt-link to="/admin/product">
         <ProductIcon class="fill-current mr-5" /> Products
       </nuxt-link>
     </div>
@@ -46,10 +59,10 @@
 
 <style scoped>
   .menu-item{
-    @apply flex mb-8 content-center items-center mt-2 text-gray-700 text-xl font-semibold cursor-pointer;
+    @apply flex mb-8 content-center mt-2 text-gray-700 text-xl font-semibold cursor-pointer;
   }
 
-  .menu-item:hover{
+  .menu-item a:hover{
     @apply text-ideeza;
   }
   .left-main-menu svg{

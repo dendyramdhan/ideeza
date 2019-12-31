@@ -39,7 +39,7 @@
           <div class="md:w-full">
         <div class="bg-white rounded border-ideeza border shadow">
         <div class="flex justify-between pt-5 pl-5 pr-5 items-center mb-3">
-            <h6 class="text-ideeza font-bold text-sm flex-shrink">Manage Orders</h6>
+            <h6 class="text-ideeza font-bold text-sm flex-shrink">Manage Products</h6>
             <div class="flex justify-between flex-none">
                 <div class="flex w-fit-content bg-white justify-center border border-ideeza rounded items-center mr-2 content-center">
                     <div class="h-8 relative w-10">
@@ -81,11 +81,7 @@
                     <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
-                    Quantity
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
-                </th>
-                <th class="p-4 border-t border-b border-blue-300 w-1/8">
-                    Price
+                    Type
                     <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
@@ -109,8 +105,11 @@
               <td class="p-4 text-sm border-b">
                 <button class="px-4 py-2 text-ideeza-dark hover:bg-green-200 bg-green-300 w-full rounded text-xs">Service Provider</button>
               </td>
-              <td class="p-4 text-sm border-b">5</td>
-              <td class="p-4 text-sm border-b">$220</td>
+              <td class="p-4 text-sm border-b">
+                <LightIcon class="mr-5" />
+                <CodeIcon class="mr-5" />
+                <CoverIcon class="" />
+              </td>
               <td class="p-4 text-sm border-b">Public</td>
               <td class="p-4 text-sm border-b flex items-center">
                 <p class="text-ideeza-dark font-bold">
@@ -147,6 +146,9 @@
   import LeftMenu from '~/components/admin/common-left-side-menu.vue'
   import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
   import SimpleTable from '~/components/reusables/Table.vue'
+  import CoverIcon from '~/components/partials/icons/cover-icon.vue'
+  import CodeIcon from '~/components/partials/icons/code-icon.vue'
+  import LightIcon from '~/components/partials/icons/light-icon.vue'
 
   export default {
     layout: 'admin',
@@ -154,6 +156,9 @@
       LeftMenu,
       MyIdeeza,
       SimpleTable,
+      CoverIcon,
+      CodeIcon,
+      LightIcon
     },
     data: function () {
       return {
