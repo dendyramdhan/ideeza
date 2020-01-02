@@ -35,17 +35,24 @@
           <div class="mx-auto task-col">
             <TaskCol @showAddTask="displayAddTask" />
           </div>
+          <div class="mx-auto task-col">
+            <TaskCol @showAddTask="displayAddTask" />
+          </div>
         </div>
 
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
-          <smooth-scrollbar :options="{alwaysShowTracks: true}">
-            <div class="mx-auto task-col">
-              <!--Task Col-->
-              <div v-for="task in tasksWeekly" :key="task.id" class="task-col">
-                <TaskCol @showAddTask="displayAddTask" />
-              </div>
-            </div>
-          </smooth-scrollbar>
+          <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col">
+            <TaskCol @showAddTask="displayAddTask" />
+          </div>
+          <div class="mx-auto task-col">
+            <TaskCol @showAddTask="displayAddTask" />
+          </div>
+          <div class="mx-auto task-col">
+            <TaskCol @showAddTask="displayAddTask" />
+          </div>
+          <div class="mx-auto task-col">
+            <TaskCol @showAddTask="displayAddTask" />
+          </div>
         </div>
       </div>
     </div>

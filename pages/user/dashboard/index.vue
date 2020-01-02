@@ -43,7 +43,7 @@
                     class="mr-6 h-10 text-2xl text-ideeza"
                     :icon="['fas', 'layer-group']"
                   />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">812</span>
+                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.projectsmark}}</span>
                 </div>
                 <div class="pl-16">
                   <span class="text-ideeza-blue-gray text-lg block">Projects</span>
@@ -52,7 +52,7 @@
               <div class="status-button p-6">
                 <div class="flex items-center">
                   <img class="mr-6" src="~/static/icons/users.svg" alt />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">388</span>
+                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.contactsmark}}</span>
                 </div>
                 <div class="pl-16">
                   <span class="text-ideeza-blue-gray text-lg block">Contacts</span>
@@ -61,29 +61,21 @@
               <div class="status-button p-6">
                 <div class="flex items-center">
                   <img class="mr-6" src="~/static/icons/bullseye.svg" alt />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">4.9</span>
+                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.myscore}}</span>
                 </div>
                 <div class="pl-16">
-                  <span class="text-ideeza-blue-gray text-lg block">My score</span>
+                  <span class="text-ideeza-blue-gray text-lg block">My Score</span>
                 </div>
               </div>
             </div>
 
             <div>
-              <div class="table relative mb-5">
+              <div class="table relative mb-5" v-for="datas in activities.data">
                 <div class="table-cell timeline-diaplay"></div>
                 <div class="table-cell pl-5">
-                  <div>29/03/2019, 23:00</div>
-                  <div class="my-1">User Log in</div>
-                  <div class="font-semibold">Karen Allen logged into a system</div>
-                </div>
-              </div>
-              <div class="table relative mb-5">
-                <div class="table-cell timeline-diaplay"></div>
-                <div class="table-cell pl-5">
-                  <div>29/03/2019, 23:00</div>
-                  <div class="my-1">User Log in</div>
-                  <div class="font-semibold">Karen Allen logged into a system</div>
+                  <div>{{datas.timestamp}}</div>
+                  <div class="my-1">{{datas.title}}</div>
+                  <div class="font-semibold">{{datas.description}}</div>
                 </div>
               </div>
             </div>
@@ -160,6 +152,7 @@ import MyIdeeza from "~/components/user/my-ideeza/new-ideeza.vue";
 import axios from "axios";
 import innovation from "~/json/innovation.json";
 import topprojects from "~/json/topprojects.json";
+import activity from "~/json/activity.json";
 
 export default {
   // asyncData({ params }) {
@@ -184,10 +177,12 @@ export default {
   data: function() {
     console.log("innovation: ", innovation.innovation);
     console.log("innovation: ", topprojects.topprojects);
+    console.log("activity: ", activity.activity);
     return {
       showMyIdeeza: false,
       topprojects: topprojects.topprojects,
-      innovations: innovation.innovation
+      innovations: innovation.innovation,
+      activities: activity.activity,
     };
   },
   computed: {
