@@ -1,4 +1,5 @@
 export default function ({ route, redirect }) {
+
   if (route.fullPath === "/") {
     return redirect('/user/dashboard')
   }
@@ -20,4 +21,5 @@ export default function ({ route, redirect }) {
   if (route.fullPath === "/technician") {
     return redirect('/technician/dashboard')
   }
+  
 }

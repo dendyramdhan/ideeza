@@ -88,7 +88,7 @@
             <div class="scroll-area">
               <smooth-scrollbar :options="{alwaysShowTracks: true}">
                 <div class="flex flex-wrap">
-                  <div class="blog-container mr-2" v-for="innovation in innovations " :key="innovation">
+                  <div class="blog-container mr-2" v-for="innovation in innovations">
                     <div class="blog-image-container mb-8">
                       <img :src="innovation.image_url" class="object-center object-contain" alt />
                     </div>
@@ -111,7 +111,7 @@
             <div class="scroll-area">
               <smooth-scrollbar :options="{alwaysShowTracks: true}">
                 <div class="flex flex-wrap">
-                  <div class="w-1/2 p-2" v-for="topproject in topprojects" :key="topproject">
+                  <div class="w-1/2 p-2" v-for="topproject in topprojects">
                     <div class="p-2 border border-solid border-light-gray">
                       <div class="w-full projects-image">
                         <img
