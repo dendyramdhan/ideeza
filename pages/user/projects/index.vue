@@ -57,7 +57,7 @@
                     <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
                     <span>{{Project.mark.first}}</span>
                   </div>
-                  <span class="font-semibold">{{Project.commitmember1.first}} &nbsp; {{Project.commitkind1.first}}</span>
+                  <span class="font-semibold">{{Project.commitmember1.first}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2.first}}&nbsp; {{Project.commitkind2}}</span>
                 </div>
               </nuxt-link>
               <nuxt-link to="/user/projects/detail" class="ml-5">
@@ -69,7 +69,7 @@
                     <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
                     <span>{{Project.mark.second}}</span>
                   </div>
-                  <span class="font-semibold">{{Project.commitmember1.second}} &nbsp;{{Project.commitkind1.second}}</span>
+                  <span class="font-semibold">{{Project.commitmember1.second}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2.second}}&nbsp; {{Project.commitkind2}}</span>
                 </div>
               </nuxt-link>
 
