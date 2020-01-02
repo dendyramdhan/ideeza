@@ -37,36 +37,48 @@
             </div>
 
             <div class="flex justify-between">
-              <div class="status-button p-6">
-                <div class="flex items-center">
-                  <font-awesome-icon
-                    class="mr-6 h-10 text-2xl text-ideeza"
-                    :icon="['fas', 'layer-group']"
-                  />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.projectsmark}}</span>
+              <nuxt-link to="/user/projects">
+                <div class="status-button p-6">
+                  <div class="flex items-center">
+                    <font-awesome-icon
+                      class="mr-6 h-10 text-2xl text-ideeza"
+                      :icon="['fas', 'layer-group']"
+                    />
+                    <span
+                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                    >{{activities.projectsmark}}</span>
+                  </div>
+                  <div class="pl-16">
+                    <span class="text-ideeza-blue-gray text-lg block">Projects</span>
+                  </div>
                 </div>
-                <div class="pl-16">
-                  <span class="text-ideeza-blue-gray text-lg block">Projects</span>
+              </nuxt-link>
+              <nuxt-link to="/user/profile">
+                <div class="status-button p-6">
+                  <div class="flex items-center">
+                    <img class="mr-6" src="~/static/icons/users.svg" alt />
+                    <span
+                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                    >{{activities.contactsmark}}</span>
+                  </div>
+                  <div class="pl-16">
+                    <span class="text-ideeza-blue-gray text-lg block">Contacts</span>
+                  </div>
                 </div>
-              </div>
-              <div class="status-button p-6">
-                <div class="flex items-center">
-                  <img class="mr-6" src="~/static/icons/users.svg" alt />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.contactsmark}}</span>
+              </nuxt-link>
+              <nuxt-link to="/user/dashboard">
+                <div class="status-button p-6">
+                  <div class="flex items-center">
+                    <img class="mr-6" src="~/static/icons/bullseye.svg" alt />
+                    <span
+                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                    >{{activities.myscore}}</span>
+                  </div>
+                  <div class="pl-16">
+                    <span class="text-ideeza-blue-gray text-lg block">My Score</span>
+                  </div>
                 </div>
-                <div class="pl-16">
-                  <span class="text-ideeza-blue-gray text-lg block">Contacts</span>
-                </div>
-              </div>
-              <div class="status-button p-6">
-                <div class="flex items-center">
-                  <img class="mr-6" src="~/static/icons/bullseye.svg" alt />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.myscore}}</span>
-                </div>
-                <div class="pl-16">
-                  <span class="text-ideeza-blue-gray text-lg block">My Score</span>
-                </div>
-              </div>
+              </nuxt-link>
             </div>
 
             <div>
@@ -101,7 +113,7 @@
                   </div>
                   <!-- <li v-for="breed in breeds" :key="breed">
                     <p class="breed button--green">{{breed}}</p>
-                  </li>-->  
+                  </li>-->
                 </div>
               </smooth-scrollbar>
             </div>
@@ -175,14 +187,11 @@ export default {
     MyIdeeza
   },
   data: function() {
-    console.log("innovation: ", innovation.innovation);
-    console.log("innovation: ", topprojects.topprojects);
-    console.log("activity: ", activity.activity);
     return {
       showMyIdeeza: false,
       topprojects: topprojects.topprojects,
       innovations: innovation.innovation,
-      activities: activity.activity,
+      activities: activity.activity
     };
   },
   computed: {
@@ -194,7 +203,11 @@ export default {
   methods: {
     onClickOutside() {
       this.showMyIdeeza = false;
-    }
+    },
+    showMyProjects() {
+      alert("Hello");
+    },
+    showMyProfile() {}
   }
 };
 </script>

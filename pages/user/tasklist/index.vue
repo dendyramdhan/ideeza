@@ -25,32 +25,15 @@
 
       <div class="w-full scroll-container mx-auto">
         <div v-if="tab==='daily'" class="task-wrapper flex mb-10">
-          <!--Task Col-->
-          <div class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
-          </div>
-          <div class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
-          </div>
-          <div class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
-          </div>
+          <!--Task Col Daily-->
           <div class="mx-auto task-col">
             <TaskCol @showAddTask="displayAddTask" />
           </div>
         </div>
 
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
+          <!--Task Col Weekly-->
           <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
-          </div>
-          <div class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
-          </div>
-          <div class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
-          </div>
-          <div class="mx-auto task-col">
             <TaskCol @showAddTask="displayAddTask" />
           </div>
         </div>
@@ -72,38 +55,23 @@
       <div class="mt-5 py-5 px-5 border-t border-solid border-gray-300">
         <div class="text-xl text-gray-500 font-semibold">Latest Activity</div>
 
-        <div class="my-5">
+        <div class="my-5" v-for="latestactivity in latestactivities">
           <div class="flex">
             <img
               class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
-              src="https://randomuser.me/api/portraits/men/10.jpg"
+              :src="latestactivity.potrait_url"
             />
             <div class="text-left mr-3">
               <div class="text-gray-600 text-sm">
-                <span class="font-semibold text-gray-800">John D.</span> added comment
+                <span class="font-semibold text-gray-800">{{latestactivity.name}}</span>
+                {{latestactivity.action}}
                 <br />
-                <span class="underline font-semibold">to usability testing</span>
+                <span class="underline font-semibold">to {{latestactivity.destination}}</span>
               </div>
-              <div class="mt-2 text-gray-500 text-xs">Apr 21, 2018 at 8:20</div>
+              <div class="mt-2 text-gray-500 text-xs">{{latestactivity.timestamp}}</div>
             </div>
           </div>
-        </div>
-        <div class="my-5">
-          <div class="flex">
-            <img
-              class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
-              src="https://randomuser.me/api/portraits/men/4.jpg"
-            />
-            <div class="text-left mr-3">
-              <div class="text-gray-600 text-sm">
-                <span class="font-semibold text-gray-800">John D.</span> attached image
-                <br />
-                <span class="underline font-semibold">o Cover Sketching</span>
-              </div>
-              <div class="mt-2 text-gray-500 text-xs">Apr 21, 2018 at 8:20</div>
-            </div>
-          </div>
-          <img class="mt-2" src="~/static/images/attach_image.png" />
+          <img class="mt-2" :src="latestactivity.image_url" />
         </div>
       </div>
     </div>
@@ -118,6 +86,7 @@ import TaskCol from "~/components/user/tasklist/task-col";
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
+import latestactivity from "~/json/latestactivity.json";
 export default {
   layout: "user",
   name: "task-index",
@@ -143,7 +112,9 @@ export default {
       },
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
-      id: 0
+      id: 0,
+
+      latestactivities: latestactivity.latestactivities
     };
   },
   computed: {
