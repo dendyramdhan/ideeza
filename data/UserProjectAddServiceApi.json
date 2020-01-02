@@ -1,0 +1,43 @@
+{
+    "Result_info": [
+        {
+            "id": 1,
+            "name": "1-Samantha",
+            "profileImage": "https://randomuser.me/api/portraits/men/18.jpg",
+            "score": 5,
+            "description": "1-DesssSamantha",
+            "time": "6 Days",
+            "cost": "$ 220",
+            "mainCore1": "PHP",
+            "mainCore2": "Java",
+            "mainCore3": "Python"
+           
+        },
+        {
+            "id": 2,
+            "name": "2-Samantha",
+            "profileImage": "https://randomuser.me/api/portraits/men/18.jpg",
+            "score": 4,
+            "description": "1-DesssSamantha",
+            "time": "6 Days",
+            "cost": "$ 220",
+            "mainCore1": "PHP",
+            "mainCore2": "Java",
+            "mainCore3": "Python"
+            
+        },
+        {
+            "id": 3,
+            "name": "3-Samantha",
+            "profileImage": "https://randomuser.me/api/portraits/men/18.jpg",
+            "score": 3,
+            "description": "1-DesssSamantha",
+            "time": "6 Days",
+            "cost": "$ 220",
+            "mainCore1": "PHP",
+            "mainCore2": "Java",
+            "mainCore3": "Python"
+            
+        }
+    ]
+}

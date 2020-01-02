@@ -1,217 +1,156 @@
 <template>
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
-    <LeftMenu/>
+    <LeftMenu />
 
     <!-- Main Contents -->
     <div class="flex-grow">
-
       <div class="main-contents">
-
-          <div class="bg-white shadow-md border-solid border-gray-400 overflow-y-auto p-10">
-            <div class="flex items-center justify-between pb-3 border-b-2 border-solid border-ideeza-dark">
-              <div class="flex items-center">
-                <span class="font-semibold text-xl inline-block">Services</span>
-
-              </div>
-
-              <Search placeholder="search services..." />
+        <div class="bg-white shadow-md border-solid border-gray-400 overflow-y-auto p-10">
+          <div
+            class="flex items-center justify-between pb-3 border-b-2 border-solid border-ideeza-dark"
+          >
+            <div class="flex items-center">
+              <span class="font-semibold text-xl inline-block">Services</span>
             </div>
 
-            <div class="my-3 lg:flex justify-between text-sm">
-              <div class="flex">
-                <div class="flex items-center p-1 border border-solid border-ideeza-gray-700 mr-5">
-                  <span class="mr-3">Type: </span>
-                  <select class="border-0">
-                    <option>Patents</option>
-                    <option>Clouds</option>
-                    <option>Freelancers</option>
-                  </select>
-                </div>
-                <div class="flex items-center p-1 border border-solid border-ideeza-gray-700">
-                  <span class="mr-3">Sort By: </span>
-                  <select class="border-0">
-                    <option>Cost</option>
-                    <option>Rating</option>
-                    <option>Work time</option>
-                    <option>Address</option>
-                  </select>
-                </div>
-              </div>
-              <div>
-                <button @click="showOptimize = true" class="btn btn-normal btn--ideeza px-8 py-2">Optimize</button>
-                <button @click="$router.back()" class="ml-5 btn btn-normal btn--ideeza-dark px-8 py-2">< Go Back</button>
-              </div>
-            </div>
-
-            <!--Results-->
-            <h1 class="my-3 font-semibold">Results (58)</h1>
-
-            <div class="services-container mx-auto mt-10">
-              <div class="mb-32 lg:mb-20 lg:flex">
-                <div class="lg:flex lg:mr-20">
-                  <div class="mb-5 lg:mb-0 lg:mr-5">
-                    <img class="avatar rounded-full mx-auto"
-                         src="https://randomuser.me/api/portraits/men/18.jpg">
-                  </div>
-                  <div>
-                    <div class="flex justify-between items-center">
-                      <div class="flex items-center">
-                        <h1 class="text-lg font-semibold inline-block mr-5">He Someone</h1>
-                        <button class="btn btn-normal btn--ideeza px-5 py-2">Available</button>
-                      </div>
-
-                      <div class="flex items-center">
-                        <div class="py-1 px-2 border border-solid border-light-gray mr-3">6 Days</div>
-                        <div class="py-1 px-2 border border-solid border-light-gray mr-3">$220</div>
-                      </div>
-
-                    </div>
-                    <div class="my-5 flex items-center">
-                      <h2 class="inline-block mr-5 font-semibold text-lg">Code</h2>
-                      <span>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-            </span>
-                      <span class="ml-3">(5.0)</span>
-                    </div>
-                    <div class="text-ideeza-black">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat orci magna, vel mollis purus consequat et. Proin consectetur odio nec varius placerat.
-                    </div>
-
-                    <div class="flex mt-5">
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">PHP</button>
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Java</button>
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Python</button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <div class="mb-32 lg:mb-20 lg:flex">
-                <div class="lg:flex lg:mr-20">
-                  <div class="mb-5 lg:mb-0 lg:mr-5">
-                    <img class="avatar rounded-full mx-auto"
-                         src="https://randomuser.me/api/portraits/men/18.jpg">
-                  </div>
-                  <div>
-                    <div class="flex justify-between items-center">
-                      <div class="flex items-center">
-                        <h1 class="text-lg font-semibold inline-block mr-5">He Someone</h1>
-                        <button class="btn btn-normal btn--ideeza px-5 py-2">Available</button>
-                      </div>
-
-                      <div class="flex items-center">
-                        <button @click="requestQuote = !requestQuote" class="btn btn-normal px-3 py-2" :class="{'btn-green': quoteSend}">Request Quote</button>
-                      </div>
-
-                    </div>
-                    <div class="my-5 flex items-center">
-                      <h2 class="inline-block mr-5 font-semibold text-lg">Code</h2>
-                      <span>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-            </span>
-                      <span class="ml-3">(5.0)</span>
-                    </div>
-                    <div class="text-ideeza-black">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat orci magna, vel mollis purus consequat et. Proin consectetur odio nec varius placerat.
-                    </div>
-
-                    <div class="flex mt-5">
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">PHP</button>
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Java</button>
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Python</button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <div class="mb-32 lg:mb-20 lg:flex">
-                <div class="lg:flex lg:mr-20">
-                  <div class="mb-5 lg:mb-0 lg:mr-5">
-                    <img class="avatar rounded-full mx-auto"
-                         src="https://randomuser.me/api/portraits/men/18.jpg">
-                  </div>
-                  <div>
-                    <div class="flex justify-between items-center">
-                      <div class="flex items-center">
-                        <h1 class="text-lg font-semibold inline-block mr-5">He Someone</h1>
-                        <button class="btn btn-normal btn--ideeza px-5 py-2">Available</button>
-                      </div>
-
-                      <div class="flex items-center">
-                        <div class="py-1 px-2 border border-solid border-light-gray mr-3">6 Days</div>
-                        <div class="py-1 px-2 border border-solid border-light-gray mr-3">$220</div>
-                      </div>
-
-                    </div>
-                    <div class="my-5 flex items-center">
-                      <h2 class="inline-block mr-5 font-semibold text-lg">Code</h2>
-                      <span>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-              <font-awesome-icon class="h-3  text-ideeza-gold" :icon="['fas', 'star']"/>
-            </span>
-                      <span class="ml-3">(5.0)</span>
-                    </div>
-                    <div class="text-ideeza-black">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat orci magna, vel mollis purus consequat et. Proin consectetur odio nec varius placerat.
-                    </div>
-
-                    <div class="flex mt-5">
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">PHP</button>
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Java</button>
-                      <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Python</button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-
-
+            <!-- <Search placeholder="search services..." /> -->
+             <div class="search-container flex w-fit-content bg-white justify-center items-center content-center">
+    <div class="h-12 relative w-10">
+      <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
+    </div>
+    <input placeholder="search services..." class="bg-white outline-none h-8 text-gray-800 pr-3" v-model="searchTerm"
+          v-on:input="search">{{searchTerm}}
+  </div>
+              
+        
           </div>
 
-      </div>
+          <div class="my-3 lg:flex justify-between text-sm">
+            <div class="flex">
+              <div class="flex items-center p-1 border border-solid border-ideeza-gray-700 mr-5">
+                <span class="mr-3">Type:</span>
+                <select class="border-0">
+                  <option>Patents</option>
+                  <option>Clouds</option>
+                  <option>Freelancers</option>
+                </select>
+              </div>
+              <div class="flex items-center p-1 border border-solid border-ideeza-gray-700">
+                <span class="mr-3">Sort By:</span>
+                <select class="border-0">
+                  <option>Cost</option>
+                  <option>Rating</option>
+                  <option>Work time</option>
+                  <option>Address</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <button
+                @click="showOptimize = true"
+                class="btn btn-normal btn--ideeza px-8 py-2"
+              >Optimize</button>
+              <button
+                @click="$router.back()"
+                class="ml-5 btn btn-normal btn--ideeza-dark px-8 py-2"
+              >< Go Back</button>
+            </div>
+          </div>
 
+          <!--Results-->
+          <h1 class="my-3 font-semibold">Results (58)</h1>
+
+          <div class="services-container mx-auto mt-10">
+            <div class="mb-32 lg:mb-20 lg:flex" v-for="Service in Services" :key="Service">
+              <div class="lg:flex lg:mr-20">
+                <div class="mb-5 lg:mb-0 lg:mr-5">
+                  <img class="avatar rounded-full mx-auto" :src="Service.profileImage" />
+                </div>
+                <div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                      <h1 class="text-lg font-semibold inline-block mr-5">{{Service.name}}</h1>
+                      <button class="btn btn-normal btn--ideeza px-5 py-2">Available</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+
+                    <div class="flex items-center">
+                      <div
+                        class="py-1 px-2 border border-solid border-light-gray mr-3"
+                      >{{Service.time}}</div>
+                      <div
+                        class="py-1 px-2 border border-solid border-light-gray mr-3"
+                      >{{Service.cost}}</div>
+                    </div>
+
+                    <div class="flex items-center">
+                      <button
+                        @click="requestQuote = !requestQuote"
+                        class="btn btn-normal px-3 py-2"
+                        :class="{'btn-green': quoteSend}"
+                      >Request Quote</button>
+                    </div>
+                  </div>
+                   <div class="my-5 flex items-center">
+                    <h2 class="inline-block mr-5 font-semibold text-lg">Code</h2>
+                    <span v-for="index in  Service.score" :key="index">
+                      <font-awesome-icon class="h-3 text-ideeza-gold" :icon="['fas', 'star']" />
+                    </span>
+                    <span class="ml-3">({{Service.score}})</span>
+                  </div>
+                  <div class="text-ideeza-black">{{Service.description}}</div>
+
+                  <div class="flex mt-5">
+                    <button class="btn btn--ideeza-dark px-3 py-1 mr-3">{{Service.mainCore1}}</button>
+                    <button class="btn btn--ideeza-dark px-3 py-1 mr-3">{{Service.mainCore2}}</button>
+                    <button class="btn btn--ideeza-dark px-3 py-1 mr-3">{{Service.mainCore3}}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!--Request popup-->
-    <div v-if="requestQuote" class="quote-popup absolute-center-h-v " v-click-outside="onClickOutside">
+    <div
+      v-if="requestQuote"
+      class="quote-popup absolute-center-h-v"
+      v-click-outside="onClickOutside"
+    >
       <h1 class="text-xl font-semibold">Requesting quote</h1>
       <p class="mt-2">
-        After requesting the quote there will 5 more<br/> free quotes left
+        After requesting the quote there will 5 more
+        <br />free quotes left
       </p>
-      <div class="flex justify-end mt-3"><button @click="sendQuote" class="btn btn-normal btn--ideeza px-4 py-2">Send</button></div>
+      <div class="flex justify-end mt-3">
+        <button @click="sendQuote" class="btn btn-normal btn--ideeza px-4 py-2">Send</button>
+      </div>
     </div>
 
     <!--Optimize popup-->
-    <div v-if="showOptimize" class="quote-popup absolute-center-h-v " v-click-outside="onClickOutsideOptimize">
+    <div
+      v-if="showOptimize"
+      class="quote-popup absolute-center-h-v"
+      v-click-outside="onClickOutsideOptimize"
+    >
       <h1 class="text-xl font-semibold">Optimization</h1>
-      <div class="flex items-center font-semibold text-ideeza-black mt-5"><CheckBox /> Free shipping</div>
+      <div class="flex items-center font-semibold text-ideeza-black mt-5">
+        <CheckBox />Free shipping
+      </div>
 
       <div class="mt-5">
         <h1 class="font-semibold mb-1">Price</h1>
         <div class="flex justify-between">
-          <input  placeholder="$ min" >
-          <input placeholder="$ max" >
+          <input placeholder="$ min" />
+          <input placeholder="$ max" />
         </div>
       </div>
 
       <div class="mt-5">
         <h1 class="font-semibold mb-1">Delivery time</h1>
-        <select class="optimize-select" >
+        <select class="optimize-select">
           <option value="1 day">1Day</option>
         </select>
       </div>
@@ -221,77 +160,103 @@
         <button class="btn btn-hollow--ideeza px-5 py-2">Mechanics criteria</button>
       </div>
 
-      <div class="flex mt-5"><button @click="doOptimize" class="btn btn-normal btn--ideeza px-4 py-2">Save</button></div>
+      <div class="flex mt-5">
+        <button @click="doOptimize" class="btn btn-normal btn--ideeza px-4 py-2">Save</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-  import LeftMenu from '~/components/user/common-left-side-menu.vue'
-  import Search from '~/components/form/search.vue'
-  import CheckBox from '~/components/form/checkbox-dark.vue'
-  export default {
-    layout: 'user',
-    name: "manufacturers-index",
-    data: function(){
-      return {
-        requestQuote: false,
-        quoteSend: false,
-        showOptimize: false
+import LeftMenu from "~/components/user/common-left-side-menu.vue";
+import Search from "~/components/form/search.vue";
+import CheckBox from "~/components/form/checkbox-dark.vue";
+
+import Services from "~/data/UserProjectAddServiceApi.json";
+
+export default {
+  layout: "user",
+  name: "manufacturers-index",
+  data: function() {
+    return {
+      searchTerm: "",
+      Services: Services.Result_info,
+      requestQuote: false,
+      quoteSend: false,
+      showOptimize: false
+    };
+  },
+  components: {
+    LeftMenu,
+    Search,
+    CheckBox
+  },
+  computed: {
+    leftMenu() {
+      return this.$store.state.usermenu.openLeftMenu;
+    }
+  },
+  methods: {
+    search(e) {
+      console.log(this.searchTerm);
+      this.searchTerm = e.target.value;
+      for (const [key, value] of Object.entries(this.Services)) {
+        if (value.name.match(e.target.value)) {
+          this.Services = this.Services
+          console.log("id_:", value.id);
+        }
       }
+      // this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+      // this.counter = articles.length / this.$store.state.userBlogStore.scale;
+      // this.start = this.$store.state.userBlogStore.offset * 5 - 0;
+      // this.end = this.$store.state.userBlogStore.offset * 5 + 6;
+      // alert(e.target.value);
     },
-    components: {
-      LeftMenu,
-      Search,
-      CheckBox
+    sendQuote() {
+      this.quoteSend = true;
+      this.requestQuote = false;
+      this.$notify({
+        group: "success",
+        text: "Request sent"
+      });
     },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
+    doOptimize() {
+      this.showOptimize = false;
     },
-    methods: {
-      sendQuote() {
-        this.quoteSend = true;
-        this.requestQuote = false;
-        this.$notify({
-          group: 'success',
-          text: 'Request sent'
-        });
-      },
-      doOptimize(){
-        this.showOptimize = false;
-      },
-      onClickOutside(){
-        this.requestQuote = false;
-      },
-      onClickOutsideOptimize() {
-        this.showOptimize = false;
-      }
+    onClickOutside() {
+      this.requestQuote = false;
+    },
+    onClickOutsideOptimize() {
+      this.showOptimize = false;
     }
   }
+};
 </script>
 
 <style scoped>
-  .quote-popup{
-    @apply bg-white shadow p-5;
-    width: 500px;
-  }
-  select{
-    @apply text-ideeza;
-  }
-  option{
-    @apply text-ideeza-black;
-  }
-  .services-container{
-    width: 100%;
-    max-width: 750px;
-  }
-  input{
-    @apply border border-solid border-ideeza-gray-300 outline-none p-2 rounded;
-  }
-  .optimize-select{
-    @apply border border-solid border-ideeza-gray-300 outline-none p-2 rounded w-full;
-    min-width: 100%;
+.quote-popup {
+  @apply bg-white shadow p-5;
+  width: 500px;
+}
+select {
+  @apply text-ideeza;
+}
+option {
+  @apply text-ideeza-black;
+}
+.services-container {
+  width: 100%;
+  max-width: 750px;
+}
+input {
+  @apply border border-solid border-ideeza-gray-300 outline-none p-2 rounded;
+}
+.optimize-select {
+  @apply border border-solid border-ideeza-gray-300 outline-none p-2 rounded w-full;
+  min-width: 100%;
+}
+
+.search-container{
+    height: fit-content;
   }
 </style>

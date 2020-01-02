@@ -13,7 +13,7 @@
       <div class="lg:flex" v-for="descrition in articles" :key="descrition">
         <div class="lg:flex" v-if="descrition.id == $route.query.id ">
           <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
-            <img class="w-full" src="~/static/images/blog-image.png" />
+            <img class="w-full" :src="descrition.postimage" />
           </div>
           <div>
             <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import articles from "../../../data/BlogApi.json";
+import articles from "~/data/BlogApi.json";
 export default {
   name: "blog-view",
   data: function() {

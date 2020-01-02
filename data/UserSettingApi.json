@@ -1,0 +1,68 @@
+{
+    "Login_history": [
+        {
+            "id": 1,
+            "Browser_Device": "Chrome/Windows 10",
+            "Location": "NewYork NY USA",
+            "Recent_Activity": "About 3 hours ago"
+           
+        },{
+            "id": 2,
+            "Browser_Device": "Chrome/Windows 10",
+            "Location": "NewYork NY USA",
+            "Recent_Activity": "About 3 hours ago"
+           
+        },{
+            "id": 3,
+            "Browser_Device": "Chrome/Windows 10",
+            "Location": "NewYork NY USA",
+            "Recent_Activity": "About 3 hours ago"
+           
+        },{
+            "id": 4,
+            "Browser_Device": "Chrome/Windows 10",
+            "Location": "NewYork NY USA",
+            "Recent_Activity": "About 3 hours ago"
+           
+        },{
+            "id": 5,
+            "Browser_Device": "Chrome/Windows 10",
+            "Location": "NewYork NY USA",
+            "Recent_Activity": "About 3 hours ago"
+           
+        }
+    ],
+    "Transation_history": [
+        {
+            "id": 1,
+            "projectimage": "/_nuxt/static/images/Layercar.png",
+            "name": "Lamborghini Aventado Project",
+            "title": "Electronics + Cover",
+            "order_id": "Order Id: 11223143",
+            "project_no": 12,
+            "build_time": "1 month",
+            "quantity": 1,
+            "price": "$100,000",
+            "manufacturename": "PCB Way",
+            "manufactureCover": "Flying Car N3",
+            "orderStatus": "In Progress",
+            "orderTimeDate": "12/11/2018"
+           
+        },{
+            "id": 2,
+            "projectimage": "/_nuxt/static/images/Layercar.png",
+            "name": "Lamborghini Aventado Project",
+            "title": "Electronics + Cover",
+            "order_id": "Order Id: 11223143",
+            "project_no": 12,
+            "build_time": "1 month",
+            "quantity": 1,
+            "price": "$100,000",
+            "manufacturename": "PCB Way",
+            "manufactureCover": "Flying Car N3",
+            "orderStatus": "In Progress",
+            "orderTimeDate": "12/11/2018"
+           
+        }
+    ]
+}
