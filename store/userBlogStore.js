@@ -11,6 +11,7 @@ export const state = () => ({
 })
 
 export const mutations = {
+  
   viewflagchange1(state) {
     state.viewflag = 2 ;
   },
@@ -45,3 +46,9 @@ export const mutations = {
     state.offset = value
   },
 }
+
+// export const actions = {
+//   add ({ commit }) {
+//     commit('add') 
+//   }
+// }

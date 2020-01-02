@@ -19,16 +19,23 @@
             :icon="['fas', 'search']"
           />
         </div>
-        <input placeholder="search article" class="bg-white outline-none h-12 text-gray-800 pr-3" />
+        <input
+          placeholder="search article"
+          v-model="searchTerm"
+          v-on:input="search"
+          class="bg-white outline-none h-12 text-gray-800 pr-3"
+        />
+        {{searchTerm}}
+        <!-- <button>Search</button> -->
       </div>
     </div>
 
     <!--Blog List-->
-    <div class="bg-white shadow-md p-0 lg:p-5">
-      <table>
+    <div class="bg-white shadow-md p-0 lg:p-5" id="app">
+      <table id="mytableapp">
         <thead>
           <tr>
-            <td>
+            <td @click="sort('name')">
               <img
                 class="inline-block mr-1 align-baseline"
                 src="~/static/icons/sort-arrows.png"
@@ -36,7 +43,7 @@
               />
               Article name
             </td>
-            <td class="flex items-center">
+            <td class="flex items-center" @click="sort('Date')">
               <img
                 class="inline-block mr-1 align-baseline"
                 src="~/static/icons/sort-arrows.png"
@@ -44,7 +51,7 @@
               />
               Date
             </td>
-            <td>
+            <td @click="sort('Status')">
               <img
                 class="inline-block mr-1 align-baseline"
                 src="~/static/icons/sort-arrows.png"
@@ -52,7 +59,7 @@
               />
               Status
             </td>
-            <td>
+            <td @click="sort('Status')">
               <img
                 class="inline-block mr-1 align-baseline"
                 src="~/static/icons/sort-arrows.png"
@@ -67,19 +74,18 @@
         </thead>
 
         <tbody class="text-gray-800">
-          <tr
-            v-for="tabledata in articles"
-            :key="tabledata"
-            v-if="start < tabledata.id && tabledata.id < end"
-          >
-            <td class="font-semibold">{{tabledata.ArticlesName}}</td>
-            <td class>
+          <tr v-for="tabledata in articles" :key="tabledata">
+            <td
+              class="font-semibold"
+              v-if="start < tabledata.id && tabledata.id < end "
+            >{{tabledata.ArticlesName | search}}</td>
+            <td class v-if="start < tabledata.id && tabledata.id < end">
               {{tabledata.Date}}
               <!-- <span v-if="tabledata.flag"></span>
               <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
             <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
-            <td>
+            <td v-if="start < tabledata.id && tabledata.id < end">
               <p v-if="tabledata.flag == 1 ">
                 <span class="text-green-500 font-semibold">{{tabledata.Status}}</span>
               </p>
@@ -91,7 +97,7 @@
               </p>
             </td>
 
-            <td class="text-gray-500">
+            <td class="text-gray-500" v-if="start < tabledata.id && tabledata.id < end">
               <nuxt-link :to="{ path: '/user/blog/view', query: { id: tabledata.id}}">
                 <!-- <nuxt-link to="/user/blog/view"> -->
                 <button @click="uploadUserBlogkey2">
@@ -116,10 +122,11 @@
                 :icon="['fas', 'times']"
               />
             </td>
-            <td></td>
+            <td v-if="start < tabledata.id && tabledata.id < end"></td>
           </tr>
         </tbody>
       </table>
+      debug: sort={{currentSort}}, dir={{currentSortDir}}
       <!--Table Stats-->
       <div class="mt-5 relative">
         <!--Paging-->
@@ -128,7 +135,7 @@
             <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
           </span>
 
-          <span v-for="inde in [1,2,3] " :key="inde">
+          <span v-for="inde in counterarray " :key="inde">
             <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
               <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
             </span>
@@ -163,24 +170,76 @@ export default {
   name: "blog-list",
   data: function() {
     return {
+      searchTerm: "",
       articles: articles,
+      currentSort: "name",
+      currentSortDir: "asc",
       currentviewpoint: this.$store.state.userBlogStore.offset + 1,
       index: 0,
       counter: articles.length / this.$store.state.userBlogStore.scale,
       start: this.$store.state.userBlogStore.offset * 5 - 0,
-      end: this.$store.state.userBlogStore.offset * 5 + 6
+      end: this.$store.state.userBlogStore.offset * 5 + 6,
+      counterarray: []
     };
   },
+  created: function() {
+    this.$store.commit("userBlogStore/viewflagchange2");
+    let i = 1;
+    let array1 = [];
+    let endd = articles.length / this.$store.state.userBlogStore.scale + 1;
+    for (i = 1; i <= endd; i++) {
+      array1.push(i);
+    }
+    this.counterarray = array1;
+    console.log("array1:", array1);
+    console.log("articles:", this.articles);
+  },
   methods: {
+    search(e) {
+      console.log(this.searchTerm);
+      this.searchTerm = e.target.value;
+      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+      this.counter = articles.length / this.$store.state.userBlogStore.scale;
+      this.start = this.$store.state.userBlogStore.offset * 5 - 0;
+      this.end = this.$store.state.userBlogStore.offset * 5 + 6;
+      // alert(e.target.value);
+    },
+    sort: function(s) {
+      let i = 1;
+      let arrayAll = [];
+      let endd = this.counter + 1;
+      for (i = 0; i <= endd; i++) {
+        arrayAll.push({
+          ArticlesName: this.articles[i].ArticlesName,
+          Date: this.articles[i].Date,
+          Status: this.articles[i].Status,
+          Action: this.articles[i].Action
+        });
+        console.log("arrayAll:");
+      }
+      this.counterArraytable = arrayAll;
+      console.log("arrayAll:", arrayAll);
+
+      //if s == current sort, reverse
+      if (s === this.currentSort) {
+        if (this.currentSortDir == "asc") {
+          // if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {          }
+        } else if (this.currentSortDir == "desc") {
+          // if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {          }
+        }
+        this.currentSortDir = this.currentSortDir === "asc" ? "desc" : "asc";
+      }
+      this.currentSort = s;
+    },
     selectedkey(e) {
-      this.$store.commit("userBlogStore/selectedkeyChange" , e-1);
-        // $router.go({path:'/news', force: true})
-      console.log(this.currentviewpoint+"_");
-      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1,
-      this.counter = articles.length / this.$store.state.userBlogStore.scale,
-      this.start = this.$store.state.userBlogStore.offset * 5 - 0,
-      this.end = this.$store.state.userBlogStore.offset * 5 + 6
-        // this.$refs.page.$forceUpdate();
+      this.$store.commit("userBlogStore/selectedkeyChange", e - 1);
+      // $router.go({path:'/news', force: true})
+      console.log(this.currentviewpoint + "_");
+      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+      this.counter = articles.length / this.$store.state.userBlogStore.scale;
+      this.start = this.$store.state.userBlogStore.offset * 5 - 0;
+      this.end = this.$store.state.userBlogStore.offset * 5 + 6;
+      // this.$refs.page.$forceUpdate();
     },
     increasekey() {
       if (
@@ -188,11 +247,11 @@ export default {
         this.currentviewpoint > this.counter
       ) {
       } else {
-      this.$store.commit("userBlogStore/increasekeyChange");
-      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1,
-      this.counter = articles.length / this.$store.state.userBlogStore.scale,
-      this.start = this.$store.state.userBlogStore.offset * 5 - 0,
-      this.end = this.$store.state.userBlogStore.offset * 5 + 6
+        this.$store.commit("userBlogStore/increasekeyChange");
+        this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+        this.counter = articles.length / this.$store.state.userBlogStore.scale;
+        this.start = this.$store.state.userBlogStore.offset * 5 - 0;
+        this.end = this.$store.state.userBlogStore.offset * 5 + 6;
         // $router.go({path:'/news', force: true})
         // this.$refs.page.$forceUpdate();
       }
@@ -200,11 +259,11 @@ export default {
     decreasekey() {
       if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
       } else {
-      this.$store.commit("userBlogStore/decreasekeyChange");
-      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1,
-      this.counter = articles.length / this.$store.state.userBlogStore.scale,
-      this.start = this.$store.state.userBlogStore.offset * 5 - 0,
-      this.end = this.$store.state.userBlogStore.offset * 5 + 6
+        this.$store.commit("userBlogStore/decreasekeyChange");
+        this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+        this.counter = articles.length / this.$store.state.userBlogStore.scale;
+        this.start = this.$store.state.userBlogStore.offset * 5 - 0;
+        this.end = this.$store.state.userBlogStore.offset * 5 + 6;
         // $router.go({path:'/news', force: true})
         // this.$refs.page.$forceUpdate();
       }
