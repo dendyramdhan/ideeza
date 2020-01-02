@@ -6,11 +6,11 @@
       </nuxt-link>
     </div>
     <div class="menu-item flex-col">
-      <nuxt-link to="/admin/users">
+      <nuxt-link to="/admin/user">
         <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']"/> Users
       </nuxt-link>
-      <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Home</nuxt-link>
-      <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Contacts</nuxt-link>
+      <nuxt-link to="/admin/user" class="ml-12 text-base mt-2">Home</nuxt-link>
+      <nuxt-link to="/admin/user/contact" class="ml-12 text-base mt-2">Contacts</nuxt-link>
       <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Marketing</nuxt-link>
     </div>
     <div class="menu-item">
