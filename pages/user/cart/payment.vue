@@ -35,8 +35,8 @@
       <div class="lg:w-1/2 lg:pr-5">
         <div class="field-container mt-10">
           <div class="text-lg text-gray-800 mb-2">End date</div>
-          <drop-down class="inline-block lg:w-1/6 w-1/3" data placeholder="mm" />
-          <drop-down class="inline-block lg:w-1/6 w-1/3" data placeholder="yyyy" />
+          <drop-down class="inline-block lg:w-1/6 w-1/3" :data="months" placeholder="mm" />
+          <drop-down class="inline-block lg:w-1/6 w-1/3" :data="years" placeholder="yyyy" />
         </div>
       </div>
       <div class="lg:w-1/6 lg:pl-5">
@@ -60,6 +60,44 @@ export default {
   data: function() {
     return {
       shippingServices: ["Ali Express Standard"],
+      years: [
+        '2000',
+        '2001',
+        '2002',
+        '2003',
+        '2004',
+        '2005',
+        '2006',
+        '2007',
+        '2008',
+        '2009',
+        '2010',
+        '2011',
+        '2012',
+        '2013',
+        '2014',
+        '2015',
+        '2016',
+        '2017',
+        '2018',
+        '2019',
+        '2020',
+        '2021',
+      ],
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'Sepetember',
+        'Octobor',
+        'November',
+        'December'
+      ]
 
     };
   },
