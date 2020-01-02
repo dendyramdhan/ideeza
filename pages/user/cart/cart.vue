@@ -71,6 +71,7 @@
 
 <script>
     import CheckBox from '~/components/form/checkbox-dark.vue'
+    import products from '~/json/products.json';
     export default {
       name: "cart",
       components: {
@@ -80,102 +81,7 @@
         return {
           details1: false,
           columns: ['id', 'detail', 'color', 'price', 'quantity', 'cost', 'actions'],
-          projects: [
-            {
-              id: 0,
-              name: 'Lamborghini Aventado and Something',
-              total: 25000,
-              tableData: [
-                {
-                  id: 1,
-                  product: {
-                    image: 'Layercar.png',
-                    name: 'Lamborghini',
-                    detail: 'Electronics + Cover'
-                  },
-                  color: 'Red',
-                  price: 20000,
-                  quantity: 1,
-                  cost: 10000,
-                  manufacturers: [
-                    {
-                      id: 1,
-                      category: 'Electronics',
-                      name: 'PCB, Way',
-                      price: 2000
-                    },
-                    {
-                      id: 2,
-                      category: 'Code',
-                      name: 'The Other Way',
-                      price: 4000
-                    }
-                  ]
-
-                },
-                {
-                  id: 2,
-                  product: {
-                    image: 'Layercar.png',
-                    name: 'Lamborghini',
-                    detail: 'Electronics + Cover'
-                  },
-                  color: 'Red',
-                  price: 20000,
-                  quantity: 1,
-                  cost: 10000,
-                  manufacturers: [
-                    {
-                      id: 1,
-                      category: 'Electronics',
-                      name: 'PCB, Way',
-                      price: 2000
-                    },
-                    {
-                      id: 2,
-                      category: 'Code',
-                      name: 'The Other Way',
-                      price: 4000
-                    }
-                  ]
-                }
-              ],
-            },
-            {
-              id: 1,
-              name: 'Washing machines',
-              total: 25000,
-              tableData: [
-                {
-                  id: 1,
-                  product: {
-                    image: 'Layercar.png',
-                    name: 'Lamborghini',
-                    detail: 'Electronics + Cover'
-                  },
-                  color: 'Red',
-                  price: 20000,
-                  quantity: 1,
-                  cost: 10000,
-                  manufacturers: [
-                    {
-                      id: 1,
-                      category: 'Electronics',
-                      name: 'PCB, Way',
-                      price: 2000
-                    },
-                    {
-                      id: 2,
-                      category: 'Code',
-                      name: 'The Other Way',
-                      price: 4000
-                    }
-                  ]
-
-                }
-              ],
-            }
-          ],
+          projects: products.projects,
 
           options: {
             headings: {

@@ -37,36 +37,48 @@
             </div>
 
             <div class="flex justify-between">
-              <div class="status-button p-6">
-                <div class="flex items-center">
-                  <font-awesome-icon
-                    class="mr-6 h-10 text-2xl text-ideeza"
-                    :icon="['fas', 'layer-group']"
-                  />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.projectsmark}}</span>
+              <nuxt-link to="/user/projects">
+                <div class="status-button p-6">
+                  <div class="flex items-center">
+                    <font-awesome-icon
+                      class="mr-6 h-10 text-2xl text-ideeza"
+                      :icon="['fas', 'layer-group']"
+                    />
+                    <span
+                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                    >{{activities.projectsmark}}</span>
+                  </div>
+                  <div class="pl-16">
+                    <span class="text-ideeza-blue-gray text-lg block">Projects</span>
+                  </div>
                 </div>
-                <div class="pl-16">
-                  <span class="text-ideeza-blue-gray text-lg block">Projects</span>
+              </nuxt-link>
+              <nuxt-link to="/user/profile">
+                <div class="status-button p-6">
+                  <div class="flex items-center">
+                    <img class="mr-6" src="~/static/icons/users.svg" alt />
+                    <span
+                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                    >{{activities.contactsmark}}</span>
+                  </div>
+                  <div class="pl-16">
+                    <span class="text-ideeza-blue-gray text-lg block">Contacts</span>
+                  </div>
                 </div>
-              </div>
-              <div class="status-button p-6">
-                <div class="flex items-center">
-                  <img class="mr-6" src="~/static/icons/users.svg" alt />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.contactsmark}}</span>
+              </nuxt-link>
+              <nuxt-link to="/user/dashboard">
+                <div class="status-button p-6">
+                  <div class="flex items-center">
+                    <img class="mr-6" src="~/static/icons/bullseye.svg" alt />
+                    <span
+                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                    >{{activities.myscore}}</span>
+                  </div>
+                  <div class="pl-16">
+                    <span class="text-ideeza-blue-gray text-lg block">My Score</span>
+                  </div>
                 </div>
-                <div class="pl-16">
-                  <span class="text-ideeza-blue-gray text-lg block">Contacts</span>
-                </div>
-              </div>
-              <div class="status-button p-6">
-                <div class="flex items-center">
-                  <img class="mr-6" src="~/static/icons/bullseye.svg" alt />
-                  <span class="text-6xl text-ideeza-black mb-5 leading-none">{{activities.myscore}}</span>
-                </div>
-                <div class="pl-16">
-                  <span class="text-ideeza-blue-gray text-lg block">My Score</span>
-                </div>
-              </div>
+              </nuxt-link>
             </div>
 
             <div>
@@ -88,7 +100,7 @@
             <div class="scroll-area">
               <smooth-scrollbar :options="{alwaysShowTracks: true}">
                 <div class="flex flex-wrap">
-                  <div class="blog-container mr-2" v-for="innovation in innovations " :key="innovation">
+                  <div class="blog-container mr-2" v-for="innovation in innovations">
                     <div class="blog-image-container mb-8">
                       <img :src="innovation.image_url" class="object-center object-contain" alt />
                     </div>
@@ -101,7 +113,7 @@
                   </div>
                   <!-- <li v-for="breed in breeds" :key="breed">
                     <p class="breed button--green">{{breed}}</p>
-                  </li>-->  
+                  </li>-->
                 </div>
               </smooth-scrollbar>
             </div>
@@ -111,7 +123,7 @@
             <div class="scroll-area">
               <smooth-scrollbar :options="{alwaysShowTracks: true}">
                 <div class="flex flex-wrap">
-                  <div class="w-1/2 p-2" v-for="topproject in topprojects" :key="topproject">
+                  <div class="w-1/2 p-2" v-for="topproject in topprojects">
                     <div class="p-2 border border-solid border-light-gray">
                       <div class="w-full projects-image">
                         <img
@@ -175,14 +187,11 @@ export default {
     MyIdeeza
   },
   data: function() {
-    console.log("innovation: ", innovation.innovation);
-    console.log("innovation: ", topprojects.topprojects);
-    console.log("activity: ", activity.activity);
     return {
       showMyIdeeza: false,
       topprojects: topprojects.topprojects,
       innovations: innovation.innovation,
-      activities: activity.activity,
+      activities: activity.activity
     };
   },
   computed: {
@@ -194,7 +203,11 @@ export default {
   methods: {
     onClickOutside() {
       this.showMyIdeeza = false;
-    }
+    },
+    showMyProjects() {
+      alert("Hello");
+    },
+    showMyProfile() {}
   }
 };
 </script>
