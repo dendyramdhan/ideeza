@@ -1,134 +1,115 @@
-[
-    {
-        "id": "1",
-        "projectName": "1-Samantha",
-        "projecttitle": "1-Samantha",
-        "ShortDescription": "Making electro cup",
-        "ImageUrl":"../../../static/images/car-big.png",       
-        "commitmember1":4,       
-        "commitmember2":2,       
-        "commitkind1":"likes",       
-        "commitkind2":"dislikes",       
-        "Cost": 4,
-        "mark":4,       
-        "flag": 1
-    },
-    {
-        "id": "2",
-        "projectName":
-            {
-                "first": "Car-1", 
-                "second":"Car-2"
+{
+    "firstproject": [
+        {
+            "id": 1,
+            "projectName": "1-Samantha",
+            "projecttitle": "1-Samantha",
+            "ShortDescription": "1Making electro cup_short",
+            "Description": "1Making electro cup",
+            "ImageUrl": "/_nuxt/static/images/car-big.png",
+            "commitmember1": 4,
+            "commitmember2": 2,
+            "commitkind1": "likes",
+            "commitkind2": "dislikes",
+            "Cost": 4,
+            "mark": 4,
+            "flag": 1
+        },
+        {
+            "id": 2,
+            "projectName": "1-Samantha",
+            "projecttitle": "1-Samantha",
+            "Description": "2Making electro cup",
+            "ShortDescription": "2Making electro cup",
+            "ImageUrl": "/_nuxt/static/images/car-big.png",
+            "commitmember1": 4,
+            "commitmember2": 2,
+            "commitkind1": "likes",
+            "commitkind2": "dislikes",
+            "Cost": 4,
+            "mark": 4,
+            "flag": 1
+        },
+        {
+            "id": 3,
+            "projectName": "1-Samantha",
+            "projecttitle": "1-Samantha",
+            "Description": "3Making electro cup",
+            "ShortDescription": "3Making electro cup",
+            "ImageUrl": "/_nuxt/static/images/car-big.png",
+            "commitmember1": 4,
+            "commitmember2": 2,
+            "commitkind1": "likes",
+            "commitkind2": "dislikes",
+            "Cost": 4,
+            "mark": 4,
+            "flag": 1
+        },
+        {
+            "id": 4,
+            "projectName": {
+                "first": "Car-1",
+                "second": "Car-2"
             },
-            "projecttitle":
-            {
-                "first": "Electronics-1", 
-                "second":"Electronics-2"
+            "projecttitle": {
+                "first": "Electronics-1",
+                "second": "Electronics-2"
             },
-        "ShortDescription":
-            {
-                "first":"My car project_1",
-                "second":"My car project_2"
-            }
-        ,
-        "ImageUrl":
-            {
-                "first":"1-Samantha",
-                "second":"1-Samantha"
-            }
-        ,
-        "Cost":
+            "ShortDescription": {
+                "first": "My car project_1",
+                "second": "My car project_2"
+            },
+            "ImageUrl": {
+                "first": "1-Samantha",
+                "second": "1-Samantha"
+            },
+            "Cost": {
+                "first": "$20,000",
+                "second": "$30,000"
+            },
+            "commitmember1": {
+                "first": 3,
+                "second": 2
+            },
+            "commitmember2": {
+                "first": 3,
+                "second": 4
+            },
+            "commitkind1": "likes",
+            "Description": "4Making electro cup",
+            "commitkind2": "dislikes",
+            "mark": {
+                "first": 3,
+                "second": 5
+            },
+            "flag": 2
+        }
+    ],
+    "myprojectconnect": [
         {
-            "first":"$20,000",
-            "second":"$30,000"
-        },
-        "commitmember1":
-        {
-            "first":3,
-            "second":2
-        },
-        "commitmember2":
-        {
-            "first":3,
-            "second":4
-        },
-        "commitkind1":"likes",       
-        "commitkind2":"dislikes", 
-        "mark":
-        {
-            "first":3,
-            "second":5
-        },  
-        "flag": 2
-    },{
-        "id": "1",
-        "projectName": "1-Samantha",
-        "projecttitle": "1-Samantha",
-        "ShortDescription": "Making electro cup",
-        "ImageUrl":"../../../static/images/car-big.png",       
-        "commitmember1":4,       
-        "commitmember2":2,       
-        "commitkind1":"likes",       
-        "commitkind2":"dislikes",       
-        "Cost": 4,
-        "mark":4,       
-        "flag": 1
-
-    },{
-        "id": "1",
-        "projectName": "1-Samantha",
-        "projecttitle": "1-Samantha",
-        "ShortDescription": "Making electro cup",
-        "ImageUrl":"../../../static/images/car-big.png",       
-        "commitmember1":4,       
-        "commitmember2":2,       
-        "commitkind1":"likes",       
-        "commitkind2":"dislikes",       
-        "Cost": 4,
-        "mark":4,       
-        "flag": 1
-
-    },{
-        "id": "1",
-        "projectName": "1-Samantha",
-        "projecttitle": "1-Samantha",
-        "ShortDescription": "Making electro cup",
-        "ImageUrl":"../../../static/images/car-big.png",       
-        "commitmember1":4,       
-        "commitmember2":2,       
-        "commitkind1":"likes",       
-        "commitkind2":"dislikes",       
-        "Cost": 4,
-        "mark":4,       
-        "flag": 1
-
-    },{
-        "id": "1",
-        "projectName": "1-Samantha",
-        "projecttitle": "1-Samantha",
-        "ShortDescription": "Making electro cup",
-        "ImageUrl":"../../../static/images/car-big.png",       
-        "commitmember1":4,       
-        "commitmember2":2,       
-        "commitkind1":"likes",       
-        "commitkind2":"dislikes",       
-        "Cost": 4,
-        "mark":4,       
-        "flag": 1
-
-    },{
-        "id": "1",
-        "projectName": "1-Samantha",
-        "projecttitle": "1-Samantha",
-        "ShortDescription": "Making electro cup",
-        "ImageUrl":"../../../static/images/car-big.png",       
-        "commitmember1":4,       
-        "commitmember2":2,       
-        "commitkind1":"likes",       
-        "commitkind2":"dislikes",       
-        "Cost": 4,
-        "mark":4,       
-        "flag": 1
-
-    }
-]
+            "id":1,
+            "name":"hmj_Eletronics",
+            "kind":"Eletronics",
+            "consultantKind":"Google Conltant",
+            "consultantname":"Google",
+            "state":"Dealer",
+            "profileimage":"https://randomuser.me/api/portraits/men/20.jpg"
+        },{
+            "id":2,
+            "name":"hmj_Freelancers",
+            "kind":"Freelancers",
+            "consultantKind":"Google Conltant",
+            "consultantname":"Google",
+            "state":"Dealer",
+            "profileimage":"https://randomuser.me/api/portraits/men/21.jpg"
+        },{
+            "id":3,
+            "name":"hmj_Parts",
+            "kind":"Parts",
+            "consultantKind":"Google Conltant",
+            "consultantname":"Google",
+            "state":"Dealer",
+            "profileimage":"https://randomuser.me/api/portraits/women/22.jpg"
+        }
+    ]
+}
