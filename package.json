@@ -40,7 +40,8 @@
     "vue-slider-component": "^3.0.44",
     "vue-smooth-scrollbar": "^0.1.2",
     "vue-tables-3": "^2.0.1-beta05",
-    "vue2-filters": "^0.8.0"
+    "vue2-filters": "^0.8.0",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0",

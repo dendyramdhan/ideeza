@@ -75,6 +75,7 @@ export default {
   },
   data: function() {
     return {
+      // titles: ['02nd Thursday', '03nd Friday', '04nd Saturday'],
       showAddTask: false,
       tasks: [
         {
