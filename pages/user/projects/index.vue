@@ -42,8 +42,7 @@
                   <div class="font-semibold text-ideeza-black">{{Project.Cost}}</div>
                 </div>
 
-                <div class="text-sm mt-5">{{Project.ShortDescription}} </div>
-              </div>
+                <div class="text-sm mt-5">{{Project.ShortDescription}}</div>
               </div>
               
               <!-- <div v-else class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative">                
@@ -57,7 +56,9 @@
                     <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
                     <span>{{Project.mark.first}}</span>
                   </div>
-                  <span class="font-semibold">{{Project.commitmember1.first}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2.first}}&nbsp; {{Project.commitkind2}}</span>
+                  <span
+                    class="font-semibold"
+                  >{{Project.commitmember1.first}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2.first}}&nbsp; {{Project.commitkind2}}</span>
                 </div>
               </nuxt-link>
               <nuxt-link to="/user/projects/detail" class="ml-5">
@@ -69,7 +70,9 @@
                     <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
                     <span>{{Project.mark.second}}</span>
                   </div>
-                  <span class="font-semibold">{{Project.commitmember1.second}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2.second}}&nbsp; {{Project.commitkind2}}</span>
+                  <span
+                    class="font-semibold"
+                  >{{Project.commitmember1.second}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2.second}}&nbsp; {{Project.commitkind2}}</span>
                 </div>
               </nuxt-link>
 
@@ -84,9 +87,7 @@
                   <div class="font-semibold text-ideeza-black">{{Project.Cost.first}}</div>
                 </div>
 
-                <div class="text-sm mt-5">
-                  {{Project.ShortDescription.first}}
-                </div>
+                <div class="text-sm mt-5">{{Project.ShortDescription.first}}</div>
 
                 <div class="flex justify-between items-center mt-10">
                   <div class="flex items-center">
@@ -96,9 +97,7 @@
                   <div class="font-semibold text-ideeza-black">{{Project.Cost.second}}</div>
                 </div>
 
-                <div class="text-sm mt-5">
-                  {{Project.ShortDescription.second}}
-                </div>
+                <div class="text-sm mt-5">{{Project.ShortDescription.second}}</div>
               </div>
             </div> -->
              

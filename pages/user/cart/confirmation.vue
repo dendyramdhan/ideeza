@@ -50,51 +50,28 @@
           </tr>
         </thead>
         <tbody class="mt-5">
-          <tr>
+          <tr v-for="cart in carts">
             <td class="product">
               <div class="lg:flex">
                 <div class="mr-2">
-                  <img class="w-20" src="~/static/images/Layercar.png" />
+                  <img class="w-20" :src="cart.image_url" />
                 </div>
                 <div class="my-auto px-5">
                   <span class="block font-semibold">
-                    Lamborghini Aventado
+                    {{cart.name}}
                     <br />Project
                   </span>
-                  <span class="block text-sm text-gray-500">Electronics + Cover - Red - 1pc</span>
+                  <span class="block text-sm text-gray-500">{{cart.description}}</span>
                 </div>
               </div>
             </td>
             <td>
               <span class="text-gray-500 text-sm block">Electronics:</span>
-              <span class="font-semibold block">PCB Way, Cha...</span>
+              <span class="font-semibold block">{{cart.eletronics_description}}</span>
               <span class="text-gray-400 text-sm block mt-2">Cover:</span>
-              <span class="font-semibold block">Flying Car N3...</span>
+              <span class="font-semibold block">{{cart.cover_description}}</span>
             </td>
-            <td class="lg:text-right">$20,000</td>
-          </tr>
-          <tr>
-            <td class="product">
-              <div class="lg:flex">
-                <div class="mr-2">
-                  <img class="w-20" src="~/static/images/Layercar.png" />
-                </div>
-                <div class="my-auto px-5">
-                  <span class="block font-semibold">
-                    Lamborghini Aventado
-                    <br />Project
-                  </span>
-                  <span class="block text-sm text-gray-500">Electronics + Cover - Red - 1pc</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <span class="text-gray-500 text-sm block">Electronics:</span>
-              <span class="font-semibold block">PCB Way, Cha...</span>
-              <span class="text-gray-400 text-sm block mt-2">Cover:</span>
-              <span class="font-semibold block">Flying Car N3...</span>
-            </td>
-            <td class="lg:text-right">$20,000</td>
+            <td class="lg:text-right">{{cart.price}}</td>
           </tr>
         </tbody>
       </table>
@@ -108,9 +85,15 @@
 </template>
 
 <script>
+import cart from '~/json/cart.json';
 export default {
   name: "payment",
 
+  data: function() {
+    return {
+      carts: cart.carts
+    }
+  },
   mounted() {
     this.$store.commit("cartstepper/set", { position: 5 });
   }

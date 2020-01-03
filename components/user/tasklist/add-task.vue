@@ -89,7 +89,7 @@
       </div>
 
       <div class="flex justify-end px-10 mb-5">
-        <button class="btn btn--ideeza px-3 py-1">Add Task</button>
+        <button class="btn btn--ideeza px-3 py-1" @click="addNewTask">Add Task</button>
       </div>
     </div>
   </div>
@@ -122,6 +122,13 @@ export default {
     },
     hideMembers() {
       this.showMembers = false;
+    },
+    addNewTask() {
+      var r = confirm("Do you want to add new task?");
+      if (r == true) {
+        window.location.reload();
+      } else {
+      }
     }
   }
 };

@@ -131,7 +131,9 @@ export default {
       this.showAddTask = false;
     },
     addTasks() {
-      if (this.tab === "weekly") {
+      if (this.tab === "daily") {
+        alert("daily");
+      } else if (this.tab === "weekly") {
         this.tasksWeekly.push({
           id: this.id
         });
