@@ -14,23 +14,22 @@
           <div class="lg:flex flex-wrap">
             <div
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-              v-for="Project in Projects"
-              v-if="Project.flag == 1"
+               v-for="Project in Projects" :key="Project.id" v-if="Project.flag == 1"
             >
-              <nuxt-link to="/user/projects/detail">
-                <div class="image-container">
-                  <img class="project-item-container--image" src="~/static/images/car-big.png" alt />
-                </div>
-                <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
-                  <div class="flex items-center">
-                    <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                    <span>{{Project.mark}}</span>
-                  </div>
-                  <span
-                    class="font-semibold"
-                  >{{Project.commitmember1}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2}}&nbsp; {{Project.commitkind2}}</span>
-                </div>
-              </nuxt-link>
+            
+                  <nuxt-link   :to="{ path: '/user/projects/detail', query: { id: Project.id}}">
+                    <div class="image-container">
+                      <img class="project-item-container--image" :src="Project.ImageUrl" alt />
+                    </div>
+                    <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
+                      <div class="flex items-center">
+                        <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
+                        <span>{{Project.mark}}</span>
+                      </div>
+                      <span class="font-semibold">{{Project.commitmember1}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2}}&nbsp; {{Project.commitkind2}}</span>
+                      
+                    </div>
+                  </nuxt-link>
 
               <div
                 class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 pop-over"
@@ -45,13 +44,10 @@
 
                 <div class="text-sm mt-5">{{Project.ShortDescription}}</div>
               </div>
-            </div>
-
-            <div
-              v-else
-              class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-            >
-              <nuxt-link to="/user/projects/detail">
+              
+              <!-- <div v-else class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative">                
+               
+               <nuxt-link   :to="{ path: '/user/projects/detail', query: { id: Project.id}}">
                 <div class="image-container">
                   <img class="project-item-container--image" src="~/static/images/car-big.png" alt />
                 </div>
@@ -103,69 +99,13 @@
 
                 <div class="text-sm mt-5">{{Project.ShortDescription.second}}</div>
               </div>
-            </div>
+            </div> -->
+             
+            
 
-            <!-- 
-              <div
-              class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-            >
-              <nuxt-link to="/user/projects/detail">
-                <div class="image-container">
-                  <img class="project-item-container--image" src="~/static/images/car-big.png" alt />
-                </div>
-                <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
-                  <div class="flex items-center">
-                    <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                    <span>4.5</span>
-                  </div>
-                  <span class="font-semibold">24 likes</span>
-                </div>
-              </nuxt-link>
-              <nuxt-link to="/user/projects/detail" class="ml-5">
-                <div class="image-container">
-                  <img class="project-item-container--image" src="~/static/images/car-big.png" alt />
-                </div>
-                <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
-                  <div class="flex items-center">
-                    <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                    <span>4.5</span>
-                  </div>
-                  <span class="font-semibold">24 likes</span>
-                </div>
-              </nuxt-link>
 
-              <div
-                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 bg-white pop-over"
-              >
-                <div class="flex justify-between items-center">
-                  <div class="flex items-center">
-                    <h1 class="font-semibold text-lg">Project name</h1>
-                    <span class="text-sm text-gray-600 ml-3">Electronics + Cover</span>
-                  </div>
-                  <div class="font-semibold text-ideeza-black">$20,000</div>
-                </div>
 
-                <div class="text-sm mt-5">
-                  Sed in porta nunc, a interdum massa. Donec elementum id leo in pulvinar.
-                  Cras purus erat, feugiat vel lectus ut, hendrerit porttitor sem. Curabitur
-                  tempor sem ex
-                </div>
 
-                <div class="flex justify-between items-center mt-10">
-                  <div class="flex items-center">
-                    <h1 class="font-semibold text-lg">Project name</h1>
-                    <span class="text-sm text-gray-600 ml-3">Electronics + Cover</span>
-                  </div>
-                  <div class="font-semibold text-ideeza-black">$20,000</div>
-                </div>
-
-                <div class="text-sm mt-5">
-                  Sed in porta nunc, a interdum massa. Donec elementum id leo in pulvinar.
-                  Cras purus erat, feugiat vel lectus ut, hendrerit porttitor sem. Curabitur
-                  tempor sem ex
-                </div>
-              </div>
-            </div>-->
           </div>
         </div>
       </div>
@@ -183,7 +123,7 @@ export default {
   data: function() {
     return {
       longview: true,
-      Projects: Projects.firstproject
+      Projects:Projects.firstproject
     };
   },
   components: {
