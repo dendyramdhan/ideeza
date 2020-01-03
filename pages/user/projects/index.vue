@@ -175,7 +175,7 @@
 
 <script>
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
-import Projects from "../../../data/UserProjectApi.json";
+import Projects from "~/data/UserProjectApi.json";
 
 export default {
   layout: "user",
@@ -183,7 +183,7 @@ export default {
   data: function() {
     return {
       longview: true,
-      Projects: Projects
+      Projects: Projects.firstproject
     };
   },
   components: {

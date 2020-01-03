@@ -2,9 +2,9 @@
   <div class="row mx-auto lg:mx-0 lg:mr-8 pb-5 shadow-md bg-white">
     <div
       class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400"
-    >02nd Thursday</div>
+    >{{d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear()}}</div>
 
-    <div v-for="(task, index) in tasks" :key="task.id" class="border-light-gray carousal-border">
+    <div v-for="(task, index) in tasks" class="border-light-gray carousal-border">
       <div
         @click="task.active = !task.active"
         class="cursor-pointer py-3 flex flex items-center"
@@ -19,18 +19,14 @@
         :class="{'important': task.important, 'task-contents-hide': !task.active, 'task-contents': task.active}"
         class="task"
       >
-        <div class="task-time">09:00 AM - 10:30 AM</div>
-        <div class="task-name">Finish electronics part</div>
+        <div class="task-time">{{task.duration}}</div>
+        <div class="task-name">{{task.title}}</div>
 
         <div class="mt-8 flex justify-between items-center">
           <div class="flex items-center">
             <img
               class="h-10 w-10 mr-2 rounded-full"
-              src="https://randomuser.me/api/portraits/women/17.jpg"
-            />
-            <img
-              class="h-10 w-10 mr-2 rounded-full"
-              src="https://randomuser.me/api/portraits/men/16.jpg"
+              :src="invite.portrait_url" v-for="invite in task.invited"
             />
             <div
               @click="task.addNewMember = !task.addNewMember"
@@ -46,14 +42,14 @@
           <div class="flex items-center">
             <div class="mr-2">
               <font-awesome-icon class="h-4 text-ideeza cursor-pointer" :icon="['far', 'comment']" />
-              <span class="attachment-no">5</span>
+              <span class="attachment-no">{{task.comment_count}}</span>
             </div>
             <div class="mr-2">
               <font-awesome-icon
                 class="h-4 text-ideeza cursor-pointer"
                 :icon="['fas', 'paperclip']"
               />
-              <span class="attachment-no">2</span>
+              <span class="attachment-no">{{task.paperclip_count}}</span>
             </div>
           </div>
         </div>
@@ -68,6 +64,7 @@
 
 <script>
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
+import tasklist from '~/json/tasklist.json';
 export default {
   name: "task-col",
   components: {
@@ -75,30 +72,14 @@ export default {
   },
   data: function() {
     return {
-      // titles: ['02nd Thursday', '03nd Friday', '04nd Saturday'],
       showAddTask: false,
-      tasks: [
-        {
-          active: false,
-          id: 0,
-          important: false,
-          addNewMember: false
-        },
-        {
-          active: false,
-          id: 1,
-          important: true,
-          addNewMember: false
-        },
-        {
-          active: false,
-          id: 2,
-          important: false,
-          addNewMember: false
-        }
-      ]
+      tasks: tasklist.tasklist,
+      d : new Date(),
+      weeks: ["Sunday", "Monday", "Tuesday", "Thirsday", "Friday", "Saturday"],
+      months : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     };
-  }
+  },
+  
 };
 </script>
 
