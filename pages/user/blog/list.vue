@@ -25,7 +25,7 @@
           v-on:input="search"
           class="bg-white outline-none h-12 text-gray-800 pr-3"
         />
-        {{searchTerm}}
+        <!-- {{searchTerm}} -->
         <!-- <button>Search</button> -->
       </div>
     </div>
