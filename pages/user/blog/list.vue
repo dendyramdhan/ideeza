@@ -74,13 +74,10 @@
         </thead>
 
         <tbody class="text-gray-800">
-          <tr v-for="tabledata in articles" v-if="start < tabledata.id && tabledata.id < end ">
-            <td
-              class="font-semibold"
-              
-            >{{tabledata.ArticlesName}}</td>
-            <td class >
-              {{tabledata.Date+"_"+tabledata.id}}
+          <tr v-for="(tabledata, index) in articleArray" v-if="start < index && index < end ">
+            <td class="font-semibold">{{tabledata.ArticlesName}}{{index}}{{tabledata.id}}</td>
+            <td class>
+              {{tabledata.Date}}
               <!-- <span v-if="tabledata.flag"></span>
               <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
@@ -97,7 +94,7 @@
               </p>
             </td>
 
-            <td class="text-gray-500" >
+            <td class="text-gray-500">
               <nuxt-link :to="{ path: '/user/blog/view', query: { id: tabledata.id}}">
                 <!-- <nuxt-link to="/user/blog/view"> -->
                 <button @click="uploadUserBlogkey2">
@@ -122,10 +119,8 @@
                 :icon="['fas', 'times']"
               />
             </td>
-            <td ></td>
+            <td></td>
           </tr>
-
-          
         </tbody>
       </table>
       debug: sort={{currentSort}}, dir={{currentSortDir}}
@@ -156,8 +151,12 @@
           class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
         >
           <span class="inline-block">Show</span>
-          <select class="inline field ml-2 h-10">
-            <option>1-3</option>
+          <select class="inline field ml-2 h-10" @change="changeshowperiod">
+            <option
+              v-for="(tabledata, index) in articleArray"
+              v-if="length > index "
+            >{{(index)*5+1}}-{{(index)*5+5}}</option>
+            <option>all</option>
           </select>
         </div>
       </div>
@@ -168,19 +167,22 @@
 
 <script>
 import articles from "../../../data/BlogApi.json";
+import { teal } from "color-name";
 export default {
   name: "blog-list",
   data: function() {
     return {
       searchTerm: "",
       articles: articles,
+      articleArray: [],
       currentSort: "name",
       currentSortDir: "asc",
       currentviewpoint: this.$store.state.userBlogStore.offset + 1,
       index: 0,
+      length: articles.length / 5 - 1,
       counter: articles.length / this.$store.state.userBlogStore.scale,
-      start: this.$store.state.userBlogStore.offset * 5 - 0,
-      end: this.$store.state.userBlogStore.offset * 5 + 6,
+      start: this.$store.state.userBlogStore.offset * 5 - 1,
+      end: this.$store.state.userBlogStore.offset * 5 + 5,
       counterarray: []
     };
   },
@@ -193,43 +195,118 @@ export default {
       array1.push(i);
     }
     this.counterarray = array1;
-    console.log("array1:", array1);
-    console.log("articles:", this.articles);
+    // console.log("array1:", array1);
+    // console.log("articles:", this.articles);
+
+    this.articles.map(item => {
+      this.articleArray.push(item);
+    });
+ 
   },
   methods: {
+    changeshowperiod(e) {
+      this.articleArray = [];
+      if (e.target.value == "all") {
+        this.articles.map(item => {
+          this.articleArray.push(item);
+        });
+      } else {
+        var a = e.target.value.split("-");
+        var a1 = a[0];
+        var a2 = a[1];
+        alert("a1:" + a1 + "a2:" + a2);
+        this.articles.map((item, index) => {
+          if (index >= a1 && index <= a2) {
+            this.articleArray.push(item);
+          }
+        });
+      }
+    },
     search(e) {
-      // console.log(this.searchTerm);
-      this.searchTerm = e.target.value;
-      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
-      this.counter = articles.length / this.$store.state.userBlogStore.scale;
-      this.start = this.$store.state.userBlogStore.offset * 5 - 0;
-      this.end = this.$store.state.userBlogStore.offset * 5 + 6;
-      // alert(e.target.value);
+      this.articleArray = [];
+
+      let article_list = this.articles;
+      article_list.map(element => {
+        const a_text = element.ArticlesName.toLowerCase() + "";
+        const b_text = e.target.value.toLowerCase() + "";
+        // const b_text = "master"
+
+        let s_index = a_text.indexOf(b_text) + 1;
+        // console.log("search ", a_text, b_text, s_index);
+
+        if (s_index > 0 || e.target.value == "") {
+          this.articleArray.push(element);
+        }
+      });
+
+      console.log("search array :", this.articleArray, e.target.value);
+
     },
     sort: function(s) {
-      let i = 1;
-      let arrayAll = [];
-      let endd = this.counter + 1;
-      for (i = 0; i <= endd; i++) {
-        arrayAll.push({
-          ArticlesName: this.articles[i].ArticlesName,
-          Date: this.articles[i].Date,
-          Status: this.articles[i].Status,
-          Action: this.articles[i].Action
-        });
-        console.log("arrayAll:");
-      }
-      this.counterArraytable = arrayAll;
-      console.log("arrayAll:", arrayAll);
+      console.log("sort key :", s, this.articleArray);
+      let direction = 1;
 
-      //if s == current sort, reverse
       if (s === this.currentSort) {
         if (this.currentSortDir == "asc") {
-          // if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {          }
+          direction = 1;
         } else if (this.currentSortDir == "desc") {
-          // if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {          }
+          direction = -1;
         }
+
         this.currentSortDir = this.currentSortDir === "asc" ? "desc" : "asc";
+      }
+
+      this.currentSortDir;
+      let article_list = this.articleArray;
+      switch (s) {
+        case "name":
+          article_list.sort(function(a, b) {
+            var x = a.ArticlesName.toLowerCase();
+            var y = b.ArticlesName.toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          // console.log("sorted : ", article_list);
+          break;
+        case "Date":
+          article_list.sort(function(a, b) {
+            var x = a.Date.toLowerCase();
+            var y = b.Date.toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          // console.log("sorted : ", article_list);
+          break;
+        case "Status":
+          article_list.sort(function(a, b) {
+            var x = a.Status.toLowerCase();
+            var y = b.Status.toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          // console.log("sorted : ", article_list);
+          break;
+
+        default:
+          break;
       }
       this.currentSort = s;
     },
@@ -238,10 +315,11 @@ export default {
       // $router.go({path:'/news', force: true})
       console.log(this.currentviewpoint + "_");
       this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
-      this.counter = articles.length / this.$store.state.userBlogStore.scale;
-      this.start = this.$store.state.userBlogStore.offset * 5 - 0;
-      this.end = this.$store.state.userBlogStore.offset * 5 + 6;
-      console.log("start and end :", this.start, this.end)
+      this.counter =
+        this.articleArray.length / this.$store.state.userBlogStore.scale;
+      this.start = this.$store.state.userBlogStore.offset * 5 - 1;
+      this.end = this.$store.state.userBlogStore.offset * 5 + 5;
+      console.log("start and end :", this.start, this.end);
       // this.$refs.page.$forceUpdate();
     },
     increasekey() {
@@ -252,9 +330,10 @@ export default {
       } else {
         this.$store.commit("userBlogStore/increasekeyChange");
         this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
-        this.counter = articles.length / this.$store.state.userBlogStore.scale;
-        this.start = this.$store.state.userBlogStore.offset * 5 - 0;
-        this.end = this.$store.state.userBlogStore.offset * 5 + 6;
+        this.counter =
+          this.articleArray.length / this.$store.state.userBlogStore.scale;
+        this.start = this.$store.state.userBlogStore.offset * 5 - 1;
+        this.end = this.$store.state.userBlogStore.offset * 5 + 5;
         // $router.go({path:'/news', force: true})
         // this.$refs.page.$forceUpdate();
       }
@@ -264,9 +343,10 @@ export default {
       } else {
         this.$store.commit("userBlogStore/decreasekeyChange");
         this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
-        this.counter = articles.length / this.$store.state.userBlogStore.scale;
-        this.start = this.$store.state.userBlogStore.offset * 5 - 0;
-        this.end = this.$store.state.userBlogStore.offset * 5 + 6;
+        this.counter =
+          this.articleArray.length / this.$store.state.userBlogStore.scale;
+        this.start = this.$store.state.userBlogStore.offset * 5 - 1;
+        this.end = this.$store.state.userBlogStore.offset * 5 + 5;
         // $router.go({path:'/news', force: true})
         // this.$refs.page.$forceUpdate();
       }
@@ -286,6 +366,10 @@ export default {
 </script>
 
 <style scoped>
+#mytableapp thead tr td {
+  cursor: pointer;
+}
+
 .blog-container {
   width: 100%;
   max-width: 1530px;

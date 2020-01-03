@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "ArticlesName": "1-Samantha",
+        "ArticlesName": "6-Samantha",
         "title": "Making electro cup",
         "rating": 4,
         "postimage": "/_nuxt/static/images/blog-image.png",
@@ -14,7 +14,7 @@
     },
     {
         "id": "2",
-        "ArticlesName": "2-Burak Aydin",
+        "ArticlesName": "9-Burak Aydin",
         "title": "Making electro cup",
         "postimage": "/_nuxt/static/images/blog-image.png",
         "rating": 3,
@@ -27,7 +27,7 @@
     },
     {
         "id": "3",
-        "ArticlesName": "3-Robin Hod",
+        "ArticlesName": "13-Robin Hod",
         "title": "Making electro cup",
         "postimage": "/_nuxt/static/images/blog-image.png",
         "rating": 5,

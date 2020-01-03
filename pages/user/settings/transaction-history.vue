@@ -33,6 +33,8 @@
         </select>
         <select class="field field--border-light mr-1 h-12">
           <option>2018</option>
+          <option>2019</option>
+          <option>2020</option>
         </select>
         <select class="field field--border-light mr-1 h-12">
           <option>Order status</option>

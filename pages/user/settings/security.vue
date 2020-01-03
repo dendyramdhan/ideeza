@@ -35,7 +35,7 @@
         </div>
 
         <div class="mt-8 mb-3 text-center">
-          <button class="btn px-20 pill-button pill-button--ideeza">Update Password</button>
+          <button class="btn px-20 pill-button pill-button--ideeza" @click="updatepassword">Update Password</button>
         </div>
       </div>
     </div>
@@ -61,7 +61,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr class v-for="Project in Projects" :key="Project">
+          <tr class v-for="Project in Projects" >
             <td class>{{ Project.Browser_Device}}</td>
             <td>{{ Project.Location}}</td>
             <td>{{ Project.Recent_Activity}}</td>
@@ -95,6 +95,11 @@ export default {
       longview: true,
       Projects: Projects.Login_history
     };
+  },
+  methods:{
+    updatepassword(){
+      alert("update your password!!!");
+    }
   }
 };
 </script>
