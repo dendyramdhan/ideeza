@@ -1,0 +1,52 @@
+<template>
+    <modal wide @close="$emit('close')">
+      <template slot="header">
+        <div class="text-right py-3 px-3">
+          <button @click="$emit('close')">
+            <font-awesome-icon class="text-xs text-black mt-2 mr-2" :icon="['fa', 'times']" />
+          </button>
+        </div>
+      </template>
+      <template slot="body">
+        <div class="my-5 mx-5">
+          <button class="rounded-full bg-blue-700 text-white text-center w-full py-3 mb-2">
+            <font-awesome-icon class="text-base mr-2" :icon="['fab', 'facebook-f']" />Continue with Facebook</button>
+          <button class="rounded-full bg-white border border-black text-black text-center w-full py-3">
+            <svg width="17" height="17" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="847 405 17 17">
+              <image
+                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAACOklEQVQ4T52US0hUYRTH/8frvMxxakzapLmoJkVbtDCMFsJMDgiJFdO6MWnZQkl7QEYb7ywmggiCoZR2GZEw0oQN5aJC22TERIshCNLowdRcreY+5p64k3O7M+L0uLvvnO/8+J/v/M8llH3ZYKeXtPwAM/WCuB1AHYAMgBQR4nlNiW2aXfhqLSPrQfJ3HGcgCsBTDrecsyCc9CSf3SzGTIjk7xAZGKlQXEzJIJxYA5ECe/uZ+XoZ4CNA90D8lhmNBPQU8npVn+fR3HxJOzxZ2yCN+1JQhAaLvIjbnhmlRFouxriry7niyrrdieefytWSOoMRPeMU5Ts7wRkniEmsezh/5i/aMq+Q+gBPAXRyToA6tSNds6S1WRWErnKtquQ2rwetElgzIBIAt3GJCBPVAYStBX3RH8eIaLyCss8GhH/rwkVbAKP/CIEBya4a6r+UEPDNeNgnIOzTQRA135tby+0tr47eVopqQpe/N6ks7DEnx3ACbBjNVogRHpOaxLDEtsiQuhtzej3AEF8fnFl3OoejuQgThi1PcIo4iXq/vD+1xDVbzARD1AThQronYfqkdTJk3/7+2piQ3zBoXQEmR3PB9r54MEzEN8om8AGgBDG/08HbiOiAQ272Ni6et9u0XxNn5vDUkGvC3J1d8e4xEE7/yWTV+Y3YungWrpxPvDvoKrRdssW+6e5+Ai5V3mJadshN514ciV1Zs8XFQOv9oJdVfYCJegG0rQK/AHjJhGmXosQWDs2W/E9+AgWG2UG1pUUZAAAAAElFTkSuQmCC"
+                width="17" height="17" x="847" y="405" /></svg>
+            Continue with Google</button>
+          <div class="flex items-center justify-between mb-3">
+            <hr class="flex-1 mt-1">
+            <span class="mx-1">or</span>
+            <hr class="flex-1 mt-1">
+          </div>
+          <form>
+          <div class="text-left">
+          <input type="text" class="block w-full border border-black px-3 py-3 mb-3" placeholder="Email">
+          <input type="text" class="block w-full border border-black px-3 py-3 mb-3" placeholder="Password">
+          <input type="checkbox" class="mb-3"> Remember me
+          <button class="rounded-full bg-ideeza text-white text-center w-full py-3 mb-1">
+            Login</button>
+          </div>
+          </form>
+          <div class="text-center mb-10 font-bold text-ideeza">
+              <a href="#" @click="$emit('reset')">Forget password?</a>
+          </div>
+          <div class="text-center">
+              Don't have account an account? <a href="#" @click="$emit('signup')" class="text-ideeza font-bold">Sign up</a>
+          </div>
+        </div>
+      </template>
+    </modal>
+</template>
+<script>
+import Modal from '~/components/reusables/Modal.vue'
+export default {
+    components: {
+        Modal
+    }
+}
+</script>

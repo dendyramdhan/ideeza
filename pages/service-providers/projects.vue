@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+  <div :class="{'hide-sider-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <!-- <LeftMenu/> -->
     <sidebar-menu :menu-items="menu" />
@@ -21,7 +21,7 @@
 
   export default {
     layout: 'user',
-    name: "blog-index",
+    name: "project-index",
     components: {
       LeftMenu,
       SidebarMenu

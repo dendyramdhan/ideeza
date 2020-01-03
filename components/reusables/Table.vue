@@ -1,16 +1,17 @@
 <template>
-  <div class="bg-white rounded border-ideeza border shadow">
-    <div class="flex justify-between pt-5 pl-5 pr-5 items-center mb-3">
-      <h6 class="text-ideeza font-bold text-sm flex-shrink">{{title}}</h6>
-      <div class="flex justify-between flex-none">
+  <div class="bg-white rounded border shadow" :class="border">
+    <template v-if="header==true">
+    <div class="flex justify-between pt-5 pl-5 pr-5 mb-3 flex-wrap md:flex-no-wrap items-end md:items-center">
+      <h6 class="text-ideeza font-bold text-sm flex-1 mb-2 md:mb-0">{{title}}</h6>
+      <div class="flex justify-end flex-1 flex-wrap-reverse md:flex-no-wrap md:items-center items-end">
         <div v-if="searchbox"
-          class="flex w-fit-content bg-white justify-center border border-ideeza rounded items-center mr-2 content-center">
+          class="flex w-fit-content bg-white border border-ideeza rounded items-center mr-2 content-center mb-2 md:mb-0">
           <div class="h-12 relative w-10">
             <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
           </div>
-          <input placeholder="Search" class="bg-white outline-none h-12 text-gray-800 pr-3">
+          <input placeholder="Search" class="bg-white outline-none h-12 text-gray-800 pr-3 w-2/3 md:w-full">
         </div>
-        <button class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza" @click="$emit('add')">
+        <button class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza mb-2 md:mb-0 h-12" @click="$emit('add')">
           Add New
           <font-awesome-icon class="text-sm" :icon="['fa', 'plus']" />
         </button>
@@ -25,6 +26,7 @@
         <button class="font-bold text-sm mr-3 text-ideeza-dark">Make Manager</button>
       </slot>
     </div>
+    </template>
     <div class="overflow-x-auto max-96-vw">
       <table class="text-left w-full simple-table">
         <thead class="bg-white flex text-ideeza-dark w-full">
@@ -60,6 +62,10 @@
 <script>
   export default {
     props: {
+      header: {
+        default: true,
+        type: Boolean
+      },
       fields: {
         type: Array,
         default: () => {
@@ -73,6 +79,10 @@
       title: {
           type: String,
           default: 'Table'
+      },
+      border: {
+        type: String,
+        default: 'border-ideeza'
       }
     },
     data() {
@@ -184,5 +194,7 @@
 </style>
 <style>
   /* Base for label styling */
-
+  .simple-table tr{
+    min-width: 775px;
+  }
 </style>

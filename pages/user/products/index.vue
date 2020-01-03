@@ -6,33 +6,33 @@
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
-          <div class="md:flex">
-          <div class="md:w-1/4">
+          <div class="md:flex md:flex-wrap">
+          <div class="lg:w-1/4 md:w-1/2 w-full">
             <div class="border rounded p-20 px-10 h-64 text-ideeza border-ideeza text-center md:mr-3 my-3 bg-white">
               <h1 class="text-5xl font-bold text-ideeza">132</h1>
               <h4 class="text-gray-500 text-xl">All Products</h4>
             </div>
           </div>
-          <div class="md:w-1/4">
-            <div class="border rounded p-20 px-10 h-64 text-ideeza border-ideeza text-center md:mr-3 my-3 bg-white">
+          <div class="lg:w-1/4 md:w-1/2 w-full">
+            <div class="border rounded p-20 px-10 h-64 text-ideeza border-ideeza text-center  my-3 bg-white">
               <h1 class="text-5xl font-bold text-ideeza">32</h1>
               <h4 class="text-gray-500 text-xl">Active users</h4>
             </div>
           </div>
-          <div class="md:w-1/4">
+          <div class="lg:w-1/4 md:w-1/2 w-full">
             <div class="border rounded p-20 px-10 h-64 text-ideeza border-ideeza text-center md:mr-3 my-3 bg-white">
               <h1 class="text-5xl font-bold text-ideeza">1192</h1>
               <h4 class="text-gray-500 text-xl">All orders</h4>
             </div>
           </div>
-          <div class="md:w-1/4">
-            <div class="border rounded p-20 px-10 h-64 text-ideeza border-ideeza text-center md:mr-3 my-3 bg-white">
+          <div class="lg:w-1/4 md:w-1/2 w-full">
+            <div class="border rounded px-10 h-64 pl-10 pr-10 pt-20 pb-20 text-ideeza border-ideeza text-center my-3 bg-white">
               <h1 class="text-5xl font-bold text-ideeza">$23,1229</h1>
               <h4 class="text-gray-500 text-xl">Revenue</h4>
             </div>
           </div>
         </div>
-        <simple-table @selectall="selectall" :fields="['Name','Title','Username','Role','Type','Visibility','Start-End']" :searchbox="true">
+        <simple-table @selectall="selectall" :fields="['Name','Title','Username','Role','Type','Visibility','Start-End']" :searchbox="true" title="Products">
           <tr class="flex w-full mb-4" v-for="(user,index) in users">
             <td class="p-4 w-1/7" :class="{'border-b':users.length-1 != index}">
               <div class="flex">

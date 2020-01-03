@@ -3,7 +3,7 @@
         <div class="bg-white rounded border-ideeza border shadow p-4">
             <nuxt-link to="/user/blog/updated" class="float-right py-1 px-2 border border-ideeza rounded text-ideeza text-sm">Go Back</nuxt-link>
             <div class="text-ideeza font-bold text-sm mb-5">Article Preview</div>
-            <div class="flex">
+            <div class="md:flex">
                 <div class="flex-1 mr-4">
                     <img src="~/static/images/blog-image.png" alt="blog-image" class="w-full mb-3">
                     <div class="text-gray-700">Jul 19, 2019 <span class="cirlce"></span> 5 mins read</div>
