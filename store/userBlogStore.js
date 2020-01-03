@@ -11,7 +11,10 @@ export const state = () => ({
 })
 
 export const mutations = {
-  
+  changeshowscale(state, value) {
+    console.log('savearticlesname', value)
+    state.scale = value
+  },
   viewflagchange1(state) {
     state.viewflag = 2 ;
   },

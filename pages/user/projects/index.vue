@@ -14,7 +14,7 @@
           <div class="lg:flex flex-wrap">
             <div
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-               v-for="Project in Projects" :key="Project" v-if="Project.flag == 1"
+               v-for="Project in Projects" :key="Project.id" v-if="Project.flag == 1"
             >
             
                   <nuxt-link   :to="{ path: '/user/projects/detail', query: { id: Project.id}}">

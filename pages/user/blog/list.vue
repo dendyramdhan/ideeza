@@ -74,7 +74,7 @@
         </thead>
 
         <tbody class="text-gray-800">
-          <tr v-for="tabledata in articles" :key="tabledata">
+          <tr v-for="tabledata in articles" :key="tabledata.id">
             <td
               class="font-semibold"
               v-if="start < tabledata.id && tabledata.id < end "
@@ -154,8 +154,13 @@
           class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
         >
           <span class="inline-block">Show</span>
-          <select class="inline field ml-2 h-10">
-            <option>1-3</option>
+          <!-- @change="changeshowstep" -->
+          <select class="inline field ml-2 h-10" v-model="showstep" 
+          
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
           </select>
         </div>
       </div>
@@ -177,8 +182,15 @@ export default {
       currentviewpoint: this.$store.state.userBlogStore.offset + 1,
       index: 0,
       counter: articles.length / this.$store.state.userBlogStore.scale,
-      start: this.$store.state.userBlogStore.offset * 5 - 0,
-      end: this.$store.state.userBlogStore.offset * 5 + 6,
+      start:
+        this.$store.state.userBlogStore.offset *
+          this.$store.state.userBlogStore.scale -
+        0,
+      end:
+        this.$store.state.userBlogStore.offset *
+          this.$store.state.userBlogStore.scale +
+        this.$store.state.userBlogStore.scale +
+        1,
       counterarray: []
     };
   },
@@ -195,6 +207,25 @@ export default {
     console.log("articles:", this.articles);
   },
   methods: {
+    changeshowstep(e) {
+      this.showstep = e.target.value;
+      this.$store.commit("userBlogStore/changeshowscale", this.showstep);
+      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+      let array1 = [];
+      let i = 1;
+      let endd = articles.length / this.$store.state.userBlogStore.scale + 1;
+      for (i = 1; i <= endd; i++) {
+        array1.push(i);
+      }
+      this.counterarray = array1;
+      this.counter = articles.length / this.showstep;
+      console.log("counter", this.counter);
+      this.start = this.$store.state.userBlogStore.offset * this.showstep - 0;
+      this.end =
+        this.$store.state.userBlogStore.offset * this.showstep +
+        this.showstep +
+        1;
+    },
     search(e) {
       console.log(this.searchTerm);
       this.searchTerm = e.target.value;

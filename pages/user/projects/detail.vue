@@ -33,7 +33,7 @@
           </div>
 
           <div class="my-5 bg-white shadow">
-            <div v-for="Project in Projects" :key="Project">
+            <div v-for="Project in Projects" :key="Project.id">
               <div v-if="Project.id == $route.query.id ">
                 <img class="w-full" :src="Project.ImageUrl" />
               </div>
@@ -87,7 +87,7 @@
             </div>
 
             <div class="py-10 px-5 text-gray-600" v-if="tab===0">
-              <div class="lg:flex" v-for="Project in Projects" :key="Project">
+              <div class="lg:flex" v-for="Project in Projects" :key="Project.id">
                 <div class="lg:flex" v-if="Project.id == $route.query.id ">{{Project.Description}}</div>
               </div>
             </div>
@@ -170,7 +170,7 @@ export default {
     onClickOutside(event, el) {
       this.focus = false;
     },
-    saveDescription() {
+    saveDescription(e) {
       if (this.description === "") {
         this.$notify({
           group: "error",
@@ -179,6 +179,8 @@ export default {
         });
       } else {
         this.tab = 0;
+        this.description=e.target.value;
+        console.log(this.description);
       }
     },
     closeShareInternal() {
