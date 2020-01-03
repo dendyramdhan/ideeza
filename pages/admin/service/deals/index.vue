@@ -9,7 +9,7 @@
 
         <div class="flex">
           <div class="flex w-1/2">
-            <h1 class="flex text-3xl text-ideeza">Activities</h1>
+            <h1 class="flex text-3xl text-ideeza">Deals</h1>
             <div class="flex items-center ml-5 text-xs">14,234 Total</div>
             <div class="flex items-center ml-5 text-xs">
               Sort By:
@@ -20,42 +20,100 @@
           </div>
           <div class="flex w-1/2 justify-end">
             <button class="items-center bg-white border border-gray-300 rounded px-3 py-1 text-gray-600">
-              Contact activities
+              <font-awesome-icon class="text-sm" :icon="['fas', 'bars']"/>
             </button>
             <button class="items-center bg-white border border-gray-300 rounded px-3 py-1 text-gray-600 ml-2">
-              All users
+              <font-awesome-icon class="text-sm" :icon="['fas', 'filter']"/>
             </button>
             <button class="items-center bg-white border border-gray-300 rounded px-3 py-1 text-gray-600 ml-2">
-              All activities
+              <font-awesome-icon class="text-sm" :icon="['fas', 'eye']"/>
             </button>
             <button class="items-center bg-ideeza border rounded px-3 py-1 text-white ml-2">
-              <font-awesome-icon class="text-sm" :icon="['fas', 'user-plus']"/> Add Document
+              <font-awesome-icon class="text-sm" :icon="['fas', 'user-plus']"/> Add Deal
             </button>
           </div>
         </div>
 
-        <div class="md:flex">
-          <table class="text-left w-full border-collapse mt-5">
-		        <thead class="">
-			        <tr class="mb-4">
-                <th class="py-2 px-10 uppercase w-3/4">Title</th>
-                <th class="py-2 uppercase w-1/4">Created</th>
-              </tr>
-		        </thead>
-            <tbody class="bg-grey-light overflow-y-auto text-gray-700">
-              <tr class="w-full mb-4 bg-white rounded" v-for="index in 8" :key="index">
-                <td class="py-2 px-10 text-sm border-b-4 w-3/4">
-                  <img class="inline-flex h-10 w-10 rounded-full" src="~/static/images/product.png"> 
-                  <div class="inline-block text-xs align-middle">
-                     <span class="font-bold">Added Document</span>
-                    <br>
-                    <span class="text-gray-500">Document type - Local drive</span>
-                  </div>
-                </td>
-                <td class="py-2 text-sm border-b-4 w-1/4 font-bold">4 Days Ago</td>
-              </tr>   
-            </tbody>
-	        </table>
+        <div class="md:flex mt-10">
+          <div class="w-1/4 mr-3">
+            <div class="bg-gray-600 text-white p-4 rounded text-sm flex justify-between">
+              <div>Test 64</div>
+              <div><font-awesome-icon class="text-sm" :icon="['fas', 'ellipsis-h']"/></div>
+            </div>
+
+            <div class="bg-white p-4 rounded mt-2" v-for="index in 4" :key="index">
+              <div class="text-gray-900 text-sm">Investment deal for series A </div>
+              <div class="text-gray-500 text-sm mt-1">$212,347.22</div>
+              <div class="mt-2">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+              </div>
+              <div class="text-gray-500 text-xs mt-2 pl-5">
+                4 months ago  
+              </div>
+            </div>
+          </div>
+
+          <div class="w-1/4 mr-3">
+            <div class="bg-blue-600 text-white p-4 rounded text-sm flex justify-between">
+              <div>Test 64</div>
+              <div><font-awesome-icon class="text-sm" :icon="['fas', 'ellipsis-h']"/></div>
+            </div>
+
+            <div class="bg-white p-4 rounded mt-2" v-for="index in 4" :key="index">
+              <div class="text-gray-900 text-sm">Investment deal for series A </div>
+              <div class="text-gray-500 text-sm mt-1">$212,347.22</div>
+              <div class="mt-2">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+              </div>
+              <div class="text-gray-500 text-xs mt-2 pl-5">
+                4 months ago  
+              </div>
+            </div>
+          </div>
+
+          <div class="w-1/4 mr-3">
+            <div class="bg-green-600 text-white p-4 rounded text-sm flex justify-between">
+              <div>Test 64</div>
+              <div><font-awesome-icon class="text-sm" :icon="['fas', 'ellipsis-h']"/></div>
+            </div>
+
+            <div class="bg-white p-4 rounded mt-2" v-for="index in 4" :key="index">
+              <div class="text-gray-900 text-sm">Investment deal for series A </div>
+              <div class="text-gray-500 text-sm mt-1">$212,347.22</div>
+              <div class="mt-2">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+              </div>
+              <div class="text-gray-500 text-xs mt-2 pl-5">
+                4 months ago  
+              </div>
+            </div>
+          </div>
+
+          <div class="w-1/4">
+            <div class="bg-red-600 text-white p-4 rounded text-sm flex justify-between">
+              <div>Test 64</div>
+              <div><font-awesome-icon class="text-sm" :icon="['fas', 'ellipsis-h']"/></div>
+            </div>
+
+            <div class="bg-white p-4 rounded mt-2" v-for="index in 4" :key="index">
+              <div class="text-gray-900 text-sm">Investment deal for series A </div>
+              <div class="text-gray-500 text-sm mt-1">$212,347.22</div>
+              <div class="mt-2">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+                <img class="inline-flex h-8 w-8 rounded-full" src="~/static/images/product.png">
+              </div>
+              <div class="text-gray-500 text-xs mt-2 pl-5">
+                4 months ago  
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
