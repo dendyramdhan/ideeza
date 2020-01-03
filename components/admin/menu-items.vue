@@ -13,10 +13,14 @@
       <nuxt-link to="/admin/user/contact" class="ml-12 text-base mt-2">Contacts</nuxt-link>
       <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Marketing</nuxt-link>
     </div>
-    <div class="menu-item">
+    <div class="menu-item flex-col">
       <nuxt-link to="/admin/service">
         <UserIcon class="fill-current mr-3" /> Service providers
       </nuxt-link>
+      <nuxt-link to="/admin/service" class="ml-12 text-base mt-2">Home</nuxt-link>
+      <nuxt-link to="/admin/service/contact" class="ml-12 text-base mt-2">Contacts</nuxt-link>
+      <nuxt-link to="/admin/service/document" class="ml-12 text-base mt-2">Documents</nuxt-link>
+      <nuxt-link to="/admin/service/activities" class="ml-12 text-base mt-2">Activities</nuxt-link>
     </div>
     <div class="menu-item">
       <nuxt-link to="/admin/invester">
@@ -34,7 +38,7 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/user/messages">
+      <nuxt-link to="/admin/messages">
         <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'comments']"/> Messages
       </nuxt-link>
     </div>
