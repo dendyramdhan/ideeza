@@ -21,7 +21,7 @@
       <template slot="body" slot-scope="props">
         <div class="notify notify--success">
           <div class="flex items-center text-white font-semibold">
-            <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt="">
+            <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt=""/>
             {{props.item.text}}
           </div>
 

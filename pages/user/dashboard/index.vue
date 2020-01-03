@@ -167,6 +167,7 @@ import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
 
 export default {
+  
   // asyncData({ params }) {
   //   return axios.get(`https://dog.ceo/api/breeds/list`).then(res => {
   //     console.log("Here: ", res.data.message);
