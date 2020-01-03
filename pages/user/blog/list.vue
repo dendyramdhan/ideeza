@@ -74,18 +74,18 @@
         </thead>
 
         <tbody class="text-gray-800">
-          <tr v-for="tabledata in articles" :key="tabledata.id">
+          <tr v-for="tabledata in articles" v-if="start < tabledata.id && tabledata.id < end ">
             <td
               class="font-semibold"
-              v-if="start < tabledata.id && tabledata.id < end "
-            >{{tabledata.ArticlesName | search}}</td>
-            <td class v-if="start < tabledata.id && tabledata.id < end">
-              {{tabledata.Date}}
+              
+            >{{tabledata.ArticlesName}}</td>
+            <td class >
+              {{tabledata.Date+"_"+tabledata.id}}
               <!-- <span v-if="tabledata.flag"></span>
               <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
             <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
-            <td v-if="start < tabledata.id && tabledata.id < end">
+            <td>
               <p v-if="tabledata.flag == 1 ">
                 <span class="text-green-500 font-semibold">{{tabledata.Status}}</span>
               </p>
@@ -97,7 +97,7 @@
               </p>
             </td>
 
-            <td class="text-gray-500" v-if="start < tabledata.id && tabledata.id < end">
+            <td class="text-gray-500" >
               <nuxt-link :to="{ path: '/user/blog/view', query: { id: tabledata.id}}">
                 <!-- <nuxt-link to="/user/blog/view"> -->
                 <button @click="uploadUserBlogkey2">
@@ -122,8 +122,10 @@
                 :icon="['fas', 'times']"
               />
             </td>
-            <td v-if="start < tabledata.id && tabledata.id < end"></td>
+            <td ></td>
           </tr>
+
+          
         </tbody>
       </table>
       debug: sort={{currentSort}}, dir={{currentSortDir}}
@@ -154,13 +156,8 @@
           class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
         >
           <span class="inline-block">Show</span>
-          <!-- @change="changeshowstep" -->
-          <select class="inline field ml-2 h-10" v-model="showstep" 
-          
-          >
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
+          <select class="inline field ml-2 h-10">
+            <option>1-3</option>
           </select>
         </div>
       </div>
@@ -182,15 +179,8 @@ export default {
       currentviewpoint: this.$store.state.userBlogStore.offset + 1,
       index: 0,
       counter: articles.length / this.$store.state.userBlogStore.scale,
-      start:
-        this.$store.state.userBlogStore.offset *
-          this.$store.state.userBlogStore.scale -
-        0,
-      end:
-        this.$store.state.userBlogStore.offset *
-          this.$store.state.userBlogStore.scale +
-        this.$store.state.userBlogStore.scale +
-        1,
+      start: this.$store.state.userBlogStore.offset * 5 - 0,
+      end: this.$store.state.userBlogStore.offset * 5 + 6,
       counterarray: []
     };
   },
@@ -207,27 +197,8 @@ export default {
     console.log("articles:", this.articles);
   },
   methods: {
-    changeshowstep(e) {
-      this.showstep = e.target.value;
-      this.$store.commit("userBlogStore/changeshowscale", this.showstep);
-      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
-      let array1 = [];
-      let i = 1;
-      let endd = articles.length / this.$store.state.userBlogStore.scale + 1;
-      for (i = 1; i <= endd; i++) {
-        array1.push(i);
-      }
-      this.counterarray = array1;
-      this.counter = articles.length / this.showstep;
-      console.log("counter", this.counter);
-      this.start = this.$store.state.userBlogStore.offset * this.showstep - 0;
-      this.end =
-        this.$store.state.userBlogStore.offset * this.showstep +
-        this.showstep +
-        1;
-    },
     search(e) {
-      console.log(this.searchTerm);
+      // console.log(this.searchTerm);
       this.searchTerm = e.target.value;
       this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
       this.counter = articles.length / this.$store.state.userBlogStore.scale;
@@ -270,6 +241,7 @@ export default {
       this.counter = articles.length / this.$store.state.userBlogStore.scale;
       this.start = this.$store.state.userBlogStore.offset * 5 - 0;
       this.end = this.$store.state.userBlogStore.offset * 5 + 6;
+      console.log("start and end :", this.start, this.end)
       // this.$refs.page.$forceUpdate();
     },
     increasekey() {
