@@ -15,22 +15,30 @@
             </div>
 
             <!-- <Search placeholder="search services..." /> -->
-             <div class="search-container flex w-fit-content bg-white justify-center items-center content-center">
-    <div class="h-12 relative w-10">
-      <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
-    </div>
-    <input placeholder="search services..." class="bg-white outline-none h-8 text-gray-800 pr-3" v-model="searchTerm"
-          v-on:input="search">{{searchTerm}}
-  </div>
-              
-        
+            <div
+              class="search-container flex w-fit-content bg-white justify-center items-center content-center"
+            >
+              <div class="h-12 relative w-10">
+                <font-awesome-icon
+                  class="ml-1 h-4 text-gray-400 absolute-center-h-v"
+                  :icon="['fas', 'search']"
+                />
+              </div>
+              <input
+                placeholder="search services..."
+                class="bg-white outline-none h-8 text-gray-800 pr-3"
+                v-model="searchTerm"
+                v-on:input="search"
+              />
+              <!-- {{searchTerm}} -->
+            </div>
           </div>
 
           <div class="my-3 lg:flex justify-between text-sm">
             <div class="flex">
               <div class="flex items-center p-1 border border-solid border-ideeza-gray-700 mr-5">
                 <span class="mr-3">Type:</span>
-                <select class="border-0">
+                <select class="border-0" @change="selectkindman" v-model="kindman">
                   <option>Patents</option>
                   <option>Clouds</option>
                   <option>Freelancers</option>
@@ -38,7 +46,7 @@
               </div>
               <div class="flex items-center p-1 border border-solid border-ideeza-gray-700">
                 <span class="mr-3">Sort By:</span>
-                <select class="border-0">
+                <select class="border-0" v-model="kindmanworkinfo"  @change="selectkindmanworkinfo">
                   <option>Cost</option>
                   <option>Rating</option>
                   <option>Work time</option>
@@ -62,7 +70,7 @@
           <h1 class="my-3 font-semibold">Results (58)</h1>
 
           <div class="services-container mx-auto mt-10">
-            <div class="mb-32 lg:mb-20 lg:flex" v-for="Service in Services" :key="Service">
+            <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray" :key="Service">
               <div class="lg:flex lg:mr-20">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
                   <img class="avatar rounded-full mx-auto" :src="Service.profileImage" />
@@ -71,34 +79,45 @@
                   <div class="flex justify-between items-center">
                     <div class="flex items-center">
                       <h1 class="text-lg font-semibold inline-block mr-5">{{Service.name}}</h1>
-                      <button class="btn btn-normal btn--ideeza px-5 py-2">Available</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span v-if="index == 0">
+                        <button
+                          class="btn btn-normal btn--ideeza px-5 py-2"
+                          @click="showprofiledetail"
+                        >Available</button>
+                      </span>
+                      <span v-else>&nbsp;</span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
 
                     <div class="flex items-center">
                       <div
                         class="py-1 px-2 border border-solid border-light-gray mr-3"
-                      >{{Service.time}}</div>
+                      >{{Service.time}} Days</div>
                       <div
                         class="py-1 px-2 border border-solid border-light-gray mr-3"
                       >{{Service.cost}}</div>
                     </div>
 
                     <div class="flex items-center">
-                      <button
-                        @click="requestQuote = !requestQuote"
-                        class="btn btn-normal px-3 py-2"
-                        :class="{'btn-green': quoteSend}"
-                      >Request Quote</button>
+                      <span v-if="index == 0">
+                        <button
+                          @click="requestQuote = !requestQuote"
+                          class="btn btn-normal px-3 py-2"
+                          :class="{'btn-green': quoteSend}"
+                        >Request Quote</button>
+                      </span>
+                      <span v-else>&nbsp;</span>
                     </div>
                   </div>
-                   <div class="my-5 flex items-center">
+                  <div class="my-5 flex items-center">
                     <h2 class="inline-block mr-5 font-semibold text-lg">Code</h2>
                     <span v-for="index in  Service.score" :key="index">
                       <font-awesome-icon class="h-3 text-ideeza-gold" :icon="['fas', 'star']" />
                     </span>
                     <span class="ml-3">({{Service.score}})</span>
                   </div>
-                  <div class="text-ideeza-black">{{Service.description}}</div>
+                  <div class="text-ideeza-black" v-if="flag == 1">{{Service.shortdescription}}</div>
+                  <div class="text-ideeza-black" v-else>{{Service.description}}</div>
 
                   <div class="flex mt-5">
                     <button class="btn btn--ideeza-dark px-3 py-1 mr-3">{{Service.mainCore1}}</button>
@@ -172,7 +191,7 @@ import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import Search from "~/components/form/search.vue";
 import CheckBox from "~/components/form/checkbox-dark.vue";
 
-import Services from "~/data/UserProjectAddServiceApi.json";
+import Services from "~/data/UserProjectApi.json";
 
 export default {
   layout: "user",
@@ -180,11 +199,20 @@ export default {
   data: function() {
     return {
       searchTerm: "",
+      kindman:"Patents",
+      kindmanworkinfo:"Cost",
+      flag: 1,
       Services: Services.Result_info,
+      articleArray:[],
       requestQuote: false,
       quoteSend: false,
       showOptimize: false
     };
+  },
+  created: function() {
+    this.Services.map(item => {
+      this.articleArray.push(item);
+    });
   },
   components: {
     LeftMenu,
@@ -197,20 +225,118 @@ export default {
     }
   },
   methods: {
-    search(e) {
-      console.log(this.searchTerm);
-      this.searchTerm = e.target.value;
-      for (const [key, value] of Object.entries(this.Services)) {
-        if (value.name.match(e.target.value)) {
-          this.Services = this.Services
-          console.log("id_:", value.id);
-        }
+    showprofiledetail(e) {
+      if (this.flag == 1) {
+        this.flag = 2;
+      } else if (this.flag == 2) {
+        this.flag = 1;
       }
-      // this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
-      // this.counter = articles.length / this.$store.state.userBlogStore.scale;
-      // this.start = this.$store.state.userBlogStore.offset * 5 - 0;
-      // this.end = this.$store.state.userBlogStore.offset * 5 + 6;
-      // alert(e.target.value);
+    },
+    selectkindman(e){
+      this.articleArray = [];
+      // alert(e.target.value)
+      this.kindman=e.target.value;
+       let article_list = this.Services;
+      article_list.map(element => { 
+        if (element.Type == e.target.value) {
+          this.articleArray.push(element);
+        }
+      });
+    },
+    selectkindmanworkinfo(e){
+      //  alert(e.target.value)
+       this.kindmanworkinfo =  e.target.value
+       let article_list = this.articleArray;
+       let S_index = e.target.value;
+       switch (S_index) {
+        case "Cost":
+          article_list.sort(function(a, b) {
+            var x = a.cost;
+            var y = b.cost;
+            if (x < y) {
+              return -1;
+            }
+            if (x > y) {
+              return 1;
+            }
+            return 0;
+          });
+
+          // console.log("sorted : ", article_list);
+          break;
+        case "Rating":
+         article_list.sort(function(a, b) {
+            var x = a.score;
+            var y = b.score;
+            if (x < y) {
+              return -1;
+            }
+            if (x > y) {
+              return 1;
+            }
+            return 0;
+          });
+
+          // console.log("sorted : ", article_list);
+          break;
+        case "Work time":
+         article_list.sort(function(a, b) {
+            var x = a.time;
+            var y = b.time;
+            if (x < y) {
+              return -1;
+            }
+            if (x > y) {
+              return 1;
+            }
+            return 0;
+          });
+
+          // console.log("sorted : ", article_list);
+          break;
+
+          case "Address":
+          article_list.sort(function(a, b) {
+            var x = a.address.toLowerCase();
+            var y = b.address.toLowerCase();
+            if (x < y) {
+              return -1 ;
+            }
+            if (x > y) {
+              return 1 ;
+            }
+            return 0;
+          });
+
+          // console.log("sorted : ", article_list);
+          break;
+          
+        default:
+          break;
+      }
+       
+
+
+    },
+    search(e) {
+      this.articleArray = [];
+
+      let article_list = this.Services;
+      article_list.map(element => {
+        const a_text = element.name.toLowerCase() + "";
+        const b_text = e.target.value.toLowerCase() + "";
+        // const b_text = "master"
+
+        let s_index = a_text.indexOf(b_text) + 1;
+        // console.log("search ", a_text, b_text, s_index);
+
+        if (s_index > 0 || e.target.value == "") {
+          this.articleArray.push(element);
+        }
+      });
+
+      console.log("search array :", this.articleArray, e.target.value);
+
     },
     sendQuote() {
       this.quoteSend = true;
@@ -256,7 +382,7 @@ input {
   min-width: 100%;
 }
 
-.search-container{
-    height: fit-content;
-  }
+.search-container {
+  height: fit-content;
+}
 </style>

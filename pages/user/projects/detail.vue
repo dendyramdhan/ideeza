@@ -15,13 +15,19 @@
             >Lamborghini Aventado Project</div>
             <div class="flex flex-wrap items-center">
               <span class="panel-menu text-center">
+                <nuxt-link to="/user/pro" >
                 <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']" />Electronics
+                </nuxt-link>
               </span>
               <span class="ml-5 panel-menu text-center active">
+                <nuxt-link to="/user/pro" >
                 <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'code']" />Code
+                </nuxt-link>
               </span>
               <span class="ml-5 panel-menu text-center">
+                <nuxt-link to="/user/pro" >
                 <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']" />Cover
+                </nuxt-link>
               </span>
               <nuxt-link to="/user/pro" class="ml-5 panel-menu text-center">
                 <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']" />General
@@ -57,7 +63,7 @@
                 </div>
               </div>
 
-              <div class="flex items-center mt-5 lg:mt-0">
+              <div class="flex items-center mt-5 lg:mt-0" v-for="Project in Projects"  v-if="Project.id == $route.query.id">
                 <div>
                   <nuxt-link
                     to="/user/order-tracking/making-product"
@@ -65,11 +71,11 @@
                   >Track the order</nuxt-link>
                 </div>
                 <div class="mx-5 text-sm text-gray-500 font-semibold">
-                  <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'eye']" />2.8k
+                  <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'eye']" />{{Project.Cost}}
                 </div>
                 <div>
                   <button class="btn btn-normal font-semibold p-2 text-gray-500">
-                    <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'star']" />39
+                    <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'star']" />{{Project.mark}}
                   </button>
                 </div>
               </div>
