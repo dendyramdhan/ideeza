@@ -21,7 +21,7 @@
 
   export default {
     layout: 'user',
-    name: "blog-index",
+    name: "project-index",
     components: {
       LeftMenu,
       SidebarMenu

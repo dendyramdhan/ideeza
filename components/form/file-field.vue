@@ -1,8 +1,8 @@
 <template>
-  <label class="file-select">
+  <label class="file-select" :class="borderClass">
     <div class="flex items-center">
-      <div class="btn btn--ideeza px-3 py-2 text-xs mr-5">Choose</div>
-      <div class="text-sm">
+      <div class="btn px-3 py-2 text-xs mr-5" :class="btn">Choose</div>
+      <div class="text-sm" >
         <span class="text-gray-800" v-if="files">{{files}}</span>
         <span class="text-gray-400" v-else>No file choosen</span>
       </div>
@@ -12,38 +12,33 @@
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  name: "file-field",
-
-  data: function() {
-    return {
-      files: null,
-      message: " "
-    };
-  },
-  methods: {
-    async handleFileChange(e) {
-      let file = e.target.files[0];
-      if (file && file.name) {
-        this.files = file.name;
-        this.$store.commit("userBlogStore/ImageurlName", this.files);
-        console.log("image url:", this.files);
-        
-      //    const formData = new FormData();
-      // formData.append("file", this.file);
-      // try {
-      //   await axios.post("/upload", formData);
-      //   this.message = "Upload!!";
-      // } catch (err) {
-      //   console.log(err);
-      //   this.message = "Something went wrong!!!";
-      // }
-        // const formData = new FormData();
-        // formData.append("myFile", this.files, this.files.name);
-        // axios.post("../../assets/img/userBlog", formData);
-      } else {
-        this.files = null;
+    export default {
+        name: "file-field",
+      props: {
+        btn: {
+          type: String,
+          default: 'btn--ideeza', 
+        },
+        borderClass: {
+          type: String,
+          default: 'border-gray-300'
+        }
+      },
+      data: function(){
+        return {
+          files: null
+        }
+      },
+      methods: {
+        handleFileChange(e) {
+          let file = e.target.files[0];
+          if(file && file.name) {
+            this.files = file.name;
+          } else {
+            this.files = null;
+          }
+          this.$emit('input', file)
+        }
       }
       this.$emit("input", file);
     }
@@ -52,11 +47,19 @@ export default {
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .file-select {
   @apply block w-full bg-white border border-solid border-gray-300 text-lg p-2;
 }
 .file-select > .select-button {
   padding: 1rem;
+=======
+  .file-select{
+    @apply block w-full bg-white border border-solid text-lg p-2;
+  }
+  .file-select > .select-button {
+    padding: 1rem;
+>>>>>>> kashifali_dev
 
   color: white;
   background-color: #2ea169;
