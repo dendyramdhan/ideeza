@@ -10,7 +10,7 @@
         >Back</nuxt-link>
       </div>
       <!--Blog Preview-->
-      <div class="lg:flex" v-for="descrition in articles" :key="descrition.id">
+      <div class="lg:flex" v-for="descrition in articles" >
         <div class="lg:flex" v-if="descrition.id == $route.query.id ">
           <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
             <img class="w-full" :src="descrition.postimage" />
