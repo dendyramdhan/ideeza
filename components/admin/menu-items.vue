@@ -21,6 +21,7 @@
       <nuxt-link to="/admin/service/contact" class="ml-12 text-base mt-2">Contacts</nuxt-link>
       <nuxt-link to="/admin/service/deals" class="ml-12 text-base mt-2">Deals</nuxt-link>
       <nuxt-link to="/admin/service/document" class="ml-12 text-base mt-2">Documents</nuxt-link>
+      <nuxt-link to="/admin/service/inbox" class="ml-12 text-base mt-2">Inbox</nuxt-link>
       <nuxt-link to="/admin/service/activities" class="ml-12 text-base mt-2">Activities</nuxt-link>
     </div>
     <div class="menu-item">
