@@ -123,7 +123,7 @@
           </tr>
         </tbody>
       </table>
-      debug: sort={{currentSort}}, dir={{currentSortDir}}
+      <!-- debug: sort={{currentSort}}, dir={{currentSortDir}} -->
       <!--Table Stats-->
       <div class="mt-5 relative">
         <!--Paging-->
@@ -161,7 +161,7 @@
         </div>
       </div>
     </div>
-    {{Math.ceil(counter)}}
+    <!-- {{Math.ceil(counter)}} -->
   </div>
 </template>
 
