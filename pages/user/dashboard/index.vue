@@ -108,7 +108,7 @@
                     <p>{{innovation.description}}</p>
                     <div class="flex justify-between items-center mt-5">
                       <small>{{innovation.date}}</small>
-                      <button class="btn btn--ideeza px-4 py-2">Read more</button>
+                      <button class="btn btn--ideeza px-4 py-2" @click="readMore">Read more</button>
                     </div>
                   </div>
                   <!-- <li v-for="breed in breeds" :key="breed">
@@ -167,7 +167,6 @@ import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
 
 export default {
-  
   // asyncData({ params }) {
   //   return axios.get(`https://dog.ceo/api/breeds/list`).then(res => {
   //     console.log("Here: ", res.data.message);
@@ -208,7 +207,10 @@ export default {
     showMyProjects() {
       alert("Hello");
     },
-    showMyProfile() {}
+    showMyProfile() {},
+    readMore() {
+      alert("Read More");
+    }
   }
 };
 </script>
