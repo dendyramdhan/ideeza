@@ -131,6 +131,7 @@ export default {
   @apply w-56 text-gray-600 text-xl font-semibold;
 }
 
+
 @screen md {
   .form-field {
     @apply flex;
