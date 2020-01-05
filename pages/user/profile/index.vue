@@ -132,19 +132,28 @@
                 </div>
                 <div class="mt-10 flex justify-between items-center">
                   <div class="flex items-center">
-                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                    <div
+                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                      @click="onLike"
+                    >
                       <font-awesome-icon
                         class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
                         :icon="['fas', 'thumbs-up']"
                       />LIKE
                     </div>
-                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                    <div
+                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                      @click="onShare"
+                    >
                       <font-awesome-icon
                         class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
                         :icon="['fas', 'share-alt']"
                       />SHARE
                     </div>
-                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                    <div
+                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                      @click="onComment"
+                    >
                       <font-awesome-icon
                         class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
                         :icon="['fas', 'comment-dots']"
@@ -221,7 +230,7 @@
                 </div>
                 <div
                   class="flex items-center text-gray-500 text-sm hover:text-gray-800 cursor-pointer"
-                >
+                @click="onReport">
                   <font-awesome-icon class="mr-2 h-4" :icon="['fas', 'flag']" />Report
                 </div>
               </div>
@@ -271,6 +280,18 @@ export default {
   methods: {
     onClickOutside() {
       this.focusMore = false;
+    },
+    onLike() {
+      alert();
+    },
+    onShare() {
+      alert();
+    },
+    onComment() {
+      alert();
+    },
+    onReport() {
+      alert();
     }
   }
 };

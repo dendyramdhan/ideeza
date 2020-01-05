@@ -77,7 +77,7 @@
                 </div>
               </div>
 
-              <button class="btn btn-normal px-2 py-2">
+              <button class="btn btn-normal px-2 py-2" @click="onConnect">
                 <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'link']" />Connect
               </button>
             </div>
@@ -120,6 +120,9 @@ export default {
       } else {
         this.feedType = "world";
       }
+    },
+    onConnect() {
+      alert('Do you want to disconnect?');
     }
   }
 };
