@@ -207,6 +207,7 @@
 import CheckBox from "~/components/form/checkbox.vue";
 import Projects from "~/data/TechnicianSettingApi.json";
 
+
 export default {
   name: "notifications",
   data: function() {
