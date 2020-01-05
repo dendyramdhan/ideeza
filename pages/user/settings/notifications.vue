@@ -128,7 +128,7 @@
           </div>
           <div class="mb-3 flex justify-between">
             <div class="text-left text-gray-800 text-lg font-semibold">Phone Number:</div>
-            <div class="flex-shrink text-gray-600 text-lg">{{infonotification.contact_info_email}}</div>
+            <div class="flex-shrink text-gray-600 text-lg">{{infonotification.contact_info_phone_number}}</div>
           </div>
         </div>
 

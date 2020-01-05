@@ -94,7 +94,7 @@ export default {
     return {
       longview: true,
       Projects: Projects.Login_history,
-      security: Projects.Setting_security
+      security: Projects.Setting_general
     };
   },
   methods:{
