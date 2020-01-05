@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-general mx-auto"  >
+  <div class="settings-general mx-auto">
     <!---->
     <!--Profile Information-->
     <!---->
@@ -245,7 +245,6 @@
         <button class="btn pill-button pill-button--ideeza px-20" @click="savegeneralsetting">Save</button>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
