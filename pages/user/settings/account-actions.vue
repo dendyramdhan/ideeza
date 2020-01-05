@@ -88,7 +88,7 @@ export default {
   data: function() {
     return {
       longview: true,
-      Projects: Projects.Setting_accpunt_action,
+      Projects: Projects.Setting_account_action,
       reason: "",
     };
   },
