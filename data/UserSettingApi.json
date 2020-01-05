@@ -137,12 +137,7 @@
             "additional_timezone": "GMT + 1:00",
             "additional_language": "English",
             "profile_photo": "https://randomuser.me/api/portraits/men/12.jpg",
-            "profile_description": "First impressions count, we all know this. And we only get one chance to make a good first impression. Perhaps in person, your charm and use of language can camouflage your faults, but in the online world. your first impression is made with your face – your profile picture."
-        }
-    ],
-    "Setting_security": [
-        {
-            "id": 1,
+            "profile_description": "First impressions count, we all know this. And we only get one chance to make a good first impression. Perhaps in person, your charm and use of language can camouflage your faults, but in the online world. your first impression is made with your face – your profile picture.",
             "password": "me"
         }
     ],
@@ -151,13 +146,13 @@
             "id": 1,
             "message_email": 1,
             "message_notification": 0,
-            "message_textmessage":0,
+            "message_textmessage": 0,
             "Reminders_email": 0,
             "Reminders_notification": 0,
             "Reminders_textmessage": 1,
             "Policy_and_community_email": 0,
             "Policy_and_community_notification": 0,
-            "Policy_and_community_textmessage":0,
+            "Policy_and_community_textmessage": 0,
             "Account_Support_email": 0,
             "Account_Support_notification": 0,
             "Account_Support_textmessage": 0,
@@ -167,17 +162,17 @@
             "Text_Messages2": "+123*** **567"
         }
     ],
-    "Setting_accpunt_action": [
+    "Setting_account_action": [
         {
             "id": 1,
             "reason1": "I don't need the website anymore",
-            "state1":0,
+            "state1": 0,
             "reason2": "I found this website useless",
-            "state2":0,
+            "state2": 0,
             "reason3": "I have technical issues",
-            "state3":0,
+            "state3": 0,
             "reason4": "Other",
-            "state4":0
+            "state4": 0
         }
     ]
 }
