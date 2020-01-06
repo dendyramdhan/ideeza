@@ -74,9 +74,9 @@
                 <nuxt-link to="/technician/projects/detail">{{Service.projectName}}</nuxt-link>
               </td>
               <td>
-                <img class="avatar" :src="Service.assigned_to_profile_image1" />
-                <img class="avatar" :src="Service.assigned_to_profile_image2" />
-                <img class="avatar" :src="Service.assigned_to_profile_image3" />
+                <span v-for="image in Service.assigned_to_profile_image">
+                  <img class="avatar" :src="image" />
+                </span>
               </td>
               <td>{{Service.due_date}}</td>
               <td class="status status--completed">{{Service.task_status}}</td>
@@ -174,10 +174,9 @@ export default {
     let i = 1;
     let endd =
       this.Services.length / this.$store.state.TechnicianProjectStore.scale + 1;
-      //  alert( this.Services.length);
+    //  alert( this.Services.length);
     for (i = 1; i <= endd; i++) {
       this.counterarray.push(i);
-       
     }
     // alert(this.counterarray);
 
@@ -212,7 +211,7 @@ export default {
       console.log("search array :", this.articleArray, e.target.value);
     },
     selectkindman(e) {
-      this.searchTerm="";
+      this.searchTerm = "";
       this.articleArray = [];
       // alert(e.target.value)
       this.kindman = e.target.value;
@@ -226,7 +225,7 @@ export default {
       });
     },
     selectkindmanworkinfo(e) {
-       this.searchTerm="";
+      this.searchTerm = "";
       //  alert(e.target.value)
       this.kindmanworkinfo = e.target.value;
       let article_list = this.articleArray;

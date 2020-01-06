@@ -13,9 +13,12 @@
             "ImageUrl1": "/_nuxt/static/images/car-big.png",
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
-            "assigned_to_profile_image1": "https://randomuser.me/api/portraits/women/15.jpg",
-            "assigned_to_profile_image2": "https://randomuser.me/api/portraits/women/16.jpg",
-            "assigned_to_profile_image3": "https://randomuser.me/api/portraits/women/17.jpg"
+            "assigned_to_profile_image":[
+                "https://randomuser.me/api/portraits/women/14.jpg",
+                "https://randomuser.me/api/portraits/women/21.jpg",
+                "https://randomuser.me/api/portraits/women/23.jpg",
+                "https://randomuser.me/api/portraits/women/21.jpg"
+            ]
         },
         {
             "id": 2,
@@ -30,9 +33,13 @@
             "ImageUrl1": "/_nuxt/static/images/car-big.png",
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
-            "assigned_to_profile_image1": "https://randomuser.me/api/portraits/women/18.jpg",
-            "assigned_to_profile_image2": "https://randomuser.me/api/portraits/women/19.jpg",
-            "assigned_to_profile_image3": "https://randomuser.me/api/portraits/women/20.jpg"
+            "assigned_to_profile_image":[
+                "https://randomuser.me/api/portraits/women/15.jpg",
+                "https://randomuser.me/api/portraits/women/16.jpg",
+                "https://randomuser.me/api/portraits/women/17.jpg",
+                "https://randomuser.me/api/portraits/women/18.jpg",
+                "https://randomuser.me/api/portraits/women/19.jpg"
+            ]
         },
         {
             "id": 3,
@@ -47,9 +54,14 @@
             "ImageUrl1": "/_nuxt/static/images/car-big.png",
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
-            "assigned_to_profile_image1": "https://randomuser.me/api/portraits/women/21.jpg",
-            "assigned_to_profile_image2": "https://randomuser.me/api/portraits/women/22.jpg",
-            "assigned_to_profile_image3": "https://randomuser.me/api/portraits/women/23.jpg"
+            "assigned_to_profile_image":[
+                "https://randomuser.me/api/portraits/women/20.jpg",
+                "https://randomuser.me/api/portraits/women/21.jpg",
+                "https://randomuser.me/api/portraits/women/22.jpg",
+                "https://randomuser.me/api/portraits/women/23.jpg",
+                "https://randomuser.me/api/portraits/women/14.jpg",
+                "https://randomuser.me/api/portraits/women/15.jpg"
+            ]
         },
         {
             "id": 4,
@@ -64,9 +76,14 @@
             "ImageUrl1": "/_nuxt/static/images/car-big.png",
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
-            "assigned_to_profile_image1": "https://randomuser.me/api/portraits/women/21.jpg",
-            "assigned_to_profile_image2": "https://randomuser.me/api/portraits/women/22.jpg",
-            "assigned_to_profile_image3": "https://randomuser.me/api/portraits/women/23.jpg"
+            "assigned_to_profile_image":[
+                "https://randomuser.me/api/portraits/women/16.jpg",
+                "https://randomuser.me/api/portraits/women/17.jpg",
+                "https://randomuser.me/api/portraits/women/18.jpg",
+                "https://randomuser.me/api/portraits/women/19.jpg",
+                "https://randomuser.me/api/portraits/women/20.jpg",
+                "https://randomuser.me/api/portraits/women/21.jpg"
+            ]
         },
         {
             "id": 5,
@@ -81,9 +98,15 @@
             "ImageUrl1": "/_nuxt/static/images/car-big.png",
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
-            "assigned_to_profile_image1": "https://randomuser.me/api/portraits/women/21.jpg",
-            "assigned_to_profile_image2": "https://randomuser.me/api/portraits/women/22.jpg",
-            "assigned_to_profile_image3": "https://randomuser.me/api/portraits/women/23.jpg"
+            "assigned_to_profile_image":[
+                "https://randomuser.me/api/portraits/women/22.jpg",
+                "https://randomuser.me/api/portraits/women/23.jpg",
+                "https://randomuser.me/api/portraits/women/14.jpg",
+                "https://randomuser.me/api/portraits/women/15.jpg",
+                "https://randomuser.me/api/portraits/women/16.jpg",
+                "https://randomuser.me/api/portraits/women/17.jpg",
+                "https://randomuser.me/api/portraits/women/18.jpg"
+            ]
         },
         {
             "id": 6,
@@ -98,9 +121,14 @@
             "ImageUrl1": "/_nuxt/static/images/car-big.png",
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
-            "assigned_to_profile_image1": "https://randomuser.me/api/portraits/women/21.jpg",
-            "assigned_to_profile_image2": "https://randomuser.me/api/portraits/women/22.jpg",
-            "assigned_to_profile_image3": "https://randomuser.me/api/portraits/women/23.jpg"
+            "assigned_to_profile_image":[
+                "https://randomuser.me/api/portraits/women/16.jpg",
+                "https://randomuser.me/api/portraits/women/17.jpg",
+                "https://randomuser.me/api/portraits/women/18.jpg",
+                "https://randomuser.me/api/portraits/women/19.jpg",
+                "https://randomuser.me/api/portraits/women/20.jpg",
+                "https://randomuser.me/api/portraits/women/21.jpg"
+            ]
         },
         {
             "id": 7,
@@ -115,9 +143,14 @@
             "ImageUrl1": "/_nuxt/static/images/car-big.png",
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
-            "assigned_to_profile_image1": "https://randomuser.me/api/portraits/women/21.jpg",
-            "assigned_to_profile_image2": "https://randomuser.me/api/portraits/women/22.jpg",
-            "assigned_to_profile_image3": "https://randomuser.me/api/portraits/women/23.jpg"
+            "assigned_to_profile_image":[
+                "https://randomuser.me/api/portraits/women/16.jpg",
+                "https://randomuser.me/api/portraits/women/17.jpg",
+                "https://randomuser.me/api/portraits/women/18.jpg",
+                "https://randomuser.me/api/portraits/women/19.jpg",
+                "https://randomuser.me/api/portraits/women/20.jpg",
+                "https://randomuser.me/api/portraits/women/21.jpg"
+            ]
         }
     ],
     "myprojectconnect": [
