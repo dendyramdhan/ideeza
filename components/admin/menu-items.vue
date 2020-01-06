@@ -24,10 +24,12 @@
       <nuxt-link to="/admin/service/inbox" class="ml-12 text-base mt-2">Inbox</nuxt-link>
       <nuxt-link to="/admin/service/activities" class="ml-12 text-base mt-2">Activities</nuxt-link>
     </div>
-    <div class="menu-item">
+    <div class="menu-item flex-col">
       <nuxt-link to="/admin/invester">
         <UserIcon class="fill-current mr-3" /> Investors
       </nuxt-link>
+
+      <nuxt-link to="/admin/invester/blog" class="ml-12 text-base mt-2">Blog</nuxt-link>
     </div>
     <div class="menu-item">
       <nuxt-link to="/admin/product">
@@ -42,6 +44,11 @@
     <div class="menu-item">
       <nuxt-link to="/admin/messages">
         <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'comments']"/> Messages
+      </nuxt-link>
+    </div>
+    <div class="menu-item">
+      <nuxt-link to="/admin/news">
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']"/> News
       </nuxt-link>
     </div>
   </div>
