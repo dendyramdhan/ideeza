@@ -181,7 +181,7 @@
     @apply border-0;
   }
   .field-label{
-    @apply w-56 text-gray-600 text-xl font-semibold
+    @apply w-56 text-gray-600 text-xl font-semibold;
   }
 
   @screen md{

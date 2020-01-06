@@ -151,13 +151,13 @@
     <div class="mt-5 lg:flex justify-end">
       <div class="lg:w-3/5 p-3 lg:flex justify-between">
         <!--Paging-->
-        <div class="flex items-center">
+        <div class="flex items-center justify-center">
           <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'angle-double-left']"/>
           page 1 0f 9
           <font-awesome-icon class="ml-2 h-4 cursor-pointer" :icon="['fas', 'angle-double-right']"/>
         </div>
 
-        <div class="flex items-center">
+        <div class="flex items-center justify-end">
 
 
           <span class="inline-block ml-32">Show</span>

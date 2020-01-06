@@ -7,57 +7,55 @@
     <div class="flex-grow mb-20">
 
       <div class="main-contents"><!--Status Cards-->
-        <div class="lg:flex w-full cards-wrapper">
-
+        <div class="lg:flex w-full cards-wrapper items-center">
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Opened Tickets</h1>
-            <div class="mx-auto lg:mx-none status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
-              </div>
+            <h1 class="text-3xl font-semibold text-gar-800 pl-3 lg:pl-0">Good morning, Chan!</h1>
+          </div>
+          <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">Open Tickets</div>
               <div class="flex justify-between items-center content-center ">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">56</div>
-                <img src="~/static/images/opened-tickets.png" class="object-center object-right" alt="">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/opened-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
 
 
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Unopened Tickets</h1>
-            <div class="status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
-              </div>
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">Unopened Tickets</div>
               <div class="flex justify-between items-center content-center ">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">26</div>
-                <img src="~/static/images/un-opened-tickets.png" class="object-center object-right" alt="">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/un-opened-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
 
           <div class="card-container mt-5 lg:mr-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">On Hold Tickets</h1>
-            <div class="status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
-              </div>
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">On Hold Tickets</div>
               <div class="flex justify-between items-center content-center ">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">32</div>
-                <img src="~/static/images/on-hold-tickets.png" class="object-center object-right" alt="">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/on-hold-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
 
           <div class="card-container mt-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Finished Tickets</h1>
-            <div class="status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
-              </div>
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">Finished Tickets</div>
               <div class="flex justify-between items-center content-center ">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">256</div>
-                <img src="~/static/images/finished-tickets.png" class="object-center object-right" alt="">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/finished-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
@@ -66,172 +64,128 @@
 
         <div class="xl:flex mt-10 justify-between">
 
-          <div class="lg:mr-5 w-full">
+          <div class="lg:mr-5 lg:w-2/3 md:w-full">
             <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Project Management</h1>
             <!--List-->
-            <div class="success-stories shadow-md mt-5 relative p-6 bg-white">
+            <div class="shadow-md mt-5 relative p-6 bg-white">
               <div class="flex justify-between">
                 <span class="text-gray-500 text-sm">2 tasks completed out of 10</span>
                 <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
               </div>
 
               <div class="mt-5 w-full lg:flex justify-between items-center">
-                <div class="text-sm text-gray-600">
+                <div class="text-sm font-bold text-black w-1/3">
+                  Title
+                </div>
+                <div class="text-sm font-bold text-black w-1/5">
+                  Domain
+                </div>
+                <div class="text-sm font-bold text-black w-1/5">
+                  Due Date
+                </div>
+                <div class="text-sm font-bold text-black w-1/5">
+                  Progress
+                </div>
+              </div>
+
+              <div class="mt-5 w-full lg:flex justify-between items-center">
+                <div class="text-sm text-gray-600 w-1/3">
                   <nuxt-link to="/technician/projects/technician-detail">
                     Washing Machine Repairments
                   </nuxt-link>
 
                 </div>
-                <div>
-                  <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+                <div class="w-1/5">
+                  Electronics
                 </div>
-                <div class="text-sm text-gray-600">16.11.2019</div>
-                <div class="text-sm text-orange-600">IN PROGRESS</div>
-                <div class="text-sm text-ideeza">not new notification</div>
+                <div class="text-sm text-gray-600 w-1/5 bg-gray-700 text-center rounded-full relative">
+                <span class="absolute due-date text-white">16.11.2019</span>
+                <div class="bg-ideeza rounded-full h-6" style="width:30%;">
+
+                </div>
+                </div>
+                <div class="text-sm text-orange-600 w-1/5">IN PROGRESS</div>
               </div>
               <div class="mt-5 w-full lg:flex justify-between items-center">
-                <div class="text-sm text-gray-600">
+                <div class="text-sm text-gray-600 w-1/3">
                   <nuxt-link to="/technician/projects/technician-detail">
                     Washing Machine Repairments
                   </nuxt-link>
+
                 </div>
-                <div>
-                  <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+                <div class="w-1/5">
+                  Electronics
                 </div>
-                <div class="text-sm text-gray-600">16.11.2019</div>
-                <div class="text-sm text-orange-600">IN PROGRESS</div>
-                <div class="text-sm text-ideeza">not new notification</div>
+                <div class="text-sm text-gray-600 w-1/5 bg-gray-700 text-center rounded-full relative">
+                <span class="absolute due-date text-white">16.11.2019</span>
+                <div class="bg-ideeza rounded-full h-6" style="width:40%;">
+
+                </div>
+                </div>
+                <div class="text-sm text-orange-600 w-1/5">IN PROGRESS</div>
               </div>
               <div class="mt-5 w-full lg:flex justify-between items-center">
-                <div class="text-sm text-gray-600">
+                <div class="text-sm text-gray-600 w-1/3">
                   <nuxt-link to="/technician/projects/technician-detail">
                     Washing Machine Repairments
                   </nuxt-link>
+
                 </div>
-                <div>
-                  <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+                <div class="w-1/5">
+                  Code
                 </div>
-                <div class="text-sm text-gray-600">16.11.2019</div>
-                <div class="text-sm text-orange-600">IN PROGRESS</div>
-                <div class="text-sm text-ideeza">not new notification</div>
+                <div class="text-sm text-gray-600 w-1/5 bg-gray-700 text-center rounded-full relative">
+                <span class="absolute due-date text-white">16.11.2019</span>
+                <div class="bg-ideeza rounded-full h-6" style="width:80%;">
+
+                </div>
+                </div>
+                <div class="text-sm text-orange-600 w-1/5">IN PROGRESS</div>
               </div>
               <div class="mt-5 w-full lg:flex justify-between items-center">
-                <div class="text-sm text-gray-600">
+                <div class="text-sm text-gray-600 w-1/3">
                   <nuxt-link to="/technician/projects/technician-detail">
                     Washing Machine Repairments
                   </nuxt-link>
+
                 </div>
-                <div>
-                  <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+                <div class="w-1/5">
+                  Electronics
                 </div>
-                <div class="text-sm text-gray-600">16.11.2019</div>
-                <div class="text-sm text-orange-600">IN PROGRESS</div>
-                <div class="text-sm text-ideeza">not new notification</div>
+                <div class="text-sm text-gray-600 w-1/5 bg-gray-700 text-center rounded-full relative">
+                <span class="absolute due-date text-white">16.11.2019</span>
+                <div class="bg-ideeza rounded-full h-6" style="width:40%;">
+
+                </div>
+                </div>
+                <div class="text-sm text-orange-600 w-1/5">IN PROGRESS</div>
               </div>
               <div class="mt-5 w-full lg:flex justify-between items-center">
-                <div class="text-sm text-gray-600">
+                <div class="text-sm text-gray-600 w-1/3">
                   <nuxt-link to="/technician/projects/technician-detail">
                     Washing Machine Repairments
                   </nuxt-link>
+
                 </div>
-                <div>
-                  <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+                <div class="w-1/5">
+                  Code
                 </div>
-                <div class="text-sm text-gray-600">16.11.2019</div>
-                <div class="text-sm text-orange-600">IN PROGRESS</div>
-                <div class="text-sm text-ideeza">not new notification</div>
+                <div class="text-sm text-gray-600 w-1/5 bg-gray-700 text-center rounded-full relative">
+                <span class="absolute due-date text-white">16.11.2019</span>
+                <div class="bg-ideeza rounded-full h-6" style="width:20%;">
+
+                </div>
+                </div>
+                <div class="text-sm text-orange-600 w-1/5">IN PROGRESS</div>
               </div>
             </div>
-
-          </div>
-
-          <div class="messages mt-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Memos</h1>
-            <div class="bg-white shadow-md mt-5 ">
-              <div class="flex justify-between p-6">
-                <span class="text-gray-500 text-sm">2 tasks completed out of 10</span>
-                <div class="text-gray-500 text-sm flex justify-between items-center">
-                  <font-awesome-icon class="h-4 cursor-pointer" :icon="['fas', 'chevron-left']"/>
-                  <span class="mx-2">March 2018</span>
-                  <font-awesome-icon class="h-4 cursor-pointer" :icon="['fas', 'chevron-right']"/>
-                </div>
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
-              </div>
-
-              <!--List-->
-              <div class="p-6 border-t border-solid border-gray-300 flex justify-between items-center text-gray-600 hover:bg-ideeza-dark hover:text-white">
-                <div>
-                  <span class="font-semibold text-sm block">
-                    <nuxt-link to="/technician/tasklist">
-                      Finish Electronics Part
-                    </nuxt-link>
-
-                  </span>
-                  <span class="text-xs block">
-                    10:30 AM - 12:40 PM
-                  </span>
-                </div>
-                <div>
-                  <font-awesome-icon class="mr-3 h-4 cursor-pointer inline" :icon="['fas', 'pen']"/>
-                  <font-awesome-icon class="h-4 cursor-pointer inline" :icon="['fas', 'times']"/>
-                </div>
-              </div>
-              <div class="p-6 border-t border-solid border-gray-300 flex justify-between items-center text-gray-600 hover:bg-ideeza-dark hover:text-white">
-                <div>
-                  <span class="font-semibold text-sm block">
-                    <nuxt-link to="/technician/tasklist">
-                      Finish Electronics Part
-                    </nuxt-link>
-                  </span>
-                  <span class="text-xs block">
-                    10:30 AM - 12:40 PM
-                  </span>
-                </div>
-                <div>
-                  <font-awesome-icon class="mr-3 h-4 cursor-pointer inline" :icon="['fas', 'pen']"/>
-                  <font-awesome-icon class="h-4 cursor-pointer inline" :icon="['fas', 'times']"/>
-                </div>
-              </div>
-              <div class="p-6 border-t border-solid border-gray-300 flex justify-between items-center text-gray-600 hover:bg-ideeza-dark hover:text-white">
-                <div>
-                  <span class="font-semibold text-sm block">
-                    <nuxt-link to="/technician/tasklist">
-                      Finish Electronics Part
-                    </nuxt-link>
-                  </span>
-                  <span class="text-xs block">
-                    10:30 AM - 12:40 PM
-                  </span>
-                </div>
-                <div>
-                  <font-awesome-icon class="mr-3 h-4 cursor-pointer inline" :icon="['fas', 'pen']"/>
-                  <font-awesome-icon class="h-4 cursor-pointer inline" :icon="['fas', 'times']"/>
-                </div>
-              </div>
-
-            </div>
-
-
-          </div>
-        </div>
-
-        <div class="mt-10 orders">
+            <div class="mt-10 orders">
           <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0 pb-3 mb-3 border-b border-solid border-gary-300">
             Message Center</h1>
 
           <div>
             <div class="hidden xl:flex justify-between">
-              <div class="flex">
+              <div class="flex flex-wrap">
                 <select class="field field--border-light mr-1 h-12">
                   <option>All payout methods</option>
                 </select>
@@ -265,9 +219,6 @@
               <tr class="text-gray-800 h16">
               <th class="text-left ">Username</th>
               <th class="text-left">Role</th>
-              <th class="text-left">Status</th>
-              <th class="text-left">Join Date</th>
-              <th class="text-left">Rate</th>
               <th class="text-left">Actions</th>
               <th class="text-right"><font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']"/></th>
             </tr>
@@ -279,17 +230,8 @@
 
                 </td>
                 <td>Service Provider</td>
-                <td>Active</td>
-                <td>1/12/2017</td>
-                <td>
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                </td>
 
-                <td class="lg:text-right">
+                <td>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']"/>
@@ -306,17 +248,7 @@
 
                 </td>
                 <td>Service Provider</td>
-                <td>Active</td>
-                <td>1/12/2017</td>
                 <td>
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                </td>
-
-                <td class="lg:text-right">
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']"/>
@@ -333,17 +265,7 @@
 
                 </td>
                 <td>Service Provider</td>
-                <td>Active</td>
-                <td>1/12/2017</td>
                 <td>
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                </td>
-
-                <td class="lg:text-right">
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']"/>
@@ -360,17 +282,7 @@
 
                 </td>
                 <td>Service Provider</td>
-                <td>Active</td>
-                <td>1/12/2017</td>
                 <td>
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                </td>
-
-                <td class="lg:text-right">
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']"/>
@@ -387,17 +299,7 @@
 
                 </td>
                 <td>Service Provider</td>
-                <td>Active</td>
-                <td>1/12/2017</td>
                 <td>
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                  <img class="inline" src="~/static/images/star.png" alt="">
-                </td>
-
-                <td class="lg:text-right">
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']"/>
                   <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']"/>
@@ -433,6 +335,58 @@
           </div>
 
         </div>
+          </div>
+
+          <div class="mt-5 lg:mt-0 md:w-1/3">
+            <vc-calendar class="mx-auto bg-white box-shadow rounded mb-3" color="pink" is-expanded :theme="theme" />
+            <div class="bg-white shadow rounded">
+            <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
+            <hr class="my-1">
+            <ul class="shadow-lg">
+                 <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -452,7 +406,16 @@
       LeftMenu
     },
     data: function () {
-      return {}
+      return {
+        theme: {
+          container: {
+            light: 'ideeza-date-picker',
+          },
+          arrows: {
+            light: 'ideeza-arrow',
+          },
+        },
+      }
     },
     computed: {
       leftMenu() {
@@ -467,12 +430,20 @@
 </script>
 
 <style scoped>
+  .due-date{
+    transform: translateX(-50%);
+  }
   .cards-wrapper{
     max-width: 1530px;
   }
   .status-card{
     width: 100%;
-    height: 100px;
+  }
+  .status-card img{
+    top: 60%;
+    position: absolute;
+    right: 0;
+    transform: translateY(-50%);
   }
   .success-stories{
     width: 100%;
@@ -515,10 +486,6 @@
   @screen lg{
     .card-container{
       @apply w-1/4;
-    }
-
-    .status-card{
-      height: 160px;
     }
     table{
       @apply mb-5 w-full table-fixed border-collapse text-gray-600;

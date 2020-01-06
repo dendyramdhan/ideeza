@@ -8,7 +8,7 @@
         </div>
 
         <!--Contents-->
-        <div class="p-20 mt-10 flex">
+        <div class="p-5 md:p-20 mt-10 md:flex popup-body">
           <div class="lg:w-1/2" >
             <div class="flex justify-between items-center">
               <h1 class="text-ideeza-dark font-semibold">Task Description</h1>
@@ -87,6 +87,10 @@
             <div class="mt-10 rounded-lg p-5 bg-gray-200">
               <span class="text-xs">Inbox is empty</span>
             </div>
+            <div class="my-10">
+              <span class="inline-block mb-2">Assigned Layer</span>
+              <DropDownField :data="layers" styleHeight="mini"  />
+            </div>
           </div>
         </div>
 
@@ -107,7 +111,8 @@
           dateRange: null,
           showMembers: false,
           showNotifications: false,
-          markStatusData: ['Waiting', 'Active', 'Completed', 'Over Due']
+          markStatusData: ['Waiting', 'Active', 'Completed', 'Over Due'],
+          layers: ['Electronics', 'Code', 'Cover'],
         }
       },
       components: {
@@ -146,5 +151,9 @@
   }
   .avatar{
     @apply w-4 rounded-full inline;
+  }
+  .popup-body{
+    max-height: 60vh;
+    overflow-y: auto;
   }
 </style>

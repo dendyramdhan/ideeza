@@ -65,11 +65,11 @@ export default {
           icons: ['fas']
         },
         {
-          set: '@fortawesome/free-regular-svg-icons',
+          set:'@fortawesome/free-regular-svg-icons',
           icons: ['far']
         },
         {
-          set: '@fortawesome/free-brands-svg-icons',
+          set:'@fortawesome/free-brands-svg-icons',
           icons: ['fab']
         }
       ]
@@ -89,7 +89,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
+    extend (config, ctx) {
     }
   }
 }

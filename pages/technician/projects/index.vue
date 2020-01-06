@@ -113,7 +113,7 @@
 
         <!--Table Stats-->
         <div class="mt-10 lg:flex justify-center">
-          <div class="flex items-center">
+          <div class="flex items-center justify-center">
             <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'angle-double-left']"/>
             page 1 0f 9
             <font-awesome-icon class="ml-2 h-4 cursor-pointer" :icon="['fas', 'angle-double-right']"/>
@@ -260,11 +260,11 @@
     /*
       Label the data
       */
-    td:nth-of-type(1):before { content: "Products"; }
-    td:nth-of-type(2):before { content: "Color"; }
-    td:nth-of-type(3):before { content: "Price"; }
-    td:nth-of-type(4):before { content: "Quantity"; }
-    td:nth-of-type(5):before { content: "Cost"; }
+    td:nth-of-type(1):before { content: "Projects"; }
+    td:nth-of-type(2):before { content: "Assigned To"; }
+    td:nth-of-type(3):before { content: "Due Date"; }
+    td:nth-of-type(4):before { content: "Task Status"; }
+    td:nth-of-type(5):before { content: "Notification"; }
     td:nth-of-type(6):before { content: "Action"; }
   }
 </style>

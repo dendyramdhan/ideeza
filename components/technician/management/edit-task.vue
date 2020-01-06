@@ -8,7 +8,7 @@
         </div>
 
         <!--Contents-->
-        <div class="p-20 mt-10 flex">
+        <div class="p-5 md:p-20 mt-10 md:flex popup-body">
           <div class="lg:w-1/2" >
             <div class="flex justify-between items-center">
               <h1 class="text-ideeza-dark font-semibold">Task Description</h1>
@@ -211,5 +211,9 @@
   }
   .avatar{
     @apply w-4 rounded-full inline;
+  }
+  .popup-body {
+    max-height: 60vh;
+    overflow-y: auto;
   }
 </style>

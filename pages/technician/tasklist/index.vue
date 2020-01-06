@@ -394,7 +394,7 @@
     @apply text-gray-800 text-xl font-semibold mt-5;
   }
   .attachment-no{
-    @apply text-gray-500 text-sm
+    @apply text-gray-500 text-sm;
   }
   .add-member{
     @apply h-10 w-10 mr-2 bg-gray-300 rounded-full relative cursor-pointer text-gray-600;
@@ -409,7 +409,7 @@
     @apply text-white;
   }
   .important{
-    @apply bg-ideeza-dark
+    @apply bg-ideeza-dark;
   }
   .important .task-time,
   .important .task-name,

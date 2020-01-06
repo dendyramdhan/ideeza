@@ -13,10 +13,10 @@
 
         <AddCode />
 
-        <div class="flex justify-between mt-10">
-          <button class="btn pill-button px-12 ">Back</button>
-          <button class="btn pill-button px-12 ">+ Add New File</button>
-          <button class="btn pill-button pill-button--ideeza px-12">Next</button>
+        <div class="md:flex text-center justify-between mt-10">
+          <button class="block md:inline-block mb-2 md:mb-0 btn pill-button px-12 ">Back</button>
+          <button class="block md:inline-block mb-2 md:mb-0 btn pill-button px-12 ">+ Add New File</button>
+          <button class="block md:inline-block mb-2 md:mb-0 btn pill-button pill-button--ideeza px-12">Next</button>
         </div>
 
       </div>

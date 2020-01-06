@@ -231,7 +231,6 @@
 
 <style scoped>
   @screen lg{
-
     table{
       @apply mb-5 w-full table-fixed border-collapse text-gray-600;
     }
@@ -239,13 +238,19 @@
       @apply bg-white px-6 pl-16;
     }
     thead th{
-      @apply p-6;
+      @apply p-3;
     }
     thead th:first-child{
       @apply pl-16;
     }
     tbody td{
-      @apply p-6;
+      @apply p-3;
+    }
+    tbody td img{
+      @apply w-5;
+    }
+    tbody td svg{
+      @apply text-xs;
     }
     tbody tr:even{
       @apply bg-white;
