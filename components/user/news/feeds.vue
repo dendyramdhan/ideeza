@@ -2,63 +2,6 @@
   <div class="w-full">
     <div class="scroll-area">
       <smooth-scrollbar :options="{alwaysShowTracks: true}">
-        <div class="flex mx-auto mb-10">
-          <img
-            class="feed-owner-avatar rounded-full mr-5"
-            src="https://randomuser.me/api/portraits/women/14.jpg"
-            alt
-          />
-          <div class="flex-grow bg-white p-5 shadow">
-            <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
-              <div>
-                Sarah Doe
-                <span class="font-normal">Loves a project</span>
-              </div>
-              <div class="relative">
-                <font-awesome-icon
-                  class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer"
-                  :icon="['fas', 'ellipsis-h']"
-                />
-              </div>
-            </div>
-            <div class="my-5">
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industry's standard dummy text ever since
-              </p>
-            </div>
-            <div class="bg-gray-200">
-              <img class="w-full object-fit object-center" src="~/static/images/car-big.png" alt />
-            </div>
-            <div class="mt-10 flex justify-between items-center">
-              <div class="flex items-center">
-                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
-                  <font-awesome-icon
-                    class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                    :icon="['fas', 'thumbs-up']"
-                  />LIKE
-                </div>
-                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
-                  <font-awesome-icon
-                    class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                    :icon="['fas', 'share-alt']"
-                  />SHARE
-                </div>
-                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
-                  <font-awesome-icon
-                    class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                    :icon="['fas', 'comment-dots']"
-                  />COMMENT
-                </div>
-              </div>
-
-              <div class="flex items-center font-semibold">
-                <div class="mr-6 text-ideeza">26 comments</div>
-                <div class="mr-6">3 share</div>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="flex mx-auto mb-10" v-for="feed in feeds">
           <img class="feed-owner-avatar rounded-full mr-5" :src="feed.potrait_url" alt />
           <div class="flex-grow bg-white py-5 shadow">
@@ -69,7 +12,7 @@
                 <span class="text-gray-800">Retro Headphones</span> •
                 <span class="font-normal text-xs">3 weeks ago</span>
               </div>
-              <div>
+              <div @click="onDetail">
                 <font-awesome-icon
                   class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer"
                   :icon="['fas', 'ellipsis-h']"
@@ -87,19 +30,28 @@
 
             <div class="p-10 flex justify-between items-center">
               <div class="flex items-center">
-                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                <div
+                  class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                  @click="onLike"
+                >
                   <font-awesome-icon
                     class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
                     :icon="['fas', 'thumbs-up']"
                   />LIKE
                 </div>
-                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                <div
+                  class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                  @click="onShare"
+                >
                   <font-awesome-icon
                     class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
                     :icon="['fas', 'share-alt']"
                   />SHARE
                 </div>
-                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                <div
+                  class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                  @click="onComment"
+                >
                   <font-awesome-icon
                     class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
                     :icon="['fas', 'comment-dots']"
@@ -108,8 +60,11 @@
               </div>
 
               <div class="flex items-center font-semibold">
-                <div class="mr-6 text-ideeza">{{feed.comments_count}} comments</div>
-                <div class="mr-6">{{feed.share_count}} share</div>
+                <div
+                  class="mr-6 text-ideeza cursor-pointer"
+                  @click="onShowComments"
+                >{{feed.comments_count}} comments</div>
+                <div class="mr-6 cursor-pointer" @click="onShowShare">{{feed.share_count}} share</div>
               </div>
             </div>
 
@@ -136,14 +91,20 @@
                   </div>
                   <p class="text-xs my-5">{{comment.comments_content}}</p>
                   <div class="flex items-center">
-                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                    <div
+                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                      @click="onCommentLike"
+                    >
                       <font-awesome-icon
                         class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
                         :icon="['fas', 'thumbs-up']"
                       />
                       {{comment.likes}}
                     </div>
-                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
+                    <div
+                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                      @click="onCommentComment"
+                    >
                       <font-awesome-icon
                         class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
                         :icon="['fas', 'comment-dots']"
@@ -174,10 +135,36 @@ import feeds from "~/json/feeds.json";
 export default {
   name: "feeds",
   data: function() {
-    console.log("feeds: ", feeds.feeds);
+    console.log("feeds: ", feeds);
     return {
-      feeds: feeds.feeds
+      feeds: feeds
     };
+  },
+  methods: {
+    onDetail() {
+      alert();
+    },
+    onLike() {
+      alert();
+    },
+    onShare() {
+      alert();
+    },
+    onComment() {
+      alert();
+    },
+    onCommentLike() {
+      alert();
+    },
+    onCommentComment() {
+      alert();
+    },
+    onShowComments() {
+      alert();
+    },
+    onShowShare() {
+      alert();
+    }
   }
 };
 </script>
