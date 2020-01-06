@@ -129,8 +129,9 @@
                 <div class="messages message--to">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
-                <div class="messages message--to">
+                <div class="messages message--to" style="width:90%" v-if="sendmessage">
                  {{sendmessage}}
+
                 </div>
                  
               </div>
@@ -148,7 +149,7 @@
                 <input class="h-full w-full border-0 text-gray-600 outline-none pr-2" placeholder="Type Message" v-model="sendmessage" @change="sendmymessage">
               </div>
               <div class="flex-shrink ">
-                <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'cloud-upload-alt']" @click="sendmymessage" />
+                <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'cloud-upload-alt']"  />
                 <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'camera']"/>
                 <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'microphone']"/>
               </div>
@@ -313,8 +314,7 @@
     },
     mounted() {
 
-    },
-    methods: {}
+    }
   }
 </script>
 
