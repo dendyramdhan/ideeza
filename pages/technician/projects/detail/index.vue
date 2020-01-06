@@ -1,15 +1,16 @@
 <template>
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+     
     <!--  Left Side Bar  -->
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow">
+    <div class="flex-grow" v-for="projectkind in Servicesproject" v-if="projectkind.id == $route.query.id ">
       <div class="main-contents">
         <div class="mt-10">
       <div class="flex justify-between items-center border-b-4 border-solid border-ideeza pb-5">
         <div class="flex">
-          <span class="text-ideeza-dark text-xl inline-block font-semibold mr-5">Project: Metal Making</span>
+          <span class="text-ideeza-dark text-xl inline-block font-semibold mr-5">Project: {{projectkind.projectName}}</span>
           <div class="flex items-center  text-gray-500 hover:text-gray-800 cursor-pointer">
             <span class="text-sm inline-block mr-1">Edit</span>
             <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']"/>
@@ -20,10 +21,10 @@
 
       <div class="flex items-center justify-between my-5">
         <div>
-          Status: <span class="text-ideeza uppercase">active</span>
+          Status: <span class="text-ideeza uppercase">{{projectkind.task_status}}</span>
         </div>
         <div class="flex items-center">
-          <div class="text-xl">Project Duration: <span class="text-ideeza">29 Sep - 16 Oct</span></div>
+          <div class="text-xl">Project Duration: <span class="text-ideeza">{{projectkind.due_date}}</span></div>
           <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']"/>
         </div>
       </div>
@@ -34,7 +35,7 @@
             Project Description
           </div>
           <p class="mt-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur fermentum consectetur. Pellentesque et velit mattis, sagittis magna ac, vulputate neque. Suspendisse dolor sem, blandit ac dolor vitae, fermentum rhoncus augue. Fusce scelerisque posuere neque, in accumsan mi sagittis vitae. Phasellus purus purus, pulvinar vel diam sit amet, auctor feugiat purus. Donec nulla est, convallis nec tempor ac, molestie in massa. Morbi molestie varius ex, vel molestie dui. Phasellus accumsan velit eget efficitur condimentum. Fusce vehicula mi eu metus gravida, eget congue quam fermentum. Fusce consectetur, velit ultrices commodo lobortis, risus justo consectetur velit, a laoreet felis nisi venenatis ex. Quisque blandit magna eget velit vestibulum, porta vehicula velit convallis. Cras pulvinar nisl ut erat porta, et pellentesque metus facilisis. Sed porttitor malesuada efficitur. Curabitur malesuada elementum rhoncus. Etiam et rutrum nisi. Nam in ultricies lorem.
+           {{projectkind.projectDescription}}
           </p>
         </div>
 
@@ -68,75 +69,20 @@
           <th class="text-left">Notification</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody v-for="(Service, index) in articleArray" v-if="projectkind.projectName == Service.projectName">
         <tr class="bg-ideeza-100">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            Iron Making
+          <td class="cursor-pointer" @click.self="editTask=true, changeid(Service.id)" >
+            {{Service.TaskName}}
           </td>
           <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td>05.05.2019</td>
-          <td class="status status--completed">COMPLETED</td>
-          <td class="notifications">
-            2 new notifications
-          </td>
-
-
-        </tr>
-        <tr class="cursor-pointer" @click.self="editTask=true">
-          <td >
-            Iron Making
-          </td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td>05.05.2019</td>
-          <td class="status status--over">over due</td>
-          <td class="notifications">
-            2 new notifications
-          </td>
-
-
-        </tr>
-        <tr class="bg-ideeza-100">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            Iron Making
-          </td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td>05.05.2019</td>
-          <td class="status status--progress">in progress</td>
-          <td class="notifications">
-            2 new notifications
-          </td>
-
-
-        </tr>
-        <tr class="">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            Iron Making
-          </td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td>05.05.2019</td>
-          <td class="status status--completed">COMPLETED</td>
-          <td class="notifications">
-            2 new notifications
-          </td>
-
-
-        </tr>
+                <span v-for="image in Service.assigned_to_profile_image">
+                  <img class="avatar" :src="image[0]" />
+                </span>
+              </td>
+              <td>{{Service.due_date}}</td>
+              <td class="status status--completed">{{Service.task_status}}</td>
+              <td class="notifications">{{Service.notification}}</td>
+            </tr>
 
         </tbody>
       </table>
@@ -174,6 +120,8 @@
   import EditTask from "~/components/technician/management/edit-task.vue"
   import TaskTimeLine from "~/components/technician/management/task-timeline.vue"
 
+import Services from "~/data/TechnicianProjectApi.json";
+
     export default {
         name: "detail",
       components: {
@@ -189,13 +137,29 @@
           return this.$store.state.usermenu.openLeftMenu;
         }
       },
+      methods:{
+        changeid(id){
+          // alert(id)
+          this.$store.commit("TechnicianProjectStore/projectTaskkeychange1", id);
+          // alert(this.$store.state.TechnicianProjectStore.projectTaskkey)
+        }
+      },
       data: function () {
         return {
+      Servicestask: Services.firsttask,
+      Servicesproject: Services.firstproject,
+      articleArray: [],
           addNewProject: false,
           addNewTask: false,
           editTask: false
         }
-      }
+      },
+      created: function() {
+    
+    this.Servicestask.map(item => {
+      this.articleArray.push(item);
+    });
+  },
     }
 </script>
 
