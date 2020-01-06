@@ -103,7 +103,7 @@ export default {
     return {
       feedType: null,
       tab: "local",
-      connects: connects.connects
+      connects: connects
     };
   },
   computed: {

@@ -135,9 +135,9 @@ import feeds from "~/json/feeds.json";
 export default {
   name: "feeds",
   data: function() {
-    console.log("feeds: ", feeds.feeds);
+    console.log("feeds: ", feeds);
     return {
-      feeds: feeds.feeds
+      feeds: feeds
     };
   },
   methods: {

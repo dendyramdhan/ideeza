@@ -156,7 +156,7 @@
               v-for="(tabledata, index) in articleArray"
               v-if="length > index "
             >{{(index)*5+1}}-{{(index)*5+5}}</option>
-            <option>all</option>
+            <option>All</option>
           </select>
         </div>
       </div>

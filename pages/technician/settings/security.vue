@@ -92,6 +92,9 @@ export default {
   name: "security",
   data: function() {
     return {
+      new_password: null,
+      old_password: null,
+      password_confirm: null,
       longview: true,
       Projects: Projects.Login_history,
       security: Projects.Setting_general

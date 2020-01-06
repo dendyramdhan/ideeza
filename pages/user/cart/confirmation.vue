@@ -85,13 +85,13 @@
 </template>
 
 <script>
-import cart from '~/json/cart.json';
+import carts from '~/json/cart.json';
 export default {
   name: "payment",
 
   data: function() {
     return {
-      carts: cart.carts
+      carts: carts
     }
   },
   mounted() {

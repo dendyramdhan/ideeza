@@ -3,7 +3,7 @@
       <div class="invite-field-container mr-5">
         <input placeholder="Enter email" />
       </div>
-      <button class="btn btn-normal btn--ideeza px-4 py-3">Invite</button>
+      <button class="btn btn-normal btn--ideeza px-4 py-3" @click="onInvite">Invite</button>
     </div>
 </template>
 
@@ -17,6 +17,10 @@
       methods: {
         onClickPop() {
 
+        },
+        onInvite() {
+          alert();
+          window.location.reload();
         }
       }
     }

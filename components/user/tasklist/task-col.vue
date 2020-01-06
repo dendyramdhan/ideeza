@@ -26,7 +26,7 @@
           <div class="flex items-center">
             <img
               class="h-10 w-10 mr-2 rounded-full"
-              :src="invite.portrait_url"
+              :src="invite"
               v-for="invite in task.invited"
             />
             <div
@@ -65,7 +65,7 @@
 
 <script>
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
-import tasklist from "~/json/tasklist.json";
+import tasklists from "~/json/tasklist.json";
 export default {
   name: "task-col",
   components: {
@@ -74,7 +74,7 @@ export default {
   data: function() {
     return {
       showAddTask: false,
-      tasks: tasklist.tasklist,
+      tasks: tasklists,
       d: new Date(),
       weeks: ["Sunday", "Monday", "Tuesday", "Thirsday", "Friday", "Saturday"],
       months: [

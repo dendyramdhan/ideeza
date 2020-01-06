@@ -194,8 +194,8 @@ export default {
   data: function() {
     return {
       showMyIdeeza: false,
-      topprojects: topprojects.topprojects,
-      innovations: innovation.innovation,
+      topprojects: topprojects,
+      innovations: innovation,
       activities: activity.activity
     };
   },
