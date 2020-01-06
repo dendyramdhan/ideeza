@@ -70,7 +70,7 @@
           <h1 class="my-3 font-semibold">Results (58)</h1>
 
           <div class="services-container mx-auto mt-10">
-            <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray" :key="Service">
+            <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray" >
               <div class="lg:flex lg:mr-20">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
                   <img class="avatar rounded-full mx-auto" :src="Service.profileImage" />
