@@ -459,50 +459,52 @@ export default {
 </script>
 
 <style scoped>
-.task-col {
-  @apply mt-5;
-  width: 100%;
-  max-width: 370px;
-  min-width: 360px;
-}
-.task-wrapper {
-  max-width: 1200px;
-}
-.task-time {
-  @apply text-gray-500;
-}
-.task-name {
-  @apply text-gray-800 text-xl font-semibold mt-5;
-}
-.attachment-no {
-  @apply text-gray-500 text-sm;
-}
-.add-member {
-  @apply h-10 w-10 mr-2 bg-gray-300 rounded-full relative cursor-pointer text-gray-600;
-}
-.add-member:hover {
-  @apply text-gray-800;
-}
-.add-member.active {
-  @apply bg-ideeza-dark text-white;
-}
-.add-member.active:hover {
-  @apply text-white;
-}
-.important {
-  @apply bg-ideeza-dark;
-}
-.important .task-time,
-.important .task-name,
-.important .attachment-no {
-  @apply text-white;
-}
-.important .add-member {
-  @apply bg-white;
-}
-/*Right Bar*/
-.task-right-bar {
-  width: 300px;
-  min-width: 300px;
-}
+
+  .task-col{
+    @apply mt-5;
+    width: 100%;
+    max-width: 370px;
+    min-width: 360px;
+  }
+  .task-wrapper{
+    max-width: 1200px;
+  }
+  .task-time{
+    @apply text-gray-500;
+  }
+  .task-name{
+    @apply text-gray-800 text-xl font-semibold mt-5;
+  }
+  .attachment-no{
+    @apply text-gray-500 text-sm;
+  }
+  .add-member{
+    @apply h-10 w-10 mr-2 bg-gray-300 rounded-full relative cursor-pointer text-gray-600;
+  }
+  .add-member:hover{
+    @apply text-gray-800;
+  }
+  .add-member.active{
+    @apply bg-ideeza-dark text-white;
+  }
+  .add-member.active:hover{
+    @apply text-white;
+  }
+  .important{
+    @apply bg-ideeza-dark;
+  }
+  .important .task-time,
+  .important .task-name,
+  .important .attachment-no{
+    @apply text-white;
+  }
+  .important .add-member{
+    @apply bg-white;
+  }
+  /*Right Bar*/
+  .task-right-bar{
+    width: 300px;
+    min-width: 300px;
+  }
+
 </style>

@@ -7,81 +7,66 @@
     <div class="flex-grow mb-20">
       <div class="main-contents">
         <!--Status Cards-->
-        <div class="lg:flex w-full cards-wrapper">
+        <div class="lg:flex w-full cards-wrapper items-center">
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Opened Tickets</h1>
-            <div class="mx-auto lg:mx-none status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
-              </div>
-              <div class="flex justify-between items-center content-center">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">56</div>
-                <img
-                  src="~/static/images/opened-tickets.png"
-                  class="object-center object-right"
-                  alt
-                />
+            <h1 class="text-3xl font-semibold text-gar-800 pl-3 lg:pl-0">Good morning, Chan!</h1>
+          </div>
+          <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">Open Tickets</div>
+              <div class="flex justify-between items-center content-center ">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/opened-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
 
+
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Unopened Tickets</h1>
-            <div class="status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
-              </div>
-              <div class="flex justify-between items-center content-center">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">26</div>
-                <img
-                  src="~/static/images/un-opened-tickets.png"
-                  class="object-center object-right"
-                  alt
-                />
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">Unopened Tickets</div>
+              <div class="flex justify-between items-center content-center ">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/un-opened-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
 
           <div class="card-container mt-5 lg:mr-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">On Hold Tickets</h1>
-            <div class="status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
-              </div>
-              <div class="flex justify-between items-center content-center">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">32</div>
-                <img
-                  src="~/static/images/on-hold-tickets.png"
-                  class="object-center object-right"
-                  alt
-                />
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">On Hold Tickets</div>
+              <div class="flex justify-between items-center content-center ">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/on-hold-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
 
           <div class="card-container mt-5 lg:mt-0">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Finished Tickets</h1>
-            <div class="status-card bg-white shadow-md mt-5 p-3">
-              <div class="text-right">
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
-              </div>
-              <div class="flex justify-between items-center content-center">
-                <div class="text-gray-800 text-semibold text-xl lg:text-6xl">256</div>
-                <img
-                  src="~/static/images/finished-tickets.png"
-                  class="object-center object-right"
-                  alt
-                />
+            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+              <div class="text-base">Finished Tickets</div>
+              <div class="flex justify-between items-center content-center ">
+                <div class="text-gray-800 text-bold text-xl lg:text-3xl">
+                  <div>56</div>
+                </div>
+                <img src="~/static/images/finished-tickets.png" class="w-12 object-center object-right mr-5" alt="">
               </div>
             </div>
           </div>
+
         </div>
 
         <div class="xl:flex mt-10 justify-between">
-          <div class="lg:mr-5 w-full">
-            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Project Management</h1>
+          <div class="lg:w-2/3 lg:mr-5 w-full">
+            <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Task Management</h1>
             <!--List-->
-            <div class="success-stories shadow-md mt-5 relative p-6 bg-white">
+            <div class="shadow-md mt-5 relative p-6 bg-white">
               <div class="flex justify-between">
                 <span class="text-gray-500 text-sm">2 tasks completed out of {{projects.length}}</span>
                 <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
@@ -107,8 +92,26 @@
               </div>
             </div>
           </div>
-
-          <div class="messages mt-5 lg:mt-0">
+          <div class="mt-5 lg:mt-0 md:w-1/3">
+            <vc-calendar class="mx-auto bg-white box-shadow rounded mb-3" color="pink" is-expanded :theme="theme" />
+            <div class="bg-white shadow rounded">
+            <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
+            <hr class="my-1">
+            <ul class="shadow-lg">
+                 <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="task in tasks">
+                    <div>
+                        <div class="text text-sm font-bold">{{task.title}}</div>
+                        <div class="text text-xs">{{task.duration}}</div>
+                    </div>
+                    <div class="event-icons text-right">
+                        <font-awesome-icon class="text text-xs text-gray-500 mr-2 cursor-pointer" :icon="['fa', 'pen']"  @click="onEditTask" />
+                        <font-awesome-icon class="text text-sm text-gray-500 cursor-pointer" :icon="['fas', 'times']" @click="onDeleteTask" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+          </div>
+          <!-- <div class="messages mt-5 lg:mt-0 lg:w-1/3">
             <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Task List</h1>
             <div class="bg-white shadow-md mt-5">
               <div class="flex justify-between p-6">
@@ -120,8 +123,6 @@
                 </div>
                 <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
               </div>
-
-              <!--List-->
               <div
                 class="p-6 border-t border-solid border-gray-300 flex justify-between items-center text-gray-600 hover:bg-ideeza-dark hover:text-white"
                 v-for="task in tasks"
@@ -146,7 +147,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
 
         <div class="mt-10 orders">
@@ -156,7 +157,7 @@
 
           <div>
             <div class="hidden xl:flex justify-between">
-              <div class="flex">
+              <div class="flex flex-wrap">
                 <select class="field field--border-light mr-1 h-12">
                   <option>All payout methods</option>
                 </select>
@@ -198,8 +199,8 @@
               />
             </div>
           </div>
-
-          <table class="mt-10 shadow-md">
+          <div class="shadow-md">
+          <table class="mt-10">
             <thead>
               <tr class="text-gray-800 h16">
                 <th class="text-left">Username</th>
@@ -215,7 +216,7 @@
             </thead>
             <tbody>
               <tr
-                class
+                :class="index%2!=0?'bg-white':'bg-gray-100'"
                 v-for="(tabledata, index) in articleArray"
                 v-if="start < index && index < end "
               >
@@ -296,10 +297,12 @@
               </div>
             </div>
           </div>
+          </div>
+        </div>
+          </div>
+
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -341,7 +344,14 @@ export default {
       ],
       projects: projects.firstproject,
       tasks: tasklists,
-
+      theme: {
+          container: {
+            light: 'ideeza-date-picker',
+          },
+          arrows: {
+            light: 'ideeza-arrow',
+          },
+        },
       searchTerm: '',
       articles: articles,
       articleArray: [],
@@ -479,6 +489,9 @@ export default {
 </script>
 
 <style scoped>
+.due-date{
+    transform: translateX(-50%);
+}
 .cards-wrapper {
   max-width: 1530px;
 }
@@ -493,10 +506,6 @@ export default {
 }
 .overlay {
   background: rgba(0, 0, 0, 0.2);
-}
-.messages {
-  width: 100%;
-  max-width: 630px;
 }
 .orders {
   width: 100%;
@@ -551,12 +560,33 @@ export default {
   }
 }
 
-@screen xl {
-  .messages {
-    width: 100%;
-    max-width: 630px;
+
+  @screen lg{
+    .card-container{
+      @apply w-1/4;
+    }
+    table{
+      @apply mb-5 w-full table-fixed border-collapse text-gray-600;
+    }
+    thead tr{
+      @apply bg-white px-6 pl-16;
+    }
+    thead th{
+      @apply p-6;
+    }
+    thead th:first-child{
+      @apply pl-16;
+    }
+    tbody td{
+      @apply p-6;
+    }
+    tbody tr:even{
+      @apply bg-white;
+    }
+    tbody td:first-child{
+      @apply pl-16;
+    }
   }
-}
 
 @media only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 1024px) {

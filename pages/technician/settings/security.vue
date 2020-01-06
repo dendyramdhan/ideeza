@@ -151,6 +151,9 @@ export default {
   tbody tr:last-child td {
     @apply border-b border-solid border-gray-400 py-3 my-3;
   }
+  .field-label{
+    @apply w-56 text-gray-600 text-xl font-semibold;
+}
 }
 
 @media only screen and (max-width: 760px),

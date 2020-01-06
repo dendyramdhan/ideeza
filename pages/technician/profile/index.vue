@@ -207,7 +207,7 @@
   }
 
   .product-history-tile:last-child {
-    @apply border-b-0
+    @apply border-b-0;
   }
 
   .feed-back-container {

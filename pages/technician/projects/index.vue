@@ -462,23 +462,11 @@ export default {
   /*
       Label the data
       */
-  td:nth-of-type(1):before {
-    content: "Products";
+    td:nth-of-type(1):before { content: "Projects"; }
+    td:nth-of-type(2):before { content: "Assigned To"; }
+    td:nth-of-type(3):before { content: "Due Date"; }
+    td:nth-of-type(4):before { content: "Task Status"; }
+    td:nth-of-type(5):before { content: "Notification"; }
+    td:nth-of-type(6):before { content: "Action"; }
   }
-  td:nth-of-type(2):before {
-    content: "Color";
-  }
-  td:nth-of-type(3):before {
-    content: "Price";
-  }
-  td:nth-of-type(4):before {
-    content: "Quantity";
-  }
-  td:nth-of-type(5):before {
-    content: "Cost";
-  }
-  td:nth-of-type(6):before {
-    content: "Action";
-  }
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
-      <div class="main-contents">
-        <simple-table :fields="fields" :searchbox="true" title="Manage articles" @add="$router.push('/user/blog/updated/add')">
+    <div class="mt-10">
+        <simple-table :fields="fields" :searchbox="false" :header="false" title="Manage articles">
           <template v-slot:header>
             <button class="font-bold text-sm mr-3 text-ideeza-dark">Delete</button>
             <button class="font-bold text-sm mr-3 text-ideeza-dark">Print</button>
@@ -58,84 +58,45 @@
             </div>
           </template>
         </simple-table>
-    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" />
-    
-  </div>
+    </div>
 </template>
 <script>
-  import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
-  import SimpleTable from '~/components/reusables/Table.vue'
-  import Pagination from 'vue-pagination-2'
-  export default {
-    layout: 'user',
+import SimpleTable from '~/components/reusables/Table.vue'
+import Pagination from 'vue-pagination-2'
+export default {
     components: {
-      MyIdeeza,
-      SimpleTable,
-      Pagination
+        SimpleTable,
+        Pagination
     },
-    data: function () {
-      return {
-        showMyIdeeza: false,
-        selected: false,
-        page: 1,
-        blogs: [{
-            id: 1,
-            name: 'How ideeza can make the world a better place',
-            date: '10 jul, 2019',
-          },
-          {
-            id: 2,
-            name: 'How ideeza can make the world a better place',
-            date: '10 jul, 2019',
-          },
-          {
-            id: 3,
-            name: 'How ideeza can make the world a better place',
-            date: '10 jul, 2019',
-          },
-          {
-            id: 4,
-            name: 'How ideeza can make the world a better place',
-            date: '10 jul, 2019',
-          },
-        ],
-        chartOptions: {
-          chart: {
-            animations: {
-              speed: 200
-            },
-            zoom: {
-              enabled: false,
-            },
-            foreColor: '#431184'
-          },
-          dataLabels: {
-            enabled: false
-          },
-          xaxis: {
-            categories: ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thur']
-          },
-          fill: {
-            colors: ['#ff00c7']
-          }
-        },
-        series: [{
-          name: 'series-1',
-          data: [30, 40, 35, 50, 49, 60, 70, 91]
-        }],
-        fields: ['id', 'article_name', 'date', 'actions'],
-        options: {
-          headings: {
-            id: '',
-            detail: 'Products',
-            quantity: 'Quantity',
-            actions: ''
-          },
-          sortable: [],
-          filterable: false,
-          childRowTogglerFirst: false
+    data() {
+        return {
+            page: 1,
+            blogs: [{
+                    id: 1,
+                    name: 'How ideeza can make the world a better place',
+                    date: '10 jul, 2019',
+                    status: 1 // 1 for approved, 0 pending
+                },
+                {
+                    id: 2,
+                    name: 'How ideeza can make the world a better place',
+                    date: '10 jul, 2019',
+                    status: 1
+                },
+                {
+                    id: 3,
+                    name: 'How ideeza can make the world a better place',
+                    date: '10 jul, 2019',
+                    status: 1
+                },
+                {
+                    id: 4,
+                    name: 'How ideeza can make the world a better place',
+                    date: '10 jul, 2019',
+                    status: 1
+                },
+            ],
         }
-      }
     },
     methods: {
       selectall() {
@@ -151,17 +112,5 @@
         this.$forceUpdate()
       }
     },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    },
-  }
-
+}
 </script>
-<style>
-  .user-chart {
-    height: calc(32rem + 0.75rem);
-    width: 100%;
-  }
-</style>

@@ -196,21 +196,25 @@ export default {
 </script>
 
 <style scoped>
-.add-new-container {
-  @apply w-full h-full;
-  max-width: 1300px;
-  max-height: 900px;
-}
-.members-container {
-  height: 200px;
-  overflow-y: auto;
-}
-.member-name {
-  @apply text-gray-600 ml-2;
-  font-size: 10px;
-  font-weight: lighter;
-}
-.avatar {
-  @apply w-4 rounded-full inline;
-}
+  .add-new-container{
+    @apply w-full h-full;
+    max-width: 1300px;
+    max-height: 900px;
+  }
+  .members-container{
+    height: 200px;
+    overflow-y: auto;
+  }
+  .member-name{
+    @apply text-gray-600 ml-2;
+    font-size: 10px;
+    font-weight: lighter;
+  }
+  .avatar{
+    @apply w-4 rounded-full inline;
+  }
+  .popup-body {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
 </style>

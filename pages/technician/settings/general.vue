@@ -218,22 +218,22 @@ export default {
 </script>
 
 <style scoped>
-.settings-general {
-  max-width: 700px;
-}
-.form-field {
-  @apply py-4 border-b border-solid border-gray-300;
-}
-.form-field:last-child {
-  @apply border-0;
-}
-.field-label {
-  @apply w-56 text-gray-600 text-xl font-semibold;
-}
-
-@screen md {
-  .form-field {
-    @apply flex;
+  .settings-general{
+    max-width: 700px;
   }
-}
+  .form-field{
+    @apply py-4 border-b border-solid border-gray-300;
+  }
+  .form-field:last-child{
+    @apply border-0;
+  }
+  .field-label{
+    @apply w-56 text-gray-600 text-xl font-semibold;
+  }
+
+  @screen md{
+    .form-field{
+      @apply flex;
+    }
+  }
 </style>
