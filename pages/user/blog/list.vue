@@ -123,7 +123,7 @@
           </tr>
         </tbody>
       </table>
-      debug: sort={{currentSort}}, dir={{currentSortDir}}
+      <!-- debug: sort={{currentSort}}, dir={{currentSortDir}} -->
       <!--Table Stats-->
       <div class="mt-5 relative">
         <!--Paging-->
@@ -156,12 +156,12 @@
               v-for="(tabledata, index) in articleArray"
               v-if="length > index "
             >{{(index)*5+1}}-{{(index)*5+5}}</option>
-            <option>all</option>
+            <option>All</option>
           </select>
         </div>
       </div>
     </div>
-    {{Math.ceil(counter)}}
+    <!-- {{Math.ceil(counter)}} -->
   </div>
 </template>
 

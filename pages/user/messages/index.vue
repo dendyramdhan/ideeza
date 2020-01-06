@@ -121,16 +121,35 @@
             </div>
 
 
+            <!--Message To-->
+            <div class="py-4">
+              <span class="block text-gray-500 text-sm text-center">10/01/2018 8:41PM</span>
+              <div class="flex items-end flex-col mt-5">
+
+                <div class="messages message--to">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <div class="messages message--to" style="width:90%" v-if="sendmessage">
+                 {{sendmessage}}
+
+                </div>
+                 
+              </div>
+            </div>
+
+
+
+
           </div>
 
           <!--Message Input-->
           <div class="p-5 mt-5 border-t border-solid border-gray-300">
             <div class="flex">
               <div class="flex-grow">
-                <input class="h-full w-full border-0 text-gray-600 outline-none pr-2" placeholder="Type Message">
+                <input class="h-full w-full border-0 text-gray-600 outline-none pr-2" placeholder="Type Message" v-model="sendmessage" @change="sendmymessage">
               </div>
               <div class="flex-shrink ">
-                <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'cloud-upload-alt']"/>
+                <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'cloud-upload-alt']"  />
                 <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'camera']"/>
                 <font-awesome-icon class="mr-1 h-4 text-gray-400 hover:text-gray-600 cursor-pointer " :icon="['fas', 'microphone']"/>
               </div>
@@ -279,7 +298,14 @@
       LeftMenu
     },
     data: function () {
-      return {}
+      return {
+        sendmessage:""
+      }
+    },
+    methods:{
+      sendmymessage(e){
+        this.sendmessage=e.target.value;
+      }
     },
     computed: {
       leftMenu() {
@@ -288,8 +314,7 @@
     },
     mounted() {
 
-    },
-    methods: {}
+    }
   }
 </script>
 

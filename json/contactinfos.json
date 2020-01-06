@@ -17,17 +17,21 @@
             },
             "projects": [
                 {
+                    "id": "1",
                     "pimage_url": "/_nuxt/static/images/dron-8.png"
                 },
                 {
+                    "id": "2",
                     "pimage_url": "/_nuxt/static/images/dron-8.png"
                 },
                 {
+                    "id": "3",
                     "pimage_url": "/_nuxt/static/images/dron-8.png"
                 }
             ],
             "shared_project": [
                 {
+                    "id": "4",
                     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
                     "potrait_url": "https://randomuser.me/api/portraits/women/14.jpg",
                     "image_url": "/_nuxt/static/images/car-big.png",
@@ -38,6 +42,7 @@
                     ]
                 }, 
                 {
+                    "id": "5",
                     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
                     "potrait_url": "https://randomuser.me/api/portraits/men/14.jpg",
                     "image_url": "/_nuxt/static/images/headphone-big.png",

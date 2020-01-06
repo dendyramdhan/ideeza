@@ -236,7 +236,8 @@
       <!--Edit task-->
       <edit-task @onClose="editTask=false" v-if="editTask" />
 
-      <detail-task @onClose="detailTask=false" @onEdit="detailTask=false;editTask=true" v-if="detailTask"/>
+      <detail-task @onClose="detailTask=false" @onEdit="detailTask=false;editTask=true" v-if="detailTask" @complete="detailTask=false;completeTask=true"/>
+      <complete-task @onClose="completeTask=false" v-if="completeTask"/>
     </div>
 </template>
 
@@ -246,6 +247,7 @@
   import EditTask from "~/components/technician/management/edit-task.vue"
   import DetailTask from "~/components/technician/management/detail-task.vue"
   import TaskTimeLine from "~/components/technician/management/task-timeline.vue"
+  import CompleteTask from "~/components/technician/management/complete-task.vue"
     export default {
         name: "detail",
       components: {
@@ -253,7 +255,8 @@
         'new-task': AddNewTask,
         'edit-task': EditTask,
         'task-timeline': TaskTimeLine,
-        DetailTask
+        DetailTask,
+        CompleteTask
       },
       methods: {
         expand(id) {
@@ -272,6 +275,7 @@
           addNewTask: false,
           editTask: false,
           detailTask: false,
+          completeTask: false,
           expanded: {},
           tasks: [
             {

@@ -46,6 +46,7 @@
       <!--Calendar-->
       <vc-calendar
         @dayclick="addTasks"
+        v-model="date"
         class="mx-auto mt-5"
         color="pink"
         is-expanded
@@ -86,7 +87,7 @@ import TaskCol from "~/components/user/tasklist/task-col";
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
-import latestactivity from "~/json/latestactivity.json";
+import latestactivities from "~/json/latestactivity.json";
 export default {
   layout: "user",
   name: "task-index",
@@ -99,6 +100,7 @@ export default {
   },
   data: function() {
     return {
+      date: new Date(),
       tab: "daily",
       showAddTask: false,
       addNewMember: false,
@@ -114,7 +116,7 @@ export default {
       tasksWeekly: [{ id: 1 }],
       id: 0,
 
-      latestactivities: latestactivity.latestactivities
+      latestactivities: latestactivities
     };
   },
   computed: {
@@ -132,7 +134,7 @@ export default {
     },
     addTasks() {
       if (this.tab === "daily") {
-        alert("daily");
+        alert(this.date);
       } else if (this.tab === "weekly") {
         this.tasksWeekly.push({
           id: this.id

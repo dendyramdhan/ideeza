@@ -33,7 +33,10 @@
           <div class="lg:w-1/2 pl-10">
             <div class="flex justify-between items-center pb-5 border-b border-light-gray">
               <h2 class="font-semibold block text-3xl">Last Activity</h2>
-              <button class="btn pill-button px-10 text-lg">View last activity</button>
+              <button
+                class="btn pill-button px-10 text-lg"
+                @click="viewLastActivity"
+              >View last activity</button>
             </div>
 
             <div class="flex justify-between">
@@ -101,14 +104,16 @@
               <smooth-scrollbar :options="{alwaysShowTracks: true}">
                 <div class="flex flex-wrap">
                   <div class="blog-container mr-2" v-for="innovation in innovations">
-                    <div class="blog-image-container mb-8">
-                      <img :src="innovation.image_url" class="object-center object-contain" alt />
-                    </div>
+                    <nuxt-link to="">
+                      <div class="blog-image-container mb-8">
+                        <img :src="innovation.image_url" class="object-center object-contain" alt />
+                      </div>
+                    </nuxt-link>
                     <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
                     <p>{{innovation.description}}</p>
                     <div class="flex justify-between items-center mt-5">
                       <small>{{innovation.date}}</small>
-                      <button class="btn btn--ideeza px-4 py-2">Read more</button>
+                      <button class="btn btn--ideeza px-4 py-2" @click="readMore">Read more</button>
                     </div>
                   </div>
                   <!-- <li v-for="breed in breeds" :key="breed">
@@ -167,7 +172,6 @@ import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
 
 export default {
-  
   // asyncData({ params }) {
   //   return axios.get(`https://dog.ceo/api/breeds/list`).then(res => {
   //     console.log("Here: ", res.data.message);
@@ -190,8 +194,8 @@ export default {
   data: function() {
     return {
       showMyIdeeza: false,
-      topprojects: topprojects.topprojects,
-      innovations: innovation.innovation,
+      topprojects: topprojects,
+      innovations: innovation,
       activities: activity.activity
     };
   },
@@ -208,7 +212,13 @@ export default {
     showMyProjects() {
       alert("Hello");
     },
-    showMyProfile() {}
+    showMyProfile() {},
+    readMore() {
+      alert("Read More");
+    },
+    viewLastActivity() {
+      window.location.reload();
+    }
   }
 };
 </script>

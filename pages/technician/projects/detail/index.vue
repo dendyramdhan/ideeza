@@ -1,15 +1,16 @@
 <template>
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+     
     <!--  Left Side Bar  -->
     <LeftMenu/>
 
     <!-- Main Contents -->
-    <div class="flex-grow">
+    <div class="flex-grow" v-for="projectkind in Servicesproject" v-if="projectkind.id == $route.query.id ">
       <div class="main-contents">
         <div class="mt-10">
       <div class="flex justify-between items-center border-b-4 border-solid border-ideeza pb-5">
-        <div class="flex">
-          <span class="text-ideeza-dark text-xl inline-block font-semibold mr-5">Project: Metal Making</span>
+        <div class="md:flex">
+          <span class="text-ideeza-dark text-xl inline-block font-semibold mr-5">Project: {{projectkind.projectName}}</span>
           <div class="flex items-center  text-gray-500 hover:text-gray-800 cursor-pointer">
             <span class="text-sm inline-block mr-1">Edit</span>
             <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']"/>
@@ -24,10 +25,10 @@
 
       <div class="flex items-center justify-between my-5">
         <div>
-          Status: <span class="text-ideeza uppercase">active</span>
+          Status: <span class="text-ideeza uppercase">{{projectkind.task_status}}</span>
         </div>
         <div class="flex items-center">
-          <div class="text-xl">Project Duration: <span class="text-ideeza">29 Sep - 16 Oct</span></div>
+          <div class="text-xl">Project Duration: <span class="text-ideeza">{{projectkind.due_date}}</span></div>
           <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']"/>
         </div>
       </div>
@@ -42,7 +43,7 @@
             Project Description
           </div>
           <p class="p-5 bg-white text-black">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur fermentum consectetur. Pellentesque et velit mattis, sagittis magna ac, vulputate neque. Suspendisse dolor sem, blandit ac dolor vitae, fermentum rhoncus augue. Fusce scelerisque posuere neque, in accumsan mi sagittis vitae. Phasellus purus purus, pulvinar vel diam sit amet, auctor feugiat purus. Donec nulla est, convallis nec tempor ac, molestie in massa. Morbi molestie varius ex, vel molestie dui. Phasellus accumsan velit eget efficitur condimentum. Fusce vehicula mi eu metus gravida, eget congue quam fermentum. Fusce consectetur, velit ultrices commodo lobortis, risus justo consectetur velit, a laoreet felis nisi venenatis ex. Quisque blandit magna eget velit vestibulum, porta vehicula velit convallis. Cras pulvinar nisl ut erat porta, et pellentesque metus facilisis. Sed porttitor malesuada efficitur. Curabitur malesuada elementum rhoncus. Etiam et rutrum nisi. Nam in ultricies lorem.
+           {{projectkind.projectDescription}}
           </p>
         </div>
 
@@ -78,148 +79,72 @@
         </tr>
         </thead>
         <tbody>
-          <template v-for="task in tasks">
+          <template v-for="(Service) in articleArray" v-if="projectkind.projectName == Service.projectName">
         <tr class="bg-ideeza-100">
-          <td class="cursor-pointer" @click.self="expand(task.id)" >
-            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" v-if="task.id in expanded&&expanded[task.id]==true"/> 
+          <td class="cursor-pointer" @click.self="expand(Service.id)" >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" v-if="Service.id in expanded&&expanded[Service.id]==true"/> 
             <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']" v-else/>
-            {{task.name}}
+            {{Service.TaskName}}
           </td>
-          <td>{{task.domain}}</td>
+          <td>{{Service.domain}}</td>
           <td>
-            <img v-for="image in task.assigned_to" :src="image.url" class="avatar">
+            <img v-for="image in Service.assigned_to_profile_image" :src="image[0]" class="avatar">
             <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
             <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
             <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg"> -->
           </td>
           <td class="text-center">
             <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">{{task.timeline.date}}</span>
-              <div class="bg-ideeza rounded-full h-8" :style="{ width: task.timeline.progress+'%'}">
+              <span class="absolute due-date text-black">{{Service.due_date}}</span>
+              <div class="bg-ideeza rounded-full h-8" :style="{ width:'30%'}">
               </div>
             </div>
           </td>
-          <td class="status status--completed" v-if="task.status == 1">
+          <td class="status status--completed" v-if="Service.task_status=='completed'">
             completed
           </td>
-          <td v-if="task.status == 2" class="status status--over">over due</td>
-          <td v-if="task.status == 3" class="status status--progress">in progress</td>
+          <td v-if="Service.task_status == 'Over Due'" class="status status--over">Over Due</td>
+          <td v-if="Service.task_status== 'Active'" class="status status--progress">Active</td>
           <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
           <td class="notifications">
-            <font-awesome-icon v-if="task.status == 1" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
-            <font-awesome-icon v-else-if="task.status == 2" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
-            <font-awesome-icon v-else-if="task.status == 3" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
+            <font-awesome-icon v-if="Service.task_status=='completed'" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
+            <font-awesome-icon v-else-if="Service.task_status == 'Over Due'" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
+            <font-awesome-icon v-else-if="Service.task_status == 'Active'" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
           </td>
         </tr>
-        <template v-if="task.id in expanded&&expanded[task.id]==true">
-          <tr class="bg-pink-200" v-for="(subtask) in task.subtasks">
+        <template v-if="Service.id in expanded&&expanded[Service.id]==true">
+          <tr class="bg-pink-200" v-for="(subtask) in Service.subtasks">
             <td class="cursor-pointer md:text-right" @click.self="detailTask=true">
-            {{subtask.name}}
+            {{subtask.TaskName}}
             </td>
           <td>{{subtask.domain}}</td>
           <td>
-            <img v-for="image in subtask.assigned_to" :src="image.url" class="avatar">
+            <img v-for="image in subtask.assigned_to_profile_image" :src="image[0]" class="avatar">
             <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
             <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
             <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg"> -->
           </td>
           <td class="text-center">
             <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">{{subtask.timeline.date}}</span>
-              <div class="bg-ideeza rounded-full h-8" :style="{ width: subtask.timeline.progress+'%'}">
+              <span class="absolute due-date text-black">{{subtask.due_date}}</span>
+              <div class="bg-ideeza rounded-full h-8" :style="{ width:'30%'}">
               </div>
             </div>
           </td>
-          <td class="status status--completed" v-if="subtask.status == 1">
+          <td class="status status--completed" v-if="subtask.task_status=='completed'">
             completed
           </td>
-          <td v-if="subtask.status == 2" class="status status--over">over due</td>
-          <td v-if="subtask.status == 3" class="status status--progress">in progress</td>
+          <td v-if="Service.task_status == 'Over Due'" class="status status--over">Over Due</td>
+          <td v-if="Service.task_status == 'Active'" class="status status--progress">Active</td>
           <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
           <td class="notifications">
-            <font-awesome-icon v-if="subtask.status == 1" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
-            <font-awesome-icon v-else-if="subtask.status == 2" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
-            <font-awesome-icon v-else-if="subtask.status == 3" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
+            <font-awesome-icon v-if="subtask.task_status=='completed'" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
+            <font-awesome-icon v-else-if="Service.task_status == 'Over Due'" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
+            <font-awesome-icon v-else-if="Service.task_status == 'Active'" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
           </td>
           </tr>
         </template>
           </template>
-        <!-- <tr class="cursor-pointer" @click.self="editTask=true">
-          <td >
-            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
-            Iron Making
-          </td>
-          <td>Cover</td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td class="text-center">
-            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">16.11.2019</span>
-              <div class="bg-ideeza rounded-full h-8" style="width:80%;">
-              </div>
-            </div>
-          </td>
-          <td class="status status--over">over due</td>
-          <td class="notifications">
-            <font-awesome-icon class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/>
-          </td>
-
-
-        </tr>
-        <tr class="bg-ideeza-100">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
-            Iron Making
-          </td>
-          <td>Code</td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td class="text-center">
-            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">16.11.2019</span>
-              <div class="bg-ideeza rounded-full h-8" style="width:60%;">
-              </div>
-            </div>
-          </td>
-          <td class="status status--progress">in progress</td>
-          <td class="notifications">
-            <font-awesome-icon class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/>
-          </td>
-
-
-        </tr>
-        <tr class="">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
-            Iron Making
-          </td>
-          <td>Electronics</td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td class="text-center">
-            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">16.11.2019</span>
-              <div class="bg-ideeza rounded-full h-8" style="width:90%;">
-              </div>
-            </div>
-          </td>
-          <td class="status status--completed">COMPLETED</td>
-          <td class="notifications">
-            <font-awesome-icon class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
-          </td>
-
-
-        </tr> -->
-
         </tbody>
       </table>
       <button @click.self="addNewTask=true" class="btn btn-normal btn--ideeza-dark px-5 py-3 mt-5">Add New Task +</button>
@@ -262,7 +187,10 @@
   import DetailTask from "~/components/technician/management/detail-task.vue"
   import CompleteTask from "~/components/technician/management/complete-task.vue"
 
+import Services from "~/data/TechnicianProjectApi.json";
+
     export default {
+      layout: 'user',
         name: "detail",
       components: {
         'new-project': AddNewProject,
@@ -278,7 +206,12 @@
           return this.$store.state.usermenu.openLeftMenu;
         }
       },
-      methods: {
+      methods:{
+        changeid(id){
+          // alert(id)
+          this.$store.commit("TechnicianProjectStore/projectTaskkeychange1", id);
+          // alert(this.$store.state.TechnicianProjectStore.projectTaskkey)
+        },
         expand(id) {
           if(id in this.expanded &&this.expanded[id] == true){
             this.$set(this.expanded, id, false);  
@@ -291,6 +224,9 @@
       },
       data: function () {
         return {
+      Servicestask: Services.firsttask,
+      Servicesproject: Services.firstproject,
+      articleArray: [],
           addNewProject: false,
           addNewTask: false,
           editTask: false,
@@ -507,7 +443,13 @@
             }
           ]
         }
-      }
+      },
+      created: function() {
+    
+    this.Servicestask.map(item => {
+      this.articleArray.push(item);
+    });
+  },
     }
 </script>
 
@@ -626,12 +568,12 @@
     /*
       Label the data
       */
-    td:nth-of-type(1):before { content: "Products"; }
-    td:nth-of-type(2):before { content: "Color"; }
-    td:nth-of-type(3):before { content: "Price"; }
-    td:nth-of-type(4):before { content: "Quantity"; }
-    td:nth-of-type(5):before { content: "Cost"; }
-    td:nth-of-type(6):before { content: "Action"; }
+    td:nth-of-type(1):before { content: "Tasks"; }
+    td:nth-of-type(2):before { content: "Domain"; }
+    td:nth-of-type(3):before { content: "Assigned To"; }
+    td:nth-of-type(4):before { content: "Due Date"; }
+    td:nth-of-type(5):before { content: "Task Status"; }
+    td:nth-of-type(6):before { content: "Notification"; }
   }
   .due-date{
     position: absolute;

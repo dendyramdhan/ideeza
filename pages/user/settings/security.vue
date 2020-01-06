@@ -16,21 +16,21 @@
         <div class="form-field">
           <div class="field-label">Old Password</div>
           <div class="field-input flex-grow">
-            <input class="field h-10" name />
+            <input class="field h-10" name v-model="old_password"/>
           </div>
         </div>
 
         <div class="form-field">
           <div class="field-label">New Password</div>
           <div class="field-input flex-grow">
-            <input class="field h-10" name />
+            <input class="field h-10" name v-model="new_password"/>
           </div>
         </div>
 
         <div class="form-field">
           <div class="field-label">Confirm Password</div>
           <div class="field-input flex-grow">
-            <input class="field h-10" name />
+            <input class="field h-10" name v-model="password_confirm"/>
           </div>
         </div>
 
@@ -93,12 +93,22 @@ export default {
   data: function() {
     return {
       longview: true,
-      Projects: Projects.Login_history
+      Projects: Projects.Login_history,
+      security: Projects.Setting_general
     };
   },
   methods:{
     updatepassword(){
-      alert("update your password!!!");
+      if (this.old_password == this.security[0].password) {        
+         if (this.new_password==this.password_confirm) {
+            alert("update your password!!!");
+         } else {
+            alert("password_confirm Error!!!");
+         }
+      } else {
+        alert("old password Error!!!");
+      }
+     
     }
   }
 };

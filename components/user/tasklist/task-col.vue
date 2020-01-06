@@ -26,7 +26,8 @@
           <div class="flex items-center">
             <img
               class="h-10 w-10 mr-2 rounded-full"
-              :src="invite.portrait_url" v-for="invite in task.invited"
+              :src="invite"
+              v-for="invite in task.invited"
             />
             <div
               @click="task.addNewMember = !task.addNewMember"
@@ -40,11 +41,11 @@
 
           <!--Attachments-->
           <div class="flex items-center">
-            <div class="mr-2">
+            <div class="mr-2" @click="onComment">
               <font-awesome-icon class="h-4 text-ideeza cursor-pointer" :icon="['far', 'comment']" />
               <span class="attachment-no">{{task.comment_count}}</span>
             </div>
-            <div class="mr-2">
+            <div class="mr-2" @click="onPaperClip">
               <font-awesome-icon
                 class="h-4 text-ideeza cursor-pointer"
                 :icon="['fas', 'paperclip']"
@@ -64,7 +65,7 @@
 
 <script>
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
-import tasklist from '~/json/tasklist.json';
+import tasklists from "~/json/tasklist.json";
 export default {
   name: "task-col",
   components: {
@@ -73,13 +74,33 @@ export default {
   data: function() {
     return {
       showAddTask: false,
-      tasks: tasklist.tasklist,
-      d : new Date(),
+      tasks: tasklists,
+      d: new Date(),
       weeks: ["Sunday", "Monday", "Tuesday", "Thirsday", "Friday", "Saturday"],
-      months : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+      months: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
     };
   },
-  
+  methods: {
+    onComment() {
+      alert();
+    },
+    onPaperClip() {
+      alert();
+    }
+  }
 };
 </script>
 
