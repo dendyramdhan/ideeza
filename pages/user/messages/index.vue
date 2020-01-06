@@ -129,7 +129,7 @@
                 <div class="messages message--to">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
-                <div class="messages message--to" style="width:90%" v-if="sendmessage">
+                <div class="messages message--to" style="width:500px" v-if="sendmessage">
                  {{sendmessage}}
 
                 </div>
