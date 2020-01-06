@@ -3,6 +3,7 @@ export const state = () => ({
     scale:5,
     viewflag:1,
     counter: 2,
+    projectTaskkey: 1,
     ArticlesName: " ",
     CategoryName: " ",
     DescriptionName: " ",
@@ -14,6 +15,10 @@ export const state = () => ({
     changeshowscale(state, value) {
       console.log('savearticlesname', value)
       state.scale = value
+    },
+    projectTaskkeychange1(state, value) {
+      console.log('projectTaskkeychange1', value)
+      state.projectTaskkey = value
     },
     viewflagchange1(state) {
       state.viewflag = 2 ;

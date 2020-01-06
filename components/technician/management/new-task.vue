@@ -89,6 +89,7 @@
             </div>
           </div>
         </div>
+            <button @click="send_add_request" class="mt-5 btn btn-normal btn--ideeza px-6 py-2">Add Task +</button>
 
       </div>
     </div>
@@ -118,6 +119,11 @@
         FileField
       },
       methods: {
+        send_add_request(){
+          alert('sending your add requset!!!');
+          this.$emit('onClose');
+
+        },
           close(){
             this.$emit('onClose');
           },
