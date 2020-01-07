@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-security mx-auto">
+  <div class="settings-security mx-3 md:mx-20 p-2 mt-10">
     <!---->
     <!--Profile Information-->
     <!---->
@@ -7,11 +7,11 @@
       <div
         class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0"
       >
-        <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Change your password</h1>
+        <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Change your password</h1>
       </div>
 
       <!--Form Container-->
-      <div class="my-5 p-5 bg-white shadow-md">
+      <div class="my-5 p-5 bg-white shadow-lg">
         <!--Form Fields-->
         <div class="form-field">
           <div class="field-label">Old Password</div>
@@ -46,11 +46,11 @@
     <div
       class="md:flex mt-20 justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0"
     >
-      <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Login History</h1>
+      <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Login History</h1>
     </div>
 
     <!--Container-->
-    <div class="my-5 p-5 bg-white shadow-md">
+    <div class="my-5 p-5 bg-white shadow-lg">
       <table>
         <thead>
           <tr class="text-gray-800 h16">
@@ -66,10 +66,7 @@
             <td>{{ Project.Location}}</td>
             <td>{{ Project.Recent_Activity}}</td>
             <td class="lg:text-right">
-              <font-awesome-icon
-                class="ml-1 h-4 cursor-pointer text-gray-400"
-                :icon="['fas', 'times']"
-              />
+              <a href="#" class="text-ideeza text-base">Log Out</a>
             </td>
           </tr>
 

@@ -1,13 +1,13 @@
 <template>
-  <div class="settings-privacy mx-auto p-2">
+  <div class="settings-privacy mx-3 md:mx-20 p-2 mt-10">
     <!---->
     <!--Social Connections-->
     <!---->
     <div class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400">
-      <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Social Connections</h1>
+      <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Social Connections</h1>
     </div>
     <!--Container-->
-    <div class="my-5 pb-10 bg-white shadow-md">
+    <div class="my-5 pb-10 bg-white shadow-lg">
       <!--Head-->
       <div class="p-10 mb-5 text-gray-500 border-b border-solid border-gray-300" v-for="Project in Projects" v-if="Project.id == 1">
         {{Project.content1}}<br />
@@ -29,10 +29,10 @@
     <div
       class="md:flex justify-between items-center pb-3 mt-10 border-b border-solid border-gray-400"
     >
-      <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Add Ideeza to Facebook Timeline</h1>
+      <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Add Ideeza to Facebook Timeline</h1>
     </div>
     <!--Container-->
-    <div class="my-5 pb-10 bg-white shadow-md">
+    <div class="my-5 pb-10 bg-white shadow-lg">
       <!--Head-->
       <div class="p-10 mb-5 text-gray-500 border-b border-solid border-gray-300" v-for="Project in Projects" v-if="Project.id == 2">
         {{Project.content1}}
@@ -54,11 +54,11 @@
       class="md:flex justify-between items-center pb-3 mt-10 border-b border-solid border-gray-400"
     >
       <h1
-        class="text-gray-800 text-xl lg:text-3xl font-semibold"
+        class="text-gray-800 text-xl lg:text-2xl font-semibold"
       >Your Products & Profile in Search Engines</h1>
     </div>
     <!--Container-->
-    <div class="my-5 pb-10 bg-white shadow-md">
+    <div class="my-5 pb-10 bg-white shadow-lg">
       <!--Head-->
       <div class="p-10 mb-5 text-gray-500 border-b border-solid border-gray-300" v-for="Project in Projects" v-if="Project.id == 3">
         {{Project.content1}}
