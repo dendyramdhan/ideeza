@@ -359,10 +359,6 @@ export default {
     }
   }
 };
-
-// export default {
-//     name: "blog-list"
-// }
 </script>
 
 <style scoped>

@@ -28,91 +28,119 @@
 
 
         </div>
-      </div>
-
-      <AddPartSearch @select="addPartSelect=true" class="mt-10" v-if="step === 0 && !addPartSelect && !addPartSelectType" />
-      <AddPart @onSelectType="addPartSelectType=true" @close="addPartSelect=false" class="mt-10" v-if="step === 0 && addPartSelect && !addPartSelectType" />
-      <AddSelectPart @selectType="next" class="mt-10" v-if="step === 0 && addPartSelectType" />
-      <AddConfigure @back="step=0" @next="step = 2" class="mt-32" v-if="step === 1"  />
-      <AddElectronics @back="step=1" @next="step = 3" class="mt-32" v-if="step === 2"  />
-
-      <AddGeneral @back="step=2" @next="step = 4" class="mt-32" v-if="step === 3"  />
-      <general-review class="mt-32" v-if="step === 4" />
-      <AddFinish class="mt-32" v-if="step === 5" />
-
-
-
-      <!--Bot Buttons-->
-      <div v-if="step === 0 || (step >= 3 && step !== 5)" class="mt-10 w-full flex">
-        <div class="w-1/2 text-left">
-          <button v-if="step > 0 " @click="back" class="btn pill-button px-16 py-0">Back</button>
+        <!--2-->
+        <div class="stepper-icon-wrapper relative" :class="{'active': step >= 1}">
+          <span class="absolute-center-h-v">2</span>
+          <div class="stepper-text stepper-text--review" :class="{'active': step >= 1}">Configure</div>
         </div>
-        <div class="w-1/2 text-right">
-          <button v-if="step <= 3" @click="next" class="btn pill-button px-16 py-0">Next</button>
-          <button v-if="step === 4" @click="next" class="btn pill-button pill-button--ideeza px-16 py-1">Finish</button>
+        <!--3-->
+        <div class="stepper-icon-wrapper relative" :class="{'active': step >= 2 }">
+          <span class="absolute-center-h-v">3</span>
+          <div
+            class="stepper-text stepper-text--complete"
+            :class="{'active': step >= 2 }"
+          >Electronics</div>
+        </div>
+        <!--4-->
+        <div class="stepper-icon-wrapper relative" :class="{'active': step >= 3 }">
+          <span class="absolute-center-h-v">4</span>
+          <div class="stepper-text stepper-text--code" :class="{'active': step >= 3 }">General</div>
         </div>
       </div>
     </div>
+
+    <AddPartSearch
+      @select="addPartSelect=true"
+      class="mt-10"
+      v-if="step === 0 && !addPartSelect && !addPartSelectType"
+    />
+    <AddPart
+      @onSelectType="addPartSelectType=true"
+      @close="addPartSelect=false"
+      class="mt-10"
+      v-if="step === 0 && addPartSelect && !addPartSelectType"
+    />
+    <AddSelectPart @selectType="next" class="mt-10" v-if="step === 0 && addPartSelectType" />
+    <AddConfigure @back="step=0" @next="step = 2" class="mt-32" v-if="step === 1" />
+    <AddElectronics @back="step=1" @next="step = 3" class="mt-32" v-if="step === 2" />
+
+    <AddGeneral @back="step=2" @next="step = 4" class="mt-32" v-if="step === 3" />
+    <general-review class="mt-32" v-if="step === 4" />
+    <AddFinish class="mt-32" v-if="step === 5" />
+
+    <!--Bot Buttons-->
+    <div v-if="step === 0 || (step >= 3 && step !== 5)" class="mt-10 w-full flex">
+      <div class="w-1/2 text-left">
+        <button v-if="step > 0 " @click="onBack" class="btn pill-button px-16 py-0">Back</button>
+      </div>
+      <div class="w-1/2 text-right">
+        <button v-if="step <= 3" @click="onNext" class="btn pill-button px-16 py-0">Next</button>
+        <button
+          v-if="step === 4"
+          @click="next"
+          class="btn pill-button pill-button--ideeza px-16 py-1"
+        >Finish</button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-    import TextField from '~/components/form/text-field.vue'
-    import TextArea from '~/components/form/text-area.vue'
-    import DropDownField from '~/components/form/dropdown-field.vue'
-    import AddPartSearch from '~/components/technician/electronics/add-part/add-part-search.vue'
-    import AddPart from '~/components/technician/electronics/add-part/add-part.vue'
-    import AddSelectPart from '~/components/technician/electronics/add-part/addSelectType.vue'
-    import AddConfigure from '~/components/technician/electronics/add-part/add-configure.vue'
-    import AddElectronics from '~/components/technician/electronics/add-part/add-electronics.vue'
-    import AddCode from '~/components/technician/electronics/add-part/add-code.vue'
-    import AddGeneral from '~/components/technician/electronics/add-part/add-general.vue'
-    import GeneralReview from '~/components/technician/electronics/add-part/general-review.vue'
-    import AddFinish from '~/components/technician/electronics/add-part/add-finish.vue'
-    export default {
-        name: "index",
-        data: function () {
-            return {
-                activeDrawer: null,
-                step: 0,
-                addPartSearch: null,
-                addPartSelect: false,
-                addPartSelectType: false
-            }
-        },
-      components: {
-            TextField,
-          TextArea,
-          DropDownField,
-          AddPartSearch,
-          AddPart,
-          AddSelectPart,
-          AddConfigure,
-          AddElectronics,
-          AddCode,
-          AddGeneral,
-          'general-review':GeneralReview,
-          AddFinish
-      },
-      computed: {
-        overlayWidth () {
-            if(this.step < 4)
-              return this.step * 33;
-            else {
-                return 99;
-            }
-        }
-      },
-        methods: {
-            back() {
-                if(this.step > 0)
-                    this.step -= 1;
-            },
-            next() {
-              if(this.step < 6)
-                  this.step += 1;
-            },
-        }
+import TextField from "~/components/form/text-field.vue";
+import TextArea from "~/components/form/text-area.vue";
+import DropDownField from "~/components/form/dropdown-field.vue";
+import AddPartSearch from "~/components/technician/electronics/add-part/add-part-search.vue";
+import AddPart from "~/components/technician/electronics/add-part/add-part.vue";
+import AddSelectPart from "~/components/technician/electronics/add-part/addSelectType.vue";
+import AddConfigure from "~/components/technician/electronics/add-part/add-configure.vue";
+import AddElectronics from "~/components/technician/electronics/add-part/add-electronics.vue";
+import AddCode from "~/components/technician/electronics/add-part/add-code.vue";
+import AddGeneral from "~/components/technician/electronics/add-part/add-general.vue";
+import GeneralReview from "~/components/technician/electronics/add-part/general-review.vue";
+import AddFinish from "~/components/technician/electronics/add-part/add-finish.vue";
+export default {
+  name: "index",
+  data: function() {
+    return {
+      activeDrawer: null,
+      step: 0,
+      addPartSearch: null,
+      addPartSelect: false,
+      addPartSelectType: false
+    };
+  },
+  components: {
+    TextField,
+    TextArea,
+    DropDownField,
+    AddPartSearch,
+    AddPart,
+    AddSelectPart,
+    AddConfigure,
+    AddElectronics,
+    AddCode,
+    AddGeneral,
+    "general-review": GeneralReview,
+    AddFinish
+  },
+  computed: {
+    overlayWidth() {
+      if (this.step < 4) return this.step * 33;
+      else {
+        return 99;
+      }
     }
+  },
+  methods: {
+    onBack() {
+      if (this.step > 0) this.step -= 1;
+    },
+    onNext() {
+      alert(this.step);
+      // if (this.step < 6) this.step += 1;
+    }
+  }
+};
 </script>
 
 <style scoped>

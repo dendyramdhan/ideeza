@@ -1,15 +1,12 @@
 export default function ({ route, redirect }) {
 
-  // if (route.fullPath === "/") {
-  //   return redirect('/user/dashboard')
-  // }
   if (route.fullPath === "/") {
-      return redirect('/technician/dashboard')
-    }
-
-  if (route.fullPath === "/user") {
     return redirect('/user/dashboard')
   }
+  // if (route.fullPath === "/") {
+  //     return redirect('/technician/dashboard')
+  //   }
+
   if (route.fullPath === "/user/settings") {
     return redirect('/user/settings/general')
   }
@@ -21,9 +18,6 @@ export default function ({ route, redirect }) {
   }
   if (route.fullPath === "/user/order-tracking") {
     return redirect('/user/order-tracking/making-product')
-  }
-  if (route.fullPath === "/technician") {
-    return redirect('/technician/dashboard')
   }
   
 }

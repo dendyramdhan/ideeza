@@ -41,9 +41,9 @@ export default {
     { src: '~/plugins/ace-editor-plugin.js', ssr: false },
     { src: '~/plugins/scrollbar-plugin.js', ssr: false },
     { src: '~/plugins/notification-plugin.js', ssr: false },
-    { src: '~/plugins/table-plugin.js'},
-    {src: '~/plugins/vue2-filters-plugin'},
-    {src: '~/plugins/calendar.js',ssr: false, mode: 'client'}
+    { src: '~/plugins/table-plugin.js' },
+    { src: '~/plugins/vue2-filters-plugin' },
+    { src: '~/plugins/calendar.js', ssr: false, mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules

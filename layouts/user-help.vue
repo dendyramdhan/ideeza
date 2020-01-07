@@ -6,29 +6,29 @@
 </template>
 
 <script>
-  import navigation from '~/components/user/header-bar-help.vue'
-  import { mapMutations } from 'vuex'
-  export default {
-    components: {navigation},
-    mounted() {
-      console.log(this.$device.isMobile);
-      if(this.$device.isMobile){
-        this.toggleLeftMenu();
-      }
-    },
-    methods: {
-      ...mapMutations({
-        toggleLeftMenu: 'usermenu/toggleLeftMenu'
-      })
+import navigation from "~/components/user/header-bar-help.vue";
+import { mapMutations } from "vuex";
+export default {
+  components: { navigation },
+  mounted() {
+    console.log(this.$device.isMobile);
+    if (this.$device.isMobile) {
+      this.toggleLeftMenu();
     }
+  },
+  methods: {
+    ...mapMutations({
+      toggleLeftMenu: "usermenu/toggleLeftMenu"
+    })
   }
+};
 </script>
 
 <style>
-#__nuxt{
+#__nuxt {
   height: 100%;
 }
-#__layout{
+#__layout {
   height: 100%;
 }
 </style>
