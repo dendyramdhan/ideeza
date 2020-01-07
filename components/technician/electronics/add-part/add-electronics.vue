@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <div class="flex justify-between items-center bg-white shadow-md p-4">
-      <div class="flex items-center">
-        <img src="~/static/images/add-part.png" alt />
+  <div >
+    <div class="md:flex justify-between items-center bg-white shadow-md  p-4">
+      <div class="flex items-center mb-2 md:mb-0">
+        <img src="~/static/images/add-part.png" alt="">
         <div class="ml-5">
           <span class="block font-semibold">ATMEGA32M1-AU</span>
           <span class="text-sm, text-gray-600">AVR microcontroller, EEPROM: 1KB; SRAM: 2KB;...</span>
         </div>
       </div>
       <div>
-        <button class="btn pill-button px-8 py-0">2D Preview</button>
-        <button class="btn pill-button px-8 mx-3 py-0">3D Preview</button>
-        <button class="btn pill-button px-8 py-0">Datasheet</button>
+        <button class="btn pill-button px-8 mx-3 py-0 mb-2">2D Preview</button>
+        <button class="btn pill-button px-8 mx-3 mb-2 py-0">3D Preview</button>
+        <button class="btn pill-button px-8 py-0 mb-2">Datasheet</button>
       </div>
     </div>
 
@@ -19,16 +19,18 @@
       <h1 class="font-semibold text-xl">Add Electronics Configuration</h1>
     </div>
 
-    <div v-if="showSelection" class="w-full flex justify-between mt-10">
-      <div class="w-48">
+    <div v-if="showSelection" class="w-full md:flex md:justify-around justify-between mt-10 items-center">
+      <div class="md:w-1/2 mb-1 mr-2">
         <div class="container-part-add">
           <img src="~/static/images/e-chip.png" alt />
 
           <button @click="legMeaning" class="btn pill-button px-24 py-0 mt-10">Leg Meaning</button>
         </div>
       </div>
-
-      <div class="w-48">
+      <div class="text-center">
+        or
+      </div>
+      <div class="md:w-1/2 ml-2">
         <div class="container-part-add">
           <div class="w-full flex flex-col items-center">
             <img src="~/static/images/e-bar-chart.png" alt />

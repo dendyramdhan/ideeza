@@ -22,7 +22,7 @@
     // R0805data
   } from '@ideeza/vue3dengine/src/engines/electronic_tech_part'
     export default {
-      name: "engine",
+      name: "3dengine",
       components: {
         'engine': Engine.etp,
       },

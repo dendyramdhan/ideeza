@@ -1,6 +1,6 @@
 <template>
     <div class="email-support-container mx-auto mt-32">
-      <div class="hidden lg:block stepper-bar bg-gray-200 relative mx-auto mb-20">
+      <div class="stepper-bar bg-gray-200 relative mx-auto mb-20">
         <div class="stepper-bar-overlay bg-ideeza-dark" :style="`width: ${overlayWidth}%` "></div>
         <div class="absolute top-0 left-0 h-full w-full z-50 flex justify-between">
 
@@ -40,27 +40,29 @@
 
       <div v-if="step === 2" class="w-full ">
         <h1 class="text-2xl font-semibold my-5">Choice on code</h1>
-        <div class="bg-white shadow border border-solid border-gray-400 w-full flex justify-center items-center choice-on-code">
-          <button  @click="back" class="btn pill-button px-16 py-1">Back</button>
-          <button class="btn pill-button pill-button--ideeza px-16 py-1 mx-5">Add code</button>
-          <button  @click="next" class="btn pill-button px-16 py-1">Continue without adding code</button>
+        <div class="bg-white shadow border border-solid border-gray-400 w-full md:flex justify-center items-center choice-on-code">
+          <button  @click="back" class="btn pill-button mb-2 md:mb-0 px-16 py-1 mx-5 mt-10 md:mx-0">Back</button>
+          <button class="btn pill-button pill-button--ideeza mb-2 md:mb-0 px-16 py-1 mx-5">Add code</button>
+          <button  @click="next" class="btn pill-button mb-2 md:mb-0 px-5 py-1 mx-5 md:mx-0">Continue without adding code</button>
         </div>
       </div>
 
       <div v-if="step === 3" class="w-full">
-        <div class="my-10 bg-white shadow border border-solid border-gray-400 w-full flex items-center p-5">
-          <div><img src="~/static/images/processor-48.png" alt=""></div>
-          <div class="mx-10">ATMEGA32M1-AU</div>
+        <div class="my-10 bg-white shadow border border-solid border-gray-400 w-full md:flex items-center p-5">
+          <div class="flex items-center">
+            <div class="mx-10">ATMEGA32M1-AU</div>
+            <img src="~/static/images/processor-48.png" alt="">
+          </div>
           <div>
-            <button class="btn pill-button px-6 text-xs mr-2">Legs</button>
-            <button class="btn pill-button px-6 text-xs mr-2">Charts</button>
-            <button class="btn pill-button px-6 text-xs mr-2">2D Preview</button>
-            <button class="btn pill-button px-6 mr-2 text-xs">3D Preview</button>
-            <button class="btn pill-button px-6 text-xs">Data Sheet</button>
+            <button class="btn pill-button px-6 text-xs mr-2 mb-2">Legs</button>
+            <button class="btn pill-button px-6 text-xs mr-2 mb-2">Charts</button>
+            <button class="btn pill-button px-6 text-xs mr-2 mb-2">2D Preview</button>
+            <button class="btn pill-button px-6 mr-2 text-xs mb-2">3D Preview</button>
+            <button class="btn pill-button px-6 text-xs mb-2">Data Sheet</button>
           </div>
         </div>
-        <div class="w-full flex">
-          <div class="w-1/2 pr-5">
+        <div class="w-full md:flex">
+          <div class="md:w-1/2 md:pr-5">
             <h1 class="text-2xl font-semibold my-5">Add details of the part</h1>
             <div class="bg-white shadow border border-solid border-gray-400">
               <div class="w-full flex p-3">
@@ -83,38 +85,38 @@
               </div>
             </div>
           </div>
-          <div class="w-1/2 pl-5">
+          <div class="md:w-1/2 md:pl-5">
             <h1 class="text-2xl font-semibold my-5">Pricing</h1>
             <div class="bg-white shadow border border-solid border-gray-400">
 
-              <div class="flex w-full">
-                <div class="w-1/2 p-3 flex justify-between items-center">
-                  <span class="inline-block mr-12">Quantity</span>
-                  <input class="w-full bg-white border border-solid border-gray-300 w-16 ">
+              <div class="md:flex w-full">
+                <div class="md:w-1/2 p-3 flex justify-between items-center">
+                  <span class="w-1/3 inline-block md:mr-12">Quantity</span>
+                  <input class="w-2/3 bg-white border border-solid border-gray-300">
                 </div>
-                <div class="w-1/2 p-3 flex justify-between items-center">
-                  <span class="inline-block mr-12">Price</span>
-                  <input class="w-full bg-white border border-solid border-gray-300 w-16 ">
-                </div>
-              </div>
-              <div class="flex w-full">
-                <div class="w-1/2 p-3 flex justify-between items-center">
-                  <span class="inline-block mr-12">Quantity</span>
-                  <input class="w-full bg-white border border-solid border-gray-300 w-16 ">
-                </div>
-                <div class="w-1/2 p-3 flex justify-between items-center">
-                  <span class="inline-block mr-12">Price</span>
-                  <input class="w-full bg-white border border-solid border-gray-300 w-16 ">
+                <div class="md:w-1/2 p-3 flex justify-between items-center">
+                  <span class="w-1/3 inline-block md:mr-12">Price</span>
+                  <input class="w-2/3 bg-white border border-solid border-gray-300">
                 </div>
               </div>
-              <div class="flex w-full">
-                <div class="w-1/2 p-3 flex justify-between items-center">
-                  <span class="inline-block mr-12">Quantity</span>
-                  <input class="w-full bg-white border border-solid border-gray-300 w-16 ">
+              <div class="md:flex w-full">
+                <div class="md:w-1/2 p-3 flex justify-between items-center">
+                  <span class="w-1/3 inline-block md:mr-12">Quantity</span>
+                  <input class="w-2/3 bg-white border border-solid border-gray-300">
                 </div>
-                <div class="w-1/2 p-3 flex justify-between items-center">
-                  <span class="inline-block mr-12">Price</span>
-                  <input class="w-full bg-white border border-solid border-gray-300 w-16 ">
+                <div class="md:w-1/2 p-3 flex justify-between items-center">
+                  <span class="w-1/3 inline-block md:mr-12">Price</span>
+                  <input class="w-2/3 bg-white border border-solid border-gray-300">
+                </div>
+              </div>
+              <div class="md:flex w-full">
+                <div class="md:w-1/2 p-3 flex justify-between items-center">
+                  <span class="w-1/3 inline-block md:mr-12">Quantity</span>
+                  <input class="w-2/3 bg-white border border-solid border-gray-300">
+                </div>
+                <div class="md:w-1/2 p-3 flex justify-between items-center">
+                  <span class="w-1/3 inline-block md:mr-12">Price</span>
+                  <input class="w-2/3 bg-white border border-solid border-gray-300">
                 </div>
               </div>
 
@@ -128,7 +130,7 @@
 
       </div>
 
-      <div v-if="step > 3" class="bg-white shadow-md w-full text-center flex flex-col justify-between items-center font-semibold text-5xl py-32">
+      <div v-if="step > 3" class="bg-white shadow-md w-full text-center flex flex-col justify-between items-center font-semibold text-3xl md:text-5xl py-32">
         <div class="mx-auto">
           <img src="~/static/images/e-processor.png" alt="">
         </div>
@@ -326,7 +328,8 @@
     max-width: 950px;
   }
   .stepper-bar{
-    width: 600px;
+    width: 95vw;
+    max-width: 600px;
     height: 15px;
   }
   .stepper-bar-overlay{

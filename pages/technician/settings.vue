@@ -4,7 +4,7 @@
     <LeftMenu />
 
     <!-- Main Contents -->
-    <div class="flex-grow">
+    <div class="flex-grow bg-settings">
       <nuxt-child></nuxt-child>
     </div>
   </div>
@@ -33,4 +33,7 @@ export default {
 </script>
 
 <style scoped>
+.bg-settings{
+  background-color: #F8F9FA;
+}
 </style>

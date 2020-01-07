@@ -1,14 +1,14 @@
 <template>
-  <div class="shadow-md">
+  <div class="shadow-md mx-2">
     <div class="w-full ">
-      <div class="bg-white p-5 flex items-center" >
+      <div class="bg-white p-5 md:flex items-center" >
         <div class="flex items-center mr-5">
           <span class="mr-2">File name </span>
-          <input placeholder="e.g filename.js" class="w-40 bg-white border border-solid border-gray-300 text-sm p-1 ">
+          <input placeholder="e.g filename.js" class="w-40 bg-white border border-solid border-gray-300 text-sm p-1 mb-2">
         </div>
         <div class="flex items-center mr-5">
           <span class="mr-2">Language </span>
-          <select v-model="selectedLanguage" @change="languageChange"  class="language-select">
+          <select v-model="selectedLanguage" @change="languageChange"  class="language-select w-40 border mb-2">
             <option  value="sh" >
             Bash
           </option><option selected  value="c_cpp" >
@@ -66,9 +66,9 @@
           </option>
           </select>
         </div>
-        <button class="btn pill-button px-5 mr-5">Upload Code</button>
-        <button class="btn pill-button px-5 mr-5">Upload Image</button>
-        <button class="btn pill-button px-5">Run</button>
+        <button class="btn pill-button px-5 mr-5 mb-2">Upload Code</button>
+        <button class="btn pill-button px-5 mr-5 mb-2">Upload Image</button>
+        <button class="btn pill-button px-5 mb-2">Run</button>
       </div>
     </div>
     <div>
@@ -134,6 +134,9 @@
     word-spacing: normal;
     font-size: 14px;
   }
-
+  select.language-select{
+    min-width: initial !important;
+    max-width: initial !important;
+  }
 
 </style>
