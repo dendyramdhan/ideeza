@@ -1,5 +1,6 @@
 <template>
-  <div class="settings-notifications p-2 lg:flex mx-auto">
+  <div>
+  <div class="settings-notifications p-2 lg:flex mx-2 md:mx-20">
     <div v-for="infonotification in Projects" class="settings-notifications p-2 lg:flex mx-auto">
       <!--Column 1-->
       <div class="column lg:mr-10">
@@ -9,7 +10,7 @@
         <div
           class="md:flex mt-10 justify-between items-center pb-3 border-b border-solid border-gray-400"
         >
-          <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Messages</h1>
+          <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Messages</h1>
         </div>
         <!--Container-->
         <div class="my-5 p-5 bg-white shadow-md">
@@ -40,7 +41,7 @@
         <div
           class="md:flex mt-10 justify-between items-center pb-3 border-b border-solid border-gray-400"
         >
-          <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Reminders</h1>
+          <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Reminders</h1>
         </div>
         <!--Container-->
         <div class="my-5 p-5 bg-white shadow-md">
@@ -73,7 +74,7 @@
         <div
           class="md:flex mt-10 justify-between items-center pb-3 border-b border-solid border-gray-400"
         >
-          <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Account Support</h1>
+          <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Account Support</h1>
         </div>
         <!--Container-->
         <div class="my-5 p-5 bg-white shadow-md">
@@ -110,7 +111,7 @@
         <div
           class="md:flex mt-10 justify-between items-center pb-3 border-b border-solid border-gray-400"
         >
-          <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Contact Information</h1>
+          <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Contact Information</h1>
         </div>
         <!--Container-->
         <div class="my-5 p-5 bg-white shadow-md">
@@ -138,7 +139,7 @@
         <div
           class="md:flex mt-10 justify-between items-center pb-3 border-b border-solid border-gray-400"
         >
-          <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Text Messages</h1>
+          <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Text Messages</h1>
         </div>
         <!--Container-->
         <div class="my-5 p-5 bg-white shadow-md">
@@ -163,7 +164,7 @@
         <div
           class="md:flex mt-10 justify-between items-center pb-3 border-b border-solid border-gray-400"
         >
-          <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Policy and community</h1>
+          <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Policy and community</h1>
         </div>
         <!--Container-->
         <div class="my-5 p-5 bg-white shadow-md">
@@ -189,17 +190,12 @@
             >Text Messages</CheckBox>
           </div>
         </div>
-        <div class="mt-16 mb-16 text-center">
-      <button class="btn pill-button pill-button--ideeza px-20" @click="savegeneralsetting">Save</button>
-    </div>
       </div>
-
-         
-       
-
-
-
     </div>
+  </div>
+  <div class="ml-24 mt-5 mb-16 md:text-center button-container">
+    <button class="btn pill-button pill-button--ideeza px-20 py-2" @click="savegeneralsetting">Save</button>
+  </div>
   </div>
 </template>
 
@@ -234,5 +230,8 @@ export default {
 .column {
   width: 100%;
   max-width: 400px;
+}
+.button-container{
+  max-width: 800px;
 }
 </style>
