@@ -39,15 +39,15 @@
                       :src="portrait_url"
                     />
                     <div
-                      @click="addNewMember = !addNewMember"
+                      @click="data.addNewMember = !data.addNewMember"
                       class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative"
-                      :class="{'active': addNewMember}"
+                      :class="{'active': data.addNewMember}"
                     >
                       <font-awesome-icon
                         class="absolute-center-h-v mr-1 h-4"
                         :icon="['fas', 'plus']"
                       />
-                      <InvitePopup v-if="addNewMember" />
+                      <InvitePopup v-if="data.addNewMember" />
                     </div>
                   </div>
 
@@ -84,7 +84,13 @@
     <div class="hidden lg:block task-right-bar bg-white shadow-md py-16">
       <div class="text-gray-800 text-2xl font-semibold text-center">Calendar</div>
       <!--Calendar-->
-      <vc-calendar class="mx-auto mt-5" color="pink" is-expanded :theme="theme" />
+      <vc-calendar 
+      class="mx-auto mt-5"
+      v-model="date" 
+      color="pink" 
+      is-expanded 
+      :theme="theme"
+      :attributes="attributes" />
 
       <div class="mt-5 py-5 px-5 border-t border-solid border-gray-300">
         <div class="text-xl text-gray-500 font-semibold">Latest Activity</div>
@@ -128,6 +134,13 @@ export default {
   data: function() {
     return {
       date: new Date(),
+      attributes: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date()
+        }
+      ],
       tasks: tasklists,
       addNewMember: false,
       theme: {
@@ -146,7 +159,9 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+  mounted() {
+    console.log("technician tasklist mounted: ");
+  },
   methods: {
     displayAddTask() {
       this.showAddTask = true;
@@ -178,52 +193,50 @@ export default {
 </script>
 
 <style scoped>
-
-  .task-col{
-    @apply mt-5;
-    width: 100%;
-    max-width: 370px;
-    min-width: 360px;
-  }
-  .task-wrapper{
-    max-width: 1200px;
-  }
-  .task-time{
-    @apply text-gray-500;
-  }
-  .task-name{
-    @apply text-gray-800 text-xl font-semibold mt-5;
-  }
-  .attachment-no{
-    @apply text-gray-500 text-sm;
-  }
-  .add-member{
-    @apply h-10 w-10 mr-2 bg-gray-300 rounded-full relative cursor-pointer text-gray-600;
-  }
-  .add-member:hover{
-    @apply text-gray-800;
-  }
-  .add-member.active{
-    @apply bg-ideeza-dark text-white;
-  }
-  .add-member.active:hover{
-    @apply text-white;
-  }
-  .important{
-    @apply bg-ideeza-dark;
-  }
-  .important .task-time,
-  .important .task-name,
-  .important .attachment-no{
-    @apply text-white;
-  }
-  .important .add-member{
-    @apply bg-white;
-  }
-  /*Right Bar*/
-  .task-right-bar{
-    width: 300px;
-    min-width: 300px;
-  }
-
+.task-col {
+  @apply mt-5;
+  width: 100%;
+  max-width: 370px;
+  min-width: 360px;
+}
+.task-wrapper {
+  max-width: 1200px;
+}
+.task-time {
+  @apply text-gray-500;
+}
+.task-name {
+  @apply text-gray-800 text-xl font-semibold mt-5;
+}
+.attachment-no {
+  @apply text-gray-500 text-sm;
+}
+.add-member {
+  @apply h-10 w-10 mr-2 bg-gray-300 rounded-full relative cursor-pointer text-gray-600;
+}
+.add-member:hover {
+  @apply text-gray-800;
+}
+.add-member.active {
+  @apply bg-ideeza-dark text-white;
+}
+.add-member.active:hover {
+  @apply text-white;
+}
+.important {
+  @apply bg-ideeza-dark;
+}
+.important .task-time,
+.important .task-name,
+.important .attachment-no {
+  @apply text-white;
+}
+.important .add-member {
+  @apply bg-white;
+}
+/*Right Bar*/
+.task-right-bar {
+  width: 300px;
+  min-width: 300px;
+}
 </style>

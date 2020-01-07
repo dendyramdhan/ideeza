@@ -307,7 +307,7 @@
 
 <script>
 import LeftMenu from "~/components/technician/common-left-side-menu.vue";
-import articles from "../../../json/messageCenter.json";
+import articles from "~/json/messageCenter.json";
 import projects from "~/data/TechnicianProjectApi.json";
 import tasklists from "~/json/tasklist.json";
 export default {

@@ -41,7 +41,6 @@ import { mapMutations } from "vuex";
 export default {
   components: { navigation, FloatButton },
   mounted() {
-    console.log("here mounted");
     console.log(this.$device.isMobile);
     if (this.$device.isMobile) {
       this.toggleLeftMenu();
