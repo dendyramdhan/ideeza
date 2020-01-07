@@ -204,7 +204,9 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+  mounted() {
+    console.log('mounted');
+  },
   methods: {
     onClickOutside() {
       this.showMyIdeeza = false;

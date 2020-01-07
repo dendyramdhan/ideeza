@@ -233,10 +233,10 @@
                 </td>
 
                 <td class="lg:text-right">
-                  <nuxt-link :to="{ path: '/user/profile', query: { id: tabledata.id}}">
+                  <nuxt-link :to="{ path: '/technician/profile', query: { id: tabledata.id}}">
                     <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
                   </nuxt-link>
-                  <nuxt-link :to="{ path: '/user/messages', query: { id: tabledata.id}}">
+                  <nuxt-link :to="{ path: '/technician/messages', query: { id: tabledata.id}}">
                     <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" />
                   </nuxt-link>
                   <font-awesome-icon
@@ -388,7 +388,9 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+  mounted() {
+    console.log('mounted');
+  },
   methods: {
     changeshowperiod(e) {
       this.articleArray = [];

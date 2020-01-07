@@ -11,6 +11,7 @@
   export default {
     components: {navigation},
     mounted() {
+      console.log('technician mounted');
       console.log(this.$device.isMobile);
       if(this.$device.isMobile){
         this.toggleLeftMenu();
