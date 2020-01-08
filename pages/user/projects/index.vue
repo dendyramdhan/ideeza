@@ -14,7 +14,8 @@
           <div class="lg:flex flex-wrap">
             <div
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-              v-for="Project in Projects"  v-if="Project.flag == 1"
+              v-for="Project in Projects"
+              v-if="Project.flag == 1"
             >
               <nuxt-link :to="{ path: '/user/projects/detail', query: { id: Project.id}}">
                 <div class="image-container">
@@ -45,18 +46,11 @@
                 <div class="text-sm mt-5">{{Project.ShortDescription}}</div>
               </div>
             </div>
-            
+
             <div
               v-else
               class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
             >
-            
-            
-          
-
-
-
-
               <nuxt-link :to="{ path: '/user/projects/detail', query: { id: Project.id}}">
                 <div class="image-container">
                   <img class="project-item-container--image" src="~/static/images/car-big.png" alt />
@@ -140,6 +134,9 @@ export default {
     leftMenu() {
       return this.$store.state.usermenu.openLeftMenu;
     }
+  },
+  mounted() {
+    console.log('mounted');
   },
   methods: {}
 };

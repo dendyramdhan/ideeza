@@ -238,16 +238,7 @@ export default {
     }
   },
   mounted() {
-    let vm = this
-    setTimeout(() => {
-      console.log(this.$refs['smooth-scroll-1'].$data)
-    }, 10000);
-  },
-  beforeRouteLeave (to, from, next) {
-    console.log(this.$refs['smooth-scroll-1'])
-    this.$refs['smooth-scroll-1'].scrollbar.removeListener()
-    this.$refs['smooth-scroll-2'].scrollbar.removeListener()
-    next();
+    console.log('mounted');
   },
   methods: {
     onClickOutside() {

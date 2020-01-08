@@ -45,24 +45,16 @@
         <font-awesome-icon class="text-ideeza h-2 absolute bell-info" :icon="['fas', 'circle']" />
         <div class="info-alert text-xs" v-show="showInfoAlert">
           <div class="text-ideeza-black px-2 py-4 font-semibold">New</div>
-          <div class="info-contents">
-            <img class="info-avatar" src="https://randomuser.me/api/portraits/women/65.jpg" />
+          <div class="info-contents" v-for="n in news">
+            <img class="info-avatar" :src="n.portrait_url" />
             <div class="flex-grow">
-              <span class="font-semibold">Laurentius</span> just followed
-              <br />you
+              <span class="font-semibold">{{n.description}}</span>
             </div>
           </div>
-          <div class="info-contents">
-            <img class="info-avatar" src="https://randomuser.me/api/portraits/men/65.jpg" />
-            <div class="flex-grow">
-              Your project
-              <span class="font-semibold">
-                "My new
-                <br />Lamborgini"
-              </span> is finished
-            </div>
-          </div>
-          <div class="text-ideeza text-center px-2 py-4 font-semibold cursor-pointer">See more</div>
+          <div
+            class="text-ideeza text-center px-2 py-4 font-semibold cursor-pointer"
+            @click="onSeeMore"
+          >See more</div>
         </div>
       </div>
 
@@ -108,18 +100,23 @@
 
 <script>
 import { mapMutations } from "vuex";
+import news from "~/json/news.json";
 export default {
   name: "header-bar",
   data: function() {
     return {
       showInfoAlert: false,
-      showHelpAlert: false
+      showHelpAlert: false,
+      news: news
     };
   },
   computed: {
     leftMenu() {
       return this.$store.state.usermenu.openLeftMenu;
     }
+  },
+  mounted() {
+    console.log("news: ", this.news, this.showInfoAlert);
   },
   methods: {
     ...mapMutations({
@@ -130,6 +127,9 @@ export default {
     },
     onClickOutsideHelp() {
       this.showHelpAlert = false;
+    },
+    onSeeMore() {
+      alert();
     }
   }
 };

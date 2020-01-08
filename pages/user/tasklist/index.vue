@@ -53,14 +53,15 @@
       <div class="text-gray-800 text-2xl font-semibold text-center">Calendar</div>
       <!--Calendar-->
       <vc-calendar
+        class="mx-auto mt-5"
         @dayclick="addTasks"
         v-model="date"
-        class="mx-auto mt-5"
         color="pink"
         is-expanded
         :theme="theme"
+        :attributes="attributes"
+        :value="null"
       />
-
       <div class="mt-5 py-5 px-5 border-t border-solid border-gray-300">
         <div class="text-xl text-gray-500 font-semibold">Latest Activity</div>
 
@@ -120,6 +121,13 @@ export default {
           light: "ideeza-arrow"
         }
       },
+      attributes: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date()
+        }
+      ],
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
       id: 0,
