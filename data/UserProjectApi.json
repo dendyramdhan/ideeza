@@ -127,6 +127,15 @@
             "consultantname":"Google",
             "state":"Dealer",
             "profileimage":"https://randomuser.me/api/portraits/women/22.jpg"
+        },
+        {
+            "id":6,
+            "name":"hmj_Eletronics4",
+            "kind":"Eletronics",
+            "consultantKind":"Freelance Front-end",
+            "consultantname":"Microsoft",
+            "state":"Dealer",
+            "profileimage":"https://randomuser.me/api/portraits/men/23.jpg"
         }
     ],
     "Result_info": [
@@ -135,7 +144,7 @@
             "name": "1-zzz vvv",
             "profileImage": "https://randomuser.me/api/portraits/men/18.jpg",
             "score": 5,
-            "shortdescription": "1-DesssSamantha",
+            "shortdescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, praesentium voluptas nemo ducimus, repellendus quibusdam libero culpa beatae ipsa distinctio sed similique consequatur aliquam? Ratione omnis aut ducimus maiores doloribus.",
             "description": "1-DesssSamantha_asdjdfjkdsfdsf",
             "time": 4,
             "cost": "$ 220",

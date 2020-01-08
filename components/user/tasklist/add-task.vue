@@ -11,8 +11,8 @@
         />
       </div>
 
-      <div class="my-5 flex justify-between px-10">
-        <div class="w-1/2">
+      <div class="my-5 md:flex justify-between px-5 md:px-10">
+        <div class="md:w-1/2">
           <div class="input-container">
             <label>Link to (Option)</label>
             <input placeholder="Project or layer" v-model="taskLink"/>
@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-        <div class="w-2/3 pl-10">
+        <div class="md:w-2/3 md:pl-10">
           <h1 class="font-semibold text-lg block">Deadline</h1>
           <!--Calendar-->
           <vc-calendar
@@ -173,6 +173,8 @@ textarea {
 .add-new-container {
   @apply w-full;
   max-width: 1000px;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 .avatar {

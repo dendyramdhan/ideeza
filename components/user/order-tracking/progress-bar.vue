@@ -1,6 +1,6 @@
 <template>
     <div class="progress-bar relative border border-solid border-ideeza">
-      <div class="h-full bg-ideeza absolute top-0 left-0 pr-5" :style="progressWidth">
+      <div class="h-full bg-ideeza-gradient absolute top-0 left-0 pr-5" :style="progressWidth">
         <span class="progress-counter absolute-center-v text-white font-semibold">{{displayProgress}}</span>
       </div>
 
@@ -28,5 +28,8 @@
   }
   .progress-counter{
     right: 10px;
+  }
+  .bg-ideeza-gradient{
+    background: linear-gradient(to right,#ff00c7,#ffd8f6);
   }
 </style>
