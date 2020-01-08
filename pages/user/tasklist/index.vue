@@ -4,7 +4,7 @@
     <LeftMenu />
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-16 lg:px-10">
+    <div class="flex-grow lg:pt-16 lg:px-2">
       <div
         class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0"
       >
@@ -26,15 +26,23 @@
       <div class="w-full scroll-container mx-auto">
         <div v-if="tab==='daily'" class="task-wrapper flex mb-10">
           <!--Task Col Daily-->
-          <div class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
+          <div class="mx-auto task-col md:flex flex-wrap">
+            <template v-for="n in 1">
+              <div>
+              <TaskCol @showAddTask="displayAddTask" :index="n" />
+              </div>
+            </template>
           </div>
         </div>
 
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
           <!--Task Col Weekly-->
-          <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
+          <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col md:flex flex-wrap">
+            <template v-for="n in 7">
+              <div>
+              <TaskCol @showAddTask="displayAddTask" :index="n" />
+              </div>
+            </template>
           </div>
         </div>
       </div>
@@ -154,8 +162,6 @@ export default {
 .task-col {
   @apply mt-5;
   width: 100%;
-  max-width: 370px;
-  min-width: 360px;
 }
 .task-wrapper {
   max-width: 1200px;

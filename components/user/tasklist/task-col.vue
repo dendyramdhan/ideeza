@@ -1,26 +1,34 @@
 <template>
-  <div class="row mx-auto lg:mx-0 lg:mr-8 pb-5 shadow-md bg-white">
+  <div class="task-container">
     <div
       class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400"
     >{{d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear()}}</div>
 
-    <div v-for="(task, index) in tasks" class="border-light-gray carousal-border">
-      <div
+    <div v-for="(task, index) in tasks" class="">
+      <!-- <div
         @click="task.active = !task.active"
         class="cursor-pointer py-3 flex flex items-center"
         :class="{'font-semibold text-ideeza-black': task.active}"
       >
         <div class="text-center flex-grow">Task {{index+1}}</div>
         <div class="mr-5" v-html="task.active ? '-' : '+'"></div>
-      </div>
+      </div> -->
 
       <!--Task content-->
       <div
-        :class="{'important': task.important, 'task-contents-hide': !task.active, 'task-contents': task.active}"
-        class="task"
+        :class="{'important': task.important}"
+        class="task task-contents"
       >
         <div class="task-time">{{task.duration}}</div>
         <div class="task-name">{{task.title}}</div>
+
+        <div v-if="task.subtasks" class="text-sm font-normal">
+          <template v-for="t in task.subtasks">
+          <check-box v-model="t.completed">
+            {{t.description}}
+          </check-box>
+          </template>
+        </div>
 
         <div class="mt-8 flex justify-between items-center">
           <div class="flex items-center">
@@ -66,16 +74,24 @@
 <script>
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import tasklists from "~/json/tasklist.json";
+import CheckBox from "~/components/form/checkbox-light.vue"
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+};
 export default {
   name: "task-col",
+  props: ["index"],
   components: {
-    InvitePopup
+    InvitePopup,
+    CheckBox
   },
   data: function() {
     return {
       showAddTask: false,
       tasks: tasklists,
-      d: new Date(),
+      d: new Date().addDays(this.index),
       weeks: ["Sunday", "Monday", "Tuesday", "Thirsday", "Friday", "Saturday"],
       months: [
         "January",
@@ -110,10 +126,8 @@ export default {
 }
 
 .task-col {
-  @apply mt-5;
+  @apply m-5;
   width: 100%;
-  max-width: 370px;
-  min-width: 360px;
 }
 .task-wrapper {
   max-width: 1200px;
@@ -122,7 +136,7 @@ export default {
   transition: all 0.2s;
 }
 .task-contents {
-  @apply my-16 mx-3 p-3;
+  @apply p-3 border border-gray-100 mx-4 my-5;
 }
 .task-contents-hide {
   @apply h-0 overflow-hidden;
@@ -158,5 +172,9 @@ export default {
 }
 .important .add-member {
   @apply bg-white;
+}
+.task-container{
+  @apply mx-5 pb-5 mb-5 shadow-lg bg-white;
+  min-width: 350px;
 }
 </style>

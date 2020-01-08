@@ -12,7 +12,7 @@
         </div>
       </div>
 
-      <div class="flex justify-center lg:ml-10 mt-10 w-full lg:w-1/2">
+      <div class="md:flex justify-center lg:ml-10 mt-10 w-full lg:w-1/2">
         <div>
           <span class="text-base lg:text-xl text-gray-500 font-semibold block">FROM</span>
           <span class="text-lg lg:text-2xl text-gray-800 font-semibold block">Oklahoma, Ohio</span>
@@ -28,18 +28,27 @@
       </div>
     </div>
 
-    <div class="mt-10">
+    <div class="mt-10 mb-20">
       <img src="~/static/images/track-map.png" class="w-full object-cover object-center" alt />
     </div>
-    <div class="mt-10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="text-right absolute left-0 bottom-0">
+      <nuxt-link to="/user/order-tracking/making-product"> 
+        <button class="btn btn-normal btn--ideeza-dark btn-text-bold btn--rounded px-8 py-4 text-lg m-3">Back</button>
+      </nuxt-link>
+    </div>
+    <div class="text-right absolute right-0 bottom-0">
+      <nuxt-link to="/user/order-tracking/pick-up" >
+        <button class="btn btn-normal btn--ideeza btn-text-bold btn--rounded px-8 py-4 text-lg m-3">Next</button>
+      </nuxt-link>
+    </div>
+    <!-- <div class="mt-10">
        <nuxt-link to="/user/order-tracking/making-product"> 
         <button class="btn btn-normal btn--ideeza-dark btn-text-bold btn--rounded px-8 py-4 text-lg">Back</button>
       </nuxt-link>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <nuxt-link to="/user/order-tracking/pick-up" >
         <button class="btn btn-normal btn--ideeza btn-text-bold btn--rounded px-8 py-4 text-lg">Next</button>
       </nuxt-link>
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -24,14 +24,14 @@
 
               <img
                 @click="showMyIdeeza=true"
-                class="cursor-pointer"
+                class="cursor-pointer absolute top-50"
                 src="~/static/images/float-ideeza.png"
                 alt
               />
             </div>
           </div>
-          <div class="lg:w-1/2 pl-10">
-            <div class="flex justify-between items-center pb-5 border-b border-light-gray">
+          <div class="lg:w-1/2 md:pl-10">
+            <div class="md:flex justify-between items-center pb-5 border-b border-light-gray">
               <h2 class="font-semibold block text-3xl">Last Activity</h2>
               <button
                 class="btn pill-button px-10 text-lg"
@@ -39,45 +39,45 @@
               >View last activity</button>
             </div>
 
-            <div class="flex justify-between">
-              <nuxt-link to="/user/projects">
-                <div class="status-button p-6">
+            <div class="md:flex justify-between">
+              <nuxt-link to="/user/projects" class="flex-1">
+                <div class="status-button p-2">
                   <div class="flex items-center">
                     <font-awesome-icon
                       class="mr-6 h-10 text-2xl text-ideeza"
                       :icon="['fas', 'layer-group']"
                     />
                     <span
-                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                      class="text-3xl font-bold text-ideeza-black mb-5 leading-none"
                     >{{activities.projectsmark}}</span>
                   </div>
-                  <div class="pl-16">
+                  <div class="pl-12">
                     <span class="text-ideeza-blue-gray text-lg block">Projects</span>
                   </div>
                 </div>
               </nuxt-link>
-              <nuxt-link to="/user/profile">
-                <div class="status-button p-6">
+              <nuxt-link to="/user/profile" class="flex-1">
+                <div class="status-button p-2">
                   <div class="flex items-center">
                     <img class="mr-6" src="~/static/icons/users.svg" alt />
                     <span
-                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                      class="text-3xl font-bold text-ideeza-black mb-5 leading-none"
                     >{{activities.contactsmark}}</span>
                   </div>
-                  <div class="pl-16">
+                  <div class="pl-12">
                     <span class="text-ideeza-blue-gray text-lg block">Contacts</span>
                   </div>
                 </div>
               </nuxt-link>
-              <nuxt-link to="/user/dashboard">
-                <div class="status-button p-6">
+              <nuxt-link to="/user/dashboard" class="flex-1">
+                <div class="status-button p-2">
                   <div class="flex items-center">
                     <img class="mr-6" src="~/static/icons/bullseye.svg" alt />
                     <span
-                      class="text-6xl text-ideeza-black mb-5 leading-none"
+                      class="text-3xl font-bold text-ideeza-black mb-5 leading-none"
                     >{{activities.myscore}}</span>
                   </div>
-                  <div class="pl-16">
+                  <div class="pl-12">
                     <span class="text-ideeza-blue-gray text-lg block">My Score</span>
                   </div>
                 </div>
@@ -97,36 +97,56 @@
           </div>
         </div>
 
-        <div class="flex">
-          <div class="w-2/3">
+        <div class="sm:flex">
+          <div class="sm:w-2/3">
             <h1 class="font-semibold lg:text-3xl my-5">World's last innovation</h1>
-            <div class="scroll-area">
-              <smooth-scrollbar :options="{alwaysShowTracks: true}">
-                <div class="flex flex-wrap">
-                  <div class="blog-container mr-2" v-for="innovation in innovations">
-                    <nuxt-link to="">
-                      <div class="blog-image-container mb-8">
-                        <img :src="innovation.image_url" class="object-center object-contain" alt />
+            <div class="scroll-area" v-if="show">
+              <no-ssr>
+              <smooth-scrollbar ref="smooth-scroll-1">
+                <div class="sm:flex flex-wrap">
+                  <template v-for="innovs in innovations.chunk_inefficient(3)">
+                  <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovs">
+                    <div class="m-1" v-if="index%2==0">
+                      <nuxt-link to="">
+                        <div class="mb-8">
+                          <img :src="innovation.image_url" class="object-center object-contain" alt />
+                        </div>
+                      </nuxt-link>
+                      <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
+                      <p>{{innovation.description}}</p>
+                      <div class="flex justify-between items-center mt-5">
+                        <small>{{innovation.date}}</small>
+                        <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
                       </div>
-                    </nuxt-link>
-                    <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
-                    <p>{{innovation.description}}</p>
-                    <div class="flex justify-between items-center mt-5">
-                      <small>{{innovation.date}}</small>
-                      <button class="btn btn--ideeza px-4 py-2" @click="readMore">Read more</button>
+                    </div>
+                    <div class="m-1" v-else>
+                      <div class="flex justify-between items-center mb-5">
+                        <small>{{innovation.date}}</small>
+                        <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
+                      </div>
+                      <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
+                      <p>{{innovation.description}}</p>
+                      <nuxt-link to="">
+                        <div class="mt-8">
+                          <img :src="innovation.image_url" class="object-center object-contain" alt />
+                        </div>
+                      </nuxt-link>
                     </div>
                   </div>
+                  </template>
                   <!-- <li v-for="breed in breeds" :key="breed">
                     <p class="breed button--green">{{breed}}</p>
                   </li>-->
                 </div>
               </smooth-scrollbar>
+              </no-ssr>
             </div>
           </div>
-          <div class="w-1/3">
+          <div class="sm:w-1/3">
             <h1 class="font-semibold lg:text-3xl my-5">Top projects</h1>
             <div class="scroll-area">
-              <smooth-scrollbar :options="{alwaysShowTracks: true}">
+              <no-ssr>
+              <smooth-scrollbar ref="smooth-scroll-2">
                 <div class="flex flex-wrap">
                   <div class="w-1/2 p-2" v-for="topproject in topprojects">
                     <div class="p-2 border border-solid border-light-gray">
@@ -152,6 +172,7 @@
                   </div>
                 </div>
               </smooth-scrollbar>
+              </no-ssr>
             </div>
           </div>
         </div>
@@ -170,6 +191,17 @@ import axios from "axios";
 import innovation from "~/json/innovation.json";
 import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
+
+Object.defineProperty(Array.prototype, 'chunk_inefficient', {
+  value: function(chunkSize) {
+    var array = this;
+    return [].concat.apply([],
+      array.map(function(elem, i) {
+        return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
+      })
+    );
+  }
+});
 
 export default {
   // asyncData({ params }) {
@@ -196,7 +228,8 @@ export default {
       showMyIdeeza: false,
       topprojects: topprojects,
       innovations: innovation,
-      activities: activity.activity
+      activities: activity.activity,
+      show: true
     };
   },
   computed: {
@@ -204,7 +237,18 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+  mounted() {
+    let vm = this
+    setTimeout(() => {
+      console.log(this.$refs['smooth-scroll-1'].$data)
+    }, 10000);
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log(this.$refs['smooth-scroll-1'])
+    this.$refs['smooth-scroll-1'].scrollbar.removeListener()
+    this.$refs['smooth-scroll-2'].scrollbar.removeListener()
+    next();
+  },
   methods: {
     onClickOutside() {
       this.showMyIdeeza = false;
@@ -224,9 +268,6 @@ export default {
 </script>
 
 <style scoped>
-.welcome-container {
-  height: 455px;
-}
 .blog-image-container {
   width: 315px;
   height: 215px;
@@ -238,14 +279,15 @@ export default {
   height: 430px;
 }
 .blog-container {
-  @apply mr-2 mt-2;
-  width: 320px;
-  height: 420px;
+  @apply mt-2;
 }
 .status-button {
   @apply p-3 m-3 border border-solid border-ideeza cursor-pointer rounded;
 }
 /deep/ .scrollbar-thumb {
   @apply bg-ideeza opacity-75;
+}
+.top-50{
+  top: 50%;
 }
 </style>
