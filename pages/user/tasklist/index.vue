@@ -45,13 +45,15 @@
       <div class="text-gray-800 text-2xl font-semibold text-center">Calendar</div>
       <!--Calendar-->
       <vc-calendar
-        @dayclick="addTasks"
         class="mx-auto mt-5"
+        @dayclick="addTasks"
+        v-model="date"
         color="pink"
         is-expanded
         :theme="theme"
+        :attributes="attributes"
+        :value="null"
       />
-
       <div class="mt-5 py-5 px-5 border-t border-solid border-gray-300">
         <div class="text-xl text-gray-500 font-semibold">Latest Activity</div>
 
@@ -86,7 +88,7 @@ import TaskCol from "~/components/user/tasklist/task-col";
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
-import latestactivity from "~/json/latestactivity.json";
+import latestactivities from "~/json/latestactivity.json";
 export default {
   layout: "user",
   name: "task-index",
@@ -99,6 +101,7 @@ export default {
   },
   data: function() {
     return {
+      date: new Date(),
       tab: "daily",
       showAddTask: false,
       addNewMember: false,
@@ -110,11 +113,18 @@ export default {
           light: "ideeza-arrow"
         }
       },
+      attributes: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date()
+        }
+      ],
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
       id: 0,
 
-      latestactivities: latestactivity.latestactivities
+      latestactivities: latestactivities
     };
   },
   computed: {
@@ -132,7 +142,7 @@ export default {
     },
     addTasks() {
       if (this.tab === "daily") {
-        alert("daily");
+        alert(this.date);
       } else if (this.tab === "weekly") {
         this.tasksWeekly.push({
           id: this.id

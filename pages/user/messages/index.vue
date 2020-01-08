@@ -127,11 +127,11 @@
                   <span class="block text-gray-500 text-sm text-center">10/01/2018 8:41PM</span>
                   <div class="flex items-end flex-col mt-5">
 
-                    <div class="messages message--to">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="messages message--to" style="width:90%" v-if="sendmessage">
-                    {{sendmessage}}
+                <div class="messages message--to">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                </div>
+                <div class="messages message--to" style="width:500px" v-if="sendmessage">
+                 {{sendmessage}}
 
                     </div>
                     

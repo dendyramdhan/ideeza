@@ -1,9 +1,9 @@
 <template>
   <div >
 
-    <div class="flex">
+    <div class="md:flex">
 
-      <div class="w-3/5 ">
+      <div class="md:w-3/5 ">
         <div class="flex justify-between items-center mb-5">
           <span class="font-semibold">
             Edit QFN Square Package Overall Dimensions
@@ -123,17 +123,17 @@
 
 
         <!--Navigation-->
-        <div class="flex justify-between mt-10">
-          <button @click="back" class="btn pill-button px-16 py-0">Back</button>
-          <button @click="next" class="btn pill-button px-16 py-0">Next</button>
-          <button @click="$emit('next')" class="btn pill-button pill-button--ideeza px-16 py-0">Finish</button>
+        <div class="md:flex justify-between mt-10">
+          <button @click="back" class="btn pill-button px-16 py-0 mb-2 md:mb-0">Back</button>
+          <button @click="next" class="btn pill-button px-16 py-0 mb-2 md:mb-0">Next</button>
+          <button @click="$emit('next')" class="btn pill-button pill-button--ideeza px-16 py-0 mb-2 md:mb-0">Finish</button>
         </div>
       </div>
 
 
 
-      <div class="w-2/5 pl-5">
-        <div class="flex items-center mb-5 justify-end">
+      <div class="md:w-2/5 md:pl-5">
+        <div class="md:flex items-center mb-5 justify-end">
           <div class="view-button-container">
             <div @click="activeView = '2D'" :class="{'active': activeView === '2D'}" class="view-style b-right">2D Preview</div>
             <div @click="activeView = '3D'" :class="{'active': activeView === '3D'}" class="view-style b-left">3D Preview</div>

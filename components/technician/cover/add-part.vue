@@ -2,12 +2,12 @@
   <div class="w-full">
     <div class="w-full shadow-md bg-white relative">
 
-      <div class="p-5 flex justify-between items-center">
-        <div class="flex items-center">
-          <div class="flex items-center mr-5">
+      <div class="p-5 md:flex justify-between items-center">
+        <div class="md:flex items-center">
+          <div class="flex items-center mr-5 mb-2 md:mb-0">
             <check-box :checked="true" @onChange="toggleGrid">Grid</check-box>
           </div>
-          <div class="flex items-center">
+          <div class="flex items-center mb-2 md:mb-0">
             <span class="mr-1">Category</span>
             <select class="w-32 bg-white p-1 border border-solid border-gray-400">
               <option></option>
@@ -41,8 +41,8 @@
         </client-only>
       </div>
 
-      <div class="flex justify-between items-center p-5 w-full">
-        <div class="flex items-center font-semibold text-gray-800">
+      <div class="md:flex justify-between items-center p-5 w-full">
+        <div class="flex items-center font-semibold text-gray-800 mb-2 md:mb-0">
           <span class="mr-2">Axis</span>
           <span class="mr-2 text-lg">X</span>
           <input @input="setTransform($event.target.value, 'X')" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
@@ -51,19 +51,20 @@
           <span class="mr-2 text-lg">Z</span>
           <input @input="setTransform($event.target.value, 'Z')" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
         </div>
-        <div class="flex items-center font-semibold text-gray-800">
+        <div class="flex items-center font-semibold text-gray-800 mb-2 md:mb-0">
           <div class="relative mr-5 flex flex-col items-center text-xs">
             <span class="block">Color</span>
-            <input v-model="objectColor" type="color">
+            <span class="w-10 h-10 rounded-full" :style="{backgroundColor:objectColor}" @click="$refs['color'].click()"></span>
+            <input v-model="objectColor" type="color" class="opacity-0" ref="color">
           </div>
 
-          <div class="relative flex flex-col items-center text-xs">
+          <!-- <div class="relative flex flex-col items-center text-xs">
             <span class="block">BG Color</span>
             <input v-model="background" type="color">
-          </div>
+          </div> -->
 
         </div>
-        <div class="flex">
+        <div class="flex mb-2 md:mb-0">
           <button @click="transform='translate'" class="btn pill-button py-0 px-5 " :class="{'pill-button--ideeza': transform === 'translate'}" >Translate</button>
           <button @click="transform='scale'" class="btn pill-button py-0 px-5 mx-5" :class="{'pill-button--ideeza': transform === 'scale'}" >Scale</button>
           <button @click="transform='rotate'" class="btn pill-button py-0 px-5" :class="{'pill-button--ideeza': transform === 'rotate'}" >Rotate</button>
@@ -85,7 +86,7 @@
     </div>
 
     <div class="w-full mt-10 lg:flex justify-end">
-      <button class="btn pill-button py-0 px-20 mr-5" >+ Add new part</button>
+      <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button>
       <button class="btn pill-button pill-button--ideeza py-0 px-12" >Save</button>
     </div>
 
@@ -112,7 +113,7 @@
             objectData: {},           // the object used to import a 3d object
             uploadData: null,         // the event from upload
             transformData: [0, 'X'],  // first is the value of input, second is axis - X,Y,Z(string)
-            objectColor: "#ffffff",   // color of object
+            objectColor: "#2B6CB0",   // color of object
             apiPlatform: "polygoogle",// site where we search polygoogle/remix3d
             searchFor: "",            // text after we search
           }
@@ -174,4 +175,17 @@
   .color-container{
     @apply rounded-full w-10 h-10 cursor-pointer border border-solid border-gray-300 shadow;
   }
+  input[type="color"] {
+    -webkit-appearance: none;
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: none;
+  }
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  input[type="color"]::-webkit-color-swatch {
+    border: none;
+}
 </style>

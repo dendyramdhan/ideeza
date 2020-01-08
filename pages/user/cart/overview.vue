@@ -84,7 +84,7 @@ export default {
   data: function() {
     return {
       columns: ["id", "detail", "color", "quantity", "actions"],
-      projects: products.projects,
+      projects: products,
 
       options: {
         headings: {

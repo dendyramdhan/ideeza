@@ -61,7 +61,7 @@
     </div>
 
     <div class="w-full mt-10 lg:flex justify-end">
-      <button class="btn pill-button py-0 px-20 mr-5" >+ Add new part</button>
+      <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button>
       <button class="btn pill-button pill-button--ideeza py-0 px-12" >Save</button>
     </div>
   </div>

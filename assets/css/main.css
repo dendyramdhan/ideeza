@@ -164,6 +164,9 @@ select{
 .btn--ideeza-dark{
   @apply bg-ideeza-dark text-white border-ideeza-dark;
 }
+.btn--ideeza-gray-500{
+  @apply bg-ideeza-gray-500 text-white border-ideeza-gray-500;
+}
 .btn-normal{
   @apply font-thin rounded-none leading-none;
   min-width: fit-content;
@@ -437,4 +440,27 @@ select{
    .curve-bg{
     background-position: 0 -400px;
   }
+}
+.vc-border {
+  border-width: 3px !important;
+}
+ul.pagination.VuePagination__pagination{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+li.VuePagination__pagination-item.page-item a{
+  border: 1px solid #ff00c7;
+  margin: 0 5px;
+  padding: 7px 10px;
+  border-radius: 3px;
+  text-align: center;
+}
+li.VuePagination__pagination-item.page-item.active a{
+  border: 3px solid #ff00c7;
+  /* padding: 0px 3px; */
+  padding: 5px 8px;
+}
+p.VuePagination__count{
+    display: none;
 }

@@ -164,24 +164,4 @@
     height: calc(32rem + 0.75rem);
     width: 100%;
   }
-  ul.pagination.VuePagination__pagination{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  li.VuePagination__pagination-item.page-item a{
-    border: 1px solid #ff00c7;
-    margin: 0 5px;
-    padding: 7px 10px;
-    border-radius: 3px;
-    text-align: center;
-  }
-  li.VuePagination__pagination-item.page-item.active a{
-    border: 3px solid #ff00c7;
-    /* padding: 0px 3px; */
-    padding: 5px 8px;
-  }
-  p.VuePagination__count{
-      display: none;
-  }
 </style>

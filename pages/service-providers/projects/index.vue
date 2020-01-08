@@ -125,7 +125,7 @@
                         <div class="text text-xs">Completed</div>
                     </div>
                     <div class="event-icons text-right">
-                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
                         <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
                     </div>
                 </li>

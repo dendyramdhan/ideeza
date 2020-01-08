@@ -61,41 +61,156 @@
       <table class="mt-10 shadow-md">
         <thead>
         <tr class="text-white h16 gradient-bg">
-          <th class="text-left ">My Tasks</th>
-
+          <th class="text-left ">Tasks</th>
+          <th class="text-left">Domain</th>
+          <th class="text-left">Assigned to</th>
           <th class="text-left">Due Date</th>
           <th class="text-left">Task Status</th>
           <th class="text-left">Notification</th>
         </tr>
         </thead>
         <tbody>
+          <template v-for="task in tasks">
         <tr class="bg-ideeza-100">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            Iron Making
+          <td class="cursor-pointer" @click.self="expand(task.id)" >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" v-if="task.id in expanded&&expanded[task.id]==true"/> 
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']" v-else/>
+            {{task.name}}
           </td>
-
-          <td>05.05.2019</td>
-          <td class="status status--completed">COMPLETED</td>
+          <td>{{task.domain}}</td>
+          <td>
+            <img v-for="image in task.assigned_to" :src="image.url" class="avatar">
+            <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg"> -->
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">{{task.timeline.date}}</span>
+              <div class="bg-ideeza rounded-full h-8" :style="{ width: task.timeline.progress+'%'}">
+              </div>
+            </div>
+          </td>
+          <td class="status status--completed" v-if="task.status == 1">
+            completed
+          </td>
+          <td v-if="task.status == 2" class="status status--over">over due</td>
+          <td v-if="task.status == 3" class="status status--progress">in progress</td>
+          <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
           <td class="notifications">
-            2 new notifications
+            <font-awesome-icon v-if="task.status == 1" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
+            <font-awesome-icon v-else-if="task.status == 2" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
+            <font-awesome-icon v-else-if="task.status == 3" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
           </td>
-
-
         </tr>
-        <tr class="cursor-pointer" >
-          <td class="cursor-pointer" @click.self="editTask=true">
+        <template v-if="task.id in expanded&&expanded[task.id]==true">
+          <tr class="bg-pink-200" v-for="(subtask) in task.subtasks">
+            <td class="cursor-pointer md:text-right" @click.self="detailTask=true">
+            {{subtask.name}}
+            </td>
+          <td>{{subtask.domain}}</td>
+          <td>
+            <img v-for="image in subtask.assigned_to" :src="image.url" class="avatar">
+            <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg"> -->
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">{{subtask.timeline.date}}</span>
+              <div class="bg-ideeza rounded-full h-8" :style="{ width: subtask.timeline.progress+'%'}">
+              </div>
+            </div>
+          </td>
+          <td class="status status--completed" v-if="subtask.status == 1">
+            completed
+          </td>
+          <td v-if="subtask.status == 2" class="status status--over">over due</td>
+          <td v-if="subtask.status == 3" class="status status--progress">in progress</td>
+          <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
+          <td class="notifications">
+            <font-awesome-icon v-if="subtask.status == 1" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
+            <font-awesome-icon v-else-if="subtask.status == 2" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
+            <font-awesome-icon v-else-if="subtask.status == 3" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
+          </td>
+          </tr>
+        </template>
+          </template>
+        <!-- <tr class="cursor-pointer" @click.self="editTask=true">
+          <td >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
             Iron Making
           </td>
-
-          <td>05.05.2019</td>
+          <td>Cover</td>
+          <td>
+            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">16.11.2019</span>
+              <div class="bg-ideeza rounded-full h-8" style="width:80%;">
+              </div>
+            </div>
+          </td>
           <td class="status status--over">over due</td>
           <td class="notifications">
-            2 new notifications
+            <font-awesome-icon class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/>
           </td>
 
 
         </tr>
+        <tr class="bg-ideeza-100">
+          <td class="cursor-pointer" @click.self="editTask=true" >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
+            Iron Making
+          </td>
+          <td>Code</td>
+          <td>
+            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">16.11.2019</span>
+              <div class="bg-ideeza rounded-full h-8" style="width:60%;">
+              </div>
+            </div>
+          </td>
+          <td class="status status--progress">in progress</td>
+          <td class="notifications">
+            <font-awesome-icon class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/>
+          </td>
 
+
+        </tr>
+        <tr class="">
+          <td class="cursor-pointer" @click.self="editTask=true" >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
+            Iron Making
+          </td>
+          <td>Electronics</td>
+          <td>
+            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">16.11.2019</span>
+              <div class="bg-ideeza rounded-full h-8" style="width:90%;">
+              </div>
+            </div>
+          </td>
+          <td class="status status--completed">COMPLETED</td>
+          <td class="notifications">
+            <font-awesome-icon class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
+          </td>
+
+
+        </tr> -->
 
         </tbody>
       </table>
@@ -131,6 +246,7 @@
   import AddNewTask from "~/components/technician/management/new-task.vue"
   import EditTask from "~/components/technician/management/edit-task-technician.vue"
   import TaskTimeLine from "~/components/technician/management/task-timeline.vue"
+  import CompleteTask from "~/components/technician/management/complete-task.vue"
 
     export default {
         name: "detail",
@@ -139,6 +255,7 @@
         'new-task': AddNewTask,
         'edit-task': EditTask,
         'task-timeline': TaskTimeLine,
+        'complete-task': CompleteTask,
         LeftMenu,
 
       },
@@ -147,11 +264,232 @@
           return this.$store.state.usermenu.openLeftMenu;
         }
       },
+      methods: {
+        expand(id) {
+          if(id in this.expanded &&this.expanded[id] == true){
+            this.$set(this.expanded, id, false);  
+          }
+          else {
+            this.$set(this.expanded, id, true);
+          }
+          this.$forceUpdate();
+        },
+      },
       data: function () {
         return {
           addNewProject: false,
           addNewTask: false,
-          editTask: false
+          editTask: false,
+          expanded: {},
+          tasks: [
+            {
+              id: 1,
+              name: 'Make Iron from steal: first phase',
+              domain: 'Electronics',
+              assigned_to: [
+                {
+                  url: 'https://randomuser.me/api/portraits/women/20.jpg'
+                },
+                {
+                  url: 'https://randomuser.me/api/portraits/men/20.jpg'  
+                },
+                {
+                  url: 'https://randomuser.me/api/portraits/men/12.jpg'  
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: '02.10.2020'
+              },
+              status: 1, //1 for completed, 2 for over_due, 3 for in_progress
+              subtasks: [
+                {
+                  id: 2,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: 'https://randomuser.me/api/portraits/women/20.jpg'
+                    },
+                    {
+                      url: 'https://randomuser.me/api/portraits/men/20.jpg'  
+                    },
+                    {
+                      url: 'https://randomuser.me/api/portraits/men/12.jpg'  
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 1
+                },
+                {
+                  id: 3,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: ''
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 1
+                },
+                {
+                  id: 4,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: 'https://randomuser.me/api/portraits/women/20.jpg'
+                    },
+                    {
+                      url: 'https://randomuser.me/api/portraits/men/20.jpg'  
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 1
+                }
+              ]
+            },
+            {
+              id: 5,
+              name: 'Make Iron from steal: first phase',
+              domain: 'Electronics',
+              assigned_to: [
+                {
+                  url: 'https://randomuser.me/api/portraits/women/20.jpg'
+                },
+                {
+                  url: 'https://randomuser.me/api/portraits/men/20.jpg'  
+                },
+              ],
+              timeline: {
+                progress: 80,
+                date: '02.10.2020'
+              },
+              status: 2, //1 for completed, 2 for over_due, 3 for in_progress
+              subtasks: [
+                {
+                  id: 6,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: 'https://randomuser.me/api/portraits/men/20.jpg'  
+                    },
+                    {
+                      url: 'https://randomuser.me/api/portraits/men/12.jpg'  
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 1
+                },
+                {
+                  id: 7,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: ''
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 2
+                },
+                {
+                  id: 8,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: ''
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 2
+                }
+              ]
+            },
+            {
+              id: 9,
+              name: 'Make Iron from steal: first phase',
+              domain: 'Electronics',
+              assigned_to: [
+                {
+                  url: 'https://randomuser.me/api/portraits/women/20.jpg'
+                },
+              ],
+              timeline: {
+                progress: 70,
+                date: '02.10.2020'
+              },
+              status: 3, //1 for completed, 2 for over_due, 3 for in_progress
+              subtasks: [
+                {
+                  id: 10,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: ''
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 1
+                },
+                {
+                  id: 11,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: ''
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 2
+                },
+                {
+                  id: 11,
+                  name: 'Make Iron from steal: first phase',
+                  domain: 'Electronics',
+                  assigned_to: [
+                    {
+                      url: ''
+                    }
+                  ],
+                  timeline: {
+                    progress: 30,
+                    date: '02.10.2020'
+                  },
+                  status: 3
+                }
+              ]
+            }
+          ]
         }
       }
     }

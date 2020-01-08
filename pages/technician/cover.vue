@@ -8,16 +8,16 @@
       <div class="main-contents">
 
         <!--Header Bar-->
-        <div class="header-bar lg:flex items-center mx-auto">
-           <nuxt-link class="header-menu" to="/technician/cover/add-part">
+        <div class="header-bar lg:flex items-center md:mx-auto">
+           <nuxt-link class="header-menu block md:inline-block mb-2 md:mb-0" to="/technician/cover/add-part">
              Add Part
            </nuxt-link>
 
-          <nuxt-link class="header-menu" to="/technician/cover/add-component">
+          <nuxt-link class="header-menu block md:inline-block mb-2 md:mb-0" to="/technician/cover/add-component">
             Add Component
           </nuxt-link>
 
-          <nuxt-link class="header-menu" to="/technician/cover/add-cover">
+          <nuxt-link class="header-menu block md:inline-block mb-2 md:mb-0" to="/technician/cover/add-cover">
             Add Cover
           </nuxt-link>
 
