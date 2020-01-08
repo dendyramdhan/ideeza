@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="email-support-container mx-auto mt-16">
       <div class="block stepper-bar bg-gray-200 relative mx-auto mb-20">
         <div class="stepper-bar-overlay bg-ideeza-dark" :style="`width: ${overlayWidth}%` "></div>
@@ -70,9 +71,11 @@
 
     <!--Bot Buttons-->
     <div v-if="step === 0 || (step >= 3 && step !== 5)" class="mt-10 w-full flex">
+
       <div class="w-1/2 text-left">
-        <button v-if="step > 0 " @click="onBack" class="btn pill-button px-16 py-0">Back</button>
+        <button v-if="step > 0"  @click="onBack" class="btn pill-button px-16 py-0">Back</button>
       </div>
+
       <div class="w-1/2 text-right">
         <button v-if="step <= 3" @click="onNext" class="btn pill-button px-16 py-0">Next</button>
         <button
@@ -81,7 +84,9 @@
           class="btn pill-button pill-button--ideeza px-16 py-1"
         >Finish</button>
       </div>
+
     </div>
+    
   </div>
 </template>
 

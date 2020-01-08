@@ -207,8 +207,7 @@ export default {
       this.articleArray.push(item);
     });
 
-    axios
-      .get('http://127.0.0.1:5000/api/test_api')
+    axios.get('http://127.0.0.1:5000/api/test_api')
       .then(response => 
       {
         console.log("response :", response)
