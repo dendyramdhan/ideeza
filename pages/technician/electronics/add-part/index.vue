@@ -47,7 +47,6 @@
           <div class="stepper-text stepper-text--code" :class="{'active': step >= 3 }">General</div>
         </div>
       </div>
-    </div>
 
     <AddPartSearch
       @select="addPartSelect=true"
@@ -82,7 +81,7 @@
         >Finish</button>
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>

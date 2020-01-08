@@ -27,9 +27,12 @@
         <div v-if="tab==='daily'" class="task-wrapper flex mb-10">
           <!--Task Col Daily-->
           <div class="mx-auto task-col md:flex flex-wrap">
-            <template v-for="n in 1">
-              <div>
-              <TaskCol @showAddTask="displayAddTask" :index="n" />
+            <template v-for="task in tasks">
+              <div v-if="filter_date==null">
+                <TaskCol @showAddTask="displayAddTask" :task="task" />
+              </div>
+              <div v-else-if="task.date == filter_date">
+                <TaskCol @showAddTask="displayAddTask" :task="task" />
               </div>
             </template>
           </div>
@@ -97,6 +100,7 @@ import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import latestactivities from "~/json/latestactivity.json";
+import taskslist from "~/json/tasklist.json"
 export default {
   layout: "user",
   name: "task-index",
@@ -113,6 +117,8 @@ export default {
       tab: "daily",
       showAddTask: false,
       addNewMember: false,
+      filter_date: null,
+      tasks: taskslist,
       theme: {
         container: {
           light: "ideeza-date-picker"
@@ -148,9 +154,10 @@ export default {
     closeAddTask() {
       this.showAddTask = false;
     },
-    addTasks() {
+    addTasks(date) {
+      console.log(date)
       if (this.tab === "daily") {
-        alert(this.date);
+        this.filter_date = date.dateTime
       } else if (this.tab === "weekly") {
         this.tasksWeekly.push({
           id: this.id

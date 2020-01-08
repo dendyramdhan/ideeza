@@ -102,7 +102,7 @@
             <h1 class="font-semibold lg:text-3xl my-5">World's last innovation</h1>
             <div class="scroll-area" v-if="show">
               <no-ssr>
-              <smooth-scrollbar ref="smooth-scroll-1">
+              <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}">
                 <div class="sm:flex flex-wrap">
                   <template v-for="innovs in innovations.chunk_inefficient(3)">
                   <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovs">
@@ -146,7 +146,7 @@
             <h1 class="font-semibold lg:text-3xl my-5">Top projects</h1>
             <div class="scroll-area">
               <no-ssr>
-              <smooth-scrollbar ref="smooth-scroll-2">
+              <smooth-scrollbar ref="smooth-scroll-2" :options="{alwaysShowTracks: true}">
                 <div class="flex flex-wrap">
                   <div class="w-1/2 p-2" v-for="topproject in topprojects">
                     <div class="p-2 border border-solid border-light-gray">

@@ -2,9 +2,8 @@
   <div class="task-container">
     <div
       class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400"
-    >{{d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear()}}</div>
-
-    <div v-for="(task, index) in tasks" class="">
+    >{{task.date_string}}</div>
+    <div v-for="(task, index) in task.tasks" class="">
       <!-- <div
         @click="task.active = !task.active"
         class="cursor-pointer py-3 flex flex items-center"
@@ -82,7 +81,7 @@ Date.prototype.addDays = function(days) {
 };
 export default {
   name: "task-col",
-  props: ["index"],
+  props: ["task"],
   components: {
     InvitePopup,
     CheckBox
@@ -90,7 +89,6 @@ export default {
   data: function() {
     return {
       showAddTask: false,
-      tasks: tasklists,
       d: new Date().addDays(this.index),
       weeks: ["Sunday", "Monday", "Tuesday", "Thirsday", "Friday", "Saturday"],
       months: [
