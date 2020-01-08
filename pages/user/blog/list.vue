@@ -162,17 +162,22 @@
       </div>
     </div>
     <!-- {{Math.ceil(counter)}} -->
+     
+
+
+
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import articles from "../../../data/BlogApi.json";
 import { teal } from "color-name";
 export default {
   name: "blog-list",
   data: function() {
     return {
-      searchTerm: "",
+       searchTerm: "",
       articles: articles,
       articleArray: [],
       currentSort: "name",
@@ -201,9 +206,26 @@ export default {
     this.articles.map(item => {
       this.articleArray.push(item);
     });
+
+    axios
+      .get('http://127.0.0.1:5000/api/test_api')
+      .then(response => 
+      {
+        console.log("response :", response)
+      })
  
   },
   methods: {
+    create(payload) {},
+
+  show(id) {},
+  update(payload, id) {},
+
+  delete(id) {},
+
+
+
+
     changeshowperiod(e) {
       this.articleArray = [];
       if (e.target.value == "all") {
