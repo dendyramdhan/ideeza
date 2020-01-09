@@ -2,10 +2,10 @@
   <div class="phone-support lg:flex flex-wrap justify-center">
     
       <div class="lg:w-1/3 mt-10"  v-for="Project in Projects" :key="Project"> 
-        <img src="~/static/images/map.png" class="object-cover object-center w-full" alt />
+        <img :src="Project.mapimage" class="object-cover object-center w-full" alt />
       </div>
       <div class="lg:w-1/3 lg:px-5 mt-10"  v-for="Project in Projects" :key="Project">
-        <img src="~/static/images/city.png" class="object-cover object-center w-full h-full" alt />
+        <img :src="Project.cityimage" class="object-cover object-center w-full h-full" alt />
       </div>
       <div class="lg:w-1/3 mt-10"  v-for="Project in Projects" :key="Project">
         <h1 class="text-xl lg:text-4xl font-semibold">City name {{Project.Cityname}}</h1>
