@@ -33,7 +33,7 @@
               </nuxt-link>
 
               <div
-                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 pop-over"
+                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 hidden pop-over"
               >
                 <div class="flex justify-between items-center">
                   <div class="flex items-center">
@@ -84,7 +84,7 @@
               </nuxt-link>
 
               <div
-                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 bg-white pop-over"
+                class="absolute p-5 rounded-lg border-light-gray border-solid border hidden shadow-md z-50 bg-white pop-over"
               >
                 <div class="flex justify-between items-center">
                   <div class="flex items-center">
@@ -162,6 +162,9 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
+  mounted() {
+    console.log('mounted');
+  },
   methods: {}
 };
 </script>
@@ -209,7 +212,6 @@ export default {
     height: 370px;
   }
   .pop-over {
-    @apply hidden;
     width: 500px;
     top: 70%;
     left: 20%;

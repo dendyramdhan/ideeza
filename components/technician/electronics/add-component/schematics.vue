@@ -1,7 +1,7 @@
 <template>
   <div class="engine-container">
 
-    <div class="engine-actions flex justify-between items-center bg-white p-5">
+    <div class="engine-actions md:flex justify-between items-center bg-white p-5">
       <div class="flex items-center ">
         <check-box :checked="true" @onChange="toggleGrid">Grid</check-box>
         <div class="resolution-container flex items-center ml-10 w-64">

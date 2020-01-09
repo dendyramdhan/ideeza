@@ -6,7 +6,7 @@
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
-        <div class="bg-white shadow-md border-solid border-gray-400 overflow-y-auto p-10">
+        <div class="bg-white shadow-md border-solid border-gray-400 overflow-y-auto p-3 md:p-10">
           <div
             class="flex items-center justify-between pb-3 border-b-2 border-solid border-ideeza-dark"
           >
@@ -35,8 +35,8 @@
           </div>
 
           <div class="my-3 lg:flex justify-between text-sm">
-            <div class="flex">
-              <div class="flex items-center p-1 border border-solid border-ideeza-gray-700 mr-5">
+            <div class="flex mb-2 justify-between md:justify-start">
+              <div class="flex items-center p-1 border border-solid border-ideeza-gray-700 md:mr-5 mr-1">
                 <span class="mr-3">Type:</span>
                 <select class="border-0" @change="selectkindman" v-model="kindman">
                   <option>Patents</option>
@@ -54,7 +54,7 @@
                 </select>
               </div>
             </div>
-            <div>
+            <div class="flex md:block justify-between">
               <button
                 @click="showOptimize = true"
                 class="btn btn-normal btn--ideeza px-8 py-2"
@@ -71,45 +71,34 @@
 
           <div class="services-container mx-auto mt-10">
             <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray" >
-              <div class="lg:flex lg:mr-20">
+              <div class="md:flex w-full">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
                   <img class="avatar rounded-full mx-auto" :src="Service.profileImage" />
                 </div>
-                <div>
-                  <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                      <h1 class="text-lg font-semibold inline-block mr-5">{{Service.name}}</h1>
-                      <span v-if="index == 0">
+                <div class="flex-1">
+                  <div class="md:flex justify-between items-center">
+                    <div class="flex-1 md:flex items-center">
+                      <h1 class="text-lg font-semibold block md:inline-block mr-5 text-center md:text-left">{{Service.name}}</h1>
+                      <span v-if="index == 0" class="text-center block md:text-left md:inline mb-2 md:mb-0">
                         <button
                           class="btn btn-normal btn--ideeza px-5 py-2"
                           @click="showprofiledetail"
                         >Available</button>
                       </span>
-                      <span v-else>&nbsp;</span>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
-
-                    <div class="flex items-center">
+                    <div class="flex justify-center md:justify-start items-center">
                       <div
-                        class="py-1 px-2 border border-solid border-light-gray mr-3"
+                        class="py-1 px-2 border border-solid border-light-gray mr-3 md:flex-none"
                       >{{Service.time}} Days</div>
                       <div
-                        class="py-1 px-2 border border-solid border-light-gray mr-3"
+                        class="py-1 px-2 border border-solid border-light-gray mr-3 md:flex-none"
                       >{{Service.cost}}</div>
-                    </div>
-
-                    <div class="flex items-center">
-                      <span v-if="index == 0">
-                        <button
-                          @click="requestQuote = !requestQuote"
-                          class="btn btn-normal px-3 py-2"
-                          :class="{'btn-green': quoteSend}"
-                        >Request Quote</button>
-                      </span>
-                      <span v-else>&nbsp;</span>
+                      <div v-if="index==0" @click="requestQuote = !requestQuote" :class="{'btn-green': quoteSend}"
+                        class="py-1 px-2 border border-solid border-light-gray md:flex-none flex-1"
+                      >Request Quote</div>
                     </div>
                   </div>
-                  <div class="my-5 flex items-center">
+                  <div class="flex-1 my-5 flex justify-center md:justify-start items-center">
                     <h2 class="inline-block mr-5 font-semibold text-lg">Code</h2>
                     <span v-for="index in  Service.score" :key="index">
                       <font-awesome-icon class="h-3 text-ideeza-gold" :icon="['fas', 'star']" />
@@ -119,7 +108,7 @@
                   <div class="text-ideeza-black" v-if="flag == 1">{{Service.shortdescription}}</div>
                   <div class="text-ideeza-black" v-else>{{Service.description}}</div>
 
-                  <div class="flex mt-5">
+                  <div class="flex mt-5 justify-center md:justify-start">
                     <button class="btn btn--ideeza-dark px-3 py-1 mr-3">{{Service.mainCore1}}</button>
                     <button class="btn btn--ideeza-dark px-3 py-1 mr-3">{{Service.mainCore2}}</button>
                     <button class="btn btn--ideeza-dark px-3 py-1 mr-3">{{Service.mainCore3}}</button>
@@ -363,6 +352,7 @@ export default {
 .quote-popup {
   @apply bg-white shadow p-5;
   width: 500px;
+  max-width: 95vw;
 }
 select {
   @apply text-ideeza;

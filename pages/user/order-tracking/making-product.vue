@@ -1,9 +1,8 @@
 <template>
-  <div class="lg:flex justify-between">
-    <div class="making-container">
+  <!-- <div class="lg:flex justify-between"> -->
+    <!-- <div class="making-container">
       <div class="track-heading">Freelancers</div>
       <div class="mt-10" v-for="Project in Projects">
-        <!--Freelancers-->
         <div class="mb-10"   v-if="Project.kind == 'Freelancers' ">
           <div class="flex justify-between items-center" >
             <div class="flex items-center">
@@ -31,13 +30,14 @@
         </div>
         
       </div>
-    </div>
-    <div class="making-container">
-      <div class="track-heading">Electronics</div>
+    </div> -->
+    <div>
+    <h4 class="text-lg text-ideeza-black font-semibold">We have already made the cover and electronics part of your product. Now it's time to combine them</h4>
+    <div class="making-container mx-auto">
+      <div class="track-heading mt-6">Combine & QA</div>
       <div class="mt-10">
         <Progress width="60" />
-        <h1 class="font-semibold my-5">People working on code</h1>
-        <div class="mb-10" v-for="Project in Projects">
+        <div class="my-10" v-for="Project in Projects">
           <div class="flex justify-between items-center" v-if="Project.kind == 'Eletronics' ">
             <div class="flex items-center">
               <div class="mr-2">
@@ -48,18 +48,30 @@
                 <span class="block text-sm text-gray-500">{{Project.consultantKind}}</span>
               </div>
             </div>
-            <span class="text-sm text-gray-500">{{Project.consultantname}}</span>
-             <nuxt-link :to="{ path: '/user/messages', query: { id: Project.id}}">
-            <font-awesome-icon
-              class="mr-2 h-6 text-ideeza text-xl cursor-pointer"
-              :icon="['fas', 'envelope']"
-            /></nuxt-link>
+            <div class="flex items-center">
+              <div class="text-sm text-gray-500 mr-2">
+                <span class="block font-semibold text-sm text-ideeza">{{Project.consultantname}}</span>
+                <span class="block text-xs font-bold text-gray-500">{{Project.state}}</span>
+              </div>
+              <nuxt-link :to="{ path: '/user/messages', query: { id: Project.id}}">
+                <font-awesome-icon
+                  class="mr-2 h-6 text-ideeza text-xl cursor-pointer"
+                  :icon="['far', 'envelope']"
+                />
+              </nuxt-link>
+            </div>
           </div>
         </div>
 
       </div>
     </div>
-    <div class="making-container">
+    <div class="text-right absolute right-0 bottom-0">
+    <nuxt-link to="/user/order-tracking/delivery">
+      <button class="btn btn-normal btn--ideeza btn-text-bold btn--rounded px-8 py-4 text-lg m-3" >Next</button>
+    </nuxt-link>
+    </div>
+    </div>
+    <!-- <div class="making-container">
       <div class="track-heading">Parts</div>
       <div class="mt-10">
         <Progress width="30" />
@@ -88,9 +100,9 @@
       <nuxt-link to="/user/order-tracking/delivery">
           <button class="btn btn-normal btn--ideeza btn-text-bold btn--rounded px-8 py-4 text-lg" >Next</button>
           </nuxt-link>
-    </div>
+    </div> -->
      
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="project-right-bar lg:ml-10 relative">
+  <div class="project-right-bar lg:ml-5 relative">
     <div class="text-right block my-5">
       <nuxt-link to="/user/add-service" class="btn btn-normal btn--ideeza px-6 py-2">Add service +</nuxt-link>
     </div>
@@ -153,10 +153,6 @@ export default {
 </script>
 
 <style scoped>
-.project-right-bar {
-  width: 100%;
-  max-width: 400px;
-}
 .track-heading {
   @apply text-2xl font-semibold relative;
   width: fit-content;

@@ -8,16 +8,16 @@
       <div class="main-contents">
 
         <!--Header Bar-->
-        <div class="header-bar lg:flex items-center mx-auto">
-           <nuxt-link class="header-menu" to="/technician/electronics/add-part">
+        <div class="header-bar lg:flex items-center mx-2 md:mx-auto">
+           <nuxt-link class="block md:inline mb-2 md:mb-0 header-menu" to="/technician/electronics/add-part">
              Add Part
            </nuxt-link>
 
-          <nuxt-link class="header-menu" to="/technician/electronics/add-component">
+          <nuxt-link class="block md:inline mb-2 md:mb-0 header-menu" to="/technician/electronics/add-component">
             Add Component
           </nuxt-link>
 
-          <nuxt-link class="header-menu" to="/technician/electronics/add-pcb">
+          <nuxt-link class="block md:inline mb-2 md:mb-0 header-menu" to="/technician/electronics/add-pcb">
             Add PCB
           </nuxt-link>
 
@@ -80,18 +80,22 @@
 </script>
 
 <style scoped>
-
-  .header-bar{
-    width: fit-content;
-  }
-
   .header-menu{
-    @apply px-6 py-3 bg-white text-lg text-gray-600 cursor-pointer mr-6 font-semibold;
+    @apply px-6 py-3 bg-white text-lg text-gray-600 cursor-pointer font-semibold;
   }
   .header-menu:hover{
     @apply text-ideeza;
   }
   .header-menu.active-link{
     @apply bg-transparent text-ideeza border border-solid border-gray-300;
+  }
+
+  @screen md{
+    .header-bar{
+      width: fit-content;
+    }
+    .header-menu {
+      @apply mr-6;
+    }
   }
 </style>

@@ -4,8 +4,8 @@
     <LeftMenu />
     <!-- Main Contents -->
     <div class="flex-grow">
-      <div class="main-contents lg:flex">
-        <div class="detail-main">
+      <div class="main-contents md:flex">
+        <div class="detail-main md:w-2/3">
           <!--Panel Menu-->
           <div
             class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3"
@@ -120,7 +120,7 @@
         </div>
 
         <!--Right Sidebar-->
-        <RightSideBar class="flex-grow" />
+        <RightSideBar class="flex-grow md:w-1/3" />
       </div>
     </div>
     <ShareInternal v-if="internalShare" @close="closeShareInternal" />

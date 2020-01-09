@@ -28,18 +28,19 @@
       <!--Left Menu-->
       <div v-if="activeMessages === 'people'" class="left-main-menu border-t border-solid border-gray-300 z-50 bg-white">
 
-        <div class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 ">
+
+        <div v-for="(item, index) in userList" class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 user-item"  @click="$emit('select_user', index)" >
           <div class="grow">
             <div class="flex items-center">
               <div class="mr-1">
                 <img class="h-10 w-10 rounded-full"
-                     src="https://randomuser.me/api/portraits/women/20.jpg">
+                     :src="item.avarta">
               </div>
               <div>
-                <span class="text-base font-semibold text-gray-800">Jasmine Mueller</span>
-                <span class="text-xs text-ideeza"><span class="text-6xl text-gray-500 line-height-0" >.</span> 5min ago</span>
+                <span class="text-base font-semibold text-gray-800">{{item.name}}</span>
+                <span class="text-xs text-ideeza"><span class="text-6xl text-gray-500 line-height-0" >.</span> {{item.last_time}} </span>
                 <div class="text-sm text-gray-500">
-                  great product, love the func ....
+                  {{item.last_message}}
                 </div>
               </div>
             </div>
@@ -48,6 +49,8 @@
             <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', 'ellipsis-h']"/>
           </div>
         </div>
+
+<!-- 
         <div class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 ">
           <div class="grow">
             <div class="flex items-center">
@@ -107,7 +110,9 @@
           <div class="flex-shrink">
             <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', 'ellipsis-h']"/>
           </div>
-        </div>
+        </div> -->
+
+
       </div>
       <div v-if="activeMessages === 'groups'" class="left-main-menu border-t border-solid border-gray-300 z-50 bg-white">
         <div class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 ">
@@ -215,6 +220,8 @@
         </div>
 
       </div>
+
+
     </div>
 
     <div v-if="activeMenu === 'menu'" class="px-10 relative w-full">
@@ -232,6 +239,7 @@
   import LeftBotMenu from '~/components/user/left-menu-bot-items.vue'
     export default {
         name: "common-left-side-menu",
+      props: ['userList'],
       components: {
         LeftBotMenu,
         CommonMenu
@@ -241,6 +249,13 @@
           activeMenu: 'messages',
           activeMessages: 'people'
         }
+      },
+      mounted(){
+        setInterval(() => {
+        // console.log("props data :", this.userList)
+          
+        }, 500);
+
       }
     }
 </script>
@@ -249,6 +264,9 @@
   .left-side-bar{
     width: 300px;
     min-width: 300px;
+  }
+  .user-item{
+    cursor:pointer;
   }
   .menu-item{
     @apply flex mb-5 content-center items-center mt-2 text-gray-700 text-lg font-semibold cursor-pointer;

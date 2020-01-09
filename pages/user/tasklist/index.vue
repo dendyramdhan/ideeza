@@ -4,7 +4,7 @@
     <LeftMenu />
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-16 lg:px-10">
+    <div class="flex-grow lg:pt-16 lg:px-2">
       <div
         class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0"
       >
@@ -26,15 +26,26 @@
       <div class="w-full scroll-container mx-auto">
         <div v-if="tab==='daily'" class="task-wrapper flex mb-10">
           <!--Task Col Daily-->
-          <div class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
+          <div class="mx-auto task-col md:flex flex-wrap">
+            <template v-for="task in tasks">
+              <div v-if="filter_date==null">
+                <TaskCol @showAddTask="displayAddTask" :task="task" />
+              </div>
+              <div v-else-if="task.date == filter_date">
+                <TaskCol @showAddTask="displayAddTask" :task="task" />
+              </div>
+            </template>
           </div>
         </div>
 
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
           <!--Task Col Weekly-->
-          <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col">
-            <TaskCol @showAddTask="displayAddTask" />
+          <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col md:flex flex-wrap">
+            <template v-for="n in 7">
+              <div>
+              <TaskCol @showAddTask="displayAddTask" :index="n" />
+              </div>
+            </template>
           </div>
         </div>
       </div>
@@ -45,13 +56,15 @@
       <div class="text-gray-800 text-2xl font-semibold text-center">Calendar</div>
       <!--Calendar-->
       <vc-calendar
-        @dayclick="addTasks"
         class="mx-auto mt-5"
+        @dayclick="addTasks"
+        v-model="date"
         color="pink"
         is-expanded
         :theme="theme"
+        :attributes="attributes"
+        :value="null"
       />
-
       <div class="mt-5 py-5 px-5 border-t border-solid border-gray-300">
         <div class="text-xl text-gray-500 font-semibold">Latest Activity</div>
 
@@ -86,7 +99,8 @@ import TaskCol from "~/components/user/tasklist/task-col";
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
-import latestactivity from "~/json/latestactivity.json";
+import latestactivities from "~/json/latestactivity.json";
+import taskslist from "~/json/tasklist.json"
 export default {
   layout: "user",
   name: "task-index",
@@ -99,9 +113,12 @@ export default {
   },
   data: function() {
     return {
+      date: new Date(),
       tab: "daily",
       showAddTask: false,
       addNewMember: false,
+      filter_date: null,
+      tasks: taskslist,
       theme: {
         container: {
           light: "ideeza-date-picker"
@@ -110,11 +127,18 @@ export default {
           light: "ideeza-arrow"
         }
       },
+      attributes: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date()
+        }
+      ],
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
       id: 0,
 
-      latestactivities: latestactivity.latestactivities
+      latestactivities: latestactivities
     };
   },
   computed: {
@@ -130,9 +154,10 @@ export default {
     closeAddTask() {
       this.showAddTask = false;
     },
-    addTasks() {
+    addTasks(date) {
+      console.log(date)
       if (this.tab === "daily") {
-        alert("daily");
+        this.filter_date = date.dateTime
       } else if (this.tab === "weekly") {
         this.tasksWeekly.push({
           id: this.id
@@ -152,8 +177,6 @@ export default {
 .task-col {
   @apply mt-5;
   width: 100%;
-  max-width: 370px;
-  min-width: 360px;
 }
 .task-wrapper {
   max-width: 1200px;
