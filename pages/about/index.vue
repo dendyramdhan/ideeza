@@ -7,7 +7,7 @@
   
       <div class="container lg m-auto text-white">
           <div class="pb-5 mb-5 px-5">
-            <h2 class="md:text-6xl sm:text-4xl mt-5 font-bold">IoT for Everyone’s Idea 
+            <h2 class="md:text-6xl sm:text-4xl mt-5 font-bold text-white">IoT for Everyone’s Idea 
               
             </h2>
             <div class="lg:w-4/5 sm:w-full"><p class="text-lg py-4 pr-5">Ideeza is an end-to-end platform for the design, development and manufacturing of smart, connected products. Machine learning, design libraries and partner manufacturers enables makers to ideate and build IoT prototypes or finished products at a fraction of the time & cost normally required.</p></div>
@@ -15,14 +15,14 @@
               <div class="lg:w-1/3 sm:w-full py-5 px-3 lg:flex sm:block">
                 <div class="lg:w-1/4 sm:w-full"><img src="~static/images/brain.png" class="inline-block"></div>
                 <div class="lg:w-2/3 sm:w-full text-white">
-                  <h3 class="text-3xl">AI-Assisted</h3>
+                  <h3 class="text-3xl text-white">AI-Assisted</h3>
                   <p class="text-lg">Ideeza’s intuitive user experience and machine learning algorithms seamlessly translate ideas into functional 3D models, circuit boards and code</p>
                 </div>
               </div>
               <div class="lg:w-1/3 sm:w-full py-5 px-3 lg:flex sm:block">
                 <div class="lg:w-1/4 sm:w-full"><img src="~static/images/intelligence.png" class="inline-block"></div>
                 <div class="lg:w-2/3 sm:w-full text-white">
-                  <h3 class="text-3xl">Maker Community</h3>
+                  <h3 class="text-3xl text-white">Maker Community</h3>
                   <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit,  eiusmod tempor incididunt ut labore et dolore magna </p>
                 </div>
               </div>
@@ -30,7 +30,7 @@
               <div class="lg:w-1/3 sm:w-full py-5 px-3 lg:flex sm:block">
                 <div class="lg:w-1/4 sm:w-full"><img src="~static/images/brain.png" class="inline-block"></div>
                 <div class="lg:w-2/3 sm:w-full text-white">
-                  <h3 class="text-3xl">Manufacturer Network</h3>
+                  <h3 class="text-3xl text-white">Manufacturer Network</h3>
                   <p class="text-lg">Our partners worldwide lend their IoT-ready facilities to the Ideeza community at competitive prices</p>
                 </div>
               </div>
