@@ -34,9 +34,6 @@
               <div v-else-if="task.date == filter_date">
                 <TaskCol @showAddTask="displayAddTask" :task="task" />
               </div>
-              <div v-else>
-                <!-- <TaskCol @showAddTask="displayAddTask" :task="task" /> -->
-              </div>
             </template>
           </div>
         </div>
