@@ -29,10 +29,13 @@
           <div class="mx-auto task-col md:flex flex-wrap">
             <template v-for="task in tasks">
               <div v-if="filter_date==null">
-                <TaskCol @showAddTask="displayAddTask" :task="task" />
+                <!-- <TaskCol @showAddTask="displayAddTask" :task="task" /> -->
               </div>
               <div v-else-if="task.date == filter_date">
                 <TaskCol @showAddTask="displayAddTask" :task="task" />
+              </div>
+              <div v-else>
+                <!-- <TaskCol @showAddTask="displayAddTask" :task="task" /> -->
               </div>
             </template>
           </div>
@@ -40,10 +43,13 @@
 
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
           <!--Task Col Weekly-->
-          <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col md:flex flex-wrap">
-            <template v-for="n in 7">
-              <div>
-              <TaskCol @showAddTask="displayAddTask" :index="n" />
+          <div class="mx-auto task-col md:flex flex-wrap">
+            <template v-for="task in tasks">
+              <div v-if="week == filter_week">
+                <TaskCol @showAddTask="displayAddTask" :task="task" />
+              </div>
+              <div v-else-if="week != filter_week">
+                <!-- <TaskCol @showAddTask="displayAddTask" :task="task" /> -->
               </div>
             </template>
           </div>
@@ -100,7 +106,7 @@ import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import latestactivities from "~/json/latestactivity.json";
-import taskslist from "~/json/tasklist.json"
+import taskslist from "~/json/tasklist.json";
 export default {
   layout: "user",
   name: "task-index",
@@ -113,11 +119,13 @@ export default {
   },
   data: function() {
     return {
+      week: null,
       date: new Date(),
       tab: "daily",
       showAddTask: false,
       addNewMember: false,
       filter_date: null,
+      filter_week: null,
       tasks: taskslist,
       theme: {
         container: {
@@ -146,7 +154,52 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+
+  created: function() {
+    Date.prototype.getWeek = function(dowOffset) {
+      /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
+
+      dowOffset = typeof dowOffset == "int" ? dowOffset : 0; //default dowOffset to zero
+      var newYear = new Date(this.getFullYear(), 0, 1);
+      var day = newYear.getDay() - dowOffset; //the day of week the year begins on
+      day = day >= 0 ? day : day + 7;
+      var daynum =
+        Math.floor(
+          (this.getTime() -
+            newYear.getTime() -
+            (this.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) /
+            86400000
+        ) + 1;
+      var weeknum;
+      //if the year starts before the middle of a week
+      if (day < 4) {
+        weeknum = Math.floor((daynum + day - 1) / 7) + 1;
+        if (weeknum > 52) {
+          nYear = new Date(this.getFullYear() + 1, 0, 1);
+          nday = nYear.getDay() - dowOffset;
+          nday = nday >= 0 ? nday : nday + 7;
+          /*if the next year starts before the middle of
+              the week, it is week #1 of that year*/
+          weeknum = nday < 4 ? 1 : 53;
+        }
+      } else {
+        weeknum = Math.floor((daynum + day - 1) / 7);
+      }
+      return weeknum;
+    };
+  },
+  mounted() {
+    this.tasks.map(item => {
+      this.week = item.date;
+      var s = new Date(this.week);
+      this.week = s.getWeek();
+    });
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    this.filter_date = Number(d);
+    var dd = new Date(this.filter_date);
+    this.filter_week = dd.getWeek();
+  },
   methods: {
     displayAddTask() {
       this.showAddTask = true;
@@ -155,14 +208,13 @@ export default {
       this.showAddTask = false;
     },
     addTasks(date) {
-      console.log(date)
+      this.filter_date = date.dateTime;
+      var d = new Date(this.filter_date);
       if (this.tab === "daily") {
-        this.filter_date = date.dateTime
+        alert(d.getWeek());
       } else if (this.tab === "weekly") {
-        this.tasksWeekly.push({
-          id: this.id
-        });
-        this.id++;
+        this.filter_week = d.getWeek();
+        alert(this.filter_week);
       }
     }
   }
