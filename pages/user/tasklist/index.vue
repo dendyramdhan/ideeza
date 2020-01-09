@@ -28,7 +28,7 @@
           <!--Task Col Daily-->
           <div class="mx-auto task-col md:flex flex-wrap">
             <template v-for="task in tasks">
-              <div v-if="filter_date==null">
+              <div v-if="filter_date==null&&task.date == new Date()">
                 <TaskCol @showAddTask="displayAddTask" :task="task" />
               </div>
               <div v-else-if="task.date == filter_date">
@@ -41,9 +41,12 @@
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
           <!--Task Col Weekly-->
           <div v-for="task in tasksWeekly" :key="task.id" class="mx-auto task-col md:flex flex-wrap">
-            <template v-for="n in 7">
-              <div>
-              <TaskCol @showAddTask="displayAddTask" :index="n" />
+            <template v-for="task in tasks">
+              <div v-if="filter_date==null">
+                <TaskCol @showAddTask="displayAddTask" :task="task" />
+              </div>
+              <div v-else-if="task.date == filter_date">
+                <TaskCol @showAddTask="displayAddTask" :task="task" />
               </div>
             </template>
           </div>
@@ -146,7 +149,9 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+  mounted() {
+    console.log(new Date().getDate())
+  },
   methods: {
     displayAddTask() {
       this.showAddTask = true;

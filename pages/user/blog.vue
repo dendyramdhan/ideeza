@@ -1,8 +1,8 @@
 <template>
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
-    <!-- <LeftMenu/> -->
-    <sidebar-menu :menu-items="menu" />
+    <LeftMenu/>
+    <!-- <sidebar-menu :menu-items="menu" /> -->
     <!-- Main Contents -->
     <div class="flex-grow">
       <div></div>
