@@ -1,8 +1,8 @@
-[{
-    "date": 1578510000000,
-    "date_string": "9 January 2020",
+[
+  {
+    "date": 1578499200000,
     "tasks": [{
-        "timestamp": "Third January 2020",
+        "timestamp": 1578499200000,
         "title": "Finish electronics part",
         "duration": "09:00 AM - 10:30 AM",
         "comment_count": 5,
@@ -17,7 +17,7 @@
         "addNewMember": false
       },
       {
-        "timestamp": "Third January 2020",
+        "timestamp": 1578499200000,
         "title": "Finish electronics part",
         "duration": "09:00 AM - 10:30 AM",
         "comment_count": 5,
@@ -32,7 +32,7 @@
         "addNewMember": false
       },
       {
-        "timestamp": "Third January 2020",
+        "timestamp": 1578499200000,
         "title": "Finish electronics part",
         "duration": "09:00 AM - 10:30 AM",
         "comment_count": 5,
@@ -58,10 +58,9 @@
     ]
   },
   {
-    "date": 1578337200000,
-    "date_string": "7 January 2020",
+    "date": 1578412800000,
     "tasks": [{
-        "timestamp": "Third January 2020",
+        "timestamp": 1578412800000,
         "title": "Finish electronics part",
         "duration": "09:00 AM - 10:30 AM",
         "comment_count": 5,
@@ -76,7 +75,7 @@
         "addNewMember": false
       },
       {
-        "timestamp": "Third January 2020",
+        "timestamp": 1578412800000,
         "title": "Finish electronics part",
         "duration": "09:00 AM - 10:30 AM",
         "comment_count": 5,
@@ -91,7 +90,7 @@
         "addNewMember": false
       },
       {
-        "timestamp": "Third January 2020",
+        "timestamp": 1578412800000,
         "title": "Finish electronics part",
         "duration": "09:00 AM - 10:30 AM",
         "comment_count": 5,
