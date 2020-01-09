@@ -222,6 +222,10 @@ export default {
       console.log(this.randomNumber);
     });
     console.log(this.randomNumber);
+
+
+
+    
   },
   methods: {
     //   getRandom () {
