@@ -34,13 +34,14 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import articles from "../../../data/BlogApi.json";
 import TextField from "~/components/form/text-field.vue";
 import TextArea from "~/components/form/text-area.vue";
 import CategoryField from "~/components/form/category-field.vue";
 import FileField from "~/components/form/file-field.vue";
-
-import axios from "axios";
+ 
 export default {
   name: "add-blog",
   components: {
@@ -74,8 +75,8 @@ export default {
       };
       console.log(body);
       try {
-        await axios.post("/UserBlogupload", body);
-        console.log("Upload");
+        await axios.post("http://127.0.0.1:5000/api/addblog", body);
+        console.log("Upload", body);
       } catch (err) {
         console.log(err);
          console.log("Something went wrong!!!");

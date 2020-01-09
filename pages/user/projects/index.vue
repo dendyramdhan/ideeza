@@ -107,16 +107,35 @@
                 <div class="text-sm mt-5">{{Project.ShortDescription.second}}</div>
               </div>
             </div>
+            
           </div>
+          
         </div>
+
+        
       </div>
+
+      
     </div>
+
+
+    <ul>
+      <!-- <button @click="getRandomFromBackend" >asd</button> -->
+      <li v-for="info in randomNumber">
+        --{{info.id}}--{{info.ArticlesName}}--{{info.Date}}--{{info.Action}}
+        <br />
+        <!-- {{randomNumber.data}}  <br> 
+        {{randomNumber.result}}  <br>-->
+      </li>
+    </ul>
+
   </div>
 </template>
 
 <script>
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import Projects from "~/data/UserProjectApi.json";
+import axios from "axios";
 
 export default {
   layout: "user",
@@ -126,6 +145,14 @@ export default {
       longview: true,
       Projects: Projects.firstproject
     };
+  },
+  created: function() {
+    axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
+      // console.log("response :", response.data)
+      this.randomNumber = response.data;
+      console.log(this.randomNumber);
+    });
+    console.log(this.randomNumber);
   },
   components: {
     LeftMenu
