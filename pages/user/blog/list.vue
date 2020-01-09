@@ -162,22 +162,29 @@
       </div>
     </div>
     <!-- {{Math.ceil(counter)}} -->
-     
 
-
-
+    <ul>
+      <!-- <button @click="getRandomFromBackend" >asd</button> -->
+      <li v-for="info in randomNumber">
+        --{{info.id}}--{{info.ArticlesName}}--{{info.Date}}--{{info.Action}}
+        <br />
+        <!-- {{randomNumber.data}}  <br> 
+        {{randomNumber.result}}  <br>-->
+      </li>
+    </ul>
+    
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 import articles from "../../../data/BlogApi.json";
 import { teal } from "color-name";
 export default {
   name: "blog-list",
   data: function() {
     return {
-       searchTerm: "",
+      searchTerm: "",
       articles: articles,
       articleArray: [],
       currentSort: "name",
@@ -188,7 +195,9 @@ export default {
       counter: articles.length / this.$store.state.userBlogStore.scale,
       start: this.$store.state.userBlogStore.offset * 5 - 1,
       end: this.$store.state.userBlogStore.offset * 5 + 5,
-      counterarray: []
+      counterarray: [],
+      result: {},
+      randomNumber: {}
     };
   },
   created: function() {
@@ -207,23 +216,29 @@ export default {
       this.articleArray.push(item);
     });
 
-    axios.get('http://127.0.0.1:5000/api/test_api')
-      .then(response => 
-      {
-        console.log("response :", response)
-      })
- 
+    axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
+      // console.log("response :", response.data)
+      this.randomNumber = response.data;
+      console.log(this.randomNumber);
+    });
+    console.log(this.randomNumber);
   },
   methods: {
-    create(payload) {},
+    //   getRandom () {
+    //   // this.randomNumber = this.getRandomInt(1, 100)
+    //   this.randomNumber = this.getRandomFromBackend()
+    // },
 
-  show(id) {},
-  update(payload, id) {},
-
-  delete(id) {},
-
-
-
+    // getRandomFromBackend () {
+    //   const path = 'http://127.0.0.1:5000/api/getblog'
+    //   axios.get(path)
+    //   .then(response => {
+    //     this.randomNumber = response.data.result
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
+    // },
 
     changeshowperiod(e) {
       this.articleArray = [];
@@ -261,7 +276,6 @@ export default {
       });
 
       console.log("search array :", this.articleArray, e.target.value);
-
     },
     sort: function(s) {
       console.log("sort key :", s, this.articleArray);

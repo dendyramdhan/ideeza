@@ -12,7 +12,13 @@
           >
             <div
               class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left"
-            >Lamborghini Aventado Project</div>
+            >
+            <div v-for="Project in Projects" :key="Project.id">
+              <div v-if="Project.id == $route.query.id ">
+                 <!-- Lamborghini Aventado Project -->
+                 {{Project.projecttitle}}
+                </div></div>
+           </div>
             <div class="flex flex-wrap items-center">
               <span class="panel-menu text-center">
                 <nuxt-link to="/user/pro" >
@@ -119,6 +125,9 @@
     </div>
     <ShareInternal v-if="internalShare" @close="closeShareInternal" />
     <ShareExternal v-if="externalShare" @close="closeShareExternal" />
+    
+
+
   </div>
 </template>
 
@@ -130,6 +139,7 @@ import ShareExternal from "~/components/share/share-external.vue";
 import CustomizeIcon from "~/components/partials/icons/customize-icon.vue";
 
 import Projects from "~/data/UserProjectApi.json";
+import axios from "axios";
 
 export default {
   layout: "user",
@@ -156,6 +166,14 @@ export default {
       internalShare: false,
       externalShare: false
     };
+  },
+  created: function() {
+    axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
+      // console.log("response :", response.data)
+      this.randomNumber = response.data;
+      console.log(this.randomNumber);
+    });
+    console.log(this.randomNumber);
   },
   computed: {
     leftMenu() {
