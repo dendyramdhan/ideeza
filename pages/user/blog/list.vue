@@ -166,11 +166,12 @@
     <ul>
       <!-- <button @click="getRandomFromBackend" >asd</button> -->
       <li v-for="info in randomNumber">
-        --{{info.id}}--{{info.ArticlesName}}--{{info.Date}}--{{info.Action}}
+        --{{info.id}}--{{info.article}}--{{info.status}}--{{info.timestamp}}
         <br />
         <!-- {{randomNumber.data}}  <br> 
         {{randomNumber.result}}  <br>-->
       </li>
+      {{base_url}}
     </ul>
     
   </div>
@@ -184,6 +185,7 @@ export default {
   name: "blog-list",
   data: function() {
     return {
+      base_url:process.env.base_url,
       searchTerm: "",
       articles: articles,
       articleArray: [],
@@ -216,7 +218,8 @@ export default {
       this.articleArray.push(item);
     });
 
-    axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
+    var url=this.base_url+"/api/get_blogs"
+    axios.get(url).then(response => {
       // console.log("response :", response.data)
       this.randomNumber = response.data;
       console.log(this.randomNumber);
