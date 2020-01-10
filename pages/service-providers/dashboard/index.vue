@@ -1,49 +1,49 @@
 <template>
-  <div class="main-contents">
+  <div>
     <div class="md:flex items-center justify-between">
       <h1 class="text-2xl font-bold mr-5">Good Morning Chan!</h1>
       <div class="md:flex justify-end">
-        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5">
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
             <div class="flex items-center">
             <div>
                 <div class="text-sm">Reviews</div>
                 <div class="text-3xl font-bold">56</div>
             </div>
-            <div>
-                <font-awesome-icon class="text-4xl mt-2 ml-4 text-ideeza" :icon="['fas', 'envelope']" />
+            <div class="absolute bottom-0 right-0 m-5">
+                <img src="~/static/images/chat-icon.png" class="h-8" alt="chat-icon">
             </div>
             </div>
         </div>
-        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5">
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
             <div class="flex items-center">
             <div>
                 <div class="text-sm">Money earned</div>
                 <div class="text-3xl font-bold">56</div>
             </div>
-            <div>
-                <font-awesome-icon class="text-4xl mt-2 ml-4 text-ideeza" :icon="['fas', 'envelope']" />
+            <div class="absolute bottom-0 right-0 m-5">
+                <img src="~/static/images/money.png" class="h-8" alt="chat-icon">
             </div>
             </div>
         </div>
-        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5">
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
             <div class="flex items-center">
             <div>
                 <div class="text-sm">Opened orders</div>
                 <div class="text-3xl font-bold">56</div>
             </div>
-            <div>
-                <font-awesome-icon class="text-4xl mt-2 ml-4 text-ideeza" :icon="['fas', 'envelope']" />
+            <div class="absolute bottom-0 right-0 m-5">
+                <img src="~/static/images/order-box.png" class="h-8" alt="chat-icon">
             </div>
             </div>
         </div>
-        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5">
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
             <div class="flex items-center">
             <div>
                 <div class="text-sm">Stars</div>
                 <div class="text-3xl font-bold">56</div>
             </div>
-            <div>
-                <font-awesome-icon class="text-4xl mt-2 ml-4 text-ideeza" :icon="['fas', 'envelope']" />
+            <div class="absolute bottom-0 right-0 m-5">
+                 <img src="~/static/images/star-icon.png" class="h-8" alt="chat-icon">
             </div>
             </div>
         </div>

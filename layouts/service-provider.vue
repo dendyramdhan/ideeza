@@ -4,9 +4,10 @@
     <div :class="{'hide-sider-bar':!leftMenu}" class="flex main-panel">
       <!--  Left Side Bar  -->
       <!-- <LeftMenu/> -->
-      <sidebar-menu :menu-items="menu" />
+      <!-- <sidebar-menu :menu-items="menu" :bot-menu-items="botMenuItems" /> -->
+      <LeftMenu />
       <!-- Main Contents -->
-      <div class="flex-grow page-container px-2 md:px-5">
+      <div class="flex-grow page-container p-2">
         <nuxt />
       </div>
 
@@ -45,16 +46,16 @@
 </template>
 
 <script>
-  import LeftMenu from '~/components/user/common-left-side-menu.vue'
+  import LeftMenu from '~/components/service-provider/common-left-side-menu.vue'
   import SidebarMenu from '~/components/reusables/SideBar.vue'
-  import navigation from "~/components/user/header-bar.vue";
+  import navigation from "~/components/service-provider/header-bar.vue";
   import FloatButton from "~/components/user/float-button/right-bot-float-button.vue";
   import {
     mapMutations
   } from "vuex";
   export default {
     layout: 'user',
-    name: "dashboard-index",
+    name: "service-provider-layout",
     components: {
       LeftMenu,
       SidebarMenu,
@@ -63,6 +64,11 @@
     },
     data: function () {
       return {
+        botMenuItems: [{
+            name: 'Help',
+            icon: 'shopping-cart',
+            link: 'orders'
+        }],
         menu: [{
             name: 'Dashboard',
             iconComponent: 'DashBoardIcon',
@@ -72,6 +78,11 @@
             name: 'Orders',
             icon: 'shopping-cart',
             link: 'orders'
+          },
+          {
+            name: 'Projects',
+            icon: 'project-diagram',
+            link: 'projects'
           },
           {
             name: 'Transactions',

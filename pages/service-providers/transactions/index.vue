@@ -5,8 +5,8 @@
     </div>
     <div class="mt-3 border-b-2 border-gray-400 py-2 md:flex justify-between">
         <div class="flex">
-            <h6 class="font-semibold text-base text-ideeza mr-10">Completed Payouts</h6>
-            <h6 class="font-semibold text-base text-gray-700">Upcoming Payouts</h6>
+            <button class="font-semibold text-base text-ideeza mr-10">Completed Payouts</button>
+            <button class="font-semibold text-base text-gray-700 hover:text-ideeza">Upcoming Payouts</button>
         </div>
         <div>
             <h6 class="font-semibold text-ideeza-black">Paid Out: 150$</h6>
@@ -47,37 +47,37 @@
           <font-awesome-icon class="ml-1 h-6 text-gray-600 absolute-center-h-v" :icon="['fas', 'sliders-h']" />
         </div>
       </div>
-
-      <table class="mt-10 bg-white shadow-lg">
+      <div class="px-3 bg-white shadow-lg">
+      <table class="mt-10 ">
         <thead>
-          <tr class="text-gray-800 h16">
-            <th class="text-left">Title</th>
+          <tr class="text-gray-800 h16 border-b border-gray-500">
+            <th class="text-left" colspan="2">Title</th>
             <th class="text-left">ID</th>
             <th class="text-left">Type</th>
             <th class="text-left">Quantity</th>
-            <th class="text-left">Date</th>
+            <th class="text-left" colspan="2">Date</th>
             <th class="text-left" colspan="2">Payout Method</th>
             <th class="text-left">Price</th>
             <th class="text-left">Invoice</th>
           </tr>
         </thead>
         <tbody v-for="(transaction, index) in transactions">
-          <tr class="font-semibold">
-            <td>
+          <tr class="font-semibold border-b border-gray-500">
+            <td colspan="2">
               <div>{{transaction.title}}</div>
               <div class="font-light">{{transaction.type}}</div>
             </td>
             <td>{{transaction.id}}</td>
             <td>{{transaction.type_2}}</td>
             <td>{{transaction.quantity}}</td>
-            <td>{{transaction.date}}</td>
+            <td colspan="2">{{transaction.date}}</td>
             <td colspan="2">{{transaction.payout_method}}</td>
             <td>{{transaction.price}}</td>
-            <td class="text-right"><img src="~/static/images/opened-tickets.png" class="w-12 object-center object-right mr-5" alt=""></td>
+            <td><img src="~/static/images/invoice.png" class="w-12 object-center object-right mr-5" alt=""></td>
           </tr>
         </tbody>
       </table>
-
+      </div>
       <!--Table Stats-->
       <!-- <div class="mt-5 lg:flex justify-end">
         <div class="lg:w-3/5 p-3 lg:flex justify-between"> -->
@@ -136,6 +136,12 @@ export default {
     },
     created: function() {
         Object.assign(this.transactions,transactionsdata);
+        let endd =
+        this.transactions.length / 5 + 1;
+        //  alert( this.Services.length);
+        for (let i = 1; i <= endd; i++) {
+            this.counterarray.push(i);
+        }
     },
     methods: {
         search(e) {
@@ -179,7 +185,7 @@ export default {
     @apply p-6;
   }
   /* thead th:first-child {
-    @apply pl-16;
+    @apply pl-0;
   } */
   tbody td {
     @apply p-6;
@@ -188,7 +194,7 @@ export default {
     @apply bg-white;
   }
   /* tbody td:first-child {
-    @apply pl-16;
+    @apply pl-0;
   } */
 }
 
@@ -240,22 +246,28 @@ export default {
       Label the data
       */
   td:nth-of-type(1):before {
-    content: "Products";
+    content: "Title";
   }
   td:nth-of-type(2):before {
-    content: "Color";
+    content: "ID";
   }
   td:nth-of-type(3):before {
-    content: "Price";
+    content: "Type";
   }
   td:nth-of-type(4):before {
     content: "Quantity";
   }
   td:nth-of-type(5):before {
-    content: "Cost";
+    content: "Date";
   }
   td:nth-of-type(6):before {
-    content: "Action";
+    content: "Payout Methods";
+  }
+  td:nth-of-type(7):before {
+    content: "Price";
+  }
+  td:nth-of-type(8):before {
+    content: "Invoice";
   }
 }
 </style>
