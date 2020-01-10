@@ -3,7 +3,8 @@
     <h1 class="text-lg font-semibold heading-border border-b pb-3">Projects</h1>
 
     <div class="cart-scroll-area">
-      <smooth-scrollbar :options="{alwaysShowTracks: true}">
+      <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
+      <div style="overflow: scroll; height: 480px">
         <div v-for="project in projects" :key="project.id">
           <div
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
@@ -70,7 +71,8 @@
             <span class="ml-3">{{project.total | currency}}</span>
           </div>
         </div>
-      </smooth-scrollbar>
+      </div>
+      <!-- </smooth-scrollbar> -->
     </div>
   </div>
 </template>

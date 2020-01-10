@@ -211,7 +211,6 @@ export default {
         alert(d.getWeek());
       } else if (this.tab === "weekly") {
         this.filter_week = d.getWeek();
-        alert(this.filter_week);
       }
     }
   }

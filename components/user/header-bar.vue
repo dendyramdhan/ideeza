@@ -91,7 +91,7 @@
             class="h-10 w-10 rounded-full mr-2"
             src="https://randomuser.me/api/portraits/men/17.jpg"
           />
-          <span class="text-white inline-block">John Doe</span>
+          <span class="text-white inline-block">{{name}}</span>
         </nuxt-link>
       </div>
     </div>
@@ -107,7 +107,8 @@ export default {
     return {
       showInfoAlert: false,
       showHelpAlert: false,
-      news: news
+      news: news,
+      name: null
     };
   },
   computed: {
@@ -116,6 +117,7 @@ export default {
     }
   },
   mounted() {
+    this.name = this.$store.state.userinfo.firstname + ' ' + this.$store.state.userinfo.lastname;
     console.log("news: ", this.news, this.showInfoAlert);
   },
   methods: {
