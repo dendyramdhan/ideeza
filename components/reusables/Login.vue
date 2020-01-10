@@ -89,6 +89,7 @@ export default {
   },
   data() {
     return {
+      base_url: process.env.base_url,
       email: null,
       password: null
     };
@@ -96,14 +97,14 @@ export default {
 
   methods: {
     login() {
-
+      var url = this.base_url + '/api/user/login';
       var bodyFormData = new FormData();
       bodyFormData.set("email", this.email);
       bodyFormData.set("password", this.password);
 
       axios({
         method: "post",
-        url: "http://192.168.1.162/api/user/login",
+        url: url,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" }
       })
