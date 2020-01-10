@@ -102,8 +102,8 @@
             <h1 class="font-semibold lg:text-3xl my-5">World's last innovation</h1>
             <div class="scroll-area" v-if="show">
               <no-ssr>
-              <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}">
-                <div class="sm:flex flex-wrap">
+              <!-- <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}"> -->
+                <div class="sm:flex flex-wrap" style="overflow: scroll; height: 600px;">
                   <template v-for="innovs in innovations.chunk_inefficient(3)">
                   <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovs">
                     <div class="m-1" v-if="index%2==0">
@@ -138,7 +138,7 @@
                     <p class="breed button--green">{{breed}}</p>
                   </li>-->
                 </div>
-              </smooth-scrollbar>
+              <!-- </smooth-scrollbar> -->
               </no-ssr>
             </div>
           </div>
@@ -146,8 +146,8 @@
             <h1 class="font-semibold lg:text-3xl my-5">Top projects</h1>
             <div class="scroll-area">
               <no-ssr>
-              <smooth-scrollbar ref="smooth-scroll-2" :options="{alwaysShowTracks: true}">
-                <div class="flex flex-wrap">
+              <!-- <smooth-scrollbar ref="smooth-scroll-2" :options="{alwaysShowTracks: true}"> -->
+                <div class="flex flex-wrap" style="overflow: scroll; height: 600px;">
                   <div class="w-1/2 p-2" v-for="topproject in topprojects">
                     <div class="p-2 border border-solid border-light-gray">
                       <div class="w-full projects-image">
@@ -171,7 +171,7 @@
                     </div>
                   </div>
                 </div>
-              </smooth-scrollbar>
+              <!-- </smooth-scrollbar> -->
               </no-ssr>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default {
       showMyIdeeza: false,
       topprojects: topprojects,
       innovations: innovation,
-      activities: activity.activity,
+      activities: activity,
       show: true
     };
   },

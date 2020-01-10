@@ -1,8 +1,11 @@
 export default function ({ route, redirect }) {
 
   if (route.fullPath === "/") {
-    return redirect('/user/dashboard')
+    return redirect('/home')
   }
+  // if (route.fullPath === "/") {
+  //   return redirect('/pricing')
+  // }
   // if (route.fullPath === "/") {
   //     return redirect('/technician/dashboard')
   //   }
@@ -19,5 +22,4 @@ export default function ({ route, redirect }) {
   if (route.fullPath === "/user/order-tracking") {
     return redirect('/user/order-tracking/making-product')
   }
-  
 }
