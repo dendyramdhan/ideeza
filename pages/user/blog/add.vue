@@ -53,7 +53,8 @@ export default {
   data: function() {
     return {
       articles: articles,
-      counter: articles.length + 1
+      counter: articles.length + 1,
+      base_url:process.env.base_url,
     };
   },
   methods: {
@@ -67,15 +68,36 @@ export default {
       let articlesDescription = this.$store.state.userBlogStore.DescriptionName;
       let articlesImageFile = this.files;
       let body = {
-        sendId: articlesId,
-        sendName: articlesName,
-        sendCategory: articlesCategory,
-        sendDescription: articlesDescription,
-        sendImageFile: articlesImageFile
+        userid: articlesId,
+        article: articlesName,
+        category: articlesCategory,
+        description: articlesDescription,
+        image: articlesImageFile
       };
       console.log(body);
       try {
-        await axios.post("http://127.0.0.1:5000/api/addblog", body);
+        var url=this.base_url+"add_blog"
+        // await axios.post(url, body);
+        
+                    
+        await axios.post(this.base_url+"/api/add_blog", {headers: {"token": "Brearer user_login_token", "Content-Type": "application/json"},
+                    data: {
+                      userid: articlesId,
+        article: articlesName,
+        category: articlesCategory,
+        description: articlesDescription,
+        image: articlesImageFile
+                    }}).then(response => {
+                        // If request is good...
+                        console.log(response.data);
+                      })
+                      .catch((error) => {
+                        console.log('error 3 ' + error);
+                      });
+
+
+
+
         console.log("Upload", body);
       } catch (err) {
         console.log(err);
