@@ -91,6 +91,7 @@
 </template>
 <script>
 import Modal from "~/components/reusables/Modal.vue";
+import firebase from "firebase";
 import axios from "axios";
 export default {
   components: {
@@ -98,6 +99,7 @@ export default {
   },
   data() {
     return {
+      base_url: process.env.base_url,
       email: null,
       password: null,
       firstname: null,
@@ -109,6 +111,8 @@ export default {
   },
   methods: {
     signup() {
+      var registerurl = this.base_url + '/api/user/register';
+      var signinurl = this.base_url + '/api/user/login';
       var birthday = this.day + "/" + this.month + "/" + this.year;
 
       var bodyFormData = new FormData();
@@ -120,7 +124,7 @@ export default {
 
       axios({
         method: "post",
-        url: "http://192.168.1.162/api/user/register",
+        url: registerurl,
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" }
       })
@@ -130,7 +134,7 @@ export default {
           if (response.data["success"] == true) {
             axios({
               method: "post",
-              url: "http://192.168.1.162/api/user/login",
+              url: signinurl,
               data: bodyFormData,
               headers: { "Content-Type": "multipart/form-data" }
             })
