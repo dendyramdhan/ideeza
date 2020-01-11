@@ -1,7 +1,7 @@
 <template>
   <div class="main-contents">
-    <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Preview</h1>
-
+    <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">View</h1>
+    <!-- {{$route.query.id}} -->
     <div class="p-0 lg:py-10 lg:pl-10">
       <div class="lg:flex justify-between items-center lg:mb-10">
         <nuxt-link
@@ -10,16 +10,17 @@
         >Back</nuxt-link>
       </div>
       <!--Blog Preview-->
-      <div class="lg:flex" v-for="descrition in articles" >
-        <div class="lg:flex" v-if="descrition.id == $route.query.id ">
+      <div class="lg:flex" v-for="descrition in articleArray">
+      <div   v-if="descrition.id == $route.query.id">
+        <div class="lg:flex">
           <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
-            <img class="w-full" :src="descrition.postimage" />
+            <img class="w-full" :src=" 'http://192.168.1.162/api/img/blogs/'+ descrition.postimage" />
           </div>
           <div>
             <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
               <h1
                 class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
-              >{{descrition.title}}</h1>
+              >{{descrition.category}}  </h1>
             </div>
             <div class="lg:my-10 my-3 flex items-center">
               <div v-for="index in  descrition.rating" :key="index">
@@ -31,70 +32,88 @@
               Comment({{descrition.rating}})
             </div>
             <div class="lg:my-10 my-3 flex items-center">
-              <img class="h-12 w-12 mr-5 rounded-full" :src="descrition.profileimage" />
-              <span class="text-gray-800 font-semibold text-xl">{{descrition.ArticlesName}}</span>
+              <!-- <img class="h-12 w-12 mr-5 rounded-full" :src="descrition.profileimage" /> -->
+              <span class="text-gray-800 font-semibold text-xl">{{descrition.article}}  </span>
             </div>
 
             <p class="text-base lg:text-lg">
-              {{descrition.descrition}}
+              {{descrition.description}}  
               <!-- -{{$route.query.id }} -->
             </p>
           </div>
+          </div>
         </div>
       </div>
-      <!-- Add preview -->
 
-      <div class="lg:flex" v-if="this.$store.state.userBlogStore.viewflag == 1 ">&nbsp;</div>
-      <div v-else-if="this.$store.state.userBlogStore.viewflag == 2" class="lg:flex">
-        <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
-          <img class="w-full" src="~/static/images/blog-image.png" />
-        </div>
-        <div>
-          <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
-            <h1
-              class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
-            >{{this.$store.state.userBlogStore.CategoryName}}</h1>
-            <!-- {{this.$store.state.userBlogStore.viewflag}} -->
-          </div>
-
-          <div class="lg:my-10 my-3 flex items-center">
-            <img
-              class="h-12 w-12 mr-5 rounded-full"
-              src="https://randomuser.me/api/portraits/women/14.jpg"
-            />
-            <span
-              class="text-gray-800 font-semibold text-xl"
-            >{{this.$store.state.userBlogStore.ArticlesName}}</span>
-          </div>
-
-          <p class="text-base lg:text-lg">
-            {{this.$store.state.userBlogStore.DescriptionName}}
-            <!-- -{{$route.query.id }} -->
-          </p>
-        </div>
-
-        <!-- <p>{{$route.query.id }}</p>
+      <!-- <p>{{$route.query.id }}</p>
         <p>{{this.$store.state.userBlogStore.ArticlesName }}</p>
         <p>{{this.$store.state.userBlogStore.CategoryName }}</p>
         <p>{{this.$store.state.userBlogStore.DescriptionName }}</p>
         <p>{{this.$store.state.userBlogStore.Imagename }}</p>
         <p>
           <img :src="this.$store.state.userBlogStore.Imageurl" />
-        </p> -->
-      </div>
+      </p>-->
+
     </div>
   </div>
 </template>
 
 <script>
-import articles from "~/data/BlogApi.json";
+import axios from "axios";
+
+// import articles from "~/data/BlogApi.json";
 export default {
   name: "blog-view",
   data: function() {
     return {
-      articles: articles,
-      size: "1"
+      // articles: articles,
+      base_url: process.env.base_url,
+      articleArray: [],
+      randomNumber: {},
+
     };
+  },
+  created: function() {
+    let geturl = this.base_url + "/api/get_blogs";
+    axios({
+      method: "get",
+      url: geturl
+    })
+      .then(response => {
+        //handle success
+        console.log(response.data);
+        this.randomNumber = response.data;
+        this.articleArray = Object.values(response.data.data);
+        // this.articleArray = onlyarticleArray[0];        
+      })
+      .catch(error => {
+        //handle error
+        console.log(error);
+      });
+
+    // let geturl = this.base_url + "/api/view_blog";
+    // var bodyFormData = new FormData();
+    // bodyFormData.set("id", this.$route.query.id);
+    // axios({
+    //   method: "get",
+    //   data: bodyFormData,
+    //   headers: { "Content-Type": "multipart/form-data" },
+    //   url: geturl
+    // })
+    //   .then(response => {
+    //     //handle success
+    //     console.log(response.data);
+    //     this.randomNumber = response.data;
+
+    //     this.articleArray = Object.values(response.data.data);
+    //     // this.articleArray = onlyarticleArray[0];
+    //   })
+    //   .catch(error => {
+    //     //handle error
+    //     console.log(error);
+    //   });
+
+
   }
 };
 
