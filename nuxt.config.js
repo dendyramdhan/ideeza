@@ -43,7 +43,8 @@ export default {
     { src: '~/plugins/notification-plugin.js', ssr: false },
     { src: '~/plugins/table-plugin.js' },
     { src: '~/plugins/vue2-filters-plugin' },
-    { src: '~/plugins/calendar.js', ssr: false, mode: 'client' }
+    { src: '~/plugins/calendar.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/firebase.js', ssr: false, mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
