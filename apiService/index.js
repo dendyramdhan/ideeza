@@ -1,6 +1,7 @@
 import axios from 'axios'
 export default (settingVal, ctx)=>{
-    return axios.get(`http://192.168.1.162/api/user/get_list`)
+    let base_url = process.env.base_url + '/api/user/get_list';
+    return axios.get(base_url)
     .then((res) => {
       ctx(res)
     })
