@@ -1,12 +1,12 @@
 <template>
   <div class="left-main-menu">
     <div class="menu-item">
-      <nuxt-link to="/service-providers/dashboard">
+      <nuxt-link to="/service-provider/dashboard">
         <DashBoardIcon class="fill-current mr-5" />Dashboard
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/service-providers/orders">
+      <nuxt-link to="/service-provider/orders">
         <font-awesome-icon
           class="mr-5 w-8 h-8 align-text-top"
           :icon="['fas', 'shopping-cart']"
@@ -14,12 +14,12 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/service-providers/projects">
+      <nuxt-link to="/service-provider/projects">
         <ProjectsIcon class="fill-current mr-5" />Projects
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/service-providers/transactions">
+      <nuxt-link to="/service-provider/transactions">
         <font-awesome-icon
           class="mr-5 w-8 h-8 align-text-top"
           :icon="['far', 'list-alt']"
@@ -27,7 +27,7 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/service-providers/messages">
+      <nuxt-link to="/service-provider/messages">
         <font-awesome-icon
           class="mr-5 w-8 h-8 align-text-top"
           :icon="['fas', 'comments']"
@@ -35,7 +35,7 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/service-providers/help">
+      <nuxt-link to="/service-provider/help">
         <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['fas', 'info-circle']" /> Help
       </nuxt-link>
     </div>
