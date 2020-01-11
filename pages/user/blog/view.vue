@@ -81,12 +81,25 @@
         <p>
           <img :src="this.$store.state.userBlogStore.Imageurl" />
         </p> -->
+
+         <ul>
+      <li v-for="info in articleArray">
+        --{{info.article}}--{{info.category}}--{{info.description}}--{{info.postimage}}--{{info.rating}} 
+        <br />
+      </li>
+      {{base_url}}
+      {{articleArray}}
+    </ul>
+sdf
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 import articles from "~/data/BlogApi.json";
 export default {
   name: "blog-view",
@@ -95,6 +108,30 @@ export default {
       articles: articles,
       size: "1"
     };
+  },
+  created:function(){
+    let geturl = this.base_url + "/api/view_blog";
+    var bodyFormData = new FormData();
+    bodyFormData.set('id', '8265d749-34dc-4bfe-8a01-10628bf8bec9');
+    axios({
+      method: "get",
+      headers: {'Content-Type': 'multipart/form-data', 'Authorization':'eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjI0NDI3MTk4MzQsImlhdCI6MTU3ODcxOTgzNCwianRpIjoibzVmOThvZGwtU2UwQXZWR0pJSXVMQSIsIm5iZiI6MTU3ODcxOTgzNCwidXNlcmlkIjoiZmU1MDVhNjEtNzQ3ZS00MzJhLWE5ODQtNjdhNTc2NDQxYzFjIn0.LjQq_-Ckl92HCfKo5_e7UfPOEr7sCQiKTp8Vgr02qgx2sfRCnE46de8WoVtrZkOPc60if0QH5ruF5PeyhS1aiaWgXfXHcj7xOkIFm4G1pyHTrgqDBS1p2yUgCRIHNWKgRBQGW1BR-K_C9kx6iYvdwQxAqXIZdSoQhlvfs4d2eQSbOfno4FnGfx4L6QbC_VfK2vAVlhiaFmnwmjwRVf2UUqLwtJB14ITzmWg4fm9AiclJ0FYffX0v9CCz_dpLfbiYZmfLyFzRrDQNidFiMKQKDozRg3KA17hbB-9gcavIEoGnWoUks7yZw8ncGGfwD6Cx7Zwie-GIB5r39IBRPgQXyg' },
+      data :bodyFormData,
+      url: geturl
+    })
+      .then(response => {
+        //handle success
+        console.log(response.data);
+        this.randomNumber = response.data;
+
+        this.articleArray = Object.values(response.data.data);
+        // this.articleArray = onlyarticleArray[0];
+ 
+      })
+      .catch(error => {
+        //handle error
+        console.log(error);
+      });
   }
 };
 

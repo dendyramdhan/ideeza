@@ -75,23 +75,27 @@
 
         <tbody class="text-gray-800">
           <tr v-for="(tabledata, index) in articleArray" v-if="start < index && index < end ">
-            <td class="font-semibold">{{tabledata.ArticlesName}}{{index}}{{tabledata.id}}</td>
+            <td class="font-semibold">
+              {{tabledata.article}}
+              <!-- {{index}}{{tabledata.id}} -->
+            </td>
             <td class>
-              {{tabledata.Date}}
+              {{tabledata.timestamp}}
               <!-- <span v-if="tabledata.flag"></span>
               <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
             <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
             <td>
-              <p v-if="tabledata.flag == 1 ">
-                <span class="text-green-500 font-semibold">{{tabledata.Status}}</span>
+              <!-- <p v-if="tabledata.flag == 1 ">
+                <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
               </p>
               <p v-else-if="tabledata.flag == 2  ">
-                <span class="font-semibold">{{tabledata.Status}}</span>
+                <span class="font-semibold">{{tabledata.status}}</span>
               </p>
               <p v-else-if="tabledata.flag == 3  ">
-                <span class="text-red-500 font-semibold">{{tabledata.Status}}</span>
-              </p>
+                <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
+              </p>-->
+              <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
             </td>
 
             <td class="text-gray-500">
@@ -147,7 +151,7 @@
           </span>
         </div>
 
-        <div
+        <!-- <div
           class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
         >
           <span class="inline-block">Show</span>
@@ -158,22 +162,20 @@
             >{{(index)*5+1}}-{{(index)*5+5}}</option>
             <option>All</option>
           </select>
-        </div>
+        </div>-->
       </div>
     </div>
+
     <!-- {{Math.ceil(counter)}} -->
 
-    <ul>
-      <!-- <button @click="getRandomFromBackend" >asd</button> -->
-      <li v-for="info in randomNumber">
-        --{{info.id}}--{{info.article}}--{{info.status}}--{{info.timestamp}}
+    <!-- <ul>
+      <li v-for="info in articleArray">
+        --{{info.article}}--{{info.id}}--{{info.status}}--{{info.timestamp}}
         <br />
-        <!-- {{randomNumber.data}}  <br> 
-        {{randomNumber.result}}  <br>-->
       </li>
       {{base_url}}
-    </ul>
-    
+      {{articleArray}}
+    </ul>-->
   </div>
 </template>
 
@@ -185,16 +187,17 @@ export default {
   name: "blog-list",
   data: function() {
     return {
-      base_url:process.env.base_url,
+      base_url: process.env.base_url,
       searchTerm: "",
       articles: articles,
       articleArray: [],
+      articleArraybase: [],
       currentSort: "name",
       currentSortDir: "asc",
       currentviewpoint: this.$store.state.userBlogStore.offset + 1,
       index: 0,
-      length: articles.length / 5 - 1,
-      counter: articles.length / this.$store.state.userBlogStore.scale,
+      length: 0,
+      counter: 0,
       start: this.$store.state.userBlogStore.offset * 5 - 1,
       end: this.$store.state.userBlogStore.offset * 5 + 5,
       counterarray: [],
@@ -206,29 +209,37 @@ export default {
     this.$store.commit("userBlogStore/viewflagchange2");
     let i = 1;
     let array1 = [];
-    let endd = articles.length / this.$store.state.userBlogStore.scale + 1;
-    for (i = 1; i <= endd; i++) {
-      array1.push(i);
-    }
-    this.counterarray = array1;
-    // console.log("array1:", array1);
-    // console.log("articles:", this.articles);
+    let endd = 0;
 
-    this.articles.map(item => {
-      this.articleArray.push(item);
-    });
+    let geturl = this.base_url + "/api/get_blogs";
+    axios({
+      method: "get",
+      url: geturl
+    })
+      .then(response => {
+        //handle success
+        console.log(response.data);
+        this.randomNumber = response.data;
 
-    var url=this.base_url+"/api/get_blogs"
-    axios.get(url).then(response => {
-      // console.log("response :", response.data)
-      this.randomNumber = response.data;
-      console.log(this.randomNumber);
-    });
-    console.log(this.randomNumber);
+        this.articleArray = Object.values(response.data.data);
+        // this.articleArray = onlyarticleArray[0];
 
+        endd =
+          this.articleArray.length / this.$store.state.userBlogStore.scale + 1;
+        for (i = 1; i <= endd; i++) {
+          array1.push(i);
+        }
+        this.counterarray = array1;
+        this.length = this.articleArray.length / 5 - 1;
+        this.counter =
+          this.articleArray.length / this.$store.state.userBlogStore.scale;
+      })
+      .catch(error => {
+        //handle error
+        console.log(error);
+      });
 
-
-    
+    // console.log(this.randomNumber);
   },
   methods: {
     //   getRandom () {
@@ -250,15 +261,15 @@ export default {
     changeshowperiod(e) {
       this.articleArray = [];
       if (e.target.value == "all") {
-        this.articles.map(item => {
+        this.articleArraybase.map(item => {
           this.articleArray.push(item);
         });
       } else {
         var a = e.target.value.split("-");
         var a1 = a[0];
         var a2 = a[1];
-        alert("a1:" + a1 + "a2:" + a2);
-        this.articles.map((item, index) => {
+        // alert("a1:" + a1 + "a2:" + a2);
+        this.articleArraybase.map((item, index) => {
           if (index >= a1 && index <= a2) {
             this.articleArray.push(item);
           }
@@ -268,26 +279,40 @@ export default {
     search(e) {
       this.articleArray = [];
 
-      let article_list = this.articles;
-      article_list.map(element => {
-        const a_text = element.ArticlesName.toLowerCase() + "";
-        const b_text = e.target.value.toLowerCase() + "";
-        // const b_text = "master"
+      let geturl = this.base_url + "/api/get_blogs";
+      axios({
+        method: "get",
+        url: geturl
+      })
+        .then(response => {
+          //handle success
+          console.log(response.data);
+          this.randomNumber = response.data;
 
-        let s_index = a_text.indexOf(b_text) + 1;
-        // console.log("search ", a_text, b_text, s_index);
+          this.articleArray = Object.values(response.data.data);
 
-        if (s_index > 0 || e.target.value == "") {
-          this.articleArray.push(element);
-        }
-      });
+          let article_list = this.articleArray;
+          article_list.map(element => {
+            const a_text = element.article.toLowerCase() + "";
+            const b_text = e.target.value.toLowerCase() + "";
+            // const b_text = "master"
 
-      console.log("search array :", this.articleArray, e.target.value);
+            let s_index = a_text.indexOf(b_text) + 1;
+            // console.log("search ", a_text, b_text, s_index);
+
+            if (s_index > 0 || e.target.value == "") {
+              this.articleArray.push(element);
+            }
+          });
+
+          console.log("search array :", this.articleArray, e.target.value);
+        })
+        .catch(error => {
+          //handle error
+          console.log(error);
+        });
     },
     sort: function(s) {
-      console.log("sort key :", s, this.articleArray);
-      let direction = 1;
-
       if (s === this.currentSort) {
         if (this.currentSortDir == "asc") {
           direction = 1;
@@ -299,57 +324,78 @@ export default {
       }
 
       this.currentSortDir;
-      let article_list = this.articleArray;
-      switch (s) {
-        case "name":
-          article_list.sort(function(a, b) {
-            var x = a.ArticlesName.toLowerCase();
-            var y = b.ArticlesName.toLowerCase();
-            if (x < y) {
-              return -1 * direction;
-            }
-            if (x > y) {
-              return 1 * direction;
-            }
-            return 0;
-          });
 
-          // console.log("sorted : ", article_list);
-          break;
-        case "Date":
-          article_list.sort(function(a, b) {
-            var x = a.Date.toLowerCase();
-            var y = b.Date.toLowerCase();
-            if (x < y) {
-              return -1 * direction;
-            }
-            if (x > y) {
-              return 1 * direction;
-            }
-            return 0;
-          });
+      let geturl = this.base_url + "/api/get_blogs";
+      axios({
+        method: "get",
+        url: geturl
+      })
+        .then(response => {
+          //handle success
+          console.log(response.data);
+          this.randomNumber = response.data;
 
-          // console.log("sorted : ", article_list);
-          break;
-        case "Status":
-          article_list.sort(function(a, b) {
-            var x = a.Status.toLowerCase();
-            var y = b.Status.toLowerCase();
-            if (x < y) {
-              return -1 * direction;
-            }
-            if (x > y) {
-              return 1 * direction;
-            }
-            return 0;
-          });
+          this.articleArray = Object.values(response.data.data);
+          let article_list = this.articleArray;
+          switch (s) {
+            case "name":
+              article_list.sort(function(a, b) {
+                var x = a.article.toLowerCase();
+                var y = b.article.toLowerCase();
+                if (x < y) {
+                  return -1 * direction;
+                }
+                if (x > y) {
+                  return 1 * direction;
+                }
+                return 0;
+              });
 
-          // console.log("sorted : ", article_list);
-          break;
+              // console.log("sorted : ", article_list);
+              break;
+            case "Date":
+              article_list.sort(function(a, b) {
+                var x = a.timestamp.toLowerCase();
+                var y = b.timestamp.toLowerCase();
+                if (x < y) {
+                  return -1 * direction;
+                }
+                if (x > y) {
+                  return 1 * direction;
+                }
+                return 0;
+              });
 
-        default:
-          break;
-      }
+              // console.log("sorted : ", article_list);
+              break;
+            case "Status":
+              article_list.sort(function(a, b) {
+                var x = a.status.toLowerCase();
+                var y = b.status.toLowerCase();
+                if (x < y) {
+                  return -1 * direction;
+                }
+                if (x > y) {
+                  return 1 * direction;
+                }
+                return 0;
+              });
+
+              // console.log("sorted : ", article_list);
+              break;
+
+            default:
+              break;
+          }
+        })
+        .catch(error => {
+          //handle error
+          console.log(error);
+        });
+
+      console.log("sort key :", s, this.articleArray);
+      let direction = 1;
+
       this.currentSort = s;
     },
     selectedkey(e) {
