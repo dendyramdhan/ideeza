@@ -152,7 +152,6 @@ export default {
           this.$router.push("/user/dashboard");
         })
         .catch(function(e) {
-          this.$snotify.error(e.message);
           console.log(e);
         });
     },
