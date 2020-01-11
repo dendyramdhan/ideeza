@@ -31,15 +31,23 @@
     </div>
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Image</div>
-      <form   enctype="multipart/form-data">
+      <img id="image" />
+      <!-- <input type="file" ref="file_preview" id="files" @change="previewimage" style="display:none"/> -->
+      <form enctype="multipart/form-data">
         <!-- <file-field v-model="files" ref="file" id="file" @change="fileseleted"/> -->
-        
-      <input type="file" @change="fileseleted" ref="file_upload" style="display:none"/>
-       <button
+
+        <input
+          type="file"
+          @change="fileseleted"
+          ref="file_upload"
+          class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
+        />
+        <!-- <button
        class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
         @click="$refs.file_upload.click()"
-      >select</button>
-  <!-- 
+        >select</button>-->
+
+        <!-- 
         <label class="file-select" :class="borderClass">
     <div class="flex items-center">
       <div class="btn px-3 py-2 text-xs mr-5" :class="btn">Choose</div>
@@ -49,8 +57,7 @@
       </div>
     </div>
     <input type="file" @change="handleFileChange" />
-  </label> -->
-
+        </label>-->
       </form>
     </div>
 
@@ -59,9 +66,13 @@
         class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg"
         @click="uploadUserBlog"
       >Publish</button>
-      <nuxt-link :to="{ path: '/user/blog/view', query: { id: counter, name:ArticlesName}}">
-        <button class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
-      </nuxt-link>
+
+      <!-- <nuxt-link :to="{ path: '/user/blog/view', query: { id: counter, name:ArticlesName}}"></nuxt-link>
+      <button
+        class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg"
+       @click="$refs.file_preview.click()"
+      >Preview</button> -->
+
       <!-- {{this.$store.state.userBlogStore.viewflag }} -->
     </div>
   </div>
@@ -92,14 +103,41 @@ export default {
       file: null,
       articlena: "",
       categoryna: "",
-      descripttionname2: ""
+      descripttionname2: "",
+
+      selectedFile: null,
+      images: [],
+      image_fields: ["id", "name"],
+      total_images: 1
     };
   },
   methods: {
-    fileseleted(event) {
+    previewimage(evt) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+      };
+
+      // read the image file as a data URL.
+      reader.readAsDataURL(evt.target.files[0]);
+    },
+    fileseleted(evt) {
+
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+      };
+
+      // read the image file as a data URL.
+      reader.readAsDataURL(evt.target.files[0]);
+
       // this.file = this.$refs.file.files[0];
-      console.log("file_upload:", event);
-      this.file = event.target.files[0];
+      console.log("file_upload:", evt);
+      this.file = evt.target.files[0];
     },
     articlename(event) {
       this.articlena = event.target.value;
@@ -110,7 +148,12 @@ export default {
     descriptionNameChange(event) {
       this.descripttionname2 = event.target.value;
     },
-
+    // previewclick() {
+    //   localStorage.setItem("blogarticlename", this.articlena);
+    //   localStorage.setItem("blogcategoryna", this.articlena);
+    //   localStorage.setItem("blogdescriptionNameChange", this.articlena);
+    //   this.$router.push("/user/blog/preview?" + this.foobar);
+    // },
     uploadUserBlog() {
       // this.file = this.$refs.file.files[0];
       const formData = new FormData();
@@ -121,7 +164,7 @@ export default {
       var url = this.base_url + "/api/add_blog";
       console.log("upload data", formData);
       let tokenStr =
-        "eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjI0NDI3NDY4OTYsImlhdCI6MTU3ODc0Njg5NiwianRpIjoiSU5RYVhrN05KOVdaY2VQSEY1dW1VUSIsIm5iZiI6MTU3ODc0Njg5NiwidXNlcmlkIjoiZmU1MDVhNjEtNzQ3ZS00MzJhLWE5ODQtNjdhNTc2NDQxYzFjIn0.EuXK2Ps63HSqXwgGH3oSF_08P_rsOMD8rfFD9y8UwHr25bXFmlL_fxR9ZX-4NURn_TnU63VGF9ihRBiBnePzcyO1HGi1GjM3f_iOxFPan5WxTAobQo7BZ-SWEVxcWGpdva23sdhGHDU1yUKz_pddkfwl7x6U29qnHm8bLNDUDsmXgUS5v5OmRYCcmr9c7TD8XUYm95AX3UN5kVXd3U1Z8XX9V8wPDa-T1ETDjRNZqHOHobxITsGnOJelVDx8F9Y4iQVxNpgemDY8Q8SfMLfhy3tPtpkcX0m2Yz2vD2mS5dFIy5wKjFqdaxW6Y5yiLJsGpeghkPG_D5EiALbJgqKDEQ";
+        "eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjI0NDI3NjgxMjYsImlhdCI6MTU3ODc2ODEyNiwianRpIjoiZm5NeFB2NlR3cVJPa2RlZVhFalRFQSIsIm5iZiI6MTU3ODc2ODEyNiwidXNlcmlkIjoiZmU1MDVhNjEtNzQ3ZS00MzJhLWE5ODQtNjdhNTc2NDQxYzFjIn0.TfJiSeX1deYBM_Cvf6wJSZQDG2vgitJ2DI8NwYKLn9gTvxMAKPjuyWmGWu_ZsxqgI1DgfkUZs5Ix8MQMRLh8ZKTc2IpLhH4icmsVdUdIGruLkvrNMFmdtXW_lpQuvIFi0Ge9TnLOra3akPv4RbjB9n6aFyTsFr7jvxL4S_CZJ1pwtknAVfaj3zkw32318HgOPfonuj62jBvujesp46uTHTyCnOrscTrBkbEFvdA_zlk563pGbudgqd3BhW2f64gZSnyhMGdp4ggdAvPDAk2fq1TYBLQ4aMtpqz4DbiIZD3_0XTyp6n_nzdhxdoy2k8Ve5ja-87zXI8YnxBH77Qgtjw";
       axios({
         method: "post",
         url: url,

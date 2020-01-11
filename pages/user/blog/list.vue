@@ -80,7 +80,7 @@
               <!-- {{index}}{{tabledata.id}} -->
             </td>
             <td class>
-              {{tabledata.timestamp}}
+              {{ts.toLocaleDateString(tabledata.timestamp)}}
               <!-- <span v-if="tabledata.flag"></span>
               <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
@@ -187,6 +187,7 @@ export default {
   name: "blog-list",
   data: function() {
     return {
+      ts :new Date(),
       base_url: process.env.base_url,
       searchTerm: "",
       articles: articles,
