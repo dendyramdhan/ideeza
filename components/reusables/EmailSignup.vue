@@ -128,7 +128,7 @@ export default {
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" }
       })
-        .then(response => {
+        .then(function(response) {
           //handle success
           console.log(response.data);
           if (response.data["success"] == true) {
@@ -138,7 +138,7 @@ export default {
               data: bodyFormData,
               headers: { "Content-Type": "multipart/form-data" }
             })
-              .then(response => {
+              .then(function(response) {
                 //handle success
                 console.log(response.data);
                 console.log(response.data["success"]);
