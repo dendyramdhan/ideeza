@@ -15,7 +15,8 @@
 
     <!--Shipping form-->
     <div class="cart-scroll-area">
-      <smooth-scrollbar :options="{alwaysShowTracks: true}">
+      <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
+        <div style="overflow: scroll; height: 480px">
         <div class="my-5 lg:flex flex-wrap">
           <div class="lg:w-1/2 lg:pr-5">
             <div class="field-container mt-10">
@@ -66,7 +67,8 @@
             </div>
           </div>
         </div>
-      </smooth-scrollbar>
+    </div>
+      <!-- </smooth-scrollbar> -->
     </div>
   </div>
 </template>
