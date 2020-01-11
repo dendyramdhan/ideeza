@@ -204,18 +204,6 @@ Object.defineProperty(Array.prototype, 'chunk_inefficient', {
 });
 
 export default {
-  // asyncData({ params }) {
-  //   return axios.get(`https://dog.ceo/api/breeds/list`).then(res => {
-  //     console.log("Here: ", res.data.message);
-  //     return { breeds: res.data.message };
-  //   });
-  // },
-  // asyncData({ params }, callback) {
-  //   axios.get("https://dog.ceo/api/breeds/list").then(res => {
-  //     callback(null, { breeds: res.data.message });
-  //     console.log("Here: ", res.data.message);
-  //   });
-  // },
 
   layout: "user",
   name: "dashboard-index",
@@ -238,7 +226,7 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted');
+    
   },
   methods: {
     onClickOutside() {

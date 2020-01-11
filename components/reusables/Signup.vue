@@ -13,7 +13,7 @@
           <font-awesome-icon class="text-base mr-2" :icon="['fab', 'facebook-f']" />Continue with Facebook
         </button>
         <button
-          class="rounded-full bg-white border border-black text-black text-center w-full py-3" @click="googleSignIn"
+          class="rounded-full bg-white border border-black text-black text-center w-full py-3" @click="googleSignin"
         >
           <svg
             width="17"
@@ -60,21 +60,22 @@ export default {
     Modal
   },
   methods: {
-    googleSignIn() {
+    googleSignin() {
       // const provider = new firebase.auth.GoogleAuthProvider();
 
       this.provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
         .signInWithPopup(this.provider)
-        .then(result => {
+        .then(function(result) {
           // store the user ore wathever
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
+          console.log('googleSign', result);
           this.$router.push("/user/dashboard");
         })
-        .catch(e => {
+        .catch(function(e) {
           this.$snotify.error(e.message);
           console.log(e);
         });
@@ -91,14 +92,14 @@ export default {
           var user = result.user;
           // ...
         })
-        .catch(function(error) {
+        .catch(function(e) {
           // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          var errorCode = e.code;
+          var errorMessage = e.message;
           // The email of the user's account used.
-          var email = error.email;
+          var email = e.email;
           // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
+          var credential = e.credential;
           // ...
         });
     }

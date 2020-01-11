@@ -100,13 +100,13 @@ export default {
   data() {
     return {
       base_url: process.env.base_url,
-      email: null,
-      password: null,
-      firstname: null,
-      lastname: null,
-      day: null,
-      month: null,
-      year: null
+      email: '',
+      password: '',
+      firstname: '',
+      lastname: '',
+      day: '',
+      month: '',
+      year: ''
     };
   },
   methods: {
@@ -128,7 +128,7 @@ export default {
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" }
       })
-        .then(function(response) {
+        .then(response => {
           //handle success
           console.log(response.data);
           if (response.data["success"] == true) {
@@ -138,7 +138,7 @@ export default {
               data: bodyFormData,
               headers: { "Content-Type": "multipart/form-data" }
             })
-              .then(function(response) {
+              .then(response => {
                 //handle success
                 console.log(response.data);
                 console.log(response.data["success"]);
@@ -149,33 +149,21 @@ export default {
                   var firstname = userdata.firstname;
                   var lastname = userdata.lastname;
                   var userid = userdata.id;
-                  window.$nuxt.$store.commit(
-                    "userinfo/saveuseraccesstoken",
-                    token
-                  );
-                  window.$nuxt.$store.commit(
-                    "userinfo/saveuserfirstname",
-                    firstname
-                  );
-                  window.$nuxt.$store.commit(
-                    "userinfo/saveuserlastname",
-                    lastname
-                  );
-                  window.$nuxt.$store.commit("userinfo/saveuserid", userid);
-                  console.log(
-                    "Here: ",
-                    window.$nuxt.$store.state.userinfo.useraccessToken
-                  );
+
+                  localStorage.setItem("authToken", token);
+                  localStorage.setItem("firtname", firstname);
+                  localStorage.setItem("lastname", lastname);
+                  localStorage.setItem("userid", userid);
                   window.$nuxt.$router.push("/user/dashboard");
                 }
               })
-              .catch(function(error) {
+              .catch(error => {
                 //handle error
                 console.log(error);
               });
           }
         })
-        .catch(function(error) {
+        .catch(error => {
           //handle error
           console.log(error);
         });

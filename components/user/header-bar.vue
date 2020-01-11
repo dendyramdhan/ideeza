@@ -117,7 +117,8 @@ export default {
     }
   },
   mounted() {
-    this.name = this.$store.state.userinfo.firstname + ' ' + this.$store.state.userinfo.lastname;
+    this.name = localStorage.getItem('firstname') + ' ' + localStorage.getItem('lastname');
+    console.log('fullname: ', this.name);
     console.log("news: ", this.news, this.showInfoAlert);
   },
   methods: {

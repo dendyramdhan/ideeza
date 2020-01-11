@@ -36,6 +36,7 @@
               <nuxt-link to class>About Us</nuxt-link>
             </li>
             <li
+            
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
             >
               <nuxt-link to="/pricing" class>Pricing</nuxt-link>
@@ -43,7 +44,7 @@
             <li
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
             >
-              <nuxt-link to class>Contact Us</nuxt-link>
+              <nuxt-link to="/user/support" class>Contact Us</nuxt-link>
             </li>
 
             <li

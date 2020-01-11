@@ -17,7 +17,7 @@
         </button>
         <button
           class="rounded-full bg-white border border-black text-black text-center w-full py-3"
-          @click="googleSignIn"
+          @click="googleSignin"
         >
           <svg
             width="17"
@@ -108,7 +108,7 @@ export default {
         data: bodyFormData,
         headers: { "Content-Type": "multipart/form-data" }
       })
-        .then(function(response) {
+        .then(response => {
           //handle success
           console.log(response.data);
           console.log(response.data["success"]);
@@ -119,37 +119,39 @@ export default {
             var firstname = userdata.firstname;
             var lastname = userdata.lastname;
             var userid = userdata.id;
-            window.$nuxt.$store.commit("userinfo/saveuseraccesstoken", token);
-            window.$nuxt.$store.commit("userinfo/saveuserfirstname", firstname);
-            window.$nuxt.$store.commit("userinfo/saveuserlastname", lastname);
-            window.$nuxt.$store.commit("userinfo/saveuserid", userid);
+
+            localStorage.setItem("authToken", token);
+            localStorage.setItem("firtname", firstname);
+            localStorage.setItem("lastname", lastname);
+            localStorage.setItem("userid", userid);
             console.log(
               "Here: ",
-              window.$nuxt.$store.state.userinfo.useraccessToken
+              localStorage.getItem("authToken")
             );
            window.$nuxt.$router.push("/user/dashboard");
           }
         })
-        .catch(function(error) {
+        .catch(error => {
           //handle error
           console.log(error);
         });
     },
-    googleSignIn() {
+    googleSignin() {
       // const provider = new firebase.auth.GoogleAuthProvider();
 
       this.provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
         .signInWithPopup(this.provider)
-        .then(result => {
+        .then(function(result) {
           // store the user ore wathever
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
+          console.log('googleSignin', result);
           this.$router.push("/user/dashboard");
         })
-        .catch(e => {
+        .catch(function(e) {
           this.$snotify.error(e.message);
           console.log(e);
         });
@@ -166,14 +168,14 @@ export default {
           var user = result.user;
           // ...
         })
-        .catch(function(error) {
+        .catch(function(e) {
           // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
+          var errorCode = e.code;
+          var errorMessage = e.message;
           // The email of the user's account used.
-          var email = error.email;
+          var email = e.email;
           // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential;
+          var credential = e.credential;
           // ...
         });
     }
