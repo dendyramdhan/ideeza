@@ -2,6 +2,8 @@
   <div class="flex flex-col h-full">
     <navigation class="flex-shrink"></navigation>
     <nuxt class="flex-grow" />
+
+<client-only>
     <notifications group="error" position="top right">
       <template slot="body" slot-scope="props">
         <div class="notify notify--error">
@@ -16,6 +18,10 @@
         </div>
       </template>
     </notifications>
+</client-only>
+
+<client-only>
+
     <notifications group="success" position="top right">
       <template slot="body" slot-scope="props">
         <div class="notify notify--success">
@@ -30,6 +36,9 @@
         </div>
       </template>
     </notifications>
+
+</client-only>
+
     <FloatButton />
   </div>
 </template>
