@@ -1,6 +1,11 @@
 
+const env = require('dotenv').config()
+
+console.log(env)
+
 export default {
   mode: 'universal',
+  env:env.parsed,
   /*
   ** Headers of the page
   */
