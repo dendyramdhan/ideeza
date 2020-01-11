@@ -360,7 +360,7 @@
 <script>
 import LeftMenu from "~/components/user/messages/left-side-menu.vue";
 import firebase from "firebase";
-import apiService from '~/apiService'
+import apiService from '~/apiService';
 
 export default {
   layout: "user",
@@ -562,7 +562,13 @@ export default {
       }
     ];
 
-    apiService(this.messageHistory, (res)=>{
+    let sendData = {
+      method: "get",
+      url: "/api/user/get_list",
+      data: null
+    }
+
+    apiService(sendData, (res)=>{
 
       console.log("get user list :", res)
 

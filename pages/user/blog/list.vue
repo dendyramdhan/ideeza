@@ -183,6 +183,8 @@
 import axios from "axios";
 import articles from "../../../data/BlogApi.json";
 import { teal } from "color-name";
+import apiService from '~/apiService';
+
 export default {
   name: "blog-list",
   data: function() {
@@ -212,13 +214,16 @@ export default {
     let array1 = [];
     let endd = 0;
 
-    let geturl = this.base_url + "/api/get_blogs";
-    axios({
+    let geturl ="/api/get_blogs";
+
+    let sendData = {
       method: "get",
-      url: geturl
-    })
-      .then(response => {
-        //handle success
+      url: geturl,
+      data: null
+    }
+
+    apiService(sendData, (response)=>{
+      
         console.log(response.data);
         this.randomNumber = response.data;
 
@@ -234,11 +239,24 @@ export default {
         this.length = this.articleArray.length / 5 - 1;
         this.counter =
           this.articleArray.length / this.$store.state.userBlogStore.scale;
-      })
-      .catch(error => {
-        //handle error
-        console.log(error);
-      });
+     
+    })
+
+
+
+
+    // axios({
+    //   method: "get",
+    //   url: geturl
+    // })
+    //   .then(response => {
+
+
+    //    })
+    //   .catch(error => {
+    //     //handle error
+    //     console.log(error);
+    //   });
 
     // console.log(this.randomNumber);
   },
@@ -281,6 +299,7 @@ export default {
       this.articleArray = [];
 
       let geturl = this.base_url + "/api/get_blogs";
+
       axios({
         method: "get",
         url: geturl
