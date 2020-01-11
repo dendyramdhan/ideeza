@@ -360,6 +360,7 @@
 <script>
 import LeftMenu from "~/components/user/messages/left-side-menu.vue";
 import firebase from "firebase";
+import apiService from '~/apiService'
 
 export default {
   layout: "user",
@@ -560,6 +561,12 @@ export default {
         ]
       }
     ];
+
+    apiService(this.messageHistory, (res)=>{
+
+      console.log("get user list :", res)
+
+    })
     // var databaseRef = firebase.database().ref('Admin');
     // console.log("message page mounted ")
   }
