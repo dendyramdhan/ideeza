@@ -1,29 +1,17 @@
 <template>
-    <div class="md:m-8 lg:m-8 m-2">
+    <div class="md:m-8 lg:m-8 my-2">
       <div class="flex">
         <div class="mr-4">
-          <button class="px-5 border border-gray-300 md:px-20 py-2 font-semibold">
-             <font-awesome-icon class="mr-2 text-sm" :icon="['fas', 'times']" />Electronics</button>
+          <nuxt-link to="/service-provider/settings/cost-of-service/electronics" class="px-5 border border-gray-300 md:px-20 py-2 font-semibold">
+             <img src="~/static/images/light-bolt.png" class="inline"> Electronics</nuxt-link>
         </div>
         <div>
-          <button class="px-5 border border-gray-300 md:px-20 py-2 bg-white font-semibold">
-           <font-awesome-icon class="mr-2 text-sm" :icon="['fas', 'times']" />
-            Cover</button>
+          <nuxt-link to="/service-provider/settings/cost-of-service/cover" class="px-5 border border-gray-300 md:px-20 py-2 bg-white font-semibold">
+           <img src="~/static/images/face.png" class="inline">
+            Cover</nuxt-link>
         </div>
       </div>
-      <div class="flex my-2">
-        <nuxt-link to="/service-provider/settings/cost-of-service/electronics-fabrication" class="mr-8 font-semibold">
-          Fabrication
-        </nuxt-link >
-        <nuxt-link to="/service-provider/settings/cost-of-service/assembly-service" class="font-semibold mr-8 text-ideeza-gray-700">
-          Assembly Service
-        </nuxt-link >
-        <nuxt-link to="/service-provider/settings/cost-of-service/electronics-dealer" class="font-semibold text-ideeza-gray-700">
-          Dealer
-        </nuxt-link>
-      </div>
-      <hr class="mt-2 mb-5">
-      <nuxt-child class="xl:max-w-4xl"/>
+      <nuxt-child class="xl:max-w-5xl mt-5"/>
 
 
     </div>
@@ -37,8 +25,5 @@ export default {
 .field-input select {
   max-width: 100%;
   min-width: 100%;
-}
-.active-link{
-  @apply text-ideeza;
 }
 </style>
