@@ -2,7 +2,7 @@
   <div class="w-full">
     <div class="scroll-area">
       <smooth-scrollbar :options="{alwaysShowTracks: true}">
-        <div class="flex mx-auto mb-10" v-for="feed in feeds">
+        <div class="sm:flex mx-auto mb-10" v-for="feed in feeds">
           <img class="feed-owner-avatar rounded-full mr-5" :src="feed.potrait_url" alt />
           <div class="flex-grow bg-white py-5 shadow">
             <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
@@ -15,8 +15,7 @@
               <div @click="onDetail">
                 <font-awesome-icon
                   class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer"
-                  :icon="['fas', 'ellipsis-h']"
-                />
+                  :icon="['fas', 'ellipsis-h']" />
               </div>
             </div>
 
@@ -28,49 +27,30 @@
               <img class="w-full object-fit object-center" :src="feed.image_url" alt />
             </div>
 
-            <div class="p-10 flex justify-between items-center">
+            <div class="p-10  md:flex justify-between items-center">
               <div class="flex items-center">
-                <div
-                  class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                  @click="onLike"
-                >
-                  <font-awesome-icon
-                    class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                    :icon="['fas', 'thumbs-up']"
-                  />LIKE
+                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5" @click="onLike">
+                  <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
+                    :icon="['fas', 'thumbs-up']" />LIKE
                 </div>
-                <div
-                  class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                  @click="onShare"
-                >
-                  <font-awesome-icon
-                    class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                    :icon="['fas', 'share-alt']"
-                  />SHARE
+                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5" @click="onShare">
+                  <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
+                    :icon="['fas', 'share-alt']" />SHARE
                 </div>
-                <div
-                  class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                  @click="onComment"
-                >
-                  <font-awesome-icon
-                    class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                    :icon="['fas', 'comment-dots']"
-                  />COMMENT
+                <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5" @click="onComment">
+                  <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
+                    :icon="['fas', 'comment-dots']" />COMMENT
                 </div>
               </div>
 
               <div class="flex items-center font-semibold">
-                <div
-                  class="mr-6 text-ideeza cursor-pointer"
-                  @click="onShowComments"
-                >{{feed.comments_count}} comments</div>
-                <div class="mr-6 cursor-pointer" @click="onShowShare">{{feed.share_count}} share</div>
+                <div class="mr-6 text-ideeza cursor-pointer" @click="onShowComments(feed.comments)">{{feed.comments_count}} comments
+                </div>
+                <div class="mr-6 cursor-pointer" @click="onShowShare(feed.shared_by)">{{feed.share_count}} share</div>
               </div>
             </div>
 
-            <div
-              class="text-gray-600 text-lg border-t border-b border-solid border-gray-300 py-5 px-5"
-            >
+            <div class="text-gray-600 text-lg border-t border-b border-solid border-gray-300 py-5 px-5">
               <span class="font-semibold">You</span> and
               <span class="font-semibold">{{feed.likes_count}} others</span> like this
             </div>
@@ -82,33 +62,50 @@
                   <img class="feed-comment-avatar rounded-full" :src="comment.photo_url" alt />
                 </div>
                 <div class="flex-grow bg-gray-200 rounded p-5">
-                  <div class="flex justify-between">
+                  <div class="flex justify-between relative cursor-pointer" @click="comment.show_user_details=true;$forceUpdate()" @mouseleave="comment.show_user_details=false;$forceUpdate()">
                     <div>
                       <h2 class="mr-10 font-semibold">{{comment.name}}</h2>
                       <span class="text-xs font-hairline">{{comment.occupation}}</span>
                     </div>
                     <div>3 min ago.</div>
+                    <div class="user-tooltip top shadow-xl rounded-lg cursor-default" v-show="comment.show_user_details==true">
+                      <div class="flex p-3">
+                        <div class="w-1/3 mr-2">
+                          <img :src="comment.photo_url" alt />
+                        </div>
+                        <div class="flex-1">
+                          <h4 class="font-bold text-2xl mb-1">{{comment.name}}</h4>
+                          <h5 class="font-bold text-base mb-1 text-ideeza-dark">{{comment.occupation}}</h5>
+                          <div class="text-gray-400">
+                            <font-awesome-icon
+                            :icon="['fas', 'map-marker-alt']"/>
+                            New york, NY
+                          </div>
+                        </div>
+                      </div>
+                      <div class="p-3 flex bg-gray-100">
+                        <button class="w-2/5 block border border-600 mr-2">
+                        <font-awesome-icon :icon="['fas', 'link']"/>
+                        Connect</button>
+                        <button class="block flex-1 border border-600">
+                          <font-awesome-icon :icon="['fas', 'envelope']"/>
+                          Message</button>
+                      </div>
+                    </div>
+                    <font-awesome-icon class="text-gray-100 cursor-default user-tooltip-caret top"
+                        :icon="['fas', 'caret-down']" v-show="comment.show_user_details==true"/>
                   </div>
                   <p class="text-xs my-5">{{comment.comments_content}}</p>
                   <div class="flex items-center">
-                    <div
-                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                      @click="onCommentLike"
-                    >
-                      <font-awesome-icon
-                        class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
-                        :icon="['fas', 'thumbs-up']"
-                      />
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5" @click="onCommentLike">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
+                        :icon="['fas', 'thumbs-up']" />
                       {{comment.likes}}
                     </div>
-                    <div
-                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                      @click="onCommentComment"
-                    >
-                      <font-awesome-icon
-                        class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
-                        :icon="['fas', 'comment-dots']"
-                      />
+                    <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
+                      @click="onCommentComment">
+                      <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
+                        :icon="['fas', 'comment-dots']" />
                       {{comment.comments}}
                     </div>
                   </div>
@@ -118,67 +115,149 @@
 
             <!--Write Comments-->
             <div class="mt-10 mx-5 bg-gray-200 p-10">
-              <input
-                class="bg-gray-200 text-gray-600 text-semibold text-lg outline-none"
-                placeholder="Write your comment..."
-              />
+              <input class="bg-gray-200 text-gray-600 text-semibold text-lg outline-none"
+                placeholder="Write your comment..." />
             </div>
           </div>
         </div>
       </smooth-scrollbar>
     </div>
+    <modal wide v-if="share==true" @close="share=false">
+      <template slot="header">
+        <div class="flex justify-between pl-10 pr-5 items-center">
+        <h4 class="flex-1 text-lg font-semibold text-ideeza-black">SharedBy</h4>
+        <div class="text-right py-3 px-3">
+          <button @click="share=false">
+            <font-awesome-icon class="text-xs text-black mt-2 mr-2" :icon="['fa', 'times']" />
+          </button>
+        </div>
+        </div>
+      </template>
+      <template slot="body">
+        <div class="m-10" v-for="user in shared_by">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="mr-2">
+                <img class="avatar" :src="user.photo_url" alt />
+              </div>
+              <div>
+                <span class="block font-semibold text-sm">{{user.name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </modal>
+    <modal wide v-if="showComments==true" @close="showComments=false">
+      <template slot="header">
+        <div class="text-right py-3 px-3">
+          <button @click="showComments=false">
+            <font-awesome-icon class="text-xs text-black mt-2 mr-2" :icon="['fa', 'times']" />
+          </button>
+        </div>
+      </template>
+      <template slot="body">
+        <div class="px-10 flex w-full mb-10" v-for="comment in comments">
+          <div class="w-16">
+            <img class="feed-comment-avatar rounded-full" :src="comment.photo_url" alt />
+          </div>
+          <div class="flex-grow bg-gray-200 rounded p-5">
+            <div class="flex justify-between">
+              <div>
+                <h2 class="mr-10 font-semibold">{{comment.name}}</h2>
+                <span class="text-xs font-hairline">{{comment.occupation}}</span>
+              </div>
+              <div>3 min ago.</div>
+            </div>
+            <p class="text-xs my-5">{{comment.comments_content}}</p>
+            <div class="flex items-center">
+              <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5" @click="onCommentLike">
+                <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
+                  :icon="['fas', 'thumbs-up']" />
+                {{comment.likes}}
+              </div>
+              <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5" @click="onCommentComment">
+                <font-awesome-icon class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
+                  :icon="['fas', 'comment-dots']" />
+                {{comment.comments}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </modal>
   </div>
 </template>
 
 <script>
-import feeds from "~/json/feeds.json";
-export default {
-  name: "feeds",
-  data: function() {
-    console.log("feeds: ", feeds);
-    return {
-      feeds: feeds
-    };
-  },
-  methods: {
-    onDetail() {
-      alert();
+  import feeds from "~/json/feeds.json";
+  import Modal from "~/components/reusables/Modal.vue"
+  export default {
+    name: "feeds",
+    components: {
+      Modal
     },
-    onLike() {
-      alert();
+    data: function () {
+      console.log("feeds: ", feeds);
+      return {
+        feeds: feeds,
+        share: false,
+        showComments: false,
+        shared_by: [],
+        comments: []
+      };
     },
-    onShare() {
-      alert();
-    },
-    onComment() {
-      alert();
-    },
-    onCommentLike() {
-      alert();
-    },
-    onCommentComment() {
-      alert();
-    },
-    onShowComments() {
-      alert();
-    },
-    onShowShare() {
-      alert();
+    methods: {
+      onDetail() {
+        alert();
+      },
+      onLike() {
+        alert();
+      },
+      onShare() {
+        this.$emit('share')
+      },
+      onComment() {
+        alert();
+      },
+      onCommentLike() {
+        alert();
+      },
+      onCommentComment() {
+        alert();
+      },
+      onShowComments(comments) {
+        this.showComments = true
+        this.comments = comments
+      },
+      onShowShare(shared_by) {
+        this.share = true
+        this.shared_by = shared_by
+      }
     }
-  }
-};
+  };
+
 </script>
 
 <style scoped>
-.feed-comment-avatar {
-  width: 48px;
-}
-.feed-owner-avatar {
-  width: 64px;
-  height: 64px;
-}
-.scroll-area {
-  width: 100%;
-  height: 700px;
-}
+  .feed-comment-avatar {
+    width: 48px;
+  }
+
+  .feed-owner-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .scroll-area {
+    width: 100%;
+    height: 700px;
+  }
+
+  .avatar {
+    @apply rounded-full;
+    width: 45px;
+    height: 45px;
+  }
+
 </style>

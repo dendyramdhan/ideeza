@@ -23,7 +23,7 @@
           <!--Feed Panel-->
           <div class="feed-panel mx-auto">
             <NewsFeed v-if="feedType === 'follow'" />
-            <!-- <NewsFeed v-if="feedType === 'world'" /> -->
+            <NewsFeed v-if="feedType === 'world'" />
             <div class="flex flex-col justify-center items-center mt-10" v-if="!feedType">
               <h1 class="text-center font-semibold w-full text-3xl">Follow list is empty</h1>
               <p
@@ -120,6 +120,7 @@ export default {
       } else {
         this.feedType = "world";
       }
+      this.$forceUpdate()
     },
     onConnect() {
       alert('Do you want to disconnect?');

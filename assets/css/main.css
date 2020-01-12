@@ -464,3 +464,36 @@ li.VuePagination__pagination-item.page-item.active a{
 p.VuePagination__count{
     display: none;
 }
+.bg-pricing {
+  background-image: url(~static/images/curve-bg-1.png);
+  width: 100%;
+  height: 100vh;
+  background-position: 0 -205px;
+  background-repeat: no-repeat;
+  background-position: 0px -0px;
+  background-size: 100% 75%;
+  z-index: -1;
+  position: fixed;
+}
+@media (min-width: 640px) {
+    .bg-pricing {
+        background-position: 0px -200px;
+        background-size: 100%;
+    }
+}
+.user-tooltip{
+  position: absolute;
+  background:white;
+}
+.user-tooltip.top{
+  top: 0;
+  transform: translateY(-100%);
+}
+.user-tooltip-caret{
+  position: absolute;
+  font-size: 1.7rem;
+}
+.user-tooltip-caret.top{
+  top: -11px;
+  left: 20px;
+}

@@ -100,7 +100,7 @@
         </span>
 
         <span v-for="inde in counterarray " :key="inde">
-          <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
+          <span v-if="1" class="text-lg text-ideeza">
             <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
           </span>
           <span v-else>
