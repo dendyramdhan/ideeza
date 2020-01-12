@@ -55,6 +55,7 @@
               placeholder="Password"
               v-model="password"
             />
+            <div v-if="!auth" style="color: red">Your Email or password is incorrect!</div>
             <input type="checkbox" class="mb-3" /> Remember me
             <!-- <nuxt-link to="/user/dashboard"> -->
             <button
@@ -90,7 +91,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      auth: true
     };
   },
 
@@ -111,6 +113,7 @@ export default {
         console.log(response.data);
         console.log(response.data["success"]);
         if (response.data["success"] == true) {
+          this.auth = true;
           var token = response.data["data"].token;
           var userdata = response.data["data"].userdata;
           var firstname = userdata.firstname;
@@ -122,7 +125,9 @@ export default {
           localStorage.setItem("lastname", lastname);
           localStorage.setItem("userid", userid);
           console.log("Here: ", localStorage.getItem("authToken"));
-          this.$router.push('/user/dashboard');
+          this.$router.push("/user/dashboard");
+        } else {
+          this.auth = false;
         }
       });
     },
@@ -146,6 +151,7 @@ export default {
           console.log(e);
         });
     },
+    
     facebookSignin() {
       var provider = new firebase.auth.FacebookAuthProvider();
       firebase

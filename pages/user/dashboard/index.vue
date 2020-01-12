@@ -49,7 +49,7 @@
                     />
                     <span
                       class="text-3xl font-bold text-ideeza-black mb-5 leading-none"
-                    >{{activities.projectsmark}}</span>
+                    >{{lengthofprojects}}</span>
                   </div>
                   <div class="pl-12">
                     <span class="text-ideeza-blue-gray text-lg block">Projects</span>
@@ -200,6 +200,7 @@ import innovation from "~/json/innovation.json";
 import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
 import apiService from "~/apiService";
+import apiServiceWithToken from "~/apiService/have_token.js";
 
 Object.defineProperty(Array.prototype, "chunk_inefficient", {
   value: function(chunkSize) {
@@ -226,7 +227,7 @@ export default {
       topprojects: topprojects,
       innovations: innovation,
       activities: activity,
-      projects: [],
+      lengthofprojects: [],
       show: true,
       name: ""
     };
@@ -254,12 +255,12 @@ export default {
         data: null
       };
 
-      apiService(sendData, response => {
+      apiServiceWithToken(sendData, response => {
         console.log(response.data);
         console.log(response.data["success"]);
         if (response.data["success"] == true) {
-          this.projects = response.data["data"];
-          console.log('projects: ', this.projects);
+          this.lengthofprojects = response.data["data"].length;
+          console.log('projects: ', this.lengthofprojects.length);
         }
       });
     } else {
