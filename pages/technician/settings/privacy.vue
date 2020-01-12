@@ -84,14 +84,34 @@
 <script>
 import CheckBox from "~/components/form/checkbox.vue";
 import Projects from "~/data/TechnicianSettingApi.json";
+import apiService from "~/apiService/have_token.js";
+import axios from "axios";
 
 export default {
   name: "privacy",
   data: function() {
     return {
       longview: true,
-      Projects: Projects.Privacy
+      Projects: Projects.Privacy,
+        geturl: "/api/setting/privacy",
+      articleArray: [],
+      randomNumber: {},
     };
+  },
+   created: function() {
+    
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+        this.randomNumber = response.data;
+        this.articleArray = Object.values(response.data.data);
+    });
+
   },
   methods:{
     savesetting(){

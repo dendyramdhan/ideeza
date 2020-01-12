@@ -16,45 +16,6 @@
             "flag": 1
         },
         {
-            "id": 2,
-            "projectName": {
-                "first": "Car-1",
-                "second": "Car-2"
-            },
-            "projecttitle": {
-                "first": "Electronics-1",
-                "second": "Electronics-2"
-            },
-            "ShortDescription": {
-                "first": "My car project_1",
-                "second": "My car project_2"
-            },
-            "ImageUrl": {
-                "first": "1-Samantha",
-                "second": "1-Samantha"
-            },
-            "Cost": {
-                "first": "$20,000",
-                "second": "$30,000"
-            },
-            "commitmember1": {
-                "first": 3,
-                "second": 2
-            },
-            "commitmember2": {
-                "first": 3,
-                "second": 4
-            },
-            "commitkind1": "likes",
-            "Description": "4Making electro cup",
-            "commitkind2": "dislikes",
-            "mark": {
-                "first": 3,
-                "second": 5
-            },
-            "flag": 2
-        },
-        {
             "id": 3,
             "projectName": "1-Samantha",
             "projecttitle": "1-Samantha",
