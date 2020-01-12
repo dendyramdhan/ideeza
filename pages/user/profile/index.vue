@@ -269,7 +269,7 @@ export default {
       tabItem: "timeline",
       focusMore: false,
       showComments: false,
-      contactinfos: contactinfos.contactinfos
+      contactinfos: contactinfos
     };
   },
   computed: {
