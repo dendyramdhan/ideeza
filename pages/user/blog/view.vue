@@ -60,6 +60,7 @@
 
 <script>
 import axios from "axios";
+import apiService from "~/apiService";
 
 // import articles from "~/data/BlogApi.json";
 export default {
@@ -67,52 +68,25 @@ export default {
   data: function() {
     return {
       // articles: articles,
-      base_url: process.env.base_url,
+            geturl: "/api/get_blogs",
       articleArray: [],
       randomNumber: {},
 
     };
   },
   created: function() {
-    let geturl = this.base_url + "/api/get_blogs";
-    axios({
+    
+    let sendData = {
       method: "get",
-      url: geturl
-    })
-      .then(response => {
-        //handle success
-        console.log(response.data);
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
         this.randomNumber = response.data;
         this.articleArray = Object.values(response.data.data);
-        // this.articleArray = onlyarticleArray[0];        
-      })
-      .catch(error => {
-        //handle error
-        console.log(error);
-      });
-
-    // let geturl = this.base_url + "/api/view_blog";
-    // var bodyFormData = new FormData();
-    // bodyFormData.set("id", this.$route.query.id);
-    // axios({
-    //   method: "get",
-    //   data: bodyFormData,
-    //   headers: { "Content-Type": "multipart/form-data" },
-    //   url: geturl
-    // })
-    //   .then(response => {
-    //     //handle success
-    //     console.log(response.data);
-    //     this.randomNumber = response.data;
-
-    //     this.articleArray = Object.values(response.data.data);
-    //     // this.articleArray = onlyarticleArray[0];
-    //   })
-    //   .catch(error => {
-    //     //handle error
-    //     console.log(error);
-    //   });
-
+    });
 
   }
 };
