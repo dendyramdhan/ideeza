@@ -17,7 +17,7 @@
         <div class="mt-10 ">
           <div class="menu-button-container" v-if="currentMenu.name === 'Electronics'">
 
-            <div class="mb-3 flex relative content-center font-semibold" >
+            <div class="mb-3 flex relative content-center font-semibold text-ideeza-dark" >
               Electronics
             </div>
             <!--Sub Menu Items-->
