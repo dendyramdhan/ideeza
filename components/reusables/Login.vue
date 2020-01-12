@@ -82,60 +82,51 @@
 <script>
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
-import axios from "axios";
+import apiService from "~/apiService";
 export default {
   components: {
     Modal
   },
   data() {
     return {
-      base_url: process.env.base_url,
-      email: null,
-      password: null
+      email: "",
+      password: ""
     };
   },
 
   methods: {
     login() {
-      var url = this.base_url + '/api/user/login';
+      let signinurl = "/api/user/login";
       var bodyFormData = new FormData();
       bodyFormData.set("email", this.email);
       bodyFormData.set("password", this.password);
 
-      axios({
+      let sendData = {
         method: "post",
-        url: url,
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" }
-      })
-        .then(response => {
-          //handle success
-          console.log(response.data);
-          console.log(response.data["success"]);
+        url: signinurl,
+        data: bodyFormData
+      };
 
-          if (response.data["success"] == true) {
-            var token = response.data["data"].token;
-            var userdata = response.data["data"].userdata;
-            var firstname = userdata.firstname;
-            var lastname = userdata.lastname;
-            var userid = userdata.id;
+      apiService(sendData, response => {
+        console.log(response.data);
+        console.log(response.data["success"]);
+        if (response.data["success"] == true) {
+          var token = response.data["data"].token;
+          var userdata = response.data["data"].userdata;
+          var firstname = userdata.firstname;
+          var lastname = userdata.lastname;
+          var userid = userdata.id;
 
-            localStorage.setItem("authToken", token);
-            localStorage.setItem("firtname", firstname);
-            localStorage.setItem("lastname", lastname);
-            localStorage.setItem("userid", userid);
-            console.log(
-              "Here: ",
-              localStorage.getItem("authToken")
-            );
-           window.$nuxt.$router.push("/user/dashboard");
-          }
-        })
-        .catch(error => {
-          //handle error
-          console.log(error);
-        });
+          localStorage.setItem("authToken", token);
+          localStorage.setItem("firstname", firstname);
+          localStorage.setItem("lastname", lastname);
+          localStorage.setItem("userid", userid);
+          console.log("Here: ", localStorage.getItem("authToken"));
+          this.$router.push('/user/dashboard');
+        }
+      });
     },
+
     googleSignin() {
       // const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -148,7 +139,7 @@ export default {
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          console.log('googleSignin', result);
+          console.log("googleSignin", result);
           this.$router.push("/user/dashboard");
         })
         .catch(function(e) {
