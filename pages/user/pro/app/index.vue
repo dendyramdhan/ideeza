@@ -62,7 +62,7 @@
       <div class="main-contents">
         
         <div class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3">
-          <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">Circuit Board</div>
+          <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">APP Inventor</div>
           <div class="flex items-center justify-center content-center">
             <span class="panel-menu text-center" >
               <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']"/>Electronics</span>
