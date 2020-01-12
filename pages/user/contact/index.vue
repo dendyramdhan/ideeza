@@ -2,11 +2,10 @@
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <LeftMenu />
-
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
-        <simple-table @selectall="selectall" :fields="['Name','Email','Title','Date Modified','Role']">
+        <simple-table @selectall="selectall" title="Manage Users, Technicians & Service Providers" :fields="['Name','Email','Title','Date Modified','Role']">
           <tr class="flex w-full mb-4" v-for="(user,index) in users">
             <td class="p-4 w-1/5" :class="{'border-b':users.length-1 != index}">
               <input type="checkbox" :id="user.id" v-model="user.selected" />

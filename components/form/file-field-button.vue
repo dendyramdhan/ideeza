@@ -1,9 +1,12 @@
 <template>
   <label class="file-select">
-    <div class="flex items-center">
+    <div class="flex items-center" v-if="icon==false">
       <div class="btn pill-button py-0 px-5">{{label}}</div>
     </div>
-
+    <div v-else>
+      <font-awesome-icon v-if="icon" class="mr-1 h-3" :icon="['fa', 'paperclip']"/>
+      {{label}}
+    </div>
     <input type="file" multiple @change="handleFileChange"/>
   </label>
 </template>
@@ -15,6 +18,10 @@
         label: {
           type: String,
           default: 'Choose Files'
+        },
+        icon: {
+          type: Boolean,
+          default: false
         }
       },
 

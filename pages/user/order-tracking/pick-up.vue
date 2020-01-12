@@ -7,6 +7,7 @@
         Order is delivered. We are waiting for you
         to pick up the product
       </div>
+      
     </div>
   </div>
 </template>
