@@ -10,8 +10,8 @@
           <div class="chat-board" id="message-container">
             <!--Header-->
             <div class="py-5 border-b border-solid border-gray-300" v-if="selectedUserIndex>-1">
-              <h1 class="text-center text-gray-800 text-lg font-semibold">Jasmine Mueller</h1>
-              <span class="block text-gray-500 text-sm text-center">Active 8h ago</span>
+              <h1 class="text-center text-gray-800 text-lg font-semibold">{{selectedUserName}}</h1>
+              <span class="block text-gray-500 text-sm text-center">{{lastViewHistory}}}</span>
             </div>
 
             <!--Messages-->
@@ -26,7 +26,7 @@
                   <div class="message-from-avatar" v-if="!message.from_me">
                     <img
                       class="h-10 w-10 rounded-full"
-                      src="https://randomuser.me/api/portraits/women/20.jpg"
+                      :src = "selectedAvarta"
                     />
                   </div>
 
@@ -96,12 +96,12 @@
                 <div class="mr-5">
                   <img
                     class="w-16 rounded-full"
-                    src="https://randomuser.me/api/portraits/women/20.jpg"
+                    :src="selectedAvarta"
                   />
                 </div>
                 <div>
-                  <h1 class="text-lg font-semibold text-gray-800">Jasmine Mueller</h1>
-                  <span class="text-base text-gray-500">Active 8h ago</span>
+                  <h1 class="text-lg font-semibold text-gray-800">{{selectedUserName}}</h1>
+                  <span class="text-base text-gray-500">{{lastViewHistory}}</span>
                 </div>
               </div>
             </div>
@@ -158,6 +158,7 @@
                 />
               </div>
             </div>
+
 
             <div
               class="flex mt-3 cursor-pointer items-center"
@@ -284,7 +285,10 @@ export default {
       },
       timeout : null,
       interval: null,
-      added_file: []
+      added_file: [],
+      selectedUserName: '',
+      lastViewHistory: '',
+      selectedAvarta:''
     };
   },
   methods: {
@@ -372,6 +376,8 @@ export default {
     select_user(user_index) {
       this.selectedUserIndex = user_index;
       let selectedUser = this.userList[user_index].user_id
+      this.selectedUserName = this.userList[user_index].name
+      this.selectedAvarta = this.userList[user_index].avarta
       let room = this.myUserId>selectedUser?this.myUserId+'_'+selectedUser:selectedUser+'_'+this.myUserId
       
       if(this.starCountRef)
@@ -388,9 +394,10 @@ export default {
           messages.push(snapshot.val())
           console.log("message get", snapshot.val(), messages)
           localStorage.setItem('messages', JSON.stringify(messages))
-          // var container = document.getElementById('message-container');
-          // container.scrollTop = container.scrollHeight;
-          // console.log("user data", snapshot.val())
+          
+          var container = document.getElementById('message-container');
+          container.scrollTop = container.scrollHeight;
+          console.log("user data", container.scrollTop, container.scrollHeight)
         });        
       }, 200);
 
@@ -431,6 +438,8 @@ export default {
 
          
           last_time = new Date(item.created * 1000).toDateString()
+          this.lastViewHistory =  last_time
+          
 
           if(beforeSate * currentState < 0){
 
