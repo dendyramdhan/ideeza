@@ -6,7 +6,7 @@
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
-        <h1 class="font-semibold lg:text-5xl">Good morning, Moran!</h1>
+        <h1 class="font-semibold lg:text-5xl">Good morning, {{name}}!</h1>
 
         <div class="mt-10 lg:flex welcome-container">
           <div class="lg:w-1/2 lg:h-full relative text-white">
@@ -49,7 +49,7 @@
                     />
                     <span
                       class="text-3xl font-bold text-ideeza-black mb-5 leading-none"
-                    >{{activities.projectsmark}}</span>
+                    >{{lengthofprojects}}</span>
                   </div>
                   <div class="pl-12">
                     <span class="text-ideeza-blue-gray text-lg block">Projects</span>
@@ -102,43 +102,51 @@
             <h1 class="font-semibold lg:text-3xl my-5">World's last innovation</h1>
             <div class="scroll-area" v-if="show">
               <no-ssr>
-              <!-- <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}"> -->
+                <!-- <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}"> -->
                 <div class="sm:flex flex-wrap" style="overflow: scroll; height: 600px;">
                   <template v-for="innovs in innovations.chunk_inefficient(3)">
-                  <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovs">
-                    <div class="m-1" v-if="index%2==0">
-                      <nuxt-link to="">
-                        <div class="mb-8">
-                          <img :src="innovation.image_url" class="object-center object-contain" alt />
+                    <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovs">
+                      <div class="m-1" v-if="index%2==0">
+                        <nuxt-link to>
+                          <div class="mb-8">
+                            <img
+                              :src="innovation.image_url"
+                              class="object-center object-contain"
+                              alt
+                            />
+                          </div>
+                        </nuxt-link>
+                        <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
+                        <p>{{innovation.description}}</p>
+                        <div class="flex justify-between items-center mt-5">
+                          <small>{{innovation.date}}</small>
+                          <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
                         </div>
-                      </nuxt-link>
-                      <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
-                      <p>{{innovation.description}}</p>
-                      <div class="flex justify-between items-center mt-5">
-                        <small>{{innovation.date}}</small>
-                        <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
+                      </div>
+                      <div class="m-1" v-else>
+                        <div class="flex justify-between items-center mb-5">
+                          <small>{{innovation.date}}</small>
+                          <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
+                        </div>
+                        <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
+                        <p>{{innovation.description}}</p>
+                        <nuxt-link to>
+                          <div class="mt-8">
+                            <img
+                              :src="innovation.image_url"
+                              class="object-center object-contain"
+                              alt
+                            />
+                          </div>
+                        </nuxt-link>
                       </div>
                     </div>
-                    <div class="m-1" v-else>
-                      <div class="flex justify-between items-center mb-5">
-                        <small>{{innovation.date}}</small>
-                        <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
-                      </div>
-                      <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
-                      <p>{{innovation.description}}</p>
-                      <nuxt-link to="">
-                        <div class="mt-8">
-                          <img :src="innovation.image_url" class="object-center object-contain" alt />
-                        </div>
-                      </nuxt-link>
-                    </div>
-                  </div>
                   </template>
                   <!-- <li v-for="breed in breeds" :key="breed">
                     <p class="breed button--green">{{breed}}</p>
                   </li>-->
                 </div>
-              <!-- </smooth-scrollbar> -->
+                <!-- </smooth-scrollbar> -->
               </no-ssr>
             </div>
           </div>
@@ -146,7 +154,7 @@
             <h1 class="font-semibold lg:text-3xl my-5">Top projects</h1>
             <div class="scroll-area">
               <no-ssr>
-              <!-- <smooth-scrollbar ref="smooth-scroll-2" :options="{alwaysShowTracks: true}"> -->
+                <!-- <smooth-scrollbar ref="smooth-scroll-2" :options="{alwaysShowTracks: true}"> -->
                 <div class="flex flex-wrap" style="overflow: scroll; height: 600px;">
                   <div class="w-1/2 p-2" v-for="topproject in topprojects">
                     <div class="p-2 border border-solid border-light-gray">
@@ -171,7 +179,7 @@
                     </div>
                   </div>
                 </div>
-              <!-- </smooth-scrollbar> -->
+                <!-- </smooth-scrollbar> -->
               </no-ssr>
             </div>
           </div>
@@ -191,11 +199,14 @@ import axios from "axios";
 import innovation from "~/json/innovation.json";
 import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
+import apiService from "~/apiService";
+import apiServiceWithToken from "~/apiService/have_token.js";
 
-Object.defineProperty(Array.prototype, 'chunk_inefficient', {
+Object.defineProperty(Array.prototype, "chunk_inefficient", {
   value: function(chunkSize) {
     var array = this;
-    return [].concat.apply([],
+    return [].concat.apply(
+      [],
       array.map(function(elem, i) {
         return i % chunkSize ? [] : [array.slice(i, i + chunkSize)];
       })
@@ -204,7 +215,6 @@ Object.defineProperty(Array.prototype, 'chunk_inefficient', {
 });
 
 export default {
-
   layout: "user",
   name: "dashboard-index",
   components: {
@@ -217,7 +227,9 @@ export default {
       topprojects: topprojects,
       innovations: innovation,
       activities: activity,
-      show: true
+      lengthofprojects: [],
+      show: true,
+      name: ""
     };
   },
   computed: {
@@ -225,8 +237,35 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
+
+  created() {},
   mounted() {
-    
+    let authToken = localStorage.getItem("authToken");
+    if (authToken != null) {
+      this.name =
+        localStorage.getItem("firstname") +
+        " " +
+        localStorage.getItem("lastname");
+
+      let getallprojectsurl = "/api/project/get_all";
+
+      let sendData = {
+        method: "get",
+        url: getallprojectsurl,
+        data: null
+      };
+
+      apiServiceWithToken(sendData, response => {
+        console.log(response.data);
+        console.log(response.data["success"]);
+        if (response.data["success"] == true) {
+          this.lengthofprojects = response.data["data"].length;
+          console.log('projects: ', this.lengthofprojects.length);
+        }
+      });
+    } else {
+      this.$router.push("/");
+    }
   },
   methods: {
     onClickOutside() {
@@ -266,7 +305,7 @@ export default {
 /deep/ .scrollbar-thumb {
   @apply bg-ideeza opacity-75;
 }
-.top-50{
+.top-50 {
   top: 50%;
 }
 </style>

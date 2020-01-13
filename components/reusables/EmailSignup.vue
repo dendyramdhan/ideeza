@@ -92,81 +92,72 @@
 <script>
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
-import axios from "axios";
+import apiService from "~/apiService";
 export default {
   components: {
     Modal
   },
   data() {
     return {
-      base_url: process.env.base_url,
-      email: '',
-      password: '',
-      firstname: '',
-      lastname: '',
-      day: '',
-      month: '',
-      year: ''
+      email: "",
+      password: "",
+      firstname: "",
+      lastname: "",
+      day: "",
+      month: "",
+      year: ""
     };
   },
   methods: {
     signup() {
-      var registerurl = this.base_url + '/api/user/register';
-      var signinurl = this.base_url + '/api/user/login';
+      var registerurl = "/api/user/register";
       var birthday = this.day + "/" + this.month + "/" + this.year;
 
-      var bodyFormData = new FormData();
-      bodyFormData.set("email", this.email);
-      bodyFormData.set("password", this.password);
-      bodyFormData.set("firstname", this.firstname);
-      bodyFormData.set("lastname", this.lastname);
-      bodyFormData.set("birthday", birthday);
+      var signupFormData = new FormData();
+      signupFormData.set("email", this.email);
+      signupFormData.set("password", this.password);
+      signupFormData.set("firstname", this.firstname);
+      signupFormData.set("lastname", this.lastname);
+      signupFormData.set("birthday", birthday);
 
-      axios({
+      let Data = {
         method: "post",
         url: registerurl,
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" }
-      })
-        .then(function(response) {
-          //handle success
-          console.log(response.data);
-          if (response.data["success"] == true) {
-            axios({
-              method: "post",
-              url: signinurl,
-              data: bodyFormData,
-              headers: { "Content-Type": "multipart/form-data" }
-            })
-              .then(function(response) {
-                //handle success
-                console.log(response.data);
-                console.log(response.data["success"]);
+        data: signupFormData
+      };
 
-                if (response.data["success"] == true) {
-                  var token = response.data["data"].token;
-                  var userdata = response.data["data"].userdata;
-                  var firstname = userdata.firstname;
-                  var lastname = userdata.lastname;
-                  var userid = userdata.id;
+      apiService(Data, response => {
+        console.log(response.data);
+        console.log(response.data["success"]);
+        if (response.data["success"] == true) {
+          let signinurl = "/api/user/login";
 
-                  localStorage.setItem("authToken", token);
-                  localStorage.setItem("firtname", firstname);
-                  localStorage.setItem("lastname", lastname);
-                  localStorage.setItem("userid", userid);
-                  window.$nuxt.$router.push("/user/dashboard");
-                }
-              })
-              .catch(error => {
-                //handle error
-                console.log(error);
-              });
-          }
-        })
-        .catch(error => {
-          //handle error
-          console.log(error);
-        });
+          let sendData = {
+            method: "post",
+            url: signinurl,
+            data: signupFormData
+          };
+
+          apiService(sendData, response => {
+            console.log(response.data);
+            console.log(response.data["success"]);
+            if (response.data["success"] == true) {
+              var token = response.data["data"].token;
+              var userdata = response.data["data"].userdata;
+              var firstname = userdata.firstname;
+              var lastname = userdata.lastname;
+              var userid = userdata.id;
+
+              localStorage.setItem("authToken", token);
+              localStorage.setItem("firstname", firstname);
+              localStorage.setItem("lastname", lastname);
+              localStorage.setItem("userid", userid);
+              console.log("Here: ", localStorage.getItem("authToken"));
+              this.$router.push("/user/dashboard");
+            }
+          });
+        }
+      });
     }
   },
   mounted() {

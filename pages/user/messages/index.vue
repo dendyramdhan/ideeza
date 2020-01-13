@@ -257,7 +257,7 @@
                 <font-awesome-icon
                   class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer"
                   :icon="['fas', options.opt2? 'chevron-down':'chevron-right']"
-                  @click="click_option('opt2')"
+                  @click="click_option('opt2');$forceUpdate()"
                 />
               </div>
             </div>
