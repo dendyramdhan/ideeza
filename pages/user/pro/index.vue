@@ -93,6 +93,7 @@
   import Cover from '~/components/user/pro/pro-cover.vue'
   import CheckBox from '~/components/form/checkbox.vue'
     export default {
+      middleware: "auth",
       layout: 'user',
       name: "index",
       components: {

@@ -64,6 +64,7 @@ import apiService from "~/apiService";
 
 // import articles from "~/data/BlogApi.json";
 export default {
+  middleware: "auth",
   name: "blog-view",
   data: function() {
     return {

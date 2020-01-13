@@ -8,7 +8,9 @@
       <h1 class="mb-20 text-gray-800 text-2xl lg:text-4xl lg:mt-10 font-semibold">Order Tracking</h1>
       <Stepper />
 
-      <div class="track-container md:mx-auto p-5 lg:p-10 my-10 border border-solid border-ideeza bg-white relative">
+      <div
+        class="track-container md:mx-auto p-5 lg:p-10 my-10 border border-solid border-ideeza bg-white relative"
+      >
         <nuxt-child></nuxt-child>
 
         <div v-if="trackStep === 0" class="mt-20 flex justify-center items-center">
@@ -17,11 +19,11 @@
             <span class="font-semibold block text-lg">John Snow</span>
             <span class="text-sm text-gray-500 block">Project Manager</span>
           </div>
-            <nuxt-link to="/user/profile">
-          <button
-            class="btn btn-normal shadow-lg text-white btn-ideeza-gradient btn-text-bold btn--rounded px-8 py-4 text-lg"
-          >Contact</button>
-            </nuxt-link>
+          <nuxt-link to="/user/profile">
+            <button
+              class="btn btn-normal shadow-lg text-white btn-ideeza-gradient btn-text-bold btn--rounded px-8 py-4 text-lg"
+            >Contact</button>
+          </nuxt-link>
         </div>
 
         <div v-if="trackStep === 2" class="mt-10 flex flex-col justify-center items-center">
@@ -31,7 +33,9 @@
             >Approve</button>
           </nuxt-link>
           <nuxt-link to="/user/order-tracking/delivery">
-            <span class="font-semibold relative text-gray-700 text-xl"><u>No delivery is made?</u></span>
+            <span class="font-semibold relative text-gray-700 text-xl">
+              <u>No delivery is made?</u>
+            </span>
           </nuxt-link>
         </div>
 
@@ -52,6 +56,7 @@ import Stepper from "~/components/user/order-tracking/stepper.vue";
 import { mapMutations } from "vuex";
 
 export default {
+  middleware: "auth",
   layout: "user",
   name: "tracking-index",
   components: {
@@ -91,7 +96,7 @@ export default {
   width: 95px;
   height: 95px;
 }
-.btn-ideeza-gradient{
-  background: linear-gradient(to left,#ff00c7,#ffb1ec);
+.btn-ideeza-gradient {
+  background: linear-gradient(to left, #ff00c7, #ffb1ec);
 }
 </style>

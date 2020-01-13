@@ -142,6 +142,7 @@ import Projects from "~/data/UserProjectApi.json";
 import axios from "axios";
 
 export default {
+  middleware: "auth",
   layout: "user",
   name: "building-index",
   components: {

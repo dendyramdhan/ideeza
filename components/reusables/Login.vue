@@ -84,6 +84,7 @@
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
 import apiService from "~/apiService";
+
 export default {
   components: {
     Modal
@@ -123,6 +124,7 @@ export default {
           // window.$nuxt.$cookies.set("firstname", firstname);
           // window.$nuxt.$cookies.set("lastname", lastname);
           // window.$nuxt.$cookies.set("userid", userid);
+          console.log('window.$nuxt.$cookies', window.$nuxt);
 
           window.$nuxt.$cookies.set("authToken", token);
           window.$nuxt.$cookies.set("firstname", firstname);

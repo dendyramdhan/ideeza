@@ -34,6 +34,7 @@
 <script>
 import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
 export default {
+    middleware: "auth",
     layout: 'user',
     components: {
         MyIdeeza

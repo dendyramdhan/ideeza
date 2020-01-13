@@ -62,6 +62,7 @@ import CartStepper from "~/components/user/cart/stepper.vue";
 import { mapMutations } from "vuex";
 
 export default {
+  middleware: "auth",
   layout: "user",
   name: "cart-index",
   components: {

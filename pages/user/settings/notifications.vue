@@ -208,6 +208,7 @@ import CheckBox from "~/components/form/checkbox.vue";
 import Projects from "~/data/UserSettingApi.json";
 
 export default {
+  middleware: "auth",
   name: "notifications",
   data: function() {
     return {
