@@ -15,20 +15,21 @@
             <div
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
               v-for="Project in Projects"
-              v-if="Project.flag == 1"
+             
             >
+             <!-- v-if="Project.flag == 1" -->
               <nuxt-link :to="{ path: '/user/projects/detail', query: { id: Project.id}}">
                 <div class="image-container">
-                  <img class="project-item-container--image" :src="Project.ImageUrl" alt />asdf
+                  <img class="project-item-container--image" :src="Project.image" alt />asdf
                 </div>
                 <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
                   <div class="flex items-center">
                     <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                    <span>{{Project.mark}}</span>
+                    <span>{{Project.rating}}</span>
                   </div>
                   <span
                     class="font-semibold"
-                  >{{Project.commitmember1}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2}}&nbsp; {{Project.commitkind2}}</span>
+                  >{{Project.like}} &nbsp; likes &nbsp; {{Project.dislike}}&nbsp; dislikes </span>
                 </div>
               </nuxt-link>
 
@@ -47,7 +48,7 @@
               </div>
             </div>
 
-            <div
+            <!-- <div
               v-else
               class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
             >
@@ -106,7 +107,7 @@
 
                 <div class="text-sm mt-5">{{Project.ShortDescription.second}}</div>
               </div>
-            </div>
+            </div> -->
             
           </div>
           
@@ -121,12 +122,11 @@
 
     <ul>
       <!-- <button @click="getRandomFromBackend" >asd</button> -->
-      <li v-for="info in randomNumber">
+      <!-- <li v-for="info in randomNumber">
         --{{info.id}}--{{info.ArticlesName}}--{{info.Date}}--{{info.Action}}
         <br />
-        <!-- {{randomNumber.data}}  <br> 
-        {{randomNumber.result}}  <br>-->
-      </li>
+      
+      </li> -->
     </ul>
 
   </div>
@@ -136,6 +136,7 @@
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import Projects from "~/data/UserProjectApi.json";
 import axios from "axios";
+import apiService from "~/apiService/have_token.js";
 
 export default {
   middleware: 'auth',
@@ -144,16 +145,34 @@ export default {
   data: function() {
     return {
       longview: true,
-      Projects: Projects.firstproject
+      Projects: Projects.firstproject,
+       geturl: "/api/project/get_all",
+      articleArray: [],
+      randomNumber: {},
     };
   },
   created: function() {
-    axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
-      // console.log("response :", response.data)
-      this.randomNumber = response.data;
-      console.log(this.randomNumber);
+
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+        this.randomNumber = response.data;
+        this.articleArray = Object.values(response.data.data);
     });
-    console.log(this.randomNumber);
+
+
+    // axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
+    //   // console.log("response :", response.data)
+    //   this.randomNumber = response.data;
+    //   console.log(this.randomNumber);
+    // });
+    // console.log(this.randomNumber);
+
   },
   components: {
     LeftMenu
