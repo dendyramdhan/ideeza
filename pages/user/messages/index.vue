@@ -1,13 +1,13 @@
 <template>
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
-    <LeftMenu :userList="userList" @select_user="select_user" />
+    <LeftMenu :userList="userList" :selectedUserIndex="selectedUserIndex" @select_user="select_user" />
 
     <!-- Main Contents -->
     <div class="flex-grow lg:py-10 lg:px-3 xl:px-10">
       <div class="lg:flex">
         <div class="lg:w-3/4 lg:mr-3 shadow-md bg-white">
-          <div class="chat-board">
+          <div class="chat-board" id="message-container">
             <!--Header-->
             <div class="py-5 border-b border-solid border-gray-300" v-if="selectedUserIndex>-1">
               <h1 class="text-center text-gray-800 text-lg font-semibold">Jasmine Mueller</h1>
@@ -34,116 +34,13 @@
                     v-bind:class="[message.from_me ? 'flex items-end flex-col mt-5' : 'ml-2 flex flex-col']"
                   >
                     <div
-                      v-bind:class="[message.from_me ? 'message--to' : 'message--from', 'messages']"
-                    >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                    <div
-                      v-bind:class="[message.from_me ? 'message--to' : 'message--from', 'messages']"
-                    >Integer vel odio nunc.</div>
-                    <div
-                      v-bind:class="[message.from_me ? 'message--to' : 'message--from', 'messages']"
-                    >Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie</div>
+                      v-bind:class="[message.from_me ? 'message--to' : 'message--from', 'messages']" v-for="(item, i) in message.messages"  :key="`${i}`"
+                    >{{item}}</div>
+                   
                   </div>
                 </div>
               </div>
-              <!-- 
-                <div class="py-4">
-                  <span class="block text-gray-500 text-sm text-center">10/01/2018 8:41PM</span>
-                  <div class="flex mt-5">
-                    <div class="message-from-avatar">
-                      <img class="h-10 w-10 rounded-full"
-                          src="https://randomuser.me/api/portraits/women/20.jpg">
-                    </div>
-                    <div class="ml-2 flex flex-col">
-                      <div class="messages message--from">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      </div>
-                      <div class="messages message--from">
-                        Integer vel odio nunc.
-                      </div>
-                      <div class="messages message--from">
-                        Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="py-4">
-                  <span class="block text-gray-500 text-sm text-center">10/01/2018 8:41PM</span>
-                  <div class="flex items-end flex-col mt-5">
-                    <div class="messages message--to">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="messages message--to">
-                      Integer vel odio nunc.
-                    </div>
-                    <div class="messages message--to">
-                      Integer vel odio nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="messages message--to">
-                      Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie
-                    </div>
-                  </div>
-                </div>
-
-                <div class="py-4">
-                  <span class="block text-gray-500 text-sm text-center">10/01/2018 8:41PM</span>
-                  <div class="flex mt-5">
-                    <div class="message-from-avatar">
-                      <img class="h-10 w-10 rounded-full"
-                          src="https://randomuser.me/api/portraits/women/20.jpg">
-                    </div>
-                    <div class="ml-2 flex flex-col">
-                      <div class="messages message--from">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      </div>
-                      <div class="messages message--from">
-                        Integer vel odio nunc.
-                      </div>
-                      <div class="messages message--from">
-                        Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="py-4">
-                  <span class="block text-gray-500 text-sm text-center">10/01/2018 8:41PM</span>
-                  <div class="flex mt-5">
-                    <div class="mr-2 message-from-avatar">
-                      <img class="h-10 w-10 rounded-full"
-                          src="https://randomuser.me/api/portraits/women/20.jpg">
-                    </div>
-                    <div class="ml-2 flex flex-col">
-                      <div class="messages message--from">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      </div>
-                      <div class="messages message--from">
-                        Integer vel odio nunc.
-                      </div>
-                      <div class="messages message--from">
-                        Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-
-                <div class="py-4">
-                    <span class="block text-gray-500 text-sm text-center">10/01/2018 8:41PM</span>
-                    <div class="flex items-end flex-col mt-5">
-                      <div class="messages message--to">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      </div>
-
-                      <div class="messages message--to" style="width:500px" v-if="sendmessage">
-                      {{sendmessage}}
-                      </div>                        
-                    </div>
-                </div> 
-              -->
+           
             </div>
           </div>
 
@@ -266,14 +163,16 @@
               class="flex mt-3 cursor-pointer items-center"
               :class="[ options.opt2?'': 'hidden']"
             >
-              <div class="mr-3">
-                <font-awesome-icon
-                  class="mr-1 h-4 text-gray-400 hover:text-gray-500"
-                  :icon="['fas', 'file']"
-                />
-              </div>
-              <div>
-                <h1 class="font-semibold text-ideeza">final-project-files.pdf</h1>
+              <div v-for="(file ,index) in added_file" :key="`${index}`" class="flex cursor-pointer items-center">
+                <div class="mr-3">
+                  <font-awesome-icon
+                    class="mr-1 h-4 text-gray-400 hover:text-gray-500"
+                    :icon="['fas', 'file']"
+                  />
+                </div>
+                <div>
+                  <a :href="file.url" download target="_blank"><h1 class="font-semibold text-ideeza">{{file.name}}</h1></a>
+                </div>
               </div>
             </div>
           </div>
@@ -289,7 +188,6 @@
                   class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer"
                   :icon="['fas', options.opt3? 'chevron-down':'chevron-right']"
                   @click="click_option('opt3')"
-
                 />
               </div>
             </div>
@@ -378,11 +276,15 @@ export default {
       chat_message: "",
       files: [],
       uploadFile: null,
+      starCountRef: null,
       options: {
         opt1: false,
         opt2: true,
         opt3: false
-      }
+      },
+      timeout : null,
+      interval: null,
+      added_file: []
     };
   },
   methods: {
@@ -410,14 +312,15 @@ export default {
         photo_url: ""
       };
 
+      let room = data.from_user>data.to_user?data.from_user+'_'+data.to_user:data.to_user+'_'+data.from_user
       var updates = {};
       let that = this;
 
       if (this.uploadFile) {
         var timestamp = (+new Date() / 1000) | 0;
-        var fileName = "Messages" + timestamp;
-        var storageRef = firebase.storage().ref("Messages/" + fileName);
-
+        // var fileName = "file_" + timestamp;
+        var fileName = this.uploadFile.name;
+        var storageRef = firebase.storage().ref("file/" + fileName);
         var task = storageRef.put(this.uploadFile);
 
         task.on(
@@ -428,17 +331,16 @@ export default {
             // uploader.value = percentage;
             console.log("upload percentage : ", percentage);
           },
-
           function error(error) {
             alert(error);
           },
-
           function complete() {
             storageRef
               .getDownloadURL()
               .then(function(url) {
                 data.photo_url = url;
-                updates["/Messages/" + uid] = data;
+                data.filename = fileName
+                updates["/"+room + "/"+ uid] = data;
                 that.uploadFile = null;
                 that.files = [];
 
@@ -456,7 +358,7 @@ export default {
           }
         );
       } else {
-        updates["/Messages/" + uid] = data;
+        updates["/"+room + "/" + uid] = data;
         firebase
           .database()
           .ref()
@@ -468,10 +370,95 @@ export default {
     },
 
     select_user(user_index) {
-
       this.selectedUserIndex = user_index;
-      console.log("user index ", user_index);
+      let selectedUser = this.userList[user_index].user_id
+      let room = this.myUserId>selectedUser?this.myUserId+'_'+selectedUser:selectedUser+'_'+this.myUserId
+      
+      if(this.starCountRef)
+        this.starCountRef.off()
 
+      this.starCountRef = firebase.database().ref('/' + room + '/').limitToLast(20)      
+      localStorage.setItem('messages', JSON.stringify([]))
+
+      clearTimeout(this.timeout)
+
+      this.timeout = setTimeout(() => {
+         this.starCountRef.on('child_added', function(snapshot) {
+          let messages = JSON.parse(localStorage.getItem('messages'))||[]
+          messages.push(snapshot.val())
+          console.log("message get", snapshot.val(), messages)
+          localStorage.setItem('messages', JSON.stringify(messages))
+          // var container = document.getElementById('message-container');
+          // container.scrollTop = container.scrollHeight;
+          // console.log("user data", snapshot.val())
+        });        
+      }, 200);
+
+
+      if(this.interval)
+        clearInterval(this.interval)
+
+
+      this.interval =  setInterval(() => {
+        let messageArray =JSON.parse(localStorage.getItem('messages'))
+        let beforeSate = 0
+        let from_me = false
+        let currentState = 0
+        let messages = []
+        let last_time = 0;
+        this.messageHistory = []
+        this.added_file = []
+        messageArray.map((item, index)=>{
+
+          if(item.from_user==this.myUserId){
+            from_me = true
+            currentState = 1
+
+          }else{
+            from_me =false
+            currentState = -1
+          }
+
+          if(item.photo_url){
+            let fileData = item.filename
+            this.added_file.push(
+              {
+                name: fileData,
+                url: item.photo_url
+              }
+            )
+          }
+
+         
+          last_time = new Date(item.created * 1000).toDateString()
+
+          if(beforeSate * currentState < 0){
+
+            from_me = beforeSate>0? true:false 
+
+            this.messageHistory.push({
+              from_me, last_time, messages
+            })
+
+          // console.log("state : ", beforeSate, currentState, item.content, from_me)
+            messages = [item.content]
+          }else{
+            messages.push(item.content)
+          }
+
+          beforeSate = currentState
+        })
+
+
+        // console.log("message array : ", messages, messageArray)
+
+        if(messages.length>0){
+            from_me = beforeSate>0? true:false
+           this.messageHistory.push({
+              from_me, last_time, messages
+            })
+        }        // console.log("message", messageArray)
+      }, 300);
     },
 
     handleFileChange(e) {
@@ -496,71 +483,12 @@ export default {
     }
   },
   mounted() {
-    this.userList = [
-      {
-        user_id: "111",
-        name: "Jasmine Mueller",
-        avarta: "https://randomuser.me/api/portraits/men/12.jpg",
-        last_time: "5min ago",
-        last_message: " great product, love the func ...."
-      },
+    this.myUserId = localStorage.getItem('userid');
 
-      {
-        user_id: "112",
-        name: "Jane Doe",
-        avarta: "https://randomuser.me/api/portraits/men/8.jpg",
-        last_time: "50min ago",
-        last_message: " great product, love the func ...."
-      },
+      localStorage.setItem('messages', JSON.stringify([]))
 
-      {
-        user_id: "113",
-        name: "Jon Doe",
-        avarta: "https://randomuser.me/api/portraits/men/3.jpg",
-        last_time: "3min ago",
-        last_message: " great product, love the func ...."
-      }
-    ];
+     
 
-    this.messageHistory = [
-      {
-        from_me: false,
-        last_time: "10/01/2018 8:41PM",
-        messages: [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "Integer vel odio nunc.",
-          "Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie"
-        ]
-      },
-
-      {
-        from_me: true,
-        last_time: "10/01/2018 8:41PM",
-        messages: [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "Integer vel odio nunc.",
-          "Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie"
-        ]
-      },
-      {
-        from_me: false,
-        last_time: "10/01/2018 8:42PM",
-        messages: [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "Integer vel odio nunc.",
-          "Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie"
-        ]
-      },
-      {
-        from_me: true,
-        last_time: "10/01/2018 8:44PM",
-        messages: [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-          "Integer vel odio nunc.",
-          "Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie"
-        ]
-      }
-    ];
 
     let sendData = {
       method: "get",
@@ -570,8 +498,26 @@ export default {
 
     apiService(sendData, (res)=>{
 
-      console.log("get user list :", res)
+      if(res.data.success){
+        let avarta = [3,8,12];
+        let user_list = []
+        res.data.data.map(item=>{
 
+          let rand = Math.round(Math.random()*2)
+          if(item.userid != this.myUserId)
+          user_list.push({
+              user_id: item.userid,
+              name: item.firstname+" "+item.lastname,
+              avarta: "https://randomuser.me/api/portraits/men/"+ rand+".jpg",
+              last_time: "5min ago",
+              last_message: " great product, love the func ...."
+            }
+          )
+
+        })
+        this.userList = user_list
+        console.log("get user list : ", user_list)
+      }
     })
     // var databaseRef = firebase.database().ref('Admin');
     // console.log("message page mounted ")
