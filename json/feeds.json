@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "Sarah Doe",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
         "potrait_url": "https://randomuser.me/api/portraits/women/14.jpg",
@@ -8,9 +9,27 @@
         "share_count": "3",
         "likes_count": "35",
         "comments": [
+        ],  
+        "shared_by":[
+            {
+                "id": 1,
+                "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
+                "name": "William Doe"
+            },
+            {
+                "id": 2,
+                "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
+                "name": "William Doe"
+            },
+            {
+                "id": 3,
+                "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
+                "name": "William Doe"
+            }
         ]
     }, 
     {
+        "id": 2,
         "name": "Sarah Doe",
         "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since",
         "potrait_url": "https://randomuser.me/api/portraits/men/14.jpg",
@@ -18,8 +37,26 @@
         "comments_count": "30",
         "share_count": "12",
         "likes_count": "35",
+        "shared_by": [
+            {
+                "id": 2,
+                "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
+                "name": "William Doe"
+            },
+            {
+                "id": 3,
+                "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
+                "name": "William Doe"
+            },
+            {
+                "id": 4,
+                "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
+                "name": "William Doe"
+            }
+        ],
         "comments": [
             {
+                "id": 1,
                 "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
                 "name": "William Doe",
                 "occupation": "Consultant at Google Inc.",
@@ -28,6 +65,7 @@
                 "comments": "90"
             },
             {
+                "id": 2,
                 "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
                 "name": "William Doe",
                 "occupation": "Consultant at Google Inc.",
@@ -36,6 +74,7 @@
                 "comments": "90"
             },
             {
+                "id": 3,
                 "photo_url": "https://randomuser.me/api/portraits/men/15.jpg",
                 "name": "William Doe",
                 "occupation": "Consultant at Google Inc.",

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-full">
-    <navigation class="flex-shrink"></navigation>
+    <navigation class="flex-shrink nav"></navigation>
     <div :class="{'hide-sider-bar':!leftMenu}" class="flex main-panel">
       <!--  Left Side Bar  -->
       <!-- <LeftMenu/> -->
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import LeftMenu from '~/components/service-provider/common-left-side-menu.vue'
+  import LeftMenu from '~/components/service-provider/settings/left-side-menu.vue'
   import SidebarMenu from '~/components/reusables/SideBar.vue'
   import navigation from "~/components/service-provider/header-bar.vue";
   import FloatButton from "~/components/user/float-button/right-bot-float-button.vue";
@@ -147,5 +147,12 @@
 .page-container {
     min-height: calc(100vh - 40px);
     background: #F5F5F5;
+    margin-left: 270px;
+}
+.nav{
+  z-index: 10;
+}
+.main-panel {
+  z-index: 1;
 }
 </style>

@@ -1,14 +1,7 @@
 <template>
-  <div :class="{'hide-sider-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <!-- <LeftMenu/> -->
-    <sidebar-menu :menu-items="menuitems" />
-    <!-- Main Contents -->
-    <div class="flex-grow">
-      <div></div>
-      <div class="main-contents">
-        <div class="md:flex md:p-10">
-          <div class="md:w-3/5 lg:w-3/4">
+      <div class="">
+        <div class="md:flex md:py-10">
+          <div class="md:w-3/5 lg:w-2/3">
             <div class="bg-white shadow-md p-5 md:mx-2 mb-10">
               <div class="flex mb-10">
                 <img src="~/static/images/Business-Profile.png" class="w-24 mr-5" alt="profile-image">
@@ -103,15 +96,15 @@
               <div class="text-center font-bold">Load more +</div>
             </div>
           </div>
-          <div class="md:w-2/5 lg:w-1/4">
+          <div class="flex-1">
             <div class="bg-white shadow-md p-5 mx-2 mb-3">
               <div class="font-bold text-black">Admin</div>
               <hr class="my-5">
               <div class="flex justify-between">
                 <div class="flex items-start">
-                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/17.jpg">
+                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/24.jpg">
                   <div class="">
-                    <div class="font-bold text-black">John Doe</div>
+                    <div class="font-bold text-black">Lucas Joena</div>
                     <div class="text-sm">Admin</div>
                   </div>
                 </div>
@@ -123,14 +116,14 @@
               </div>
             </div>
             <div class="bg-white shadow-md p-5 mx-2 mb-3">
-              <div class="font-bold text-black">Admin</div>
+              <div class="font-bold text-black">Agents</div>
               <hr class="my-5">
               <div class="flex justify-between mb-5">
                 <div class="flex items-start">
-                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/17.jpg">
+                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/23.jpg">
                   <div class="">
-                    <div class="font-bold text-black">John Doe</div>
-                    <div class="text-sm">Admin</div>
+                    <div class="font-bold text-black">Jon Cochran</div>
+                    <div class="text-sm">Editor</div>
                   </div>
                 </div>
                 <div>
@@ -141,10 +134,10 @@
               </div>
               <div class="flex justify-between mb-5">
                 <div class="flex items-start">
-                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/17.jpg">
+                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/22.jpg">
                   <div class="">
-                    <div class="font-bold text-black">John Doe</div>
-                    <div class="text-sm">Admin</div>
+                    <div class="font-bold text-black">Alex Pilania</div>
+                    <div class="text-sm">Editor</div>
                   </div>
                 </div>
                 <div>
@@ -155,10 +148,10 @@
               </div>
               <div class="flex justify-between mb-5">
                 <div class="flex items-start">
-                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/17.jpg">
+                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/21.jpg">
                   <div class="">
-                    <div class="font-bold text-black">John Doe</div>
-                    <div class="text-sm">Admin</div>
+                    <div class="font-bold text-black">Hana Lalardo</div>
+                    <div class="text-sm">Editor</div>
                   </div>
                 </div>
                 <div>
@@ -169,10 +162,10 @@
               </div>
               <div class="flex justify-between mb-5">
                 <div class="flex items-start">
-                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/17.jpg">
+                  <img class="h-12 w-12 rounded-full mr-4 " src="https://randomuser.me/api/portraits/men/20.jpg">
                   <div class="">
-                    <div class="font-bold text-black">John Doe</div>
-                    <div class="text-sm">Admin</div>
+                    <div class="font-bold text-black">Omar Latori</div>
+                    <div class="text-sm">Editor</div>
                   </div>
                 </div>
                 <div>
@@ -195,27 +188,14 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 <script>
-  import items from '../menu-items'
-  import SidebarMenu from '~/components/reusables/SideBar.vue'
   export default {
-    layout: 'user',
-    components: {
-      SidebarMenu
-    },
+    layout: 'service-provider',
     data() {
       return {
-        menuitems: items,
         readMoreActivated: false,
         longText: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque!'
-      }
-    },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
       }
     },
   }
