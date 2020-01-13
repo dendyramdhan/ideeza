@@ -1,6 +1,6 @@
 import axios from 'axios'
 export default (sendData, ctx)=>{
-    let authToken = localStorage.getItem('authToken');
+    let authToken = window.$nuxt.$cookies.get('authToken');
     return axios({
         method: sendData.method,
         url: process.env.base_url + sendData.url,

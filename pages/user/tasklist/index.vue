@@ -105,6 +105,7 @@ import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import latestactivities from "~/json/latestactivity.json";
 import taskslist from "~/json/tasklist.json";
 export default {
+  middleware: 'auth',
   layout: "user",
   name: "task-index",
   components: {

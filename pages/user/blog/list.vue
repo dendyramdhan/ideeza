@@ -216,6 +216,7 @@ import apiService from "~/apiService";
 import apiService2 from "~/apiService/have_data.js";
 
 export default {
+  middleware: 'auth',
   name: "blog-list",
   data: function() {
     return {

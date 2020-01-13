@@ -262,6 +262,7 @@ import firebase from "firebase";
 import apiService from '~/apiService';
 
 export default {
+  middleware: 'auth',
   layout: "user",
   name: "messages-index",
   components: {
