@@ -79,7 +79,8 @@ export default {
           icons: ['fab']
         }
       ]
-    }]
+    }],
+    'cookie-universal-nuxt',
   ],
   /**
    * Router Middleware

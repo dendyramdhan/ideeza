@@ -93,6 +93,7 @@ import NewsFeed from "~/components/user/news/feeds.vue";
 import connects from "~/json/connects.json";
 
 export default {
+  middleware: 'auth',
   layout: "user",
   name: "news-index",
   components: {

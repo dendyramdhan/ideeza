@@ -146,9 +146,9 @@ export default {
       this.descripttionname2 = event.target.value;
     },
     // previewclick() {
-    //   localStorage.setItem("blogarticlename", this.articlena);
-    //   localStorage.setItem("blogcategoryna", this.articlena);
-    //   localStorage.setItem("blogdescriptionNameChange", this.articlena);
+    //   window.$nuxt.$cookies.set("blogarticlename", this.articlena);
+    //   window.$nuxt.$cookies.set("blogcategoryna", this.articlena);
+    //   window.$nuxt.$cookies.set("blogdescriptionNameChange", this.articlena);
     //   this.$router.push("/user/blog/preview?" + this.foobar);
     // },
     uploadUserBlog() {

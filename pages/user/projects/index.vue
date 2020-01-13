@@ -138,6 +138,7 @@ import Projects from "~/data/UserProjectApi.json";
 import axios from "axios";
 
 export default {
+  middleware: 'auth',
   layout: "user",
   name: "projects-index",
   data: function() {

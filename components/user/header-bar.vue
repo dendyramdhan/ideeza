@@ -145,10 +145,14 @@ export default {
     }
   },
   mounted() {
-    this.name =
-      localStorage.getItem("firstname") +
-      " " +
-      localStorage.getItem("lastname");
+
+    let firstname = window.$nuxt.$cookies.get('firstname');
+    let lastname = window.$nuxt.$cookies.get('lastname');
+    this.name = firstname + ' ' + lastname;
+    // this.name =
+    //   window.$nuxt.$cookies.get("firstname") +
+    //   " " +
+    //   window.$nuxt.$cookies.get("lastname");
     console.log("fullname: ", this.name);
     console.log("news: ", this.news, this.showInfoAlert);
   },
@@ -169,10 +173,10 @@ export default {
       alert();
     },
     onSignOut() {
-      localStorage.removeItem("authToken");
-      localStorage.removeItem("firstname");
-      localStorage.removeItem("lastname");
-      localStorage.removeItem("userid");
+      window.$nuxt.$cookies.remove("authToken");
+      window.$nuxt.$cookies.remove("firstname");
+      window.$nuxt.$cookies.remove("lastname");
+      window.$nuxt.$cookies.remove("userid");
       this.$router.push("/home");
     }
   }
