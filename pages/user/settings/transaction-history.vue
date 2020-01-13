@@ -129,6 +129,7 @@
 import Projects from "~/data/UserSettingApi.json";
 
 export default {
+  middleware: "auth",
   name: "transaction-history",
   data: function() {
     return {

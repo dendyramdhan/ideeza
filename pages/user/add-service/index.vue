@@ -183,6 +183,7 @@ import CheckBox from "~/components/form/checkbox-dark.vue";
 import Services from "~/data/UserProjectApi.json";
 
 export default {
+  middleware: 'auth',
   layout: "user",
   name: "manufacturers-index",
   data: function() {

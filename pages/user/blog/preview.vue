@@ -57,7 +57,7 @@
           <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
             <h1
               class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
-            > {{localStorage.getItem("blogcategoryna")}}</h1>
+            > {{window.$nuxt.$cookies.get("blogcategoryna")}}</h1>
             <!-- {{this.$store.state.userBlogStore.viewflag}} -->
           </div>
 
@@ -68,11 +68,11 @@
             />
             <span
               class="text-gray-800 font-semibold text-xl"
-            > {{localStorage.getItem("blogarticlename")}}</span>
+            > {{window.$nuxt.$cookies.get("blogarticlename")}}</span>
           </div>
 
           <p class="text-base lg:text-lg">
-             {{localStorage.getItem("blogdescriptionNameChange")}}
+             {{window.$nuxt.$cookies.get("blogdescriptionNameChange")}}
             <!-- -{{$route.query.id }} -->
           </p>
         </div>
@@ -106,6 +106,7 @@ import axios from "axios";
 
 import articles from "~/data/BlogApi.json";
 export default {
+  middleware: "auth",
   name: "blog-preview",
   data: function() {
     return {

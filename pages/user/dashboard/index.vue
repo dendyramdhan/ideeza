@@ -84,13 +84,13 @@
               </nuxt-link>
             </div>
 
-            <div>
-              <div class="table relative mb-5" v-for="datas in activities.data">
+            <div style="overflow: scroll; height:200px">
+              <div class="table relative mb-5" v-for="userloginhistory in userloginhistories">
                 <div class="table-cell timeline-diaplay"></div>
                 <div class="table-cell pl-5">
-                  <div>{{datas.timestamp}}</div>
-                  <div class="my-1">{{datas.title}}</div>
-                  <div class="font-semibold">{{datas.description}}</div>
+                  <div>{{new Date(userloginhistory.history.timestamp * 1000)}}</div>
+                  <div class="my-1">User Log in</div>
+                  <div class="font-semibold">{{name}} logged into a system</div>
                 </div>
               </div>
             </div>
@@ -215,6 +215,7 @@ Object.defineProperty(Array.prototype, "chunk_inefficient", {
 });
 
 export default {
+  middleware: "auth",
   layout: "user",
   name: "dashboard-index",
   components: {
@@ -228,6 +229,7 @@ export default {
       innovations: innovation,
       activities: activity,
       lengthofprojects: [],
+      userloginhistories: [],
       show: true,
       name: ""
     };
@@ -240,27 +242,49 @@ export default {
 
   created() {},
   mounted() {
-    let authToken = localStorage.getItem("authToken");
+    // let authToken = window.$nuxt.$cookies.get("authToken");
+    let authToken = window.$nuxt.$cookies.get("authToken");
     if (authToken != null) {
-      this.name =
-        localStorage.getItem("firstname") +
-        " " +
-        localStorage.getItem("lastname");
+      // this.name =
+      //   window.$nuxt.$cookies.get("firstname") +
+      //   " " +
+      //   window.$nuxt.$cookies.get("lastname");
+      let firstname = window.$nuxt.$cookies.get("firstname");
+      let lastname = window.$nuxt.$cookies.get("lastname");
+      this.name = firstname + " " + lastname;
 
       let getallprojectsurl = "/api/project/get_all";
 
-      let sendData = {
+      let getallprojectsData = {
         method: "get",
         url: getallprojectsurl,
         data: null
       };
 
-      apiServiceWithToken(sendData, response => {
+      apiServiceWithToken(getallprojectsData, response => {
         console.log(response.data);
         console.log(response.data["success"]);
         if (response.data["success"] == true) {
           this.lengthofprojects = response.data["data"].length;
-          console.log('projects: ', this.lengthofprojects.length);
+          console.log("projects: ", response.data["data"]);
+        }
+      });
+
+      let getloginhistory = "/api/setting/login_history";
+
+      let getloginhistoryData = {
+        method: "get",
+        url: getloginhistory,
+        data: null
+      };
+
+      apiServiceWithToken(getloginhistoryData, response => {
+        console.log(response.data);
+        console.log(response.data["success"]);
+        if (response.data["success"] == true) {
+          // this.lengthofprojects = response.data["data"].length;
+          this.userloginhistories = response.data["data"];
+          console.log("history: ", response.data["data"]);
         }
       });
     } else {

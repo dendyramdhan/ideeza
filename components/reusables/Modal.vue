@@ -86,4 +86,28 @@ export default {
     max-height: 80vh;
     overflow-y: auto;
 }
+.modal-enter-active, .modal-leave-active {
+  transition: opacity 0.5s;
+}
+
+.modal-enter, .modal-leave-to {
+  opacity: 0;
+}
+.modal-body::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.modal-body::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.modal-body::-webkit-scrollbar-thumb
+{
+	background-color: #999999;
+	border: 2px solid #999999;
+}
 </style>

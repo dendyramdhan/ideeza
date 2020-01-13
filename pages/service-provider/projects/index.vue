@@ -67,7 +67,7 @@
               Posted before
             </th>
           </template>
-          <tr class="flex w-full mb-4" v-for="(project,index) in projects">
+          <tr class="flex w-full mb-4" v-for="(project,index) in projects" @click="$router.push('/service-provider/projects/'+project.id)">
             <td class="w-2/5" :class="{'border-b':projects.length-1 != index}">
               <div class="font-bold text-black">
                 {{project.description.title}}
@@ -139,7 +139,7 @@
 <script>
   import SimpleTable from '~/components/reusables/Table.vue'
   export default {
-    layout: 'user',
+    layout: 'service-provider',
     components: {
       SimpleTable
     },
@@ -180,6 +180,7 @@
           },
         ],
         projects: [{
+            id: 1,
             description: {
               title: 'Washing machine requirements',
               text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
@@ -189,6 +190,7 @@
             posted_before: '10 mins'
           },
           {
+            id: 2,
             description: {
               title: 'Washing machine requirements',
               text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
@@ -198,6 +200,7 @@
             posted_before: '10 mins'
           },
           {
+            id: 3,
             description: {
               title: 'Washing machine requirements',
               text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
@@ -207,6 +210,7 @@
             posted_before: '10 mins'
           },
           {
+            id: 4,
             description: {
               title: 'Washing machine requirements',
               text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
@@ -216,6 +220,7 @@
             posted_before: '10 mins'
           },
           {
+            id: 5,
             description: {
               title: 'Washing machine requirements',
               text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'

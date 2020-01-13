@@ -56,6 +56,7 @@
 import DropDown from "~/components/form/dropdown-field.vue";
 import TextField from "~/components/form/text-field.vue";
 export default {
+  middleware: "auth",
   name: "payment",
   data: function() {
     return {

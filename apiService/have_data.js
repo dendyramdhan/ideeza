@@ -10,8 +10,7 @@ export default (sendData, ctx)=>{
         ctx(response)
 
     })
-    .catch((e) => {
-        error({ statusCode: 404, message: 'Post not found' })
+    .catch((error) => {
         ctx(null)
     })
 

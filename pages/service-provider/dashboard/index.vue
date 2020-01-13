@@ -1,325 +1,237 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
-
-    <!-- Main Contents -->
-    <div class="flex-grow mb-20">
-      <div class="main-contents">
-        
-        <div class="md:flex items-center">
-          <div class="md:w-1/2 md:mr-3">
-            <h1 class="text-4xl font-bold">Good Morning, Chan!</h1>
-          </div>
-
-          <div class="md:w-1/4 md:mr-3">
-            <div class="border rounded border-gray-300 bg-white mb-3 shadow">
-              <div class="flex p-3 items-center justify-around">
-                <div>
-                  <div class="text-sm text-gray-700">Reviews</div>
-                  <div class="text-3xl font-extrabold text-gray-800">56</div>
-                </div>
-                <div>
-                  <img class="inline-flex" src="~/static/images/customer-reviews.png">
-                </div>
-              </div>
+  <div>
+    <div class="md:flex items-center justify-between">
+      <h1 class="text-2xl font-bold mr-5">Good Morning Chan!</h1>
+      <div class="md:flex justify-end">
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
+            <div class="flex items-center">
+            <div>
+                <div class="text-sm">Reviews</div>
+                <div class="text-3xl font-bold">56</div>
             </div>
-          </div>
-         <div class="md:w-1/4 md:mr-3">
-            <div class="border rounded border-gray-300 bg-white mb-3 shadow">
-              <div class="flex p-3 items-center justify-around">
-                <div>
-                  <div class="text-sm text-gray-800">Money earned</div>
-                  <div class="text-3xl font-extrabold text-gray-900">56</div>
-                </div>
-                <div>
-                  <img class="inline-flex" src="~/static/images/money.png">
-                </div>
-              </div>
+            <div class="absolute bottom-0 right-0 m-5">
+                <img src="~/static/images/chat-icon.png" class="h-8" alt="chat-icon">
             </div>
-          </div>
-          <div class="md:w-1/4 md:mr-3">
-            <div class="border rounded border-gray-300 bg-white mb-3 shadow">
-              <div class="flex p-3 items-center justify-around">
-                <div>
-                  <div class="text-sm text-gray-800">Opened orders</div>
-                  <div class="text-3xl font-extrabold text-gray-900">56</div>
-                </div>
-                <div>
-                  <img class="inline-flex" src="~/static/images/box.png">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="md:w-1/4 md:mr-3">
-            <div class="border rounded border-gray-300 bg-white mb-3 shadow">
-              <div class="flex p-3 items-center justify-around">
-                <div>
-                  <div class="text-sm text-gray-800">Star</div>
-                  <div class="text-3xl font-extrabold text-gray-900">56</div>
-                </div>
-                <div>
-                  <img class="inline-flex" src="~/static/images/star-1.png">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <h1 class="mt-10 mb-2 text-1xl font-bold">My Feed</h1>
-        <div class="md:flex">
-          <div class="md:w-2/3 md:mr-3">
-          <div class="border rounded text-ideeza border-gray-300 bg-white mb-3">
-        <table class="text-left w-full border-collapse">
-		      <thead class="bg-white text-gray-600">
-			        <tr class="">
-                <th class="p-2 border-t border-b border-gray-300 text-ideeza w-1/2">Description</th>
-                <th class="p-2 border-t border-b border-gray-300 text-ideeza">Domain</th>
-                <th class="p-2 border-t border-b border-gray-300 text-ideeza">Due date</th>
-                <th class="p-2 border-t border-b border-gray-300 text-ideeza">Posted before</th>
-            </tr>
-		      </thead>
-          <tbody class="bg-grey-light overflow-y-auto text-gray-700 text-sm">
-            <tr class="w-full mb-4" v-for="index in 4" :key="index">
-                    <td class="p-2 text-sm border-b">
-                      <span class="font-bold text-gray-700">Washing machine requirements</span>
-                      <p class="text-gray-500 text-xs">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</p>
-                    </td>
-                    <td class="p-2 text-sm border-b">PCB & Assamble</td>
-                    <td class="p-2 text-sm border-b">01.01.2020</td>
-                    <td class="p-2 text-sm border-b">
-                      <div class="flex items-center justify-between">
-                        <p class="">10 mins</p>
-                        <font-awesome-icon class="text-xl text-ideeza mr-5" :icon="['far', 'clock']" />
-                      </div>
-                    </td>
-                  </tr>
-                  
-            </tbody>
-	        </table>
-          </div>
-        </div>
-
-        <div class="md:w-1/3">
-          <div class="border rounded text-ideeza border-gray-300 bg-white mb-3">
-              <div class="">
-                <vc-calendar class="mx-auto" color="pink" is-expanded :theme="theme" />
-              </div>
-            </div>
-
-        <div class="border rounded text-ideeza border-gray-300 bg-white">
-          <div class="flex justify-center bg-ideeza p-5 items-center mb-3 border rounded border-ideeza">
-              <h6 class="text-white font-bold text-sm flex-shrink">3rd March</h6>
-          </div>
-              <div class="">
-                <div class="overflow-auto max-96-vw sales-table">
-
-                <div>
-                  <div class="flex">
-                    
-                  </div>
-                </div>
-
-                  <table class="text-left w-full">
-                    <tbody class="bg-grey-light w-full text-ideeza-dark">
-                      <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
-                        <td class="p-2 border-b">
-                          <div id="chart-spark3">
-                            <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
-                          </div>
-                        </td>
-                        <td class="p-2 border-b text-xs text-green-400 font-bold">+7%</td>
-                        <td class="p-2 border-b">
-                        <div class="bg-green-200 rounded-full h-10 w-10 flex items-center justify-center">
-                          <font-awesome-icon class="text-xl text-gray-500" :icon="['fas', 'arrow-up']"/>
-                        </div>
-                        </td>
-                      </tr>
-                      <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
-                        <td class="p-2 border-b">
-                          <div id="chart-spark3">
-                            <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
-                          </div>
-                        </td>
-                        <td class="p-2 border-b text-xs text-green-400 font-bold">+7%</td>
-                        <td class="p-2 border-b">
-                        <div class="bg-green-200 rounded-full h-10 w-10 flex items-center justify-center">
-                          <font-awesome-icon class="text-xl text-gray-500" :icon="['fas', 'arrow-up']"/>
-                        </div>
-                        </td>
-                      </tr>
-                      <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
-                        <td class="p-2 border-b">
-                          <div id="chart-spark3">
-                            <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
-                          </div>
-                        </td>
-                        <td class="p-2 border-b text-xs text-green-400 font-bold">+7%</td>
-                        <td class="p-2 border-b">
-                        <div class="bg-green-200 rounded-full h-10 w-10 flex items-center justify-center">
-                          <font-awesome-icon class="text-xl text-gray-500" :icon="['fas', 'arrow-up']"/>
-                        </div>
-                        </td>
-                      </tr>
-                      <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
-                        <td class="p-2 border-b">
-                          <div id="chart-spark3">
-                            <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
-                          </div>
-                        </td>
-                        <td class="p-2 border-b text-xs text-green-400 font-bold">+7%</td>
-                        <td class="p-2 border-b">
-                        <div class="bg-green-200 rounded-full h-10 w-10 flex items-center justify-center">
-                          <font-awesome-icon class="text-xl text-gray-500" :icon="['fas', 'arrow-up']"/>
-                        </div>
-                        </td>
-                      </tr>
-                      <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
-                        <td class="p-2 border-b">
-                          <div id="chart-spark3">
-                            <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
-                          </div>
-                        </td>
-                        <td class="p-2 border-b text-xs text-green-400 font-bold">+7%</td>
-                        <td class="p-2 border-b">
-                        <div class="bg-green-200 rounded-full h-10 w-10 flex items-center justify-center">
-                          <font-awesome-icon class="text-xl text-gray-500" :icon="['fas', 'arrow-up']"/>
-                        </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
             </div>
         </div>
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
+            <div class="flex items-center">
+            <div>
+                <div class="text-sm">Money earned</div>
+                <div class="text-3xl font-bold">56</div>
+            </div>
+            <div class="absolute bottom-0 right-0 m-5">
+                <img src="~/static/images/money.png" class="h-8" alt="chat-icon">
+            </div>
+            </div>
+        </div>
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
+            <div class="flex items-center">
+            <div>
+                <div class="text-sm">Opened orders</div>
+                <div class="text-3xl font-bold">56</div>
+            </div>
+            <div class="absolute bottom-0 right-0 m-5">
+                <img src="~/static/images/order-box.png" class="h-8" alt="chat-icon">
+            </div>
+            </div>
+        </div>
+        <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
+            <div class="flex items-center">
+            <div>
+                <div class="text-sm">Stars</div>
+                <div class="text-3xl font-bold">56</div>
+            </div>
+            <div class="absolute bottom-0 right-0 m-5">
+                 <img src="~/static/images/star-icon.png" class="h-8" alt="chat-icon">
+            </div>
+            </div>
         </div>
       </div>
     </div>
-    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" />
+    <div class="text-sm font-bold text-black md:ml-5 mb-3">My Feed</div>
+    <div class="md:flex">
+      <div class="md:w-9/12 mb-5 md:mb-0">
+        <simple-table :header="false" :searchbox="true" title="Manage articles" border="border-gray">
+          <template v-slot:th>
+            <th class="border-t border-b border-blue-300 w-2/5 text-ideeza p-3">
+              Description
+            </th>
+            <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
+              Domain
+            </th>
+            <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
+              Due Date
+            </th>
+            <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
+              Posted before
+            </th>
+          </template>
+          <tr class="flex w-full mb-4" v-for="(project,index) in projects">
+            <td class="w-2/5" :class="{'border-b':projects.length-1 != index}">
+              <div class="font-bold text-black">
+                {{project.description.title}}
+              </div>
+              <div class="text-sm">
+                {{project.description.text}}
+              </div>
+            </td>
+            <td class="w-1/5" :class="{'border-b':projects.length-1 != index}">{{project.domain}}</td>
+            <td class="w-1/5" :class="{'border-b':projects.length-1 != index}">{{project.due_date}}</td>
+            <td class="w-1/5" :class="{'border-b':projects.length-1 != index}">{{project.posted_before}}</td>
+          </tr>
+        </simple-table>
+      </div>
+      <div class="md:w-3/12 md:mx-3">
+        <!-- <vc-calendar color="pink" is-expanded :theme="theme" /> -->
+        <vc-calendar class="mx-auto bg-white box-shadow rounded mb-3" color="pink" is-expanded :theme="theme" />
+        <div class="bg-white shadow rounded">
+            <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
+            <hr class="my-1">
+            <ul class="shadow-lg">
+                 <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                        <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- <div id="myCalendar" class="vanilla-calendar"></div> -->
+      </div>
+    </div>
   </div>
 </template>
 <script>
-  import LeftMenu from '~/components/service-provider/common-left-side-menu.vue'
-  import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
-
+  import SimpleTable from '~/components/reusables/Table.vue'
   export default {
     layout: 'service-provider',
     components: {
-      LeftMenu,
-      MyIdeeza,
+      SimpleTable
     },
-    data: function () {
+    mounted() {
+      new VanillaCalendar({
+        selector: "#myCalendar"
+      })
+    },
+    data() {
       return {
-        showMyIdeeza: false,
-        chartOptions: {
-          chart: {
-            animations: {
-              speed: 200
+        theme: {
+          container: {
+            light: 'ideeza-date-picker',
+          },
+          arrows: {
+            light: 'ideeza-arrow',
+          },
+        },
+        blogs: [{
+            id: 1,
+            name: 'How ideeza can make the world a better place',
+            date: '10 jul, 2019',
+          },
+          {
+            id: 2,
+            name: 'How ideeza can make the world a better place',
+            date: '10 jul, 2019',
+          },
+          {
+            id: 3,
+            name: 'How ideeza can make the world a better place',
+            date: '10 jul, 2019',
+          },
+          {
+            id: 4,
+            name: 'How ideeza can make the world a better place',
+            date: '10 jul, 2019',
+          },
+        ],
+        projects: [{
+            description: {
+              title: 'Washing machine requirements',
+              text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
             },
-            zoom: {
-              enabled: false,
+            domain: 'PCB & Asamble',
+            due_date: '01.01.2020',
+            posted_before: '10 mins'
+          },
+          {
+            description: {
+              title: 'Washing machine requirements',
+              text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
             },
-            foreColor: '#431184'
+            domain: 'PCB & Asamble',
+            due_date: '01.01.2020',
+            posted_before: '10 mins'
           },
-          dataLabels: {
-            enabled: false
+          {
+            description: {
+              title: 'Washing machine requirements',
+              text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
+            },
+            domain: 'PCB & Asamble',
+            due_date: '01.01.2020',
+            posted_before: '10 mins'
           },
-          xaxis: {
-            categories: ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thur']
+          {
+            description: {
+              title: 'Washing machine requirements',
+              text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
+            },
+            domain: 'PCB & Asamble',
+            due_date: '01.01.2020',
+            posted_before: '10 mins'
           },
-          fill: {
-            colors: ['#ff00c7']
+          {
+            description: {
+              title: 'Washing machine requirements',
+              text: 'lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe'
+            },
+            domain: 'PCB & Asamble',
+            due_date: '01.01.2020',
+            posted_before: '10 mins'
           }
-        },
-        chartOptions_line: {
-          chart: {
-            animations: {
-              speed: 200
-            },
-            zoom: {
-              enabled: false,
-            },
-          },
-          colors: ["#C0FFCF"],
-          stroke: {
-            curve: 'smooth',
-          },
-          dataLabels: {
-            enabled: false
-          },
-          xaxis: {
-            categories: ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thur']
-          },
-        },
-          seriesSpark3: [{
-            data: [47, 45, 54, 38, 56, 24, 65, 31, 37]
-          }],
-          chartOptionsSpark3: {
-            chart: {
-              type: 'area',
-              height: 20,
-              sparkline: {
-                enabled: true
-              },
-            },
-            colors: ["#C0FFCF"],
-            stroke: {
-              curve: 'smooth'
-            },
-            fill: {
-              opacity: 0.3
-            },
-            xaxis: {
-              crosshairs: {
-                width: 1
-              },
-            },
-            yaxis: {
-              min: 0
-            },
-          },
-        series: [{
-          name: 'series-1',
-          data: [30, 40, 35, 50, 49, 60, 70, 91]
-        }]
+        ]
       }
-    },
-    methods: {
-      selectall(value) {
-        if (value == true) {
-          this.users.forEach(element => {
-            element.selected = true
-          });
-        } else {
-          this.users.forEach(element => {
-            element.selected = false
-          });
-        }
-        this.$forceUpdate()
-      }
-    },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    },
+    }
   }
 
 </script>
 <style>
-  .user-chart {
-    height: calc(32rem + 0.75rem);
-    width: 100%;
-  }
+.event:hover .text{
+    color: white;
+}
 </style>

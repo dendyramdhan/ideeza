@@ -71,6 +71,7 @@
   import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
   import SimpleTable from '~/components/reusables/Table.vue'
   export default {
+    middleware: "auth",
     layout: 'user',
     components: {
       LeftMenu,

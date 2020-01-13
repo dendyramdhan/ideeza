@@ -77,7 +77,9 @@
 import DropDown from "~/components/form/dropdown-field.vue";
 import TextField from "~/components/form/text-field.vue";
 import axios from "axios";
+
 export default {
+  middleware: "auth",
   name: "delivery",
   asyncData({ params }) {
     return axios.get(`https://api.printful.com/countries`).then(res => {

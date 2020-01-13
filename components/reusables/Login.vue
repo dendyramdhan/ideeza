@@ -84,6 +84,7 @@
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
 import apiService from "~/apiService";
+
 export default {
   components: {
     Modal
@@ -95,9 +96,10 @@ export default {
       auth: true
     };
   },
+  computed: {},
 
   methods: {
-    login() {
+    async login() {
       let signinurl = "/api/user/login";
       var bodyFormData = new FormData();
       bodyFormData.set("email", this.email);
@@ -108,26 +110,28 @@ export default {
         url: signinurl,
         data: bodyFormData
       };
-
       apiService(sendData, response => {
         console.log(response.data);
-        console.log(response.data["success"]);
-        if (response.data["success"] == true) {
-          this.auth = true;
+        console.log(response.data.success);
+        if (response.data.success == true) {
           var token = response.data["data"].token;
           var userdata = response.data["data"].userdata;
           var firstname = userdata.firstname;
           var lastname = userdata.lastname;
           var userid = userdata.id;
 
-          localStorage.setItem("authToken", token);
-          localStorage.setItem("firstname", firstname);
-          localStorage.setItem("lastname", lastname);
-          localStorage.setItem("userid", userid);
-          console.log("Here: ", localStorage.getItem("authToken"));
+          // window.$nuxt.$cookies.set("authToken", token);
+          // window.$nuxt.$cookies.set("firstname", firstname);
+          // window.$nuxt.$cookies.set("lastname", lastname);
+          // window.$nuxt.$cookies.set("userid", userid);
+          console.log('window.$nuxt.$cookies', window.$nuxt);
+
+          window.$nuxt.$cookies.set("authToken", token);
+          window.$nuxt.$cookies.set("firstname", firstname);
+          window.$nuxt.$cookies.set("lastname", lastname);
+          window.$nuxt.$cookies.set("userid", userid);
+          // console.log("Here: ", window.$nuxt.$cookies.get("authToken"));
           this.$router.push("/user/dashboard");
-        } else {
-          this.auth = false;
         }
       });
     },
@@ -151,7 +155,7 @@ export default {
           console.log(e);
         });
     },
-    
+
     facebookSignin() {
       var provider = new firebase.auth.FacebookAuthProvider();
       firebase
