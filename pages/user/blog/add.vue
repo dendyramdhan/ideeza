@@ -91,6 +91,7 @@ import CategoryField from "~/components/form/category-field.vue";
 import FileField from "~/components/form/file-field.vue";
 
 export default {
+  middleware: "auth",
   name: "add-blog",
   components: {
     "text-field": TextField,

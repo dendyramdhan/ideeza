@@ -55,6 +55,7 @@
 <script>
 import Truck from "~/components/partials/icons/track-truck-icon.vue";
 export default {
+  middleware: "auth",
   name: "making-product",
   components: {
     Truck

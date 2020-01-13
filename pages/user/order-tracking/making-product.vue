@@ -110,6 +110,7 @@ import Progress from "~/components/user/order-tracking/progress-bar.vue";
 import Projects from "~/data/UserProjectApi.json";
 
 export default {
+  middleware: "auth",
   name: "making-product",
   components: {
     Progress

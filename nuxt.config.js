@@ -80,7 +80,7 @@ export default {
         }
       ]
     }],
-    'cookie-universal-nuxt',
+    ['cookie-universal-nuxt', { alias: 'cookies' }],
   ],
   /**
    * Router Middleware

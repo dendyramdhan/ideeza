@@ -13,6 +13,7 @@
 
 <script>
   export default {
+    middleware: "auth",
     name: "finish",
 
     mounted() {

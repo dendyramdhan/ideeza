@@ -67,6 +67,7 @@
   import SimpleTable from '~/components/reusables/Table.vue'
   import Pagination from 'vue-pagination-2'
   export default {
+    middleware: "auth",
     layout: 'user',
     components: {
       MyIdeeza,

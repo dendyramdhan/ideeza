@@ -251,6 +251,7 @@
 <script>
 import Projects from "~/data/UserSettingApi.json";
 export default {
+  middleware: "auth",
   name: "index",
   data: function() {
     return {

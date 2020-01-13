@@ -12,39 +12,39 @@
           </div>
 
           <div class="lg:flex flex-wrap">
-                        <div
-                        class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-                        >
-                                <nuxt-link to="/user/projects/detail">
-                                    <div class="image-container">
-                                    <img class="project-item-container--image" src="~/static/images/car-big.png" alt />
-                                    </div>
-                                    <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
-                                    <div class="flex items-center">
-                                        <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                                        <span>4.5</span>
-                                    </div>
-                                    <span class="font-semibold">24 likes</span>
-                                    </div>
-                                </nuxt-link>
+            <div
+              class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
+            >
+              <nuxt-link to="/user/projects/detail">
+                <div class="image-container">
+                  <img class="project-item-container--image" src="~/static/images/car-big.png" alt />
+                </div>
+                <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
+                  <div class="flex items-center">
+                    <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
+                    <span>4.5</span>
+                  </div>
+                  <span class="font-semibold">24 likes</span>
+                </div>
+              </nuxt-link>
 
-                                <div
-                                    class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 pop-over"
-                                >
-                                    <div class="flex justify-between items-center">
-                                    <div class="flex items-center">
-                                        <h1 class="font-semibold text-lg">Project name</h1>
-                                        <span class="text-sm text-gray-600 ml-3">Electronics + Cover</span>
-                                    </div>
-                                    <div class="font-semibold text-ideeza-black">$20,000</div>
-                                    </div>
+              <div
+                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 pop-over"
+              >
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <h1 class="font-semibold text-lg">Project name</h1>
+                    <span class="text-sm text-gray-600 ml-3">Electronics + Cover</span>
+                  </div>
+                  <div class="font-semibold text-ideeza-black">$20,000</div>
+                </div>
 
-                                    <div class="text-sm mt-5">
-                                    Sed in porta nunc, a interdum massa. Donec elementum id leo in pulvinar.
-                                    Cras purus erat, feugiat vel lectus ut, hendrerit porttitor sem. Curabitur
-                                    tempor sem ex
-                                    </div>
-                            </div>
+                <div class="text-sm mt-5">
+                  Sed in porta nunc, a interdum massa. Donec elementum id leo in pulvinar.
+                  Cras purus erat, feugiat vel lectus ut, hendrerit porttitor sem. Curabitur
+                  tempor sem ex
+                </div>
+              </div>
             </div>
             <div
               class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
@@ -219,6 +219,7 @@
 <script>
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 export default {
+  middleware: "auth",
   layout: "user",
   name: "projects-index",
   data: function() {

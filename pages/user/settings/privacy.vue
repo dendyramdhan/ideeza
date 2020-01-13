@@ -131,6 +131,7 @@ import Projects from "~/data/UserSettingApi.json";
 import axios from "axios";
 import apiService from "~/apiService/have_token.js";
 export default {
+  middleware: "auth",
   name: "privacy",
   data: function() {
     return {

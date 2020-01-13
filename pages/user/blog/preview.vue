@@ -106,6 +106,7 @@ import axios from "axios";
 
 import articles from "~/data/BlogApi.json";
 export default {
+  middleware: "auth",
   name: "blog-preview",
   data: function() {
     return {
