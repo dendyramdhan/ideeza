@@ -22,7 +22,7 @@
         <br />
         {{Project.content3}}
       </div>
-     <div
+      <div
         class="px-10"
         v-for="(select,index) in articleArray[0]"
         v-if="index == 'social_connection' "
@@ -59,8 +59,11 @@
         <br />
         {{Project.content2}}
       </div>
-      <div class="px-10"  v-for="(select,index) in articleArray[0]"
-        v-if="index == 'facebook_timeline' ">
+      <div
+        class="px-10"
+        v-for="(select,index) in articleArray[0]"
+        v-if="index == 'facebook_timeline' "
+      >
         <span v-if="select == 'false'">
           <input type="checkbox" :checked="false" id="Facebook" @click="changeFacebook" />
           Share my activity with my Facebook friends that are also on Ideeza (recommended)
@@ -71,9 +74,7 @@
         </span>
 
         <!-- <input type="checkbox" :checked="false" id="Facebook" @click="changeFacebook" />
-        Share my activity with my Facebook friends that are also on Ideeza (recommended) -->
-
-
+        Share my activity with my Facebook friends that are also on Ideeza (recommended)-->
       </div>
     </div>
 
@@ -103,8 +104,8 @@
         <br />
         {{Project.content3}}
       </div>
-      <div class="px-10" v-for="(select,index) in articleArray[0]" v-if="index == 'search_engine' ">         
-         <span v-if="select == 'false'">
+      <div class="px-10" v-for="(select,index) in articleArray[0]" v-if="index == 'search_engine' ">
+        <span v-if="select == 'false'">
           <input type="checkbox" :checked="false" id="Search" @click="changesearch" />
           Include my profile and products in search engines like Google and Bing (recommended)
         </span>
@@ -114,7 +115,7 @@
         </span>
 
         <!-- <input type="checkbox" :checked="select" id="Search" @click="changesearch" />
-        Include my profile and products in search engines like Google and Bing (recommended){{select}} -->
+        Include my profile and products in search engines like Google and Bing (recommended){{select}}-->
       </div>
     </div>
 
@@ -146,11 +147,12 @@ export default {
       randomNumber: {}
     };
   },
-  created: function() {
+  created: function() {},
+  mounted() {
     let sendData = {
       method: "get",
       url: this.geturl,
-      data: null,
+      data: null
     };
 
     apiService(sendData, response => {
@@ -161,14 +163,14 @@ export default {
       this.articleArray[0].map((item, index) => {
         switch (index) {
           case 0:
-            this.Facebook =item;           
+            this.Facebook = item;
 
             break;
           case 1:
             this.Search = item;
             break;
           case 2:
-           this.social =item;
+            this.social = item;
             break;
         }
         console.log("item,index:", item, index);
@@ -176,7 +178,6 @@ export default {
         console.log("item_++index:", index);
         // this.articleArray.push(item);
       });
-
     });
   },
   methods: {
@@ -224,15 +225,12 @@ export default {
       let sendData = {
         method: "post",
         url: this.geturl2,
-        data: formData,
-        tokenstr: ""
+        data: formData
       };
 
       apiService(sendData, response => {
         console.log(response);
       });
-
-
     }
   },
   components: {
