@@ -254,11 +254,10 @@ export default {
       this.name = firstname + " " + lastname;
 
       let getallprojectsurl = "/api/project/get_all";
-
       let getallprojectsData = {
         method: "get",
         url: getallprojectsurl,
-        data: null
+        data: null,
       };
 
       apiServiceWithToken(getallprojectsData, response => {

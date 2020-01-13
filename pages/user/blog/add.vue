@@ -162,7 +162,6 @@ export default {
         method: "post",
         url: this.geturl,
         data: formData,
-        tokenstr: ""
       };
 
       apiService(sendData, response => {
