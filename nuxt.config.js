@@ -51,6 +51,7 @@ export default {
     { src: '~/plugins/calendar.js', ssr: false, mode: 'client' },
     { src: '~/plugins/firebase.js', ssr: false, mode: 'client' },
     { src: '~/plugins/vue-carousel-3d.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/jspdf.js', ssr: false, mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules

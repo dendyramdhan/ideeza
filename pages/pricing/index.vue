@@ -280,7 +280,7 @@
     <login
       v-if="showLoginModal"
       @close="showLoginModal=false"
-      @signup="showLoginModal=false;showSignupModal=true"
+      @signup="showLoginModal=false;showChooseType=true"
       @reset="showLoginModal=false;showResetModal=true;"
     />
     <signup
@@ -299,11 +299,17 @@
       @close="showEmailSignupModal=false"
       @login="showLoginModal=true;showEmailSignupModal=false"
     />
+    <choose-type
+      v-if="showChooseType"
+      @close="showChooseType=false"
+      @signup="showSignupModal=true;showChooseType=false"
+    />
   </div>
 </template>
 <script>
 import Login from "~/components/reusables/Login.vue";
 import Signup from "~/components/reusables/Signup.vue";
+import ChooseType from "~/components/reusables/ChooseType.vue"
 import ResetPassword from "~/components/reusables/ResetPassword.vue";
 import EmailSignup from "~/components/reusables/EmailSignup.vue";
 export default {
@@ -313,7 +319,8 @@ export default {
     Login,
     Signup,
     ResetPassword,
-    EmailSignup
+    EmailSignup,
+    ChooseType
   },
   data() {
     return {
@@ -324,6 +331,7 @@ export default {
       showSignupModal: false,
       showResetModal: false,
       showEmailSignupModal: false,
+      showChooseType: false,
       auth: false
     };
   },

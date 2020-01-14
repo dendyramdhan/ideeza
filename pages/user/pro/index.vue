@@ -224,15 +224,6 @@
                   ]
                 }]
               },
-              {
-                name: 'Sensors',
-              },
-              {
-                name: 'Networks',
-              }
-
-            ]
-          },
           code: {
             name: 'Code',
             children: [{
