@@ -29,7 +29,7 @@
       </div>
       <div class="md:w-2/3 sm:w-full">
         <nav :class="isOpen ? 'block' : 'hidden'" class="px-2 pt-2 pb-4 md:flex sm:p-0 justify-end">
-          <ul class="text-white text-right block">
+          <ul class="flex items-center text-white text-right block">
             <li
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
             >
@@ -64,7 +64,7 @@
               v-else
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
             >
-              <nuxt-link to="/user/profile">
+              <nuxt-link to="/user/profile" class>
                 <div class="flex items-center" style="cursor: pointer">
                   <img
                     class="h-8 w-8 rounded-full mr-2"
