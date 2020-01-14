@@ -30,20 +30,6 @@
 
         </div>
         <!--2-->
-        <div class="stepper-icon-wrapper relative" :class="{'active': step >= 1}">
-          <span class="absolute-center-h-v">2</span>
-          <div class="stepper-text stepper-text--review" :class="{'active': step >= 1}">Configure</div>
-        </div>
-        <!--3-->
-        <div class="stepper-icon-wrapper relative" :class="{'active': step >= 2 }">
-          <span class="absolute-center-h-v">3</span>
-          <div class="stepper-text stepper-text--complete" :class="{'active': step >= 2 }">Electronics</div>
-        </div>
-        <!--4-->
-        <div class="stepper-icon-wrapper relative" :class="{'active': step >= 3 }">
-          <span class="absolute-center-h-v">4</span>
-          <div class="stepper-text stepper-text--code" :class="{'active': step >= 3 }">General</div>
-        </div>
       </div>
 
       <AddPartSearch @select="addPartSelect=true" class="mt-10"

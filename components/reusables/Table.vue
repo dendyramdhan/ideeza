@@ -9,7 +9,7 @@
           <div class="h-12 relative w-10">
             <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
           </div>
-          <input placeholder="Search" class="bg-white outline-none h-12 text-gray-800 pr-3 w-2/3 md:w-full">
+          <input placeholder="Search" class="bg-white outline-none h-12 text-gray-800 mt-1 pr-3 w-2/3 md:w-full">
         </div>
         <button v-if="add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza mb-2 md:mb-0 h-12" @click="$emit('add')">
           Add New

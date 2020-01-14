@@ -5,7 +5,7 @@
     <div class="p-0 lg:py-10 lg:pl-10">
       <div class="lg:flex justify-between items-center lg:mb-10">
         <nuxt-link
-          to="/user/blog/list"
+          to="/user/blog"
           class="btn btn-normal btn--ideeza-dark px-10 py-4 block lg:inline-block"
         >Back</nuxt-link>
       </div>

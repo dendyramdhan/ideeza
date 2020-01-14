@@ -50,7 +50,9 @@ export default {
     { src: '~/plugins/table-plugin.js' },
     { src: '~/plugins/vue2-filters-plugin' },
     { src: '~/plugins/calendar.js', ssr: false, mode: 'client' },
-    { src: '~/plugins/firebase.js', ssr: false, mode: 'client' }
+    { src: '~/plugins/firebase.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/vue-carousel-3d.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/jspdf.js', ssr: false, mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules

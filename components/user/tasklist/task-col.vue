@@ -171,6 +171,5 @@ export default {
 }
 .task-container {
   @apply mx-5 pb-5 mb-5 shadow-lg bg-white;
-  min-width: 350px;
 }
 </style>
