@@ -48,7 +48,7 @@
               <div v-if="Project.project.id == $route.query.id ">
                 <img
                   class="w-full"
-                  :src=" 'http://192.168.1.162/api/img/projects/'+ Project.project.image"
+                  :src=" project_img_url + Project.project.image"
                 />
               </div>
             </div>
@@ -183,7 +183,9 @@ export default {
       geturl: "/api/project/get_all",
       geturl2: "/api/project/update_description",
       articleArray: [],
-      randomNumber: {}
+      randomNumber: {},
+      project_img_url:process.env.project_image_url,
+
     };
   },
   created: function() {},

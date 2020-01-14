@@ -28,7 +28,7 @@
         <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Electronics' ">
           <div class="flex items-center">
             <div class="mr-2">
-              <img class="avatar" :src="'http://192.168.1.162/api/img/avatars/'+Project.connector.profile" alt />
+              <img class="avatar" :src=" avata_img_url +Project.connector.profile" alt />
             </div>
             <div>
               <span class="block font-semibold text-sm">{{Project.connector.name}}</span>
@@ -59,7 +59,7 @@
         <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Freelancers' ">
           <div class="flex items-center">
             <div class="mr-2">
-              <img class="avatar" :src="'http://192.168.1.162/api/img/avatars/'+Project.connector.profile" alt />
+              <img class="avatar" :src=" avata_img_url +Project.connector.profile" alt />
             </div>
             <div>
               <span class="block font-semibold text-sm">{{Project.connector.name}}</span>
@@ -90,7 +90,7 @@
         <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Parts' ">
           <div class="flex items-center">
             <div class="mr-2">
-              <img class="avatar" :src="'http://192.168.1.162/api/img/avatars/'+Project.connector.profile" alt />
+              <img class="avatar" :src="avata_img_url+Project.connector.profile" alt />
             </div>
             <div>
               <span class="block font-semibold text-sm">{{Project.connector.name}}</span>
@@ -133,7 +133,9 @@ export default {
       geturl: "/api/project/get_connectors",
       articleArray: [],
       randomNumber: [],
-      projectidd:window.$nuxt.$cookies.get("userprojectid")
+      projectidd:window.$nuxt.$cookies.get("userprojectid"),
+      avata_img_url:process.env.avatar_base_url,
+
     };
   },
    mounted() {

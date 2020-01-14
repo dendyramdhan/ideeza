@@ -20,7 +20,7 @@
              <!-- v-if="Project.flag == 1" -->
               <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
                 <div class="image-container">
-                  <img class="project-item-container--image" :src="'http://192.168.1.162/api/img/projects/' + info.project.image" alt />asdf
+                  <img class="project-item-container--image" :src="project_img_url + info.project.image" alt />asdf
                 </div>
                 <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
                   <div class="flex items-center">
@@ -140,7 +140,9 @@ export default {
       Projects: Projects.firstproject,
       geturl: "/api/project/get_all",
       articleArray: [],
-      randomNumber: {}
+      randomNumber: {},
+      project_img_url:process.env.project_image_url,
+
     };
   },
   created: function() {
