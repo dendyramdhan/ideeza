@@ -35,7 +35,19 @@
             "descibe": "I am senior full stack developer.",
             "profile_photo": "/_nuxt/static/images/Business-Profile.png",
             "profile_description": "Most viewers take less than three seconds to scan a full web-page and form their first impressions. The next thing they look for? A company’s logo.",
-            "password": "you"
+            "password": "you",
+            "Line_Business":[
+                "code",
+                "cover",
+                "electronics"
+            ],
+            "expertise":[
+                "assembly",
+                "Tester",
+                "Dealer",
+                "CNC plastic"
+            ]
+            
         }
     ],
     "Setting_notification": [

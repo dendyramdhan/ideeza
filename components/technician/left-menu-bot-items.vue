@@ -7,7 +7,7 @@
     </div>
 
     <div class="menu-item text-gray-500 hover:text-gray-800 mt-5 text-xl font-semibold">
-      <nuxt-link to="/technician/settings">
+      <nuxt-link to="/technician/settings/general">
         <font-awesome-icon class="mr-5 w-8 h-8 align-text-middle" :icon="['fas', 'cog']"/> Settings
       </nuxt-link>
 
