@@ -41,6 +41,7 @@
           @change="fileseleted"
           ref="file_upload"
           class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
+          style="display:none"
         />
         <!-- <button
        class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
@@ -64,14 +65,15 @@
     <div class="mt-12 text-center lg:text-left">
       <button
         class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg"
+        @click="$refs.file_upload.click()"
+      >SelectImage</button>
+
+      <button
+        class="btn btn-normal btn--ideeza px-10 py-4 lg: iinline-block"
         @click="uploadUserBlog"
       >Publish</button>
 
-      <!-- <nuxt-link :to="{ path: '/user/blog/view', query: { id: counter, name:ArticlesName}}"></nuxt-link>
-      <button
-        class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg"
-       @click="$refs.file_preview.click()"
-      >Preview</button> -->
+      <!-- <nuxt-link :to="{ path: '/user/blog/view', query: { id: counter, name:ArticlesName}}"></nuxt-link>  -->
 
       <!-- {{this.$store.state.userBlogStore.viewflag }} -->
     </div>
@@ -80,6 +82,7 @@
 
 <script>
 import axios from "axios";
+import apiService from "~/apiService/have_token.js";
 
 import articles from "../../../data/BlogApi.json";
 import TextField from "~/components/form/text-field.vue";
@@ -88,6 +91,7 @@ import CategoryField from "~/components/form/category-field.vue";
 import FileField from "~/components/form/file-field.vue";
 
 export default {
+  middleware: "auth",
   name: "add-blog",
   components: {
     "text-field": TextField,
@@ -99,12 +103,11 @@ export default {
     return {
       articles: articles,
       counter: articles.length + 1,
-      base_url: process.env.base_url,
+      geturl: "/api/add_blog",
       file: null,
       articlena: "",
       categoryna: "",
       descripttionname2: "",
-
       selectedFile: null,
       images: [],
       image_fields: ["id", "name"],
@@ -114,24 +117,19 @@ export default {
   methods: {
     previewimage(evt) {
       var reader = new FileReader();
-
       reader.onload = function(e) {
         // get loaded data and render thumbnail.
         document.getElementById("image").src = e.target.result;
       };
-
       // read the image file as a data URL.
       reader.readAsDataURL(evt.target.files[0]);
     },
     fileseleted(evt) {
-
       var reader = new FileReader();
-
       reader.onload = function(e) {
         // get loaded data and render thumbnail.
         document.getElementById("image").src = e.target.result;
       };
-
       // read the image file as a data URL.
       reader.readAsDataURL(evt.target.files[0]);
 
@@ -149,36 +147,47 @@ export default {
       this.descripttionname2 = event.target.value;
     },
     // previewclick() {
-    //   localStorage.setItem("blogarticlename", this.articlena);
-    //   localStorage.setItem("blogcategoryna", this.articlena);
-    //   localStorage.setItem("blogdescriptionNameChange", this.articlena);
+    //   window.$nuxt.$cookies.set("blogarticlename", this.articlena);
+    //   window.$nuxt.$cookies.set("blogcategoryna", this.articlena);
+    //   window.$nuxt.$cookies.set("blogdescriptionNameChange", this.articlena);
     //   this.$router.push("/user/blog/preview?" + this.foobar);
     // },
     uploadUserBlog() {
-      // this.file = this.$refs.file.files[0];
       const formData = new FormData();
       formData.set("article", this.articlena);
       formData.set("category", this.categoryna);
       formData.set("description", this.descripttionname2);
       formData.append("image", this.file);
-      var url = this.base_url + "/api/add_blog";
-      console.log("upload data", formData);
-      let tokenStr =
-        "eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjI0NDI3NjgxMjYsImlhdCI6MTU3ODc2ODEyNiwianRpIjoiZm5NeFB2NlR3cVJPa2RlZVhFalRFQSIsIm5iZiI6MTU3ODc2ODEyNiwidXNlcmlkIjoiZmU1MDVhNjEtNzQ3ZS00MzJhLWE5ODQtNjdhNTc2NDQxYzFjIn0.TfJiSeX1deYBM_Cvf6wJSZQDG2vgitJ2DI8NwYKLn9gTvxMAKPjuyWmGWu_ZsxqgI1DgfkUZs5Ix8MQMRLh8ZKTc2IpLhH4icmsVdUdIGruLkvrNMFmdtXW_lpQuvIFi0Ge9TnLOra3akPv4RbjB9n6aFyTsFr7jvxL4S_CZJ1pwtknAVfaj3zkw32318HgOPfonuj62jBvujesp46uTHTyCnOrscTrBkbEFvdA_zlk563pGbudgqd3BhW2f64gZSnyhMGdp4ggdAvPDAk2fq1TYBLQ4aMtpqz4DbiIZD3_0XTyp6n_nzdhxdoy2k8Ve5ja-87zXI8YnxBH77Qgtjw";
-      axios({
+      let sendData = {
         method: "post",
-        url: url,
+        url: this.geturl,
         data: formData,
-        headers: { Authorization: `Bearer ${tokenStr}` }
-      })
-        .then(function(response) {
-          //handle success
-          console.log(response);
-        })
-        .catch(error => {
-          //handle error
-          console.log(error);
-        });
+      };
+
+      apiService(sendData, response => {
+        console.log(response);
+      });
+
+      // // this.file = this.$refs.file.files[0];
+
+      // var url = this.base_url + "/api/add_blog";
+      // console.log("upload data", formData);
+      // let tokenStr =
+      //   "eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjI0NDI3NjgxMjYsImlhdCI6MTU3ODc2ODEyNiwianRpIjoiZm5NeFB2NlR3cVJPa2RlZVhFalRFQSIsIm5iZiI6MTU3ODc2ODEyNiwidXNlcmlkIjoiZmU1MDVhNjEtNzQ3ZS00MzJhLWE5ODQtNjdhNTc2NDQxYzFjIn0.TfJiSeX1deYBM_Cvf6wJSZQDG2vgitJ2DI8NwYKLn9gTvxMAKPjuyWmGWu_ZsxqgI1DgfkUZs5Ix8MQMRLh8ZKTc2IpLhH4icmsVdUdIGruLkvrNMFmdtXW_lpQuvIFi0Ge9TnLOra3akPv4RbjB9n6aFyTsFr7jvxL4S_CZJ1pwtknAVfaj3zkw32318HgOPfonuj62jBvujesp46uTHTyCnOrscTrBkbEFvdA_zlk563pGbudgqd3BhW2f64gZSnyhMGdp4ggdAvPDAk2fq1TYBLQ4aMtpqz4DbiIZD3_0XTyp6n_nzdhxdoy2k8Ve5ja-87zXI8YnxBH77Qgtjw";
+      // axios({
+      //   method: "post",
+      //   url: url,
+      //   data: formData,
+      //   headers: { Authorization: `Bearer ${tokenStr}` }
+      // })
+      //   .then(function(response) {
+      //     //handle success
+      //     console.log(response);
+      //   })
+      //   .catch(error => {
+      //     //handle error
+      //     console.log(error);
+      //   });
 
       // // alert(this.files);alert(articles.length + 1);
       // let articlesId = articles.length + 1;

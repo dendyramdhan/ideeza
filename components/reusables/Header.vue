@@ -33,10 +33,9 @@
             <li
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
             >
-              <nuxt-link to class>About Us</nuxt-link>
+              <nuxt-link to="/about" class>About Us</nuxt-link>
             </li>
             <li
-            
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
             >
               <nuxt-link to="/pricing" class>Pricing</nuxt-link>
@@ -48,30 +47,64 @@
             </li>
 
             <li
-              class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5 social-link"
-            >
-              <nuxt-link to class>
-                <i class="fa fa-linkedin-square"></i>
-              </nuxt-link>
-              <nuxt-link to class>
-                <i class="fa fa-twitter-square"></i>
-              </nuxt-link>
-              <nuxt-link to class>
-                <i class="fa fa-instagram"></i>
-              </nuxt-link>
-              <nuxt-link to class>
-                <i class="fa fa-facebook-square"></i>
-              </nuxt-link>
-            </li>
-            <li style="cursor: pointer"
+              v-if="!auth"
+              style="cursor: pointer"
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
               @click="showSignupModal=true"
             >Sign Up</li>
 
-            <li style="cursor: pointer"
+            <li
+              v-if="!auth"
+              style="cursor: pointer"
               class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
               @click="showLoginModal=true"
             >Log In</li>
+
+            <li
+              v-else
+              class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+            >
+              <nuxt-link to="/user/profile">
+                <div class="flex items-center" style="cursor: pointer">
+                  <img
+                    class="h-8 w-8 rounded-full mr-2"
+                    src="https://randomuser.me/api/portraits/men/17.jpg"
+                  />
+                  <span class="text-white inline-block">{{name}}</span>
+                </div>
+              </nuxt-link>
+            </li>
+            <li
+              class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5 social-link"
+            >
+              <nuxt-link
+                to="/user/profile"
+                class="md:ml-0 mr-4 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300"
+              >
+                <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'linkedin']" />
+              </nuxt-link>
+              <nuxt-link
+                to="/user/profile"
+                class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+              >
+                <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'twitter-square']" />
+              </nuxt-link>
+              <nuxt-link
+                to="/user/profile"
+                class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+              >
+                <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'instagram']" />
+              </nuxt-link>
+              <nuxt-link
+                to="/user/profile"
+                class="md:my-0 my-3 mr-12 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+              >
+                <font-awesome-icon
+                  class="text-xl text-gray-500"
+                  :icon="['fab', 'facebook-square']"
+                />
+              </nuxt-link>
+            </li>
           </ul>
         </nav>
       </div>
@@ -118,8 +151,22 @@ export default {
       showLoginModal: false,
       showSignupModal: false,
       showResetModal: false,
-      showEmailSignupModal: false
+      showEmailSignupModal: false,
+      name: "",
+      auth: false
     };
+  },
+
+  mounted() {
+    let authToken = window.$nuxt.$cookies.get("authToken");
+    if (authToken != null) {
+      this.auth = true;
+      let firstname = window.$nuxt.$cookies.get("firstname");
+      let lastname = window.$nuxt.$cookies.get("lastname");
+      this.name = firstname + " " + lastname;
+    } else {
+      this.auth = false;
+    }
   }
 };
 </script>

@@ -85,14 +85,41 @@
         </div>
       </div>
 
-      <div class="flex justify-center items-center content-center w-m-c">
-        <nuxt-link to="/user/profile" class="flex items-center">
+      <div class="flex items-center relative mr-5" v-click-outside="onClickOutsideProfile">
+        <div
+          class="flex items-center"
+          @click="showProfileAlert = !showProfileAlert"
+          style="cursor: pointer"
+        >
           <img
             class="h-10 w-10 rounded-full mr-2"
             src="https://randomuser.me/api/portraits/men/17.jpg"
           />
           <span class="text-white inline-block">{{name}}</span>
-        </nuxt-link>
+        </div>
+        <div class="help-alert text-xs" v-show="showProfileAlert">
+          <nuxt-link
+            to="/user/profile"
+            class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
+          >
+            <div class="px-2 w-full flex items-center">
+              <font-awesome-icon class="mr-3 h-5 align-text-middle" :icon="['fas', 'user-alt']" />Profile
+            </div>
+          </nuxt-link>
+
+          <div
+            class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
+            style="cursor: pointer"
+            @click="onSignOut"
+          >
+            <div class="px-2 w-full flex items-center">
+              <font-awesome-icon
+                class="mr-3 h-5 align-text-middle"
+                :icon="['fas', 'sign-out-alt']"
+              />Sign Out
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -107,8 +134,9 @@ export default {
     return {
       showInfoAlert: false,
       showHelpAlert: false,
+      showProfileAlert: false,
       news: news,
-      name: null
+      name: ""
     };
   },
   computed: {
@@ -117,8 +145,15 @@ export default {
     }
   },
   mounted() {
-    this.name = localStorage.getItem('firstname') + ' ' + localStorage.getItem('lastname');
-    console.log('fullname: ', this.name);
+
+    let firstname = window.$nuxt.$cookies.get('firstname');
+    let lastname = window.$nuxt.$cookies.get('lastname');
+    this.name = firstname + ' ' + lastname;
+    // this.name =
+    //   window.$nuxt.$cookies.get("firstname") +
+    //   " " +
+    //   window.$nuxt.$cookies.get("lastname");
+    console.log("fullname: ", this.name);
     console.log("news: ", this.news, this.showInfoAlert);
   },
   methods: {
@@ -131,8 +166,18 @@ export default {
     onClickOutsideHelp() {
       this.showHelpAlert = false;
     },
+    onClickOutsideProfile() {
+      this.showProfileAlert = false;
+    },
     onSeeMore() {
       alert();
+    },
+    onSignOut() {
+      window.$nuxt.$cookies.remove("authToken");
+      window.$nuxt.$cookies.remove("firstname");
+      window.$nuxt.$cookies.remove("lastname");
+      window.$nuxt.$cookies.remove("userid");
+      this.$router.push("/home");
     }
   }
 };

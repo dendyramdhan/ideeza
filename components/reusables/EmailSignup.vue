@@ -92,85 +92,125 @@
 <script>
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
-import axios from "axios";
+import apiService from "~/apiService";
 export default {
   components: {
     Modal
   },
   data() {
     return {
-      base_url: process.env.base_url,
-      email: '',
-      password: '',
-      firstname: '',
-      lastname: '',
-      day: '',
-      month: '',
-      year: ''
+      email: "",
+      password: "",
+      firstname: "",
+      lastname: "",
+      day: "",
+      month: "",
+      year: ""
     };
   },
   methods: {
-    signup() {
-      var registerurl = this.base_url + '/api/user/register';
-      var signinurl = this.base_url + '/api/user/login';
-      var birthday = this.day + "/" + this.month + "/" + this.year;
+    async signup() {
+      if (validate_email(this.email) && validatePassword(this.password)) {
+        var registerurl = "/api/user/register";
+        var birthday = this.day + "/" + this.month + "/" + this.year;
 
-      var bodyFormData = new FormData();
-      bodyFormData.set("email", this.email);
-      bodyFormData.set("password", this.password);
-      bodyFormData.set("firstname", this.firstname);
-      bodyFormData.set("lastname", this.lastname);
-      bodyFormData.set("birthday", birthday);
+        var signupFormData = new FormData();
+        signupFormData.set("email", this.email);
+        signupFormData.set("password", this.password);
+        signupFormData.set("firstname", this.firstname);
+        signupFormData.set("lastname", this.lastname);
+        signupFormData.set("birthday", birthday);
 
-      axios({
-        method: "post",
-        url: registerurl,
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" }
-      })
-        .then(function(response) {
-          //handle success
+        let sendData = {
+          method: "post",
+          url: registerurl,
+          data: signupFormData
+        };
+
+        apiService(sendData, response => {
           console.log(response.data);
-          if (response.data["success"] == true) {
-            axios({
+          console.log(response.data.success);
+          if (response.data.success == true) {
+            let signinurl = "/api/user/login";
+
+            let Data = {
               method: "post",
               url: signinurl,
-              data: bodyFormData,
-              headers: { "Content-Type": "multipart/form-data" }
-            })
-              .then(function(response) {
-                //handle success
-                console.log(response.data);
-                console.log(response.data["success"]);
+              data: signupFormData
+            };
 
-                if (response.data["success"] == true) {
-                  var token = response.data["data"].token;
-                  var userdata = response.data["data"].userdata;
-                  var firstname = userdata.firstname;
-                  var lastname = userdata.lastname;
-                  var userid = userdata.id;
+            apiService(Data, response => {
+              console.log(response.data);
+              console.log(response.data.success);
+              if (response.data.success == true) {
+                var token = response.data["data"].token;
+                var userdata = response.data["data"].userdata;
+                var firstname = userdata.firstname;
+                var lastname = userdata.lastname;
+                var userid = userdata.id;
 
-                  localStorage.setItem("authToken", token);
-                  localStorage.setItem("firtname", firstname);
-                  localStorage.setItem("lastname", lastname);
-                  localStorage.setItem("userid", userid);
-                  window.$nuxt.$router.push("/user/dashboard");
-                }
-              })
-              .catch(error => {
-                //handle error
-                console.log(error);
-              });
+                window.$nuxt.$cookies.set("authToken", token);
+                window.$nuxt.$cookies.set("firstname", firstname);
+                window.$nuxt.$cookies.set("lastname", lastname);
+                window.$nuxt.$cookies.set("userid", userid);
+                console.log("Here: ", window.$nuxt.$cookies.get("authToken"));
+                this.$router.push("/user/dashboard");
+              }
+            });
           }
-        })
-        .catch(error => {
-          //handle error
-          console.log(error);
         });
+      } else {
+      }
     }
   },
   mounted() {
     // this.signup();
   }
 };
+
+function validate_email(email) {
+  if (email != "") {
+    var apos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+    if (apos < 1 || dotpos - apos < 2) {
+      alert("Please Enter Your Email Correctly!");
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    alert("Please Enter Your Email");
+    return false;
+  }
+}
+
+function validatePassword(password) {
+  var error = "";
+  var illegalChars = /[\W_]/; // allow only letters and numbers
+
+  if (password == "") {
+    error = "You didn't enter a password.\n";
+    alert(error);
+    return false;
+  } else if (password.length < 3 || password.length > 15) {
+    error = "The password is the wrong length. \n";
+    alert(error);
+    return false;
+  } else if (illegalChars.test(password)) {
+    error = "The password contains illegal characters.\n";
+    alert(error);
+    return false;
+  }
+  // else if (
+  //   password.search(/[a-zA-Z]+/) == -1 ||
+  //   password.search(/[0-9]+/) == -1
+  // ) {
+  //   error = "The password must contain at least one numeral.\n";
+  //   alert(error);
+  //   return false;
+  // }
+  else {
+  }
+  return true;
+}
 </script>

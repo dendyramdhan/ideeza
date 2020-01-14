@@ -87,6 +87,7 @@
 <script>
 import carts from '~/json/cart.json';
 export default {
+  middleware: "auth",
   name: "payment",
 
   data: function() {

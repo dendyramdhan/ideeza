@@ -259,6 +259,7 @@
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import contactinfos from "~/json/contactinfos";
 export default {
+  middleware: 'auth',
   layout: "user",
   name: "profile-index",
   components: {

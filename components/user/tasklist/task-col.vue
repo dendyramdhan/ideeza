@@ -3,7 +3,7 @@
     <div
       class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400"
     >{{this.title}}</div>
-    <div v-for="(task, index) in task.tasks" class>
+    <div v-for="(task, index) in task.task" class>
       <!-- <div
         @click="task.active = !task.active"
         class="cursor-pointer py-3 flex flex items-center"

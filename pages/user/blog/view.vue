@@ -14,7 +14,7 @@
       <div   v-if="descrition.id == $route.query.id">
         <div class="lg:flex">
           <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
-            <img class="w-full" :src=" 'http://192.168.1.162/api/img/blogs/'+ descrition.postimage" />
+            <img class="w-full" :src=" blog_img_url + descrition.postimage" />
           </div>
           <div>
             <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
@@ -60,59 +60,35 @@
 
 <script>
 import axios from "axios";
+import apiService from "~/apiService";
 
 // import articles from "~/data/BlogApi.json";
 export default {
+  middleware: "auth",
   name: "blog-view",
   data: function() {
     return {
       // articles: articles,
-      base_url: process.env.base_url,
+            geturl: "/api/get_blogs",
       articleArray: [],
       randomNumber: {},
+      blog_img_url:process.env.blog_post_url,
 
     };
   },
   created: function() {
-    let geturl = this.base_url + "/api/get_blogs";
-    axios({
+    
+    let sendData = {
       method: "get",
-      url: geturl
-    })
-      .then(response => {
-        //handle success
-        console.log(response.data);
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
         this.randomNumber = response.data;
         this.articleArray = Object.values(response.data.data);
-        // this.articleArray = onlyarticleArray[0];        
-      })
-      .catch(error => {
-        //handle error
-        console.log(error);
-      });
-
-    // let geturl = this.base_url + "/api/view_blog";
-    // var bodyFormData = new FormData();
-    // bodyFormData.set("id", this.$route.query.id);
-    // axios({
-    //   method: "get",
-    //   data: bodyFormData,
-    //   headers: { "Content-Type": "multipart/form-data" },
-    //   url: geturl
-    // })
-    //   .then(response => {
-    //     //handle success
-    //     console.log(response.data);
-    //     this.randomNumber = response.data;
-
-    //     this.articleArray = Object.values(response.data.data);
-    //     // this.articleArray = onlyarticleArray[0];
-    //   })
-    //   .catch(error => {
-    //     //handle error
-    //     console.log(error);
-    //   });
-
+    });
 
   }
 };

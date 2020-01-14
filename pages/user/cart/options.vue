@@ -19,6 +19,7 @@ import BluePrintIcon from "~/components/partials/icons/blueprint-icon.vue";
 import ShoppingBasketIcon from "~/components/partials/icons/shopping-basket-icon.vue";
 import { mapMutations } from "vuex";
 export default {
+  middleware: "auth",
   name: "cart-options",
   mounted() {
     this.$store.commit("cartstepper/set", { position: 1 });
