@@ -119,7 +119,7 @@
         --{{info.project.id}}-{{info.project.description}}
         <br />
        -->
-      </li>
+      <!-- </li> -->
       <!-- {{articleArray}} -->
     </ul>
   </div>
