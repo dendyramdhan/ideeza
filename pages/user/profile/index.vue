@@ -6,7 +6,11 @@
     <div class="flex-grow lg:p-10">
       <div class="lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
         <div class="left-panel">
-          <img class="w-full" :src="contactinfos.potrait_url" alt />
+          <img
+            class="w-full"
+            :src="'http://192.168.1.162/api/img/avatars/' + additional_contactinfos.avatar"
+            alt
+          />
 
           <div class="mt-10 mb-5 semi-border relative">
             <span class="font-semibold text-gray-500 pr-3 bg-white">SOCIAL MEDIA</span>
@@ -46,14 +50,14 @@
           <div class="w-full flex justify-between items-top">
             <div class="lg:flex items-top">
               <div class="text-3xl font-semibold leading-none">
-                {{contactinfos.contact.name}}
+                {{general_contactinfos.firstname + ' ' + general_contactinfos.lastname}}
                 <span
                   class="block font-normal text-base text-ideeza-dark mt-3"
-                >{{contactinfos.contact.occupation}}</span>
+                >{{additional_contactinfos.work}}</span>
               </div>
               <div class="lg:ml-10 text-gray-500">
                 <font-awesome-icon class="mr-1 h-6 align-middle" :icon="['fas', 'map-marker-alt']" />
-                {{contactinfos.contact.location}}
+                {{general_contactinfos.address}}
               </div>
             </div>
             <nuxt-link to="/user/settings/notifications">
@@ -66,7 +70,7 @@
           <div class="lg:mt-10">
             <span class="text-gray-500 block">RATINGS</span>
             <div class="flex items-center">
-              <span class="text-gray-800 font-semibold text-xl">{{contactinfos.contact.rating}}</span>
+              <span class="text-gray-800 font-semibold text-xl"></span>
               <img class="rating-star" src="~/static/images/star.png" alt />
               <img class="rating-star" src="~/static/images/star.png" alt />
               <img class="rating-star" src="~/static/images/star.png" alt />
@@ -109,16 +113,15 @@
           </div>
           <!--Time line-->
           <div v-if="tabItem === 'timeline'" class="mt-5">
-            <!--New Feed-->
 
-            <div class="flex mb-10" v-for="sharedproject in contactinfos.shared_project">
-              <div class="flex-grow bg-white p-5 shadow">
+            <div class="flex mb-10">
+              <div class="flex-grow bg-white p-5 shadow" v-for="shared_project in shared_projects">
                 <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
                   <div>
-                    {{contactinfos.contact.name}}
+                    {{shared_project.name}}
                     <span class="font-normal">add a new project</span>
                     <span class="text-gray-800">Retro Headphones</span> •
-                    <span class="font-normal text-xs">3 weeks ago</span>
+                    <span class="font-normal text-xs">{{new Date(shared_project.created_at).getDate()}} weeks ago</span>
                   </div>
                   <div>
                     <font-awesome-icon
@@ -128,7 +131,7 @@
                   </div>
                 </div>
                 <div class="bg-gray-200">
-                  <img class="w-full object-fit object-center" :src="sharedproject.image_url" alt />
+                  <img class="w-full object-fit object-center" :src="'http://192.168.1.162/api/img/projects/' + shared_project.projec_image" alt />
                 </div>
                 <div class="mt-10 flex justify-between items-center">
                   <div class="flex items-center">
@@ -162,8 +165,8 @@
                   </div>
 
                   <div class="flex items-center font-semibold">
-                    <div class="mr-6 text-ideeza">{{sharedproject.comments_count}} comments</div>
-                    <div class="mr-6">{{sharedproject.share_count}} share</div>
+                    <div class="mr-6 text-ideeza">{{shared_project.comment_count}} comments</div>
+                    <div class="mr-6">{{shared_project.share_count}} share</div>
                   </div>
                 </div>
               </div>
@@ -181,62 +184,63 @@
 
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Phone:</div>
-              <div class="text-ideeza-dark">{{contactinfos.contact.phone}}</div>
+              <div class="text-ideeza-dark">{{general_contactinfos.phone}}</div>
             </div>
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Address:</div>
-              <div class>{{contactinfos.contact.address}}</div>
+              <div class>{{general_contactinfos.address}}</div>
             </div>
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Email:</div>
-              <div class="text-ideeza-dark">{{contactinfos.contact.email}}</div>
+              <div class="text-ideeza-dark">{{general_contactinfos.email}}</div>
             </div>
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Website:</div>
-              <div class="text-ideeza-dark">{{contactinfos.contact.website}}</div>
+              <div class="text-ideeza-dark">{{general_contactinfos.website}}</div>
             </div>
 
             <h1 class="text-gray-500 font-semibold txt-xl my-10">BASIC INFORMATION</h1>
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Birthday:</div>
-              <div class>{{contactinfos.contact.birthday}}</div>
+              <div class>{{general_contactinfos.birthday}}</div>
             </div>
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Gender:</div>
-              <div class>{{contactinfos.contact.gender}}</div>
+              <div class>{{general_contactinfos.sex}}</div>
             </div>
           </div>
 
           <!--Projects-->
-          <div class="mt-5 flex flex-wrap" v-if="tabItem === 'projects'">
+           <div class="mt-5 flex flex-wrap" v-if="tabItem === 'projects'">
             <img
               class="project-image"
-              v-for="project in contactinfos.projects"
-              :src="project.pimage_url"
+              v-for="project in projects"
+              :src="'http://192.168.1.162/api/img/projects/' + project.project.image"
               alt
             />
           </div>
 
           <!--Reviews-->
-          <div class="mt-5" v-if="tabItem === 'reviews'">
-            <div class="mb-10 mt-5" v-for="review in contactinfos.reviews">
+          <div class="mt-5" v-if="tabItem === 'reviews'" style="overflow: scroll; height: 600px">
+            <div class="mb-10 mt-5" v-for="review in reviews">
               <div class="flex justify-between items-center w-full">
                 <div class="flex items-center">
-                  <img class="feed-avatar w-16 rounded-full mr-5" :src="review.potrait_url" alt />
+                  <img class="feed-avatar w-16 rounded-full mr-5" :src="review.avatar" alt />
                   <div class>
                     <span class="font-semibold text-ideeza-dark inline-block mr-5">{{review.name}}</span>
-                    <span class="font-sm text-gray-500">Reviewed {{review.date_ago}} days ago</span>
+                    <span class="font-sm text-gray-500">Reviewed {{new Date(review.created_at).getDate()}} days ago</span>
                   </div>
                 </div>
                 <div
                   class="flex items-center text-gray-500 text-sm hover:text-gray-800 cursor-pointer"
-                @click="onReport">
+                  @click="onReport"
+                >
                   <font-awesome-icon class="mr-2 h-4" :icon="['fas', 'flag']" />Report
                 </div>
               </div>
               <div class="mt-5 border rounded-lg border-solid border-gray-500 p-5 text-sm">
                 <div class="flex justify-between">
-                  <div class="text-lg font-semibold">"{{review.review_title}}"</div>
+                  <div class="text-lg font-semibold">"{{review.title}}"</div>
                   <div>
                     <img class="rating-star" src="~/static/images/star.png" alt />
                     <img class="rating-star" src="~/static/images/star.png" alt />
@@ -245,7 +249,7 @@
                     <img class="rating-star" src="~/static/images/star.png" alt />
                   </div>
                 </div>
-                <p class="font-sm my-5">{{review.review_description}}</p>
+                <p class="font-sm my-5">{{review.description}}</p>
               </div>
             </div>
           </div>
@@ -258,8 +262,10 @@
 <script>
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import contactinfos from "~/json/contactinfos";
+import apiServiceWithToken from "~/apiService/have_token.js";
+
 export default {
-  middleware: 'auth',
+  middleware: "auth",
   layout: "user",
   name: "profile-index",
   components: {
@@ -270,7 +276,11 @@ export default {
       tabItem: "timeline",
       focusMore: false,
       showComments: false,
-      contactinfos: contactinfos
+      general_contactinfos: {},
+      additional_contactinfos: {},
+      reviews: [],
+      projects: [],
+      shared_projects: []
     };
   },
   computed: {
@@ -278,6 +288,66 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
+
+  mounted() {
+    let getallcontactsurl = "/api/user/get_profile";
+    let getallcontactsData = {
+      method: "get",
+      url: getallcontactsurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallcontactsData, response => {
+      if (response.data["success"] == true) {
+        this.general_contactinfos = response.data["data"].general_profile;
+        this.additional_contactinfos = response.data["data"].additional_profile;
+        console.log("contactinfos: ", this.general_contactinfos);
+      }
+    });
+
+    let getallreviewsurl = "/api/user/reviews";
+    let getallreviewsData = {
+      method: "get",
+      url: getallreviewsurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallreviewsData, response => {
+      if (response.data["success"] == true) {
+        this.reviews = response.data["reviews"];
+        console.log("reviews: ", this.reviews);
+      }
+    });
+
+    let getallmyprojectsurl = "/api/project/get_all";
+    let getallmyprojectsData = {
+      method: "get",
+      url: getallmyprojectsurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallmyprojectsData, response => {
+      if (response.data["success"] == true) {
+        this.projects = response.data["data"];
+        console.log("allmyprojects: ", this.reviews);
+      }
+    });
+
+    let getallmysharedprojectsurl = "/api/project/shared_project";
+    let getallmysharedprojectsData = {
+      method: "get",
+      url: getallmysharedprojectsurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallmysharedprojectsData, response => {
+      if (response.data["success"] == true) {
+        this.shared_projects = response.data["data"];
+        console.log("allmysharedprojects: ", this.reviews);
+      }
+    });
+  },
+
   methods: {
     onClickOutside() {
       this.focusMore = false;
