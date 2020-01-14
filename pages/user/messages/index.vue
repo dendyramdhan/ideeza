@@ -395,7 +395,7 @@ export default {
           messages.push(snapshot.val())
           console.log("message get", snapshot.val(), messages)
           localStorage.setItem('messages', JSON.stringify(messages))
-          
+
           var container = document.getElementById('message-container');
           container.scrollTop = container.scrollHeight;
           console.log("user data", container.scrollTop, container.scrollHeight)
@@ -493,12 +493,11 @@ export default {
     }
   },
   mounted() {
-    this.myUserId = localStorage.getItem('userid');
 
-      localStorage.setItem('messages', JSON.stringify([]))
-
-     
-
+    // this.myUserId = localStorage.getItem('userid');
+     this.myUserId =  window.$nuxt.$cookies.get("userid");
+     console.log("myuser id : ", this.myUserId)
+    localStorage.setItem('messages', JSON.stringify([]))
 
     let sendData = {
       method: "get",
