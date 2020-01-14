@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-transaction-history mx-auto">
+  <div class="settings-transaction-history md:mx-auto mx-2">
     <!---->
     <!--Orders-->
     <!---->

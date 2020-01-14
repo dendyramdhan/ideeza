@@ -5,7 +5,7 @@
 
     <!-- Main Contents -->
     <div class="flex-grow ">
-      <div class="main-contents">
+      <div class="main-contents mx-5">
         <h1 class="text-gray-800 text-2xl lg:text-4xl lg:mt-10 font-semibold">How can we help?</h1>
         <!--Search-->
         <div class="search-field border border-solid border-gray-400 bg-white flex">
@@ -17,17 +17,17 @@
         </div>
 
         <!--Big Buttons-->
-        <div class="big-buttons-container flex flex-wrap mt-8 lg:mt-16 xl:mt-32">
-          <div class="big-button mr-5 xl:mt-0 lg:mt-5">
+        <div class="big-buttons-container justify-between md:justify-start flex flex-wrap mt-8 lg:mt-16 xl:mt-32">
+          <div class="big-button w-1/2 xl:mt-0 lg:mt-5 mr-0 md:mr-5">
             <span class="text-center absolute-center-v w-full block">Getting Started</span>
           </div>
-          <div class="big-button mr-5">
+          <div class="big-button w-1/2 mr-0 md:mr-5">
             <span class="text-center absolute-center-v w-full block">Knowledge Base</span>
           </div>
-          <div class="big-button mr-5">
+          <div class="big-button w-1/2 mr-0 md:mr-5">
             <span class="text-center absolute-center-v w-full block">Forum</span>
           </div>
-          <div class="big-button mr-5">
+          <div class="big-button w-1/2 mr-0 md:mr-5">
             <span class="text-center absolute-center-v w-full block">News</span>
           </div>
         </div>

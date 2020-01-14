@@ -32,9 +32,27 @@
       <!--Results-->
       <h1 class="pb-3 mt-5 border-b border-solid border-gray-400 font-semibold">45 results by <span class="text-ideeza-dark">Drone</span></h1>
 
-      <div class="flex flex-wrap justify-start my-5">
+      <div class="flex flex-wrap justify-between my-5">
         <!--Search Items-->
-        <div class="search-item shadow">
+        <div class="w-full md:w-1/2 lg:w-1/4" v-for="n in 12" :key="n">
+        <div class="search-item shadow mr-1 mb-1">
+          <div class="search-item-img">
+            <img class="object-cover object-center" src="~/static/images/dron-8.png" alt="">
+          </div>
+
+          <div class="bg-white p-2 flex justify-between items-center">
+            <div class="search-avatar flex items-center font-semibold text-sm text-gray-500">
+              <img class="search-avatar-img mr-2" :src="'https://randomuser.me/api/portraits/men/'+n+'.jpg'" alt=""> John Doe
+            </div>
+            <div class="flex items-center text-gray-500 text-sm">
+              <div class="mr-2"><font-awesome-icon class="mr-1 h-4 panel-menu-icon" :icon="['fas', 'eye']"/>1.5k</div>
+              <div class="mr-2"><font-awesome-icon class="mr-1 h-4 panel-menu-icon" :icon="['fas', 'comments']"/>8</div>
+              <div class="mr-2"><font-awesome-icon class="mr-1 h-4 panel-menu-icon" :icon="['fas', 'star']"/>3.6</div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <!-- <div class="search-item shadow">
           <div class="search-item-img">
             <img class="object-cover object-center" src="~/static/images/dron-8.png" alt="">
           </div>
@@ -145,23 +163,7 @@
               <div class="mr-2"><font-awesome-icon class="mr-1 h-4 panel-menu-icon" :icon="['fas', 'star']"/>3.6</div>
             </div>
           </div>
-        </div>
-        <div class="search-item shadow">
-          <div class="search-item-img">
-            <img class="object-cover object-center" src="~/static/images/dron-8.png" alt="">
-          </div>
-
-          <div class="bg-white p-2 flex justify-between items-center">
-            <div class="search-avatar flex items-center font-semibold text-sm text-gray-500">
-              <img class="search-avatar-img mr-2" src="https://randomuser.me/api/portraits/men/6.jpg" alt=""> John Doe
-            </div>
-            <div class="flex items-center text-gray-500 text-sm">
-              <div class="mr-2"><font-awesome-icon class="mr-1 h-4 panel-menu-icon" :icon="['fas', 'eye']"/>1.5k</div>
-              <div class="mr-2"><font-awesome-icon class="mr-1 h-4 panel-menu-icon" :icon="['fas', 'comments']"/>8</div>
-              <div class="mr-2"><font-awesome-icon class="mr-1 h-4 panel-menu-icon" :icon="['fas', 'star']"/>3.6</div>
-            </div>
-          </div>
-        </div>
+        </div> -->
 
 
 
@@ -218,9 +220,6 @@
     width: 28px;
     height: 28px;
   }
-  .search-item{
-    @apply mb-5 mx-auto;
-  }
   @screen lg{
     .search-panel{
       width: 100%;
@@ -229,24 +228,15 @@
     .search-banner{
       height: 350px;
     }
-    .search-item{
-      @apply mr-2;
-      width: 300px;
-    }
     .search-item-img{
-      height: 300px;
+      height: 270px;
     }
     .search-item-img img{
-      width: auto;
-      height: 300px;
+      height: 270px;
     }
 
-
-    .search-item{
-      max-width: 293px;
-    }
     .search-item-img{
-      height: 300px;
+      height: 270px;
     }
 
 
