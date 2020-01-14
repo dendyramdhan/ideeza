@@ -11,11 +11,11 @@
       <div class="md:flex items-center justify-around">
         <div class="md:flex block justify-center items-center content-center w-m-c">
           <nuxt-link
-            to="/user/profile"
+            to="/about"
             class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
           >About Us</nuxt-link>
           <nuxt-link
-            to="/user/profile"
+            to="/pricing"
             class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
           >Pricing</nuxt-link>
           <nuxt-link
@@ -47,12 +47,22 @@
             <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'facebook-square']" />
           </nuxt-link>
           <button
+            v-if="!auth"
             @click="showLoginModal=true"
             class="auth-btn ml-5 md:ml-0 my-1 md:my-0 rounded-full px-3 py-2 border-0 text-gray-300"
           >
             Sign Up/
             Log In
           </button>
+          <nuxt-link v-else to="/user/profile">
+            <div class="flex items-center" style="cursor: pointer">
+              <img
+                class="h-8 w-8 rounded-full mr-2"
+                src="https://randomuser.me/api/portraits/men/17.jpg"
+              />
+              <span class="text-white inline-block">{{name}}</span>
+            </div>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -297,6 +307,7 @@ import Signup from "~/components/reusables/Signup.vue";
 import ResetPassword from "~/components/reusables/ResetPassword.vue";
 import EmailSignup from "~/components/reusables/EmailSignup.vue";
 export default {
+  middleware: "auth",
   layout: "pricing",
   components: {
     Login,
@@ -312,8 +323,20 @@ export default {
       showLoginModal: false,
       showSignupModal: false,
       showResetModal: false,
-      showEmailSignupModal: false
+      showEmailSignupModal: false,
+      auth: false
     };
+  },
+  mounted() {
+    let authToken = window.$nuxt.$cookies.get("authToken");
+    if (authToken != null) {
+      this.auth = true;
+      let firstname = window.$nuxt.$cookies.get("firstname");
+      let lastname = window.$nuxt.$cookies.get("lastname");
+      this.name = firstname + " " + lastname;
+    } else {
+      this.auth = false;
+    }
   }
 };
 </script>

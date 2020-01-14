@@ -104,8 +104,9 @@ import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import latestactivities from "~/json/latestactivity.json";
 import taskslist from "~/json/tasklist.json";
+import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
-  middleware: 'auth',
+  middleware: "auth",
   layout: "user",
   name: "task-index",
   components: {
@@ -124,7 +125,7 @@ export default {
       addNewMember: false,
       filter_date: null,
       filter_week: null,
-      tasks: taskslist,
+      tasks: [],
       theme: {
         container: {
           light: "ideeza-date-picker"
@@ -197,6 +198,30 @@ export default {
     this.filter_date = Number(d);
     var dd = new Date(this.filter_date);
     this.filter_week = dd.getWeek();
+
+    let getalltasksurl = "/api/task/get_all";
+    let getalltasksData = {
+      method: "get",
+      url: getalltasksurl,
+      data: null
+    };
+
+    apiServiceWithToken(getalltasksData, response => {
+      console.log(response.data);
+      console.log(response.data["success"]);
+      if (response.data["success"] == true) {
+        this.tasks = response.data["data"];
+        console.log("tasks: ", response.data["data"]);
+      }
+    });
+
+    let getloginhistory = "/api/setting/login_history";
+
+    let getloginhistoryData = {
+      method: "get",
+      url: getloginhistory,
+      data: null
+    };
   },
   methods: {
     displayAddTask() {
@@ -209,9 +234,11 @@ export default {
       this.filter_date = date.dateTime;
       var d = new Date(this.filter_date);
       if (this.tab === "daily") {
-        alert(d.getWeek());
+        this.filter_date = d.getDate();
+        alert(date.dateTime + ' ' + d.getDate());
       } else if (this.tab === "weekly") {
         this.filter_week = d.getWeek();
+        alert(d.getWeek());
       }
     }
   }
