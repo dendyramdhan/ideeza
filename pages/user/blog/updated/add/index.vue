@@ -36,6 +36,7 @@
  import FileField from '~/components/form/file-field.vue';
 import TagsInput from '@voerro/vue-tagsinput/src/VoerroTagsInput.vue'
 export default {
+    middleware: "auth",
     components: {
         'file-field': FileField,
         'tag-input': TagsInput

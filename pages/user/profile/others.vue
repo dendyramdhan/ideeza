@@ -348,6 +348,7 @@
 <script>
   import LeftMenu from '~/components/user/common-left-side-menu.vue'
     export default {
+      middleware: "auth",
       layout: 'user',
       name: "profile-index",
       components: {

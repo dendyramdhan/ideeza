@@ -109,59 +109,108 @@ export default {
     };
   },
   methods: {
-    signup() {
-      var registerurl = "/api/user/register";
-      var birthday = this.day + "/" + this.month + "/" + this.year;
+    async signup() {
+      if (validate_email(this.email) && validatePassword(this.password)) {
+        var registerurl = "/api/user/register";
+        var birthday = this.day + "/" + this.month + "/" + this.year;
 
-      var signupFormData = new FormData();
-      signupFormData.set("email", this.email);
-      signupFormData.set("password", this.password);
-      signupFormData.set("firstname", this.firstname);
-      signupFormData.set("lastname", this.lastname);
-      signupFormData.set("birthday", birthday);
+        var signupFormData = new FormData();
+        signupFormData.set("email", this.email);
+        signupFormData.set("password", this.password);
+        signupFormData.set("firstname", this.firstname);
+        signupFormData.set("lastname", this.lastname);
+        signupFormData.set("birthday", birthday);
 
-      let Data = {
-        method: "post",
-        url: registerurl,
-        data: signupFormData
-      };
+        let sendData = {
+          method: "post",
+          url: registerurl,
+          data: signupFormData
+        };
 
-      apiService(Data, response => {
-        console.log(response.data);
-        console.log(response.data["success"]);
-        if (response.data["success"] == true) {
-          let signinurl = "/api/user/login";
+        apiService(sendData, response => {
+          console.log(response.data);
+          console.log(response.data.success);
+          if (response.data.success == true) {
+            let signinurl = "/api/user/login";
 
-          let sendData = {
-            method: "post",
-            url: signinurl,
-            data: signupFormData
-          };
+            let Data = {
+              method: "post",
+              url: signinurl,
+              data: signupFormData
+            };
 
-          apiService(sendData, response => {
-            console.log(response.data);
-            console.log(response.data["success"]);
-            if (response.data["success"] == true) {
-              var token = response.data["data"].token;
-              var userdata = response.data["data"].userdata;
-              var firstname = userdata.firstname;
-              var lastname = userdata.lastname;
-              var userid = userdata.id;
+            apiService(Data, response => {
+              console.log(response.data);
+              console.log(response.data.success);
+              if (response.data.success == true) {
+                var token = response.data["data"].token;
+                var userdata = response.data["data"].userdata;
+                var firstname = userdata.firstname;
+                var lastname = userdata.lastname;
+                var userid = userdata.id;
 
-              localStorage.setItem("authToken", token);
-              localStorage.setItem("firstname", firstname);
-              localStorage.setItem("lastname", lastname);
-              localStorage.setItem("userid", userid);
-              console.log("Here: ", localStorage.getItem("authToken"));
-              this.$router.push("/user/dashboard");
-            }
-          });
-        }
-      });
+                window.$nuxt.$cookies.set("authToken", token);
+                window.$nuxt.$cookies.set("firstname", firstname);
+                window.$nuxt.$cookies.set("lastname", lastname);
+                window.$nuxt.$cookies.set("userid", userid);
+                console.log("Here: ", window.$nuxt.$cookies.get("authToken"));
+                this.$router.push("/user/dashboard");
+              }
+            });
+          }
+        });
+      } else {
+      }
     }
   },
   mounted() {
     // this.signup();
   }
 };
+
+function validate_email(email) {
+  if (email != "") {
+    var apos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+    if (apos < 1 || dotpos - apos < 2) {
+      alert("Please Enter Your Email Correctly!");
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    alert("Please Enter Your Email");
+    return false;
+  }
+}
+
+function validatePassword(password) {
+  var error = "";
+  var illegalChars = /[\W_]/; // allow only letters and numbers
+
+  if (password == "") {
+    error = "You didn't enter a password.\n";
+    alert(error);
+    return false;
+  } else if (password.length < 3 || password.length > 15) {
+    error = "The password is the wrong length. \n";
+    alert(error);
+    return false;
+  } else if (illegalChars.test(password)) {
+    error = "The password contains illegal characters.\n";
+    alert(error);
+    return false;
+  }
+  // else if (
+  //   password.search(/[a-zA-Z]+/) == -1 ||
+  //   password.search(/[0-9]+/) == -1
+  // ) {
+  //   error = "The password must contain at least one numeral.\n";
+  //   alert(error);
+  //   return false;
+  // }
+  else {
+  }
+  return true;
+}
 </script>

@@ -73,7 +73,6 @@
                 class="ml-1 h-4 cursor-pointer text-gray-400"
                 :icon="['fas', 'times']"
                 @click="delete_login_history(Project.id)"
-                
               />
             </td>
           </tr>
@@ -93,8 +92,8 @@ import Projects from "~/data/UserSettingApi.json";
 import axios from "axios";
 import apiService from "~/apiService/have_token.js";
 
-
 export default {
+  middleware: "auth",
   name: "security",
   data: function() {
     return {
@@ -106,13 +105,13 @@ export default {
       articleArray: [],
       randomNumber: {},
       ts: new Date(),
-      loginId:null,
-      password_confirm:null,
-      new_password:null,
-      old_password:null,
+      loginId: null,
+      password_confirm: null,
+      new_password: null,
+      old_password: null
     };
   },
-  created: function() {
+  mounted() {
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -123,50 +122,47 @@ export default {
       console.log(response.data);
       this.randomNumber = response.data.data;
       // this.articleArray = Object.values(response.data.data);
-      this.articleArray =  this.randomNumber
+      this.articleArray = this.randomNumber;
     });
   },
+  created: function() {},
   methods: {
-    delete_login_history(evt){
-    //   this.articleArray=[];
-  
+    delete_login_history(evt) {
+      //   this.articleArray=[];
+
       //  alert(evt)
       // this.loginId=evt;
       // this.randomNumber.splice(this.loginId, this.loginId-1)
-      
+
       const formData = new FormData();
-      formData.set("id", evt);     
+      formData.set("id", evt);
       let sendData = {
-      method: "post",
-      url: this.geturl2,
-      data: formData
-    };
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
 
+      apiService(sendData, response => {
+        console.log(response.data);
 
-    apiService(sendData, response => {
-      console.log(response.data);
-
-        let listArray = []
-        console.log("before delete : ", this.randomNumber, evt)
-          this.randomNumber.map(item => {
-            // console.log("item id : ", item.history.id)
-            if (item.history.id == evt) {              
-            } else {
-              // this.articleArray.push(item);
-              listArray.push(item)
-            }
-          
+        let listArray = [];
+        console.log("before delete : ", this.randomNumber, evt);
+        this.randomNumber.map(item => {
+          // console.log("item id : ", item.history.id)
+          if (item.history.id == evt) {
+          } else {
+            // this.articleArray.push(item);
+            listArray.push(item);
+          }
         });
 
+        this.articleArray = listArray;
 
-      this.articleArray = listArray
+        console.log("after delete : ", this.articleArray);
 
-      console.log("after delete : ", this.articleArray)
-      
-      // this.randomNumber[this.loginId].remove()   
+        // this.randomNumber[this.loginId].remove()
         // window.location.reload();
       });
-
     },
     updatepassword() {
       if (this.old_password == this.security[0].password) {

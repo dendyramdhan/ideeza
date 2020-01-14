@@ -189,28 +189,26 @@
   import Electronics from '~/components/user/pro/pro-electronics.vue'
   import Cover from '~/components/user/pro/pro-cover.vue'
   import CheckBox from '~/components/form/checkbox.vue'
-  export default {
-    layout: 'user',
-    name: "index",
-    components: {
-      LeftMenu,
-      Electronics,
-      Cover,
-      'check-box': CheckBox
-    },
-    data: function () {
-      return {
-        mainDropDownActive: false,
-        menuData: {
-          electronic: {
-            name: 'Electronics',
-            children: [{
-                name: 'Core',
-                children: [{
-                  name: 'CPU',
-                  children: [{
-                      name: 'Atmega',
-                    },
+    export default {
+      middleware: "auth",
+      layout: 'user',
+      name: "index",
+      components: {
+        LeftMenu,
+        Electronics,
+        Cover,
+        'check-box': CheckBox
+      },
+      data: function () {
+        return {
+          mainDropDownActive: false,
+          menuData: {
+            electronic: {
+              name: 'Electronics',
+              children: [
+                {
+                  name: 'Core',
+                  children: [
                     {
                       name: 'Pic',
                     },

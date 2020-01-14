@@ -1,6 +1,6 @@
 import axios from 'axios'
 export default (sendData, ctx)=>{
-    let authToken = localStorage.getItem('authToken');
+    let authToken = window.$nuxt.$cookies.get("authToken");
     return axios({
         method: sendData.method,
         url: process.env.base_url + sendData.url,
@@ -12,8 +12,7 @@ export default (sendData, ctx)=>{
         ctx(response)
 
     })
-    .catch((e) => {
-        error({ statusCode: 404, message: 'Post not found' })
+    .catch((error) => {
         ctx(null)
     })
 

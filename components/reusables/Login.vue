@@ -84,6 +84,7 @@
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
 import apiService from "~/apiService";
+
 export default {
   components: {
     Modal
@@ -95,41 +96,51 @@ export default {
       auth: true
     };
   },
+  computed: {},
 
   methods: {
-    login() {
-      let signinurl = "/api/user/login";
-      var bodyFormData = new FormData();
-      bodyFormData.set("email", this.email);
-      bodyFormData.set("password", this.password);
+    async login() {
+      if (validate_email(this.email) && validatePassword(this.password)) {
+        let signinurl = "/api/user/login";
+        var bodyFormData = new FormData();
+        bodyFormData.set("email", this.email);
+        bodyFormData.set("password", this.password);
 
-      let sendData = {
-        method: "post",
-        url: signinurl,
-        data: bodyFormData
-      };
+        let sendData = {
+          method: "post",
+          url: signinurl,
+          data: bodyFormData
+        };
+        apiService(sendData, response => {
+          console.log(response.data);
+          console.log(response.data.success);
+          if (response.data.success == true) {
+            this.auth = true;
+            var token = response.data["data"].token;
+            var userdata = response.data["data"].userdata;
+            var firstname = userdata.firstname;
+            var lastname = userdata.lastname;
+            var userid = userdata.id;
 
-      apiService(sendData, response => {
-        console.log(response.data);
-        console.log(response.data["success"]);
-        if (response.data["success"] == true) {
-          this.auth = true;
-          var token = response.data["data"].token;
-          var userdata = response.data["data"].userdata;
-          var firstname = userdata.firstname;
-          var lastname = userdata.lastname;
-          var userid = userdata.id;
+            // window.$nuxt.$cookies.set("authToken", token);
+            // window.$nuxt.$cookies.set("firstname", firstname);
+            // window.$nuxt.$cookies.set("lastname", lastname);
+            // window.$nuxt.$cookies.set("userid", userid);
+            console.log("window.$nuxt.$cookies", window.$nuxt);
 
-          localStorage.setItem("authToken", token);
-          localStorage.setItem("firstname", firstname);
-          localStorage.setItem("lastname", lastname);
-          localStorage.setItem("userid", userid);
-          console.log("Here: ", localStorage.getItem("authToken"));
-          this.$router.push("/user/dashboard");
-        } else {
-          this.auth = false;
-        }
-      });
+            window.$nuxt.$cookies.set("authToken", token);
+            window.$nuxt.$cookies.set("firstname", firstname);
+            window.$nuxt.$cookies.set("lastname", lastname);
+            window.$nuxt.$cookies.set("userid", userid);
+            // console.log("Here: ", window.$nuxt.$cookies.get("authToken"));
+            this.$router.push("/user/dashboard");
+          } else {
+            // alert(response.data.message)
+            this.auth = false;
+          }
+        });
+      } else {
+      }
     },
 
     googleSignin() {
@@ -151,7 +162,7 @@ export default {
           console.log(e);
         });
     },
-    
+
     facebookSignin() {
       var provider = new firebase.auth.FacebookAuthProvider();
       firebase
@@ -177,4 +188,50 @@ export default {
     }
   }
 };
+
+function validate_email(email) {
+  if (email != "") {
+    var apos = email.indexOf("@");
+    var dotpos = email.lastIndexOf(".");
+    if (apos < 1 || dotpos - apos < 2) {
+      alert("Please Enter Your Email Correctly!");
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    alert("Please Enter Your Email");
+    return false;
+  }
+}
+
+function validatePassword(password) {
+  var error = "";
+  var illegalChars = /[\W_]/; // allow only letters and numbers
+
+  if (password == "") {
+    error = "You didn't enter a password.\n";
+    alert(error);
+    return false;
+  } else if (password.length < 3 || password.length > 15) {
+    error = "The password is the wrong length. \n";
+    alert(error);
+    return false;
+  } else if (illegalChars.test(password)) {
+    error = "The password contains illegal characters.\n";
+    alert(error);
+    return false;
+  } 
+  // else if (
+  //   password.search(/[a-zA-Z]+/) == -1 ||
+  //   password.search(/[0-9]+/) == -1
+  // ) {
+  //   error = "The password must contain at least one numeral.\n";
+  //   alert(error);
+  //   return false;
+  // } 
+  else {
+  }
+  return true;
+}
 </script>

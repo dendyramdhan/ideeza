@@ -14,21 +14,22 @@
           <div class="lg:flex flex-wrap">
             <div
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-              v-for="Project in Projects"
-              v-if="Project.flag == 1"
+           v-for="(info,index) in articleArray"
+             
             >
-              <nuxt-link :to="{ path: '/user/projects/detail', query: { id: Project.id}}">
+             <!-- v-if="Project.flag == 1" -->
+              <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
                 <div class="image-container">
-                  <img class="project-item-container--image" :src="Project.ImageUrl" alt />asdf
+                  <img class="project-item-container--image" :src="project_img_url + info.project.image" alt />asdf
                 </div>
                 <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
                   <div class="flex items-center">
                     <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                    <span>{{Project.mark}}</span>
+                    <span>{{info.project.rate}}</span>
                   </div>
                   <span
                     class="font-semibold"
-                  >{{Project.commitmember1}} &nbsp; {{Project.commitkind1}}&nbsp; {{Project.commitmember2}}&nbsp; {{Project.commitkind2}}</span>
+                  >{{info.project.like}} &nbsp; likes &nbsp; {{info.project.dislike}}&nbsp; dislikes </span>
                 </div>
               </nuxt-link>
 
@@ -37,17 +38,17 @@
               >
                 <div class="flex justify-between items-center">
                   <div class="flex items-center">
-                    <h1 class="font-semibold text-lg">{{Project.projectName}}</h1>
-                    <span class="text-sm text-gray-600 ml-3">{{Project.projecttitle}}</span>
+                    <h1 class="font-semibold text-lg">{{info.project.name}}</h1>
+                    <span class="text-sm text-gray-600 ml-3">{{info.project.title}}</span>
                   </div>
-                  <div class="font-semibold text-ideeza-black">{{Project.Cost}}</div>
+                  <div class="font-semibold text-ideeza-black">{{info.project.cost}}</div>
                 </div>
 
-                <div class="text-sm mt-5">{{Project.ShortDescription}}</div>
+                <div class="text-sm mt-5">{{info.project.shortdescription}}</div>
               </div>
             </div>
 
-            <div
+            <!-- <div
               v-else
               class="w-64p double flex justify-between project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
             >
@@ -106,53 +107,64 @@
 
                 <div class="text-sm mt-5">{{Project.ShortDescription.second}}</div>
               </div>
-            </div>
-            
+            </div>-->
           </div>
-          
         </div>
-
-        
       </div>
-
-      
     </div>
 
-
     <ul>
-      <!-- <button @click="getRandomFromBackend" >asd</button> -->
-      <li v-for="info in randomNumber">
-        --{{info.id}}--{{info.ArticlesName}}--{{info.Date}}--{{info.Action}}
+      <!-- <button @click="getRandomFromBackend" >asd</button>  -->
+       <!-- <li v-for="(info,index) in articleArray">
+        --{{info.project.id}}-{{info.project.description}}
         <br />
-        <!-- {{randomNumber.data}}  <br> 
-        {{randomNumber.result}}  <br>-->
-      </li>
+       -->
+      <!-- </li> -->
+      <!-- {{articleArray}} -->
     </ul>
-
   </div>
 </template>
 
 <script>
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import Projects from "~/data/UserProjectApi.json";
-import axios from "axios";
+import apiService from "~/apiService/have_token.js";
 
 export default {
+  middleware: "auth",
   layout: "user",
   name: "projects-index",
   data: function() {
     return {
       longview: true,
-      Projects: Projects.firstproject
+      Projects: Projects.firstproject,
+      geturl: "/api/project/get_all",
+      articleArray: [],
+      randomNumber: {},
+      project_img_url:process.env.project_image_url,
+
     };
   },
   created: function() {
-    axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
-      // console.log("response :", response.data)
-      this.randomNumber = response.data;
-      console.log(this.randomNumber);
-    });
-    console.log(this.randomNumber);
+    
+    // let authToken = window.$nuxt.$cookies.get("authToken");
+    // let sendData = {
+    //   method: "get",
+    //   url: this.geturl,
+    //   data: null,
+    //   authToken: authToken
+    // };
+    // apiService(sendData, response => {
+    //   console.log(response.data);
+    //   this.randomNumber = response.data;
+    //   this.articleArray = Object.values(response.data.data);
+    // });
+    // axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
+    //   // console.log("response :", response.data)
+    //   this.randomNumber = response.data;
+    //   console.log(this.randomNumber);
+    // });
+    // console.log(this.randomNumber);
   },
   components: {
     LeftMenu
@@ -163,7 +175,17 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted');
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArray = Object.values(response.data.data);
+    });
   },
   methods: {}
 };

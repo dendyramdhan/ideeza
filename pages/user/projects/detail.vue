@@ -10,29 +10,28 @@
           <div
             class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3"
           >
-            <div
-              class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left"
-            >
-            <div v-for="Project in Projects" :key="Project.id">
-              <div v-if="Project.id == $route.query.id ">
-                 <!-- Lamborghini Aventado Project -->
-                 {{Project.projecttitle}}
-                </div></div>
-           </div>
+            <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">
+              <div v-for="Project in articleArray">
+                <div v-if="Project.project.id == $route.query.id ">
+                  <!-- Lamborghini Aventado Project -->
+                  {{Project.project.title}}
+                </div>
+              </div>
+            </div>
             <div class="flex flex-wrap items-center">
               <span class="panel-menu text-center">
-                <nuxt-link to="/user/pro" >
-                <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']" />Electronics
+                <nuxt-link to="/user/pro">
+                  <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']" />Electronics
                 </nuxt-link>
               </span>
               <span class="ml-5 panel-menu text-center active">
-                <nuxt-link to="/user/pro" >
-                <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'code']" />Code
+                <nuxt-link to="/user/pro">
+                  <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'code']" />Code
                 </nuxt-link>
               </span>
               <span class="ml-5 panel-menu text-center">
-                <nuxt-link to="/user/pro" >
-                <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']" />Cover
+                <nuxt-link to="/user/pro">
+                  <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']" />Cover
                 </nuxt-link>
               </span>
               <nuxt-link to="/user/pro" class="ml-5 panel-menu text-center">
@@ -45,9 +44,12 @@
           </div>
 
           <div class="my-5 bg-white shadow">
-            <div v-for="Project in Projects" :key="Project.id">
-              <div v-if="Project.id == $route.query.id ">
-                <img class="w-full" :src="Project.ImageUrl" />
+            <div v-for="Project in articleArray">
+              <div v-if="Project.project.id == $route.query.id ">
+                <img
+                  class="w-full"
+                  :src=" project_img_url + Project.project.image"
+                />
               </div>
             </div>
 
@@ -69,7 +71,11 @@
                 </div>
               </div>
 
-              <div class="flex items-center mt-5 lg:mt-0" v-for="Project in Projects"  v-if="Project.id == $route.query.id">
+              <div
+                class="flex items-center mt-5 lg:mt-0"
+                v-for="Project in articleArray"
+                v-if="Project.project.id == $route.query.id"
+              >
                 <div>
                   <nuxt-link
                     to="/user/order-tracking/making-product"
@@ -77,11 +83,13 @@
                   >Track the order</nuxt-link>
                 </div>
                 <div class="mx-5 text-sm text-gray-500 font-semibold">
-                  <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'eye']" />{{Project.Cost}}
+                  <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'eye']" />
+                  {{Project.project.cost}}
                 </div>
                 <div>
                   <button class="btn btn-normal font-semibold p-2 text-gray-500">
-                    <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'star']" />{{Project.mark}}
+                    <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'star']" />
+                    {{Project.project.rate}}
                   </button>
                 </div>
               </div>
@@ -99,19 +107,26 @@
             </div>
 
             <div class="py-10 px-5 text-gray-600" v-if="tab===0">
-              <div class="lg:flex" v-for="Project in Projects" :key="Project.id">
-                <div class="lg:flex" v-if="Project.id == $route.query.id ">{{Project.Description}}</div>
+              <div class="lg:flex" v-for="Project in articleArray">
+                <div
+                  class="lg:flex"
+                  v-if="Project.project.id == $route.query.id "
+                >{{Project.project.description}}</div>
               </div>
             </div>
-            <div class="py-10 px-5 text-gray-600 w-full" v-if="tab===1">
-              <textarea
-                name
-                id
-                cols="30"
-                rows="10"
-                class="w-full border-light-gray border border-solid p-3"
-                v-model="description"
-              ></textarea>
+            <div class="py-10 px-5 text-gray-600 w-full">
+              <div v-if="tab===1" v-for="Project in articleArray">
+                <textarea
+                  name
+                  id
+                  cols="30"
+                  rows="10"
+                  class="w-full border-light-gray border border-solid p-3"
+                  v-if="Project.project.id == $route.query.id "
+                  @change="saveDescription"
+                >{{Project.project.description}}</textarea>
+              </div>
+
               <div class="mt-5 flex justify-end">
                 <button class="btn pill-button--ideeza px-5 py-1" @click="saveDescription">Save</button>
               </div>
@@ -125,13 +140,12 @@
     </div>
     <ShareInternal v-if="internalShare" @close="closeShareInternal" />
     <ShareExternal v-if="externalShare" @close="closeShareExternal" />
-    
-
-
   </div>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import RightSideBar from "~/components/user/projects/right-bar.vue";
 import ShareInternal from "~/components/share/share-internal.vue";
@@ -139,9 +153,11 @@ import ShareExternal from "~/components/share/share-external.vue";
 import CustomizeIcon from "~/components/partials/icons/customize-icon.vue";
 
 import Projects from "~/data/UserProjectApi.json";
-import axios from "axios";
+import apiService from "~/apiService/have_token.js";
+import apiService2 from "~/apiService/have_data.js";
 
 export default {
+  middleware: "auth",
   layout: "user",
   name: "building-index",
   components: {
@@ -162,18 +178,31 @@ export default {
       menuChildren: null,
       searchVal: null,
       focus: null,
-
       internalShare: false,
-      externalShare: false
+      externalShare: false,
+      geturl: "/api/project/get_all",
+      geturl2: "/api/project/update_description",
+      articleArray: [],
+      randomNumber: {},
+      project_img_url:process.env.project_image_url,
+
     };
   },
-  created: function() {
-    axios.get("http://127.0.0.1:5000/api/getblog").then(response => {
-      // console.log("response :", response.data)
+  created: function() {},
+  mounted() {
+    window.$nuxt.$cookies.set("userprojectid", this.$route.query.id);
+
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
       this.randomNumber = response.data;
-      console.log(this.randomNumber);
+      this.articleArray = Object.values(response.data.data);
     });
-    console.log(this.randomNumber);
   },
   computed: {
     leftMenu() {
@@ -203,8 +232,32 @@ export default {
         });
       } else {
         this.tab = 0;
-        this.description=e.target.value;
-        console.log(this.description);
+        this.description = e.target.value;
+        console.log("change description:",this.description);
+        console.log("change idid description:",this.$route.query.id);
+
+        let rouu = this.$route.query.id
+        let description = e.target.value;
+
+        const formData = new FormData();
+        formData.set("projectid", rouu);
+        formData.set("description", description);
+        let sendData = {
+          method: "post",
+          url: this.geturl2,
+          data: formData
+        };
+        apiService2(sendData, response => {
+
+          console.log(response);
+          this.articleArray.map(item=>{
+            if(item.project.id == this.$route.query.id)
+              {
+                item.project.description = e.target.value
+              }
+          })
+
+        });
       }
     },
     closeShareInternal() {

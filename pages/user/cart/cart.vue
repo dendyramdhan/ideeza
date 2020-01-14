@@ -88,6 +88,7 @@
 import CheckBox from "~/components/form/checkbox-dark.vue";
 import products from "~/json/products.json";
 export default {
+  middleware: "auth",
   name: "cart",
   components: {
     CheckBox

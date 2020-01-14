@@ -29,7 +29,6 @@
             <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt />
             {{props.item.text}}
           </div>
-
           <a class="close cursor-pointer" @click="props.close">
             <font-awesome-icon class="mr-3 h-3 text-green-200 text-xs" :icon="['fas', 'times']" />
           </a>

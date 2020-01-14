@@ -11,9 +11,11 @@
             "Chronologycal": 10,
             "task_status": "Active",
             "notification": "2 new notification",
-            "ImageUrl1": "/_nuxt/static/images/car-big.png",
-            "ImageUrl2": "/_nuxt/static/images/car-big.png",
-            "ImageUrl3": "/_nuxt/static/images/car-big.png",
+            "ImageUrl": [
+                "/_nuxt/static/images/car-big.png",
+                "/_nuxt/static/images/car-big.png",
+                "/_nuxt/static/images/car-big.png"
+            ],
             "assigned_to_profile_image":[
                 "https://randomuser.me/api/portraits/women/14.jpg",
                 "https://randomuser.me/api/portraits/women/21.jpg",
