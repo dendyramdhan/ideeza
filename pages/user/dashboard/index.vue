@@ -104,42 +104,43 @@
               <no-ssr>
                 <!-- <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}"> -->
                 <div class="sm:flex flex-wrap" style="overflow: scroll; height: 600px;">
-                  <template v-for="innovs in innovations.chunk_inefficient(3)">
-                    <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovs">
-                      <div class="m-1" v-if="index%2==0">
+                  <template>
+                    <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovations">
+                      <div class="m-1">
                         <nuxt-link to>
                           <div class="mb-8">
                             <img
-                              :src="innovation.image_url"
+                              :src="'http://192.168.1.162/api/img/blogs/' + innovation.postimage"
                               class="object-center object-contain"
                               alt
+                              style="height: 200px"
                             />
                           </div>
                         </nuxt-link>
-                        <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
+                        <h3 class="font-semibold tex-2xl mb-2" style="height: 100px">{{innovation.article}}</h3>
                         <p>{{innovation.description}}</p>
                         <div class="flex justify-between items-center mt-5">
-                          <small>{{innovation.date}}</small>
+                          <small>{{new Date(innovation.timestamp*1000)}}</small>
                           <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
                         </div>
                       </div>
-                      <div class="m-1" v-else>
+                      <!-- <div class="m-1" v-else>
                         <div class="flex justify-between items-center mb-5">
-                          <small>{{innovation.date}}</small>
+                          <small>{{new Date(innovation.timestamp*1000)}}</small>
                           <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
                         </div>
-                        <h3 class="font-semibold tex-2xl mb-2">{{innovation.title}}</h3>
+                        <h3 class="font-semibold tex-2xl mb-2">{{innovation.article}}</h3>
                         <p>{{innovation.description}}</p>
                         <nuxt-link to>
                           <div class="mt-8">
                             <img
-                              :src="innovation.image_url"
+                              :src="'http://192.168.1.162/api/img/blogs/' + innovation.postimage"
                               class="object-center object-contain"
                               alt
                             />
                           </div>
                         </nuxt-link>
-                      </div>
+                      </div>-->
                     </div>
                   </template>
                   <!-- <li v-for="breed in breeds" :key="breed">
@@ -160,7 +161,7 @@
                     <div class="p-2 border border-solid border-light-gray">
                       <div class="w-full projects-image">
                         <img
-                          :src="topproject.image_url"
+                          :src="'http://192.168.1.162/api/img/projects/' + topproject.project.image"
                           class="object-contain object-center w-full"
                           alt
                         />
@@ -170,10 +171,10 @@
                               class="mr-1 h-4 text-ideeza-gold"
                               :icon="['fas', 'star']"
                             />
-                            <small class="text-xs">{{topproject.mark}}</small>
+                            <small class="text-xs">{{topproject.project.rate}}</small>
                           </div>
 
-                          <span class="text-xs">{{topproject.like}} likes</span>
+                          <span class="text-xs">{{topproject.project.like}} likes</span>
                         </div>
                       </div>
                     </div>
@@ -225,8 +226,8 @@ export default {
   data: function() {
     return {
       showMyIdeeza: false,
-      topprojects: topprojects,
-      innovations: innovation,
+      topprojects: [],
+      innovations: [],
       activities: activity,
       lengthofprojects: [],
       userloginhistories: [],
@@ -244,6 +245,7 @@ export default {
   mounted() {
     // let authToken = window.$nuxt.$cookies.get("authToken");
     let authToken = window.$nuxt.$cookies.get("authToken");
+    console.log("authToken: ", authToken);
     if (authToken != null) {
       // this.name =
       //   window.$nuxt.$cookies.get("firstname") +
@@ -257,7 +259,7 @@ export default {
       let getallprojectsData = {
         method: "get",
         url: getallprojectsurl,
-        data: null,
+        data: null
       };
 
       apiServiceWithToken(getallprojectsData, response => {
@@ -284,6 +286,42 @@ export default {
           // this.lengthofprojects = response.data["data"].length;
           this.userloginhistories = response.data["data"];
           console.log("history: ", response.data["data"]);
+        }
+      });
+
+      let gettopprojectsurl = "/api/project/top_projects";
+
+      let gettopprojectsData = {
+        method: "get",
+        url: gettopprojectsurl,
+        data: null
+      };
+
+      apiServiceWithToken(gettopprojectsData, response => {
+        console.log("topprojectData: ", response.data);
+        console.log(response.data["success"]);
+        if (response.data["success"] == true) {
+          // this.lengthofprojects = response.data["data"].length;
+          this.topprojects = response.data["data"];
+          console.log("history: ", response.data["data"]);
+        }
+      });
+
+      let getblogsurl = "/api/get_blogs";
+
+      let getblogsurlData = {
+        method: "get",
+        url: getblogsurl,
+        data: null
+      };
+
+      apiServiceWithToken(getblogsurlData, response => {
+        console.log("blogsData: ", response.data);
+        console.log(response.data["success"]);
+        if (response.data["success"] == true) {
+          // this.lengthofprojects = response.data["data"].length;
+          this.innovations = response.data["data"];
+          console.log("innovations: ", this.innovations);
         }
       });
     } else {
