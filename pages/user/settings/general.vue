@@ -176,7 +176,7 @@
           <div
             class="w-full h-64 mb-5 md:mb-0 md:h-48 md:w-48 md:w-max-content md:mr-6 flex-shrink"
           >
-            <img id="image" class="object-cover object-center h-full mx-auto" :src="'http://192.168.1.162/api/img/avatars/' + infogeneral.additional_profile.avatar" />
+            <img id="image" class="object-cover object-center h-full mx-auto" :src="avata_img_url + infogeneral.additional_profile.avatar" />
           </div>
           <div class="flex-grow">
             <div class="text-gray-500 text-sm">{{infogeneral.additional_profile.profile_description}}</div>
@@ -290,7 +290,9 @@ export default {
       },
        geturl: "/api/user/get_profile",
       articleArray: [],
-      randomNumber: {}
+      randomNumber: {},
+      avata_img_url:process.env.avatar_base_url,
+
     };
   },
   mounted() {

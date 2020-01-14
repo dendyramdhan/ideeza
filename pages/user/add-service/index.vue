@@ -73,7 +73,7 @@
             <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray" >
               <div class="md:flex w-full">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
-                  <img class="avatar rounded-full mx-auto" :src="'http://192.168.1.162/api/img/avatars/'+ Service.profile" />
+                  <img class="avatar rounded-full mx-auto" :src="avata_img_url+ Service.profile" />
                 </div>
                 <div class="flex-1">
                   <div class="md:flex justify-between items-center">
@@ -204,7 +204,9 @@ export default {
       geturl: "/api/project/get_services",
       articleArrayaxios: [],
       randomNumber: [],
-      projectidd:window.$nuxt.$cookies.get("userprojectid")
+      projectidd:window.$nuxt.$cookies.get("userprojectid"),
+      avata_img_url:process.env.avatar_base_url,
+
     };
   },
    mounted() { 

@@ -14,7 +14,7 @@
       <div   v-if="descrition.id == $route.query.id">
         <div class="lg:flex">
           <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
-            <img class="w-full" :src=" 'http://192.168.1.162/api/img/blogs/'+ descrition.postimage" />
+            <img class="w-full" :src=" blog_img_url + descrition.postimage" />
           </div>
           <div>
             <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
@@ -72,6 +72,7 @@ export default {
             geturl: "/api/get_blogs",
       articleArray: [],
       randomNumber: {},
+      blog_img_url:process.env.blog_post_url,
 
     };
   },
