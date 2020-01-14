@@ -111,7 +111,7 @@ export default {
       old_password: null
     };
   },
-  created: function() {
+  mounted() {
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -125,6 +125,7 @@ export default {
       this.articleArray = this.randomNumber;
     });
   },
+  created: function() {},
   methods: {
     delete_login_history(evt) {
       //   this.articleArray=[];

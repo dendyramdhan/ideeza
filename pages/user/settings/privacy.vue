@@ -121,7 +121,7 @@
 
     <div class="mt-16 mb-16 text-center">
       <button class="btn px-20 pill-button pill-button--ideeza" @click="savesetting">Save</button>
-      {{articleArray[0]}}
+      <!-- {{articleArray[0]}} -->
     </div>
   </div>
 </template>
@@ -209,15 +209,15 @@ export default {
       // alert("social_"+this.social);
     },
     savesetting() {
-      alert(
-        "all setting saved!!!" +
-          this.social +
-          "_" +
-          this.Facebook +
-          "_" +
-          this.Search +
-          "_"
-      );
+      // alert(
+      //   "all setting saved!!!" +
+      //     this.social +
+      //     "_" +
+      //     this.Facebook +
+      //     "_" +
+      //     this.Search +
+      //     "_"
+      // );
       const formData = new FormData();
       formData.set("facebook_timeline", this.Facebook);
       formData.set("search_engine", this.Search);
