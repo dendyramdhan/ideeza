@@ -27,12 +27,10 @@
         <div v-if="tab==='daily'" class="task-wrapper flex mb-10">
           <!--Task Col Daily-->
           <div class="mx-auto task-col md:flex flex-wrap">
-            <template v-for="task in tasks">
-              <div v-if="filter_date==null">
-                <!-- <TaskCol @showAddTask="displayAddTask" :task="task" /> -->
-              </div>
-              <div v-else-if="task.date == filter_date">
-                <TaskCol @showAddTask="displayAddTask" :task="task" />
+            <template>
+              <div v-if="filter_date==null"></div>
+              <div v-else>
+                <TaskCol @showAddTask="displayAddTask" :task="tasks" />
               </div>
             </template>
           </div>
@@ -41,12 +39,12 @@
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
           <!--Task Col Weekly-->
           <div class="mx-auto task-col md:flex flex-wrap">
-            <template v-for="task in tasks">
-              <div v-if="week == filter_week">
-                <TaskCol @showAddTask="displayAddTask" :task="task" />
+            <template>
+              <div v-if="filter_week == null">
+                <!-- <TaskCol @showAddTask="displayAddTask" :task="tasks" /> -->
               </div>
-              <div v-else-if="week != filter_week">
-                <!-- <TaskCol @showAddTask="displayAddTask" :task="task" /> -->
+              <div v-else>
+                <TaskCol @showAddTask="displayAddTask" :task="tasks" />
               </div>
             </template>
           </div>
@@ -199,16 +197,18 @@ export default {
     var dd = new Date(this.filter_date);
     this.filter_week = dd.getWeek();
 
+    var bodyFormData = new FormData();
+    bodyFormData.set("start", Number(d));
+    bodyFormData.set("end", Number(d));
+
     let getalltasksurl = "/api/task/get_all";
     let getalltasksData = {
-      method: "get",
+      method: "post",
       url: getalltasksurl,
-      data: null
+      data: bodyFormData
     };
 
     apiServiceWithToken(getalltasksData, response => {
-      console.log(response.data);
-      console.log(response.data["success"]);
       if (response.data["success"] == true) {
         this.tasks = response.data["data"];
         console.log("tasks: ", response.data["data"]);
@@ -235,10 +235,51 @@ export default {
       var d = new Date(this.filter_date);
       if (this.tab === "daily") {
         this.filter_date = d.getDate();
-        alert(date.dateTime + ' ' + d.getDate());
+
+        let gettasksurl = "/api/task/get_all";
+        var bodyFormData = new FormData();
+        bodyFormData.set("start", date.dateTime);
+        bodyFormData.set("end", date.dateTime);
+
+        let getalltasksData = {
+          method: "post",
+          url: gettasksurl,
+          data: bodyFormData
+        };
+
+        apiServiceWithToken(getalltasksData, response => {
+          if (response.data["success"] == true) {
+            this.tasks = response.data["data"];
+            console.log("tasks: ", response.data["data"]);
+          }
+        });
       } else if (this.tab === "weekly") {
-        this.filter_week = d.getWeek();
-        alert(d.getWeek());
+        // this.filter_week = d.getWeek();
+        var d = new Date(date.dateTime);
+
+        var first = d.getDate() - d.getDay();
+        var last = first + 6;
+        var firstday = new Date(d.setDate(first));
+        var lastday = new Date(d.setDate(last));
+        var start = Number(firstday);
+        var end = Number(lastday);
+        let gettasksurl = "/api/task/get_all";
+        var bodyFormData = new FormData();
+        bodyFormData.set("start", start);
+        bodyFormData.set("end", end);
+
+        let getalltasksData = {
+          method: "post",
+          url: gettasksurl,
+          data: bodyFormData
+        };
+
+        apiServiceWithToken(getalltasksData, response => {
+          if (response.data["success"] == true) {
+            this.tasks = response.data["data"];
+            console.log("weekly tasks: ", response.data["data"]);
+          }
+        });
       }
     }
   }
