@@ -14,18 +14,11 @@
           <div class="lg:flex flex-wrap">
             <div
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-<<<<<<< HEAD
-              v-for="Project in Projects"
-            >
-              <!-- v-if="Project.flag == 1" -->
-              <nuxt-link :to="{ path: '/user/projects/detail', query: { id: Project.id}}">
-=======
            v-for="(info,index) in articleArray"
              
             >
              <!-- v-if="Project.flag == 1" -->
               <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
->>>>>>> change page(api)__
                 <div class="image-container">
                   <img class="project-item-container--image" :src="'http://192.168.1.162/api/img/project/' + info.project.image" alt />asdf
                 </div>
@@ -36,11 +29,7 @@
                   </div>
                   <span
                     class="font-semibold"
-<<<<<<< HEAD
-                  >{{Project.like}} &nbsp; likes &nbsp; {{Project.dislike}}&nbsp; dislikes</span>
-=======
                   >{{info.project.like}} &nbsp; likes &nbsp; {{info.project.dislike}}&nbsp; dislikes </span>
->>>>>>> change page(api)__
                 </div>
               </nuxt-link>
 
@@ -130,12 +119,8 @@
         --{{info.project.id}}-{{info.project.description}}
         <br />
       
-<<<<<<< HEAD
-      </li>-->
-=======
       </li>
       <!-- {{articleArray}} -->
->>>>>>> change page(api)__
     </ul>
   </div>
 </template>
