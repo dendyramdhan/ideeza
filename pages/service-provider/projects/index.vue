@@ -57,84 +57,89 @@
             />-->
           </div>
         </div>
-
-        <table class="mt-10 shadow-md">
-          <thead>
-            <tr class="text-white h16 gradient-bg">
-              <th class="text-left">Projects</th>
-              <th class="text-left">Domain</th>
-              <th class="text-left">Assigned to</th>
-              <th class="text-left">Due Date</th>
-              <th class="text-left">Task Status</th>
-              <th class="text-left">Notification</th>
-            </tr>
-          </thead>
-          <tbody v-for="(Service, index) in articleArray">
-            <tr class="bg-ideeza-100" v-if="start < index && index < end ">
-              <td>
-                <nuxt-link :to="{ path: '/service-provider/projects/'+Service.id}" >{{Service.projectName}}</nuxt-link>
-              </td>
-              <td>{{Service.domain}}</td>
-              <td>
-                <span v-for="image in Service.assigned_to_profile_image">
-                  <img class="avatar" :src="image" />
-                </span>
-              </td>
-              <td>
-                <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-                  <span class="absolute due-date text-black">{{Service.due_date}}</span>
-                  <div class="bg-ideeza rounded-full h-8" :style="{ width:'60%'}">
-                  </div>
-                </div>
-              </td>
-              <td class="status status--completed" v-if="Service.task_status=='completed'">
-                completed
-              </td>
-              <td v-else-if="Service.task_status == 'Over Due'" class="status status--over">Over Due</td>
-              <td v-else-if="Service.task_status== 'Active'" class="status status--progress">Active</td>
-              <td v-else class="status status--progress">Priority</td>
-              <td class="notifications">
-                <font-awesome-icon v-if="Service.task_status=='completed'" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
-                <font-awesome-icon v-else-if="Service.task_status == 'Active'" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
-                <font-awesome-icon v-else class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!--Table Stats-->
-        <!-- <div class="mt-10 lg:flex justify-center">
-          <div class="flex items-center">
-            <font-awesome-icon
-              class="mr-2 h-4 cursor-pointer"
-              :icon="['fas', 'angle-double-left']"
-            />page 1 0f 9
-            <font-awesome-icon
-              class="ml-2 h-4 cursor-pointer"
-              :icon="['fas', 'angle-double-right']"
-            />
-          </div>
-        </div>-->
-
-        <!--Paging-->
-        <div class="mx-auto w-content">
-          <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
-            <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
-          </span>
-
-          <span v-for="inde in counterarray " :key="inde">
-            <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
-              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
-            </span>
-            <span v-else>
-              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
-            </span>
-          </span>
-
-          <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
-            Next
-            <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
-          </span>
+      </div>
+    </div>
+    <div class="text-sm font-bold text-black md:ml-5 mb-3">My Feed</div>
+    <div class="md:flex">
+      <div class="md:w-9/12 mb-5 md:mb-0">
+        <simple-table :header="false" :searchbox="true" title="Manage articles" border="border-gray">
+          <template v-slot:th>
+            <th class="border-t border-b border-blue-300 w-2/5 text-ideeza p-3">
+              Description
+            </th>
+            <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
+              Domain
+            </th>
+            <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
+              Due Date
+            </th>
+            <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
+              Posted before
+            </th>
+          </template>
+          <tr class="flex w-full mb-4" v-for="(project,index) in projects" @click="$router.push('/service-provider/projects/'+project.id)">
+            <td class="w-2/5" :class="{'border-b':projects.length-1 != index}">
+              <div class="font-bold text-black">
+                {{project.description.title}}
+              </div>
+              <div class="text-sm">
+                {{project.description.text}}
+              </div>
+            </td>
+            <td class="w-1/5" :class="{'border-b':projects.length-1 != index}">{{project.domain}}</td>
+            <td class="w-1/5" :class="{'border-b':projects.length-1 != index}">{{project.due_date}}</td>
+            <td class="w-1/5" :class="{'border-b':projects.length-1 != index}">{{project.posted_before}}</td>
+          </tr>
+        </simple-table>
+      </div>
+      <div class="md:w-3/12 md:mx-3">
+        <!-- <vc-calendar color="pink" is-expanded :theme="theme" /> -->
+        <vc-calendar class="mx-auto bg-white box-shadow rounded mb-3" color="pink" is-expanded :theme="theme" />
+        <div class="bg-white shadow rounded">
+            <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
+            <hr class="my-1">
+            <ul class="shadow-lg">
+                 <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+                <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event">
+                    <div>
+                        <div class="text text-sm font-bold">Finish ELectronics Part</div>
+                        <div class="text text-xs">Completed</div>
+                    </div>
+                    <div class="event-icons text-right">
+                         <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                        <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <!--Add new project-->

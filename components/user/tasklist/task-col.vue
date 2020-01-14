@@ -1,9 +1,12 @@
 <template>
   <div class="task-container">
-    <div
+    <!-- <div
       class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400"
-    >{{this.title}}</div>
-    <div v-for="(task, index) in task.task" class>
+    >{{title}}</div> -->
+    <div v-for="(tk, index) in task" class>
+      <div
+      class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400"
+    >{{new Date(tk.task.timestamp).toDateString()}}</div>
       <!-- <div
         @click="task.active = !task.active"
         class="cursor-pointer py-3 flex flex items-center"
@@ -14,26 +17,26 @@
       </div>-->
 
       <!--Task content-->
-      <div :class="{'important': task.important}" class="task task-contents">
-        <div class="task-time">{{task.duration}}</div>
-        <div class="task-name">{{task.title}}</div>
+      <div :class="{'important': tk.task.important}" class="task task-contents">
+        <div class="task-time">{{tk.task.duration}}</div>
+        <div class="task-name">{{tk.task.title}}</div>
 
-        <div v-if="task.subtasks" class="text-sm font-normal">
-          <template v-for="t in task.subtasks">
+        <div v-if="tk.task.subtasks" class="text-sm font-normal">
+          <template v-for="t in tk.task.subtasks">
             <check-box v-model="t.completed">{{t.description}}</check-box>
           </template>
         </div>
 
         <div class="mt-8 flex justify-between items-center">
           <div class="flex items-center">
-            <img class="h-10 w-10 mr-2 rounded-full" :src="invite" v-for="invite in task.invited" />
+            <img class="h-10 w-10 mr-2 rounded-full" :src="invite" v-for="invite in tk.task.invited" />
             <div
-              @click="task.addNewMember = !task.addNewMember"
+              @click="tk.task.addnewmember = !tk.task.addnewmember"
               class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative"
-              :class="{'active': task.addNewMember}"
+              :class="{'active': tk.task.addnewmember}"
             >
               <font-awesome-icon class="absolute-center-h-v mr-1 h-4" :icon="['fas', 'plus']" />
-              <InvitePopup v-if="task.addNewMember" />
+              <InvitePopup v-if="tk.task.addnewmember" />
             </div>
           </div>
 
@@ -41,22 +44,22 @@
           <div class="flex items-center">
             <div class="mr-2" @click="onComment">
               <font-awesome-icon class="h-4 text-ideeza cursor-pointer" :icon="['far', 'comment']" />
-              <span class="attachment-no">{{task.comment_count}}</span>
+              <span class="attachment-no">{{tk.task.comment_count}}</span>
             </div>
             <div class="mr-2" @click="onPaperClip">
               <font-awesome-icon
                 class="h-4 text-ideeza cursor-pointer"
                 :icon="['fas', 'paperclip']"
               />
-              <span class="attachment-no">{{task.paperclip_count}}</span>
+              <span class="attachment-no">{{tk.task.paperclip_count}}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="my-5 text-center">
-      <button @click="$emit('showAddTask')" class="btn pill-button px-5">+Add new task</button>
+    <div class="text-center">
+      <button @click="$emit('showAddTask')" class="btn pill-button px-5 mt-5">+Add new task</button>
     </div>
   </div>
 </template>
@@ -100,7 +103,7 @@ export default {
     };
   },
   mounted() {
-    this.title = new Date(this.task.date).toDateString();
+    // this.title = new Date(this.tk.timestamp).toDateString();
   },
   methods: {
     onComment() {

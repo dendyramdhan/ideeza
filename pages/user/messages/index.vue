@@ -544,8 +544,6 @@ export default {
 }
 .shared-list{
   flex-direction: column;
-  
-
 }
 .message--to {
   @apply text-right  text-white  bg-ideeza-dark rounded-l-lg;
