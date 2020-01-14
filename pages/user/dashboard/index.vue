@@ -120,7 +120,7 @@
                         <h3 class="font-semibold tex-2xl mb-2" style="height: 100px">{{innovation.article}}</h3>
                         <p>{{innovation.description}}</p>
                         <div class="flex justify-between items-center mt-5">
-                          <small>{{new Date(innovation.timestamp*1000)}}</small>
+                          <small>{{new Date(innovation.timestamp*1000).getDate() + ' ' +  months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</small>
                           <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
                         </div>
                       </div>
@@ -232,7 +232,21 @@ export default {
       lengthofprojects: [],
       userloginhistories: [],
       show: true,
-      name: ""
+      name: "",
+      months: [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'Sepetember',
+        'Octobor',
+        'November',
+        'December'
+      ]
     };
   },
   computed: {
