@@ -24,23 +24,23 @@
     <div v-if="tabNumber === 0" class="mt-10">
       <Progress width="60" />
       <h1 class="font-semibold my-5">Manufacturers working on project</h1>
-      <div class="mb-10" v-for="Project in Projects" >
-        <div class="flex justify-between items-center" v-if="Project.kind == 'Eletronics' ">
+      <div class="mb-10" v-for="Project in articleArray" >
+        <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Electronics' ">
           <div class="flex items-center">
             <div class="mr-2">
-              <img class="avatar" :src="Project.profileimage" alt />
+              <img class="avatar" :src="'http://192.168.1.162/api/img/avatars/'+Project.connector.profile" alt />
             </div>
             <div>
-              <span class="block font-semibold text-sm">{{Project.name}}</span>
-              <span class="block text-sm text-gray-500">{{Project.consultantKind}}</span>
+              <span class="block font-semibold text-sm">{{Project.connector.name}}</span>
+              <span class="block text-sm text-gray-500">{{Project.connector.consultantKind}}</span>
             </div>
           </div>
           <div class="flex items-center">
             <div class="text-sm text-right mr-5">
-              <span class="text-ideeza block font-semibold">{{Project.consultantname}}</span>
-              <span class="text-gray-600 text-xs block">{{Project.state}}</span>
+              <span class="text-ideeza block font-semibold">{{Project.connector.consultantname}}</span>
+              <span class="text-gray-600 text-xs block">{{Project.connector.state}}</span>
             </div>
-            <nuxt-link  :to="{ path: '/user/messages', query: { id: Project.id}}">
+            <nuxt-link  :to="{ path: '/user/messages', query: { id: Project.connector.id}}">
               <font-awesome-icon
                 class="mr-2 h-6 text-ideeza text-xl cursor-pointer"
                 :icon="['fas', 'envelope']"
@@ -55,23 +55,23 @@
     <div v-if="tabNumber === 1" class="mt-10">
       <Progress width="20" />
       <h1 class="font-semibold my-5">Freelancers working on project</h1>
-      <div class="mb-10" v-for="Project in Projects" >
-        <div class="flex justify-between items-center" v-if="Project.kind == 'Freelancers' ">
+      <div class="mb-10" v-for="Project in articleArray" >
+        <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Freelancers' ">
           <div class="flex items-center">
             <div class="mr-2">
-              <img class="avatar" :src="Project.profileimage" alt />
+              <img class="avatar" :src="'http://192.168.1.162/api/img/avatars/'+Project.connector.profile" alt />
             </div>
             <div>
-              <span class="block font-semibold text-sm">{{Project.name}}</span>
-              <span class="block text-sm text-gray-500">{{Project.consultantKind}}</span>
+              <span class="block font-semibold text-sm">{{Project.connector.name}}</span>
+              <span class="block text-sm text-gray-500">{{Project.connector.consultantKind}}</span>
             </div>
           </div>
           <div class="flex items-center">
             <div class="text-sm text-right mr-5">
-              <span class="text-ideeza block font-semibold">{{Project.consultantname}}</span>
-              <span class="text-gray-600 text-xs block">{{Project.state}}</span>
+              <span class="text-ideeza block font-semibold">{{Project.connector.consultantname}}</span>
+              <span class="text-gray-600 text-xs block">{{Project.connector.state}}</span>
             </div>
-             <nuxt-link  :to="{ path: '/user/messages', query: { id: Project.id}}">
+            <nuxt-link  :to="{ path: '/user/messages', query: { id: Project.connector.id}}">
               <font-awesome-icon
                 class="mr-2 h-6 text-ideeza text-xl cursor-pointer"
                 :icon="['fas', 'envelope']"
@@ -86,23 +86,23 @@
     <div v-if="tabNumber === 2" class="mt-10">
       <Progress width="80" />
       <h1 class="font-semibold my-5">People working on project</h1>
-      <div class="mb-10" v-for="Project in Projects" >
-        <div class="flex justify-between items-center" v-if="Project.kind == 'Parts' ">
+      <div class="mb-10" v-for="Project in articleArray" >
+        <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Parts' ">
           <div class="flex items-center">
             <div class="mr-2">
-              <img class="avatar" :src="Project.profileimage" alt />
+              <img class="avatar" :src="'http://192.168.1.162/api/img/avatars/'+Project.connector.profile" alt />
             </div>
             <div>
-              <span class="block font-semibold text-sm">{{Project.name}}</span>
-              <span class="block text-sm text-gray-500">{{Project.consultantKind}}</span>
+              <span class="block font-semibold text-sm">{{Project.connector.name}}</span>
+              <span class="block text-sm text-gray-500">{{Project.connector.consultantKind}}</span>
             </div>
           </div>
           <div class="flex items-center">
             <div class="text-sm text-right mr-5">
-              <span class="text-ideeza block font-semibold">{{Project.consultantname}}</span>
-              <span class="text-gray-600 text-xs block">{{Project.state}}</span>
+              <span class="text-ideeza block font-semibold">{{Project.connector.consultantname}}</span>
+              <span class="text-gray-600 text-xs block">{{Project.connector.state}}</span>
             </div>
-            <nuxt-link  :to="{ path: '/user/messages', query: { id: Project.id}}">
+            <nuxt-link  :to="{ path: '/user/messages', query: { id: Project.connector.id}}">
               <font-awesome-icon
                 class="mr-2 h-6 text-ideeza text-xl cursor-pointer"
                 :icon="['fas', 'envelope']"
@@ -112,6 +112,7 @@
         </div>
       </div>
     </div>
+    <!-- {{articleArray}}--{{projectidd}} -->
   </div>
 </template>
 
@@ -119,15 +120,47 @@
 import Progress from "~/components/user/order-tracking/progress-bar.vue";
 
 import Projects from "~/data/UserProjectApi.json";
+import apiService from "~/apiService/get_param.js";
 
+ import axios from 'axios';
 export default {
   name: "projects-right-bar",
   data: function() {
     return {
       Projects: Projects.myprojectconnect,
       tabNumber: 0,
-      titleList: ["Electronics", "Freelancers", "Parts"]
+      titleList: ["Electronics", "Freelancers", "Parts"],
+      geturl: "/api/project/get_connectors",
+      articleArray: [],
+      randomNumber: [],
+      projectidd:window.$nuxt.$cookies.get("userprojectid")
     };
+  },
+   mounted() {
+
+      
+// axios.get('http://192.168.1.162/api/project/get_connectors', {
+//     params: {
+//       projectid: this.projectidd
+//     }
+//   })
+//   .then(function (response) {
+//     console.log("response:", response);
+//     this.randomNumber = response;
+//     this.articleArray = Object.values(response.data.data);
+//   })
+
+     const params = {	projectid: this.projectidd,};
+    let sendData = {
+      url: this.geturl,
+      param: params
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArray = Object.values(response.data.data);
+    });
   },
   components: {
     Progress

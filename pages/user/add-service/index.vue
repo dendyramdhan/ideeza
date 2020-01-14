@@ -73,7 +73,7 @@
             <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray" >
               <div class="md:flex w-full">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
-                  <img class="avatar rounded-full mx-auto" :src="Service.profileImage" />
+                  <img class="avatar rounded-full mx-auto" :src="'http://192.168.1.162/api/img/avatars/'+ Service.profile" />
                 </div>
                 <div class="flex-1">
                   <div class="md:flex justify-between items-center">
@@ -172,6 +172,7 @@
         <button @click="doOptimize" class="btn btn-normal btn--ideeza px-4 py-2">Save</button>
       </div>
     </div>
+    <!-- {{articleArrayaxios}} -->
   </div>
 </template>
 
@@ -181,6 +182,8 @@ import Search from "~/components/form/search.vue";
 import CheckBox from "~/components/form/checkbox-dark.vue";
 
 import Services from "~/data/UserProjectApi.json";
+import apiService from "~/apiService/get_param.js";
+
 
 export default {
   middleware: 'auth',
@@ -194,15 +197,39 @@ export default {
       flag: 1,
       Services: Services.Result_info,
       articleArray:[],
+      articleArrayrout:[],
       requestQuote: false,
       quoteSend: false,
-      showOptimize: false
+      showOptimize: false,
+      geturl: "/api/project/get_services",
+      articleArrayaxios: [],
+      randomNumber: [],
+      projectidd:window.$nuxt.$cookies.get("userprojectid")
     };
   },
-  created: function() {
-    this.Services.map(item => {
-      this.articleArray.push(item);
+   mounted() { 
+
+     const params = {	projectid: this.projectidd,};
+    let sendData = {
+      url: this.geturl,
+      param: params
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
+
+      this.articleArrayaxios.map(item=>{
+          this.articleArrayrout.push(item.service);
+          this.articleArray.push(item.service);
+      })
     });
+  },
+  created: function() {
+    // this.Services.map(item => {
+    //   this.articleArray.push(item);
+    // });
   },
   components: {
     LeftMenu,
@@ -226,9 +253,9 @@ export default {
       this.articleArray = [];
       // alert(e.target.value)
       this.kindman=e.target.value;
-       let article_list = this.Services;
+       let article_list = this.articleArrayrout;
       article_list.map(element => { 
-        if (element.Type == e.target.value) {
+        if (element.type == e.target.value) {
           this.articleArray.push(element);
         }
       });
@@ -311,7 +338,7 @@ export default {
     search(e) {
       this.articleArray = [];
 
-      let article_list = this.Services;
+      let article_list = this.articleArrayrout;
       article_list.map(element => {
         const a_text = element.name.toLowerCase() + "";
         const b_text = e.target.value.toLowerCase() + "";
