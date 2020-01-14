@@ -281,7 +281,7 @@ export default {
         console.log(response.data["success"]);
         if (response.data["success"] == true) {
           this.lengthofprojects = response.data["data"].length;
-          console.log("projects: ", response.data["data"]);
+          console.log("projects: ", response.data["data"].genera);
         }
       });
 

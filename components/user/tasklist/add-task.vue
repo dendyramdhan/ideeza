@@ -19,7 +19,7 @@
           </div>
           <div class="input-container">
             <label>Name</label>
-            <input placeholder="Project or layer" v-model="taskName"/>
+            <input placeholder="name" v-model="taskName"/>
           </div>
           <div class="input-container">
             <label>Description</label>
@@ -53,7 +53,8 @@
           <h1 class="font-semibold text-lg block">Deadline</h1>
           <!--Calendar-->
           <vc-calendar
-            v-model="dateRange"
+            v-model="date"
+            @dayclick="selectDate"
             mode="range"
             value
             class="mx-auto mt-5"
@@ -150,6 +151,9 @@ export default {
     onAddTaskers() {
       this.requestAddTasker = true;
       // alert();
+    },
+    selectDate(date) {
+      alert(date.dateTime);
     }
   }
 };
