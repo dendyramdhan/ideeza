@@ -82,34 +82,34 @@
           </tr>
         </thead>
         <tbody>
-          <tr class v-for="Project in Projects" :key="Project">
+          <tr class v-for="Project in articleArray" >
             <td class="product">
               <div class="lg:flex">
                 <div class="mr-2">
-                  <img :src="Project.projectimage" />
+                  <img :src="'http://192.168.1.162/api/img/projects/'+Project.transaction.profile" />
                 </div>
                 <div>
-                  <span class="block font-semibold">{{Project.name}}</span>
-                  <span class="block text-sm text-gray-500">{{Project.title}}</span>
-                  <span class="text-sm block mt-3">{{Project.order_id}}</span>
+                  <span class="block font-semibold">{{Project.transaction.name}}</span>
+                  <span class="block text-sm text-gray-500">{{Project.transaction.title}}</span>
+                  <span class="text-sm block mt-3">{{Project.transaction.order_id}}</span>
                 </div>
               </div>
             </td>
-            <td class="lg:text-center">{{Project.project_no}}</td>
-            <td class="font-semibold">{{Project.build_time}}</td>
-            <td class="font-semibold">{{Project.quantity}}</td>
-            <td class="font-semibold">{{Project.price}}</td>
+            <td class="lg:text-center">{{Project.transaction.project_no}}</td>
+            <td class="font-semibold">{{Project.transaction.build_tiem}}</td>
+            <td class="font-semibold">{{Project.transaction.quantity}}</td>
+            <td class="font-semibold">{{Project.transaction.price}}</td>
             <td class="font-semibold">
               <span class="text-sm text-gray-500 block">Manufacturers:</span>
-              <span class="font-semibold block">{{Project.manufacturename}}</span>
+              <span class="font-semibold block">{{Project.transaction.manufacturename}}</span>
               <span class="text-sm text-gray-500 block">Cover:</span>
-              <span class="font-semibold block">{{Project.manufactureCover}}</span>
+              <span class="font-semibold block">{{Project.transaction.manufacturecover}}</span>
             </td>
             <td class="font-semibold">
               <span class="text-sm text-gray-500 block">Order Status:</span>
-              <span class="font-semibold block">{{Project.orderStatus}}</span>
+              <span class="font-semibold block">{{Project.transaction.orderstatus}}</span>
               <span class="text-sm text-gray-500 block">Order Time and Date:</span>
-              <span class="font-semibold block">{{Project.orderTimeDate}}</span>
+              <span class="font-semibold block">{{ts.toLocaleDateString(Project.transaction.timestamp)}}</span>
             </td>
             <td class="lg:text-right">
               <div
@@ -122,11 +122,12 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div>  
   </div>
 </template>
 <script>
-import Projects from "~/data/UserSettingApi.json";
+// import Projects from "~/data/UserSettingApi.json";
+import apiService from "~/apiService/have_token.js";
 
 export default {
   middleware: "auth",
@@ -134,9 +135,34 @@ export default {
   data: function() {
     return {
       longview: true,
-      Projects: Projects.Transation_history
+      Projects: null,
+      geturl: "/api/setting/transaction_history",
+      articleArray: [],
+      randomNumber: {},
+       ts: new Date(),
     };
-  }
+  },
+  mounted(){
+
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArray = Object.values(response.data.data);
+
+      this.articleArray.map(element => {
+        this.Projects.push(element.transaction);
+        // this.Servicesaxios.push(element.service);
+      });
+
+    });
+
+  },
 };
 </script>
 

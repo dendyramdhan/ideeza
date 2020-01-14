@@ -20,7 +20,7 @@
              <!-- v-if="Project.flag == 1" -->
               <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
                 <div class="image-container">
-                  <img class="project-item-container--image" :src="'http://192.168.1.162/api/img/project/' + info.project.image" alt />asdf
+                  <img class="project-item-container--image" :src="'http://192.168.1.162/api/img/projects/' + info.project.image" alt />asdf
                 </div>
                 <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
                   <div class="flex items-center">
@@ -115,10 +115,10 @@
 
     <ul>
       <!-- <button @click="getRandomFromBackend" >asd</button>  -->
-       <li v-for="(info,index) in articleArray">
+       <!-- <li v-for="(info,index) in articleArray">
         --{{info.project.id}}-{{info.project.description}}
         <br />
-      
+       -->
       </li>
       <!-- {{articleArray}} -->
     </ul>
