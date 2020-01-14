@@ -86,7 +86,7 @@
             <td class="product">
               <div class="lg:flex">
                 <div class="mr-2">
-                  <img :src="'http://192.168.1.162/api/img/projects/'+Project.transaction.profile" />
+                  <img :src="project_img_url+Project.transaction.profile" />
                 </div>
                 <div>
                   <span class="block font-semibold">{{Project.transaction.name}}</span>
@@ -140,6 +140,8 @@ export default {
       articleArray: [],
       randomNumber: {},
        ts: new Date(),
+      project_img_url:process.env.project_image_url,
+
     };
   },
   mounted(){
