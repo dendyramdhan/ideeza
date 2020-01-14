@@ -26,32 +26,27 @@
         <div @click="activeMessages = 'unseen'" class="messages-left-toggler" :class="{'active': activeMessages === 'unseen'}">Notifications</div>
       </div>
       <!--Left Menu-->
-      <div v-if="activeMessages === 'people'" class="left-main-menu border-t border-solid border-gray-300 z-50 bg-white">
-
-
-        <div v-for="(item, index) in userList" class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 user-item"  :class="{'selected': index == selectedUserIndex}"  @click="$emit('select_user', index)" >
-          <div class="grow">
-            <div class="flex items-center">
-              <div class="mr-1">
-                <img class="h-10 w-10 rounded-full"
-                     :src="item.avarta">
-              </div>
-              <div>
-                <span class="text-base font-semibold text-gray-800">{{item.name}}</span>
-                <span class="text-xs text-ideeza"><span class="text-6xl text-gray-500 line-height-0" >.</span> {{item.last_time}} </span>
-                <div class="text-sm text-gray-500">
-                  {{item.last_message}}
+      <div v-if="activeMessages === 'people'" class="left-main-menu border-t border-solid border-gray-300 z-50 bg-white scroll-area">
+          <div v-for="(item, index) in userList" class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 user-item"  :class="{'selected': index == selectedUserIndex}"  @click="$emit('select_user', index)" >
+            <div class="grow">
+              <div class="flex items-center">
+                <div class="mr-1">
+                  <img class="h-10 w-10 rounded-full"
+                      :src="item.avarta">
+                </div>
+                <div>
+                  <span class="text-base font-semibold text-gray-800">{{item.name}}</span>
+                  <span class="text-xs text-ideeza"><span class="text-6xl text-gray-500 line-height-0" >.</span> {{item.last_time}} </span>
+                  <div class="text-sm text-gray-500">
+                    {{item.last_message}}
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="flex-shrink">
+              <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', 'ellipsis-h']"/>
+            </div>
           </div>
-          <div class="flex-shrink">
-            <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', 'ellipsis-h']"/>
-          </div>
-        </div>
-
-
-
       </div>
       <div v-if="activeMessages === 'groups'" class="left-main-menu border-t border-solid border-gray-300 z-50 bg-white">
         <div class="flex justify-between items-center mt-5 px-3 pb-5 border-b border-solid border-gray-300 ">
@@ -210,6 +205,10 @@
   }
   .left-main-menu svg{
     @apply text-gray-500;
+  }
+  .left-main-menu{
+    height: 720px;
+    overflow: auto;
   }
   .menu-item:hover svg{
     @apply text-ideeza;

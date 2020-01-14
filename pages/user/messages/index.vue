@@ -161,7 +161,7 @@
 
 
             <div
-              class="flex mt-3 cursor-pointer items-center"
+              class="flex mt-3 cursor-pointer items-start shared-list" 
               :class="[ options.opt2?'': 'hidden']"
             >
               <div v-for="(file ,index) in added_file" :key="`${index}`" class="flex cursor-pointer items-center">
@@ -375,6 +375,7 @@ export default {
     },
 
     select_user(user_index) {
+
       this.selectedUserIndex = user_index;
       let selectedUser = this.userList[user_index].user_id
       this.selectedUserName = this.userList[user_index].name
@@ -386,26 +387,21 @@ export default {
 
       this.starCountRef = firebase.database().ref('/' + room + '/').limitToLast(20)      
       localStorage.setItem('messages', JSON.stringify([]))
-
       clearTimeout(this.timeout)
-
       this.timeout = setTimeout(() => {
-         this.starCountRef.on('child_added', function(snapshot) {
-          let messages = JSON.parse(localStorage.getItem('messages'))||[]
-          messages.push(snapshot.val())
-          console.log("message get", snapshot.val(), messages)
-          localStorage.setItem('messages', JSON.stringify(messages))
-
-          var container = document.getElementById('message-container');
-          container.scrollTop = container.scrollHeight;
-          console.log("user data", container.scrollTop, container.scrollHeight)
+          this.starCountRef.on('child_added', function(snapshot) {
+            let messages = JSON.parse(localStorage.getItem('messages'))||[]
+            messages.push(snapshot.val())
+            console.log("message get", snapshot.val(), messages)
+            localStorage.setItem('messages', JSON.stringify(messages))
+            var container = document.getElementById('message-container');
+            container.scrollTop = container.scrollHeight;
         });        
       }, 200);
 
 
       if(this.interval)
         clearInterval(this.interval)
-
 
       this.interval =  setInterval(() => {
         let messageArray =JSON.parse(localStorage.getItem('messages'))
@@ -419,6 +415,7 @@ export default {
         messageArray.map((item, index)=>{
 
           if(item.from_user==this.myUserId){
+
             from_me = true
             currentState = 1
 
@@ -428,6 +425,7 @@ export default {
           }
 
           if(item.photo_url){
+
             let fileData = item.filename
             this.added_file.push(
               {
@@ -435,33 +433,27 @@ export default {
                 url: item.photo_url
               }
             )
-          }
 
-         
+          }         
+
           last_time = new Date(item.created * 1000).toDateString()
-          this.lastViewHistory =  last_time
-          
+          this.lastViewHistory =  last_time   
 
           if(beforeSate * currentState < 0){
 
             from_me = beforeSate>0? true:false 
-
             this.messageHistory.push({
               from_me, last_time, messages
             })
-
-          // console.log("state : ", beforeSate, currentState, item.content, from_me)
             messages = [item.content]
+
           }else{
             messages.push(item.content)
           }
 
           beforeSate = currentState
+
         })
-
-
-        // console.log("message array : ", messages, messageArray)
-
         if(messages.length>0){
             from_me = beforeSate>0? true:false
            this.messageHistory.push({
@@ -474,7 +466,6 @@ export default {
     handleFileChange(e) {
       let file = e.target.files[0];
       this.uploadFile = e.target.files[0];
-
       if (file && file.name) {
         this.files = file.name;
       } else {
@@ -482,6 +473,8 @@ export default {
       }
       this.$emit("input", file);
     },
+
+
     click_option(option) {
       console.log("option :", option);
       this.options[option] = !this.options[option];
@@ -548,6 +541,11 @@ export default {
 .chat-board {
   height: 682px;
   overflow: auto;
+}
+.shared-list{
+  flex-direction: column;
+  
+
 }
 .message--to {
   @apply text-right  text-white  bg-ideeza-dark rounded-l-lg;
