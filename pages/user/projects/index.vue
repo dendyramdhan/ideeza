@@ -144,6 +144,7 @@ export default {
     };
   },
   created: function() {
+    
     // let authToken = window.$nuxt.$cookies.get("authToken");
     // let sendData = {
     //   method: "get",
