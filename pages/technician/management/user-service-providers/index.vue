@@ -32,15 +32,15 @@
                 />
               </div>
               <input
-              placeholder="search Project..."
-              class="bg-white outline-none h-8 text-gray-800 pr-3"
-              v-model="searchTerm"
-              v-on:input="search"
-            />
+                placeholder="search Project..."
+                class="bg-white outline-none h-8 text-gray-800 pr-3"
+                v-model="searchTerm"
+                v-on:input="search"
+              />
               <!-- <input
                 placeholder="search users"
                 class="bg-white outline-none h-12 text-gray-800 pr-3"
-              /> -->
+              />-->
             </div>
           </div>
         </div>
@@ -63,44 +63,50 @@
             <th class="text-left">Join Date</th>
             <th class="text-left">Rate</th>
             <th class="text-left">Actions</th>
-            <th class="text-right">
+            <!-- <th class="text-right">
               <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
-            </th>
+            </th>-->
           </tr>
         </thead>
         <tbody v-for="(Service, index) in articleArray">
           <tr v-if="start < index && index < end ">
             <td>
               <nuxt-link
-                :to="{ path: '/technician/user-profile', query: { id: Service.id}}"
-              >{{Service.username}}</nuxt-link>
+                :to="{ path: '/technician/user-profile', query: { id: Service.userid}}"
+              >{{Service.firstname}}</nuxt-link>
             </td>
             <td>{{Service.role}}</td>
             <td>{{Service.status}}</td>
-            <td>{{Service.joindate}}</td>
+            <td>{{ts.toLocaleDateString(Service.created_at)}}</td>
             <td>
-              <span v-for="counter in Service.rate">
+              <span v-for="counter in Service.rating">
                 <img class="inline" src="~/static/images/star.png" alt />
               </span>
             </td>
-
+            
             <td class="lg:text-right">
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" />
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']" />
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']" />
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']" />
+               <nuxt-link
+                :to="{ path: '/technician/user-profile', query: { id: Service.userid}}"
+              ><font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" /></nuxt-link>
+               <nuxt-link
+                :to="{ path: '/technician/messages', query: { id: Service.userid}}"
+              ><font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" /></nuxt-link>
+              
+              
+              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']" @click="setstatus(Service.userid,'Active')" />
+              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']"   @click="setstatus(Service.userid,'Pause')" />
+              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']"   @click="setstatus(Service.userid,'Close')" />
             </td>
-            <td class="lg:text-right text-xs">{{Service.time}}</td>
+            <!-- <td class="lg:text-right text-xs">{{Service.time}}</td> -->
           </tr>
         </tbody>
       </table>
 
       <!--Table Stats-->
       <!-- <div class="mt-5 lg:flex justify-end">
-        <div class="lg:w-3/5 p-3 lg:flex justify-between"> -->
-          <!--Paging-->
-          <!-- <div class="flex items-center">
+      <div class="lg:w-3/5 p-3 lg:flex justify-between">-->
+      <!--Paging-->
+      <!-- <div class="flex items-center">
             <font-awesome-icon
               class="mr-2 h-4 cursor-pointer"
               :icon="['fas', 'angle-double-left']"
@@ -109,80 +115,124 @@
               class="ml-2 h-4 cursor-pointer"
               :icon="['fas', 'angle-double-right']"
             />
-          </div> -->
+      </div>-->
 
-<!--Paging-->
-        <div class="mx-auto w-content">
-          <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
-            <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
+      <!--Paging-->
+      <div class="mx-auto w-content">
+        <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
+          <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
+        </span>
+
+        <span v-for="inde in counterarray " :key="inde">
+          <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
+            <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
           </span>
-
-          <span v-for="inde in counterarray " :key="inde">
-            <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
-              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
-            </span>
-            <span v-else>
-              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
-            </span>
+          <span v-else>
+            <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
           </span>
+        </span>
 
-          <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
-            Next
-            <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
-          </span>
-        </div>
+        <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
+          Next
+          <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
+        </span>
+      </div>
 
-          <div class="flex items-center">
-            <!-- <span class="inline-block ml-32">Show</span>
+      <div class="flex items-center">
+        <!-- <span class="inline-block ml-32">Show</span>
             <select class="field field--border-none ml-2 h-10">
               <option>1-3</option>
-            </select> -->
-          </div>
-        </div>
+        </select>-->
       </div>
+    </div>
+    <!-- {{articleArray}}- -->
+  </div>
 </template>
 
 <script>
 import Services from "~/data/TechnicianmanagementApi.json";
+import apiService from "~/apiService/have_token.js";
+import apiService2 from "~/apiService/have_data.js";
+
 
 export default {
   name: "user-service-providers",
   data: function() {
     return {
+      ts: new Date(),
       searchTerm: "",
       counterarray: [],
       articleArray: [],
       Services: Services.first_submenu_User_provider,
       currentviewpoint: this.$store.state.TechnicianProjectStore.offset + 1,
       index: 0,
-      length: Services.length / 5 - 1,
-      counter: Services.length / this.$store.state.TechnicianProjectStore.scale,
+      length: null,
+      counter: null,
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
-      end: this.$store.state.TechnicianProjectStore.offset * 5 + 5
+      end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
+      articleArrayaxios: [],
+      articleArrayrout: [],
+      randomNumber: [],
+      geturl: "/api/user/get_list",
+      geturl2: "/api/user/change_status",
+
     };
   },
-  created: function() {
+  mounted() {
     this.$store.commit("TechnicianProjectStore/viewflagchange2");
-    let i = 1;
-    let endd =
-      this.Services.length / this.$store.state.TechnicianProjectStore.scale + 1;
-    //  alert( this.Services.length);
-    for (i = 1; i <= endd; i++) {
-      this.counterarray.push(i);
-    }
-    // alert(this.counterarray);
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
 
-    this.Services.map(item => {
-      this.articleArray.push(item);
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
+
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item);
+        this.articleArray.push(item);
+      });
+
+      this.length = this.articleArrayrout.length / 5 - 1;
+      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
+  
+      let i = 1;
+      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      //  alert( this.Services.length);
+      for (i = 1; i <= endd; i++) {
+        this.counterarray.push(i);
+      }
     });
   },
-  methods:{
+  created: function() {},
+  methods: {
+      setstatus(userid, status){
+          const formData = new FormData();
+      formData.set("userid", userid);
+      formData.set("status", status);
+      let sendData = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+      apiService2(sendData, response => {
+        console.log(response);
+      });
+      },
+    // @click="setstatus(Service.userid,'Active')" />
+    //           <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']"   @click="setstatus(Service.userid,'Pause')" />
+    //           <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']"   @click="setstatus(Service.userid,'Close')" />
+
+
     search(e) {
       this.articleArray = [];
 
-      let article_list = this.Services;
+      let article_list = this.articleArrayrout;
       article_list.map(element => {
-        const a_text = element.username.toLowerCase() + "";
+        const a_text = element.firstname.toLowerCase() + "";
         const b_text = e.target.value.toLowerCase() + "";
         // const b_text = "master"
 

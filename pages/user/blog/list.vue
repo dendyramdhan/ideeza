@@ -241,7 +241,7 @@ export default {
       statusarticles: "Not Approved"
     };
   },
-  created: function() {
+  mounted(){
     this.$store.commit("userBlogStore/viewflagchange2");
     let i = 1;
     let array1 = [];
@@ -270,6 +270,9 @@ export default {
       this.counter =
         this.articleArray.length / this.$store.state.userBlogStore.scale;
     });
+  },
+  created: function() {
+    
 
     // axios({
     //   method: "get",

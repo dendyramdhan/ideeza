@@ -1,259 +1,257 @@
 <template>
-  <div class="settings-general mx-auto">
+  <div class="settings-general mx-auto"  >
     <!---->
     <!--Profile Information-->
     <!---->
-    <div v-for="infogeneral in articleArray">
-      <div
-        class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0"
-      >
-        <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Edit Profile Information</h1>
-        <span class="text-gray-500 text-sm lg:text-2xl">* Required</span>
-      </div>
+    <div  v-for="infogeneral in Projectsgeneral">
+    <div
+      class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0"
+     
+    >
+      <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Edit Profile Information</h1>
+      <span class="text-gray-500 text-sm lg:text-2xl">* Required</span>
+    </div>
 
-      <!--Form Container-->
-      <div class="my-5 p-5 bg-white shadow-md">
-        <!--Form Fields-->
-        <div class="form-field">
-          <div class="field-label">
-            First Name
-            <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
-          </div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" name="first-name" v-model="infogeneral.general_profile.firstname" />
-          </div>
+    <!--Form Container-->
+    <div class="my-5 p-5 bg-white shadow-md">
+      <!--Form Fields-->
+      <div class="form-field">
+        <div class="field-label">
+          First Name
+          <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
-
-        <div class="form-field">
-          <div class="field-label">
-            Last Name
-            <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
-          </div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.general_profile.lastname" />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">I Am</div>
-          <div class="field-input flex-grow">
-            <select class="field h-10" v-model="infogeneral.general_profile.sex">
-              <option value="male">Male</option>
-              <option value="female">FeMale</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">
-            Birth Date
-            <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
-          </div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.general_profile.birthday" />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">
-            Email Address
-            <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
-          </div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.general_profile.email" />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">
-            Phone Number
-            <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
-          </div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.general_profile.phone" />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">Preferred Language</div>
-          <div class="field-input flex-grow">
-            <select class="field h-10" v-model="infogeneral.general_profile.prefered_language">
-              <option value="male" >{{infogeneral.general_profile.prefered_language}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">
-            Address
-            <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
-          </div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.general_profile.address" />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">Website</div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.general_profile.website" />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">Skills</div>
-          <div class="field-input flex-grow">
-            <textarea class="field h-20" v-model="infogeneral.general_profile.skill"></textarea>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">Describe Yourself</div>
-          <div class="field-input flex-grow">
-            <textarea class="field h-40" v-model="infogeneral.general_profile.desc"></textarea>
-          </div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" name="first-name" v-model="firstname" />
         </div>
       </div>
 
-      <!---->
-      <!--Additional Information-->
-      <!---->
-      <div
-        class="md:flex justify-between items-center pb-3 mt-20 border-b border-solid border-gray-400 p-5 lg:p-0"
-      >
-        <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Additional Information</h1>
-        <span class="text-gray-500 text-sm lg:text-2xl">* Required</span>
-      </div>
-
-      <!--Form Container-->
-      <div class="my-5 p-5 bg-white shadow-md">
-        <!--Form Fields-->
-        <div class="form-field">
-          <div class="field-label">School</div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.additional_profile.school" />
-          </div>
+      <div class="form-field">
+        <div class="field-label">
+          Last Name
+          <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
-
-        <div class="form-field">
-          <div class="field-label">Work</div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.additional_profile.work" />
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">Timezone</div>
-          <div class="field-input flex-grow">
-            <select class="field h-10" v-model="infogeneral.additional_profile.timezone">
-              <option value="male" >{{infogeneral.additional_profile.timezone}}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-field">
-          <div class="field-label">Languages</div>
-          <div class="field-input flex-grow">
-            <input class="field h-10" v-model="infogeneral.additional_profile.langauge" />
-          </div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="lastname" />
         </div>
       </div>
 
-      <!---->
-      <!--Profile Phote-->
-      <!---->
-      <div
-        class="md:flex justify-between items-center pb-3 mt-20 border-b border-solid border-gray-400 p-5 lg:p-0"
-      >
-        <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Profile Photo</h1>
-        <span class="text-gray-500 text-sm lg:text-2xl">* Required</span>
+      <div class="form-field">
+        <div class="field-label">I Am</div>
+        <div class="field-input flex-grow">
+          <select class="field h-10" v-model="sex">
+            <option value="male">Male</option>
+            <option value="female">FeMale</option>
+          </select>
+        </div>
       </div>
 
-      <!--Form Container-->
-      <div class="my-5 p-5 bg-white shadow-md">
-        <!--Photo Field-->
-        <div class="md:flex">
+      <div class="form-field">
+        <div class="field-label">
+          Birth Date
+          <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
+        </div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="birthday" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">
+          Email Address
+          <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
+        </div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="emailaddress" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">
+          Phone Number
+          <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
+        </div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="phonenumber" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">Preferred Language</div>
+        <div class="field-input flex-grow">
+          <select class="field h-10" v-model="preferredlanguage">
+            <option value="male" v-for="info in Projectslanguage">{{info.language}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">
+          Address
+          <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
+        </div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="address" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">Website</div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="website" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">Skills</div>
+        <div class="field-input flex-grow">
+          <textarea class="field h-20" v-model="skills"></textarea>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">Describe Yourself</div>
+        <div class="field-input flex-grow">
+          <textarea class="field h-40" v-model="descibe"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!---->
+    <!--Additional Information-->
+    <!---->
+    <div
+      class="md:flex justify-between items-center pb-3 mt-20 border-b border-solid border-gray-400 p-5 lg:p-0"
+    >
+      <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Additional Information</h1>
+      <span class="text-gray-500 text-sm lg:text-2xl">* Required</span>
+    </div>
+
+    <!--Form Container-->
+    <div class="my-5 p-5 bg-white shadow-md">
+      <!--Form Fields-->
+      <div class="form-field">
+        <div class="field-label">School</div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="additional_school" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">Work</div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="additional_work" />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">Timezone</div>
+        <div class="field-input flex-grow">
+          <select class="field h-10" v-model="additional_timezone">
+            <option value="male" v-for="info in Projectstimezone">{{info.timezone}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <div class="field-label">Languages</div>
+        <div class="field-input flex-grow">
+          <input class="field h-10" v-model="additional_language" />
+        </div>
+      </div>
+    </div>
+
+    <!---->
+    <!--Profile Phote-->
+    <!---->
+    <div
+      class="md:flex justify-between items-center pb-3 mt-20 border-b border-solid border-gray-400 p-5 lg:p-0"
+    >
+      <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Profile Photo</h1>
+      <span class="text-gray-500 text-sm lg:text-2xl">* Required</span>
+    </div>
+
+    <!--Form Container-->
+    <div class="my-5 p-5 bg-white shadow-md">
+      <!--Photo Field-->
+      <div class="md:flex">
+        <div class="w-full h-64 mb-5 md:mb-0 md:h-48 md:w-48 md:w-max-content md:mr-6 flex-shrink">
+          <img
+            class="object-cover object-center h-full mx-auto"
+            :src="infogeneral.profile_photo" id="image"
+            @change="upload"
+          />
+        </div>
+        <div class="flex-grow">
           <div
-            class="w-full h-64 mb-5 md:mb-0 md:h-48 md:w-48 md:w-max-content md:mr-6 flex-shrink"
-          >
-            <img id="image" class="object-cover object-center h-full mx-auto" :src="avata_img_url + infogeneral.additional_profile.avatar" />
-          </div>
-          <div class="flex-grow">
-            <div class="text-gray-500 text-sm">{{infogeneral.additional_profile.profile_description}}</div>
-            <div class="mt-10">
-              <input id="file-input" type="file" name="name" style="display: none;" />
+            class="text-gray-500 text-sm"
+          >{{infogeneral.profile_description}}</div>
+          <div class="mt-10">
+            <input id="file-input" type="file" name="name" style="display: none;" />
               <button
                 class="btn pill-button w-full"
                 onclick="document.getElementById('file-input').click();"
-                @click="upload"
-              >Upload a file from your computer</button>
-            </div>
+                >Upload a file from your computer</button>     
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!---->
+    <!--Social Container-->
+    <!---->
+    <div
+      class="md:flex justify-between items-center pb-3 mt-20 border-b border-solid border-gray-400 p-5 lg:p-0"
+    >
+      <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Social Media Accounts</h1>
+    </div>
+
+    <!--Container-->
+    <div class="my-5 p-5 bg-white shadow-md">
+      <div class="mb-10">
+        <h1
+          class="text-lg font-semibold text-gray-600 pb-3 border-b border-solid border-gray-400"
+        >Facebook</h1>
+        <div class="lg:flex justify-between">
+          <div class="text-lg text-gray-500 mt-3 pr-0 lg:pr-28">
+            Sign in with Facebook and discover your trusted
+            connections to people all over the world.
+          </div>
+          <div class="self-center mt-3 lg:mt-0">
+            <button class="btn px-2" @click="disconnectfacebook">Disconnect</button>
           </div>
         </div>
       </div>
 
-      <!---->
-      <!--Social Container-->
-      <!---->
-      <div
-        class="md:flex justify-between items-center pb-3 mt-20 border-b border-solid border-gray-400 p-5 lg:p-0"
-      >
-        <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Social Media Accounts</h1>
-      </div>
-
-      <!--Container-->
-      <div class="my-5 p-5 bg-white shadow-md">
-        <div class="mb-10">
-          <h1
-            class="text-lg font-semibold text-gray-600 pb-3 border-b border-solid border-gray-400"
-          >Facebook</h1>
-          <div class="lg:flex justify-between">
-            <div class="text-lg text-gray-500 mt-3 pr-0 lg:pr-28">
-              Sign in with Facebook and discover your trusted
-              connections to people all over the world.
-            </div>
-            <div class="self-center mt-3 lg:mt-0">
-              <button class="btn px-2" @click="disconnectfacebook">Disconnect</button>
-            </div>
+      <div class="mb-10">
+        <h1
+          class="text-lg font-semibold text-gray-600 pb-3 border-b border-solid border-gray-400"
+        >LinkedIn</h1>
+        <div class="lg:flex justify-between">
+          <div class="text-lg text-gray-500 mt-3 pr-0 lg:pr-28">
+            Sign in with Facebook and discover your trusted
+            connections to people all over the world.
+          </div>
+          <div class="self-center mt-3 lg:mt-0">
+            <button class="btn px-2"  @click="disconnectlinkedin">Disconnect</button>
           </div>
         </div>
-
-        <div class="mb-10">
-          <h1
-            class="text-lg font-semibold text-gray-600 pb-3 border-b border-solid border-gray-400"
-          >LinkedIn</h1>
-          <div class="lg:flex justify-between">
-            <div class="text-lg text-gray-500 mt-3 pr-0 lg:pr-28">
-              Sign in with Facebook and discover your trusted
-              connections to people all over the world.
-            </div>
-            <div class="self-center mt-3 lg:mt-0">
-              <button class="btn px-2" @click="disconnectlinkedin">Disconnect</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-16 mb-3 text-center">
-          <button
-            class="btn pill-button px-10 lg:px-20"
-            @click="addsocialaccount"
-          >Add more social accounts</button>
-        </div>
       </div>
 
-      <div class="mt-16 mb-16 text-center">
-        <button class="btn pill-button pill-button--ideeza px-20" @click="savegeneralsetting">Save</button>
+      <div class="mt-16 mb-3 text-center">
+        <button class="btn pill-button px-10 lg:px-20"   @click="addsocialaccount">Add more social accounts</button>
       </div>
-    </div> 
+    </div>
+
+    <div class="mt-16 mb-16 text-center">
+      <button class="btn pill-button pill-button--ideeza px-20" @click="savegeneralsetting">Save</button>
+    </div>
+  </div>
   </div>
 </template>
 
 <script>
 import Projects from "~/data/UserSettingApi.json";
-import apiService from "~/apiService/have_token.js";
-
 export default {
-  middleware: "auth",
   name: "index",
   data: function() {
     return {
@@ -287,45 +285,36 @@ export default {
         website: null,
         skills: null,
         describe: null
-      },
-       geturl: "/api/user/get_profile",
-      articleArray: [],
-      randomNumber: {},
-      avata_img_url:process.env.avatar_base_url,
-
+      }
     };
   },
-  
-  mounted() {
+  methods:{
+    upload(evt){
+      // alert("upload image!!!")
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+      };
+      // read the image file as a data URL.
+      reader.readAsDataURL(evt.target.files[0]);
 
-    let sendData = {
-      method: "get",
-      url: this.geturl,
-      data: null
-    };
+      // this.file = this.$refs.file.files[0];
+      console.log("file_upload:", evt);
+      this.file = evt.target.files[0];
 
-    apiService(sendData, response => {
-      console.log(response.data);
-      this.randomNumber = response.data;
-      this.articleArray = Object.values(response.data.data);
-    });
-  },
-  methods: {
-    upload() {
-      // alert("upload image!!!");
-      
     },
-    disconnectfacebook() {
-      alert("disconnect_Facebook!!!");
+    disconnectfacebook(){
+      alert("disconnect_Facebook!!!")
     },
-    disconnectlinkedin() {
-      alert("disconnect_Linkedin!!!");
+    disconnectlinkedin(){
+      alert("disconnect_Linkedin!!!")
     },
-    addsocialaccount() {
-      alert("add_Social_Account!!!");
+    addsocialaccount(){
+       alert("add_Social_Account!!!")
     },
-    savegeneralsetting() {
-      alert("All Setting Saved!!!");
+    savegeneralsetting(){
+      alert("All Setting Saved!!!")
     }
   }
 };
