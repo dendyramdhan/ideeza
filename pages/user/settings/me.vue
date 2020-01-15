@@ -130,7 +130,7 @@
 
            
           </div>
-          
+
           <div class="flex-grow">
             <div class="text-gray-500 text-sm">
               Most viewers take less than three seconds to scan a full web-page and form their first impressions. The next thing they look for? A company’s logo.

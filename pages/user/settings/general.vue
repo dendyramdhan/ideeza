@@ -3,7 +3,10 @@
     <!---->
     <!--Profile Information-->
     <!---->
-    <div  v-for="infogeneral in Projectsgeneral">
+    <!-- {{articleArraymid1}}
+    {{articleArraymid1.userid}} -->
+    <div v-if="articleArraymid1.userid == userid">
+      <!-- v-if="userid == infogeneral.userid" -->
     <div
       class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0"
      
@@ -21,7 +24,7 @@
           <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
         <div class="field-input flex-grow">
-          <input class="field h-10" name="first-name" v-model="firstname" />
+          <input class="field h-10" name="first-name"   :value="articleArraymid1.firstname"/>
         </div>
       </div>
 
@@ -31,14 +34,14 @@
           <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="lastname" />
+          <input class="field h-10" :value="articleArraymid1.lastname" />
         </div>
       </div>
 
       <div class="form-field">
         <div class="field-label">I Am</div>
         <div class="field-input flex-grow">
-          <select class="field h-10" v-model="sex">
+          <select class="field h-10" :value="articleArraymid1.sex">
             <option value="male">Male</option>
             <option value="female">FeMale</option>
           </select>
@@ -51,7 +54,7 @@
           <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="birthday" />
+          <input class="field h-10"  :value="articleArraymid1.birthday" />
         </div>
       </div>
 
@@ -61,7 +64,7 @@
           <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="emailaddress" />
+          <input class="field h-10" :value="articleArraymid1.email" />
         </div>
       </div>
 
@@ -71,15 +74,16 @@
           <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="phonenumber" />
+          <input class="field h-10" :value="articleArraymid1.phone" />
         </div>
       </div>
 
       <div class="form-field">
         <div class="field-label">Preferred Language</div>
         <div class="field-input flex-grow">
-          <select class="field h-10" v-model="preferredlanguage">
-            <option value="male" v-for="info in Projectslanguage">{{info.language}}</option>
+          <select class="field h-10"  :value="articleArraymid1.prefered_language">
+             <option value="English">English</option>
+            <option value="Russia">Russia</option>
           </select>
         </div>
       </div>
@@ -90,28 +94,28 @@
           <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
         </div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="address" />
+          <input class="field h-10"  :value="articleArraymid1.address" />
         </div>
       </div>
 
       <div class="form-field">
         <div class="field-label">Website</div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="website" />
+          <input class="field h-10" :value="articleArraymid1.website" />
         </div>
       </div>
 
       <div class="form-field">
         <div class="field-label">Skills</div>
         <div class="field-input flex-grow">
-          <textarea class="field h-20" v-model="skills"></textarea>
+          <textarea class="field h-20" :value="articleArraymid1.skill"></textarea>
         </div>
       </div>
 
       <div class="form-field">
         <div class="field-label">Describe Yourself</div>
         <div class="field-input flex-grow">
-          <textarea class="field h-40" v-model="descibe"></textarea>
+          <textarea class="field h-40" :value="articleArraymid1.desc"></textarea>
         </div>
       </div>
     </div>
@@ -132,22 +136,23 @@
       <div class="form-field">
         <div class="field-label">School</div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="additional_school" />
+          <input class="field h-10" :value="articleArraymid1.school" />
         </div>
       </div>
 
       <div class="form-field">
         <div class="field-label">Work</div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="additional_work" />
+          <input class="field h-10" :value="articleArraymid1.work" />
         </div>
       </div>
 
       <div class="form-field">
         <div class="field-label">Timezone</div>
         <div class="field-input flex-grow">
-          <select class="field h-10" v-model="additional_timezone">
-            <option value="male" v-for="info in Projectstimezone">{{info.timezone}}</option>
+          <select class="field h-10" :value="articleArraymid1.timezone">
+            <option value="GMT + 1:00">GMT + 1:00</option>
+            <option value="GMT + 2:00">GMT + 2:00</option>
           </select>
         </div>
       </div>
@@ -155,7 +160,7 @@
       <div class="form-field">
         <div class="field-label">Languages</div>
         <div class="field-input flex-grow">
-          <input class="field h-10" v-model="additional_language" />
+          <input class="field h-10" :value="articleArraymid1.language" />
         </div>
       </div>
     </div>
@@ -175,21 +180,26 @@
       <!--Photo Field-->
       <div class="md:flex">
         <div class="w-full h-64 mb-5 md:mb-0 md:h-48 md:w-48 md:w-max-content md:mr-6 flex-shrink">
-          <img
+         <img
             class="object-cover object-center h-full mx-auto"
-            :src="infogeneral.profile_photo" id="image"
-            @change="upload"
-          />
+            :src=" avata_img_url + articleArraymid1.avatar" id="image"           
+          /> 
+           <!-- {{infogeneral.avatar}} -->
         </div>
         <div class="flex-grow">
           <div
             class="text-gray-500 text-sm"
-          >{{infogeneral.profile_description}}</div>
+          >
+          First impressions count, we all know this. And we only get one chance to make a good first impression. Perhaps in person, your charm and use of language can camouflage your faults, but in the online world. your first impression is made with your face – your profile picture.
+          <!-- {{infogeneral.profile_description}} -->
+          </div>
           <div class="mt-10">
-            <input id="file-input" type="file" name="name" style="display: none;" />
+            <form enctype="multipart/form-data">
+              <input ref="file_upload" type="file"  style="display: none;"  @change="upload" />
+               </form>
               <button
                 class="btn pill-button w-full"
-                onclick="document.getElementById('file-input').click();"
+                @click="$refs.file_upload.click()"
                 >Upload a file from your computer</button>     
           </div>
         </div>
@@ -246,52 +256,100 @@
       <button class="btn pill-button pill-button--ideeza px-20" @click="savegeneralsetting">Save</button>
     </div>
   </div>
+  <!-- {{articleArraymid1}} -->
   </div>
 </template>
 
 <script>
 import Projects from "~/data/UserSettingApi.json";
+import apiService from "~/apiService/have_token.js";
+
 export default {
   name: "index",
   data: function() {
     return {
-      Projectslanguage: Projects.General_language,
-      Projectstimezone: Projects.General_timezone,
-      Projectsgeneral: Projects.Setting_general,
-      firstname: Projects.Setting_general[0].firstname,
-      lastname: Projects.Setting_general[0].lastname,
-      sex: Projects.Setting_general[0].sex,
-      birthday: Projects.Setting_general[0].birthday,
-      emailaddress: Projects.Setting_general[0].emailaddress,
-      phonenumber: Projects.Setting_general[0].phonenumber,
-      preferredlanguage: Projects.Setting_general[0].preferredlanguage,
-      address: Projects.Setting_general[0].address,
-      website: Projects.Setting_general[0].website,
-      skills: Projects.Setting_general[0].skills,
-      descibe: Projects.Setting_general[0].descibe,
-      additional_school: Projects.Setting_general[0].additional_school,
-      additional_work: Projects.Setting_general[0].additional_work,
-      additional_timezone: Projects.Setting_general[0].additional_timezone,
-      additional_language: Projects.Setting_general[0].additional_language,
-      form: {
-        first_name: null,
-        last_name: null,
-        gender: null,
-        d_o_b: null,
-        email: null,
-        phone: null,
-        lanuage: null,
-        address: null,
-        website: null,
-        skills: null,
-        describe: null
-      }
+      // Projectslanguage: null,
+      // Projectstimezone: null,
+      // Projectsgeneral: null,
+      // firstname: null,
+      // lastname: null,
+      // sex: null,
+      // birthday: null,
+      // emailaddress: null,
+      // phonenumber: null,
+      // preferredlanguage: null,
+      // address: null,
+      // website: null,
+      // skills: null,
+      // descibe: null,
+      // additional_school: null,
+      // additional_work: null,
+      // additional_timezone: null,
+      // additional_language: null,
+      // form: {
+      //   first_name: null,
+      //   last_name: null,
+      //   gender: null,
+      //   d_o_b: null,
+      //   email: null,
+      //   phone: null,
+      //   lanuage: null,
+      //   address: null,
+      //   website: null,
+      //   skills: null,
+      //   describe: null
+      // },
+       geturl: "/api/user/get_profile",
+      articleArray: [],
+      randomNumber: {},
+      avata_img_url:process.env.avatar_base_url,
+      articleArraymid1:[],
+      userid:null,
     };
+  },
+  mounted(){
+    this.userid = window.$nuxt.$cookies.get("userid")
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArray = Object.values(response.data.data);
+
+      
+       const obj3 = { ...this.articleArray[0], ...this.articleArray[1] };
+       this.articleArraymid1 =obj3;
+
+      // this.Projectslanguage= Projects.General_language;
+      // this.Projectstimezone= Projects.General_timezone;
+      // this.Projectsgeneral= this.articleArraymid1;
+      // this.firstname= Projects.Setting_general[0].firstname;
+      // this.lastname= Projects.Setting_general[0].lastname;
+      // this.sex=Projects.Setting_general[0].sex;
+      // this.birthday= Projects.Setting_general[0].birthday;
+      // this.emailaddress= Projects.Setting_general[0].emailaddress;
+      // this.phonenumber= Projects.Setting_general[0].phonenumber;
+      // this.preferredlanguage= Projects.Setting_general[0].preferredlanguage;
+      // this.address= Projects.Setting_general[0].address;
+      // this.website= Projects.Setting_general[0].website;
+      // this.skills= Projects.Setting_general[0].skills;
+      // this.descibe= Projects.Setting_general[0].descibe;
+      // this.additional_school= Projects.Setting_general[0].additional_school;
+      // this.additional_work= Projects.Setting_general[0].additional_work;
+      // this.additional_timezone= Projects.Setting_general[0].additional_timezone;
+      // this.additional_language= Projects.Setting_general[0].additional_language;
+
+       });
+
   },
   methods:{
     upload(evt){
       // alert("upload image!!!")
-      var reader = new FileReader();
+    var reader = new FileReader();
       reader.onload = function(e) {
         // get loaded data and render thumbnail.
         document.getElementById("image").src = e.target.result;

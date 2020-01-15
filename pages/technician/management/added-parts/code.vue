@@ -61,16 +61,18 @@
           <td> {{Service.role}}</td>
           <td> {{Service.id}}</td>
           <td> {{Service.category}}</td>
-          <td> {{Service.sub_category}}</td>
+          <td> {{Service.sub_cat}}</td>
 
           <td class>
             <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
-            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" />
-            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']" />
-            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']" />
-            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']" />
+            <nuxt-link
+                :to="{ path: '/technician/messages', query: { id: Service.id}}"
+              ><font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" /></nuxt-link>
+            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']" @click="setstatus(Service.id,'Active')" />
+            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']"  @click="setstatus(Service.id,'Pause')"/>
+            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']"  @click="setstatus(Service.id,'Close')" />
           </td>
-          <td class="lg:text-right text-xs">{{Service.time}}</td>
+          <td class="lg:text-right text-xs">{{ts.toLocaleDateString(Service.created_at)}}</td>
         </tr>
       </tbody>
     </table>
@@ -102,43 +104,81 @@
 
 <script>
 import Services from "~/data/TechnicianmanagementApi.json";
+ import apiService from "~/apiService/have_token.js";
+import apiService2 from "~/apiService/have_data.js";
 
 export default {
   name: "added-code-index",
 data: function() {
     return {
+      ts: new Date(),
       searchTerm: "",
       counterarray: [],
       articleArray: [],
       Services: Services.second_submenu_add_parts_code,
       currentviewpoint: this.$store.state.TechnicianProjectStore.offset + 1,
       index: 0,
-      length: Services.length / 5 - 1,
-      counter: Services.length / this.$store.state.TechnicianProjectStore.scale,
+      length: null,
+      counter: null,
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
-      end: this.$store.state.TechnicianProjectStore.offset * 5 + 5
+      end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
+      articleArrayaxios: [],
+      articleArrayrout: [],
+      randomNumber: [],
+      geturl: "/api/code/added_part",
+      geturl2: "/api/code/change_status",
     };
   },
-  created: function() {
+  mounted(){
     this.$store.commit("TechnicianProjectStore/viewflagchange2");
-    let i = 1;
-    let endd =
-      this.Services.length / this.$store.state.TechnicianProjectStore.scale + 1;
-    //  alert( this.Services.length);
-    for (i = 1; i <= endd; i++) {
-      this.counterarray.push(i);
-    }
-    // alert(this.counterarray);
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
 
-    this.Services.map(item => {
-      this.articleArray.push(item);
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
+
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item);
+        this.articleArray.push(item);
+      });
+
+      this.length = this.articleArrayrout.length / 5 - 1;
+      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
+  
+      let i = 1;
+      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      //  alert( this.Services.length);
+      for (i = 1; i <= endd; i++) {
+        this.counterarray.push(i);
+      }
     });
   },
+  created: function() {
+    
+  },
   methods:{
+    setstatus(userid, status){
+          const formData = new FormData();
+      formData.set("part_id", userid);
+      formData.set("status", status);
+      let sendData = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+      apiService2(sendData, response => {
+        console.log(response);
+      });
+      },
     search(e) {
       this.articleArray = [];
 
-      let article_list = this.Services;
+      let article_list = this.articleArrayrout;
       article_list.map(element => {
         const a_text = element.category.toLowerCase() + "";
         const b_text = e.target.value.toLowerCase() + "";

@@ -211,8 +211,8 @@ export default {
   methods: {
       setstatus(userid, status){
           const formData = new FormData();
-      formData.set("userid", userid);
       formData.set("status", status);
+      formData.set("userid", userid);
       let sendData = {
         method: "post",
         url: this.geturl2,
