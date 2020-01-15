@@ -1,116 +1,616 @@
-<template>
-    <div class="mt-10">
-        <simple-table :fields="fields" :searchbox="false" :header="false" title="Manage articles">
-          <template v-slot:header>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Delete</button>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Print</button>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Export</button>
-          </template>
-          <template v-slot:th>
-            <th class="p-4 border-t border-b border-blue-300 w-2/3">
-              <input type="checkbox" id="ad" v-model="selected" @change="selectall" />
-              <label for="ad">Article Name</label>
-              <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']" />
-            </th>
-            <th class="p-4 border-t border-b border-blue-300 w-1/4">
-              Date
-              <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']" />
-            </th>
-            <th class="p-4 border-t border-b border-blue-300 w-1/3">
-              Action
-              <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']" />
-            </th>
-            <!-- <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length" v-for="(field,index) in fields">
-                    <template v-if="index==0">
-                        <input  type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)"/>
-                        <label for="ad">{{field}}</label>
-                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
-                    </template>
-                    <template v-else>
-                        {{field}}
-                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>    
-                    </template>
-                </th> -->
-          </template>
-          <tr class="flex w-full mb-4" v-for="(blog,index) in blogs">
-            <td class="p-4 w-2/3" :class="{'border-b':blogs.length-1 != index}">
-              <div class="flex">
-                <div>
-                  <input type="checkbox" :id="blog.id" v-model="blog.selected" />
-                  <label :for="blog.id">{{blog.name}}</label>
-                </div>
-              </div>
+<template  >
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+    <!--  Left Side Bar  -->
+    <!-- <LeftMenu /> -->
+
+    <!-- Main Contents -->
+    <div class="flex-grow">
+      <div class="main-contents">
+    <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Your articles</h1>
+
+    <div class="lg:flex justify-between items-center my-5">
+      <nuxt-link
+        to="/user/blog/add"
+        class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
+      >
+        <button @click="uploadUserBlogkey">Add new article</button>
+        <span class="ml-5">+</span>
+      </nuxt-link>
+      <div
+        class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center mt-3 lg:mt-0"
+      >
+        <div class="h-12 relative w-10">
+          <font-awesome-icon
+            class="ml-1 h-4 text-gray-400 absolute-center-h-v"
+            :icon="['fas', 'search']"
+          />
+        </div>
+        <input
+          placeholder="search article"
+          v-model="searchTerm"
+          @input="search"
+          class="bg-white outline-none h-12 text-gray-800 pr-3"
+        />
+        <!-- {{searchTerm}} -->
+        <!-- <button>Search</button> -->
+      </div>
+    </div>
+
+    <!--Blog List-->
+    <div class="bg-white shadow-md p-0 lg:p-5" id="app">
+      <table id="mytableapp">
+        <thead>
+          <tr>
+            <td @click="sort('name')">
+              <img
+                class="inline-block mr-1 align-baseline"
+                src="~/static/icons/sort-arrows.png"
+                alt
+              />
+              Article name
             </td>
-            <td class="p-4 w-1/4" :class="{'border-b':blogs.length-1 != index}">{{blog.date}}</td>
-            <td class="p-4 w-1/3" :class="{'border-b':blogs.length-1 != index}">
-              <nuxt-link :to="'/user/blog/updated/'+blog.id">
-              <font-awesome-icon class="text-xl mt-2 ml-4 text-blue-800" :icon="['fas', 'eye']" />
-              </nuxt-link>
-              <font-awesome-icon class="text-xl mt-2 ml-4 text-blue-800" :icon="['fas', 'pause']" />
-              <font-awesome-icon class="text-xl mt-2 ml-4 text-blue-800" :icon="['fas', 'check']" />
-              <font-awesome-icon class="text-xl mt-2 ml-4 text-blue-800" :icon="['fas', 'times']" />
-              <font-awesome-icon class="text-xl mt-2 ml-4 text-green-300 float-right" :icon="['fa', 'grip-vertical']" />
+            <td class="flex items-center" @click="sort('Date')">
+              <img
+                class="inline-block mr-1 align-baseline"
+                src="~/static/icons/sort-arrows.png"
+                alt
+              />
+              Date
+            </td>
+            <td @click="sort('Status')">
+              <img
+                class="inline-block mr-1 align-baseline"
+                src="~/static/icons/sort-arrows.png"
+                alt
+              />
+              Status
+            </td>
+            <td @click="sort('Status')">
+              <img
+                class="inline-block mr-1 align-baseline"
+                src="~/static/icons/sort-arrows.png"
+                alt
+              />
+              Actions
+            </td>
+            <td class="text-right">
+              <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
             </td>
           </tr>
-          <template v-slot:footer>
-            <div class="my-3">
-                <pagination v-model="page" :records="50" :per-page="10" ></pagination>
-            </div>
-          </template>
-        </simple-table>
+        </thead>
+
+        <tbody class="text-gray-800">
+          <tr v-for="(tabledata, index) in articleArray" v-if="start < index && index < end ">
+            <td class="font-semibold">
+              {{tabledata.article}}
+              <!-- {{index}}{{tabledata.id}} -->
+            </td>
+            <td class>
+              {{ts.toLocaleDateString(tabledata.timestamp)}}
+              <!-- <span v-if="tabledata.flag"></span>
+              <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
+            </td>
+            <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
+            <td>
+              <!-- <p v-if="tabledata.flag == 1 ">
+                <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+              </p>
+              <p v-else-if="tabledata.flag == 2  ">
+                <span class="font-semibold">{{tabledata.status}}</span>
+              </p>
+              <p v-else-if="tabledata.flag == 3  ">
+                <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
+              </p>-->
+              <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+            </td>
+
+            <td class="text-gray-500">
+              <nuxt-link :to="{ path: '/technician/management/blogs/view', query: { id: tabledata.id}}">
+                <!-- <nuxt-link to="/user/blog/view"> -->
+                <button @click="uploadUserBlogkey2">
+                  <font-awesome-icon
+                    class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                    :icon="['fas', 'eye']"
+                  />
+                </button>
+              </nuxt-link>
+              <nuxt-link :to="{ path: '/user/messages', query: { id: tabledata.id}}">
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  :icon="['fas', 'envelope']"
+                />
+              </nuxt-link>
+              <span v-if="statusarticles == 'Not Approved'">
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  :icon="['fas', 'check']"
+                  @click="setapproved(tabledata.id)"
+                />
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  :icon="['fas', 'times']"
+                  @click="setclosed(tabledata.id)"
+                />
+              </span>
+              <span v-else-if="statusarticles == 'Approved'">
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  style="color:red"
+                  :icon="['fas', 'check']"
+                  @click="setapproved(tabledata.id)"
+                />
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  :icon="['fas', 'times']"
+                  @click="setclosed(tabledata.id)"
+                />
+              </span>
+              <span v-else-if="statusarticles == 'Closed'">
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  :icon="['fas', 'check']"
+                  @click="setapproved(tabledata.id)"
+                />
+                <font-awesome-icon
+                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                  :icon="['fas', 'times']"
+                  @click="setclosed(tabledata.id)"
+                />
+              </span>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- debug: sort={{currentSort}}, dir={{currentSortDir}} -->
+      <!--Table Stats-->
+      <div class="mt-5 relative">
+        <!--Paging-->
+        <div class="mx-auto w-content">
+          <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
+            <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
+          </span>
+
+          <span v-for="inde in counterarray " :key="inde">
+            <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
+              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+            </span>
+            <span v-else>
+              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+            </span>
+          </span>
+
+          <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
+            Next
+            <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
+          </span>
+        </div>
+
+        <!-- <div
+          class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
+        >
+          <span class="inline-block">Show</span>
+          <select class="inline field ml-2 h-10" @change="changeshowperiod">
+            <option
+              v-for="(tabledata, index) in articleArray"
+              v-if="length > index "
+            >{{(index)*5+1}}-{{(index)*5+5}}</option>
+            <option>All</option>
+          </select>
+        </div>-->
+      </div>
     </div>
+
+    <!-- {{Math.ceil(counter)}} -->
+
+    <!-- <ul>
+      <li v-for="info in articleArray">
+        --{{info.article}}--{{info.id}}--{{info.status}}--{{info.timestamp}}
+        <br />
+      </li>
+      {{base_url}}
+      {{articleArray}}
+    </ul>-->
+  </div>
+  </div>
+  </div>
 </template>
+
 <script>
-import SimpleTable from '~/components/reusables/Table.vue'
-import Pagination from 'vue-pagination-2'
+import axios from "axios";
+import articles from "~/data/BlogApi.json";
+import { teal } from "color-name";
+import apiService from "~/apiService";
+import apiService2 from "~/apiService/have_data.js";
+
 export default {
-    components: {
-        SimpleTable,
-        Pagination
+  middleware: 'auth',
+  name: "blog-list",
+  data: function() {
+    return {
+      ts: new Date(),
+      geturl: "/api/get_blogs",
+      searchTerm: "",
+      articles: articles,
+      articleArray: [],
+      articleArraybase: [],
+      currentSort: "name",
+      currentSortDir: "asc",
+      currentviewpoint: this.$store.state.userBlogStore.offset + 1,
+      index: 0,
+      length: 0,
+      counter: 0,
+      start: this.$store.state.userBlogStore.offset * 5 - 1,
+      end: this.$store.state.userBlogStore.offset * 5 + 5,
+      counterarray: [],
+      result: {},
+      randomNumber: {},
+      geturl2: "/api/blog/change_status",
+      statusarticles: "Not Approved"
+    };
+  },
+  computed: {
+    leftMenu() {
+      return this.$store.state.usermenu.openLeftMenu;
+    }
+  },
+  created: function() {
+    this.$store.commit("userBlogStore/viewflagchange2");
+    let i = 1;
+    let array1 = [];
+    let endd = 0;
+
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+
+      this.articleArray = Object.values(response.data.data);
+      // this.articleArray = onlyarticleArray[0];
+
+      endd =
+        this.articleArray.length / this.$store.state.userBlogStore.scale + 1;
+      for (i = 1; i <= endd; i++) {
+        array1.push(i);
+      }
+      this.counterarray = array1;
+      this.length = this.articleArray.length / 5 - 1;
+      this.counter =
+        this.articleArray.length / this.$store.state.userBlogStore.scale;
+    });
+
+    // axios({
+    //   method: "get",
+    //   url: geturl
+    // })
+    //   .then(response => {
+
+    //    })
+    //   .catch(error => {
+    //     //handle error
+    //     console.log(error);
+    //   });
+
+    // console.log(this.randomNumber);
+  },
+  methods: {
+    //   getRandom () {
+    //   // this.randomNumber = this.getRandomInt(1, 100)
+    //   this.randomNumber = this.getRandomFromBackend()
+    // },
+
+    // getRandomFromBackend () {
+    //   const path = 'http://127.0.0.1:5000/api/getblog'
+    //   axios.get(path)
+    //   .then(response => {
+    //     this.randomNumber = response.data.result
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //   })
+    // },
+    setapproved(evt) {
+      const formData = new FormData();
+      formData.set("id", evt);
+      formData.set("status", "Approved");
+      let sendData = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+      apiService2(sendData, response => {
+        console.log(response);
+      });
     },
-    data() {
-        return {
-            page: 1,
-            blogs: [{
-                    id: 1,
-                    name: 'How ideeza can make the world a better place',
-                    date: '10 jul, 2019',
-                    status: 1 // 1 for approved, 0 pending
-                },
-                {
-                    id: 2,
-                    name: 'How ideeza can make the world a better place',
-                    date: '10 jul, 2019',
-                    status: 1
-                },
-                {
-                    id: 3,
-                    name: 'How ideeza can make the world a better place',
-                    date: '10 jul, 2019',
-                    status: 1
-                },
-                {
-                    id: 4,
-                    name: 'How ideeza can make the world a better place',
-                    date: '10 jul, 2019',
-                    status: 1
-                },
-            ],
-        }
+    setclosed(evt) {
+      const formData = new FormData();
+      formData.set("id", evt);
+      formData.set("status", "Closed");
+      let sendData = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+      apiService2(sendData, response => {
+        console.log(response);
+      });
     },
-    methods: {
-      selectall() {
-        if (this.selected == true) {
-          this.blogs.forEach(element => {
-            element.selected = true
-          });
-        } else {
-          this.blogs.forEach(element => {
-            element.selected = false
-          });
-        }
-        this.$forceUpdate()
+    changeshowperiod(e) {
+      this.articleArray = [];
+      if (e.target.value == "all") {
+        this.articleArraybase.map(item => {
+          this.articleArray.push(item);
+        });
+      } else {
+        var a = e.target.value.split("-");
+        var a1 = a[0];
+        var a2 = a[1];
+        // alert("a1:" + a1 + "a2:" + a2);
+        this.articleArraybase.map((item, index) => {
+          if (index >= a1 && index <= a2) {
+            this.articleArray.push(item);
+          }
+        });
       }
     },
-}
+    search(e) {
+      this.articleArray = [];
+
+      let sendData = {
+        method: "get",
+        url: this.geturl,
+        data: null
+      };
+
+      apiService(sendData, response => {
+        console.log(response.data);
+        this.randomNumber = response.data;
+
+        this.articleArray = Object.values(response.data.data);
+
+        let article_list = this.articleArray;
+        article_list.map(element => {
+          const a_text = element.article.toLowerCase() + "";
+          const b_text = e.target.value.toLowerCase() + "";
+          // const b_text = "master"
+
+          let s_index = a_text.indexOf(b_text) + 1;
+          // console.log("search ", a_text, b_text, s_index);
+
+          if (s_index > 0 || e.target.value == "") {
+            this.articleArray.push(element);
+          }
+        });
+
+        console.log("search array :", this.articleArray, e.target.value);
+      });
+    },
+    sort: function(s) {
+      if (s === this.currentSort) {
+        if (this.currentSortDir == "asc") {
+          direction = 1;
+        } else if (this.currentSortDir == "desc") {
+          direction = -1;
+        }
+
+        this.currentSortDir = this.currentSortDir === "asc" ? "desc" : "asc";
+      }
+
+      this.currentSortDir;
+
+      let sendData = {
+        method: "get",
+        url: this.geturl,
+        data: null
+      };
+
+      apiService(sendData, response => {
+        //handle success
+        console.log(response.data);
+        this.randomNumber = response.data;
+
+        this.articleArray = Object.values(response.data.data);
+        let article_list = this.articleArray;
+        switch (s) {
+          case "name":
+            article_list.sort(function(a, b) {
+              var x = a.article.toLowerCase();
+              var y = b.article.toLowerCase();
+              if (x < y) {
+                return -1 * direction;
+              }
+              if (x > y) {
+                return 1 * direction;
+              }
+              return 0;
+            });
+
+            // console.log("sorted : ", article_list);
+            break;
+          case "Date":
+            article_list.sort(function(a, b) {
+              var x = a.timestamp.toLowerCase();
+              var y = b.timestamp.toLowerCase();
+              if (x < y) {
+                return -1 * direction;
+              }
+              if (x > y) {
+                return 1 * direction;
+              }
+              return 0;
+            });
+
+            // console.log("sorted : ", article_list);
+            break;
+          case "Status":
+            article_list.sort(function(a, b) {
+              var x = a.status.toLowerCase();
+              var y = b.status.toLowerCase();
+              if (x < y) {
+                return -1 * direction;
+              }
+              if (x > y) {
+                return 1 * direction;
+              }
+              return 0;
+            });
+
+            // console.log("sorted : ", article_list);
+            break;
+
+          default:
+            break;
+        }
+      });
+
+      console.log("sort key :", s, this.articleArray);
+      let direction = 1;
+
+      this.currentSort = s;
+    },
+    selectedkey(e) {
+      this.$store.commit("userBlogStore/selectedkeyChange", e - 1);
+      // $router.go({path:'/news', force: true})
+      console.log(this.currentviewpoint + "_");
+      this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+      this.counter =
+        this.articleArray.length / this.$store.state.userBlogStore.scale;
+      this.start = this.$store.state.userBlogStore.offset * 5 - 1;
+      this.end = this.$store.state.userBlogStore.offset * 5 + 5;
+      console.log("start and end :", this.start, this.end);
+      // this.$refs.page.$forceUpdate();
+    },
+    increasekey() {
+      if (
+        this.currentviewpoint == this.counter ||
+        this.currentviewpoint > this.counter
+      ) {
+      } else {
+        this.$store.commit("userBlogStore/increasekeyChange");
+        this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+        this.counter =
+          this.articleArray.length / this.$store.state.userBlogStore.scale;
+        this.start = this.$store.state.userBlogStore.offset * 5 - 1;
+        this.end = this.$store.state.userBlogStore.offset * 5 + 5;
+        // $router.go({path:'/news', force: true})
+        // this.$refs.page.$forceUpdate();
+      }
+    },
+    decreasekey() {
+      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
+      } else {
+        this.$store.commit("userBlogStore/decreasekeyChange");
+        this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
+        this.counter =
+          this.articleArray.length / this.$store.state.userBlogStore.scale;
+        this.start = this.$store.state.userBlogStore.offset * 5 - 1;
+        this.end = this.$store.state.userBlogStore.offset * 5 + 5;
+        // $router.go({path:'/news', force: true})
+        // this.$refs.page.$forceUpdate();
+      }
+    },
+    uploadUserBlogkey() {
+      this.$store.commit("userBlogStore/viewflagchange1");
+    },
+    uploadUserBlogkey2() {
+      this.$store.commit("userBlogStore/viewflagchange2");
+    }
+  }
+};
 </script>
+
+<style scoped>
+#mytableapp thead tr td {
+  cursor: pointer;
+}
+
+.blog-container {
+  width: 100%;
+  max-width: 1530px;
+  padding: 20px 5px;
+}
+
+@screen lg {
+  .blog-container {
+    padding: 60px 50px;
+  }
+  /*Table*/
+  table {
+    @apply mb-5 w-full border-collapse text-gray-600;
+  }
+
+  tbody td {
+    @apply py-5 pr-2;
+  }
+
+  tbody tr:nth-child(odd) {
+    @apply bg-gray-100;
+  }
+}
+
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  /*
+      Label the data
+      */
+  td:nth-of-type(1):before {
+    content: "Article name";
+  }
+  td:nth-of-type(2):before {
+    content: "Date";
+  }
+  td:nth-of-type(3):before {
+    content: "Status";
+  }
+  td:nth-of-type(4):before {
+    content: "Actions";
+  }
+}
+</style>
