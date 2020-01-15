@@ -22,7 +22,7 @@
         <input
           placeholder="search article"
           v-model="searchTerm"
-          @input="search"
+          v-on:input="search"
           class="bg-white outline-none h-12 text-gray-800 pr-3"
         />
         <!-- {{searchTerm}} -->
@@ -75,12 +75,9 @@
 
         <tbody class="text-gray-800">
           <tr v-for="(tabledata, index) in articleArray" v-if="start < index && index < end ">
-            <td class="font-semibold">
-              {{tabledata.article}}
-              <!-- {{index}}{{tabledata.id}} -->
-            </td>
+            <td class="font-semibold">{{tabledata.article}}</td>
             <td class>
-              {{ts.toLocaleDateString(tabledata.timestamp)}}
+               {{ts.toLocaleDateString(tabledata.timestamp)}}
               <!-- <span v-if="tabledata.flag"></span>
               <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
@@ -94,8 +91,8 @@
               </p>
               <p v-else-if="tabledata.flag == 3  ">
                 <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
-              </p>-->
-              <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+              </p> -->
+               <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
             </td>
 
             <td class="text-gray-500">
@@ -114,43 +111,16 @@
                   :icon="['fas', 'envelope']"
                 />
               </nuxt-link>
-              <span v-if="statusarticles == 'Not Approved'">
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'check']"
-                  @click="setapproved(tabledata.id)"
-                />
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'times']"
-                  @click="setclosed(tabledata.id)"
-                />
-              </span>
-              <span v-else-if="statusarticles == 'Approved'">
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  style="color:red"
-                  :icon="['fas', 'check']"
-                  @click="setapproved(tabledata.id)"
-                />
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'times']"
-                  @click="setclosed(tabledata.id)"
-                />
-              </span>
-              <span v-else-if="statusarticles == 'Closed'">
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'check']"
-                  @click="setapproved(tabledata.id)"
-                />
-                <font-awesome-icon
-                  class="mr-1 h-3 cursor-pointer hover:text-gray-800"
-                  :icon="['fas', 'times']"
-                  @click="setclosed(tabledata.id)"
-                />
-              </span>
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'check']"
+                 @click="setstatus(tabledata.id,'Active')"
+              />
+              <font-awesome-icon
+                class="mr-1 h-3 cursor-pointer hover:text-gray-800"
+                :icon="['fas', 'times']"
+                 @click="setstatus(tabledata.id,'Close')"
+              />
             </td>
             <td></td>
           </tr>
@@ -180,7 +150,7 @@
           </span>
         </div>
 
-        <!-- <div
+        <div
           class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
         >
           <span class="inline-block">Show</span>
@@ -189,64 +159,47 @@
               v-for="(tabledata, index) in articleArray"
               v-if="length > index "
             >{{(index)*5+1}}-{{(index)*5+5}}</option>
-            <option>All</option>
+            <option>all</option>
           </select>
-        </div>-->
+        </div>
       </div>
     </div>
-
     <!-- {{Math.ceil(counter)}} -->
-
-    <!-- <ul>
-      <li v-for="info in articleArray">
-        --{{info.article}}--{{info.id}}--{{info.status}}--{{info.timestamp}}
-        <br />
-      </li>
-      {{base_url}}
-      {{articleArray}}
-    </ul>-->
   </div>
 </template>
 
 <script>
-import axios from "axios";
 import articles from "../../../data/BlogApi.json";
-import { teal } from "color-name";
 import apiService from "~/apiService";
 import apiService2 from "~/apiService/have_data.js";
 
+import { teal } from "color-name";
 export default {
-  middleware: 'auth',
   name: "blog-list",
   data: function() {
     return {
       ts: new Date(),
-      geturl: "/api/get_blogs",
       searchTerm: "",
       articles: articles,
       articleArray: [],
-      articleArraybase: [],
       currentSort: "name",
       currentSortDir: "asc",
       currentviewpoint: this.$store.state.userBlogStore.offset + 1,
       index: 0,
-      length: 0,
-      counter: 0,
+      length: null,
+      counter: null,
       start: this.$store.state.userBlogStore.offset * 5 - 1,
       end: this.$store.state.userBlogStore.offset * 5 + 5,
       counterarray: [],
-      result: {},
-      randomNumber: {},
+       articleArrayaxios: [],
+      articleArrayrout: [],
+      randomNumber: [],
+      geturl: "/api/get_blogs",
       geturl2: "/api/blog/change_status",
-      statusarticles: "Not Approved"
     };
   },
-  created: function() {
-    this.$store.commit("userBlogStore/viewflagchange2");
-    let i = 1;
-    let array1 = [];
-    let endd = 0;
-
+  mounted(){
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -256,55 +209,33 @@ export default {
     apiService(sendData, response => {
       console.log(response.data);
       this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
 
-      this.articleArray = Object.values(response.data.data);
-      // this.articleArray = onlyarticleArray[0];
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item);
+        this.articleArray.push(item);
+      });
 
-      endd =
-        this.articleArray.length / this.$store.state.userBlogStore.scale + 1;
+      this.length = this.articleArrayrout.length / 5 - 1;
+      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
+  
+      let i = 1;
+      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
-        array1.push(i);
+        this.counterarray.push(i);
       }
-      this.counterarray = array1;
-      this.length = this.articleArray.length / 5 - 1;
-      this.counter =
-        this.articleArray.length / this.$store.state.userBlogStore.scale;
     });
-
-    // axios({
-    //   method: "get",
-    //   url: geturl
-    // })
-    //   .then(response => {
-
-    //    })
-    //   .catch(error => {
-    //     //handle error
-    //     console.log(error);
-    //   });
-
-    // console.log(this.randomNumber);
+  },
+  created: function() {
+    
+ 
   },
   methods: {
-    //   getRandom () {
-    //   // this.randomNumber = this.getRandomInt(1, 100)
-    //   this.randomNumber = this.getRandomFromBackend()
-    // },
-
-    // getRandomFromBackend () {
-    //   const path = 'http://127.0.0.1:5000/api/getblog'
-    //   axios.get(path)
-    //   .then(response => {
-    //     this.randomNumber = response.data.result
-    //   })
-    //   .catch(error => {
-    //     console.log(error)
-    //   })
-    // },
-    setapproved(evt) {
-      const formData = new FormData();
-      formData.set("id", evt);
-      formData.set("status", "Approved");
+    setstatus(userid, status){
+          const formData = new FormData();
+      formData.set("id", userid);
+      formData.set("status", status);
       let sendData = {
         method: "post",
         url: this.geturl2,
@@ -313,24 +244,11 @@ export default {
       apiService2(sendData, response => {
         console.log(response);
       });
-    },
-    setclosed(evt) {
-      const formData = new FormData();
-      formData.set("id", evt);
-      formData.set("status", "Closed");
-      let sendData = {
-        method: "post",
-        url: this.geturl2,
-        data: formData
-      };
-      apiService2(sendData, response => {
-        console.log(response);
-      });
-    },
+      },
     changeshowperiod(e) {
       this.articleArray = [];
       if (e.target.value == "all") {
-        this.articleArraybase.map(item => {
+        this.articleArrayrout.map(item => {
           this.articleArray.push(item);
         });
       } else {
@@ -338,7 +256,7 @@ export default {
         var a1 = a[0];
         var a2 = a[1];
         // alert("a1:" + a1 + "a2:" + a2);
-        this.articleArraybase.map((item, index) => {
+        this.articleArrayrout.map((item, index) => {
           if (index >= a1 && index <= a2) {
             this.articleArray.push(item);
           }
@@ -348,36 +266,27 @@ export default {
     search(e) {
       this.articleArray = [];
 
-      let sendData = {
-        method: "get",
-        url: this.geturl,
-        data: null
-      };
+      let article_list = this.articleArrayrout;
+      article_list.map(element => {
+        const a_text = element.article.toLowerCase() + "";
+        const b_text = e.target.value.toLowerCase() + "";
+        // const b_text = "master"
 
-      apiService(sendData, response => {
-        console.log(response.data);
-        this.randomNumber = response.data;
+        let s_index = a_text.indexOf(b_text) + 1;
+        // console.log("search ", a_text, b_text, s_index);
 
-        this.articleArray = Object.values(response.data.data);
-
-        let article_list = this.articleArray;
-        article_list.map(element => {
-          const a_text = element.article.toLowerCase() + "";
-          const b_text = e.target.value.toLowerCase() + "";
-          // const b_text = "master"
-
-          let s_index = a_text.indexOf(b_text) + 1;
-          // console.log("search ", a_text, b_text, s_index);
-
-          if (s_index > 0 || e.target.value == "") {
-            this.articleArray.push(element);
-          }
-        });
-
-        console.log("search array :", this.articleArray, e.target.value);
+        if (s_index > 0 || e.target.value == "") {
+          this.articleArray.push(element);
+        }
       });
+
+      console.log("search array :", this.articleArray, e.target.value);
+
     },
     sort: function(s) {
+      console.log("sort key :", s, this.articleArray);
+      let direction = 1;
+
       if (s === this.currentSort) {
         if (this.currentSortDir == "asc") {
           direction = 1;
@@ -389,75 +298,58 @@ export default {
       }
 
       this.currentSortDir;
+      let article_list = this.articleArray;
+      switch (s) {
+        case "name":
+          article_list.sort(function(a, b) {
+            var x = a.article.toLowerCase();
+            var y = b.article.toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
 
-      let sendData = {
-        method: "get",
-        url: this.geturl,
-        data: null
-      };
+          // console.log("sorted : ", article_list);
+          break;
+        case "Date":
+          article_list.sort(function(a, b) {
+            var ts= new Date()
+            var x = ts.toLocaleDateString(a.timestamp).toLowerCase();
+            var y = ts.toLocaleDateString(b.timestamp).toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
 
-      apiService(sendData, response => {
-        //handle success
-        console.log(response.data);
-        this.randomNumber = response.data;
+          // console.log("sorted : ", article_list);
+          break;
+        case "Status":
+          article_list.sort(function(a, b) {
+            var x = a.status.toLowerCase();
+            var y = b.status.toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
 
-        this.articleArray = Object.values(response.data.data);
-        let article_list = this.articleArray;
-        switch (s) {
-          case "name":
-            article_list.sort(function(a, b) {
-              var x = a.article.toLowerCase();
-              var y = b.article.toLowerCase();
-              if (x < y) {
-                return -1 * direction;
-              }
-              if (x > y) {
-                return 1 * direction;
-              }
-              return 0;
-            });
+          // console.log("sorted : ", article_list);
+          break;
 
-            // console.log("sorted : ", article_list);
-            break;
-          case "Date":
-            article_list.sort(function(a, b) {
-              var x = a.timestamp.toLowerCase();
-              var y = b.timestamp.toLowerCase();
-              if (x < y) {
-                return -1 * direction;
-              }
-              if (x > y) {
-                return 1 * direction;
-              }
-              return 0;
-            });
-
-            // console.log("sorted : ", article_list);
-            break;
-          case "Status":
-            article_list.sort(function(a, b) {
-              var x = a.status.toLowerCase();
-              var y = b.status.toLowerCase();
-              if (x < y) {
-                return -1 * direction;
-              }
-              if (x > y) {
-                return 1 * direction;
-              }
-              return 0;
-            });
-
-            // console.log("sorted : ", article_list);
-            break;
-
-          default:
-            break;
-        }
-      });
-
-      console.log("sort key :", s, this.articleArray);
-      let direction = 1;
-
+        default:
+          break;
+      }
       this.currentSort = s;
     },
     selectedkey(e) {
@@ -509,6 +401,10 @@ export default {
     }
   }
 };
+
+// export default {
+//     name: "blog-list"
+// }
 </script>
 
 <style scoped>
