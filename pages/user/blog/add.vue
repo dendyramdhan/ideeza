@@ -84,7 +84,7 @@
 import axios from "axios";
 import apiService from "~/apiService/have_token.js";
 
-import articles from "~/data/BlogApi.json";
+import articles from "../../../data/BlogApi.json";
 import TextField from "~/components/form/text-field.vue";
 import TextArea from "~/components/form/text-area.vue";
 import CategoryField from "~/components/form/category-field.vue";

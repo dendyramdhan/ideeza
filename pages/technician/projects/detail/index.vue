@@ -17,8 +17,9 @@
           </div>
         </div>
         <div>
-        <button @click.self="completeTask=true" class="btn btn-normal btn--ideeza px-5 py-3">Complete Project</button>
-        <button @click.self="$router.push('/technician/projects')" class="btn btn-normal btn--ideeza-gray-500 px-5 py-3">Back</button>
+        <button @click.self="addNewProject=true" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
+        <button @click.self="addNewProject=true" class="btn btn-normal btn--ideeza px-5 py-3">Complete Project</button>
+        <button @click.self="addNewProject=true" class="btn btn-normal btn--ideeza-gray-500 px-5 py-3">Back</button>
         </div>
       </div>
 
@@ -30,6 +31,10 @@
           <div class="text-xl">Project Duration: <span class="text-ideeza">{{projectkind.due_date}}</span></div>
           <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']"/>
         </div>
+      </div>
+
+      <div class="text-ideeza my-5">
+        Price: $210
       </div>
 
       <div class="lg:flex justify-between">
@@ -67,6 +72,7 @@
         <tr class="text-white h16 gradient-bg">
           <th class="text-left ">Tasks</th>
           <th class="text-left">Domain</th>
+          <th class="text-left">Assigned to</th>
           <th class="text-left">Due Date</th>
           <th class="text-left">Task Status</th>
           <th class="text-left">Notification</th>
@@ -81,6 +87,12 @@
             {{Service.TaskName}}
           </td>
           <td>{{Service.domain}}</td>
+          <td>
+            <img v-for="image in Service.assigned_to_profile_image" :src="image[0]" class="avatar">
+            <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg"> -->
+          </td>
           <td class="text-center">
             <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
               <span class="absolute due-date text-black">{{Service.due_date}}</span>
@@ -135,6 +147,7 @@
           </template>
         </tbody>
       </table>
+      <button @click.self="addNewTask=true" class="btn btn-normal btn--ideeza-dark px-5 py-3 mt-5">Add New Task +</button>
 
 
       <div class="mt-20">

@@ -131,13 +131,13 @@
           <td class="status status--completed" v-if="subtask.task_status=='completed'">
             completed
           </td>
-          <td v-if="subtask.task_status == 'Over Due'" class="status status--over">Over Due</td>
-          <td v-if="subtask.task_status == 'Active'" class="status status--progress">Active</td>
+          <td v-if="Service.task_status == 'Over Due'" class="status status--over">Over Due</td>
+          <td v-if="Service.task_status == 'Active'" class="status status--progress">Active</td>
           <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
           <td class="notifications">
             <font-awesome-icon v-if="subtask.task_status=='completed'" class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
-            <font-awesome-icon v-else-if="subtask.task_status == 'Over Due'" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
-            <font-awesome-icon v-else-if="subtask.task_status == 'Active'" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
+            <font-awesome-icon v-else-if="Service.task_status == 'Over Due'" class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/> 
+            <font-awesome-icon v-else-if="Service.task_status == 'Active'" class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/> 
           </td>
           </tr>
         </template>
