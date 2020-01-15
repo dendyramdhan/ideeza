@@ -4,7 +4,7 @@
     <div class="left-main-menu p-10 relative w-full">
       <CommonMenuItems />
     </div>
-    <LeftBotMenu class="flex-shrink sticky bottom-0 p-10 self-end w-full" />
+    <!-- <LeftBotMenu class="flex-shrink sticky bottom-0 p-10 self-end w-full" /> -->
   </div>
 </template>
 
