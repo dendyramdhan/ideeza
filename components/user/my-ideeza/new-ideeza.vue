@@ -6,13 +6,13 @@
       </div>
 
       <div class="my-ideeza-contents">
-        <div class="flex justify-between items-center font-semibold">
-          <span>My ideeza...</span>
-          <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'microphone']" />
+        <div class="relative font-semibold">
+          <textarea @keydown.enter="pitchIdeeza" v-model="ideeza" rows="6" placeholder="My ideeza..." class="font-semibold w-full pr-10"></textarea>
+          <font-awesome-icon class="font-semibold h-4 mr-2 mt-1 absolute top-0 right-0" :icon="['fas', 'microphone']" />
         </div>
       </div>
 
-      <img
+      <img @click="pitchIdeeza"
         class="ideeza-go-icon absolute-center-h cursor-pointer bottom-0"
         src="~/static/icons/my-ideeza-go.png"
       />
@@ -26,6 +26,16 @@ export default {
   name: "new-ideeza",
   components: {
     LayersIcon
+  },
+  data() {
+    return {
+      ideeza: null
+    }
+  },
+  methods: {
+    pitchIdeeza() {
+      this.$emit('close')
+    }
   }
 };
 </script>

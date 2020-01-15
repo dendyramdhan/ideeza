@@ -12,7 +12,7 @@
       </div>
 
       <!--Share Project-->
-      <div class="button-hide share button-container" :class="{'active':active}">
+      <div class="button-hide share button-container" :class="{'active':active}" @click="showShare=true">
         <div class="button">
           <img src="~/static/icons/share.svg" class="absolute-center-h-v" alt />
         </div>
@@ -20,7 +20,7 @@
       </div>
 
       <!--New Note-->
-      <div class="button-hide edit button-container" :class="{'active':active}">
+      <div class="button-hide edit button-container" :class="{'active':active}" @click="showAddTask=true">
         <div class="button">
           <img src="~/static/icons/edit.svg" class="absolute-center-h-v" alt />
         </div>
@@ -28,32 +28,39 @@
       </div>
 
       <!--New Message-->
-      <div class="button-hide message button-container" :class="{'active':active}">
+      <nuxt-link to="/user/messages" class="button-hide message button-container" :class="{'active':active}">
         <div class="button">
-          <nuxt-link to="/user/messages">
+          <div>
             <img src="~/static/icons/envelope.svg" class="absolute-center-h-v" alt />
-          </nuxt-link>
+          </div>
         </div>
         <h1 class="font-semibold text-xs">Message</h1>
-      </div>
+      </nuxt-link>
     </div>
-
+    <add-note @onClose="showAddTask=false" v-if="showAddTask==true" />
+    <share-project @close="showShare=false" v-if="showShare"/>
     <!--MyIdeeza Popup-->
-    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" />
+    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" @close="showMyIdeeza=false" />
   </div>
 </template>
 
 <script>
 import MyIdeeza from "~/components/user/my-ideeza/new-ideeza.vue";
+import AddNote from "~/components/user/tasklist/add-task.vue"
+import ShareProject from "~/components/share/share-internal.vue"
 export default {
   name: "right-bot-float-button",
   components: {
-    MyIdeeza
+    MyIdeeza,
+    AddNote,
+    ShareProject
   },
   data: function() {
     return {
       showMyIdeeza: false,
-      active: false
+      showAddTask: false,
+      showShare: false,
+      active: false,
     };
   },
   methods: {
@@ -67,7 +74,7 @@ export default {
 <style scoped>
 .float-button {
   @apply fixed;
-  z-index: 100;
+  z-index: 39;
   right: 100px;
   bottom: 50px;
 }

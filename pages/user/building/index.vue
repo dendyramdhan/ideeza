@@ -11,17 +11,25 @@
           <span class="panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']"/>Electronics</span>
           <span class="ml-5 panel-menu text-center active" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'code']"/>Code</span>
           <span class="ml-5 panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']"/>Cover</span>
-          <span class="ml-5 panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']"/>General</span>
+          <span class="ml-5 panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'mobile-alt']"/>App</span>
+          <span class="ml-5 panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']"/>Customize</span>
         </div>
       </div>
 
       <div class="my-5 bg-white shadow">
         <img class="w-full" src="~/static/images/car-big.png">
         <div class="py-5 px-5 lg:flex justify-between items-center">
-          <div class="flex">
-            <div class="mr-5 font-semibold text-gray-500 cursor-pointer text-sm"><font-awesome-icon class="mr-1 h-4" :icon="['fas', 'plus']"/> Add To</div>
-            <div class="mr-5 font-semibold text-gray-500 cursor-pointer text-sm"><font-awesome-icon class="mr-1 h-4" :icon="['fas', 'code']"/> Embed</div>
-            <div class="mr-5 font-semibold text-gray-500 cursor-pointer text-sm"><font-awesome-icon class="mr-1 h-4" :icon="['fas', 'share']"/> Share</div>
+          <div class="relative share">
+            <button class="bg-ideeza text-white px-2 py-3 rounded">
+              Share invention
+              <font-awesome-icon class="ml-1 h-4" :icon="['fas', 'star']"/>
+            </button>
+            <div class="absolute bg-white bottom-0 share-drop-down shadow-md">
+              <ul>
+                <li @click="showShareInternal=true" class="p-3">Share in news feed</li>
+                <li @click="showShareExternal=true" class="p-3">Share external</li>
+              </ul>
+            </div>
           </div>
 
           <div class="flex items-center mt-5 lg:mt-0">
@@ -40,43 +48,48 @@
 
       <div class="my-10 bg-white shadow">
         <div class="flex py-5 border-b border-solid border-gray-300">
-          <div @click="tab=0" class="tab px-5 text-gray-700 font-semibold text-lg lg:text-xl cursor-pointer" :class="{'active': tab===0}" >
+          <div class="tab px-5 text-gray-700 font-semibold text-lg lg:text-xl cursor-pointer active" >
             Description
-          </div>
-          <div @click="tab=1" class="tab px-5 text-gray-700 font-semibold text-lg lg:text-xl cursor-pointer" :class="{'active': tab===1}" >
-            Project Information
           </div>
         </div>
 
-        <div class="py-10 px-5 text-gray-600" v-if="tab===0">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+        <div class="pt-10 px-5">
+          <div class="font-bold text-black mb-3 text-lg">Description</div>
+          <textarea class="w-full border rounded p-3 font-bold text-base" rows="8" v-model="description" placeholder="Type the description here..."></textarea>
         </div>
-        <div class="py-10 px-5 text-gray-600" v-if="tab===1">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+        <div class="text-right pt-5 pb-10 px-5">
+          <button class="bg-ideeza px-5 py-2 text-white">Save</button>
         </div>
       </div>
     </div>
+    <share-internal v-if="showShareInternal" @close="showShareInternal=false"/>
+    <share-external v-if="showShareExternal" @close="showShareExternal=false"/>
   </div>
 </template>
 
 <script>
   import LeftMenu from '~/components/user/common-left-side-menu.vue'
+  import ShareExternal from '~/components/share/share-external.vue'
+  import ShareInternal from '~/components/share/share-internal.vue'
     export default {
       middleware: "auth",
       layout: 'user',
       name: "building-index",
       components: {
         LeftMenu,
+        ShareExternal,
+        ShareInternal
       },
       data: function () {
         return {
-          tab: 0,
+          description: null,
           mainDropDownActive: false,
-
           currentMenu: {},
           storeCurrentMenu: null,
           menuChildren: null,
-          searchVal: null
+          searchVal: null,
+          showShareInternal: false,
+          showShareExternal: false
         }
       },
       computed: {
@@ -115,4 +128,22 @@
       max-width: 1235px;
     }
   }
+  .share:hover .share-drop-down{
+    opacity: 1;
+    transform: translateY(100%);
+  }
+  .share .share-drop-down{
+    opacity: 0;
+    transform: translateY(80%);
+    min-width: fit-content;
+    transition: all 0.5s;
+  }
+  .share .share-drop-down li{
+    min-width: max-content;
+    @apply font-semibold cursor-pointer;
+  }
+  .share .share-drop-down li:hover{
+    @apply text-ideeza;
+  }
+
 </style>
