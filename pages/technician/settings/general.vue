@@ -1,6 +1,6 @@
 <template>
   <div class="settings-general mx-3 md:mx-20 mt-10">
-    <div v-for="infogeneral in Projectsgeneral">
+    <div v-for="infogeneral in articleArray">
       <!---->
       <!--Profile Information-->
       <!---->
@@ -17,7 +17,7 @@
         <div class="form-field">
           <div class="field-label">Name</div>
           <div class="field-input flex-grow">
-            <input class="field h-10" name="name"  v-model="name"/>
+            <!-- <input class="field h-10" name="name"  v-model="infogeneral.general_profile.firstname"/> -->
           </div>
         </div>
 
@@ -27,7 +27,7 @@
             <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
           </div>
           <div class="field-input flex-grow">
-            <input class="field h-10" v-model="emailaddress" />
+            <input class="field h-10" v-model="infogeneral.general_profile.email" />
           </div>
         </div>
 
@@ -37,7 +37,7 @@
             <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
           </div>
           <div class="field-input flex-grow">
-            <input class="field h-10" v-model="phonenumber" />
+            <input class="field h-10" v-model="infogeneral.general_profile.phone" />
           </div>
         </div>
 
@@ -47,22 +47,22 @@
             <font-awesome-icon class="ml-1 h-4 inline" :icon="['fas', 'lock']" />
           </div>
           <div class="field-input flex-grow">
-            <input class="field h-10"  v-model="address" />
+            <input class="field h-10" v-model="infogeneral.general_profile.address" />
           </div>
         </div>
 
         <div class="form-field">
           <div class="field-label">Website</div>
           <div class="field-input flex-grow">
-            <input class="field h-10" v-model="website"  />
+            <input class="field h-10" v-model="infogeneral.general_profile.website" />
           </div>
         </div>
 
         <div class="form-field">
           <div class="field-label">Preferred Language</div>
           <div class="field-input flex-grow">
-            <select class="field h-10"  v-model="preferredlanguage" >
-              <option value="male">English</option>
+            <select class="field h-10" v-model="infogeneral.general_profile.prefered_language">
+              <option value="male" >{{infogeneral.general_profile.prefered_language}}</option>
             </select>
           </div>
         </div>
@@ -70,7 +70,7 @@
         <div class="form-field">
           <div class="field-label">Description</div>
           <div class="field-input flex-grow">
-            <textarea class="field h-40" v-model="descibe"></textarea>
+            <textarea class="field h-40" v-model="infogeneral.general_profile.desc"></textarea>
           </div>
         </div>
       </div>
@@ -88,10 +88,8 @@
         <div class="form-field">
           <div class="field-label">Line of Business</div>
           <div class="field-input flex-grow">
-            <select v-model="line_of_business" class="field w-full h-10">
-              <option value="1">Electronics</option>
-              <option value="2">Cover</option>
-              <option value="3">Code</option>
+            <select  class="field w-full h-10" v-model="infogeneral.general_profile.lineofbusiness">
+              <option value="male" >{{infogeneral.general_profile.lineofbusiness}}</option>
             </select>
             <!-- <input class="field h-10" name="name"  v-model="line_of_business"/> -->
           </div>
@@ -99,13 +97,16 @@
         <div class="form-field">
           <div class="field-label">Expertise</div>
           <div class="field-input flex-grow">
-            <select v-model="expertise" class="field w-full h-10">
+            <select  class="field w-full h-10" v-model="infogeneral.general_profile.expertise">
+              <option value="male" >{{infogeneral.general_profile.expertise}}</option>
+            </select>
+            <!-- <select v-model="expertise" class="field w-full h-10">
               <option value="1">Fabrication</option>
               <option value="2">Assembly</option>
               <option value="3">Dealer</option>
               <option value="4">Tester</option>
               <option value="5">CNC Plastic</option>
-            </select>
+            </select> -->
           </div>
         </div>
       </div>
@@ -132,7 +133,7 @@
           </div>
           <div class="flex-grow">
             <div class="text-gray-500 text-sm">
-              {{infogeneral.profile_description}}
+              Most viewers take less than three seconds to scan a full web-page and form their first impressions. The next thing they look for? A company’s logo.
             </div>
             <div class="mt-10">
                <input id="file-input" type="file" name="name" style="display: none;" />
@@ -214,6 +215,7 @@
 
 <script>
 import Projects from "~/data/TechnicianSettingApi.json";
+import apiService from "~/apiService/have_token.js";
 
 export default {
   name: "index",
@@ -242,8 +244,25 @@ export default {
         website: null,
         skills: null,
         describe: null
-      }
+      },
+      geturl: "/api/user/get_profile",
+      articleArray: [],
+      randomNumber: {},
+      avata_img_url:process.env.avatar_base_url,
     };
+  }, mounted() {
+
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArray = Object.values(response.data.data);
+    });
   },
   methods: {
     upload() {
