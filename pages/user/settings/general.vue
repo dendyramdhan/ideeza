@@ -1,5 +1,5 @@
 <template>
-  <div class="settings-general md:mx-auto mx-2">
+  <div class="settings-general mx-auto">
     <!---->
     <!--Profile Information-->
     <!---->
@@ -348,9 +348,5 @@ export default {
   .form-field {
     @apply flex;
   }
-}
-select.field {
-  min-width: 100%;
-  max-width: 100%;
 }
 </style>

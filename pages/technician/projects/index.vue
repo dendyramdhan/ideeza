@@ -26,12 +26,16 @@
             <!-- <search-field placeholder="Search Project..." /> -->
             <input
               placeholder="search Project..."
-              class="bg-white outline-none h-10 text-gray-800 pr-3 w-32 mr-10 pl-2"
+              class="bg-white outline-none h-8 text-gray-800 pr-3"
               v-model="searchTerm"
               v-on:input="search"
             />
           </div>
           <div>
+            <button
+              @click.self="addNewProject=true"
+              class="btn btn-normal btn--ideeza px-5 py-3"
+            >Create New +</button>
             <select
               class="w-48 block mt-5"
               placeholder="Sort By"
@@ -58,6 +62,7 @@
           <thead>
             <tr class="text-white h16 gradient-bg">
               <th class="text-left">Projects</th>
+              <th class="text-left">Assigned to</th>
               <th class="text-left">Due Date</th>
               <th class="text-left">Task Status</th>
               <th class="text-left">Notification</th>
@@ -67,6 +72,11 @@
             <tr class="bg-ideeza-100" v-if="start < index && index < end ">
               <td>
                 <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}" >{{Service.projectName}}</nuxt-link>
+              </td>
+              <td>
+                <span v-for="image in Service.assigned_to_profile_image">
+                  <img class="avatar" :src="image" />
+                </span>
               </td>
               <td>{{Service.due_date}}</td>
               <td class="status status--completed">{{Service.task_status}}</td>

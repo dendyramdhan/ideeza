@@ -201,17 +201,7 @@
 
       <div class="md:flex sm:block mt-20">
         <div class="md:w-6/12 sm:w-full px-3">
-          <carousel-3d border="0" :autoplay="true" height="300">
-            <slide :index="0">
-              <img src="~static/images/silder-placeholder.png" class="inline-block" />
-            </slide>
-            <slide :index="1">
-              <img src="~static/images/dashboard.png" class="inline-block" />
-            </slide>
-            <slide :index="2">
-              <img src="~static/images/dashboard-blog-image.png" class="inline-block" />
-            </slide>
-          </carousel-3d>
+          <img src="~static/images/silder-placeholder.png" class="inline-block" />
         </div>
         <div class="md:w-6/12 sm:w-full px-3">
           <h2 class="text-purple-900 text-5xl font-bold">John Doe’s Dream</h2>
@@ -277,8 +267,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-.carousel-3d-slide{
-  background-color: initial !important;
-}
-</style>

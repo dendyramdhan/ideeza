@@ -70,23 +70,23 @@
             <td>PCBWay</td>
             <td>
               <div class="field-input flex-grow">
-                <input class="field h-8 px-2 text-sm" value="10" />
+                <input class="field h-10 px-2 text-sm" value="10" />
               </div>
             </td>
             <td>
               <div class="field-input flex-grow">
-                <input class="field h-8 px-2 text-sm" value="10" />
+                <input class="field h-10 px-2 text-sm" value="10" />
               </div>
             </td>
             <td>
               <div class="field-input flex-grow">
-                <input class="field h-8 px-2 text-sm" value="10" />
+                <input class="field h-10 px-2 text-sm" value="10" />
               </div>
             </td>
             <td>2018</td>
             <td>
               <div class="field-input flex-grow">
-                <input class="field h-8 px-2 text-sm" value="Yes" />
+                <input class="field h-10 px-2 text-sm" value="Yes" />
               </div>
             </td>
             <td>Yes</td>
@@ -95,13 +95,13 @@
           </tr>
         </tbody>
       </table> -->
-      <div class="p-2 mt-10 shadow-md bg-white rounded">
-        <table>
-        <thead>
-          <tr class="text-gray-800 h16">
-            <th class="text-left w-16 p-1">Name</th>
-            <th class="text-left w-8 p-1">2D</th>
-            <th class="text-left w-8 p-1">3D</th>
+      <simple-table title="" :header="false" border="border-0 shadow-md" class="mt-4">
+          <template v-slot:header>
+          </template>
+          <template v-slot:th>
+            <th class="text-left w-24 p-1">Name</th>
+            <th class="text-left w-16 p-1">2D</th>
+            <th class="text-left w-16 p-1">3D</th>
             <th class="text-left w-32 p-1">Manufacturer</th>
             <th class="text-left w-32 p-1">Unit in stock</th>
             <th class="text-left w-32 p-1">Price</th>
@@ -111,72 +111,79 @@
             <th class="text-left w-24 p-1">ROHS?</th>
             <th class="text-left w-32 p-1">Category</th>
             <th class="text-left w-32 p-1">Subcategory</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="text-left w-16 p-1 border-b border-gray-400">Name</td>
-            <td class="text-left w-8 p-1 border-b border-gray-400">2D</td>
-            <td class="text-left w-8 p-1 border-b border-gray-400">3D</td>
+            <!-- <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length" v-for="(field,index) in fields">
+                    <template v-if="index==0">
+                        <input  type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)"/>
+                        <label for="ad">{{field}}</label>
+                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
+                    </template>
+                    <template v-else>
+                        {{field}}
+                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>    
+                    </template>
+                </th> -->
+          </template>
+          <tr class="flex w-full" >
+            <td class="text-left w-24 p-1 border-b border-gray-400">Name</td>
+            <td class="text-left w-16 p-1 border-b border-gray-400">2D</td>
+            <td class="text-left w-16 p-1 border-b border-gray-400">3D</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Manufacturer</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">Product</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Category</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Subcategory</td>
           </tr>
-          <tr>
-            <td class="text-left w-16 p-1 border-b border-gray-400">Name</td>
-            <td class="text-left w-8 p-1 border-b border-gray-400">2D</td>
-            <td class="text-left w-8 p-1 border-b border-gray-400">3D</td>
+          <tr class="flex w-full" >
+            <td class="text-left w-24 p-1 border-b border-gray-400">Name</td>
+            <td class="text-left w-16 p-1 border-b border-gray-400">2D</td>
+            <td class="text-left w-16 p-1 border-b border-gray-400">3D</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Manufacturer</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">Product</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-8"  />
+                <input class="field h-10"  />
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Category</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Subcategory</td>
           </tr>
-        </tbody>
-      </table>
-      </div>
+        </simple-table>
   </div>
 
 </template>
@@ -189,8 +196,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-table td{
-  padding: 0.5rem;
-}
-</style>

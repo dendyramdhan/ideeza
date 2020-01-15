@@ -1,5 +1,5 @@
 <template>
-    <div class="py-10 mb-16 block">
+    <div class="py-10 mb-16 hidden lg:block">
       <div class="stepper-container mx-auto px-10 ">
         <div class="stepper-bar bg-gray-200 relative mx-auto">
           <div class="hidden stepper-bar-overlay bg-ideeza-dark" :style="`width: ${overlayWidth}%` "></div>
@@ -76,7 +76,7 @@
   }
   .stepper-bar{
     width: 100%;
-    max-width: 95vw;
+    max-width: 945px;
     height: 15px;
   }
   .stepper-bar-overlay{

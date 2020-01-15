@@ -9,9 +9,9 @@
           </div>
         </div>
         <div>
-        <button onClick="print()" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
-        <button @click.self="completeTask=true" class="btn btn-normal btn--ideeza px-5 py-3">Complete Project</button>
-        <button @click.self="$router.push('/technician/management/projects')" class="btn btn-normal btn--ideeza-gray-500 px-5 py-3">Back</button>
+        <button @click.self="addNewProject=true" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
+        <button @click.self="addNewProject=true" class="btn btn-normal btn--ideeza px-5 py-3">Complete Project</button>
+        <button @click.self="addNewProject=true" class="btn btn-normal btn--ideeza-gray-500 px-5 py-3">Back</button>
         </div>
       </div>
 
@@ -267,7 +267,7 @@
             this.$set(this.expanded, id, true);
           }
           this.$forceUpdate();
-        }
+        },
       },
       data: function () {
         return {
@@ -489,11 +489,6 @@
         }
       }
     }
-  function print() {
-    var doc = new jsPDF()
-    doc.text('Price: 210', 10, 10)
-    doc.save('a4.pdf')
-  }
 </script>
 
 <style scoped>

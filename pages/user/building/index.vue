@@ -3,7 +3,7 @@
     <!--  Left Side Bar  -->
     <LeftMenu/>
     <!-- Main Contents -->
-    <div class="builder-panel flex-grow lg:p-10 mx-2 md:mx-0">
+    <div class="builder-panel flex-grow lg:p-10">
       <!--Panel Menu-->
       <div class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3">
         <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">Lamborghini Aventado Project</div>
@@ -11,7 +11,7 @@
           <span class="panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']"/>Electronics</span>
           <span class="ml-5 panel-menu text-center active" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'code']"/>Code</span>
           <span class="ml-5 panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']"/>Cover</span>
-          <nuxt-link to="/user/pro" class="inline ml-5 panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']"/>Customize</nuxt-link>
+          <span class="ml-5 panel-menu text-center" ><font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']"/>General</span>
         </div>
       </div>
 

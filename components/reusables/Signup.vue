@@ -1,5 +1,4 @@
 <template>
-  <div>
   <modal wide @close="$emit('close')">
     <template slot="header">
       <div class="text-right py-3 px-3">
@@ -51,7 +50,6 @@
       </div>
     </template>
   </modal>
-  </div>
 </template>
 <script>
 import Modal from "~/components/reusables/Modal.vue";
@@ -60,11 +58,6 @@ import axios from "axios";
 export default {
   components: {
     Modal
-  },
-  data() {
-    return {
-      type_decided: false
-    }
   },
   methods: {
     googleSignin() {

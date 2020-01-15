@@ -1,7 +1,7 @@
 <template>
   <div class="email-support-container mx-auto my-32">
 
-    <div class="block stepper-bar bg-gray-200 relative mx-auto mb-20">
+    <div class="hidden lg:block stepper-bar bg-gray-200 relative mx-auto mb-20">
       <div class="stepper-bar-overlay bg-ideeza-dark" :style="`width: ${overlayWidth}%` "></div>
       <div class="absolute top-0 left-0 h-full w-full z-50 flex justify-between">
 
@@ -114,7 +114,6 @@ resolve here (minimum of 10 characters)..." />
     max-width: 950px;
   }
   .stepper-bar{
-    max-width: 95vw;
     width: 450px;
     height: 15px;
   }
