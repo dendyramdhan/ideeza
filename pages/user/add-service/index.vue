@@ -36,7 +36,9 @@
 
           <div class="my-3 lg:flex justify-between text-sm">
             <div class="flex mb-2 justify-between md:justify-start">
-              <div class="flex items-center p-1 border border-solid border-ideeza-gray-700 md:mr-5 mr-1">
+              <div
+                class="flex items-center p-1 border border-solid border-ideeza-gray-700 md:mr-5 mr-1"
+              >
                 <span class="mr-3">Type:</span>
                 <select class="border-0" @change="selectkindman" v-model="kindman">
                   <option>Patents</option>
@@ -46,7 +48,7 @@
               </div>
               <div class="flex items-center p-1 border border-solid border-ideeza-gray-700">
                 <span class="mr-3">Sort By:</span>
-                <select class="border-0" v-model="kindmanworkinfo"  @change="selectkindmanworkinfo">
+                <select class="border-0" v-model="kindmanworkinfo" @change="selectkindmanworkinfo">
                   <option>Cost</option>
                   <option>Rating</option>
                   <option>Work time</option>
@@ -70,7 +72,7 @@
           <h1 class="my-3 font-semibold">Results (58)</h1>
 
           <div class="services-container mx-auto mt-10">
-            <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray" >
+            <div class="mb-32 lg:mb-20 lg:flex" v-for="(Service, index ) in articleArray">
               <div class="md:flex w-full">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
                   <img class="avatar rounded-full mx-auto" :src="avata_img_url+ Service.profile" />
@@ -78,8 +80,13 @@
                 <div class="flex-1">
                   <div class="md:flex justify-between items-center">
                     <div class="flex-1 md:flex items-center">
-                      <h1 class="text-lg font-semibold block md:inline-block mr-5 text-center md:text-left">{{Service.name}}</h1>
-                      <span v-if="index == 0" class="text-center block md:text-left md:inline mb-2 md:mb-0">
+                      <h1
+                        class="text-lg font-semibold block md:inline-block mr-5 text-center md:text-left"
+                      >{{Service.name}}</h1>
+                      <span
+                        v-if="index == 0"
+                        class="text-center block md:text-left md:inline mb-2 md:mb-0"
+                      >
                         <button
                           class="btn btn-normal btn--ideeza px-5 py-2"
                           @click="showprofiledetail"
@@ -93,7 +100,10 @@
                       <div
                         class="py-1 px-2 border border-solid border-light-gray mr-3 md:flex-none"
                       >{{Service.cost}}</div>
-                      <div v-if="index==0" @click="requestQuote = !requestQuote" :class="{'btn-green': quoteSend}"
+                      <div
+                        v-if="index==0"
+                        @click="requestQuote = !requestQuote"
+                        :class="{'btn-green': quoteSend}"
                         class="py-1 px-2 border border-solid border-light-gray md:flex-none flex-1"
                       >Request Quote</div>
                     </div>
@@ -184,34 +194,32 @@ import CheckBox from "~/components/form/checkbox-dark.vue";
 import Services from "~/data/UserProjectApi.json";
 import apiService from "~/apiService/get_param.js";
 
-
 export default {
-  middleware: 'auth',
+  middleware: "auth",
   layout: "user",
   name: "manufacturers-index",
   data: function() {
     return {
       searchTerm: "",
-      kindman:"Patents",
-      kindmanworkinfo:"Cost",
+      kindman: "Patents",
+      kindmanworkinfo: "Cost",
       flag: 1,
       Services: Services.Result_info,
-      articleArray:[],
-      articleArrayrout:[],
+      articleArray: [],
+      articleArrayrout: [],
       requestQuote: false,
       quoteSend: false,
       showOptimize: false,
       geturl: "/api/project/get_services",
       articleArrayaxios: [],
       randomNumber: [],
-      projectidd:null,
-      avata_img_url:process.env.avatar_base_url,
-
+      projectidd: null,
+      avata_img_url: process.env.avatar_base_url
     };
   },
-   mounted() { 
-      this.projectidd = window.$nuxt.$cookies.get("userprojectid");
-     const params = {	projectid: this.projectidd};
+  mounted() {
+    this.projectidd = window.$nuxt.$cookies.get("userprojectid");
+    const params = { projectid: this.projectidd };
     let sendData = {
       url: this.geturl,
       param: params
@@ -222,10 +230,10 @@ export default {
       this.randomNumber = response.data;
       this.articleArrayaxios = Object.values(response.data.data);
 
-      this.articleArrayaxios.map(item=>{
-          this.articleArrayrout.push(item.service);
-          this.articleArray.push(item.service);
-      })
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item.service);
+        this.articleArray.push(item.service);
+      });
     });
   },
   created: function() {
@@ -251,23 +259,23 @@ export default {
         this.flag = 1;
       }
     },
-    selectkindman(e){
+    selectkindman(e) {
       this.articleArray = [];
       // alert(e.target.value)
-      this.kindman=e.target.value;
-       let article_list = this.articleArrayrout;
-      article_list.map(element => { 
+      this.kindman = e.target.value;
+      let article_list = this.articleArrayrout;
+      article_list.map(element => {
         if (element.type == e.target.value) {
           this.articleArray.push(element);
         }
       });
     },
-    selectkindmanworkinfo(e){
+    selectkindmanworkinfo(e) {
       //  alert(e.target.value)
-       this.kindmanworkinfo =  e.target.value
-       let article_list = this.articleArray;
-       let S_index = e.target.value;
-       switch (S_index) {
+      this.kindmanworkinfo = e.target.value;
+      let article_list = this.articleArray;
+      let S_index = e.target.value;
+      switch (S_index) {
         case "Cost":
           article_list.sort(function(a, b) {
             var x = a.cost;
@@ -284,7 +292,7 @@ export default {
           // console.log("sorted : ", article_list);
           break;
         case "Rating":
-         article_list.sort(function(a, b) {
+          article_list.sort(function(a, b) {
             var x = a.score;
             var y = b.score;
             if (x < y) {
@@ -299,7 +307,7 @@ export default {
           // console.log("sorted : ", article_list);
           break;
         case "Work time":
-         article_list.sort(function(a, b) {
+          article_list.sort(function(a, b) {
             var x = a.time;
             var y = b.time;
             if (x < y) {
@@ -314,28 +322,25 @@ export default {
           // console.log("sorted : ", article_list);
           break;
 
-          case "Address":
+        case "Address":
           article_list.sort(function(a, b) {
             var x = a.address.toLowerCase();
             var y = b.address.toLowerCase();
             if (x < y) {
-              return -1 ;
+              return -1;
             }
             if (x > y) {
-              return 1 ;
+              return 1;
             }
             return 0;
           });
 
           // console.log("sorted : ", article_list);
           break;
-          
+
         default:
           break;
       }
-       
-
-
     },
     search(e) {
       this.articleArray = [];
@@ -355,7 +360,6 @@ export default {
       });
 
       console.log("search array :", this.articleArray, e.target.value);
-
     },
     sendQuote() {
       this.quoteSend = true;
