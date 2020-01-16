@@ -161,7 +161,7 @@
                     <div class="p-2 border border-solid border-light-gray">
                       <div class="w-full projects-image">
                         <img
-                          :src="'http://192.168.1.162/api/img/projects/' + topproject.project.image"
+                          :src="'http://192.168.1.162/api/img/projects/' + topproject.project_info.image"
                           class="object-contain object-center w-full"
                           alt
                         />
@@ -171,10 +171,10 @@
                               class="mr-1 h-4 text-ideeza-gold"
                               :icon="['fas', 'star']"
                             />
-                            <small class="text-xs">{{topproject.project.rate}}</small>
+                            <small class="text-xs">{{topproject.project_info.rate}}</small>
                           </div>
 
-                          <span class="text-xs">{{topproject.project.like}} likes</span>
+                          <span class="text-xs">{{topproject.project_info.like}} likes</span>
                         </div>
                       </div>
                     </div>

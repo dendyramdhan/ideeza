@@ -10,6 +10,7 @@
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
           >
             <div class="text-sm mb-1 lg:mb-0 lg:text-xl">{{project.name}}</div>
+            <font-awesome-icon class="mr-1 h-4 cursor-pointer text-white" :icon="['fas', 'trash']" />
           </div>
           <v-client-table
             :ref="`products_table_${project.id}`"
