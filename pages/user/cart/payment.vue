@@ -35,8 +35,8 @@
       <div class="lg:w-1/2 lg:pr-5">
         <div class="field-container mt-10">
           <div class="text-lg text-gray-800 mb-2">End date</div>
-          <drop-down class="inline-block lg:w-1/6 w-1/3" :data="months" placeholder="mm" />
-          <drop-down class="inline-block lg:w-1/6 w-1/3" :data="years" placeholder="yyyy" />
+          <drop-down class="inline-block lg:w-1/3 w-1/3" :data="months" placeholder="mm" />
+          <drop-down class="inline-block lg:w-1/3 w-1/3" :data="years" placeholder="yyyy" />
         </div>
       </div>
       <div class="lg:w-1/6 lg:pl-5">

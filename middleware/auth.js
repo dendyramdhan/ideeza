@@ -1,5 +1,4 @@
 export default (context) => {
-    console.log('context', context);
     let authToken = context.app.$cookies.get('authToken');
     if (authToken == null) {
       // error({
