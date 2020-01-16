@@ -12,10 +12,42 @@
           </div>
 
           <div class="lg:flex flex-wrap">
-            <div
+            <template v-for="(info,index) in articleArray">
+            <div v-if="index==1" :key="index" class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative">
+              <carousel per-page="1">
+                <slide v-for="n in 10" :key="'d'+n">
+                  <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
+                  <div class="image-container">
+                    <img class="project-item-container--image" :src="project_img_url + info.project.image" alt />asdf
+                  </div>
+                  <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
+                    <div class="flex items-center">
+                      <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
+                      <span>{{info.project.rate}}</span>
+                    </div>
+                    <span
+                      class="font-semibold"
+                    >{{info.project.like}} &nbsp; likes &nbsp; {{info.project.dislike}}&nbsp; dislikes </span>
+                  </div>
+                </nuxt-link>
+                </slide>
+              </carousel>
+              <div
+                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 hidden pop-over"
+              >
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <h1 class="font-semibold text-lg">{{info.project.name}}</h1>
+                    <span class="text-sm text-gray-600 ml-3">{{info.project.title}}</span>
+                  </div>
+                  <div class="font-semibold text-ideeza-black">{{info.project.cost}}</div>
+                </div>
+
+                <div class="text-sm mt-5">{{info.project.shortdescription}}</div>
+              </div>
+            </div>
+            <div :key="index" v-else
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-           v-for="(info,index) in articleArray"
-             
             >
              <!-- v-if="Project.flag == 1" -->
               <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
@@ -47,6 +79,7 @@
                 <div class="text-sm mt-5">{{info.project.shortdescription}}</div>
               </div>
             </div>
+            </template>
 
             <!-- <div
               v-else
@@ -250,4 +283,33 @@ export default {
     margin-left: 10px;
   }
 }
+.carousel-open:checked + .carousel-item {
+				position: static;
+				opacity: 100;
+			}
+			.carousel-item {
+				-webkit-transition: opacity 0.6s ease-out;
+				transition: opacity 0.6s ease-out;
+			}
+			#carousel-1:checked ~ .control-1,
+			#carousel-2:checked ~ .control-2,
+			#carousel-3:checked ~ .control-3 {
+				display: block;
+			}
+			.carousel-indicators {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				bottom: 2%;
+				left: 0;
+				right: 0;
+				text-align: center;
+				z-index: 10;
+			}
+			#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
+			#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
+			#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
+				color: #2b6cb0;  /*Set to match the Tailwind colour you want the active one to be */
+			}
 </style>
