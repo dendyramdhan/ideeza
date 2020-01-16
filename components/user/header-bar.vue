@@ -226,6 +226,7 @@ export default {
 }
 .header-bar {
   @apply flex justify-between pl-5 pr-5 pt-2 pb-2;
+  z-index:1;
 }
 .logo {
   width: 70px;
