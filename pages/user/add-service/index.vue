@@ -213,14 +213,13 @@ export default {
       geturl: "/api/project/get_services",
       articleArrayaxios: [],
       randomNumber: [],
-      projectidd:null,
-      avata_img_url:process.env.avatar_base_url,
-
+      projectidd: null,
+      avata_img_url: process.env.avatar_base_url
     };
   },
-   mounted() { 
-      this.projectidd = window.$nuxt.$cookies.get("userprojectid");
-     const params = {	projectid: this.projectidd};
+  mounted() {
+    this.projectidd = window.$nuxt.$cookies.get("userprojectid");
+    const params = { projectid: this.projectidd };
     let sendData = {
       url: this.geturl,
       param: params
