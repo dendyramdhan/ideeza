@@ -6,30 +6,48 @@
       </nuxt-link>
     </div>
     <div class="menu-item flex-col">
-      <nuxt-link to="/admin/user">
-        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']"/> Users
-      </nuxt-link>
-      <nuxt-link to="/admin/user" class="ml-12 text-base mt-2">Home</nuxt-link>
-      <nuxt-link to="/admin/user/contact" class="ml-12 text-base mt-2">Contacts</nuxt-link>
-      <nuxt-link to="/admin/users" class="ml-12 text-base mt-2">Marketing</nuxt-link>
+      <div class="flex">
+        <nuxt-link to="/admin/user" class="w-1/2">
+          <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']"/> Users
+        </nuxt-link>
+        <font-awesome-icon v-if="!userActive" @click="userActive = !userActive" class="w-1/2 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-down']"/>
+        <font-awesome-icon v-if="userActive" @click="userActive = !userActive" class="w-1/2 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-up']"/>
+      </div>
+      <div :class="[userActive ? 'block' : 'hidden']">
+        <nuxt-link to="/admin/user" class="block ml-12 text-base mt-2">Home</nuxt-link>
+        <nuxt-link to="/admin/user/contact" class="block ml-12 text-base mt-2">Contacts</nuxt-link>
+        <nuxt-link to="/admin/users" class="block ml-12 text-base mt-2">Marketing</nuxt-link>
+      </div>
     </div>
     <div class="menu-item flex-col">
-      <nuxt-link to="/admin/service">
-        <UserIcon class="fill-current mr-3" /> Service providers
-      </nuxt-link>
-      <nuxt-link to="/admin/service" class="ml-12 text-base mt-2">Home</nuxt-link>
-      <nuxt-link to="/admin/service/contact" class="ml-12 text-base mt-2">Contacts</nuxt-link>
-      <nuxt-link to="/admin/service/deals" class="ml-12 text-base mt-2">Deals</nuxt-link>
-      <nuxt-link to="/admin/service/document" class="ml-12 text-base mt-2">Documents</nuxt-link>
-      <nuxt-link to="/admin/service/inbox" class="ml-12 text-base mt-2">Inbox</nuxt-link>
-      <nuxt-link to="/admin/service/activities" class="ml-12 text-base mt-2">Activities</nuxt-link>
+      <div class="flex">
+        <nuxt-link to="/admin/service" class="w-11/12">
+          <UserIcon class="fill-current mr-3" /> Service providers
+        </nuxt-link>
+        <font-awesome-icon v-if="!SPActive" @click="SPActive = !SPActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-down']"/>
+        <font-awesome-icon v-if="SPActive" @click="SPActive = !SPActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-up']"/>
+      </div>
+      <div :class="[SPActive ? 'block' : 'hidden']">
+        <nuxt-link to="/admin/service" class="block ml-12 text-base mt-2">Home</nuxt-link>
+        <nuxt-link to="/admin/service/contact" class="block ml-12 text-base mt-2">Contacts</nuxt-link>
+        <nuxt-link to="/admin/service/deals" class="block ml-12 text-base mt-2">Deals</nuxt-link>
+        <nuxt-link to="/admin/service/document" class="block ml-12 text-base mt-2">Documents</nuxt-link>
+        <nuxt-link to="/admin/service/inbox" class="block ml-12 text-base mt-2">Inbox</nuxt-link>
+        <nuxt-link to="/admin/service/activities" class="block ml-12 text-base mt-2">Activities</nuxt-link>
+      </div>
     </div>
     <div class="menu-item flex-col">
-      <nuxt-link to="/admin/invester">
-        <UserIcon class="fill-current mr-3" /> Investors
-      </nuxt-link>
+      <div class="flex">
+        <nuxt-link to="/admin/invester" class="w-11/12">
+          <UserIcon class="fill-current mr-3" /> Investors
+        </nuxt-link>
+        <font-awesome-icon v-if="!investActive" @click="investActive = !investActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-down']"/>
+        <font-awesome-icon v-if="investActive" @click="investActive = !investActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-up']"/>
+      </div>
 
-      <nuxt-link to="/admin/invester/blog" class="ml-12 text-base mt-2">Blog</nuxt-link>
+      <div :class="[investActive ? 'block' : 'hidden']">
+        <nuxt-link to="/admin/invester/blog" class="block ml-12 text-base mt-2">Blog</nuxt-link>
+      </div>
     </div>
     <div class="menu-item">
       <nuxt-link to="/admin/product">
@@ -66,6 +84,13 @@
         ProductIcon,
         TaskIcon,
         UserIcon
+      },
+      data() {
+        return {
+          userActive: false,
+          SPActive: false,
+          investActive: false
+        }
       }
     }
 </script>
