@@ -12,9 +12,9 @@
           >
             <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">
               <div v-for="Project in articleArray">
-                <div v-if="Project.project.id == $route.query.id ">
+                <div v-if="Project.project_id == $route.query.id ">
                   <!-- Lamborghini Aventado Project -->
-                  {{Project.project.title}}
+                  {{Project.title}}
                 </div>
               </div>
             </div>
@@ -45,10 +45,10 @@
 
           <div class="my-5 bg-white shadow">
             <div v-for="Project in articleArray">
-              <div v-if="Project.project.id == $route.query.id ">
+              <div v-if="Project.project_id == $route.query.id ">
                 <img
                   class="w-full"
-                  :src=" project_img_url + Project.project.image"
+                  :src=" project_img_url + Project.products[0].product_image"
                 />
               </div>
             </div>
@@ -74,7 +74,7 @@
               <div
                 class="flex items-center mt-5 lg:mt-0"
                 v-for="Project in articleArray"
-                v-if="Project.project.id == $route.query.id"
+                v-if="Project.project_id == $route.query.id"
               >
                 <div>
                   <nuxt-link
@@ -84,12 +84,12 @@
                 </div>
                 <div class="mx-5 text-sm text-gray-500 font-semibold">
                   <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'eye']" />
-                  {{Project.project.cost}}
+                  {{Project.products[0].cost}}
                 </div>
                 <div>
                   <button class="btn btn-normal font-semibold p-2 text-gray-500">
                     <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'star']" />
-                    {{Project.project.rate}}
+                    {{Project.products[0].rating}}
                   </button>
                 </div>
               </div>
@@ -110,8 +110,8 @@
               <div class="lg:flex" v-for="Project in articleArray">
                 <div
                   class="lg:flex"
-                  v-if="Project.project.id == $route.query.id "
-                >{{Project.project.description}}</div>
+                  v-if="Project.project_id == $route.query.id "
+                >{{Project.description}}</div>
               </div>
             </div>
             <div class="py-10 px-5 text-gray-600 w-full">
@@ -122,9 +122,9 @@
                   cols="30"
                   rows="10"
                   class="w-full border-light-gray border border-solid p-3"
-                  v-if="Project.project.id == $route.query.id "
+                  v-if="Project.project_id == $route.query.id "
                   @change="saveDescription"
-                >{{Project.project.description}}</textarea>
+                >{{Project.description}}</textarea>
               </div>
 
               <div class="mt-5 flex justify-end">
@@ -153,6 +153,7 @@ import ShareExternal from "~/components/share/share-external.vue";
 import CustomizeIcon from "~/components/partials/icons/customize-icon.vue";
 
 import Projects from "~/data/UserProjectApi.json";
+
 import apiService from "~/apiService/have_token.js";
 import apiService2 from "~/apiService/have_data.js";
 
@@ -240,7 +241,7 @@ export default {
         let description = e.target.value;
 
         const formData = new FormData();
-        formData.set("projectid", rouu);
+        formData.set("project_id", rouu);
         formData.set("description", description);
         let sendData = {
           method: "post",
@@ -253,7 +254,7 @@ export default {
           this.articleArray.map(item=>{
             if(item.project.id == this.$route.query.id)
               {
-                item.project.description = e.target.value
+                item.description = e.target.value
               }
           })
 
