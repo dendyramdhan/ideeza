@@ -40,13 +40,13 @@
             </div>
             <div class="flex items-center" slot="quantity" slot-scope="props">
               <div class="mx-auto flex">
-                 <font-awesome-icon
-                  class="mr-2 h-3 cursor-pointer"
+                 <font-awesome-icon @click="count--" v-if="count >= 1"
+                  class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'minus']"
                 />
                 <div class="w-5">{{count}}</div>
-                <font-awesome-icon
-                  class="mr-2 h-3 cursor-pointer"
+                <font-awesome-icon @click="count++"
+                  class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'plus']"
                 />
               </div>
@@ -64,7 +64,7 @@
               />
               <font-awesome-icon
                 class="mr-2 h-4 cursor-pointer text-ideeza"
-                :icon="['fas', 'trash']" @click="onRemove"
+                :icon="['fas', 'trash']" @click="onRemove(project.project_id)"
               />
 
               <!-- <nuxt-link to="/user/add-service">
@@ -165,15 +165,12 @@ export default {
     toggleChildRow(ref, id) {
       this.$refs[ref][0].toggleChildRow(id);
     },
-    onRemove() {
+    onRemove(project_id) {
       var d = confirm("Do you really want to remove?");
       if (d == true) {
         
       }
     }
-    // increase() {
-    //   this.count++;
-    // }
   }
 };
 </script>

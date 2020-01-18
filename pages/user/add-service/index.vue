@@ -218,6 +218,7 @@ export default {
     };
   },
   mounted() {
+    console.log('params: ', this.$route.params);
     this.projectidd = window.$nuxt.$cookies.get("userprojectid");
     const params = { projectid: this.projectidd };
     let sendData = {
