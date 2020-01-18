@@ -1,83 +1,120 @@
 <template>
-  <div v-if="info in "
-  <div class="mt-10">
-    <div class="flex justify-between items-center border-b-4 border-solid border-ideeza pb-5">
-      <div class="flex">
-        <span class="text-ideeza-dark text-xl inline-block font-semibold mr-5">Project: Metal Making</span>
-        <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
-          <span class="text-sm inline-block mr-1">Edit</span>
-          <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
-        </div>
-      </div>
-      <div>
-        <button onclick="print()" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
-        <button
-          @click.self="completeTask=true"
-          class="btn btn-normal btn--ideeza px-5 py-3"
-        >Complete Project</button>
-        <button
-          @click.self="$router.push('/technician/management/projects')"
-          class="btn btn-normal btn--ideeza-gray-500 px-5 py-3"
-        >Back</button>
-      </div>
-    </div>
-
-    <div class="flex items-center justify-between my-5">
-      <div>
-        Status:
-        <span class="text-ideeza uppercase">active</span>
-      </div>
-      <div class="flex items-center">
-        <div class="text-xl">
-          Project Duration:
-          <span class="text-ideeza">29 Sep - 16 Oct</span>
-        </div>
-        <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']" />
-      </div>
-    </div>
-
-    <div class="text-ideeza my-5">Price: $210</div>
-
-    <div class="lg:flex justify-between">
-      <div class="project-description lg:mr-16">
-        <div class="gradient-bg px-8 py-5 text-white">Project Description</div>
-        <p
-          class="p-5 bg-white text-black"
-        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam efficitur fermentum consectetur. Pellentesque et velit mattis, sagittis magna ac, vulputate neque. Suspendisse dolor sem, blandit ac dolor vitae, fermentum rhoncus augue. Fusce scelerisque posuere neque, in accumsan mi sagittis vitae. Phasellus purus purus, pulvinar vel diam sit amet, auctor feugiat purus. Donec nulla est, convallis nec tempor ac, molestie in massa. Morbi molestie varius ex, vel molestie dui. Phasellus accumsan velit eget efficitur condimentum. Fusce vehicula mi eu metus gravida, eget congue quam fermentum. Fusce consectetur, velit ultrices commodo lobortis, risus justo consectetur velit, a laoreet felis nisi venenatis ex. Quisque blandit magna eget velit vestibulum, porta vehicula velit convallis. Cras pulvinar nisl ut erat porta, et pellentesque metus facilisis. Sed porttitor malesuada efficitur. Curabitur malesuada elementum rhoncus. Etiam et rutrum nisi. Nam in ultricies lorem.</p>
-      </div>
-
-      <div class="flex-grow">
-        <div class="gradient-bg px-8 py-5 text-white">Attachments</div>
-        <div class="p-5 bg-white">
-          <span class="block text-xs">3 pics attached</span>
-          <div class="flex flex-wrap attached-images-wrapper mt-2">
-            <img src="https://picsum.photos/200" alt />
-            <img src="https://picsum.photos/200" alt />
-            <img src="https://picsum.photos/200" alt />
+  <div>
+    <div v-for="info in articleArray" v-if="info.id == $route.query.id">
+      <div class="mt-10">
+        <div class="flex justify-between items-center border-b-4 border-solid border-ideeza pb-5">
+          <div class="flex">
+            <span
+              class="text-ideeza-dark text-xl inline-block font-semibold mr-5"
+            >Project: {{info.title}}</span>
+            <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+              <span class="text-sm inline-block mr-1">Edit</span>
+              <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
+            </div>
           </div>
-          <div class="text-xs mt-5">
-            link attached:
-            <a class="text-blue-500" href="https://google.com">https://google.com</a>
+          <div>
+            <button onclick="print()" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
+            <button
+              @click.self="completeTask=true"
+              class="btn btn-normal btn--ideeza px-5 py-3"
+            >Complete Project</button>
+            <button
+              @click.self="$router.push('/technician/management/projects')"
+              class="btn btn-normal btn--ideeza-gray-500 px-5 py-3"
+            >Back</button>
           </div>
         </div>
-      </div>
-    </div>
 
-    <table class="mt-10 shadow-md">
-      <thead>
-        <tr class="text-white h16 gradient-bg">
-          <th class="text-left">Tasks</th>
-          <th class="text-left">Domain</th>
-          <th class="text-left">Assigned to</th>
-          <th class="text-left">Due Date</th>
-          <th class="text-left">Task Status</th>
-          <th class="text-left">Notification</th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="task in tasks">
-          <tr class="bg-ideeza-100">
-            <td class="cursor-pointer" @click.self="expand(task.id)">
+        <div class="flex items-center justify-between my-5">
+          <div>
+            Status:
+            <span class="text-ideeza uppercase">{{info.status}}</span>
+          </div>
+          <div class="flex items-center">
+            <div class="text-xl">
+              Project Duration:
+              <span class="text-ideeza">{{ts.toLocaleDateString(0 - info.start)}} -</span>
+              <span class="text-ideeza">{{ts.toLocaleDateString(info.end - 0)}}</span>
+            </div>
+            <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']" />
+          </div>
+        </div>
+
+        <div class="text-ideeza my-5">Price: $210</div>
+
+        <div class="lg:flex justify-between">
+          <div class="project-description lg:mr-16">
+            <div class="gradient-bg px-8 py-5 text-white">Project Description</div>
+            <p class="p-5 bg-white text-black">{{info.description}}</p>
+          </div>
+
+          <div class="flex-grow">
+            <div class="gradient-bg px-8 py-5 text-white">Attachments</div>
+            <div class="p-5 bg-white">
+              <span class="block text-xs">3 pics attached</span>
+              <div class="flex flex-wrap attached-images-wrapper mt-2">
+                <!-- <img src="https://picsum.photos/200" alt /> -->
+                <span v-for="image in info.attach">
+                  <img :src="project_img_url + image.image" />
+                </span>
+                <img src="https://picsum.photos/200" alt />
+                <!-- <img v-for="image in info.attach" :src="project_img_url+image.image" alt />{{project_img_url}}{{image.image}} -->
+              </div>
+              <div class="text-xs mt-5">
+                link attached:
+                <a class="text-blue-500" href="https://google.com">https://google.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <table class="mt-10 shadow-md">
+          <thead>
+            <tr class="text-white h16 gradient-bg">
+              <th class="text-left">Tasks</th>
+              <th class="text-left">Domain</th>
+              <th class="text-left">Assigned to</th>
+              <th class="text-left">Due Date</th>
+              <th class="text-left">Task Status</th>
+              <th class="text-left">Notification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-for="task in articleArray2">
+              <tr class="bg-ideeza-100">
+                <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
+                  <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
+                  <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" />
+                  {{task.name}}
+                </td>
+                <td>{{task.domain}}</td>
+                <td>
+                  <img
+                    v-for="image in task.assigned_user"
+                    :src="avata_img_url + image.avatar"
+                    class="avatar"
+                  />
+                </td>
+                <td class="text-center">
+                  <div
+                    class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
+                  >
+                    <span class="absolute due-date text-black">{{(task.end - task.start)/100000000}}</span>
+                    <div
+                      class="bg-ideeza rounded-full h-8"
+                      :style="{ width: ((task.end - task.start)/100000000) +'%'}"
+                    ></div>
+                  </div>
+                </td>
+                <td>{{task.status}}</td>
+                <td class="notifications">
+                  <font-awesome-icon
+                    class="mr-1 text-lg text-ideeza-gold"
+                    :icon="['fas', 'exclamation-circle']"
+                  />
+                </td>
+
+                <!-- <td class="cursor-pointer" @click.self="expand(task.id)">
               <font-awesome-icon
                 class="mr-1 text-lg text-ideeza"
                 :icon="['fas', 'caret-up']"
@@ -92,11 +129,11 @@
             </td>
             <td>{{task.domain}}</td>
             <td>
-              <img v-for="image in task.assigned_to" :src="image.url" class="avatar" />
-              <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-              <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
-            </td>
+                <img v-for="image in task.assigned_to" :src="image.url" class="avatar" />-->
+                <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+                                              <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+                <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
+                <!-- </td>
             <td class="text-center">
               <div
                 class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
@@ -110,9 +147,9 @@
             </td>
             <td class="status status--completed" v-if="task.status == 1">completed</td>
             <td v-if="task.status == 2" class="status status--over">over due</td>
-            <td v-if="task.status == 3" class="status status--progress">in progress</td>
-            <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
-            <td class="notifications">
+                <td v-if="task.status == 3" class="status status--progress">in progress</td>-->
+                <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
+                <!-- <td class="notifications">
               <font-awesome-icon
                 v-if="task.status == 1"
                 class="mr-1 text-lg text-ideeza-gold"
@@ -128,9 +165,10 @@
                 class="mr-1 text-lg text-red-500"
                 :icon="['far', 'clock']"
               />
-            </td>
-          </tr>
-          <template v-if="task.id in expanded&&expanded[task.id]==true">
+                </td>-->
+              </tr>
+
+              <!-- <template v-if="task.id in expanded&&expanded[task.id]==true">
             <tr class="bg-pink-200" v-for="(subtask) in task.subtasks">
               <td
                 class="cursor-pointer md:text-right"
@@ -138,11 +176,11 @@
               >{{subtask.name}}</td>
               <td>{{subtask.domain}}</td>
               <td>
-                <img v-for="image in subtask.assigned_to" :src="image.url" class="avatar" />
-                <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+              <img v-for="image in subtask.assigned_to" :src="image.url" class="avatar" />-->
+              <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
             <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
-              </td>
+              <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
+              <!-- </td>
               <td class="text-center">
                 <div
                   class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
@@ -156,9 +194,9 @@
               </td>
               <td class="status status--completed" v-if="subtask.status == 1">completed</td>
               <td v-if="subtask.status == 2" class="status status--over">over due</td>
-              <td v-if="subtask.status == 3" class="status status--progress">in progress</td>
+              <td v-if="subtask.status == 3" class="status status--progress">in progress</td>-->
               <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
-              <td class="notifications">
+              <!-- <td class="notifications">
                 <font-awesome-icon
                   v-if="subtask.status == 1"
                   class="mr-1 text-lg text-ideeza-gold"
@@ -176,10 +214,10 @@
                 />
               </td>
             </tr>
-          </template>
-        </template>
+              </template>-->
+            </template>
 
-        <!-- <tr class="cursor-pointer" @click.self="editTask=true">
+            <!-- <tr class="cursor-pointer" @click.self="editTask=true">
           <td >
             <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
             Iron Making
@@ -253,41 +291,44 @@
           </td>
 
 
-        </tr>-->
-      </tbody>
-    </table>
-    <button
-      @click.self="addNewTask=true"
-      class="btn btn-normal btn--ideeza-dark px-5 py-3 mt-5"
-    >Add New Task +</button>
+            </tr>-->
+          </tbody>
+        </table>
+        <button
+          @click.self="addNewTask=true"
+          class="btn btn-normal btn--ideeza-dark px-5 py-3 mt-5"
+        >Add New Task +</button>
 
-    <div class="mt-20">
-      <div class="gradient-bg px-8 py-5 text-white">Timeline</div>
+        <div class="mt-20">
+          <div class="gradient-bg px-8 py-5 text-white">Timeline</div>
 
-      <task-timeline />
-    </div>
+          <task-timeline />
+        </div>
 
-    <!--Add new project-->
-    <new-project @onClose="addNewProject=false" v-if="addNewProject" />
+        <!--Add new project-->
+        <new-project @onClose="addNewProject=false" v-if="addNewProject" />
 
-    <!--Add new task-->
-    <new-task @onClose="addNewTask=false" v-if="addNewTask" />
+        <!--Add new task-->
+        <new-task @onClose="addNewTask=false" v-if="addNewTask" />
 
-    <!--Edit task-->
-    <edit-task @onClose="editTask=false" v-if="editTask" />
+        <!--Edit task-->
+        <edit-task @onClose="editTask=false" v-if="editTask" />
 
-    <detail-task
-      @onClose="detailTask=false"
-      @onEdit="detailTask=false;editTask=true"
-      v-if="detailTask"
-      @complete="detailTask=false;completeTask=true"
-    />
-    <complete-task @onClose="completeTask=false" v-if="completeTask" />
-    <span v-for="info in articleArray">
-      <span v-if="info.id == $route.query.id">{{info}}</span>
+        <detail-task
+          @onClose="detailTask=false"
+          @onEdit="detailTask=false;editTask=true"
+          v-if="detailTask"
+          @complete="detailTask=false;completeTask=true"
+        />
+        <complete-task @onClose="completeTask=false" v-if="completeTask" />
+
+        <!-- <span v-for="info in articleArray" v-if="info.id == $route.query.id">
+      {{info}}
     </span>
     --{{$route.query.id}}
-  </div>
+        {{articleArray2}}--{{projectidd}}-->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -300,14 +341,16 @@ import TaskTimeLine from "~/components/technician/management/task-timeline.vue";
 import CompleteTask from "~/components/technician/management/complete-task.vue";
 
 import apiService from "~/apiService/have_token.js";
-
-
+import apiService2 from "~/apiService/get_param.js";
 
 export default {
   name: "detail",
   mounted() {
-   this.projectidd = this.$route.query.id;
+    this.projectidd = this.$route.query.id;
+    window.$nuxt.$cookies.set("technicianprojectid", this.$route.query.id);
+
     this.$store.commit("TechnicianProjectStore/viewflagchange2");
+
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -324,6 +367,25 @@ export default {
         this.articleArray.push(item);
       });
     });
+
+    const formData = new FormData();
+    formData.set("projectid", this.projectidd);
+    let sendData2 = {
+      method: "post",
+      url: this.geturl2,
+      data: formData
+    };
+
+    apiService(sendData2, response => {
+      console.log(response.data);
+      this.randomNumber2 = response.data;
+      this.articleArrayaxios2 = Object.values(response.data.tasks);
+
+      this.articleArrayaxios2.map(item => {
+        this.articleArrayrout2.push(item);
+        this.articleArray2.push(item);
+      });
+    });
   },
   components: {
     "new-project": AddNewProject,
@@ -334,6 +396,10 @@ export default {
     CompleteTask
   },
   methods: {
+    taskdetailtrue(myid) {
+      window.$nuxt.$cookies.set("techniciantaskid", myid);
+      this.detailTask = true;
+    },
     expand(id) {
       if (id in this.expanded && this.expanded[id] == true) {
         this.$set(this.expanded, id, false);
@@ -345,13 +411,21 @@ export default {
   },
   data: function() {
     return {
+      project_img_url: process.env.project_image_url,
+      ts: new Date(),
       geturl: "/api/project/technician/get_all",
       articleArray: [],
       articleArrayrout: [],
       articleArrayaxios: [],
       projectidd: null,
       randomNumber: {},
+      avata_img_url: process.env.avatar_base_url,
       project_img_url: process.env.project_image_url,
+      articleArray2: [],
+      articleArrayrout2: [],
+      geturl2: "/api/project/get_tasks",
+      articleArrayaxios2: [],
+      randomNumber2: [],
 
       addNewProject: false,
       addNewTask: false,
