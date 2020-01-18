@@ -1,5 +1,9 @@
 <template>
-   <!-- Main Contents -->
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+    <!--  Left Side Bar  -->
+    <LeftMenu />
+
+    <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
         <div class="p-5">
@@ -157,13 +161,38 @@
       </div>
         
       </div>
+
+      
+    </div>
+
+
+     
+
   </div>
 </template>
 
 <script>
+  import LeftMenu from '~/components/technician/common-left-side-menu.vue'
+
   export default {
-    layout: 'service-provider',
-  }
+    layout: 'user',
+    name: "agency-index",
+    components: {
+      LeftMenu
+    },
+    data: function () {
+      return {}
+    },
+    computed: {
+      leftMenu() {
+        return this.$store.state.usermenu.openLeftMenu;
+      }
+    },
+    mounted() {
+
+    },
+    methods: {}
+  };
 
 </script>
 
