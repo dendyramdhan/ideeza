@@ -14,7 +14,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                     </div>
                     <div class="text-center">
-                        <button class="w-full py-2 px-4 bg-gray-300 text-black rounded-full">Currently Activated</button>
+                        <button class="w-full py-2 px-4 bg-gray-300 text-black rounded-full" @click="selectplan('ESSENTIAL')">Currently Activated</button>
                     </div>
                 </div>
                 <ul>
@@ -53,7 +53,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </div>
                     <div class="text-center">
-                        <button class="w-full py-2 px-4 bg-ideeza text-white rounded-full">Subscribe</button>
+                        <button class="w-full py-2 px-4 bg-ideeza text-white rounded-full" @click="selectplan('PREMIUM')">Subscribe</button>
                     </div>
                 </div>
                 <ul>
@@ -92,7 +92,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </div>
                     <div class="text-center">
-                        <button class="w-full py-2 px-4 bg-ideeza-dark text-white rounded-full">Subscribe</button>
+                        <button class="w-full py-2 px-4 bg-ideeza-dark text-white rounded-full" @click="selectplan('ENTERPRISE')">Subscribe</button>
                     </div>
                 </div>
                 <ul>
@@ -127,7 +127,12 @@
 </template>
 <script>
 export default {
-    layout: 'service-provider-setting'
+    layout: 'service-provider-setting',
+    methods:{
+        selectplan(str){
+            alert("you select "+ str + " pricing plan")
+        }
+    },
 }
 </script>
 <style scoped>

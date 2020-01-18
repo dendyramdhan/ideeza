@@ -62,7 +62,7 @@
           <div class="field-label">Preferred Language</div>
           <div class="field-input flex-grow">
             <select class="field h-10" :value="articleArraymid1.prefered_language" >
-              <option value="male">English</option>
+              <option value="English">English</option>
             </select>
           </div>
         </div>

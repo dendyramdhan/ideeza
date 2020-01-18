@@ -169,6 +169,7 @@ export default {
       this.counterarray.push(i);
     }
     // alert(this.counterarray);
+    
 
     this.Services.map(item => {
       this.articleArray.push(item);
@@ -460,3 +461,20 @@ export default {
     td:nth-of-type(6):before { content: "Action"; }
   }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

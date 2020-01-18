@@ -9,24 +9,25 @@
             <div class="form-field">
               <div class="field-label">Old Password</div>
               <div class="field-input flex-grow">
-                <input class="field p-1" name="name" type="password" value="PCXL.L."/>
+                           <input class="field h-10" name v-model="old_password" />
+
               </div>
             </div>
              <div class="form-field">
               <div class="field-label">New Password</div>
               <div class="field-input flex-grow">
-                <input class="field p-1" name="name" type="password"  value="PCXL.L."/>
+                <input class="field h-10" name v-model="new_password" />
               </div>
             </div>
              <div class="form-field">
               <div class="field-label">Confirm Password</div>
               <div class="field-input flex-grow">
-                <input class="field p-1" name="name" type="password" value="PCXL.L."/>
+                 <input class="field h-10" name v-model="password_confirm" />
               </div>
             </div>
             <div class="flex justify-center">
               <div class="mt-5">
-                <button class="text-white rounded-full bg-ideeza px-4 py-1">Update Password</button>
+                <button class="text-white rounded-full bg-ideeza px-4 py-1"  @click="updatepassword">Update Password</button>
               </div>
             </div>
           </div>
@@ -39,28 +40,26 @@
 
       <table>
         <thead>
-        <tr class="text-gray-800 h16">
-          <th class="text-left">Browser/Device</th>
-          <th class="text-left">Location</th>
-          <th class="text-left">Recent Activity</th>
-          <th></th>
-        </tr>
+          <tr class="text-gray-800 h16">
+            <th class="text-left">Browser/Device</th>
+            <th class="text-left">Location</th>
+            <th class="text-left">Recent Activity</th>
+            <th></th>
+          </tr>
         </thead>
-        <tbody>
-        <tr class="">
-          <td class="">Chrome/Windows 10</td>
-          <td >NewYork NY USA</td>
-          <td >About 3 hours ago</td>
-          <td class="lg:text-right text-ideeza">Log Out</td>
-        </tr>
-
-        <tr class="">
-          <td class="">Chrome/Windows 10</td>
-          <td >NewYork NY USA</td>
-          <td >About 3 hours ago</td>
-          <td class="lg:text-right text-ideeza">Log Out</td>
-        </tr>
-
+        <tbody v-for="Projects in articleArray ">
+          <tr class v-for="(Project,index) in Projects ">
+            <td class>{{ Project.browser}}</td>
+            <td>{{ Project.location}}</td>
+            <td>{{ ts.toLocaleDateString(Project.timestamp)}}</td>
+            <td class="lg:text-right">
+              <font-awesome-icon
+                class="ml-1 h-4 cursor-pointer text-gray-400"
+                :icon="['fas', 'times']"
+                @click="delete_login_history(Project.id)"
+              />
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -104,8 +103,92 @@
   </div>
 </template>
 <script>
+import Projects from "~/data/UserSettingApi.json";
+import apiService from "~/apiService/have_token.js";
+
 export default {
-  layout:'service-provider-setting'
+  layout:'service-provider-setting',
+  data: function() {
+    return {
+      longview: true,
+      Projects: Projects.Login_history,
+      security: Projects.Setting_general,
+      geturl: "/api/setting/login_history",
+      geturl2: "/api/setting/delete_login_history",
+      articleArray: [],
+      randomNumber: {},
+      ts: new Date(),
+      loginId: null,
+      password_confirm: null,
+      new_password: null,
+      old_password: null
+    };
+  },
+  mounted() {
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data.data;
+      // this.articleArray = Object.values(response.data.data);
+      this.articleArray = this.randomNumber;
+    });
+  },
+  created: function() {},
+  methods: {
+    delete_login_history(evt) {
+      //   this.articleArray=[];
+
+      //  alert(evt)
+      // this.loginId=evt;
+      // this.randomNumber.splice(this.loginId, this.loginId-1)
+
+      const formData = new FormData();
+      formData.set("id", evt);
+      let sendData = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+
+      apiService(sendData, response => {
+        console.log(response.data);
+
+        let listArray = [];
+        console.log("before delete : ", this.randomNumber, evt);
+        this.randomNumber.map(item => {
+          // console.log("item id : ", item.history.id)
+          if (item.history.id == evt) {
+          } else {
+            // this.articleArray.push(item);
+            listArray.push(item);
+          }
+        });
+
+        this.articleArray = listArray;
+
+        console.log("after delete : ", this.articleArray);
+
+        // this.randomNumber[this.loginId].remove()
+        // window.location.reload();
+      });
+    },
+    updatepassword() {
+      if (this.old_password == this.security[0].password) {
+        if (this.new_password == this.password_confirm) {
+          alert("update your password!!!");
+        } else {
+          alert("password_confirm Error!!!");
+        }
+      } else {
+        alert("old password Error!!!");
+      }
+    }
+  }
 }
 </script>
 <style scoped>

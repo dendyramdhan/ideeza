@@ -133,14 +133,13 @@ export default {
       geturl: "/api/project/get_connectors",
       articleArray: [],
       randomNumber: [],
-      projectidd:window.$nuxt.$cookies.get("userprojectid"),
+      projectidd:null,
       avata_img_url:process.env.avatar_base_url,
 
     };
   },
    mounted() {
 
-      
 // axios.get('http://192.168.1.162/api/project/get_connectors', {
 //     params: {
 //       projectid: this.projectidd
@@ -151,6 +150,8 @@ export default {
 //     this.randomNumber = response;
 //     this.articleArray = Object.values(response.data.data);
 //   })
+
+      this.projectidd = window.$nuxt.$cookies.get("userprojectid");
 
      const params = {	projectid: this.projectidd,};
     let sendData = {
