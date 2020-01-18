@@ -5,16 +5,16 @@
     <div class="cart-scroll-area">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
       <div style="overflow: scroll; height: 480px">
-        <div v-for="project in projects" :key="project.id">
+        <div v-for="project in projects" :key="project.project_id">
           <div
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
           >
-            <div class="text-sm mb-1 lg:mb-0 lg:text-xl">{{project.name}}</div>
-            <font-awesome-icon class="mr-1 h-4 cursor-pointer text-white" :icon="['fas', 'trash']" />
+            <div class="text-sm mb-1 lg:mb-0 lg:text-xl">{{project.title}}</div>
+            <font-awesome-icon class="mr-1 h-4 cursor-pointer text-white" :icon="['fas', 'trash']" @click="onRemoveAll"/>
           </div>
           <v-client-table
-            :ref="`products_table_${project.id}`"
-            :data="project.tableData"
+            :ref="`products_table_${project.project_id}`"
+            :data="project.products"
             :columns="columns"
             :options="options"
           >
@@ -24,8 +24,21 @@
                 <img src="~/static/images/Layercar.png" />
               </div>
               <div class="my-auto">
-                <span class="block font-semibold">{{props.row.product.name}}</span>
-                <span class="block text-sm text-gray-500">{{props.row.product.detail}}</span>
+                <span class="block font-semibold">{{props.row.product_title}}</span>
+                <span class="block text-sm text-gray-500">{{props.row.product_description}}</span>
+              </div>
+            </div>
+            <div class="flex items-center" slot="quantity" slot-scope="props">
+              <div class="mx-auto flex">
+                 <font-awesome-icon
+                  class="mr-2 h-3 cursor-pointer"
+                  :icon="['fas', 'minus']"
+                />
+                <div class="w-5">{{count}}</div>
+                <font-awesome-icon
+                  class="mr-2 h-3 cursor-pointer"
+                  :icon="['fas', 'plus']"
+                />
               </div>
             </div>
             <span
@@ -37,10 +50,10 @@
             <div class="flex items-center justify-end" slot="actions" slot-scope="props">
               <font-awesome-icon
                 class="mr-2 h-4 cursor-pointer text-ideeza"
-                :icon="['fas', 'trash']"
+                :icon="['fas', 'trash']" @click="onRemove"
               />
               <font-awesome-icon
-                @click="toggleChildRow('products_table_'+project.id, props.row.id)"
+                @click="toggleChildRow('products_table_'+project.project_id, props.row.id)"
                 class="mr-2 h-4 cursor-pointer text-ideeza"
                 :icon="['fas', 'pen']"
               />
@@ -86,6 +99,7 @@
 
 <script>
 import CheckBox from "~/components/form/checkbox-dark.vue";
+import apiServiceWithToken from "~/apiService/have_token.js";
 import products from "~/json/products.json";
 export default {
   middleware: "auth",
@@ -95,6 +109,7 @@ export default {
   },
   data: function() {
     return {
+      count: 0,
       details1: false,
       columns: [
         "id",
@@ -105,7 +120,7 @@ export default {
         "cost",
         "actions"
       ],
-      projects: products,
+      projects: [],
 
       options: {
         headings: {
@@ -125,11 +140,38 @@ export default {
   },
   mounted() {
     this.$store.commit("cartstepper/set", { position: 2 });
+    let getallprojectsurl = "/api/project/get_all";
+    let getallprojectsData = {
+      method: "get",
+      url: getallprojectsurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallprojectsData, response => {
+      console.log(response.data);
+      console.log(response.data["success"]);
+      if (response.data["success"] == true) {
+        this.projects = response.data["data"];
+        console.log("projects: ", response.data["data"]);
+      }
+    });
   },
   methods: {
     addManufacturer() {},
     toggleChildRow(ref, id) {
       this.$refs[ref][0].toggleChildRow(id);
+    },
+    onRemove() {
+      var d = confirm("Do you really want to remove?");
+      if (d == true) {
+        
+      }
+    },
+    onRemoveAll() {
+      var d = confirm("Do you really want to remove?");
+      if (d == true) {
+        
+      }
     }
   }
 };
