@@ -96,7 +96,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 5 });
+    this.$store.commit("cartstepper/set", { position: 6 });
   }
 };
 </script>

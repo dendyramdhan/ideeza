@@ -81,23 +81,19 @@ import axios from "axios";
 export default {
   middleware: "auth",
   name: "delivery",
-  asyncData({ params }) {
-    return axios.get(`https://api.printful.com/countries`).then(res => {
-      var countries = [];
-      for (var i = 0; i < res.data.result.length; i++) {
-        countries.push(res.data.result[i].name);
-      }
-      return { countries: countries };
-    });
-  },
+  
   data: function() {
     return {
       shippingServices: [
         "Ali Express Standard",
-        "Ali Express Standard",
-        "Ali Express Standard",
-        "Ali Express Standard",
-        "Ali Express Standard"
+        "FEDEX",
+        "UPS",
+        "USPS"
+      ],
+      countries : [
+        "United States",
+        "United Kingdom",
+        "Canada"
       ],
       cities: [
         "New York",
@@ -112,7 +108,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 3 });
+    this.$store.commit("cartstepper/set", { position: 4 });
   },
   components: {
     "text-field": TextField,

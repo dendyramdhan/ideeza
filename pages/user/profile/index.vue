@@ -215,7 +215,7 @@
             <img
               class="project-image"
               v-for="project in projects"
-              :src="'http://192.168.1.162/api/img/projects/' + project.project.image"
+              :src="'http://192.168.1.162/api/img/projects/' + project.avatar"
               alt
             />
           </div>
