@@ -5,45 +5,74 @@
     <div class="cart-scroll-area">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
       <div style="overflow: scroll; height: 480px">
-        <div v-for="project in projects" :key="project.id">
+        <div v-for="project in projects" :key="project.project_id">
           <div
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
           >
-            <div class="text-sm mb-1 lg:mb-0 lg:text-xl">{{project.name}}</div>
-            <font-awesome-icon class="mr-1 h-4 cursor-pointer text-white" :icon="['fas', 'trash']" />
+            <div class="text-sm mb-1 lg:mb-0 lg:text-xl">{{project.title}}</div>
+            <!-- <font-awesome-icon class="mr-1 h-4 cursor-pointer text-white" :icon="['fas', 'trash']" /> -->
           </div>
           <v-client-table
-            :ref="`products_table_${project.id}`"
-            :data="project.tableData"
+            :ref="`products_table_${project.project_id}`"
+            :data="project.products"
             :columns="columns"
             :options="options"
           >
-            <CheckBox slot="id" slot-scope="props" />
+            <!-- <CheckBox slot="id" slot-scope="props" /> -->
             <div class="flex items-center" slot="detail" slot-scope="props">
               <div class="mr-2">
-                <img :src="props.row.product.image" />
+                <img :src="'http://192.168.1.162/api/img/projects/' + props.row.product_image" />
               </div>
               <div class="my-auto">
-                <span class="block font-semibold">{{props.row.product.name}}</span>
-                <span class="block text-sm text-gray-500">{{props.row.product.detail}}</span>
+                <span class="block font-semibold">{{props.row.product_title}}</span>
+                <span class="block text-sm text-gray-500">{{props.row.product_description}}</span>
+              </div>
+            </div>
+            <div class="flex items-center" slot="color" slot-scope="props">
+              <div class="my-auto">
+                <span class="block font-semibold">{{props.row.color}}</span>
+              </div>
+            </div>
+            <div class="flex items-center" slot="price" slot-scope="props">
+              <div class="mx-auto">
+                <span class="block font-semibold">{{props.row.cost}}</span>
+              </div>
+            </div>
+            <div class="flex items-center" slot="quantity" slot-scope="props">
+              <div class="mx-auto flex">
+                 <font-awesome-icon
+                  class="mr-2 h-3 cursor-pointer"
+                  :icon="['fas', 'minus']"
+                />
+                <div class="w-5">{{count}}</div>
+                <font-awesome-icon
+                  class="mr-2 h-3 cursor-pointer"
+                  :icon="['fas', 'plus']"
+                />
+              </div>
+            </div>
+            <div class="flex items-center" slot="cost" slot-scope="props">
+              <div class="mx-auto">
+                <span class="block font-semibold">{{props.row.cost}}</span>
               </div>
             </div>
             <div class="flex items-center justify-end" slot="actions" slot-scope="props">
               <font-awesome-icon
-                class="mr-2 h-4 cursor-pointer text-ideeza"
-                :icon="['fas', 'trash']"
-              />
-              <font-awesome-icon
-                @click="toggleChildRow('products_table_'+project.id, props.row.id)"
+                @click="toggleChildRow('products_table_'+project.project_id, props.row.id)"
                 class="mr-2 h-4 cursor-pointer text-ideeza"
                 :icon="['fas', 'pen']"
               />
-              <nuxt-link to="/user/add-service">
+              <font-awesome-icon
+                class="mr-2 h-4 cursor-pointer text-ideeza"
+                :icon="['fas', 'trash']" @click="onRemove"
+              />
+
+              <!-- <nuxt-link to="/user/add-service">
                 <font-awesome-icon
                   class="mr-2 h-4 cursor-pointer text-ideeza"
                   :icon="['fas', 'plus']"
                 />
-              </nuxt-link>
+              </nuxt-link>-->
             </div>
 
             <div slot="child_row" slot-scope="props" class="pb-10 pr-32">
@@ -80,22 +109,32 @@
 
 <script>
 import CheckBox from "~/components/form/checkbox-dark.vue";
+import apiServiceWithToken from "~/apiService/have_token.js";
 import products from "~/json/products.json";
 export default {
-  middleware: 'auth',
+  middleware: "auth",
   name: "overview",
   components: { CheckBox },
   data: function() {
     return {
-      columns: ["id", "detail", "color", "quantity", "actions"],
-      projects: products,
+      count: 0,
+      columns: [
+        "id",
+        "detail",
+        "color",
+        "price",
+        "quantity",
+        "cost",
+        "actions"
+      ],
+      projects: [],
 
       options: {
         headings: {
           id: "",
           detail: "Products",
           quantity: "Quantity",
-          actions: "Actions"
+          actions: ""
         },
         sortable: [],
         filterable: false,
@@ -105,11 +144,36 @@ export default {
   },
   mounted() {
     this.$store.commit("cartstepper/set", { position: 0 });
+
+    let getallprojectsurl = "/api/project/get_all";
+    let getallprojectsData = {
+      method: "get",
+      url: getallprojectsurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallprojectsData, response => {
+      console.log(response.data);
+      console.log(response.data["success"]);
+      if (response.data["success"] == true) {
+        this.projects = response.data["data"];
+        console.log("projects: ", response.data["data"]);
+      }
+    });
   },
   methods: {
     toggleChildRow(ref, id) {
       this.$refs[ref][0].toggleChildRow(id);
+    },
+    onRemove() {
+      var d = confirm("Do you really want to remove?");
+      if (d == true) {
+        
+      }
     }
+    // increase() {
+    //   this.count++;
+    // }
   }
 };
 </script>

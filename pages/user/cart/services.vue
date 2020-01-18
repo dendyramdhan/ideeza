@@ -9,12 +9,13 @@
           <option>All</option>
           <option>Copyrighting</option>
           <option>Electronics</option>
-          <option>Code</option>
-          <option>Development</option>
+          <option>Coding</option>
+          <option>Developing</option>
+          <option>Designing</option>
         </select>
       </div>
       <div>
-        <SearchInput />
+        <SearchInput placeholder="Search Member..." />
       </div>
     </div>
 
