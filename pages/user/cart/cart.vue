@@ -10,7 +10,11 @@
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
           >
             <div class="text-sm mb-1 lg:mb-0 lg:text-xl">{{project.title}}</div>
-            <font-awesome-icon class="mr-1 h-4 cursor-pointer text-white" :icon="['fas', 'trash']" @click="onRemoveAll"/>
+            <font-awesome-icon
+              class="mr-1 h-4 cursor-pointer text-white"
+              :icon="['fas', 'trash']"
+              @click="onRemoveAll(project.project_id)"
+            />
           </div>
           <v-client-table
             :ref="`products_table_${project.project_id}`"
@@ -30,15 +34,9 @@
             </div>
             <div class="flex items-center" slot="quantity" slot-scope="props">
               <div class="mx-auto flex">
-                 <font-awesome-icon
-                  class="mr-2 h-3 cursor-pointer"
-                  :icon="['fas', 'minus']"
-                />
+                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'minus']" @click="ondecrease"/>
                 <div class="w-5">{{count}}</div>
-                <font-awesome-icon
-                  class="mr-2 h-3 cursor-pointer"
-                  :icon="['fas', 'plus']"
-                />
+                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'plus']" @click="onincrement"/>
               </div>
             </div>
             <span
@@ -50,19 +48,18 @@
             <div class="flex items-center justify-end" slot="actions" slot-scope="props">
               <font-awesome-icon
                 class="mr-2 h-4 cursor-pointer text-ideeza"
-                :icon="['fas', 'trash']" @click="onRemove"
+                :icon="['fas', 'trash']"
+                @click="onRemove(props.row.product_id)"
               />
               <font-awesome-icon
                 @click="toggleChildRow('products_table_'+project.project_id, props.row.id)"
                 class="mr-2 h-4 cursor-pointer text-ideeza"
                 :icon="['fas', 'pen']"
               />
-              <nuxt-link to="/user/add-service">
-                <font-awesome-icon
+                <font-awesome-icon @click="onAddService(project.project_id)"
                   class="mr-2 h-4 cursor-pointer text-ideeza"
                   :icon="['fas', 'plus']"
                 />
-              </nuxt-link>
             </div>
 
             <div slot="child_row" slot-scope="props" class="pb-10 pr-32">
@@ -161,17 +158,32 @@ export default {
     toggleChildRow(ref, id) {
       this.$refs[ref][0].toggleChildRow(id);
     },
-    onRemove() {
+    onRemove(product_id) {
       var d = confirm("Do you really want to remove?");
       if (d == true) {
         
       }
     },
-    onRemoveAll() {
+    onRemoveAll(project_id) {
       var d = confirm("Do you really want to remove?");
       if (d == true) {
         
       }
+    },
+    onAddService(id) {
+      window.$nuxt.$cookies.set("userprojectid", id);
+      this.$router.push("/user/add-service");
+    },
+
+    onincrement() {
+      this.count++;
+    },
+
+    ondecrease() {
+      if (this.count < 1) {
+        return
+      }
+      this.count--;
     }
   }
 };
