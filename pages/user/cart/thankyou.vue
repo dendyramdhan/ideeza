@@ -23,7 +23,7 @@ export default {
   middleware: "auth",
   name: "cart-thankyou",
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 6 });
+    this.$store.commit("cartstepper/set", { position: 7 });
   }
 };
 </script>

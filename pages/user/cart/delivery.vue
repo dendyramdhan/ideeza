@@ -108,7 +108,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 3 });
+    this.$store.commit("cartstepper/set", { position: 4 });
   },
   components: {
     "text-field": TextField,

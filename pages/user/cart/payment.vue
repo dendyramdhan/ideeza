@@ -182,7 +182,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 4 });
+    this.$store.commit("cartstepper/set", { position: 5 });
   },
   components: {
     "text-field": TextField,
