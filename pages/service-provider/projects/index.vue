@@ -112,6 +112,11 @@
         <new-project @onClose="addNewProject=false" v-if="addNewProject" />
       </div>
     </div>
+    <!-- <ul >
+      <li v-for="info in articleArray">
+        <span v-for="detail in info.assigned_users">{{detail.avatar}}</span></li><br/>
+    </ul> -->
+    <!-- {{articleArray}} -->
   </div>
 </template>
 
