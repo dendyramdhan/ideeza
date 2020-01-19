@@ -53,7 +53,7 @@
                 @click="$emit('onEdit')"
               >
                 <span class="text-sm inline-block mr-1">Edit</span>
-                <font-awesome-icon   class="mr-1 h-3" :icon="['fas', 'pen']" />
+                <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
               </div>
             </div>
             <div class="mt-5">
@@ -76,8 +76,23 @@
                     href="https://google.com"
                   >https://google.com</a>
                 </div>
-                <div class="text-xs mt-5">
-                  <file-field-button :icon="true" label="Add Attachment *" />
+                <div class="mt-5">
+                  <span class="inline-block mb-2">Attach</span>
+                  <!-- <FileField /> -->
+                  <img id="image" />
+                  <form enctype="multipart/form-data">
+                    <input
+                      type="file"
+                      @change="fileseleted"
+                      ref="file_upload2"
+                      class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
+                      style="display:none"
+                    />
+                  </form>
+                  <button
+                    class="ml-5 btn btn-small btn--ideeza px-2 text-xs"
+                    @click="$refs.file_upload2.click()"
+                  >SelectImage</button>
                 </div>
               </div>
             </div>
@@ -86,9 +101,7 @@
           <div class="lg:ml-5 w-1/3">
             <div class="mb-2 ml-5 flex justify-between">
               <span>Notification Center:</span>
-              <nuxt-link
-                :to="{ path: '/technician/messages', query: { id:  userid}}"
-              >
+              <nuxt-link :to="{ path: '/technician/messages', query: { id:  userid}}">
                 <button class="btn--ideeza px-3 py-1">
                   Compose
                   <font-awesome-icon
@@ -99,7 +112,10 @@
               </nuxt-link>
             </div>
             <ul class="events mb-5">
-              <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="member in info.assigned_users">
+              <li
+                class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event"
+                v-for="member in info.assigned_users"
+              >
                 <div>
                   <div class="text text-sm font-bold">{{member.name}}</div>
                   <div class="text text-xs">Completed</div>
@@ -123,7 +139,9 @@
           <button class="btn--ideeza bg-ideeza text-white px-3 py-2">Complete Task</button>
           <!-- <span v-for="(info,index) in articleArray" v-if="index==0">
            {{info.name}}
-          </span>-->
+
+          </span>
+          {{articleArray}}-->
           <!-- {{articleArray}}--{{projectidd}} -->
         </div>
       </div>
@@ -143,6 +161,9 @@ import apiService from "~/apiService/have_token.js";
 
 export default {
   name: "new-project",
+  props: {
+    parentData: String
+  },
   data: function() {
     return {
       dateRange: null,
@@ -152,17 +173,21 @@ export default {
       taskTitle: "Make Iron from steel",
       ts: new Date(),
       geturl: "/api/project/get_task_detail",
+      geturl2: "/api/project/task/add_attach",
       articleArray: [],
       articleArrayrout: [],
       articleArrayaxios: [],
       projectidd: null,
       randomNumber: {},
       project_img_url: process.env.project_image_url,
-      userid:null,
+      userid: null,
+      file: null
     };
   },
   mounted() {
-    this.projectidd = window.$nuxt.$cookies.get("techniciantaskid");
+    console.log("parent data:", this.parentData);
+
+    this.projectidd = this.parentData;
     this.userid = window.$nuxt.$cookies.get("userid");
     const formData = new FormData();
     formData.set("taskid", this.projectidd);
@@ -192,6 +217,32 @@ export default {
     FileFieldButton
   },
   methods: {
+    fileseleted(evt) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+      };
+      // read the image file as a data URL.
+      reader.readAsDataURL(evt.target.files[0]);
+
+      // this.file = this.$refs.file.files[0];
+      console.log("file_upload:", evt);
+      this.file = evt.target.files[0];
+
+      // const formData = new FormData();
+      // formData.set("taskid", this.projectidd);
+      // formData.append("attached", this.file);
+      // let sendData2 = {
+      //   method: "post",
+      //   url: this.geturl2,
+      //   data: formData
+      // };
+
+      // apiService(sendData2, response => {
+      //   console.log(response.data);
+      // });
+    },
     close() {
       this.$emit("onClose");
     },

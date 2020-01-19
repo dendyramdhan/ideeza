@@ -8,8 +8,8 @@
               class="text-ideeza-dark text-xl inline-block font-semibold mr-5"
             >Project: {{info.title}}</span>
             <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
-              <span class="text-sm inline-block mr-1">Edit</span>
-              <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
+              <!-- <span class="text-sm inline-block mr-1">Edit</span>
+              <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />-->
             </div>
           </div>
           <div>
@@ -319,6 +319,7 @@
           @onEdit="detailTask=false;editTask=true"
           v-if="detailTask"
           @complete="detailTask=false;completeTask=true"
+          :parentData="sendparentdata"
         />
         <complete-task @onClose="completeTask=false" v-if="completeTask" />
 
@@ -397,7 +398,12 @@ export default {
   },
   methods: {
     taskdetailtrue(myid) {
-      window.$nuxt.$cookies.set("techniciantaskid", myid);
+      if (window.$nuxt.$cookies.get("techniciantaskid")) {
+      } else {
+        window.$nuxt.$cookies.set("techniciantaskid", myid);
+      }
+      console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));
+      this.sendparentdata = myid;
       this.detailTask = true;
     },
     expand(id) {
@@ -411,6 +417,7 @@ export default {
   },
   data: function() {
     return {
+      sendparentdata: null,
       project_img_url: process.env.project_image_url,
       ts: new Date(),
       geturl: "/api/project/technician/get_all",
