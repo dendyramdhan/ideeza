@@ -84,7 +84,7 @@
               <tr class="bg-ideeza-100">
                 <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
                   <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
-                  <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" />
+                  <!-- <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" /> -->
                   {{task.name}}
                 </td>
                 <td>{{task.domain}}</td>
@@ -397,12 +397,14 @@ export default {
     CompleteTask
   },
   methods: {
-    taskdetailtrue(myid) {
-      if (window.$nuxt.$cookies.get("techniciantaskid")) {
-      } else {
-        window.$nuxt.$cookies.set("techniciantaskid", myid);
-      }
+    setEditvalue(){
+      this.detailTask=false;
+      this.editTask=true
       console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));
+    },
+    taskdetailtrue(myid) {
+      window.$nuxt.$cookies.set("techniciantaskid",myid)
+      console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));      
       this.sendparentdata = myid;
       this.detailTask = true;
     },

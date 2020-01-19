@@ -94,10 +94,10 @@
                 <tr class="bg-ideeza-100">
                   <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
                     <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
-                    <font-awesome-icon
+                    <!-- <font-awesome-icon
                       class="mr-1 text-lg text-ideeza"
                       :icon="['fas', 'caret-up']"
-                    />
+                    /> -->
                     {{task.name}}
                   </td>
                   <td>{{task.domain}}</td>
@@ -128,185 +128,8 @@
                       :icon="['fas', 'exclamation-circle']"
                     />
                   </td>
-
-                  <!-- <td class="cursor-pointer" @click.self="expand(task.id)">
-              <font-awesome-icon
-                class="mr-1 text-lg text-ideeza"
-                :icon="['fas', 'caret-up']"
-                v-if="task.id in expanded&&expanded[task.id]==true"
-              />
-              <font-awesome-icon
-                class="mr-1 text-lg text-ideeza"
-                :icon="['fas', 'caret-down']"
-                v-else
-              />
-              {{task.name}}
-            </td>
-            <td>{{task.domain}}</td>
-            <td>
-                  <img v-for="image in task.assigned_to" :src="image.url" class="avatar" />-->
-                  <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-                                              <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                  <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
-                  <!-- </td>
-            <td class="text-center">
-              <div
-                class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
-              >
-                <span class="absolute due-date text-black">{{task.timeline.date}}</span>
-                <div
-                  class="bg-ideeza rounded-full h-8"
-                  :style="{ width: task.timeline.progress+'%'}"
-                ></div>
-              </div>
-            </td>
-            <td class="status status--completed" v-if="task.status == 1">completed</td>
-            <td v-if="task.status == 2" class="status status--over">over due</td>
-                  <td v-if="task.status == 3" class="status status--progress">in progress</td>-->
-                  <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
-                  <!-- <td class="notifications">
-              <font-awesome-icon
-                v-if="task.status == 1"
-                class="mr-1 text-lg text-ideeza-gold"
-                :icon="['fas', 'exclamation-circle']"
-              />
-              <font-awesome-icon
-                v-else-if="task.status == 2"
-                class="mr-1 text-lg text-blue-700"
-                :icon="['fas', 'bell']"
-              />
-              <font-awesome-icon
-                v-else-if="task.status == 3"
-                class="mr-1 text-lg text-red-500"
-                :icon="['far', 'clock']"
-              />
-                  </td>-->
                 </tr>
-
-                <!-- <template v-if="task.id in expanded&&expanded[task.id]==true">
-            <tr class="bg-pink-200" v-for="(subtask) in task.subtasks">
-              <td
-                class="cursor-pointer md:text-right"
-                @click.self="detailTask=true"
-              >{{subtask.name}}</td>
-              <td>{{subtask.domain}}</td>
-              <td>
-                <img v-for="image in subtask.assigned_to" :src="image.url" class="avatar" />-->
-                <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-                <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
-                <!-- </td>
-              <td class="text-center">
-                <div
-                  class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
-                >
-                  <span class="absolute due-date text-black">{{subtask.timeline.date}}</span>
-                  <div
-                    class="bg-ideeza rounded-full h-8"
-                    :style="{ width: subtask.timeline.progress+'%'}"
-                  ></div>
-                </div>
-              </td>
-              <td class="status status--completed" v-if="subtask.status == 1">completed</td>
-              <td v-if="subtask.status == 2" class="status status--over">over due</td>
-                <td v-if="subtask.status == 3" class="status status--progress">in progress</td>-->
-                <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
-                <!-- <td class="notifications">
-                <font-awesome-icon
-                  v-if="subtask.status == 1"
-                  class="mr-1 text-lg text-ideeza-gold"
-                  :icon="['fas', 'exclamation-circle']"
-                />
-                <font-awesome-icon
-                  v-else-if="subtask.status == 2"
-                  class="mr-1 text-lg text-blue-700"
-                  :icon="['fas', 'bell']"
-                />
-                <font-awesome-icon
-                  v-else-if="subtask.status == 3"
-                  class="mr-1 text-lg text-red-500"
-                  :icon="['far', 'clock']"
-                />
-              </td>
-            </tr>
-                </template>-->
               </template>
-
-              <!-- <tr class="cursor-pointer" @click.self="editTask=true">
-          <td >
-            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
-            Iron Making
-          </td>
-          <td>Cover</td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td class="text-center">
-            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">16.11.2019</span>
-              <div class="bg-ideeza rounded-full h-8" style="width:80%;">
-              </div>
-            </div>
-          </td>
-          <td class="status status--over">over due</td>
-          <td class="notifications">
-            <font-awesome-icon class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/>
-          </td>
-
-
-        </tr>
-        <tr class="bg-ideeza-100">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
-            Iron Making
-          </td>
-          <td>Code</td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td class="text-center">
-            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">16.11.2019</span>
-              <div class="bg-ideeza rounded-full h-8" style="width:60%;">
-              </div>
-            </div>
-          </td>
-          <td class="status status--progress">in progress</td>
-          <td class="notifications">
-            <font-awesome-icon class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/>
-          </td>
-
-
-        </tr>
-        <tr class="">
-          <td class="cursor-pointer" @click.self="editTask=true" >
-            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
-            Iron Making
-          </td>
-          <td>Electronics</td>
-          <td>
-            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
-            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
-          </td>
-          <td class="text-center">
-            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
-              <span class="absolute due-date text-black">16.11.2019</span>
-              <div class="bg-ideeza rounded-full h-8" style="width:90%;">
-              </div>
-            </div>
-          </td>
-          <td class="status status--completed">COMPLETED</td>
-          <td class="notifications">
-            <font-awesome-icon class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
-          </td>
-
-
-              </tr>-->
             </tbody>
           </table>
           <button
@@ -417,10 +240,8 @@ export default {
   },
   methods: {
     taskdetailtrue(myid) {
-      if (window.$nuxt.$cookies.get("techniciantaskid")) {
-      } else {
-        window.$nuxt.$cookies.set("techniciantaskid", myid);
-      }
+       window.$nuxt.$cookies.set("techniciantaskid",myid)
+      console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));     
       this.sendparentdata = myid;
       this.detailTask = true;
     },
