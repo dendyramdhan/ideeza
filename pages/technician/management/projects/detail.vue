@@ -55,7 +55,7 @@
               <div class="flex flex-wrap attached-images-wrapper mt-2">
                 <!-- <img src="https://picsum.photos/200" alt /> -->
                 <span v-for="image in info.attach">
-                  <img :src="project_img_url + image.image" />
+                  <img :src="task_img_url + image.image" />
                 </span>
                 <img src="https://picsum.photos/200" alt />
                 <!-- <img v-for="image in info.attach" :src="project_img_url+image.image" alt />{{project_img_url}}{{image.image}} -->
@@ -418,7 +418,7 @@ export default {
   data: function() {
     return {
       sendparentdata: null,
-      project_img_url: process.env.project_image_url,
+      task_img_url: process.env.task_image_url,
       ts: new Date(),
       geturl: "/api/project/technician/get_all",
       articleArray: [],
@@ -427,7 +427,6 @@ export default {
       projectidd: null,
       randomNumber: {},
       avata_img_url: process.env.avatar_base_url,
-      project_img_url: process.env.project_image_url,
       articleArray2: [],
       articleArrayrout2: [],
       geturl2: "/api/project/get_tasks",

@@ -65,7 +65,7 @@
                 <span class="block text-xs">3 pics attached</span>
                 <div class="flex flex-wrap attached-images-wrapper mt-2">
                   <span v-for="image in info.attach">
-                    <img :src="project_img_url + image.image" />
+                    <img :src="task_img_url + image.image" />
                   </span>
                   <img src="https://picsum.photos/200" alt class="mr-2" />
                 </div>
@@ -179,14 +179,13 @@ export default {
       articleArrayaxios: [],
       projectidd: null,
       randomNumber: {},
-      project_img_url: process.env.project_image_url,
+      task_img_url: process.env.task_image_url,
       userid: null,
       file: null
     };
   },
   mounted() {
     console.log("parent data:", this.parentData);
-
     this.projectidd = this.parentData;
     this.userid = window.$nuxt.$cookies.get("userid");
     const formData = new FormData();
