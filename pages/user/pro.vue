@@ -104,12 +104,12 @@
             <hr class="my-5">
             <!--Sub Menu Items-->
             <ul class="code-menu">
-              <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app" tag="li" >
+              <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app/info" tag="li" >
                 <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> App Info
               </nuxt-link>
-              <li class="pl-2 cursor-pointer" @click="showChooseLayout=true">
+              <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app/template" tag="li">
                 <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> Templates
-              </li>
+              </nuxt-link>
               <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app/design" tag="li">
                 <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> User interface
               </nuxt-link>
@@ -462,5 +462,8 @@
   }
   .app-layout {
       padding-right: 325px;
+  }
+  .active-link{
+    @apply text-ideeza;
   }
 </style>
