@@ -66,7 +66,7 @@
         />
         <div class="help-alert text-xs" v-show="showHelpAlert">
           <nuxt-link
-            to="/service-providers/help"
+            to="/service-provider/help"
             class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
           >
             <div class="px-2 w-full flex items-center">
