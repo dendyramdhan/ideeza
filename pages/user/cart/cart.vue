@@ -34,9 +34,9 @@
             </div>
             <div class="flex items-center" slot="quantity" slot-scope="props">
               <div class="mx-auto flex">
-                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'minus']" @click="ondecrease"/>
+                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'minus']" @click="count--" v-if="count >= 1"/>
                 <div class="w-5">{{count}}</div>
-                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'plus']" @click="onincrement"/>
+                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'plus']" @click="count++"/>
               </div>
             </div>
             <span
@@ -173,17 +173,6 @@ export default {
     onAddService(id) {
       window.$nuxt.$cookies.set("userprojectid", id);
       this.$router.push("/user/add-service");
-    },
-
-    onincrement() {
-      this.count++;
-    },
-
-    ondecrease() {
-      if (this.count < 1) {
-        return
-      }
-      this.count--;
     }
   }
 };
