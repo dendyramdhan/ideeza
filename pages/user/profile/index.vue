@@ -329,7 +329,7 @@ export default {
     apiServiceWithToken(getallmyprojectsData, response => {
       if (response.data["success"] == true) {
         this.projects = response.data["data"];
-        console.log("allmyprojects: ", this.reviews);
+        console.log("allmyprojects: ", this.projects);
       }
     });
 

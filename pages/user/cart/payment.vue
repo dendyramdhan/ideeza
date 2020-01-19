@@ -69,64 +69,9 @@
       </div>
     </div>
     <div class="mt-5 lg:flex flex-wrap" v-if="tabItem === 'marketcard'">
-      <div class="lg:w-1/2 lg:pr-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">Card holder name</div>
-          <text-field placeholder />
-        </div>
-      </div>
-      <div class="lg:w-1/2 lg:pl-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">Card number</div>
-          <text-field placeholder />
-        </div>
-      </div>
-      <div class="lg:w-1/2 lg:pr-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">End date</div>
-          <drop-down class="inline-block lg:w-1/3 w-1/3" :data="months" placeholder="mm" />
-          <drop-down class="inline-block lg:w-1/3 w-1/3" :data="years" placeholder="yyyy" />
-        </div>
-      </div>
-      <div class="lg:w-1/6 lg:pl-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">
-            CVV
-            <font-awesome-icon class="ml-2 h-5 text-gray-500" :icon="['fas', 'info-circle']" />
-          </div>
-          <text-field placeholder />
-        </div>
-      </div>
     </div>
     <div class="mt-5 lg:flex flex-wrap" v-if="tabItem === 'paypal'">
-      <div class="lg:w-1/2 lg:pr-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">Card holder name</div>
-          <text-field placeholder />
-        </div>
-      </div>
-      <div class="lg:w-1/2 lg:pl-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">Card number</div>
-          <text-field placeholder />
-        </div>
-      </div>
-      <div class="lg:w-1/2 lg:pr-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">End date</div>
-          <drop-down class="inline-block lg:w-1/3 w-1/3" :data="months" placeholder="mm" />
-          <drop-down class="inline-block lg:w-1/3 w-1/3" :data="years" placeholder="yyyy" />
-        </div>
-      </div>
-      <div class="lg:w-1/6 lg:pl-5">
-        <div class="field-container mt-10">
-          <div class="text-lg text-gray-800 mb-2">
-            CVV
-            <font-awesome-icon class="ml-2 h-5 text-gray-500" :icon="['fas', 'info-circle']" />
-          </div>
-          <text-field placeholder />
-        </div>
-      </div>
+      <h5 class="title-pay">Pay via <span>PayPal</span></h5>
     </div>
   </div>
 </template>
@@ -182,7 +127,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 5 });
+    this.$store.commit("cartstepper/set", { position: 4 });
   },
   components: {
     "text-field": TextField,
