@@ -26,12 +26,16 @@
             <!-- <search-field placeholder="Search Project..." /> -->
             <input
               placeholder="search Project..."
-              class="bg-white outline-none h-10 text-gray-800 pr-3 w-32 mr-10 pl-2"
+              class="bg-white outline-none h-8 text-gray-800 pr-3"
               v-model="searchTerm"
               v-on:input="search"
             />
           </div>
           <div>
+            <!-- <button
+              @click.self="addNewProject=true"
+              class="btn btn-normal btn--ideeza px-5 py-3"
+            >Create New +</button> -->
             <select
               class="w-48 block mt-5"
               placeholder="Sort By"
@@ -58,6 +62,7 @@
           <thead>
             <tr class="text-white h16 gradient-bg">
               <th class="text-left">Projects</th>
+              <!-- <th class="text-left">Assigned to</th> -->
               <th class="text-left">Due Date</th>
               <th class="text-left">Task Status</th>
               <th class="text-left">Notification</th>
@@ -66,11 +71,16 @@
           <tbody v-for="(Service, index) in articleArray">
             <tr class="bg-ideeza-100" v-if="start < index && index < end ">
               <td>
-                <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}" >{{Service.projectName}}</nuxt-link>
+                <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}" >{{Service.title}}</nuxt-link>
               </td>
-              <td>{{Service.due_date}}</td>
-              <td class="status status--completed">{{Service.task_status}}</td>
-              <td class="notifications">{{Service.notification}}</td>
+              <!-- <td>
+                <span v-for="image in Service.assigned_users">
+                  <img class="avatar" :src="avata_img_url + image.avatar" />
+                </span>
+              </td> -->
+              <td>{{ts.toLocaleDateString(Service.end - Service.start)}}</td>
+              <td class="status status--completed">{{Service.status}}</td>
+              <td class="notifications">2 new notification</td>
             </tr>
           </tbody>
         </table>
@@ -114,6 +124,11 @@
         <new-project @onClose="addNewProject=false" v-if="addNewProject" />
       </div>
     </div>
+    <!-- <ul >
+      <li v-for="info in articleArray">
+        <span v-for="detail in info.assigned_users">{{detail.avatar}}</span></li><br/>
+    </ul> -->
+    <!-- {{articleArray}} -->
   </div>
 </template>
 
@@ -124,6 +139,10 @@ import SearchField from "~/components/form/search.vue";
 import AddNewProject from "~/components/technician/management/new-project.vue";
 
 import Services from "~/data/TechnicianProjectApi.json";
+
+import apiService from "~/apiService/have_token.js";
+
+
 
 export default {
   layout: "user",
@@ -136,6 +155,7 @@ export default {
   },
   data: function() {
     return {
+      ts: new Date(),
       Services: Services.firstproject,
       searchTerm: "",
       kindman: "All",
@@ -143,11 +163,16 @@ export default {
       articleArray: [],
       currentviewpoint: this.$store.state.TechnicianProjectStore.offset + 1,
       index: 0,
-      length: Services.length / 5 - 1,
-      counter: Services.length / this.$store.state.TechnicianProjectStore.scale,
+      length: null,
+      counter: null,
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
       end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
       counterarray: [],
+       articleArrayaxios: [],
+      articleArrayrout: [],
+      randomNumber: [],
+      geturl: "/api/project/technician/get_all",
+      avata_img_url:process.env.avatar_base_url,
       addNewProject: false,
       dataDropDown: ["All", "Active", "Completed", "Priority", "Over Due"],
       sortDropDown: [
@@ -160,34 +185,61 @@ export default {
     };
   },
   created: function() {
-    this.$store.commit("TechnicianProjectStore/viewflagchange2");
-    let i = 1;
-    let endd =
-      this.Services.length / this.$store.state.TechnicianProjectStore.scale + 1;
-    //  alert( this.Services.length);
-    for (i = 1; i <= endd; i++) {
-      this.counterarray.push(i);
-    }
-    // alert(this.counterarray);
-    
+    // this.$store.commit("TechnicianProjectStore/viewflagchange2");
+    // let i = 1;
+    // let endd =
+    //   this.Services.length / this.$store.state.TechnicianProjectStore.scale + 1;
+    // //  alert( this.Services.length);
+    // for (i = 1; i <= endd; i++) {
+    //   this.counterarray.push(i);
+    // }
+    // // alert(this.counterarray);
 
-    this.Services.map(item => {
-      this.articleArray.push(item);
-    });
+    // this.Services.map(item => {
+    //   this.articleArray.push(item);
+    // });
   },
   computed: {
     leftMenu() {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+  mounted() {
+     this.$store.commit("TechnicianProjectStore/viewflagchange2");
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
+
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item);
+        this.articleArray.push(item);
+      });
+
+      this.length = this.articleArrayrout.length / 5 - 1;
+      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
+  
+      let i = 1;
+      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      //  alert( this.Services.length);
+      for (i = 1; i <= endd; i++) {
+        this.counterarray.push(i);
+      }
+    });
+  },
   methods: {
     search(e) {
       this.articleArray = [];
 
-      let article_list = this.Services;
+      let article_list = this.articleArrayrout;
       article_list.map(element => {
-        const a_text = element.projectName.toLowerCase() + "";
+        const a_text = element.title.toLowerCase() + "";
         const b_text = e.target.value.toLowerCase() + "";
         // const b_text = "master"
 
@@ -206,11 +258,11 @@ export default {
       this.articleArray = [];
       // alert(e.target.value)
       this.kindman = e.target.value;
-      let article_list = this.Services;
+      let article_list = this.articleArrayrout;
       article_list.map(element => {
         if (e.target.value == "All") {
           this.articleArray.push(element);
-        } else if (element.task_status == e.target.value) {
+        } else if (element.status == e.target.value) {
           this.articleArray.push(element);
         }
       });
@@ -224,8 +276,8 @@ export default {
       switch (S_index) {
         case "None":
           article_list.sort(function(a, b) {
-            var x = a.projectName;
-            var y = b.projectName;
+            var x = a.title;
+            var y = b.title;
             if (x < y) {
               return -1;
             }
@@ -239,8 +291,8 @@ export default {
           break;
         case "Due Date First":
           article_list.sort(function(a, b) {
-            var x = a.due_date;
-            var y = b.due_date;
+            var x = a.end;
+            var y = b.end;
             if (x < y) {
               return -1;
             }
@@ -254,8 +306,8 @@ export default {
           break;
         case "Starting Day First":
           article_list.sort(function(a, b) {
-            var x = a.start_date;
-            var y = b.start_date;
+            var x = a.start;
+            var y = b.start;
             if (x < y) {
               return -1;
             }
@@ -270,8 +322,8 @@ export default {
 
         case "Chronologycal":
           article_list.sort(function(a, b) {
-            var x = a.Chronologycal;
-            var y = b.Chronologycal;
+            var x = a.start;
+            var y = b.start;
             if (x < y) {
               return -1;
             }
@@ -286,8 +338,8 @@ export default {
 
         case "Alphabetical":
           article_list.sort(function(a, b) {
-            var x = a.projectName.toLowerCase();
-            var y = b.projectName.toLowerCase();
+            var x = a.title.toLowerCase();
+            var y = b.title.toLowerCase();
             if (x < y) {
               return -1;
             }
@@ -453,28 +505,23 @@ export default {
   /*
       Label the data
       */
-    td:nth-of-type(1):before { content: "Projects"; }
-    td:nth-of-type(2):before { content: "Assigned To"; }
-    td:nth-of-type(3):before { content: "Due Date"; }
-    td:nth-of-type(4):before { content: "Task Status"; }
-    td:nth-of-type(5):before { content: "Notification"; }
-    td:nth-of-type(6):before { content: "Action"; }
+  td:nth-of-type(1):before {
+    content: "Products";
   }
+  td:nth-of-type(2):before {
+    content: "Color";
+  }
+  td:nth-of-type(3):before {
+    content: "Price";
+  }
+  td:nth-of-type(4):before {
+    content: "Quantity";
+  }
+  td:nth-of-type(5):before {
+    content: "Cost";
+  }
+  td:nth-of-type(6):before {
+    content: "Action";
+  }
+}
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

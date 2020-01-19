@@ -86,7 +86,7 @@
       </div>
 
       <div class="flex justify-center items-center content-center w-m-c">
-        <nuxt-link to="/service-providers/profile" class="flex items-center">
+        <nuxt-link to="/service-provider/profile" class="flex items-center">
           <img
             class="h-10 w-10 rounded-full mr-2"
             src="https://randomuser.me/api/portraits/men/17.jpg"

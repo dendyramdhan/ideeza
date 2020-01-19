@@ -192,6 +192,7 @@ import Search from "~/components/form/search.vue";
 import CheckBox from "~/components/form/checkbox-dark.vue";
 
 import Services from "~/data/UserProjectApi.json";
+
 import apiService from "~/apiService/get_param.js";
 
 export default {
@@ -218,6 +219,7 @@ export default {
     };
   },
   mounted() {
+    console.log('params: ', this.$route.params);
     this.projectidd = window.$nuxt.$cookies.get("userprojectid");
     const params = { projectid: this.projectidd };
     let sendData = {
