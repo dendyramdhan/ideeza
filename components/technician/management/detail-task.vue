@@ -53,7 +53,7 @@
                 @click="$emit('onEdit')"
               >
                 <span class="text-sm inline-block mr-1">Edit</span>
-                <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
+                <font-awesome-icon   class="mr-1 h-3" :icon="['fas', 'pen']" />
               </div>
             </div>
             <div class="mt-5">
@@ -65,7 +65,7 @@
                 <span class="block text-xs">3 pics attached</span>
                 <div class="flex flex-wrap attached-images-wrapper mt-2">
                   <span v-for="image in info.attach">
-                    <img :src="task_img_url + image.image" />
+                    <img :src="project_img_url + image.image" />
                   </span>
                   <img src="https://picsum.photos/200" alt class="mr-2" />
                 </div>
@@ -76,24 +76,8 @@
                     href="https://google.com"
                   >https://google.com</a>
                 </div>
-                <div class="mt-5">
-                  <!-- <span class="inline-block mb-2">Attach</span>
-                  <img id="image" />
-                  <form enctype="multipart/form-data">
-                    <input
-                      type="file"
-                      @change="fileseleted"
-                      ref="file_upload2"
-                      class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
-                      style="display:none"
-                    />
-                  </form>
-                  <button
-                    class="ml-5 btn btn-small btn--ideeza px-2 text-xs"
-                    @click="$refs.file_upload2.click()"
-                  >SelectImage</button> -->
-                  <image-upload  @selected="sendapi" />
-                 
+                <div class="text-xs mt-5">
+                  <file-field-button :icon="true" label="Add Attachment *" />
                 </div>
               </div>
             </div>
@@ -102,7 +86,9 @@
           <div class="lg:ml-5 w-1/3">
             <div class="mb-2 ml-5 flex justify-between">
               <span>Notification Center:</span>
-              <nuxt-link :to="{ path: '/technician/messages', query: { id:  userid}}">
+              <nuxt-link
+                :to="{ path: '/technician/messages', query: { id:  userid}}"
+              >
                 <button class="btn--ideeza px-3 py-1">
                   Compose
                   <font-awesome-icon
@@ -113,19 +99,15 @@
               </nuxt-link>
             </div>
             <ul class="events mb-5">
-              <li
-                class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event"
-                v-for="member in info.assigned_users"
-              >
-                <div v-if="member.id == null">&nbsp;</div>
-                <div v-else>
+              <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="member in info.assigned_users">
+                <div>
                   <div class="text text-sm font-bold">{{member.name}}</div>
                   <div class="text text-xs">Completed</div>
                 </div>
-                <!-- <div class="event-icons text-right">
+                <div class="event-icons text-right">
                   <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
                   <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
-                </div> -->
+                </div>
               </li>
             </ul>
             <div class="mb-10 ml-5">
@@ -141,9 +123,7 @@
           <button class="btn--ideeza bg-ideeza text-white px-3 py-2">Complete Task</button>
           <!-- <span v-for="(info,index) in articleArray" v-if="index==0">
            {{info.name}}
-
-          </span>
-          {{articleArray}}-->
+          </span>-->
           <!-- {{articleArray}}--{{projectidd}} -->
         </div>
       </div>
@@ -157,16 +137,12 @@ import DropDownField from "~/components/form/dropdown-field.vue";
 import SearchField from "~/components/form/search-mini.vue";
 import CheckBoxField from "~/components/form/checkbox-plus.vue";
 import FileField from "~/components/form/file-field.vue";
-import ImageUpload from "~/components/form/image-upload";
 import FileFieldButton from "~/components/form/file-field-button.vue";
 
 import apiService from "~/apiService/have_token.js";
 
 export default {
   name: "new-project",
-  props: {
-    parentData: String
-  },
   data: function() {
     return {
       dateRange: null,
@@ -176,21 +152,17 @@ export default {
       taskTitle: "Make Iron from steel",
       ts: new Date(),
       geturl: "/api/project/get_task_detail",
-      geturl2: "/api/project/task/add_attach",
       articleArray: [],
       articleArrayrout: [],
       articleArrayaxios: [],
       projectidd: null,
       randomNumber: {},
-      task_img_url: process.env.task_image_url,
-      userid: null,
-      file: null,
-      flag:0,
+      project_img_url: process.env.project_image_url,
+      userid:null,
     };
   },
   mounted() {
-    console.log("parent data:", this.parentData);
-    this.projectidd = this.parentData;
+    this.projectidd = window.$nuxt.$cookies.get("techniciantaskid");
     this.userid = window.$nuxt.$cookies.get("userid");
     const formData = new FormData();
     formData.set("taskid", this.projectidd);
@@ -217,32 +189,9 @@ export default {
     SearchField,
     CheckBoxField,
     FileField,
-    FileFieldButton,
-    ImageUpload
+    FileFieldButton
   },
   methods: {
-    sendapi(value){
-      
-      this.file=value;
-      this.flag = 1;
-      console.log(this.file)
-      console.log(this.projectidd)
-      if(this.file)
-        this.uploadapi();
-    },
-    uploadapi(){
-      const formData = new FormData();
-      formData.set("taskid", this.projectidd);
-      formData.append("attached", this.file);
-      let sendData3 = {
-        method: "post",
-        url: this.geturl2,
-        data: formData
-      };
-      apiService(sendData3, response => {
-        console.log(response.data);
-      });
-    },
     close() {
       this.$emit("onClose");
     },
