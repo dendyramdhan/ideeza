@@ -118,8 +118,7 @@
                   @click="addMenuState(menuData.cover,1)"><font-awesome-icon class="mr-1 panel-menu-icon"
                                                                              :icon="['fas', 'cube']"/>Cover</span>
             <span class="ml-5 panel-menu text-center" :class="{'active': currentMenu.name === 'App'}"
-                  @click="addMenuState(menuData.app,1);$router.push('/user/pro/app/setting')"><font-awesome-icon class="mr-1 mobile"
-                                                                               :icon="['fas', 'wrench']"/>App</span>
+                  @click="addMenuState(menuData.app,1);$router.push('/user/pro/app/setting')"><font-awesome-icon class="mr-1 mobile" :icon="['far', 'square']"/>App</span>
             <span class="ml-5 panel-menu text-center" :class="{'active': currentMenu.name === 'General'}"
                   @click="addMenuState(menuData.general,1)"><font-awesome-icon class="mr-1 panel-menu-icon"
                                                                                :icon="['fas', 'wrench']"/>General</span>

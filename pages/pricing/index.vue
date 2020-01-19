@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="curve-bg-gradient">
     <div class="md:flex justify-around">
       <div class="p-5">
         <div class="logo md:ml-10">
@@ -308,7 +308,7 @@ import ResetPassword from "~/components/reusables/ResetPassword.vue";
 import EmailSignup from "~/components/reusables/EmailSignup.vue";
 export default {
   middleware: "auth",
-  layout: "pricing",
+  layout: "default",
   components: {
     Login,
     Signup,
