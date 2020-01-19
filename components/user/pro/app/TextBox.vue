@@ -45,7 +45,21 @@
             </select>
           </div>
           <div class="mt-3 text-sm">
-              Text Color
+              Hint
+          </div>
+          <div class="mt-1">
+              <input type="text" class="w-full border p-2">
+          </div>
+          <check-box class="mt-2">Mulitline</check-box>
+          <check-box class="mt-1">Numbersonly</check-box>
+          <div class="mt-3 text-sm">
+              Text
+          </div>
+          <div class="mt-1">
+              <input type="text" class="w-full border p-2">
+          </div>
+          <div class="mt-3 text-sm">
+              Text color
           </div>
           <div class="mt-1">
               <div class="rounded p-4 text-white bg-green-300 mt-1">#FFFFFF

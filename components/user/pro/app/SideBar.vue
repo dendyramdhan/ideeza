@@ -7,11 +7,13 @@
 import WebViewer from './WebViewer'
 import Layers from './Layers'
 import TimePicker from './TimePicker'
+import TextBox from './TextBox'
 export default {
     components: {
         WebViewer,
         Layers,
-        TimePicker
+        TimePicker,
+        TextBox
     },
     data() {
         return{
