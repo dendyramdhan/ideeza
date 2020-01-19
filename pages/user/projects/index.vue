@@ -15,53 +15,53 @@
             <template v-for="(info,index) in articleArray">
             <div v-if="index==1" :key="index" class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative">
               <carousel per-page="1">
-                <slide v-for="n in 10" :key="'d'+n">
-                  <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
+                <slide v-for="n in info.products.length+1 " :key="'d'+n">
+                  <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
                   <div class="image-container">
-                    <img class="project-item-container--image" :src="project_img_url + info.project.image" alt />asdf
+                    <img class="project-item-container--image" :src="project_img_url + info.products[0].product_image" alt />asdf
                   </div>
                   <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
                     <div class="flex items-center">
                       <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                      <span>{{info.project.rate}}</span>
+                      <span>{{info.products[0].rating}}</span>
                     </div>
                     <span
                       class="font-semibold"
-                    >{{info.project.like}} &nbsp; likes &nbsp; {{info.project.dislike}}&nbsp; dislikes </span>
+                    >{{info.products[0].like}} &nbsp; likes &nbsp; {{info.products[0].dislike}}&nbsp; dislikes </span>
                   </div>
                 </nuxt-link>
                 </slide>
-              </carousel>
+              </carousel><br/>
               <div
                 class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 hidden pop-over"
+                
               >
                 <div class="flex justify-between items-center">
                   <div class="flex items-center">
-                    <h1 class="font-semibold text-lg">{{info.project.name}}</h1>
-                    <span class="text-sm text-gray-600 ml-3">{{info.project.title}}</span>
+                    <h1 class="font-semibold text-lg">{{info.products[0].product_title}}</h1>
+                    <span class="text-sm text-gray-600 ml-3">{{info.title}}</span>
                   </div>
-                  <div class="font-semibold text-ideeza-black">{{info.project.cost}}</div>
+                  <div class="font-semibold text-ideeza-black">{{info.products[0].cost}}</div>
                 </div>
-
-                <div class="text-sm mt-5">{{info.project.shortdescription}}</div>
+                <div class="text-sm mt-5">{{info.products[0].product_description}}</div>
               </div>
             </div>
             <div :key="index" v-else
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
             >
              <!-- v-if="Project.flag == 1" -->
-              <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project.id}}">
+              <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
                 <div class="image-container">
-                  <img class="project-item-container--image" :src="project_img_url + info.project.image" alt />asdf
+                  <img class="project-item-container--image" :src="project_img_url + info.products[0].product_image" alt />asdf
                 </div>
                 <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
                   <div class="flex items-center">
                     <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                    <span>{{info.project.rate}}</span>
+                    <span>{{info.products[0].rating}}</span>
                   </div>
                   <span
                     class="font-semibold"
-                  >{{info.project.like}} &nbsp; likes &nbsp; {{info.project.dislike}}&nbsp; dislikes </span>
+                  >{{info.products[0].like}} &nbsp; likes &nbsp; {{info.products[0].dislike}}&nbsp; dislikes </span>
                 </div>
               </nuxt-link>
 
@@ -70,13 +70,13 @@
               >
                 <div class="flex justify-between items-center">
                   <div class="flex items-center">
-                    <h1 class="font-semibold text-lg">{{info.project.name}}</h1>
-                    <span class="text-sm text-gray-600 ml-3">{{info.project.title}}</span>
+                    <h1 class="font-semibold text-lg">{{info.products[0].product_title}}</h1>
+                    <span class="text-sm text-gray-600 ml-3">{{info.title}}</span>
                   </div>
-                  <div class="font-semibold text-ideeza-black">{{info.project.cost}}</div>
+                  <div class="font-semibold text-ideeza-black">{{info.products[0].cost}}</div>
                 </div>
 
-                <div class="text-sm mt-5">{{info.project.shortdescription}}</div>
+                <div class="text-sm mt-5">{{info.products[0].product_description}}</div>
               </div>
             </div>
             </template>
@@ -148,12 +148,19 @@
 
     <ul>
       <!-- <button @click="getRandomFromBackend" >asd</button>  -->
-       <!-- <li v-for="(info,index) in articleArray">
-        --{{info.project.id}}-{{info.project.description}}
+       <li v-for="(info,index) in articleArray">
+        <!-- --{{info.products[0].product_image}}-{{info}}---{{info.products.length}}<br> -->
+       <!-- {{iinfo.products.length}} -->
+       <!-- {{info.products}} -->
+        <span v-for="innf in info.products">
+            {{innf.cost}}__<br/>
+
+        </span>
         <br />
-       -->
-      <!-- </li> -->
-      <!-- {{articleArray}} -->
+      
+      </li>
+      <!-- {{articleArray}}-------- -->
+      <!-- {{pagerlength}} -->
     </ul>
   </div>
 </template>
@@ -174,7 +181,7 @@ export default {
       geturl: "/api/project/get_all",
       articleArray: [],
       randomNumber: {},
-      project_img_url:process.env.project_image_url,
+      project_img_url:process.env.project_image_url,     
 
     };
   },
@@ -218,6 +225,10 @@ export default {
       console.log(response.data);
       this.randomNumber = response.data;
       this.articleArray = Object.values(response.data.data);
+      // this.articleArray.map(item=>{
+      //   this.pagerlength=item.products.length
+      // })
+      
     });
   },
   methods: {}

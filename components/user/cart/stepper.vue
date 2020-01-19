@@ -19,7 +19,7 @@
             <div class="stepper-icon-wrapper relative" :class="{'active': cartStep === 2 || cartStep === 6}">
               <cart-icon class="fill-current absolute-center-h-v" />
               <div class="stepper-text stepper-text--cart" :class="{'active': cartStep === 2 || cartStep === 6}">Cart</div>
-            </div>
+            </div> 
 
             <!--4-->
             <div class="stepper-icon-wrapper relative" :class="{'active': cartStep === 3 || cartStep === 6}">
@@ -30,7 +30,7 @@
             <div class="stepper-icon-wrapper relative" :class="{'active': cartStep === 4 || cartStep === 6}">
               <font-awesome-icon class="w-8 h-8 text-xl absolute-center-h-v" :icon="['fas', 'money-check-alt']"/>
               <div class="stepper-text stepper-text--payment" :class="{'active': cartStep === 4 || cartStep === 6}">Payment</div>
-            </div>
+            </div> 
             <!--6-->
             <div class="stepper-icon-wrapper relative" :class="{'active': cartStep === 5 || cartStep === 6}">
               <font-awesome-icon class="w-8 h-8 text-xl absolute-center-h-v" :icon="['fas', 'clipboard-check']"/>
@@ -83,7 +83,7 @@
     @apply rounded-r-lg;
     transition: all 0.3s ease-in;
     height: 100%;
-    width: 97%;
+    width: 96%;
     margin-left: 2px;
   }
   .stepper-icon-wrapper{

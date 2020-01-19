@@ -68,7 +68,7 @@
             </th>-->
           </tr>
         </thead>
-        <tbody v-for="(Service, index) in articleArray">
+         <tbody v-for="(Service, index) in articleArray">
           <tr v-if="start < index && index < end ">
             <td>
               <nuxt-link
@@ -77,14 +77,15 @@
             </td>
             <td>{{Service.role}}</td>
             <td>{{Service.status}}</td>
-            <td>{{ts.toLocaleDateString(Service.created_at)}}</td>
+            <td v-if="Service.created_at != null ">{{ts.toLocaleDateString(Service.created_at)}}</td>
+            <td v-else>{{Service.created_at}}</td>
             <td>
               <span v-for="counter in Service.rating">
                 <img class="inline" src="~/static/images/star.png" alt />
               </span>
             </td>
             
-            <td class="lg:text-right">
+             <td class="lg:text-right">
                <nuxt-link
                 :to="{ path: '/technician/user-profile', query: { id: Service.userid}}"
               ><font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" /></nuxt-link>
@@ -97,9 +98,9 @@
               <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']"   @click="setstatus(Service.userid,'Pause')" />
               <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']"   @click="setstatus(Service.userid,'Close')" />
             </td>
-            <!-- <td class="lg:text-right text-xs">{{Service.time}}</td> -->
+            <!-- <td class="lg:text-right text-xs">{{ts.toLocaleDateString(Service.created_at)}}</td> --> 
           </tr>
-        </tbody>
+        </tbody> 
       </table>
 
       <!--Table Stats-->
@@ -172,7 +173,7 @@ export default {
       end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
       articleArrayaxios: [],
       articleArrayrout: [],
-      randomNumber: [],
+      randomNumber: {},
       geturl: "/api/user/get_list",
       geturl2: "/api/user/change_status",
 
@@ -188,7 +189,7 @@ export default {
 
     apiService(sendData, response => {
       console.log(response.data);
-      this.randomNumber = response.data;
+      // this.randomNumber = response.data;
       this.articleArrayaxios = Object.values(response.data.data);
 
       this.articleArrayaxios.map(item => {
