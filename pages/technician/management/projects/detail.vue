@@ -8,8 +8,8 @@
               class="text-ideeza-dark text-xl inline-block font-semibold mr-5"
             >Project: {{info.title}}</span>
             <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
-              <!-- <span class="text-sm inline-block mr-1">Edit</span>
-              <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />-->
+              <span class="text-sm inline-block mr-1">Edit</span>
+              <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
             </div>
           </div>
           <div>
@@ -55,7 +55,7 @@
               <div class="flex flex-wrap attached-images-wrapper mt-2">
                 <!-- <img src="https://picsum.photos/200" alt /> -->
                 <span v-for="image in info.attach">
-                  <img :src="task_img_url + image.image" />
+                  <img :src="project_img_url + image.image" />
                 </span>
                 <img src="https://picsum.photos/200" alt />
                 <!-- <img v-for="image in info.attach" :src="project_img_url+image.image" alt />{{project_img_url}}{{image.image}} -->
@@ -84,7 +84,7 @@
               <tr class="bg-ideeza-100">
                 <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
                   <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
-                  <!-- <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" /> -->
+                  <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" />
                   {{task.name}}
                 </td>
                 <td>{{task.domain}}</td>
@@ -319,7 +319,6 @@
           @onEdit="detailTask=false;editTask=true"
           v-if="detailTask"
           @complete="detailTask=false;completeTask=true"
-          :parentData="sendparentdata"
         />
         <complete-task @onClose="completeTask=false" v-if="completeTask" />
 
@@ -397,15 +396,8 @@ export default {
     CompleteTask
   },
   methods: {
-    setEditvalue(){
-      this.detailTask=false;
-      this.editTask=true
-      console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));
-    },
     taskdetailtrue(myid) {
-      window.$nuxt.$cookies.set("techniciantaskid",myid)
-      console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));      
-      this.sendparentdata = myid;
+      window.$nuxt.$cookies.set("techniciantaskid", myid);
       this.detailTask = true;
     },
     expand(id) {
@@ -419,8 +411,7 @@ export default {
   },
   data: function() {
     return {
-      sendparentdata: null,
-      task_img_url: process.env.task_image_url,
+      project_img_url: process.env.project_image_url,
       ts: new Date(),
       geturl: "/api/project/technician/get_all",
       articleArray: [],
@@ -429,6 +420,7 @@ export default {
       projectidd: null,
       randomNumber: {},
       avata_img_url: process.env.avatar_base_url,
+      project_img_url: process.env.project_image_url,
       articleArray2: [],
       articleArrayrout2: [],
       geturl2: "/api/project/get_tasks",
