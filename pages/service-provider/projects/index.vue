@@ -64,7 +64,7 @@
           <tbody v-for="(Service, index) in articleArray">
             <tr class="bg-ideeza-100" v-if="start < index && index < end ">
               <td>
-                <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}" >{{Service.projectName}}</nuxt-link>
+                <nuxt-link :to="{ path: '/service-provider/projects/detail', query: { id: Service.id}}" >{{Service.projectName}}</nuxt-link>
               </td>
               <td>{{Service.due_date}}</td>
               <td class="status status--completed">{{Service.task_status}}</td>
