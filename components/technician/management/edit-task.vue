@@ -165,6 +165,9 @@ import FileField from "~/components/form/file-field.vue";
 
 import Services from "~/data/TechnicianProjectApi.json";
 
+import apiService from "~/apiService/have_token.js";
+
+
 export default {
   name: "new-project",
   data: function() {
@@ -174,8 +177,39 @@ export default {
       showMembers: false,
       showNotifications: false,
       markStatusData: ["Waiting", "Active", "Completed", "Over Due"],
-      taskTitle: ""
+      taskTitle: "",
+      ts:new Date(),
+      geturl: "/api/project/get_task_detail",
+      articleArray: [],
+      articleArrayrout: [],
+      articleArrayaxios: [],
+      projectidd: null,
+      randomNumber: {},
+      project_img_url: process.env.project_image_url,
+
     };
+  },
+  mounted(){
+   this.projectidd =window.$nuxt.$cookies.get("technicianprojectid");
+
+     const formData = new FormData();
+      formData.set("projectid", this.projectidd);
+      let sendData2 = {
+        method: "post",
+        url: this.geturl,
+        data: formData
+      };
+
+      apiService(sendData2, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
+
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item);
+        this.articleArray.push(item);
+      });
+    });   
   },
   components: {
     TextAreaField,

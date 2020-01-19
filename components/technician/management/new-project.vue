@@ -35,7 +35,7 @@
           <button
             @click="send_add_request"
             class="mt-5 btn btn-normal btn--ideeza px-6 py-2"
-          >Add Task +</button>
+          >Add project +</button>
         </div>
 
         <div class="lg:ml-20">
@@ -220,19 +220,13 @@ export default {
     },
     projectdeadline(event){
       this.dateRange = event.target.value;
-      console.log("datapicker:",this.dateRange )
-      
-      
-    },
-    projectend(event){
-      this.end = event.target.value;
+      console.log("datapicker:",this.dateRange )      
     },
     projectstatus(event){
       this.status = event.target.value;
     },
     projectuser(event){
-      this.user.push(event)
-      
+      this.user.push(event)      
     },
     send_add_request() {
       this.start=new Date(this.dateRange.start).getTime()
