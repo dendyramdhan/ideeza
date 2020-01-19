@@ -10,7 +10,7 @@
           <CartStepper />
           <nuxt-child></nuxt-child>
           <div
-            v-if="cartStep < 7"
+            v-if="cartStep < 6"
             class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative"
             :class="{'w-half': cartStep === 1}"
           >
@@ -26,15 +26,15 @@
             </button>
             <nuxt-link
               to="/user/dashboard"
-              v-if="cartStep !== 6"
+              v-if="cartStep !== 5"
               class="order-1 lg:order-2 my-4 lg:my-0 btn pill-button px-8 py-1"
             >Continue shopping</nuxt-link>
-            <div v-if="cartStep === 6" class="order-1 lg:order-2 items-center content-center">
+            <div v-if="cartStep === 5" class="order-1 lg:order-2 items-center content-center">
               <span class="text-gray-500 font-semibold">Total Price:</span>
               <span class="text-gray-800 text-xl font-semibold ml-10">$1000,000</span>
             </div>
             <button
-              v-if="cartStep <= 5 && cartStep !== 1"
+              v-if="cartStep <= 4 && cartStep !== 1"
               @click="moveNext"
               class="order-3 btn pill-button pill-button--ideeza px-8 py-1"
             >
@@ -45,7 +45,7 @@
               />
             </button>
             <nuxt-link
-              v-if="cartStep === 6"
+              v-if="cartStep === 5"
               to="/user/cart/thankyou"
               class="order-3 btn pill-button pill-button--ideeza px-8 py-1"
             >Confirm order</nuxt-link>
@@ -75,7 +75,6 @@ export default {
         "/user/cart/overview",
         "/user/cart/options",
         "/user/cart/cart",
-        "/user/cart/services",
         "/user/cart/delivery",
         "/user/cart/payment",
         "/user/cart/confirmation"

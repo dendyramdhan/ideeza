@@ -241,7 +241,7 @@ export default {
   middleware: "auth",
   name: "services",
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 3 });
+    this.$store.commit("cartstepper/set", { position: 10 });
   },
   components: {
     SearchInput
