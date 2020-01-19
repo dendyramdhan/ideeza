@@ -62,7 +62,7 @@
           <div class="field-label">Preferred Language</div>
           <div class="field-input flex-grow">
             <select class="field h-10" :value="articleArraymid1.prefered_language" >
-              <option value="male">English</option>
+              <option value="English">English</option>
             </select>
           </div>
         </div>
@@ -76,6 +76,45 @@
           </div>
         </div>
       </div>
+
+
+       <!--- Business Information -->
+      <!---->
+
+      <div
+        class="md:flex justify-between items-center pb-3 mt-20 border-b border-solid border-gray-400 p-5 lg:p-0"
+      >
+        <h1 class="text-gray-800 text-xl lg:text-2xl font-semibold">Business Information</h1>
+        <span class="text-gray-500 text-sm lg:text-xl">* Required</span>
+      </div>
+      <div class="my-5 p-5 bg-white shadow-lg">
+        <div class="form-field">
+          <div class="field-label">Line of Business</div>
+          <div class="field-input flex-grow">
+            <select v-model="line_of_business"  class="field w-full h-10">
+              <option value="1">Electronics</option>
+              <option value="2">Cover</option>
+              <option value="3">Code</option>
+            </select>
+            <!-- <input class="field h-10" name="name"  v-model="line_of_business"/> -->
+          </div>
+        </div>
+        <div class="form-field">
+          <div class="field-label">Expertise</div>
+          <div class="field-input flex-grow">
+            <select v-model="expertise" class="field w-full h-10">
+              <option value="1">Fabrication</option>
+              <option value="2">Assembly</option>
+              <option value="3">Dealer</option>
+              <option value="4">Tester</option>
+              <option value="5">CNC Plastic</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+
+
 
       <!---->
       <!--Profile Phote-->

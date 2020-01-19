@@ -9,12 +9,13 @@
           <option>All</option>
           <option>Copyrighting</option>
           <option>Electronics</option>
-          <option>Code</option>
-          <option>Development</option>
+          <option>Coding</option>
+          <option>Developing</option>
+          <option>Designing</option>
         </select>
       </div>
       <div>
-        <SearchInput />
+        <SearchInput placeholder="Search Member..." />
       </div>
     </div>
 
@@ -240,7 +241,7 @@ export default {
   middleware: "auth",
   name: "services",
   mounted() {
-    this.$store.commit("cartstepper/set", { position: 3 });
+    this.$store.commit("cartstepper/set", { position: 10 });
   },
   components: {
     SearchInput
