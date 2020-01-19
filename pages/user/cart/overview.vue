@@ -171,9 +171,6 @@ export default {
         
       }
     }
-    // increase() {
-    //   this.count++;
-    // }
   }
 };
 </script>
