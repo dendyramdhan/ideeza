@@ -1,5 +1,6 @@
 <template>
-  <div class="main-contents">
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
@@ -23,16 +24,12 @@
             <!-- <search-field placeholder="Search Project..." /> -->
             <input
               placeholder="search Project..."
-              class="bg-white outline-none h-8 text-gray-800 pr-3"
+              class="bg-white outline-none h-10 text-gray-800 pr-3 w-32 mr-10 pl-2"
               v-model="searchTerm"
               v-on:input="search"
             />
           </div>
           <div>
-            <!-- <button
-              @click.self="addNewProject=true"
-              class="btn btn-normal btn--ideeza px-5 py-3"
-            >Create New +</button> -->
             <select
               class="w-48 block mt-5"
               placeholder="Sort By"
@@ -59,7 +56,6 @@
           <thead>
             <tr class="text-white h16 gradient-bg">
               <th class="text-left">Projects</th>
-              <!-- <th class="text-left">Assigned to</th> -->
               <th class="text-left">Due Date</th>
               <th class="text-left">Task Status</th>
               <th class="text-left">Notification</th>
@@ -68,16 +64,11 @@
           <tbody v-for="(Service, index) in articleArray">
             <tr class="bg-ideeza-100" v-if="start < index && index < end ">
               <td>
-                <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}" >{{Service.title}}</nuxt-link>
+                <nuxt-link :to="{ path: '/service-provider/projects/detail', query: { id: Service.id}}" >{{Service.projectName}}</nuxt-link>
               </td>
-              <!-- <td>
-                <span v-for="image in Service.assigned_users">
-                  <img class="avatar" :src="avata_img_url + image.avatar" />
-                </span>
-              </td> -->
-              <td>{{ts.toLocaleDateString(Service.end - Service.start)}}</td>
-              <td class="status status--completed">{{Service.status}}</td>
-              <td class="notifications">2 new notification</td>
+              <td>{{Service.due_date}}</td>
+              <td class="status status--completed">{{Service.task_status}}</td>
+              <td class="notifications">{{Service.notification}}</td>
             </tr>
           </tbody>
         </table>
@@ -130,19 +121,22 @@
 </template>
 
 <script>
-  import SimpleTable from '~/components/reusables/Table.vue'
-  import Services from "~/data/TechnicianProjectApi.json";
+import DropDownField from "~/components/form/dropdown-field.vue";
+import SearchField from "~/components/form/search.vue";
+import AddNewProject from "~/components/service-provider/management/new-project.vue";
 
-import apiService from "~/apiService/have_token.js";
+import Services from "~/data/TechnicianProjectApi.json";
 
-  export default {
-    layout: 'service-provider',
-    components: {
-      SimpleTable
-    },
-   data: function() {
+export default {
+  layout: "service-provider",
+  name: "projects-index",
+  components: {
+    "drop-down": DropDownField,
+    "search-field": SearchField,
+    "new-project": AddNewProject
+  },
+  data: function() {
     return {
-      ts: new Date(),
       Services: Services.firstproject,
       searchTerm: "",
       kindman: "All",
@@ -150,16 +144,11 @@ import apiService from "~/apiService/have_token.js";
       articleArray: [],
       currentviewpoint: this.$store.state.TechnicianProjectStore.offset + 1,
       index: 0,
-      length: null,
-      counter: null,
+      length: Services.length / 5 - 1,
+      counter: Services.length / this.$store.state.TechnicianProjectStore.scale,
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
       end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
       counterarray: [],
-       articleArrayaxios: [],
-      articleArrayrout: [],
-      randomNumber: [],
-      geturl: "/api/project/technician/get_all",
-      avata_img_url:process.env.avatar_base_url,
       addNewProject: false,
       dataDropDown: ["All", "Active", "Completed", "Priority", "Over Due"],
       sortDropDown: [
@@ -172,61 +161,33 @@ import apiService from "~/apiService/have_token.js";
     };
   },
   created: function() {
-    // this.$store.commit("TechnicianProjectStore/viewflagchange2");
-    // let i = 1;
-    // let endd =
-    //   this.Services.length / this.$store.state.TechnicianProjectStore.scale + 1;
-    // //  alert( this.Services.length);
-    // for (i = 1; i <= endd; i++) {
-    //   this.counterarray.push(i);
-    // }
-    // // alert(this.counterarray);
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
+    let i = 1;
+    let endd =
+      this.Services.length / this.$store.state.TechnicianProjectStore.scale + 1;
+    //  alert( this.Services.length);
+    for (i = 1; i <= endd; i++) {
+      this.counterarray.push(i);
+    }
+    // alert(this.counterarray);
 
-    // this.Services.map(item => {
-    //   this.articleArray.push(item);
-    // });
+    this.Services.map(item => {
+      this.articleArray.push(item);
+    });
   },
   computed: {
     leftMenu() {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {
-     this.$store.commit("TechnicianProjectStore/viewflagchange2");
-    let sendData = {
-      method: "get",
-      url: this.geturl,
-      data: null
-    };
-
-    apiService(sendData, response => {
-      console.log(response.data);
-      this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
-
-      this.articleArrayaxios.map(item => {
-        this.articleArrayrout.push(item);
-        this.articleArray.push(item);
-      });
-
-      this.length = this.articleArrayrout.length / 5 - 1;
-      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
-  
-      let i = 1;
-      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
-      //  alert( this.Services.length);
-      for (i = 1; i <= endd; i++) {
-        this.counterarray.push(i);
-      }
-    });
-  },
+  mounted() {},
   methods: {
     search(e) {
       this.articleArray = [];
 
-      let article_list = this.articleArrayrout;
+      let article_list = this.Services;
       article_list.map(element => {
-        const a_text = element.title.toLowerCase() + "";
+        const a_text = element.projectName.toLowerCase() + "";
         const b_text = e.target.value.toLowerCase() + "";
         // const b_text = "master"
 
@@ -245,11 +206,11 @@ import apiService from "~/apiService/have_token.js";
       this.articleArray = [];
       // alert(e.target.value)
       this.kindman = e.target.value;
-      let article_list = this.articleArrayrout;
+      let article_list = this.Services;
       article_list.map(element => {
         if (e.target.value == "All") {
           this.articleArray.push(element);
-        } else if (element.status == e.target.value) {
+        } else if (element.task_status == e.target.value) {
           this.articleArray.push(element);
         }
       });
@@ -263,8 +224,8 @@ import apiService from "~/apiService/have_token.js";
       switch (S_index) {
         case "None":
           article_list.sort(function(a, b) {
-            var x = a.title;
-            var y = b.title;
+            var x = a.projectName;
+            var y = b.projectName;
             if (x < y) {
               return -1;
             }
@@ -278,8 +239,8 @@ import apiService from "~/apiService/have_token.js";
           break;
         case "Due Date First":
           article_list.sort(function(a, b) {
-            var x = a.end;
-            var y = b.end;
+            var x = a.due_date;
+            var y = b.due_date;
             if (x < y) {
               return -1;
             }
@@ -293,8 +254,8 @@ import apiService from "~/apiService/have_token.js";
           break;
         case "Starting Day First":
           article_list.sort(function(a, b) {
-            var x = a.start;
-            var y = b.start;
+            var x = a.start_date;
+            var y = b.start_date;
             if (x < y) {
               return -1;
             }
@@ -309,8 +270,8 @@ import apiService from "~/apiService/have_token.js";
 
         case "Chronologycal":
           article_list.sort(function(a, b) {
-            var x = a.start;
-            var y = b.start;
+            var x = a.Chronologycal;
+            var y = b.Chronologycal;
             if (x < y) {
               return -1;
             }
@@ -325,8 +286,8 @@ import apiService from "~/apiService/have_token.js";
 
         case "Alphabetical":
           article_list.sort(function(a, b) {
-            var x = a.title.toLowerCase();
-            var y = b.title.toLowerCase();
+            var x = a.projectName.toLowerCase();
+            var y = b.projectName.toLowerCase();
             if (x < y) {
               return -1;
             }
@@ -393,10 +354,8 @@ import apiService from "~/apiService/have_token.js";
   }
 };
 </script>
-<style>
-.event:hover .text{
-    color: white;
-}
+
+<style scoped>
 .avatar {
   @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;
 }
@@ -494,23 +453,11 @@ import apiService from "~/apiService/have_token.js";
   /*
       Label the data
       */
-  td:nth-of-type(1):before {
-    content: "Products";
+    td:nth-of-type(1):before { content: "Projects"; }
+    td:nth-of-type(2):before { content: "Assigned To"; }
+    td:nth-of-type(3):before { content: "Due Date"; }
+    td:nth-of-type(4):before { content: "Task Status"; }
+    td:nth-of-type(5):before { content: "Notification"; }
+    td:nth-of-type(6):before { content: "Action"; }
   }
-  td:nth-of-type(2):before {
-    content: "Color";
-  }
-  td:nth-of-type(3):before {
-    content: "Price";
-  }
-  td:nth-of-type(4):before {
-    content: "Quantity";
-  }
-  td:nth-of-type(5):before {
-    content: "Cost";
-  }
-  td:nth-of-type(6):before {
-    content: "Action";
-  }
-}
 </style>
