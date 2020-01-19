@@ -211,6 +211,7 @@
     data: function () {
       return {
         showMyIdeeza: false,
+        searchbox: false,
         users: [{
             id: 1,
             name: 'Michael Scott',
