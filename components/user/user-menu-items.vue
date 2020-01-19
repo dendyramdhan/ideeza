@@ -10,6 +10,11 @@
         <ProjectsIcon class="fill-current mr-5" />My Projects
       </nuxt-link>
     </div>
+ <div class="menu-item">
+      <nuxt-link to="/user/products/product">
+        <ProjectsIcon class="fill-current mr-5" />My Products
+      </nuxt-link>
+    </div>
     <div class="menu-item">
       <nuxt-link to="/user/tasklist">
         <TaskIcon class="fill-current mr-5" />Task list
