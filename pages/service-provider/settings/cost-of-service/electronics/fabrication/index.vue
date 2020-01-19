@@ -43,6 +43,31 @@
        <hr class="my-2">
 
       <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold">Quantity</div>
+        <div class="field-input flex-grow mb-2">
+          <input class="field h-10" placeholder="pcs" />
+        </div>
+      </div>
+      <hr class="my-2">
+
+      <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold">Layers</div>
+        <div class="field-input flex-grow">
+          <select class="h-10 border border-black w-full">
+            <option>1 Layer</option>
+            <option>2 Layers</option>
+            <option>4 Layers</option>
+            <option>6 Layers</option>
+            <option>8 Layers</option>
+            <option>10 Layers</option>
+            <option>12 Layers</option>
+            <option>14 Layers</option>
+          </select>
+        </div>
+      </div>
+      <hr class="my-2">
+
+      <div class="form-field md:flex items-center">
         <div class="field-label md:w-1/3 font-semibold" >Material</div>
         <div class="field-input flex-grow">
           <select class="h-10 border border-black w-full">
@@ -57,6 +82,71 @@
         </div>
       </div>
       <hr class="my-2">
+      <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold" >FR4-TG</div>
+        <div class="field-input flex-grow">
+          <select class="h-10 border border-black w-full">
+            <option>TG 130-140</option>
+            <option>TG 150-160</option>
+            <option>TG 170-180</option>
+          </select>
+        </div>
+      </div>
+      <hr class="my-2">
+
+      <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold">Thickness</div>
+        <div class="field-input flex-grow">
+          <select class="h-10 border border-black w-full">
+            <option>0.2</option>
+            <option>0.4</option>
+            <option>0.6</option>
+            <option>0.8</option>
+            <option>1.0</option>
+            <option>1.2</option>
+            <option>1.6</option>
+            <option>2.0</option>
+            <option>2.4</option>
+            <option>2.6</option>
+            <option>2.8</option>
+            <option>3.0</option>
+            <option>3.2</option>
+            <option> >= 1.7-6.0</option>
+          </select>
+        </div>
+      </div>
+      <hr class="my-2">
+
+      <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold">Min Track/Spacing</div>
+        <div class="field-input flex-grow">
+          <select class="h-10 border border-black w-full">
+            <option>3/3mil</option>
+            <option>4/4mil</option>
+            <option>5/5mil</option>
+            <option>6/6mil</option>
+            <option>8/8mil</option>
+          </select>
+        </div>
+      </div>
+      <hr class="my-2">
+
+      <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold">Min Hole Size</div>
+        <div class="field-input flex-grow">
+          <select class="h-10 border border-black w-full">
+            <option>0.15mm</option>
+            <option>0.2mm</option>
+            <option>0.25mm</option>
+            <option>0.3mm</option>
+            <option>0.8mm</option>
+            <option>1.0mm</option>
+            <option>No Drill</option>
+          </select>
+        </div>
+      </div>
+      <hr class="my-2">
+
        <div class="form-field md:flex items-center">
         <div class="field-label md:w-1/3 font-semibold" >Solder Mask</div>
         <div class="field-input flex-grow">
@@ -71,6 +161,19 @@
         </div>
       </div>
        <hr class="my-2">
+
+       <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold" >Silkscreen</div>
+        <div class="field-input flex-grow">
+          <select class="h-10 border border-black w-full">
+            <option>White</option>
+            <option>Black</option>
+            <option>None</option>
+          </select>
+        </div>
+      </div>
+       <hr class="my-2">
+
        <div class="form-field md:flex items-center">
         <div class="field-label md:w-1/3 font-semibold" >Gold Fingers</div>
         <div class="field-input flex-grow">
@@ -177,6 +280,14 @@
               13 oz cu
             </option>
           </select>
+        </div>
+      </div>
+
+      <hr class="my-2">
+      <div class="form-field md:flex items-center">
+        <div class="field-label md:w-1/3 font-semibold">Extra pcb product number</div>
+        <div class="field-input flex-grow">
+          <input type="checkbox">  Not to add extra pcb product number on board (extra+$3)
         </div>
       </div>
     </div>
