@@ -28,7 +28,6 @@
                 <span class="block text-sm text-gray-500">{{props.row.product_description}}</span>
               </div>
             </div>
-
             <div class="flex items-center" slot="color" slot-scope="props">
               <div class="my-auto">
                 <span class="block font-semibold">{{props.row.color}}</span>
