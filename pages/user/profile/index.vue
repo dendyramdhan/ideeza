@@ -6,11 +6,7 @@
     <div class="flex-grow lg:p-10">
       <div class="lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
         <div class="left-panel">
-          <img
-            class="w-full"
-            :src="'http://192.168.1.162/api/img/avatars/' + additional_contactinfos.avatar"
-            alt
-          />
+          <img class="w-full" :src="avata_img_url + additional_contactinfos.avatar" alt />
 
           <div class="mt-10 mb-5 semi-border relative">
             <span class="font-semibold text-gray-500 pr-3 bg-white">SOCIAL MEDIA</span>
@@ -70,12 +66,12 @@
           <div class="lg:mt-10">
             <span class="text-gray-500 block">RATINGS</span>
             <div class="flex items-center">
-              <span class="text-gray-800 font-semibold text-xl"></span>
+              <span class="text-gray-800 font-semibold text-xl">{{general_contactinfos.rating}}</span>
               <img class="rating-star" src="~/static/images/star.png" alt />
               <img class="rating-star" src="~/static/images/star.png" alt />
               <img class="rating-star" src="~/static/images/star.png" alt />
               <img class="rating-star" src="~/static/images/star.png" alt />
-              <img class="rating-star" src="~/static/images/star-gray.png" alt />
+              <img class="rating-star" src="~/static/images/star.png" alt />
             </div>
           </div>
 
@@ -113,7 +109,6 @@
           </div>
           <!--Time line-->
           <div v-if="tabItem === 'timeline'" class="mt-5">
-
             <div class="flex mb-10">
               <div class="flex-grow bg-white p-5 shadow" v-for="shared_project in shared_projects">
                 <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
@@ -121,7 +116,9 @@
                     {{shared_project.name}}
                     <span class="font-normal">add a new project</span>
                     <span class="text-gray-800">Retro Headphones</span> •
-                    <span class="font-normal text-xs">{{new Date(shared_project.created_at).getDate()}} weeks ago</span>
+                    <span
+                      class="font-normal text-xs"
+                    >{{new Date(shared_project.created_at).getDate()}} weeks ago</span>
                   </div>
                   <div>
                     <font-awesome-icon
@@ -131,7 +128,11 @@
                   </div>
                 </div>
                 <div class="bg-gray-200">
-                  <img class="w-full object-fit object-center" :src="'http://192.168.1.162/api/img/projects/' + shared_project.projec_image" alt />
+                  <img
+                    class="w-full object-fit object-center"
+                    :src="project_image_url + shared_project.projec_image"
+                    alt
+                  />
                 </div>
                 <div class="mt-10 flex justify-between items-center">
                   <div class="flex items-center">
@@ -211,13 +212,15 @@
           </div>
 
           <!--Projects-->
-           <div class="mt-5 flex flex-wrap" v-if="tabItem === 'projects'">
-            <img
-              class="project-image"
-              v-for="project in projects"
-              :src="'http://192.168.1.162/api/img/projects/' + project.avatar"
-              alt
-            />
+          <div class="mt-5 flex flex-wrap" v-if="tabItem === 'projects'">
+            <div class="flex" v-for="project in projects">
+              <img
+                class="project-image"
+                v-for="product in project.products"
+                :src="project_image_url + product.product_image"
+                alt
+              />
+            </div>
           </div>
 
           <!--Reviews-->
@@ -228,7 +231,9 @@
                   <img class="feed-avatar w-16 rounded-full mr-5" :src="review.avatar" alt />
                   <div class>
                     <span class="font-semibold text-ideeza-dark inline-block mr-5">{{review.name}}</span>
-                    <span class="font-sm text-gray-500">Reviewed {{new Date(review.created_at).getDate()}} days ago</span>
+                    <span
+                      class="font-sm text-gray-500"
+                    >Reviewed {{new Date(review.created_at).getDate()}} days ago</span>
                   </div>
                 </div>
                 <div
@@ -280,7 +285,9 @@ export default {
       additional_contactinfos: {},
       reviews: [],
       projects: [],
-      shared_projects: []
+      shared_projects: [],
+      avata_img_url: process.env.avatar_base_url,
+      project_image_url: process.env.project_image_url
     };
   },
   computed: {
@@ -343,7 +350,7 @@ export default {
     apiServiceWithToken(getallmysharedprojectsData, response => {
       if (response.data["success"] == true) {
         this.shared_projects = response.data["data"];
-        console.log("allmysharedprojects: ", this.reviews);
+        console.log("allmysharedprojects: ", this.shared_projects);
       }
     });
   },

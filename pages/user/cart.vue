@@ -9,7 +9,7 @@
         <div class="shadow-md bg-white">
           <CartStepper />
           <nuxt-child></nuxt-child>
-          <div
+          <!-- <div
             v-if="cartStep < 6"
             class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative"
             :class="{'w-half': cartStep === 1}"
@@ -43,13 +43,13 @@
                 class="ml-2 h-4 cursor-pointer"
                 :icon="['fas', 'long-arrow-alt-right']"
               />
-            </button>
-            <nuxt-link
+            </button> -->
+            <!-- <nuxt-link
               v-if="cartStep === 5"
               to="/user/cart/thankyou"
               class="order-3 btn pill-button pill-button--ideeza px-8 py-1"
-            >Confirm order</nuxt-link>
-          </div>
+            >Confirm order</nuxt-link> -->
+          <!-- </div> -->
         </div>
       </div>
     </div>

@@ -5,33 +5,23 @@
       <div class="tabs-container z-10 relative flex lg:mt-20">
         <span class="font-semibold text-xl text-gray-500 mr-2">Choose payment method</span>
         <div
-          @click="tabItem='visa'"
-          class="tab-item"
-          :class="{active: tabItem === 'visa', 'border-bot': tabItem !== 'visa'}"
-        >
-          <img
-            class="lg:inline-block w-20 lg:w-auto mt-5 lg:mt-0 lg:mx-12"
-            src="~/static/images/visa_logo.png"
-          />
-        </div>
-        <div
-          @click="tabItem='marketcard'"
-          class="tab-item"
-          :class="{active: tabItem === 'marketcard', 'border-bot': tabItem !== 'marketcard'}"
-        >
-          <img
-            class="lg:inline-block w-20 lg:w-auto lg:mr-12 mt-5 lg:mt-0"
-            src="~/static/images/mastercard-logo.png"
-          />
-        </div>
-        <div
           @click="tabItem='paypal'"
           class="tab-item"
           :class="{active: tabItem === 'paypal', 'border-bot': tabItem !== 'paypal'}"
         >
           <img
-            class="lg:inline-block w-20 lg:w-auto mt-5 lg:mt-0"
+            class="lg:inline-block w-20 lg:w-auto mt-5 lg:mt-0 lg:mx-12"
             src="~/static/images/paypal-logo.png"
+          />
+        </div>
+        <div
+          @click="tabItem='visa'"
+          class="tab-item"
+          :class="{active: tabItem === 'visa', 'border-bot': tabItem !== 'visa'}"
+        >
+          <img
+            class="lg:inline-block w-20 lg:w-auto mt-5 lg:mt-0"
+            src="~/static/images/stripe-logo.png"
           />
         </div>
       </div>
@@ -39,7 +29,7 @@
 
     <!--Shipping form-->
     <div class="mt-5 lg:flex flex-wrap" v-if="tabItem === 'visa'">
-      <div class="lg:w-1/2 lg:pr-5">
+      <!-- <div class="lg:w-1/2 lg:pr-5">
         <div class="field-container mt-10">
           <div class="text-lg text-gray-800 mb-2">Card holder name</div>
           <text-field placeholder />
@@ -66,16 +56,43 @@
           </div>
           <text-field placeholder />
         </div>
+      </div>-->
+
+      <div class="lg:w-1/4 lg:pr-5">
+        <div class="field-container mt-10"></div>
+      </div>
+      <div class="lg:w-1/2 lg:pl-5">
+        <div class="field-container mt-10">
+          <div class="field-container mt-5" id="card-element"></div>
+        </div>
       </div>
     </div>
-    <div class="mt-5 lg:flex flex-wrap" v-if="tabItem === 'marketcard'">
+    <div class="mt-10 lg:flex flex-wrap" v-if="tabItem === 'paypal'">
+      <div class="lg:w-1/4 lg:pr-5">
+        <div class="field-container mt-10"></div>
+      </div>
+      <div class="lg:w-1/2 lg:pl-5">
+        <div class="field-container mt-10">
+          <div class="field-container mt-5" id="paypal-button"></div>
+        </div>
+      </div>
     </div>
-    <div class="mt-5 lg:flex flex-wrap" v-if="tabItem === 'paypal'">
-      <h5 class="title-pay">Pay via <span>PayPal</span></h5>
+
+    <div class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative">
+      <button @click="moveBack" class="order-2 lg:order-1 my-4 lg:my-0 btn pill-button px-8 py-1">
+        <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-left']" />Back
+      </button>
+      <nuxt-link
+        to="/user/dashboard"
+        class="order-1 lg:order-2 my-4 lg:my-0 btn pill-button px-8 py-1"
+      >Continue shopping</nuxt-link>
+      <button @click="moveNext" class="order-3 btn pill-button pill-button--ideeza px-8 py-1">
+        Next Step
+        <font-awesome-icon class="ml-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-right']" />
+      </button>
     </div>
   </div>
 </template>
-
 <script>
 import DropDown from "~/components/form/dropdown-field.vue";
 import TextField from "~/components/form/text-field.vue";
@@ -84,7 +101,7 @@ export default {
   name: "payment",
   data: function() {
     return {
-      tabItem: "visa",
+      tabItem: "paypal",
       shippingServices: ["Ali Express Standard"],
       years: [
         "2000",
@@ -128,10 +145,90 @@ export default {
   },
   mounted() {
     this.$store.commit("cartstepper/set", { position: 4 });
+
+    paypal
+      .Buttons({
+        createOrder: function(data, actions) {
+          // This function sets up the details of the transaction, including the amount and line item details.
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: "0.01"
+                }
+              }
+            ]
+          });
+        },
+        onError: function(err) {
+          // that.toastService.show('Error with payment processing', 4000, 'red');
+          console.log("payPal onError", err);
+          return;
+        },
+        onCancel: function(data) {
+          console.log("payPal onCancel", data);
+          // that.toastService.show(
+          //   "The transaction was interrupted",
+          //   4000,
+          //   "red"
+          // );
+          return;
+        },
+        onApprove: function(data, actions) {
+          // This function captures the funds from the transaction.
+          return actions.order.capture().then(function(details) {
+            // This function shows a transaction success message to your buyer.
+            alert("Transaction completed by " + details.payer.name.given_name);
+          });
+        }
+      })
+      .render("#paypal-button");
+    // paypal.Button.render(
+    //   {
+    //     style: {
+    //       size: "large",
+    //       layout: "vertical"
+    //     },
+    //     env: "sandbox", // Or 'production'
+    //     // Set up the payment:
+    //     // 1. Add a payment callback
+    //     payment: function(data, actions) {
+    //       // 2. Make a request to your server
+    //       return actions.request
+    //         .post("/my-api/create-payment/")
+    //         .then(function(res) {
+    //           // 3. Return res.id from the response
+    //           return res.id;
+    //         });
+    //     },
+    //     // Execute the payment:
+    //     // 1. Add an onAuthorize callback
+    //     onAuthorize: function(data, actions) {
+    //       // 2. Make a request to your server
+    //       return actions.request
+    //         .post("/my-api/execute-payment/", {
+    //           paymentID: data.paymentID,
+    //           payerID: data.payerID
+    //         })
+    //         .then(function(res) {
+    //           // 3. Show the buyer a confirmation message.
+    //         });
+    //     }
+    //   },
+    //   "#paypal-button"
+    // );
   },
   components: {
     "text-field": TextField,
     "drop-down": DropDown
+  },
+  methods: {
+    moveBack() {
+      this.$router.push("/user/cart/delivery");
+    },
+    moveNext() {
+      this.$router.push("/user/cart/confirmation");
+    }
   }
 };
 </script>

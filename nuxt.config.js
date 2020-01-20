@@ -5,7 +5,7 @@ console.log(env)
 
 export default {
   mode: 'universal',
-  env:env.parsed,
+  env: env.parsed,
   /*
   ** Headers of the page
   */
@@ -22,6 +22,8 @@ export default {
     ],
     script: [
       // {src: '/ace/ace.js'}
+      { src: 'https://www.paypal.com/sdk/js?client-id=ASFdXLU0llnPQcKJdaFzUQKNAM0jcUP7ng5MVDJp1p15BNspcJYLDFU-U1uqrDI-O2VKQxZqnZwNVqfF' }
+
     ]
   },
   /*
@@ -74,11 +76,11 @@ export default {
           icons: ['fas']
         },
         {
-          set:'@fortawesome/free-regular-svg-icons',
+          set: '@fortawesome/free-regular-svg-icons',
           icons: ['far']
         },
         {
-          set:'@fortawesome/free-brands-svg-icons',
+          set: '@fortawesome/free-brands-svg-icons',
           icons: ['fab']
         }
       ]
@@ -99,7 +101,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }
