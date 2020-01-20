@@ -77,8 +77,7 @@
                   >https://google.com</a>
                 </div>
                 <div class="mt-5">
-                  <span class="inline-block mb-2">Attach</span>
-                  <!-- <FileField /> -->
+                  <!-- <span class="inline-block mb-2">Attach</span>
                   <img id="image" />
                   <form enctype="multipart/form-data">
                     <input
@@ -92,7 +91,9 @@
                   <button
                     class="ml-5 btn btn-small btn--ideeza px-2 text-xs"
                     @click="$refs.file_upload2.click()"
-                  >SelectImage</button>
+                  >SelectImage</button> -->
+                  <image-upload  @selected="sendapi" />
+                 
                 </div>
               </div>
             </div>
@@ -116,14 +117,15 @@
                 class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event"
                 v-for="member in info.assigned_users"
               >
-                <div>
+                <div v-if="member.id == null">&nbsp;</div>
+                <div v-else>
                   <div class="text text-sm font-bold">{{member.name}}</div>
                   <div class="text text-xs">Completed</div>
                 </div>
-                <div class="event-icons text-right">
+                <!-- <div class="event-icons text-right">
                   <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
                   <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
-                </div>
+                </div> -->
               </li>
             </ul>
             <div class="mb-10 ml-5">
@@ -155,6 +157,7 @@ import DropDownField from "~/components/form/dropdown-field.vue";
 import SearchField from "~/components/form/search-mini.vue";
 import CheckBoxField from "~/components/form/checkbox-plus.vue";
 import FileField from "~/components/form/file-field.vue";
+import ImageUpload from "~/components/form/image-upload";
 import FileFieldButton from "~/components/form/file-field-button.vue";
 
 import apiService from "~/apiService/have_token.js";
@@ -181,7 +184,8 @@ export default {
       randomNumber: {},
       task_img_url: process.env.task_image_url,
       userid: null,
-      file: null
+      file: null,
+      flag:0,
     };
   },
   mounted() {
@@ -213,34 +217,31 @@ export default {
     SearchField,
     CheckBoxField,
     FileField,
-    FileFieldButton
+    FileFieldButton,
+    ImageUpload
   },
   methods: {
-    fileseleted(evt) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        // get loaded data and render thumbnail.
-        document.getElementById("image").src = e.target.result;
+    sendapi(value){
+      
+      this.file=value;
+      this.flag = 1;
+      console.log(this.file)
+      console.log(this.projectidd)
+      if(this.file)
+        this.uploadapi();
+    },
+    uploadapi(){
+      const formData = new FormData();
+      formData.set("taskid", this.projectidd);
+      formData.append("attached", this.file);
+      let sendData3 = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
       };
-      // read the image file as a data URL.
-      reader.readAsDataURL(evt.target.files[0]);
-
-      // this.file = this.$refs.file.files[0];
-      console.log("file_upload:", evt);
-      this.file = evt.target.files[0];
-
-      // const formData = new FormData();
-      // formData.set("taskid", this.projectidd);
-      // formData.append("attached", this.file);
-      // let sendData2 = {
-      //   method: "post",
-      //   url: this.geturl2,
-      //   data: formData
-      // };
-
-      // apiService(sendData2, response => {
-      //   console.log(response.data);
-      // });
+      apiService(sendData3, response => {
+        console.log(response.data);
+      });
     },
     close() {
       this.$emit("onClose");
