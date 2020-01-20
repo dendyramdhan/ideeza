@@ -110,7 +110,7 @@
                         <nuxt-link to>
                           <div class="mb-8">
                             <img
-                              :src="'http://192.168.1.162/api/img/blogs/' + innovation.postimage"
+                              :src="blog_post_url + innovation.postimage"
                               class="object-center object-contain"
                               alt
                               style="height: 200px"
@@ -161,7 +161,7 @@
                     <div class="p-2 border border-solid border-light-gray">
                       <div class="w-full projects-image">
                         <img
-                          :src="'http://192.168.1.162/api/img/projects/' + topproject.project_info.image"
+                          :src="project_image_url + topproject.project_info.image"
                           class="object-contain object-center w-full"
                           alt
                         />
@@ -246,7 +246,9 @@ export default {
         'Octobor',
         'November',
         'December'
-      ]
+      ],
+      blog_post_url: process.env.blog_post_url,
+      project_image_url: process.env.project_image_url
     };
   },
   computed: {

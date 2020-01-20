@@ -53,24 +53,24 @@
           <h1 class="my-3 font-semibold">Results (58)</h1>
 
           <div class="services-container mx-auto mt-10">
-            <div class="mb-32 lg:mb-20 lg:flex">
+            <div class="mb-32 lg:mb-20 lg:flex" v-for="manufacturer in manufacturers">
               <div class="lg:flex lg:mr-20">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
                   <img
                     class="avatar rounded-full mx-auto"
-                    src="https://picsum.photos/id/870/150/150?grayscale&blur=2"
+                    :src="avata_img_url + manufacturer.manufacturer.avatar"
                   />
                 </div>
                 <div>
                   <div class="flex justify-between items-center">
                     <div class="flex items-center">
-                      <h1 class="text-lg font-semibold inline-block mr-5">Coder</h1>
+                      <h1 class="text-lg font-semibold inline-block mr-5">{{manufacturer.manufacturer.name}}</h1>
                       <button class="btn btn-normal btn--ideeza px-5 py-2">Available</button>
                     </div>
 
                     <div class="flex items-center">
-                      <div class="py-1 px-2 border border-solid border-light-gray mr-3">6 Days</div>
-                      <div class="py-1 px-2 border border-solid border-light-gray mr-3">$220</div>
+                      <div class="py-1 px-2 border border-solid border-light-gray mr-3">{{manufacturer.manufacturer.worktime}} Days</div>
+                      <div class="py-1 px-2 border border-solid border-light-gray mr-3">${{manufacturer.manufacturer.cost}}</div>
                     </div>
                   </div>
                   <div class="my-5 flex items-center">
@@ -82,21 +82,19 @@
                       <font-awesome-icon class="h-3 text-ideeza-gold" :icon="['fas', 'star']" />
                       <font-awesome-icon class="h-3 text-ideeza-gold" :icon="['fas', 'star']" />
                     </span>
-                    <span class="ml-3">(5.0)</span>
+                    <span class="ml-3">({{manufacturer.manufacturer.rating}})</span>
                   </div>
                   <div
                     class="text-ideeza-black"
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum consequat orci magna, vel mollis purus consequat et. Proin consectetur odio nec varius placerat.</div>
+                  >{{manufacturer.manufacturer.description}}</div>
 
                   <div class="flex mt-5">
-                    <button class="btn btn--ideeza-dark px-3 py-1 mr-3">PHP</button>
-                    <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Java</button>
-                    <button class="btn btn--ideeza-dark px-3 py-1 mr-3">Python</button>
+                    <button class="btn btn--ideeza-dark px-3 py-1 mr-3" v-for="skill in manufacturer.manufacturer.skill">{{skill}}</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="mb-32 lg:mb-20 lg:flex">
+            <!-- <div class="mb-32 lg:mb-20 lg:flex">
               <div class="lg:flex lg:mr-20">
                 <div class="mb-5 lg:mb-0 lg:mr-5">
                   <img
@@ -183,7 +181,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -247,6 +245,7 @@
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import Search from "~/components/form/search.vue";
 import CheckBox from "~/components/form/checkbox-dark.vue";
+import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   middleware: "auth",
   layout: "user",
@@ -255,7 +254,9 @@ export default {
     return {
       requestQuote: false,
       quoteSend: false,
-      showOptimize: false
+      showOptimize: false,
+      manufacturers: [],
+      avata_img_url: process.env.avatar_base_url,
     };
   },
   components: {
@@ -267,6 +268,26 @@ export default {
     leftMenu() {
       return this.$store.state.usermenu.openLeftMenu;
     }
+  },
+  mounted() {
+    let productid = window.$nuxt.$cookies.get('productid');
+    var manufacturersFormData = new FormData();
+    manufacturersFormData.set('productid', productid);
+    let getmanufacturersurl = "/api/project/get_manufacturers";
+    let getmanufacturersData = {
+      method: "post",
+      url: getmanufacturersurl,
+      data: manufacturersFormData
+    };
+
+    apiServiceWithToken(getmanufacturersData, response => {
+      console.log(response.data);
+      console.log(response.data["success"]);
+      if (response.data["success"] == true) {
+        this.manufacturers = response.data["data"];
+        console.log("manufacturers: ", response.data["data"]);
+      }
+    });
   },
   methods: {
     sendQuote() {
