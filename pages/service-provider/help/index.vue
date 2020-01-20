@@ -1,6 +1,7 @@
 <template>
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!-- Main Contents -->
+    
     <div class="flex-grow ">
       <div class="main-contents">
         <h1 class="text-gray-800 text-2xl lg:text-4xl lg:mt-10 font-semibold">How can we help?</h1>
