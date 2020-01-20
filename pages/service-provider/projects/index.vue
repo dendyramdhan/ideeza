@@ -393,9 +393,57 @@ import apiService from "~/apiService/have_token.js";
   }
 };
 </script>
-<style>
-.event:hover .text{
-    color: white;
+
+<style scoped>
+.avatar {
+  @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;
+}
+.avatar:hover {
+  @apply shadow-md;
+}
+.avatar:first-child {
+  @apply ml-0;
+}
+.status {
+  @apply uppercase;
+}
+.status--completed {
+  @apply text-green-500;
+}
+.status--progress {
+  @apply text-orange-500;
+}
+.status--over {
+  @apply text-red-500;
+}
+.notifications {
+  @apply text-sm text-ideeza;
+}
+@screen lg {
+  table {
+    @apply mb-5 w-full table-fixed border-collapse text-gray-600;
+  }
+  thead tr {
+    @apply bg-white px-6 pl-16;
+  }
+  thead th {
+    @apply p-6;
+  }
+  thead th:first-child {
+    @apply pl-16;
+  }
+  tbody td {
+    @apply p-6 border-r border-solid border-gray-300;
+  }
+  tbody tr:even {
+    @apply bg-white;
+  }
+  tbody td:first-child {
+    @apply pl-16;
+  }
+  tbody td:last-child {
+    @apply border-r-0;
+  }
 }
 .avatar {
   @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;

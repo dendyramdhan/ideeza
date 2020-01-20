@@ -161,11 +161,6 @@
           />
           <complete-task @onClose="completeTask=false" v-if="completeTask" />
 
-          <!-- <span v-for="info in articleArray" v-if="info.id == $route.query.id">
-      {{info}}
-    </span>
-    --{{$route.query.id}}
-          {{articleArray2}}--{{projectidd}}-->
         </div>
       </div>
     </div>
