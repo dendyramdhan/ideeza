@@ -5,7 +5,7 @@
       <div class="tabs-container z-10 relative flex lg:mt-20">
         <span class="font-semibold text-xl text-gray-500 mr-2">Choose payment method</span>
         <div
-          @click="tabItem='paypal'"
+          @click="onTabPayPal"
           class="tab-item"
           :class="{active: tabItem === 'paypal', 'border-bot': tabItem !== 'paypal'}"
         >
@@ -15,7 +15,7 @@
           />
         </div>
         <div
-          @click="tabItem='visa'"
+          @click="onTabStripe"
           class="tab-item"
           :class="{active: tabItem === 'visa', 'border-bot': tabItem !== 'visa'}"
         >
@@ -73,7 +73,7 @@
       </div>
       <div class="lg:w-1/2 lg:pl-5">
         <div class="field-container mt-10">
-          <div class="field-container mt-5" id="paypal-button"></div>
+          <div class="field-container mt-5" id="paypal-button-container"></div>
         </div>
       </div>
     </div>
@@ -96,6 +96,7 @@
 <script>
 import DropDown from "~/components/form/dropdown-field.vue";
 import TextField from "~/components/form/text-field.vue";
+// import func from "../../../vue-temp/vue-editor-bridge";
 export default {
   middleware: "auth",
   name: "payment",
@@ -146,77 +147,7 @@ export default {
   mounted() {
     this.$store.commit("cartstepper/set", { position: 4 });
 
-    paypal
-      .Buttons({
-        createOrder: function(data, actions) {
-          // This function sets up the details of the transaction, including the amount and line item details.
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: "0.01"
-                }
-              }
-            ]
-          });
-        },
-        onError: function(err) {
-          // that.toastService.show('Error with payment processing', 4000, 'red');
-          console.log("payPal onError", err);
-          return;
-        },
-        onCancel: function(data) {
-          console.log("payPal onCancel", data);
-          // that.toastService.show(
-          //   "The transaction was interrupted",
-          //   4000,
-          //   "red"
-          // );
-          return;
-        },
-        onApprove: function(data, actions) {
-          // This function captures the funds from the transaction.
-          return actions.order.capture().then(function(details) {
-            // This function shows a transaction success message to your buyer.
-            alert("Transaction completed by " + details.payer.name.given_name);
-          });
-        }
-      })
-      .render("#paypal-button");
-    // paypal.Button.render(
-    //   {
-    //     style: {
-    //       size: "large",
-    //       layout: "vertical"
-    //     },
-    //     env: "sandbox", // Or 'production'
-    //     // Set up the payment:
-    //     // 1. Add a payment callback
-    //     payment: function(data, actions) {
-    //       // 2. Make a request to your server
-    //       return actions.request
-    //         .post("/my-api/create-payment/")
-    //         .then(function(res) {
-    //           // 3. Return res.id from the response
-    //           return res.id;
-    //         });
-    //     },
-    //     // Execute the payment:
-    //     // 1. Add an onAuthorize callback
-    //     onAuthorize: function(data, actions) {
-    //       // 2. Make a request to your server
-    //       return actions.request
-    //         .post("/my-api/execute-payment/", {
-    //           paymentID: data.paymentID,
-    //           payerID: data.payerID
-    //         })
-    //         .then(function(res) {
-    //           // 3. Show the buyer a confirmation message.
-    //         });
-    //     }
-    //   },
-    //   "#paypal-button"
-    // );
+    PayPal();
   },
   components: {
     "text-field": TextField,
@@ -228,9 +159,64 @@ export default {
     },
     moveNext() {
       this.$router.push("/user/cart/confirmation");
+    },
+    onTabPayPal() {
+      this.tabItem = "paypal";
+      if (this.tabItem == "paypal") {
+        setTimeout(() => {
+          PayPal();
+        }, 100);
+      } else {
+      }
+    },
+    onTabStripe() {
+      this.tabItem = "visa";
+      if (this.tabItem == "visa") {
+      } else {
+      }
     }
   }
 };
+
+function PayPal() {
+  paypal
+    .Buttons({
+      createOrder: function(data, actions) {
+        // This function sets up the details of the transaction, including the amount and line item details.
+        return actions.order.create({
+          purchase_units: [
+            {
+              amount: {
+                value: "100"
+              }
+            }
+          ]
+        });
+      },
+      onError: function(err) {
+        // that.toastService.show('Error with payment processing', 4000, 'red');
+        console.log("payPal onError", err);
+        return;
+      },
+      onCancel: function(data) {
+        console.log("payPal onCancel", data);
+        // that.toastService.show(
+        //   "The transaction was interrupted",
+        //   4000,
+        //   "red"
+        // );
+        return;
+      },
+      onApprove: function(data, actions) {
+        // This function captures the funds from the transaction.
+        return actions.order.capture().then(function(details) {
+          // This function shows a transaction success message to your buyer.
+          alert("Transaction completed by " + details.payer.name.given_name);
+        });
+      }
+    })
+    .render("#paypal-button-container");
+}
 </script>
 
 <style scoped>
