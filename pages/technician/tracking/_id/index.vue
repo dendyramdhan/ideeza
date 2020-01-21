@@ -102,6 +102,8 @@
                 <div class="flex" @click.stop>
                   <!-- <input type="checkbox" :id="task.id" v-model="task.selected" />
                   <label :for="task.id"></label>-->
+                  <img :src="avata_img_url +useravatar" class="h-10 w-10 rounded-full mr-2" />
+
                   <label>{{username}}</label>
                 </div>
               </div>
@@ -157,7 +159,11 @@ export default {
     CompleteTask
   },
   mounted() {
-    this.username = window.$nuxt.$cookies.get("firstname") + " "+ window.$nuxt.$cookies.get("lastname");
+    this.username =
+      window.$nuxt.$cookies.get("firstname") +
+      " " +
+      window.$nuxt.$cookies.get("lastname");
+    this.useravatar = window.$nuxt.$cookies.get("useravatar");
 
     this.projectidd = this.$route.query.id;
     window.$nuxt.$cookies.set("technicianprojectid", this.$route.query.id);
@@ -202,7 +208,8 @@ export default {
   },
   data() {
     return {
-      username:null,
+      useravatar: null,
+      username: null,
       project_img_url: process.env.project_image_url,
       ts: new Date(),
       geturl: "/api/project/technician/get_all",

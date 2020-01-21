@@ -85,12 +85,15 @@
           color="pink"
           is-expanded
           :theme="theme"
+      v-model="date" 
+      :attributes="attributes"
+
         />
         <div class="bg-white shadow rounded">
           <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
           <hr class="my-1" />
           <ul class="shadow-lg">
-            <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="(Service, index) in articleArray" v-if="5 < index">
+            <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="(Service, index) in articleArray2" >
               <div >
                 <div class="text text-sm font-bold">{{Service.title}}</div>
                 <div class="text text-xs">Completed</div>
@@ -106,6 +109,7 @@
         <!-- <div id="myCalendar" class="vanilla-calendar"></div> -->
       </div>
     </div>
+    <!-- {{articleArray2}} -->
   </div>
 </template>
 <script>
@@ -140,16 +144,47 @@ export default {
 
     });
 
+    let sendData2 = {
+      method: "get",
+      url: this.geturl2,
+      data: null
+    };
+
+    apiService(sendData2, response => {
+      console.log(response.data);
+      this.randomNumber2 = response.data;
+      this.articleArrayaxios2 = Object.values(response.data.data);
+
+      this.articleArrayaxios2.map(item => {
+        this.articleArrayrout2.push(item);
+        this.articleArray2.push(item);
+      });
+
+    });
+
 
   },
   data() {
     return {
+      date: new Date(),
+      attributes: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date()
+        }
+      ],
       ts: new Date(),
       articleArray: [],
       articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
       geturl: "/api/project/technician/get_all",
+      articleArray2: [],
+      articleArrayaxios2: [],
+      articleArrayrout2: [],
+      randomNumber2: [],
+      geturl2: "/api/project/completed_project",
       theme: {
         container: {
           light: "ideeza-date-picker"

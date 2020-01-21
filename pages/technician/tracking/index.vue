@@ -68,8 +68,7 @@
                   <!-- <input type="checkbox" :id="project.id" v-model="project.selected" /> -->
                   <!-- <label :for="project.id"></label> -->
                 </div>
-                <!-- <img :src="avata_img_url + project.avatar" class="h-10 w-10 rounded-full mr-2" />
-                <label >{{project.user.name}}</label> -->
+                <img :src="avata_img_url +useravatar" class="h-10 w-10 rounded-full mr-2" />
                 <label>{{ username}}</label>
                 
               </div>
@@ -129,6 +128,7 @@ export default {
       geturl: "/api/project/technician/get_all",
       avata_img_url: process.env.avatar_base_url,
       username:null,
+      useravatar:null,
       selected: false,
       projects: [
         {
@@ -180,6 +180,7 @@ export default {
   },
   mounted() {
     this.username = window.$nuxt.$cookies.get("firstname") + " "+ window.$nuxt.$cookies.get("lastname");
+    this.useravatar = window.$nuxt.$cookies.get("useravatar");
     let sendData = {
       method: "get",
       url: this.geturl,

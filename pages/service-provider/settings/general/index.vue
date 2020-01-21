@@ -12,14 +12,14 @@
             <div class="form-field">
               <div class="field-label">Company Name</div>
               <div class="field-input flex-grow">
-                 <input class="field h-10" :value="articleArraymid1.company_name" />
+                 <input class="field h-10" :value="articleArraymid1.company_name" @change="changecompany"/>
               </div>
             </div>
           <hr class="mb-2">
             <div class="form-field">
               <div class="field-label">Email Address</div>
               <div class="field-input flex-grow">
-            <input class="field h-10" :value="articleArraymid1.email" />
+            <input class="field h-10" :value="articleArraymid1.email" @change="changeemail"/>
                
               </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="form-field">
               <div class="field-label">Phone Number <font-awesome-icon class="ml-2 text-sm" :icon="['fas', 'lock']" /></div>
               <div class="field-input flex-grow">
-            <input class="field h-10" :value="articleArraymid1.phone" />
+            <input class="field h-10" :value="articleArraymid1.phone" @change="changephonenumber" />
                
               </div>
             </div>
@@ -35,7 +35,7 @@
             <div class="form-field">
               <div class="field-label">Address <font-awesome-icon class="ml-2 text-sm" :icon="['fas', 'lock']" /></div>
               <div class="field-input flex-grow">
-                            <input class="field h-10"  :value="articleArraymid1.address" />
+                            <input class="field h-10"  :value="articleArraymid1.address"  @change="changeaddress"/>
 
               </div>
             </div>
@@ -43,7 +43,7 @@
             <div class="form-field">
               <div class="field-label">Website</div>
               <div class="field-input flex-grow">
-            <input class="field h-10"  :value="articleArraymid1.website" />
+            <input class="field h-10"  :value="articleArraymid1.website" @change="changewebsite"/>
                
               </div>
             </div>
@@ -51,7 +51,7 @@
           <div class="form-field">
             <div class="field-label">Preferred Language</div>
             <div class="field-input flex-grow">
-             <select class="field h-10" :value="articleArraymid1.prefered_language" >
+             <select class="field h-10"     @change="changelanguage">
               <option value="English">English</option>
             </select>
             </div>
@@ -60,7 +60,7 @@
           <div class="form-field textarea">
             <div class="field-label">Describe Your Company</div>
             <div class="field-input flex-grow">
-              <textarea class="field h-40" value="">
+              <textarea class="field h-40" value=""  @change="changedesc">
                  {{articleArraymid1.desc}}
               </textarea>
             </div>
@@ -80,7 +80,7 @@
             <div class="form-field">
               <div class="field-label">Line of bussiness</div>
               <div class="field-input flex-grow">
-               <select v-model="line_of_business"  class="field w-full h-10">
+               <select v-model="lineofbusiness"  class="field w-full h-10" @change="changelineofbussiness">
               <option value="1">Electronics</option>
               <option value="2">Cover</option>
               <option value="3">Code</option>
@@ -91,7 +91,7 @@
           <div class="form-field">
               <div class="field-label">Expertise</div>
               <div class="field-input flex-grow">
-                 <select v-model="expertise" class="field w-full h-10">
+                 <select v-model="expertise" class="field w-full h-10" @change="changeexpertise">
               <option value="1">Fabrication</option>
               <option value="2">Assembly</option>
               <option value="3">Dealer</option>
@@ -195,7 +195,27 @@ export default {
       randomNumber: {},
       avata_img_url: process.env.avatar_base_url,
       articleArraymid1: [],
-      userid: null
+      userid: null,
+      geturl2: "/api/user/update_profile",
+      firstname:null,
+      lastname:null,
+      birthday:null,
+      email:null,
+      sex:null,
+      phone:null,
+      prefered_language:null,
+      address:null,
+      website:null,
+      skill:null,
+      desc:null,
+      school:null,
+      work:null,
+      timezone:null,
+      language:null,
+      company:null,
+      avatar:null,
+      lineofbusiness:null,
+      expertise:null,
     };
   },
   mounted() {
@@ -213,9 +233,56 @@ export default {
 
       const obj3 = { ...this.articleArray[0], ...this.articleArray[1] };
       this.articleArraymid1 = obj3;
+
+      this.firstname = this.articleArraymid1.firstname;
+      this.lastname = this.articleArraymid1.lastname;
+      this.birthday = this.articleArraymid1.birthday;
+      this.email = this.articleArraymid1.email;
+      this.sex = this.articleArraymid1.sex;
+      this.phone = this.articleArraymid1.phone;
+      this.prefered_language = this.articleArraymid1.prefered_language;
+      this.address = this.articleArraymid1.address;
+      this.website = this.articleArraymid1.website;
+      this.skill = this.articleArraymid1.skill;
+      this.desc = this.articleArraymid1.desc;
+      this.school = this.articleArraymid1.school;
+      this.work = this.articleArraymid1.work;
+      this.timezone = this.articleArraymid1.timezone;
+      this.language = this.articleArraymid1.language;
+      this.company = this.articleArraymid1.company;
+      this.avatar = this.articleArraymid1.avatar;
+      this.lineofbusiness = this.articleArraymid1.lineofbusiness;
+      this.expertise = this.articleArraymid1.expertise;
     });
   },
   methods: {
+    changecompany(evt){
+      this.company = evt.target.value
+    },
+    changeemail(evt){
+        this.email = evt.target.value
+    },
+    changephonenumber(evt){
+        this.phone = evt.target.value
+    },
+     changeaddress(evt){
+        this.address = evt.target.value
+    },
+    changewebsite(evt){
+        this.website = evt.target.value
+    },
+    changelanguage(evt){
+        this.prefered_language = evt.target.value
+    },
+    changedesc(evt){
+        this.desc = evt.target.value
+    },
+    changelineofbussiness(evt){
+        this.lineofbusiness = evt.target.value
+    },
+    changeexpertise(evt){
+        this.expertise = evt.target.value
+    },
     upload(evt) {
       // alert("upload image!!!")
     var reader = new FileReader();
@@ -228,7 +295,7 @@ export default {
 
       // this.file = this.$refs.file.files[0];
       console.log("file_upload:", evt);
-      this.file = evt.target.files[0];
+      this.avatar = evt.target.files[0];
     },
     disconnectfacebook() {
       alert("disconnect_Facebook!!!");
@@ -243,7 +310,56 @@ export default {
       alert("add_Social_Account!!!");
     },
     savegeneralsetting() {
-      alert("All Setting Saved!!!");
+      const formData = new FormData();
+      formData.set("firstname", this.firstname);
+      formData.set("lastname", this.lastname);
+      formData.set("birthday", this.birthday);
+      formData.set("email", this.email);
+      formData.set("sex", this.sex);
+      formData.set("phone", this.phone);
+      formData.set("prefered_language", this.prefered_language);
+      formData.set("address", this.address);
+      formData.set("website", this.website);
+      formData.set("skill", this.skill);
+      formData.set("desc", this.desc);
+      formData.set("school", this.school);
+      formData.set("work", this.work);
+      formData.set("timezone", this.timezone);
+      formData.set("language", this.language);
+      formData.set("company", this.company);
+      formData.append("avatar", this.avatar);
+      formData.set("lineofbusiness", this.lineofbusiness);
+      formData.set("expertise", this.expertise);
+      let sendData2 = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+
+      apiService(sendData2, response => {
+        console.log(response);
+      });
+
+
+      // alert("All Setting Saved!!!");
+      console.log("firstname:",this.firstname);
+      console.log("lastname:",this.lastname);
+      console.log("birthday:",this.birthday);
+      console.log("email:",this.email);
+      console.log("sex:",this.sex);
+      console.log("phone:",this.phone);
+      console.log("prefered_language:",this.prefered_language);
+      console.log("address:",this.address);
+      console.log("skill:",this.skill);
+      console.log("desc:",this.desc);
+      console.log("school:",this.school);
+      console.log("work:",this.work);
+      console.log("timezone:",this.timezone);
+      console.log("language:",this.language);
+      console.log("company:",this.company);
+      console.log("avatar:",this.avatar);
+      console.log("lineofbusiness:",this.lineofbusiness);
+      console.log("expertise:",this.expertise);
     }
   }
 }
