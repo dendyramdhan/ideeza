@@ -10,11 +10,11 @@
           <div class="flex justify-between items-center">
             <div>
               <font-awesome-icon class="mr-3 h-4 text-gray-500" :icon="['fas', 'truck']" />
-              <span class="font-semibold">Express Delivery</span>
+              <span class="font-semibold">{{delivery_service}} Delivery</span>
             </div>
             <div>
               <span class="text-gray-500">Price:</span>
-              <span class="font-semibold">$50</span>
+              <span class="font-semibold">${{delivery_price}}</span>
             </div>
           </div>
           <div class="flex mt-6">
@@ -22,10 +22,9 @@
               <font-awesome-icon class="mr-6 h-4 text-gray-500" :icon="['fas', 'map-marker-alt']" />
             </div>
             <div class="font-semibold">
-              Keas 69 Str.
-              <br />15234, Chalandri
-              <br />Athens,
-              <br />Greece
+              {{delivery_address}}
+              <br />{{delivery_city}},
+              <br />{{delivery_country}}
             </div>
           </div>
         </div>
@@ -101,17 +100,34 @@
 
 <script>
 import carts from "~/json/cart.json";
+import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   middleware: "auth",
   name: "payment",
 
   data: function() {
     return {
-      carts: carts
+      carts: carts,
+      delivery_address: null,
+      delivery_city: null,
+      delivery_country: null,
+      delivery_price: null,
+      delivery_service: 'Experss'
     };
   },
   mounted() {
     this.$store.commit("cartstepper/set", { position: 5 });
+
+    window.$nuxt.$cookies.get("d_firstname");
+    window.$nuxt.$cookies.get("d_lastname");
+    window.$nuxt.$cookies.get("d_phonenumber");
+    this.delivery_address = window.$nuxt.$cookies.get("d_address");
+    window.$nuxt.$cookies.get("d_zip");
+    window.$nuxt.$cookies.get("d_email");
+    this.delivery_country = window.$nuxt.$cookies.get("d_country");
+    this.delivery_city = window.$nuxt.$cookies.get("d_city");
+    this.delivery_service = window.$nuxt.$cookies.get("d_shipping_service");
+
   },
 
   methods: {
