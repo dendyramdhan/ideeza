@@ -4,11 +4,14 @@
     <LeftMenu />
 
     <!-- Main Contents -->
-    <div class="flex-grow">
+    <div class="flex-grow" v-for="info in articleArray" v-if="info.id == $route.query.id">
       <div class="main-contents p-5">
         <div class="md:flex text-black justify-between mb-5">
-          <h1 class="font-bold text-3xl">Project: Mental Making</h1>
-          <button class="bg-ideeza-dark px-3 py-2 text-white">Back</button>
+          <h1 class="font-bold text-3xl">Project: {{info.title}}</h1>
+          <button
+            class="bg-ideeza-dark px-3 py-2 text-white"
+            @click.self="$router.push('/technician/tracking')"
+          >Back</button>
         </div>
         <div class="md:flex text-ideeza-dark mb-5 items-center font-semibold justify-between">
           <div class="md:flex items-center">
@@ -23,9 +26,7 @@
         <div class="md:flex">
           <div class="w-4/6 bg-white p-5 border-ideeza border mb-5 rounded mr-2">
             <h1 class="text-xl font-bold text-ideeza mb-3">Project Description</h1>
-            <p
-              class="text-gray-500"
-            >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error quod laborum sint architecto debitis illum nobis quia accusantium itaque molestiae non vitae quasi, aspernatur consequuntur nesciunt omnis hic excepturi commodi. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid maxime atque placeat quasi reprehenderit minus ut enim in repudiandae, corporis nihil sunt dignissimos est iste iusto saepe eos corrupti incidunt.</p>
+            <p class="text-gray-500">{{info.description}}</p>
           </div>
           <div class="w-2/6 bg-white p-5 border-ideeza border mb-5 rounded">
             <div class="flex-grow">
@@ -33,8 +34,9 @@
               <div class="bg-white">
                 <span class="block text-xs">3 pics attached</span>
                 <div class="flex flex-wrap attached-images-wrapper mt-2">
-                  <img src="https://picsum.photos/200" alt />
-                  <img src="https://picsum.photos/200" alt />
+                  <span v-for="image in info.attach">
+                    <img :src="project_img_url + image.image" />
+                  </span>
                   <img src="https://picsum.photos/200" alt />
                 </div>
                 <div class="mt-5">Link attached:</div>
@@ -53,87 +55,76 @@
           </template>
           <template v-slot:th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              <input type="checkbox" id="ad" v-model="selected" @change="selectall" />
+              <!-- <input type="checkbox" id="ad" v-model="selected" @change="selectall" /> -->
               <label for="ad">User name</label>
-              <font-awesome-icon
+              <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
-              />
+              />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
               Project name
-              <font-awesome-icon
+              <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
-              />
+              />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3 text-center">
               Service Providers
-              <font-awesome-icon
+              <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
-              />
+              />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
               Deadline
-              <font-awesome-icon
+              <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
-              />
+              />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
               Completed
-              <font-awesome-icon
+              <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
-              />
+              />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3"></th>
           </template>
-          <tr class="flex w-full mb-4" v-for="(task,index) in tasks" @click="detailTask=true">
-            <td
-              class="w-2/12 text-ideeza-dark font-semibold"
-              :class="{'border-b':tasks.length-1 != index}"
-            >
+          <tr
+            class="flex w-full mb-4"
+            v-for="task in articleArray2"
+            @click="taskdetailtrue(task.id)"
+          >
+            <td class="w-2/12 text-ideeza-dark font-semibold">
               <div class="flex">
                 <div class="flex" @click.stop>
-                  <input type="checkbox" :id="task.id" v-model="task.selected" />
-                  <label :for="task.id"></label>
+                  <!-- <input type="checkbox" :id="task.id" v-model="task.selected" />
+                  <label :for="task.id"></label>-->
+                  <label>{{username}}</label>
                 </div>
-                {{task.category.name}}
               </div>
             </td>
-            <td
-              class="w-2/12 text-sm text-ideeza-dark font-semibold"
-              :class="{'border-b':tasks.length-1 != index}"
-            >{{task.task.name}}</td>
-            <td
-              class="w-2/12 text-sm text-ideeza-dark text-center"
-              :class="{'border-b':tasks.length-1 != index}"
-            >
-              <img v-for="image in task.service_providers" :src="image.url" class="avatar" />
-              +{{task.service_providers.length}}
+            <td class="w-2/12 text-sm text-ideeza-dark font-semibold">{{task.name}}</td>
+            <td class="w-2/12 text-sm text-ideeza-dark text-center">
+              <img
+                v-for="image in task.assigned_user"
+                :src="avata_img_url + image.avatar"
+                class="avatar"
+              />
             </td>
-            <td
-              class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left"
-              :class="{'border-b':tasks.length-1 != index}"
-            >
-              <div class="ml-2">{{task.deadline}}</div>
+            <td class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left">
+              <div class="ml-2">{{ts.toLocaleDateString(task.end - task.start)}}</div>
             </td>
-            <td
-              class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left"
-              :class="{'border-b':tasks.length-1 != index}"
-            >
-              <div class="ml-5">{{task.completed}}%</div>
+            <td class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left">
+              <div class="ml-5">{{(task.end - task.start)/100000000}}%</div>
             </td>
-            <td
-              class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left"
-              :class="{'border-b':tasks.length-1 != index}"
-            >
-              <font-awesome-icon
+            <td class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left">
+              <!-- <font-awesome-icon
                 class="text-xl mt-2 ml-4 text-green-300 float-right"
                 :icon="['fa', 'grip-vertical']"
-              />
+              />-->
             </td>
           </tr>
         </simple-table>
@@ -153,6 +144,10 @@ import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import SimpleTable from "~/components/reusables/Table.vue";
 import DetailTask from "~/components/technician/management/detail-task.vue";
 import CompleteTask from "~/components/technician/management/complete-task.vue";
+
+import apiService from "~/apiService/have_token.js";
+import apiService2 from "~/apiService/get_param.js";
+
 export default {
   layout: "user",
   components: {
@@ -161,102 +156,74 @@ export default {
     DetailTask,
     CompleteTask
   },
+  mounted() {
+    this.username = window.$nuxt.$cookies.get("firstname") + " "+ window.$nuxt.$cookies.get("lastname");
+
+    this.projectidd = this.$route.query.id;
+    window.$nuxt.$cookies.set("technicianprojectid", this.$route.query.id);
+
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
+
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
+
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item);
+        this.articleArray.push(item);
+      });
+    });
+
+    const formData = new FormData();
+    formData.set("projectid", this.projectidd);
+    let sendData2 = {
+      method: "post",
+      url: this.geturl2,
+      data: formData
+    };
+
+    apiService(sendData2, response => {
+      console.log(response.data);
+      this.randomNumber2 = response.data;
+      this.articleArrayaxios2 = Object.values(response.data.tasks);
+
+      this.articleArrayaxios2.map(item => {
+        this.articleArrayrout2.push(item);
+        this.articleArray2.push(item);
+      });
+    });
+  },
   data() {
     return {
+      username:null,
+      project_img_url: process.env.project_image_url,
+      ts: new Date(),
+      geturl: "/api/project/technician/get_all",
+      articleArray: [],
+      articleArrayrout: [],
+      articleArrayaxios: [],
+      projectidd: null,
+      randomNumber: {},
+      avata_img_url: process.env.avatar_base_url,
+      project_img_url: process.env.project_image_url,
+      articleArray2: [],
+      articleArrayrout2: [],
+      geturl2: "/api/project/get_tasks",
+      articleArrayaxios2: [],
+      randomNumber2: [],
       selected: false,
       detailTask: false,
       completeTask: false,
       tasks: [
         {
           id: 1,
-          category: {
-            name: "Code"
-          },
-          task: {
-            name: "Make Iron from steal"
-          },
-          service_providers: [
-            {
-              url: "https://randomuser.me/api/portraits/women/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/12.jpg"
-            }
-          ],
-          deadline: "07/04/1927",
-          completed: 30
-        },
-        {
-          id: 2,
-          category: {
-            name: "Code"
-          },
-          task: {
-            name: "Make Iron from steal"
-          },
-          service_providers: [
-            {
-              url: "https://randomuser.me/api/portraits/women/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/12.jpg"
-            }
-          ],
-          deadline: "07/04/1927",
-          completed: 30
-        },
-        {
-          id: 3,
-          category: {
-            name: "Code"
-          },
-          task: {
-            name: "Make Iron from steal"
-          },
-          service_providers: [
-            {
-              url: "https://randomuser.me/api/portraits/women/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/12.jpg"
-            }
-          ],
-          deadline: "07/04/1927",
-          completed: 30
-        },
-        {
-          id: 4,
-          category: {
-            name: "Code"
-          },
-          task: {
-            name: "Make Iron from steal"
-          },
-          service_providers: [
-            {
-              url: "https://randomuser.me/api/portraits/women/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/12.jpg"
-            }
-          ],
-          deadline: "07/04/1927",
-          completed: 30
-        },
-        {
-          id: 5,
           category: {
             name: "Code"
           },
@@ -286,6 +253,10 @@ export default {
     }
   },
   methods: {
+    taskdetailtrue(myid) {
+      window.$nuxt.$cookies.set("techniciantaskid", myid);
+      this.detailTask = true;
+    },
     selectall() {
       if (this.selected == true) {
         this.projects.forEach(element => {
