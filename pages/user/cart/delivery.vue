@@ -5,7 +5,12 @@
     >
       <div class="flex items-center">
         <span class="font-semibold text-xl text-gray-500 mr-2">Shipping Services</span>
-        <drop-down style-height="mini" :data="shippingServices" class="services-dropdown" v-model="shipping_service"/>
+        <drop-down
+          style-height="mini"
+          :data="shippingServices"
+          class="services-dropdown"
+          v-model="shipping_service"
+        />
       </div>
       <div>
         <span class="text-gray-500 mr-2">Delivery time:</span>
@@ -45,13 +50,13 @@
           <div class="lg:w-1/2 lg:pr-5">
             <div class="field-container mt-10">
               <div class="text-lg text-gray-800 mb-2">Country</div>
-              <drop-down :data="countries" v-model="country"/>
+              <drop-down :data="countries" v-model="country" />
             </div>
           </div>
           <div class="lg:w-1/2 lg:pl-5">
             <div class="field-container mt-10">
               <div class="text-lg text-gray-800 mb-2">City</div>
-              <drop-down :data="cities" v-model="city"/>
+              <drop-down :data="cities" v-model="city" />
             </div>
           </div>
           <div class="lg:w-1/2 lg:pr-5">
@@ -69,7 +74,7 @@
         </div>
       </div>
       <!-- </smooth-scrollbar> -->
-    </div>  
+    </div>
 
     <div class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative">
       <button @click="moveBack" class="order-2 lg:order-1 my-4 lg:my-0 btn pill-button px-8 py-1">
@@ -90,8 +95,7 @@
 <script>
 import DropDown from "~/components/form/dropdown-field.vue";
 import TextField from "~/components/form/text-field.vue";
-import axios from "axios";
-
+import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   middleware: "auth",
   name: "delivery",
@@ -121,16 +125,16 @@ export default {
   },
   methods: {
     moveNext() {
-
-      window.$nuxt.$cookies.set('d_firstname', this.firstname);
-      window.$nuxt.$cookies.set('d_lastname', this.lastname);
-      window.$nuxt.$cookies.set('d_phonenumber', this.phonenumber);
-      window.$nuxt.$cookies.set('d_address', this.address);
-      window.$nuxt.$cookies.set('d_zip', this.zip);
-      window.$nuxt.$cookies.set('d_email', this.email);
-      window.$nuxt.$cookies.set('d_country', this.country);
-      window.$nuxt.$cookies.set('d_city', this.city);
+      window.$nuxt.$cookies.set("d_firstname", this.firstname);
+      window.$nuxt.$cookies.set("d_lastname", this.lastname);
+      window.$nuxt.$cookies.set("d_phonenumber", this.phonenumber);
+      window.$nuxt.$cookies.set("d_address", this.address);
+      window.$nuxt.$cookies.set("d_zip", this.zip);
+      window.$nuxt.$cookies.set("d_email", this.email);
+      window.$nuxt.$cookies.set("d_country", this.country);
+      window.$nuxt.$cookies.set("d_city", this.city);
       window.$nuxt.$cookies.set("d_shipping_service", this.shipping_service);
+
       this.$router.push("/user/cart/payment");
     },
     moveBack() {
