@@ -5,18 +5,18 @@
       <div class="w-6 h-full relative">
         <transition name="slide-fade">
           <font-awesome-icon
-            key="on"
+            key="off"
             v-if="!leftMenu"
             @click="toggleLeftMenu()"
             class="absolute-center-v text-white cursor-pointer ml-1 mr-2 absolute h-4"
-            :icon="['fas', 'chevron-left']"
+            :icon="['fas', 'bars']"
           />
           <font-awesome-icon
-            key="off"
+            key="on"
             v-else
             @click="toggleLeftMenu()"
             class="absolute-center-v text-white cursor-pointer ml-1 mr-2 absolute h-4"
-            :icon="['fas', 'bars']"
+            :icon="['fas', 'chevron-left']"
           />
         </transition>
       </div>

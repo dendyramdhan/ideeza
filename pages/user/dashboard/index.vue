@@ -13,13 +13,13 @@
             <img src="~/static/images/user-dash-main.png" class="object-center object-contain" alt />
             <div class="absolute top-0 left-0 w-full text-center flex flex-col items-center">
               <h1
-                class="font-semibold lg:text-5xl mt-10 mb-5 text-white text-center w-full"
+                class="font-semibold lg:text-5xl mt-10 mb-5 text-black text-center w-full"
               >Let's get you started</h1>
               <span
-                class="font-semibold block text-3xl mb-3 w-full text-center"
+                class="font-semibold block text-3xl mb-3 w-full text-black text-center"
               >Now is your time to change the world.</span>
               <span
-                class="font-semibold block text-3xl mb-10 w-full text-center"
+                class="font-semibold block text-3xl mb-10 w-full text-black text-center"
               >Dream, invent, create.</span>
 
               <img
@@ -31,13 +31,6 @@
             </div>
           </div>
           <div class="lg:w-1/2 md:pl-10">
-            <div class="md:flex justify-between items-center pb-5 border-b border-light-gray">
-              <h2 class="font-semibold block text-3xl">Last Activity</h2>
-              <button
-                class="btn pill-button px-10 text-lg"
-                @click="viewLastActivity"
-              >View last activity</button>
-            </div>
 
             <div class="md:flex justify-between">
               <nuxt-link to="/user/projects" class="flex-1">
@@ -81,7 +74,30 @@
                     <span class="text-ideeza-blue-gray text-lg block">My Score</span>
                   </div>
                 </div>
+                <span class="score-badge" 
+                  v-if="activities.myscore >= 0 &&  activities.myscore <=100"
+                  :class="{rookieColor: activities.myscore >= 0 &&  activities.myscore <=100}">Rookie</span>
+                
+                <span class="score-badge" 
+                  v-if="activities.myscore >= 101 &&  activities.myscore <=500"
+                  :class="{talentedColor: activities.myscore >= 101 &&  activities.myscore <=500}">Talented</span>
+                
+                <span class="score-badge" 
+                  v-if="activities.myscore >= 501 &&  activities.myscore <=1000"
+                  :class="{seniorColor: activities.myscore >= 501 &&  activities.myscore <=1000}">Senior</span>
+                
+                <span class="score-badge" 
+                  v-if="activities.myscore >= 1001"
+                  :class="{masterColor: activities.myscore >= 1001}">Master</span>
               </nuxt-link>
+            </div>
+
+            <div class="md:flex justify-between items-center pb-5 mt-6 border-b border-light-gray">
+              <h2 class="font-semibold block text-3xl">Last Activities</h2>
+              <button
+                class="btn pill-button px-10 text-lg"
+                @click="viewLastActivity"
+              >View all activities</button>
             </div>
 
             <div style="overflow: scroll; height:200px">
@@ -171,10 +187,10 @@
                               class="mr-1 h-4 text-ideeza-gold"
                               :icon="['fas', 'star']"
                             />
-                            <small class="text-xs">{{topproject.project_info.rate}}</small>
+                            <small class="text-xs">{{topproject.project.rate}}</small>
                           </div>
 
-                          <span class="text-xs">{{topproject.project_info.like}} likes</span>
+                          <span class="text-xs">{{topproject.project.like}} likes</span>
                         </div>
                       </div>
                     </div>
@@ -366,6 +382,25 @@ export default {
 </script>
 
 <style scoped>
+.score-badge {
+  color: #FFF;
+  font-weight: bold;
+  margin-left: 12px;
+  border-radius: 5px;
+  padding: 0px 12px 4px 13px;
+}
+.rookieColor {
+  background: #FF33CC;
+}
+.talentedColor {
+  background: #CC0099;
+}
+.seniorColor {
+  background: #7030A0;
+}
+.masterColor {
+  background: #2E75B6;
+}
 .blog-image-container {
   width: 315px;
   height: 215px;
@@ -380,6 +415,7 @@ export default {
   @apply mt-2;
 }
 .status-button {
+  margin-bottom:  0px !important;
   @apply p-3 m-3 border border-solid border-ideeza cursor-pointer rounded;
 }
 /deep/ .scrollbar-thumb {
