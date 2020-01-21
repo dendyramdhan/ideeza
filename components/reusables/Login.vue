@@ -112,8 +112,6 @@ export default {
           data: bodyFormData
         };
         apiService(sendData, response => {
-          console.log(response.data);
-          console.log(response.data.success);
           if (response.data.success == true) {
             this.auth = true;
             var token = response.data["data"].token;
@@ -121,6 +119,7 @@ export default {
             var firstname = userdata.firstname;
             var lastname = userdata.lastname;
             var userid = userdata.id;
+            var useravatar = userdata.avatar;
 
             // window.$nuxt.$cookies.set("authToken", token);
             // window.$nuxt.$cookies.set("firstname", firstname);
@@ -132,6 +131,7 @@ export default {
             window.$nuxt.$cookies.set("firstname", firstname);
             window.$nuxt.$cookies.set("lastname", lastname);
             window.$nuxt.$cookies.set("userid", userid);
+            window.$nuxt.$cookies.set("useravatar", useravatar);
             // console.log("Here: ", window.$nuxt.$cookies.get("authToken"));
             this.$router.push("/user/dashboard");
           } else {

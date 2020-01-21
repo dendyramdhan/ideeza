@@ -233,6 +233,7 @@ export default {
       userloginhistories: [],
       show: true,
       name: "",
+      avatar: "",
       months: [
         'January',
         'February',
@@ -269,7 +270,9 @@ export default {
       //   window.$nuxt.$cookies.get("lastname");
       let firstname = window.$nuxt.$cookies.get("firstname");
       let lastname = window.$nuxt.$cookies.get("lastname");
+      let useravatar = window.$nuxt.$cookies.get("useravatar");
       this.name = firstname + " " + lastname;
+      this.avatar = useravatar;
 
       let getallprojectsurl = "/api/project/get_all";
       let getallprojectsData = {

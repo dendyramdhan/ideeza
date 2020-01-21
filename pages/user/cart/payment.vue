@@ -62,8 +62,19 @@
         <div class="field-container mt-10"></div>
       </div>
       <div class="lg:w-1/2 lg:pl-5">
-        <div class="field-container mt-10">
-          <div class="field-container mt-5" id="card-element"></div>
+        <div class="field-container mt-10 mx-auto">
+          <div class="justify-center items-center">
+            <p class="mt-5 text-center">Credit or debit card</p>
+            <div id="card-element" class="input-container mt-5">
+              <!-- a Stripe Element will be inserted here. -->
+            </div>
+            <!-- Used to display form errors -->
+            <div id="card-errors" class="mt-5"></div>
+          </div>
+          <button
+            @click="stripeSubmit"
+            class="btn btn--ideeza py-2 mt-5 stripesubmit"
+          >Submit Stripe Payment</button>
         </div>
       </div>
     </div>
@@ -96,7 +107,7 @@
 <script>
 import DropDown from "~/components/form/dropdown-field.vue";
 import TextField from "~/components/form/text-field.vue";
-// import func from "../../../vue-temp/vue-editor-bridge";
+var stripeCard;
 export default {
   middleware: "auth",
   name: "payment",
@@ -172,8 +183,61 @@ export default {
     onTabStripe() {
       this.tabItem = "visa";
       if (this.tabItem == "visa") {
+        setTimeout(() => {
+          console.log("Here: ", this.$stripe);
+          const elements = this.$stripe.import().elements();
+          const style = {
+            base: {
+              color: "#000000",
+              fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+              fontSmoothing: "antialiased",
+              fontSize: "16px",
+              "::placeholder": {
+                color: "#aab7c4"
+              },
+              height: "30px",
+              border: "1px solid #000"
+            },
+            invalid: {
+              color: "#fa755a",
+              iconColor: "#fa755a"
+            }
+          };
+          const card = elements.create("card", { style: style });
+          stripeCard = card;
+          // Add an instance of the card Element into the `card-element` <div>
+          card.mount("#card-element");
+
+          card.addEventListener("change", function(event) {
+            const displayError = document.getElementById("card-errors");
+            if (event.error) {
+              displayError.textContent = event.error.message;
+            } else {
+              displayError.textContent = "";
+            }
+          });
+        }, 100);
       } else {
       }
+    },
+    stripeSubmit() {
+
+      const elements = this.$stripe.import().elements();
+      // const cardNumber = elements.create("cardNumber");
+
+      // console.log("Here: ", this.$stripe.import().createToken(cardNumber));
+      // return;
+      this.$stripe
+        .import()
+        .createToken(stripeCard)
+        .then(function(result) {
+          if (result.error) {
+            // Inform the user if there was an error.
+            const errorElement = document.getElementById("card-errors");
+            errorElement.textContent = result.error.message;
+          } else {
+          }
+        });
     }
   }
 };
@@ -220,6 +284,17 @@ function PayPal() {
 </script>
 
 <style scoped>
+.stripesubmit {
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+.input-container {
+  @apply my-5;
+}
 .services-dropdown {
   width: 270px;
 }

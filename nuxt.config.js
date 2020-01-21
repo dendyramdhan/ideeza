@@ -86,6 +86,11 @@ export default {
       ]
     }],
     ['cookie-universal-nuxt', { alias: 'cookies' }],
+    ['nuxt-stripe-module', {
+      /* module options */
+      version: 'v3', // Default,
+      publishableKey: 'pk_test_3jHRUbrWywqszV6R6uBuh48o00m6odH81C'
+    }],
   ],
   /**
    * Router Middleware

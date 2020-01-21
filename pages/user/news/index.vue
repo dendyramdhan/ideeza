@@ -65,12 +65,12 @@
               class="text-lg border-b font-semibold border-solid border-gray-300 pb-5 text-gray-500"
             >PEOPLE YOU SHOULD CONNECT</div>
 
-            <div class="flex justify-between items-center bg-white my-5" v-for="connect in connects">
+            <div
+              class="flex justify-between items-center bg-white my-5"
+              v-for="connect in connects"
+            >
               <div class="flex items-center">
-                <img
-                  class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
-                  :src="connect.potrait_url"
-                />
+                <img class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3" :src="connect.potrait_url" />
                 <div class="text-left mr-3">
                   <h2 class="font-semibold text-gray-800">{{connect.name}}</h2>
                   <div class="text-gray-600">{{connect.occupation}}</div>
@@ -93,7 +93,7 @@ import NewsFeed from "~/components/user/news/feeds.vue";
 import connects from "~/json/connects.json";
 
 export default {
-  middleware: 'auth',
+  middleware: "auth",
   layout: "user",
   name: "news-index",
   components: {
@@ -121,10 +121,10 @@ export default {
       } else {
         this.feedType = "world";
       }
-      this.$forceUpdate()
+      this.$forceUpdate();
     },
     onConnect() {
-      alert('Do you want to disconnect?');
+      alert("Do you want to disconnect?");
     }
   }
 };
