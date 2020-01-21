@@ -23,11 +23,19 @@
 
 
           <nuxt-link class="header-menu block mb-2" to="/technician/management/projects">
-            <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'clipboard-list']"/> Projects
+            <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'clipboard-list']"/> Project
           </nuxt-link>
 
           <nuxt-link class="header-menu block mb-2" to="/technician/management/blogs">
             Blogs
+          </nuxt-link>
+
+          <nuxt-link class="header-menu block mb-2" to="/technician/management/add-tech">
+            Add new technician
+          </nuxt-link>
+
+          <nuxt-link class="header-menu block mb-2" to="/technician/management/approve-service-provider">
+            Approve service provider
           </nuxt-link>
 
         </div>

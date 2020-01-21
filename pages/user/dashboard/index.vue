@@ -177,7 +177,7 @@
                     <div class="p-2 border border-solid border-light-gray">
                       <div class="w-full projects-image">
                         <img
-                          :src="project_image_url + topproject.project_info.image"
+                          :src="project_image_url + topproject.project.image"
                           class="object-contain object-center w-full"
                           alt
                         />
