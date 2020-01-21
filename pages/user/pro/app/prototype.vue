@@ -14,7 +14,7 @@
     <side-bar></side-bar>
     <div class="w-full my-10 md:flex justify-center">
               
-            <div class="bg-white rounded-lg shadow p-3 mr-5 mobile">
+            <div class="bg-white rounded-lg shadow p-3 mr-5 mobile screen-1">
               <div class="py-5">
                 <img src="~/static/images/back-screen.png" class="inline-block">
               </div>
@@ -53,7 +53,7 @@
                 
               </div>
          </div>
-         <div class="bg-white rounded-lg shadow p-5 mr-5 mobile" v-if="singleView==false">
+         <div class="bg-white rounded-lg shadow p-5 mr-10 mobile" v-if="singleView==false">
               <div class="py-5 flex justify-between items-center">
                 <img src="~/static/images/back-screen.png" class="inline-block">
                 <h4 class="font-semibold text-lg text-black">News</h4>
@@ -148,4 +148,14 @@ export default {
   .charity img{
     height: 105px;
   }
+  .screen-1:after
+  {
+    content:'';
+    width: 2.5rem;
+    border-bottom: 1px solid;
+    position: absolute;
+    top: 50%;
+    right: -11%;
+    z-index: 1000000;
+}
 </style>

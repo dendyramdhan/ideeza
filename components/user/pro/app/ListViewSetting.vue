@@ -1,6 +1,6 @@
 <template>
     <div class="p-5">
-        <h5 class="font-semibold text-lg text-center mt-10">TimePicker</h5>
+        <h5 class="font-semibold text-lg text-center mt-10">List View</h5>
         
         <div class="mt-5 mx-3">
             <div>Background Color</div>
@@ -15,7 +15,7 @@
           </div>
           <div class="mt-1">
               <select class="w-full mb-2 border p-2 rounded">
-                  <option value="1" selected>Open sans</option>
+                  <option value="1" selected>22px</option>
               </select>
               <div class="flex items-center">
                 <select class="w-2/3  border p-2 rounded mr-2">
@@ -45,10 +45,36 @@
             </select>
           </div>
           <div class="mt-3 text-sm">
-              Text Color
+              Selection
           </div>
           <div class="mt-1">
-              <div class="rounded p-4 text-white bg-green-300 mt-1">#FFFFFF
+              <input type="text" class="w-full border p-2">
+          </div>
+          <check-box class="mt-2">Show Filter bar</check-box>
+          <div class="mt-3">
+            <div>Selection color</div>
+            <div class="rounded p-4 text-white bg-green-300 mt-1">#FFFFFF
+            </div>
+          </div>
+          <div class="mt-3 text-sm">
+              Text
+          </div>
+          <div class="mt-1">
+              <input type="text" class="w-full border p-2">
+          </div>
+          <div class="mt-3 text-sm">
+              Text Alignment
+          </div>
+          <div class="mt-1">
+            <select class="w-full border p-2 rounded mr-2">
+                <option value="1" selected>Center</option>
+            </select>
+          </div>
+          <div class="mt-3 text-sm">
+              Text color
+          </div>
+          <div class="mt-1">
+              <div class="rounded p-4 text-white bg-black mt-1">#FFFFFF
               </div>
           </div>
           <check-box class="mt-3">Visible</check-box>
