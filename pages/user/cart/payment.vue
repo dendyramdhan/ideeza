@@ -17,7 +17,7 @@
         <div
           @click="onTabStripe"
           class="tab-item"
-          :class="{active: tabItem === 'visa', 'border-bot': tabItem !== 'visa'}"
+          :class="{active: tabItem === 'stripe', 'border-bot': tabItem !== 'stripe'}"
         >
           <img
             class="lg:inline-block w-20 lg:w-auto mt-5 lg:mt-0"
@@ -28,7 +28,7 @@
     </div>
 
     <!--Shipping form-->
-    <div class="mt-5 lg:flex flex-wrap" v-if="tabItem === 'visa'">
+    <div class="mt-5 lg:flex flex-wrap" v-if="tabItem === 'stripe'">
       <!-- <div class="lg:w-1/2 lg:pr-5">
         <div class="field-container mt-10">
           <div class="text-lg text-gray-800 mb-2">Card holder name</div>
@@ -107,7 +107,9 @@
 <script>
 import DropDown from "~/components/form/dropdown-field.vue";
 import TextField from "~/components/form/text-field.vue";
+import apiServiceWithToken from "~/apiService/have_token.js";
 var stripeCard;
+var transaction_success;
 export default {
   middleware: "auth",
   name: "payment",
@@ -152,7 +154,8 @@ export default {
         "Octobor",
         "November",
         "December"
-      ]
+      ],
+      transaction_success: "false"
     };
   },
   mounted() {
@@ -175,35 +178,90 @@ export default {
       this.tabItem = "paypal";
       if (this.tabItem == "paypal") {
         setTimeout(() => {
-          PayPal();
+          paypal
+            .Buttons({
+              createOrder: function(data, actions) {
+                // This function sets up the details of the transaction, including the amount and line item details.
+                return actions.order.create({
+                  purchase_units: [
+                    {
+                      amount: {
+                        value: "0.01"
+                      }
+                    }
+                  ]
+                });
+              },
+              onError: function(err) {
+                // that.toastService.show('Error with payment processing', 4000, 'red');
+                console.log("payPal onError", err);
+                return;
+              },
+              onCancel: function(data) {
+                console.log("payPal onCancel", data);
+                // that.toastService.show(
+                //   "The transaction was interrupted",
+                //   4000,
+                //   "red"
+                // );
+                return;
+              },
+              onApprove: function(data, actions) {
+                // This function captures the funds from the transaction.
+                return actions.order.capture().then(function(details) {
+                  // This function shows a transaction success message to your buyer.
+                  alert("Transaction completed by " + details.payer.name.given_name);
+                  console.log("Transaction completed by ", details);
+                  let transactionsurl = "/api/transaction/add";
+                  let transactionsData = {
+                    method: "post",
+                    url: transactionsurl,
+                    data: details
+                  };
+
+                  apiServiceWithToken(transactionsData, response => {
+                    console.log("response", response.data.success);
+                    if (response.data.success == true) {
+                      
+                    }
+                  });
+                });
+              }
+            })
+            .render("#paypal-button-container");
         }, 100);
       } else {
       }
     },
     onTabStripe() {
-      this.tabItem = "visa";
-      if (this.tabItem == "visa") {
+      this.tabItem = "stripe";
+      if (this.tabItem == "stripe") {
         setTimeout(() => {
           console.log("Here: ", this.$stripe);
           const elements = this.$stripe.import().elements();
-          const style = {
-            base: {
-              color: "#000000",
-              fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-              fontSmoothing: "antialiased",
-              fontSize: "16px",
-              "::placeholder": {
-                color: "#aab7c4"
+          const card = elements.create("card", {
+            iconStyle: "solid",
+            style: {
+              base: {
+                iconColor: "#000",
+                color: "#000",
+                fontWeight: 400,
+                fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
+                fontSize: "16px",
+                fontSmoothing: "antialiased",
+                "::placeholder": {
+                  color: "#BFAEF6"
+                },
+                ":-webkit-autofill": {
+                  color: "#fce883"
+                }
               },
-              height: "30px",
-              border: "1px solid #000"
-            },
-            invalid: {
-              color: "#fa755a",
-              iconColor: "#fa755a"
+              invalid: {
+                iconColor: "#FFC7EE",
+                color: "#FFC7EE"
+              }
             }
-          };
-          const card = elements.create("card", { style: style });
+          });
           stripeCard = card;
           // Add an instance of the card Element into the `card-element` <div>
           card.mount("#card-element");
@@ -221,7 +279,6 @@ export default {
       }
     },
     stripeSubmit() {
-
       const elements = this.$stripe.import().elements();
       // const cardNumber = elements.create("cardNumber");
 
@@ -251,7 +308,7 @@ function PayPal() {
           purchase_units: [
             {
               amount: {
-                value: "100"
+                value: "0.01"
               }
             }
           ]
@@ -275,7 +332,21 @@ function PayPal() {
         // This function captures the funds from the transaction.
         return actions.order.capture().then(function(details) {
           // This function shows a transaction success message to your buyer.
-          alert("Transaction completed by " + details.payer.name.given_name);
+          // alert("Transaction completed by " + details.payer.name.given_name + ' ' + details);
+          console.log("Transaction completed by ", details);
+          let transactionsurl = "/api/transaction/add";
+          let transactionsData = {
+            method: "post",
+            url: transactionsurl,
+            data: details
+          };
+
+          apiServiceWithToken(transactionsData, response => {
+            console.log("response", response.data.success);
+            if (response.data.success == true) {
+              transaction_success == true;
+            }
+          });
         });
       }
     })
@@ -292,6 +363,9 @@ function PayPal() {
   display: flex;
   align-items: center;
 }
+/* #card-element {
+  border: solid 1px #3f3b3b;
+} */
 .input-container {
   @apply my-5;
 }
