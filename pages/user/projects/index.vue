@@ -146,22 +146,15 @@
       </div>
     </div>
 
-    <ul>
-      <!-- <button @click="getRandomFromBackend" >asd</button>  -->
-       <li v-for="(info,index) in articleArray">
-        <!-- --{{info.products[0].product_image}}-{{info}}---{{info.products.length}}<br> -->
-       <!-- {{iinfo.products.length}} -->
-       <!-- {{info.products}} -->
+    <!-- <ul>      
+       <li v-for="(info,index) in articleArray">       
         <span v-for="innf in info.products">
             {{innf.cost}}__<br/>
-
         </span>
-        <br />
-      
-      </li>
-      <!-- {{articleArray}}-------- -->
-      <!-- {{pagerlength}} -->
-    </ul>
+        <br />      
+      </li>      
+    </ul> -->
+
   </div>
 </template>
 

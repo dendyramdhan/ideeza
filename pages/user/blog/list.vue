@@ -261,6 +261,8 @@ export default {
             this.articleArray.push(item);
           }
         });
+        this.selectedkey(1);
+         
       }
     },
     search(e) {
