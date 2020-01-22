@@ -10,7 +10,7 @@
           <div class="md:w-full">
         <div class="bg-white rounded border-ideeza border shadow">
         <div class="flex justify-between pt-5 pl-5 pr-5 items-center mb-3">
-            <h6 class="text-ideeza font-bold text-sm flex-shrink">Manage articles</h6>
+            <h6 class="text-ideeza font-bold text-sm flex-shrink">Manage News</h6>
             <div class="flex justify-between flex-none">
                 <div class="flex w-fit-content bg-white justify-center border border-ideeza rounded items-center mr-2 content-center">
                     <div class="h-8 relative w-10">
@@ -18,7 +18,7 @@
                     </div>
                     <input placeholder="search" class="bg-white outline-none h-8 text-gray-800 pr-3">
                 </div>
-                <a href="/admin/invester/blog/add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">Add New <font-awesome-icon class="text-sm" :icon="['fa', 'plus']"/></a>
+                <a href="/admin/invester/news/add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">Add New <font-awesome-icon class="text-sm" :icon="['fa', 'plus']"/></a>
                 <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']"/>
             </div>
         </div>
@@ -33,7 +33,7 @@
 			        <tr class="mb-4">
                 <th class="px-10 py-4 border-t border-b border-blue-300">
                   <input  type="checkbox" id="ad"/>
-                  <label for="ad">Artical Name</label>
+                  <label for="ad">News Name</label>
                   <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
                 <th class="px-10 py-4 border-t border-b border-blue-300">

@@ -10,7 +10,7 @@
         <!--Header Bar-->
         <div class="header-bar lg:flex items-center">
            <nuxt-link class="header-menu block mb-2" to="/technician/management/user-service-providers">
-             <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'users-cog']"/> User & Service Providers
+             <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'users-cog']"/> User & Service Providers & Technician
            </nuxt-link>
 
           <nuxt-link class="header-menu block mb-2" to="/technician/management/added-parts/electronics">
@@ -32,10 +32,6 @@
 
           <nuxt-link class="header-menu block mb-2" to="/technician/management/add-tech">
             Add new technician
-          </nuxt-link>
-
-          <nuxt-link class="header-menu block mb-2" to="/technician/management/approve-service-provider">
-            Approve service provider
           </nuxt-link>
 
         </div>

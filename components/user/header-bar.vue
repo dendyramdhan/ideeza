@@ -107,6 +107,15 @@
             </div>
           </nuxt-link>
 
+          <nuxt-link
+            to="/technician/settings/general"
+            class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
+          >
+            <div class="px-2 w-full flex items-center">
+              <font-awesome-icon class="mr-3 h-5 align-text-middle" :icon="['fas', 'cog']" />Settings
+            </div>
+          </nuxt-link>
+
           <div
             class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
             style="cursor: pointer"
