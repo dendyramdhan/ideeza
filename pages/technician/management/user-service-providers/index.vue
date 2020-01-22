@@ -2,7 +2,7 @@
   <div>
     <h1
       class="text-2xl border-b-4 border-solid border-ideeza pb-5 mt-8"
-    >Manage Users & Service Providers</h1>
+    >Manage Users & Service Providers & Technician</h1>
 
     <div class="mt-10">
       <div>
