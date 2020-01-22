@@ -5,7 +5,7 @@
     <div class="cart-scroll-area">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
       <div style="overflow: scroll; height: 480px">
-        <div v-for="project in projects" :key="project.project_id">
+        <div v-for="(project) in projects" :key="project.project_id">
           <div
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
           >
@@ -35,7 +35,7 @@
             </div>
             <div class="flex items-center" slot="price" slot-scope="props">
               <div class="mx-auto">
-                <span class="block font-semibold">${{props.row.cost}}</span>
+                <span class="block font-semibold">${{props.row.price}}</span>
               </div>
             </div>
 
@@ -79,7 +79,7 @@
                 <h1 class="text-center font-semibold w-48">Manufacturers</h1>
                 <h1 class="text-center font-semibold w-32">Price</h1>
               </div>
-              <div v-for="manufacturer in manufacturers" class="flex justify-end px-5">
+              <div v-for="(manufacturer, mindex) in manufacturers" class="flex justify-end px-5">
                 <div class="w-32 text-center">{{manufacturer.type}}</div>
                 <div class="w-48 text-center">
                   <nuxt-link to="/user/add-manufacturer">
@@ -96,24 +96,19 @@
           </v-client-table>
           <div class="py-5 pr-5 text-right">
             Total:
-            <span class="ml-3">{{project.total | currency}}</span>
+            <span class="ml-3">{{740 | currency}}</span>
           </div>
         </div>
       </div>
       <!-- </smooth-scrollbar> -->
     </div>
 
-    <div
-      class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative"
-    >
+    <div class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative">
       <nuxt-link
         to="/user/dashboard"
         class="order-1 lg:order-2 my-4 lg:my-0 btn pill-button px-8 py-1"
       >Continue shopping</nuxt-link>
-      <button
-        @click="moveNext"
-        class="order-3 btn pill-button pill-button--ideeza px-8 py-1"
-      >
+      <button @click="moveNext" class="order-3 btn pill-button pill-button--ideeza px-8 py-1">
         Next Step
         <font-awesome-icon class="ml-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-right']" />
       </button>
@@ -174,6 +169,7 @@ export default {
       if (response.data["success"] == true) {
         this.projects = response.data["data"];
         console.log("projects: ", response.data["data"]);
+        console.log("projects length: ", response.data["data"].length);
       }
     });
 
