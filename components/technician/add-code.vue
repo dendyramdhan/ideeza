@@ -4,11 +4,11 @@
       <div class="bg-white p-5 md:flex items-center" >
         <div class="flex items-center mr-5">
           <span class="mr-2">File name </span>
-          <input placeholder="e.g filename.js" class="w-40 bg-white border border-solid border-gray-300 text-sm p-1 mb-2">
+          <input placeholder="e.g filename.js" class="w-40 bg-white border border-solid border-gray-300 text-sm p-1 mb-2" style="margin: 0">
         </div>
         <div class="flex items-center mr-5">
           <span class="mr-2">Language </span>
-          <select v-model="selectedLanguage" @change="languageChange"  class="language-select w-40 border mb-2">
+          <select v-model="selectedLanguage" @change="languageChange"  class="language-select w-40 border mb-2" style="margin: 0">
             <option  value="sh" >
             Bash
           </option><option selected  value="c_cpp" >
@@ -46,16 +46,13 @@
           </option><option  value="php" >
             PHP
           </option>
-            <option  value="python" >
-              Python
-            </option>
-            <option  value="r" >
-            R
-          </option><option  value="ruby" >
+          <option  value="python" > Python </option>
+          <option  value="r" >R </option>
+          <option  value="ruby" >
             Ruby
-          </option><option  value="rust" >
-            Rust
-          </option><option  value="scala" >
+          </option>
+          <option  value="rust" > Rust </option>
+          <option  value="scala" >
             Scala
           </option><option  value="scheme" >
             Scheme
@@ -66,20 +63,22 @@
           </option>
           </select>
         </div>
-        <button class="btn pill-button px-5 mr-5 mb-2">Upload Code</button>
+         <input
+            type="file"
+            @change="handleAddFileChange"
+            style="display:none;"
+            ref="upload_code"
+          />          
+        <button class="btn pill-button px-5 mr-5 mb-2" @click="$refs.upload_code.click()" >Upload Code</button>
         <button class="btn pill-button px-5 mr-5 mb-2">Upload Image</button>
-        <button class="btn pill-button px-5 mb-2">Run</button>
+        <!-- <button class="btn pill-button px-5 mb-2">Run</button> -->
       </div>
     </div>
     <div>
       <div class="code-container relative w-full bg-black py-5">
         <div id="editor"></div>
       </div>
-
-
     </div>
-
-
   </div>
 </template>
 
@@ -93,7 +92,7 @@
         data: function () {
             return {
               editor: null,
-              contents: null,
+              contents: "// type your code down. \n",
               selectedLanguage: 'c_cpp'
             }
         },
@@ -101,10 +100,12 @@
         this.editor = ace.edit("editor", {
           selectionStyle: "text"
         });
-        this.languageChange();
-        this.setEditorTheme();
+        this.languageChange()
+        this.setEditorTheme()
+        this.editor.setValue(this.contents)
       },
         methods: {
+
           languageChange() {
               this.editor.session.setMode('ace/mode/'+this.selectedLanguage);
           },
@@ -115,9 +116,26 @@
             return this.editor.getValue();
           },
           setEditorContents(contents) {
-            this.editor.getValue(contents);
+            this.editor.setValue(contents);
+          },
+          handleAddFileChange(e){
+            // console.log("handleAddFileChange :", e.target.files[0])
+            var reader = new FileReader();
+            let that = this
+            reader.onload = function(){
+              var text = reader.result;
+              console.log("readed text :", text)
+              that.editor.setValue(text);
+              // this.content = text
+            };
+            reader.readAsText(e.target.files[0]);
           }
+
+        },
+        fetchData(){
+          console.log("fetch data")
         }
+
     }
 </script>
 

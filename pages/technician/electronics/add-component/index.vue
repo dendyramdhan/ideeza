@@ -3,7 +3,6 @@
       <div class="stepper-bar bg-gray-200 relative mx-auto mb-20">
         <div class="stepper-bar-overlay bg-ideeza-dark" :style="`width: ${overlayWidth}%` "></div>
         <div class="absolute top-0 left-0 h-full w-full z-50 flex justify-between">
-
           <!--1-->
           <div class="stepper-icon-wrapper relative" :class="{'active': step >= 0}">
             <span class="absolute-center-h-v" >1</span>
@@ -24,8 +23,6 @@
             <span  class="absolute-center-h-v" >4</span>
             <div class="stepper-text stepper-text--complete" :class="{'active': step >= 3 }">General</div>
           </div>
-
-
         </div>
       </div>
 
@@ -34,10 +31,7 @@
           <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
         </div>
         <input placeholder="Add more components" class="bg-white flex-grow outline-none h-8 text-gray-800 pr-3">
-
-
       </div>
-
       <div v-if="step === 0" class="w-full relative bg-gray-400 mt-10 components-container">
         <Schematic />
       </div>
@@ -126,11 +120,9 @@
                   <input class="w-full bg-white border border-solid border-gray-300 w-16 ">
                 </div>
               </div>
-
               <div class="w-full p-3 text-center bg-gray-200 cursor-pointer">
                 + Add new
               </div>
-
             </div>
           </div>
         </div>

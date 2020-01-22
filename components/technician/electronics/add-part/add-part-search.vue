@@ -12,6 +12,9 @@
       <input
         placeholder="search name of the component"
         class="bg-white flex-grow outline-none h-8 text-gray-800 pr-3"
+        v-bind:value="searchComponent"
+        v-on:input="searchComponent = $event.target.value"
+        v-on:keyup="search_component"
       />
     </div>
 
@@ -92,12 +95,15 @@
 
         <div class="flex items-center">
           <span class="inline-block ml-32">Show</span>
-          <select class="field field--border-none ml-2 h-10" @change="changeshowperiod">
+          <select style="font-size: 15px;" class="field field--border-none ml-2 h-10" @change="changeshowperiod">
             <!-- <option
               v-for="(tabledata, index) in articleArray"
               v-if="length > index "
             >{{(index)*5+1}}-{{(index)*5+5}}</option> -->
             <option>All</option>
+            <option>1-3</option>
+            <option>5-10</option>
+            <option>11-15</option>
           </select>
         </div>
       </div>
@@ -107,13 +113,16 @@
 
 <script>
 import technicianaddpartsearchs from "~/json/technicianaddpartsearch.json";
+import apiService from "~/apiService/index.js"
 export default {
   name: "add-part-search",
   data: function() {
     return {
       // technicianaddpartsearchs: technicianaddpartsearchs,
       searchTerm: "",
-      articles: technicianaddpartsearchs
+      articles: technicianaddpartsearchs,
+      searchComponent: "",      
+
     };
   },
   methods: {
@@ -129,6 +138,29 @@ export default {
     },
     onDataSheet() {
       alert();
+    },
+    search_component(e){
+      if (this.searchComponent.length<3 ||  e.key != "Enter")
+        return;
+      console.log("search text : ", this.searchComponent)     
+
+      var data = {
+          q: "solid state relay",
+          start: 0,
+          limit: 10
+      };
+      let sendData ={
+        url: "/api/parts_search",
+        method: "post",
+        data:{query: this.searchComponent}
+      }
+
+      apiService(sendData, (res)=>{
+        console.log("reponse : ", res)
+      })
+
+      
+
     }
   }
 };

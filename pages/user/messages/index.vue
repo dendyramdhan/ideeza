@@ -120,7 +120,6 @@
               <div class="grow">
                 <h1 class="text-lg font-semibold text-gray-600">Options</h1>
               </div>
-
               <div class="flex-shrink">
                 <font-awesome-icon
                   class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer"

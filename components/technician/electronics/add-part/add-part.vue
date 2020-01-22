@@ -29,6 +29,7 @@
       <div class="w-45">
         <h1 class="font-semibold">Create new model</h1>
         <div class="container-part-add">
+          
           <div class="w-full flex flex-col items-center" v-if="!createModel">
             <img src="~/static/images/processor.png" alt />
             <div class="text-center">Create new model from scratch</div>
@@ -37,24 +38,27 @@
           </div>
 
           <div v-if="createModel" class="w-full flex flex-col items-center">
+
             <span class="font-semibold text-center mb-5">Choose the type of Model</span>
             <button
               @click="$emit('onSelectType')"
               class="btn pill-button pill-button--ideeza px-24 py-0 mb-5"
             >SMT</button>
             <hr data-content="or" class="hr-text my-5" />
+
             <button
               @click="$emit('onSelectType')"
               class="btn pill-button pill-button--ideeza px-16 py-0"
             >Through Hole</button>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
+
 export default {
   name: "add-part",
   data: () => {

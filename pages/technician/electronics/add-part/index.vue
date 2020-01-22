@@ -4,17 +4,23 @@
       <div class="block stepper-bar bg-gray-200 relative mx-auto mb-20">
         <div class="stepper-bar-overlay bg-ideeza-dark" :style="`width: ${overlayWidth}%` "></div>
         <div class="absolute top-0 left-0 h-full w-full z-50 flex justify-between">
+          
           <!--1-->
+
           <div class="stepper-icon-wrapper relative" :class="{'active': step >= 0}">
             <span class="absolute-center-h-v">1</span>
             <div class="stepper-text stepper-text--ask" :class="{'active': step >=0 }">Add Part</div>
           </div>
+
           <!--2-->
+
           <div class="stepper-icon-wrapper relative" :class="{'active': step >= 1}">
             <span class="absolute-center-h-v">2</span>
             <div class="stepper-text stepper-text--review" :class="{'active': step >= 1}">Configure</div>
           </div>
+
           <!--3-->
+
           <div class="stepper-icon-wrapper relative" :class="{'active': step >= 2 }">
             <span class="absolute-center-h-v">3</span>
             <div
@@ -27,8 +33,7 @@
             <span class="absolute-center-h-v">4</span>
             <div class="stepper-text stepper-text--code" :class="{'active': step >= 3 }">General</div>
           </div>
-        </div>
-      
+        </div>      
       </div>
 
       <AddPartSearch
@@ -36,12 +41,14 @@
         class="mt-10"
         v-if="step === 0 && !addPartSelect && !addPartSelectType"
       />
+
       <AddPart
         @onSelectType="addPartSelectType=true"
         @close="addPartSelect=false"
         class="mt-10"
         v-if="step === 0 && addPartSelect && !addPartSelectType"
       />
+
       <AddSelectPart @selectType="next" class="mt-10" v-if="step === 0 && addPartSelectType" />
       <AddConfigure @back="step=0" @next="step = 2" class="mt-32" v-if="step === 1" />
       <AddElectronics @back="step=1" @next="step = 3" class="mt-32" v-if="step === 2" />
@@ -53,24 +60,18 @@
       <!--Bot Buttons-->
       <div v-if="step === 0 || (step >= 3 && step !== 5)" class="mt-10 w-full flex">
         <div class="w-1/2 text-left">
-
-          <button v-if="step > 0" @click="onBack" class="btn pill-button px-16 py-0">Back</button>
-          
+          <button v-if="step > 0" @click="onBack" class="btn pill-button px-16 py-0">Back</button>          
         </div>
-
         <div class="w-1/2 text-right">
-
           <button v-if="step <= 3" @click="onNext" class="btn pill-button px-16 py-0">Next</button>
           <button
             v-if="step === 4"
-            @click="next"
+            @click="onFinish"
             class="btn pill-button pill-button--ideeza px-16 py-1"
           >
             Finish
           </button>
-
         </div>
-
       </div>
     </div>
   </div>
@@ -92,14 +93,16 @@ import AddFinish from "~/components/technician/electronics/add-part/add-finish.v
 export default {
   name: "index",
   data: function() {
+
     return {
       activeDrawer: null,
       step: 0,
       addPartSearch: null,
       addPartSelect: false,
-      addPartSelectType: false
+      addPartSelectType: false,
     };
   },
+
   components: {
     TextField,
     TextArea,
@@ -129,8 +132,14 @@ export default {
     onNext() {
       // alert(this.step);
       if (this.step < 6) this.step += 1;
+    },
+    onFinish(){
+
+      console.log("finish")
+
     }
   }
+
 };
 </script>
 

@@ -21,7 +21,7 @@
 
     <div class="my-10 border-b border-solid border-gray-300">
       <h1 class="font-semibold text-xl">
-        Code Editor
+        Codes Editor
       </h1>
     </div>
 
