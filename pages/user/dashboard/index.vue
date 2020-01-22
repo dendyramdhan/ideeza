@@ -187,10 +187,10 @@
                               class="mr-1 h-4 text-ideeza-gold"
                               :icon="['fas', 'star']"
                             />
-                            <small class="text-xs">{{topproject.project.rate}}</small>
+                            <small class="text-xs">{{topproject.project_info.rating}}</small>
                           </div>
 
-                          <span class="text-xs">{{topproject.project.like}} likes</span>
+                          <span class="text-xs">{{topproject.project_info.like}} likes</span>
                         </div>
                       </div>
                     </div>
