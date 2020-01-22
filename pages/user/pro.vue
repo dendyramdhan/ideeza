@@ -16,7 +16,7 @@
 
         <!--Left Menu-->
         <div class="mt-10 ">
-          <div class="menu-button-container" v-if="$route.name === 'user-pro-electronics'">
+          <div class="menu-button-container" v-show="$route.name === 'user-pro-electronics'">
 
             <div class="mb-3 flex relative content-center font-semibold text-ideeza-dark">
               Electronics
@@ -52,7 +52,7 @@
             <nuxt-link class="button" to="technician/electronics/add-component">Add Component</nuxt-link>
             <nuxt-link class="button" to="technician/electronics/add-pcb">Add PCB</nuxt-link>
           </div>
-          <div class="menu-button-container" v-if="$route.name === 'user-pro-code'">
+          <div class="menu-button-container" v-show="$route.name === 'user-pro-code'">
 
             <div class="block relative content-center font-semibold text-ideeza-dark">
               <font-awesome-icon class="text-xs text-ideeza" :icon="['fas', 'chevron-down']" /> Code
@@ -60,21 +60,31 @@
             <hr class="my-5">
             <!--Sub Menu Items-->
             <ul class="code-menu">
-              <li v-for="item in menuData.code.children" class="pb-10 border-b border-gray">
-                <font-awesome-icon class="text-xs text-ideeza" :icon="['fas', 'chevron-down']" /> {{item.name}}
-                <ul>
-                  <li class="pl-2" v-for="itemA in item.children">
-                    <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> {{itemA.name}}
-                    <ul>
-                      <li class="pl-2" v-for="child in itemA.children">
-                        <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> {{child.name}}</li>
+              <li v-for="item in menuData.code.children" class="pb-10 border-b border-gray cursor-pointer select-none" @click="item.showChild=!item.showChild;$forceUpdate()" :key="item.name">
+                <font-awesome-icon class="text-xs" :class="{'text-ideeza': item.showChild}" :icon="['fas', item.showChild?'chevron-down':'chevron-right']" /> 
+                <span :class="{'text-ideeza': item.showChild}">{{item.name}}</span>
+                <ul v-if="item.showChild">
+                  <li class="pl-2 cursor-pointer select-none" v-for="itemA in item.children" @click.stop="itemA.showChild=!itemA.showChild;$forceUpdate()" :key="itemA.name">
+                    <font-awesome-icon :class="{'text-ideeza': itemA.showChild}" class="text-xs" :icon="['fas', itemA.showChild?'chevron-down':'chevron-right']" /> 
+                    <span :class="{'text-ideeza': itemA.showChild}">{{itemA.name}}</span>
+                    <ul v-if="itemA.showChild">
+                      <li class="pl-2 cursor-pointer select-none" v-for="itemB in itemA.children" @click.stop="itemB.showChild=!itemB.showChild;$forceUpdate()" :key="itemB.name">
+                        <font-awesome-icon :class="{'text-ideeza': itemB.showChild}" class="text-xs" :icon="['fas', itemB.showChild?'chevron-down':'chevron-right']" /> 
+                        <span :class="{'text-ideeza': itemB.showChild}">{{itemB.name}}</span>
+                        <ul v-if="itemB.showChild">
+                        <li class="pl-2 cursor-pointer select-none" v-for="itemC in itemB.children" :key="itemC.name">
+                          <font-awesome-icon :class="{'text-ideeza': itemC.showChild}" class="text-xs" :icon="['fas', itemC.showChild?'chevron-down':'chevron-right']" /> 
+                          <span @click.stop :class="{'text-ideeza': itemC.showChild}">{{itemC.name}}</span>
+                          </li>
+                        </ul>  
+                      </li>
                     </ul>
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
-          <div class="menu-button-container" v-if="$route.name === 'user-pro-cover'">
+          <div class="menu-button-container" v-show="$route.name === 'user-pro-cover'">
 
             <div class="block relative content-center font-semibold text-ideeza-dark">
               <font-awesome-icon class="text-xs text-ideeza" :icon="['fas', 'chevron-down']" /> Cover
@@ -82,14 +92,24 @@
             <hr class="my-5">
             <!--Sub Menu Items-->
             <ul class="code-menu">
-              <li v-for="item in menuData.cover.children">
-                <font-awesome-icon class="text-xs text-ideeza" :icon="['fas', 'chevron-down']" /> {{item.name}}
-                <ul>
-                  <li class="pl-2" v-for="itemA in item.children">
-                    <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> {{itemA.name}}
-                    <ul>
-                      <li class="pl-2" v-for="child in itemA.children">
-                        <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> {{child.name}}</li>
+              <li v-for="item in menuData.cover.children" class="pb-10 border-b border-gray cursor-pointer select-none" @click="item.showChild=!item.showChild;$forceUpdate()" :key="item.name">
+                <font-awesome-icon class="text-xs" :class="{'text-ideeza': item.showChild}" :icon="['fas', item.showChild?'chevron-down':'chevron-right']" /> 
+                <span :class="{'text-ideeza': item.showChild}">{{item.name}}</span>
+                <ul v-if="item.showChild">
+                  <li class="pl-2 cursor-pointer select-none" v-for="itemA in item.children" @click.stop="itemA.showChild=!itemA.showChild;$forceUpdate()" :key="itemA.name">
+                    <font-awesome-icon :class="{'text-ideeza': itemA.showChild}" class="text-xs" :icon="['fas', itemA.showChild?'chevron-down':'chevron-right']" /> 
+                    <span :class="{'text-ideeza': itemA.showChild}">{{itemA.name}}</span>
+                    <ul v-if="itemA.showChild">
+                      <li class="pl-2 cursor-pointer select-none" v-for="itemB in itemA.children" @click.stop="itemB.showChild=!itemB.showChild;$forceUpdate()" :key="itemB.name">
+                        <font-awesome-icon :class="{'text-ideeza': itemB.showChild}" class="text-xs" :icon="['fas', itemB.showChild?'chevron-down':'chevron-right']" /> 
+                        <span :class="{'text-ideeza': itemB.showChild}">{{itemB.name}}</span>
+                        <ul v-if="itemB.showChild">
+                        <li class="pl-2 cursor-pointer select-none" v-for="itemC in itemB.children" :key="itemC.name">
+                          <font-awesome-icon :class="{'text-ideeza': itemC.showChild}" class="text-xs" :icon="['fas', itemC.showChild?'chevron-down':'chevron-right']" /> 
+                          <span @click.stop :class="{'text-ideeza': itemC.showChild}">{{itemC.name}}</span>
+                          </li>
+                        </ul>  
+                      </li>
                     </ul>
                   </li>
                 </ul>
@@ -104,18 +124,65 @@
             <hr class="my-5">
             <!--Sub Menu Items-->
             <ul class="code-menu">
-              <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app" tag="li" >
+              <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app/info" tag="li" >
                 <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> App Info
               </nuxt-link>
-              <li class="pl-2 cursor-pointer" @click="showChooseLayout=true">
+              <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app/template" tag="li">
                 <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> Templates
-              </li>
+              </nuxt-link>
               <nuxt-link class="pl-2 cursor-pointer" to="/user/pro/app/design" tag="li">
                 <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> User interface
+                <div class="submenu text-gray-600 ml-2 mt-2 hidden">
+                  <div class="mt-1" @click="changeCurrentMenu('button-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='button-setting'}" class="mr-2 font-lg" :icon="['far', 'square']" /> Button
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('check-box-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='check-box-setting'}" class="mr-2 font-lg" :icon="['far', 'check-circle']" /> Checkbox
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('date-picker-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='date-picker-setting'}" class="mr-2 font-lg" :icon="['far', 'clock']" /> Datepicker
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('image-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='image-setting'}" class="mr-2 font-lg" :icon="['far', 'image']" /> Image
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('label-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='label-setting'}" class="mr-2 font-lg" :icon="['fas', 'pen']" /> Label
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('list-picker-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='list-picker-setting'}" class="mr-2 font-lg" :icon="['far', 'list-alt']" /> ListPicker
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('list-view-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='list-view-setting'}" class="mr-2 font-lg" :icon="['fas', 'list-alt']" /> ListView
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('notifier-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='notifier-setting'}" class="mr-2 font-lg" :icon="['far', 'bell']" /> Notifier
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('password-text-box-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='password-text-box-setting'}" class="mr-2 font-lg" :icon="['fas', 'key']" /> Password
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('slider-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='slider-setting'}" class="mr-2 font-lg" :icon="['fas', 'sliders-h']" /> Slider
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('spinner-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='spinner-setting'}" class="mr-2 font-lg" :icon="['fas', 'spinner']" /> Spinner
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('text-box-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='text-box-setting'}" class="mr-2 font-lg" :icon="['fas', 'file-alt']" /> Textbox
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('time-picker-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='time-picker-setting'}" class="mr-2 font-lg" :icon="['fas', 'stopwatch']" /> Timepicker
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('web-viewer-setting')">
+                    <font-awesome-icon :class="{'text-ideeza': currentRightMenu=='web-viewer-setting'}"  class="mr-2 font-lg" :icon="['fas', 'globe']" /> Webviewer
+                  </div>
+                  <div class="mt-3" @click="changeCurrentMenu('');showChooseLayout=true">
+                    <font-awesome-icon :class="{'text-ideeza': showChooseLayout==true}" class="mr-2 font-lg" :icon="['fas', 'border-all']" /> Layouts
+                  </div>
+                </div>
               </nuxt-link>
-              <li class="pl-2">
+              <nuxt-link to="/user/pro/app/prototype" tag="li" class="pl-2 cursor-pointer">
                 <font-awesome-icon class="text-xs" :icon="['fas', 'chevron-right']" /> Prototyping
-              </li>
+              </nuxt-link>
             </ul>
           </div>
           <!-- <div class="mt-10 " v-if="$route.name==='user-pro-app'">
@@ -163,7 +230,7 @@
     <!-- Main Contents -->
     <div class="flex-grow">
       <!--Panel Menu-->
-      <div class="main-contents" :class="{'app-layout':$route.path.includes('/user/pro/app/design')}">
+      <div class="main-contents" :class="{'app-layout':$route.path.includes('/user/pro/app/design')||$route.path.includes('/user/pro/app/prototype')}">
         <div class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3">
           <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">Circuit Board</div>
           <div class="flex items-center justify-center content-center">
@@ -174,7 +241,7 @@
             <nuxt-link class="ml-5 panel-menu text-center" to="/user/pro/cover">
               <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']" />Cover</nuxt-link>
             <nuxt-link class="ml-5 panel-menu text-center" to="/user/pro/app">
-              <font-awesome-icon class="mr-1 mobile" :icon="['fas', 'wrench']" />App</nuxt-link>
+              <font-awesome-icon class="mr-1 mobile" :icon="['far', 'square']" />App</nuxt-link>
             <nuxt-link class="ml-5 panel-menu text-center" to="/user/pro/customize">
               <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']" />General</nuxt-link>
           </div>
@@ -197,6 +264,8 @@
   import Cover from '~/components/user/pro/pro-cover.vue'
   import CheckBox from '~/components/form/checkbox.vue'
   import ChooseLayout from '~/components/user/pro/choose-layout.vue'
+  import { mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
   export default {
     middleware: "auth",
       layout: 'user',
@@ -261,18 +330,38 @@
                       children: [
                         {
                           name: 'Atmega',
+                          children: [
+                            { name: 'Private' },
+                            { name: 'Public'}
+                          ]
                         },
                         {
                           name: 'Pic',
+                          children: [
+                            { name: 'Private' },
+                            { name: 'Public'}
+                          ]
                         },
                         {
                           name: 'St',
+                          children: [
+                            { name: 'Private' },
+                            { name: 'Public'}
+                          ]
                         },
                         {
                           name: 'Raspberry Pi',
+                          children: [
+                            { name: 'Private' },
+                            { name: 'Public'}
+                          ]
                         },
                         {
                           name: 'Intel',
+                          children: [
+                            { name: 'Private' },
+                            { name: 'Public'}
+                          ]
                         }
                       ]
                     },
@@ -343,7 +432,10 @@
       computed: {
         leftMenu () {
           return this.$store.state.usermenu.openLeftMenu;
-        }
+        },
+        ...mapState({
+          currentRightMenu : state => state.appMenu.currentMenu 
+        })
       },
       mounted() {
         this.addMenuState(this.menuData.electronic, 1);
@@ -351,6 +443,9 @@
         console.log(this.$route.path.includes('/user/pro/app'))
       },
       methods: {
+        ...mapMutations({
+          changeCurrentMenu: "appMenu/changeRightMenu"
+        }),
         changeState(item){
           let name = item.name;
           item.isActive = !item.isActive;
@@ -462,5 +557,11 @@
   }
   .app-layout {
       padding-right: 325px;
+  }
+  .active-link{
+    @apply text-ideeza;
+  }
+  .active-link .submenu{
+    display: block;
   }
 </style>

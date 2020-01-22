@@ -5,18 +5,18 @@
       <div class="w-6 h-full relative">
         <transition name="slide-fade">
           <font-awesome-icon
-            key="on"
+            key="off"
             v-if="!leftMenu"
             @click="toggleLeftMenu()"
             class="absolute-center-v text-white cursor-pointer ml-1 mr-2 absolute h-4"
-            :icon="['fas', 'chevron-left']"
+            :icon="['fas', 'bars']"
           />
           <font-awesome-icon
-            key="off"
+            key="on"
             v-else
             @click="toggleLeftMenu()"
             class="absolute-center-v text-white cursor-pointer ml-1 mr-2 absolute h-4"
-            :icon="['fas', 'bars']"
+            :icon="['fas', 'chevron-left']"
           />
         </transition>
       </div>
@@ -93,7 +93,7 @@
         >
           <img
             class="h-10 w-10 rounded-full mr-2"
-            src="https://randomuser.me/api/portraits/men/17.jpg"
+            :src="avatar_base_url + avatar"
           />
           <span class="text-white inline-block">{{name}}</span>
         </div>
@@ -136,7 +136,9 @@ export default {
       showHelpAlert: false,
       showProfileAlert: false,
       news: news,
-      name: ""
+      name: "",
+      avatar: "",
+      avatar_base_url: process.env.avatar_base_url,
     };
   },
   computed: {
@@ -148,13 +150,9 @@ export default {
 
     let firstname = window.$nuxt.$cookies.get('firstname');
     let lastname = window.$nuxt.$cookies.get('lastname');
+    let useravatar = window.$nuxt.$cookies.get("useravatar");
     this.name = firstname + ' ' + lastname;
-    // this.name =
-    //   window.$nuxt.$cookies.get("firstname") +
-    //   " " +
-    //   window.$nuxt.$cookies.get("lastname");
-    console.log("fullname: ", this.name);
-    console.log("news: ", this.news, this.showInfoAlert);
+    this.avatar = useravatar;
   },
   methods: {
     ...mapMutations({

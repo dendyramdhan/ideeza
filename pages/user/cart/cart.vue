@@ -17,7 +17,7 @@
             />
           </div>
           <v-client-table
-            :ref="`products_table_${project.project_id}`"
+            :ref="project.project_id"
             :data="project.products"
             :columns="columns"
             :options="options"
@@ -34,9 +34,18 @@
             </div>
             <div class="flex items-center" slot="quantity" slot-scope="props">
               <div class="mx-auto flex">
-                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'minus']" @click="count--" v-if="count >= 1"/>
+                <font-awesome-icon
+                  class="mr-2 h-3 cursor-pointer my-auto"
+                  :icon="['fas', 'minus']"
+                  @click="count--"
+                  v-if="count >= 1"
+                />
                 <div class="w-5">{{count}}</div>
-                <font-awesome-icon class="mr-2 h-3 cursor-pointer my-auto" :icon="['fas', 'plus']" @click="count++"/>
+                <font-awesome-icon
+                  class="mr-2 h-3 cursor-pointer my-auto"
+                  :icon="['fas', 'plus']"
+                  @click="count++"
+                />
               </div>
             </div>
             <span
@@ -52,14 +61,15 @@
                 @click="onRemove(props.row.product_id)"
               />
               <font-awesome-icon
-                @click="toggleChildRow('products_table_'+project.project_id, props.row.id)"
+                @click="toggleChildRow(project.project_id, props.row.product_id)"
                 class="mr-2 h-4 cursor-pointer text-ideeza"
                 :icon="['fas', 'pen']"
               />
-                <font-awesome-icon @click="onAddService(project.project_id)"
-                  class="mr-2 h-4 cursor-pointer text-ideeza"
-                  :icon="['fas', 'plus']"
-                />
+              <font-awesome-icon
+                @click="onAddService(project.project_id)"
+                class="mr-2 h-4 cursor-pointer text-ideeza"
+                :icon="['fas', 'plus']"
+              />
             </div>
 
             <div slot="child_row" slot-scope="props" class="pb-10 pr-32">
@@ -68,8 +78,8 @@
                 <h1 class="text-center font-semibold w-48">Manufacturers</h1>
                 <h1 class="text-center font-semibold w-32">Price</h1>
               </div>
-              <div v-for="manufacturer in props.row.manufacturers" class="flex justify-end px-5">
-                <div class="w-32 text-center">{{manufacturer.category}}</div>
+              <div v-for="manufacturer in manufacturers" class="flex justify-end px-5">
+                <div class="w-32 text-center">{{manufacturer.type}}</div>
                 <div class="w-48 text-center">
                   <nuxt-link to="/user/add-manufacturer">
                     <span>{{manufacturer.name}}</span>
@@ -79,7 +89,7 @@
                     />
                   </nuxt-link>
                 </div>
-                <div class="w-32 text-center">{{manufacturer.price | currency}}</div>
+                <div class="w-32 text-center">{{manufacturer.cost | currency}}</div>
               </div>
             </div>
           </v-client-table>
@@ -90,6 +100,19 @@
         </div>
       </div>
       <!-- </smooth-scrollbar> -->
+    </div>
+    <div class="py-10 lg:px-20 flex flex-col lg:flex-row justify-between relative">
+      <button @click="moveBack" class="order-2 lg:order-1 my-4 lg:my-0 btn pill-button px-8 py-1">
+        <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-left']" />Back
+      </button>
+      <nuxt-link
+        to="/user/dashboard"
+        class="order-1 lg:order-2 my-4 lg:my-0 btn pill-button px-8 py-1"
+      >Continue shopping</nuxt-link>
+      <button @click="moveNext" class="order-3 btn pill-button pill-button--ideeza px-8 py-1">
+        Next Step
+        <font-awesome-icon class="ml-2 h-4 cursor-pointer" :icon="['fas', 'long-arrow-alt-right']" />
+      </button>
     </div>
   </div>
 </template>
@@ -118,6 +141,9 @@ export default {
         "actions"
       ],
       projects: [],
+      manufacturers: [],
+      allmanufacturers: [],
+      manufs: [],
 
       options: {
         headings: {
@@ -152,27 +178,59 @@ export default {
         console.log("projects: ", response.data["data"]);
       }
     });
+
+    let getallmanufacturersurl = "/api/project/get_all_manufacturers";
+    let getallmanufacturersData = {
+      method: "get",
+      url: getallmanufacturersurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallmanufacturersData, response => {
+      if (response.data["success"] == true) {
+        this.allmanufacturers = response.data["data"];
+        console.log("all manufactures: ", response.data["data"]);
+      }
+    });
   },
   methods: {
     addManufacturer() {},
-    toggleChildRow(ref, id) {
-      this.$refs[ref][0].toggleChildRow(id);
+    toggleChildRow(ref, product_id) {
+      window.$nuxt.$cookies.set("productid", product_id);
+      this.allmanufacturers.map(element => {
+        if (element.product_id == product_id) {
+          this.manufs.push(element.manufacturer);
+          console.log("element: ", this.manufacturers);
+        }
+      });
+
+      this.manufacturers = this.manufs;
+      this.manufs = [];
+
+      console.log("product_id: ", product_id);
+      this.$refs[ref][0].toggleChildRow();
     },
     onRemove(product_id) {
       var d = confirm("Do you really want to remove?");
       if (d == true) {
-        
       }
     },
     onRemoveAll(project_id) {
       var d = confirm("Do you really want to remove?");
       if (d == true) {
-        
       }
     },
     onAddService(id) {
       window.$nuxt.$cookies.set("userprojectid", id);
       this.$router.push("/user/add-service");
+    },
+
+    moveNext() {
+      this.$router.push("/user/cart/delivery");
+    },
+
+    moveBack() {
+      this.$router.push("/user/cart/options");
     }
   }
 };

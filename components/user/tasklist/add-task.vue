@@ -3,7 +3,7 @@
     <div class="popup-overlay--contents add-new-container">
       <!--Header-->
       <div class="flex justify-between px-10 pt-5">
-        <h1 class="font-semibold text-xl">Add new task</h1>
+        <h1 class="font-semibold text-xl">Add new note</h1>
         <font-awesome-icon
           @click="close"
           class="mr-1 h-4 cursor-pointer text-gray-500 hover:text-gray-800"
@@ -15,11 +15,11 @@
         <div class="md:w-1/2">
           <div class="input-container">
             <label>Link to (Option)</label>
-            <input placeholder="Project or layer" v-model="taskLink"/>
+            <input placeholder="Project or layer" v-model="taskLink" />
           </div>
           <div class="input-container">
             <label>Name</label>
-            <input placeholder="name" v-model="taskName"/>
+            <input placeholder="name" v-model="taskName" />
           </div>
           <div class="input-container">
             <label>Description</label>
@@ -36,13 +36,11 @@
                 class="h-10 w-10 mr-2 rounded-full"
                 src="https://randomuser.me/api/portraits/men/16.jpg"
               />
-              <div
-                class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative"
-                
-              >
+              <div class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative">
                 <font-awesome-icon
                   class="absolute-center-h-v mr-1 h-4 text-gray-600 hover:text-gray-800 cursor-pointer"
-                  :icon="['fas', 'plus']" @click="onAddTaskers"
+                  :icon="['fas', 'plus']"
+                  @click="onAddTaskers"
                 />
                 <InvitePopup v-if="requestAddTasker" />
               </div>
@@ -60,6 +58,7 @@
             class="mx-auto mt-5"
             color="pink"
             is-expanded
+            :attributes="attributes"
             :theme="theme"
           />
         </div>
@@ -69,20 +68,6 @@
         <h1 class="font-semibold text-lg block">Attachments</h1>
         <FileField />
         <div>
-          <div class="flex items-center mt-2">
-            <span class="text-ideeza text-xs">introduction to the task 4 attachment</span>
-            <font-awesome-icon
-              class="ml-2 h-3 inline text-ideeza-gray-300 cursor-pointer :hover:text-ideeza-gray-500"
-              :icon="['fas', 'trash']"
-            />
-          </div>
-          <div class="flex items-center mt-2">
-            <span class="text-ideeza text-xs">introduction to the task 4 attachment</span>
-            <font-awesome-icon
-              class="ml-2 h-3 inline text-ideeza-gray-300 cursor-pointer :hover:text-ideeza-gray-500"
-              :icon="['fas', 'trash']"
-            />
-          </div>
           <div class="flex items-center mt-2">
             <span class="text-ideeza text-xs">introduction to the task 4 attachment</span>
             <font-awesome-icon
@@ -107,8 +92,9 @@ export default {
   name: "add-task",
   data: function() {
     return {
+      date: new Date(),
       requestAddTasker: false,
-      dateRange: null,
+      dateRange: new Date().setHours(0, 0, 0, 0),
       taskLink: null,
       taskName: null,
       taskDescription: null,
@@ -124,9 +110,16 @@ export default {
         arrows: {
           light: "ideeza-arrow"
         }
-      }
+      },
+      attributes: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date()
+        }
+      ]
     };
-  },  
+  },
   components: {
     FileField,
     InvitePopup
@@ -141,9 +134,20 @@ export default {
     addNewTask() {
       var r = confirm("Do you want to add new task?");
       if (r == true) {
-        this.task = { link: this.taskLink, name: this.taskName, description: this.taskDescription};
-        const data = JSON.stringify(this.task)
-        alert(data);  
+        this.task = {
+          link: this.taskLink,
+          name: this.taskName,
+          description: this.taskDescription,
+          deadline: this.dateRange
+        };
+        const data = JSON.stringify(this.task);
+        alert(data);
+
+        var addTaskFormData = new FormData();
+        addTaskFormData.set("link", this.taskLink);
+        addTaskFormData.set("name", this.taskName);
+        addTaskFormData.set("description", this.taskDescription);
+        addTaskFormData.set("deadline", this.dateRange);
         window.location.reload();
       } else {
       }
@@ -154,6 +158,7 @@ export default {
     },
     selectDate(date) {
       alert(date.dateTime);
+      this.dateRange = date.dateTime;
     }
   }
 };
