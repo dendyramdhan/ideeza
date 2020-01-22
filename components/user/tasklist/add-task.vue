@@ -3,7 +3,7 @@
     <div class="popup-overlay--contents add-new-container">
       <!--Header-->
       <div class="flex justify-between px-10 pt-5">
-        <h1 class="font-semibold text-xl">Add new task</h1>
+        <h1 class="font-semibold text-xl">Add new note</h1>
         <font-awesome-icon
           @click="close"
           class="mr-1 h-4 cursor-pointer text-gray-500 hover:text-gray-800"

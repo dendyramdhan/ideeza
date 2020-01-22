@@ -7,11 +7,9 @@
     </div>
     <div class="menu-item flex-col">
       <div class="flex">
-        <nuxt-link to="/admin/user" class="w-1/2">
+        <div class="w-1/2 cursor-pointer" @click="userActive = !userActive">
           <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']"/> Users
-        </nuxt-link>
-        <font-awesome-icon v-if="!userActive" @click="userActive = !userActive" class="w-1/2 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-down']"/>
-        <font-awesome-icon v-if="userActive" @click="userActive = !userActive" class="w-1/2 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-up']"/>
+        </div>
       </div>
       <div :class="[userActive ? 'block' : 'hidden']">
         <nuxt-link to="/admin/user" class="block ml-12 text-base mt-2">Home</nuxt-link>
@@ -21,11 +19,9 @@
     </div>
     <div class="menu-item flex-col">
       <div class="flex">
-        <nuxt-link to="/admin/service" class="w-11/12">
+        <div class="w-full cursor-pointer" @click="SPActive = !SPActive">
           <UserIcon class="fill-current mr-3" /> Service providers
-        </nuxt-link>
-        <font-awesome-icon v-if="!SPActive" @click="SPActive = !SPActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-down']"/>
-        <font-awesome-icon v-if="SPActive" @click="SPActive = !SPActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-up']"/>
+        </div>
       </div>
       <div :class="[SPActive ? 'block' : 'hidden']">
         <nuxt-link to="/admin/service" class="block ml-12 text-base mt-2">Home</nuxt-link>
@@ -38,15 +34,20 @@
     </div>
     <div class="menu-item flex-col">
       <div class="flex">
-        <nuxt-link to="/admin/invester" class="w-11/12">
+        <div class="w-11/12 cursor-pointer" @click="investActive = !investActive">
           <UserIcon class="fill-current mr-3" /> Investors
-        </nuxt-link>
-        <font-awesome-icon v-if="!investActive" @click="investActive = !investActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-down']"/>
-        <font-awesome-icon v-if="investActive" @click="investActive = !investActive" class="w-1/12 mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'caret-up']"/>
+        </div>
       </div>
 
       <div :class="[investActive ? 'block' : 'hidden']">
+        <nuxt-link to="/admin/invester" class="block ml-12 text-base mt-2">Home</nuxt-link>
+        <nuxt-link to="/admin/invester/contact" class="block ml-12 text-base mt-2">Contacts</nuxt-link>
+        <nuxt-link to="/admin/invester/deals" class="block ml-12 text-base mt-2">Deals</nuxt-link>
+        <nuxt-link to="/admin/invester/document" class="block ml-12 text-base mt-2">Documents</nuxt-link>
+        <nuxt-link to="/admin/invester/inbox" class="block ml-12 text-base mt-2">Inbox</nuxt-link>
+        <nuxt-link to="/admin/invester/activities" class="block ml-12 text-base mt-2">Activities</nuxt-link>
         <nuxt-link to="/admin/invester/blog" class="block ml-12 text-base mt-2">Blog</nuxt-link>
+        <nuxt-link to="/admin/invester/news" class="block ml-12 text-base mt-2">News</nuxt-link>
       </div>
     </div>
     <div class="menu-item">

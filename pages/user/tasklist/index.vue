@@ -8,7 +8,7 @@
       <div
         class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0"
       >
-        <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Task List</h1>
+        <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">My Notes</h1>
         <div class="flex items-center">
           <span
             class="text-lg font-semibold cursor-pointer mr-5 text-ideeza-black hover:text-ideeza"
@@ -66,28 +66,6 @@
         :attributes="attributes"
         :value="null"
       />
-      <div class="mt-5 py-5 px-5 border-t border-solid border-gray-300">
-        <div class="text-xl text-gray-500 font-semibold">Latest Activity</div>
-
-        <div class="my-5" v-for="latestactivity in latestactivities">
-          <div class="flex">
-            <img
-              class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
-              :src="latestactivity.potrait_url"
-            />
-            <div class="text-left mr-3">
-              <div class="text-gray-600 text-sm">
-                <span class="font-semibold text-gray-800">{{latestactivity.name}}</span>
-                {{latestactivity.action}}
-                <br />
-                <span class="underline font-semibold">to {{latestactivity.destination}}</span>
-              </div>
-              <div class="mt-2 text-gray-500 text-xs">{{latestactivity.timestamp}}</div>
-            </div>
-          </div>
-          <img class="mt-2" :src="latestactivity.image_url" />
-        </div>
-      </div>
     </div>
 
     <!--Add Task-->
@@ -100,7 +78,6 @@ import TaskCol from "~/components/user/tasklist/task-col";
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
-import latestactivities from "~/json/latestactivity.json";
 import taskslist from "~/json/tasklist.json";
 import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
@@ -142,8 +119,6 @@ export default {
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
       id: 0,
-
-      latestactivities: latestactivities
     };
   },
   computed: {
