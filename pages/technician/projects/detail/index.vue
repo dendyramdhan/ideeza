@@ -13,10 +13,10 @@
             <span
               class="text-ideeza-dark text-xl inline-block font-semibold mr-5"
             >Project: {{info.title}}</span>
-            <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+            <!-- <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
               <span class="text-sm inline-block mr-1">Edit</span>
               <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
-            </div>
+            </div> -->
           </div>
           <div>
             <button onclick="print()" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
@@ -61,7 +61,7 @@
               <div class="flex flex-wrap attached-images-wrapper mt-2">
                 <!-- <img src="https://picsum.photos/200" alt /> -->
                 <span v-for="image in info.attach">
-                  <img :src="project_img_url + image.image" />
+                  <img :src="task_img_url + image.image" />
                 </span>
                 <img src="https://picsum.photos/200" alt />
                 <!-- <img v-for="image in info.attach" :src="project_img_url+image.image" alt />{{project_img_url}}{{image.image}} -->
@@ -90,7 +90,7 @@
               <tr class="bg-ideeza-100">
                 <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
                   <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
-                  <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" />
+                  <!-- <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" /> -->
                   {{task.name}}
                 </td>
                 <td>{{task.domain}}</td>
@@ -151,6 +151,7 @@
           @onEdit="detailTask=false;editTask=true"
           v-if="detailTask"
           @complete="detailTask=false;completeTask=true"
+          :parentData="sendparentdata"
         />
         <complete-task @onClose="completeTask=false" v-if="completeTask" />
  
@@ -233,22 +234,7 @@ import apiService2 from "~/apiService/get_param.js";
     DetailTask,
     CompleteTask
   },
-  methods: {
-    taskdetailtrue(myid) {
-      window.$nuxt.$cookies.set("techniciantaskid", myid);
-      this.detailTask = true;
-    },
-    expand(id) {
-      if (id in this.expanded && this.expanded[id] == true) {
-        this.$set(this.expanded, id, false);
-      } else {
-        this.$set(this.expanded, id, true);
-      }
-      this.$forceUpdate();
-    }
-  },
-
-      components: {
+  components: {
         'new-project': AddNewProject,
         'new-task': AddNewTask,
         'edit-task': EditTask,
@@ -263,23 +249,30 @@ import apiService2 from "~/apiService/get_param.js";
         }
       },
       methods:{
+        taskdetailtrue(myid) {
+      window.$nuxt.$cookies.set("techniciantaskid",myid)
+      console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));      
+      this.sendparentdata = myid;
+      this.detailTask = true;
+    },
+    expand(id) {
+      if (id in this.expanded && this.expanded[id] == true) {
+        this.$set(this.expanded, id, false);
+      } else {
+        this.$set(this.expanded, id, true);
+      }
+      this.$forceUpdate();
+    },
         changeid(id){
           // alert(id)
           this.$store.commit("TechnicianProjectStore/projectTaskkeychange1", id);
           // alert(this.$store.state.TechnicianProjectStore.projectTaskkey)
         },
-        expand(id) {
-          if(id in this.expanded &&this.expanded[id] == true){
-            this.$set(this.expanded, id, false);  
-          }
-          else {
-            this.$set(this.expanded, id, true);
-          }
-          this.$forceUpdate();
-        },
       },
       data: function () {
         return {
+      sendparentdata: null,
+      task_img_url: process.env.task_image_url,
           project_img_url: process.env.project_image_url,
       ts: new Date(),
       geturl: "/api/project/technician/get_all",
