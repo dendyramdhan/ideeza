@@ -4,7 +4,7 @@
     <LeftMenu />
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-16 lg:px-2">
+    <div class="flex-grow lg:pt-16 lg:px-10">
       <div
         class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0"
       >

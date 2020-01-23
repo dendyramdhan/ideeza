@@ -56,7 +56,7 @@
                 {{general_contactinfos.address}}
               </div>
             </div>
-            <nuxt-link to="/user/settings/notifications">
+            <nuxt-link to="/admin/settings/general">
               <font-awesome-icon
                 class="mr-1 h-4 text-sm inline-block cursor-pointer"
                 :icon="['fas', 'cog']"
@@ -178,7 +178,7 @@
           <div class="mt-5" v-if="tabItem === 'about'">
             <div class="flex justify-between items-center">
               <h1 class="text-gray-500 font-semibold txt-xl my-10">CONTACT INFORMATION</h1>
-              <nuxt-link to="/user/settings/general">
+              <nuxt-link to="/admin/settings/general">
                 <button class="btn btn-normal btn-small px-2">Edit profile</button>
               </nuxt-link>
             </div>
@@ -311,7 +311,7 @@
 </template>
 
 <script>
-import LeftMenu from "~/components/user/common-left-side-menu.vue";
+import LeftMenu from "~/components/admin/common-left-side-menu.vue";
 import contactinfos from "~/json/contactinfos";
 import apiServiceWithToken from "~/apiService/have_token.js";
 
