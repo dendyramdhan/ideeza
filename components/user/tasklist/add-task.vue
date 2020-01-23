@@ -132,7 +132,7 @@ export default {
       this.showMembers = false;
     },
     addNewTask() {
-      var r = confirm("Do you want to add new task?");
+      var r = confirm("Do you want to add new note?");
       if (r == true) {
         this.task = {
           link: this.taskLink,

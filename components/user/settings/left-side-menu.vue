@@ -20,9 +20,6 @@
           <div class="menu-item">
             <nuxt-link to="/user/settings/payout-methods" >Payout Preferences</nuxt-link>
           </div>
-                  <div class="menu-item">
-            <nuxt-link to="/user/settings/assembly-service" >Cost of  Service</nuxt-link>
-          </div>
           <div class="menu-item">
             <nuxt-link to="/user/settings/transaction-history" >Transaction History</nuxt-link>
           </div>
@@ -41,11 +38,6 @@
       <div v-if="activeMenu === 'menu'" class="px-10 relative w-full">
         <CommonMenu />
       </div>
-
-
-
-
-
   </div>
 </template>
 

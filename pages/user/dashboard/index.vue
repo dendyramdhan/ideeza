@@ -205,7 +205,7 @@
     </div>
 
     <!--MyIdeeza Popup-->
-    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" />
+    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" @close="showMyIdeeza=false"  />
   </div>
 </template>
 
@@ -424,4 +424,18 @@ export default {
 .top-50 {
   top: 50%;
 }
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #E6E6E6; 
+}
+::-webkit-scrollbar-thumb {
+  background: #FF09D0; 
+}
+
 </style>
