@@ -90,7 +90,7 @@ import data from "~/data/TechnicianManagementCategory.json";
     name: "electronics",
     data: function() {
       return {
-      mydata: data.app,
+      mydata: data.network,
         main_1: false,
         main_2: false,
         main_3: false,

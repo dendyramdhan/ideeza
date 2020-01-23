@@ -13,6 +13,8 @@ export default (sendData, ctx)=>{
 
     })
     .catch((error) => {
+        console.log('error: ', error);
+
         ctx(null)
     })
 
