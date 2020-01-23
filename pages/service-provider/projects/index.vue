@@ -68,7 +68,7 @@
           <tbody v-for="(Service, index) in articleArray">
             <tr class="bg-ideeza-100" v-if="start < index && index < end ">
               <td>
-                <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}" >{{Service.title}}</nuxt-link>
+                <nuxt-link :to="{ path: '/service-provider/projects/detail', query: { id: Service.id}}" >{{Service.title}}</nuxt-link>
               </td>
               <!-- <td>
                 <span v-for="image in Service.assigned_users">

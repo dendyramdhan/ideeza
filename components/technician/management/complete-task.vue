@@ -56,6 +56,8 @@ export default {
 
       apiService(sendData, response => {
         console.log(response);
+         alert("Completed your project!!!")
+         this.close();
       });
     }
   }

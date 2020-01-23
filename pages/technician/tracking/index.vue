@@ -61,6 +61,7 @@
             class="flex w-full mb-4"
             v-for="(project,index) in articleArray"
             @click="$router.push('/technician/tracking/_id?id='+project.id)"
+            style="cursor:pointer"
           >
             <td class="w-1/5 text-ideeza-dark font-semibold">
               <div class="flex">
@@ -69,7 +70,7 @@
                   <!-- <label :for="project.id"></label> -->
                 </div>
                 <img :src="avata_img_url +useravatar" class="h-10 w-10 rounded-full mr-2" />
-                <label>{{ username}}</label>
+                <label style="cursor:pointer">{{ username}}</label>
                 
               </div>
             </td>
