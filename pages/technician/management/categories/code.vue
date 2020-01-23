@@ -12,143 +12,66 @@
     </div>
 
     <!--Left Menu-->
-    <div class="">
-
-      <div class="main-menu-item">
-        <div @click="main_1 = !main_1" class="menu-item hover:bg-gray-200 ">
+    <div class>
+      <div class="main-menu-item" v-for="info in mydata" >
+        <div @click="info.value1 = !info.value1" class="menu-item hover:bg-gray-200">
           <div class="flex flex-grow items-center main">
-            <font-awesome-icon class="mr-5 h-4 inline text-xl text-gray-500 main-arrow" :class="{'active': main_1}" :icon="['fas', 'chevron-right']"/>
-            <div>Core Code</div>
+            <font-awesome-icon
+              class="mr-5 h-4 inline text-xl text-gray-500 main-arrow"
+              :class="{'active': info.value1}"
+              :icon="['fas', 'chevron-right']"
+            />
+            <div>{{info.title}}</div>
           </div>
           <div class="flex flex-shrink items-center self-end">
-            <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-            <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
+            <font-awesome-icon
+              class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600"
+              :icon="['fas', 'pen']"
+            />
+            <font-awesome-icon
+              class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600"
+              :icon="['fas', 'trash']"
+            />
           </div>
         </div>
 
-        <div v-if="main_1" @click="main_2 = !main_2" class="menu-item-2 hover:bg-gray-200 ">
+        <div v-if="info.value1" @click="info.value2 = !info.value2" class="menu-item-2 hover:bg-gray-200">
           <div class="flex flex-grow items-center main">
-            <font-awesome-icon class="mr-5 h-4 inline text-xl text-gray-500 main-arrow" :class="{'active': main_2}" :icon="['fas', 'chevron-right']"/>
-            <div>CPU</div>
+            <font-awesome-icon
+              class="mr-5 h-4 inline text-xl text-gray-500 main-arrow"
+              :class="{'active': info.value2}"
+              :icon="['fas', 'chevron-right']"
+            />
+            <div>{{info.type}}</div>
           </div>
           <div class="flex flex-shrink items-center self-end">
-            <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-            <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
+            <font-awesome-icon
+              class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600"
+              :icon="['fas', 'pen']"
+            />
+            <font-awesome-icon
+              class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600"
+              :icon="['fas', 'trash']"
+            />
           </div>
         </div>
 
-        <div v-if="main_2 && main_1" class="">
-
-          <div class="menu-sub-item hover:bg-gray-200">
+        <div v-if="info.value1 && info.value2" class>
+          <div class="menu-sub-item hover:bg-gray-200" v-for="kind in info.kind">
             <div class="flex flex-grow items-center main">
-              <div>Atmega</div>
+              <div>{{kind}}</div>
             </div>
             <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
+              <font-awesome-icon
+                class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600"
+                :icon="['fas', 'pen']"
+              />
+              <font-awesome-icon
+                class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600"
+                :icon="['fas', 'trash']"
+              />
             </div>
           </div>
-
-          <div class="menu-sub-item hover:bg-gray-200">
-            <div class="flex flex-grow items-center main">
-              <div>Pic</div>
-            </div>
-            <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-            </div>
-          </div>
-
-          <div class="menu-sub-item hover:bg-gray-200">
-            <div class="flex flex-grow items-center main">
-              <div>Intel</div>
-            </div>
-            <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-            </div>
-          </div>
-
-          <div class="menu-sub-item hover:bg-gray-200">
-            <div class="flex flex-grow items-center main">
-              <div>AMD</div>
-            </div>
-            <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-      <div class="main-menu-item">
-        <div @click="main_3 = !main_3" class="menu-item hover:bg-gray-200 ">
-          <div class="flex flex-grow items-center main">
-            <font-awesome-icon class="mr-5 h-4 inline text-xl text-gray-500 main-arrow" :class="{'active': main_3}" :icon="['fas', 'chevron-right']"/>
-            <div>Built In</div>
-          </div>
-          <div class="flex flex-shrink items-center self-end">
-            <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-            <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-          </div>
-        </div>
-
-        <div v-if="main_3" @click="main_4 = !main_4" class="menu-item-2 hover:bg-gray-200 ">
-          <div class="flex flex-grow items-center main">
-            <font-awesome-icon class="mr-5 h-4 inline text-xl text-gray-500 main-arrow" :class="{'active': main_4}" :icon="['fas', 'chevron-right']"/>
-            <div>CPU</div>
-          </div>
-          <div class="flex flex-shrink items-center self-end">
-            <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-            <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-          </div>
-        </div>
-
-        <div v-if="main_3 && main_4" class="">
-
-          <div class="menu-sub-item hover:bg-gray-200">
-            <div class="flex flex-grow items-center main">
-              <div>Atmega</div>
-            </div>
-            <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-            </div>
-          </div>
-
-          <div class="menu-sub-item hover:bg-gray-200">
-            <div class="flex flex-grow items-center main">
-              <div>Pic</div>
-            </div>
-            <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-            </div>
-          </div>
-
-          <div class="menu-sub-item hover:bg-gray-200">
-            <div class="flex flex-grow items-center main">
-              <div>Intel</div>
-            </div>
-            <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-            </div>
-          </div>
-
-          <div class="menu-sub-item hover:bg-gray-200">
-            <div class="flex flex-grow items-center main">
-              <div>AMD</div>
-            </div>
-            <div class="flex flex-shrink items-center self-end">
-              <font-awesome-icon class="h-3 mr-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'pen']"/>
-              <font-awesome-icon class="h-3 inline text-xs text-gray-400 cursor-pointer hover:text-gray-600" :icon="['fas', 'trash']"/>
-            </div>
-          </div>
-
-
         </div>
       </div>
 
@@ -162,10 +85,12 @@
 </template>
 
 <script>
+import data from "~/data/TechnicianManagementCategory.json";
   export default {
     name: "electronics",
     data: function() {
       return {
+      mydata: data.code,
         main_1: false,
         main_2: false,
         main_3: false,

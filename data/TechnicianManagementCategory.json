@@ -1,0 +1,122 @@
+{
+    "electronics":[
+        {
+            "id":1,
+            "title": "Core code",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+            
+        },
+        {
+            "id": 2,
+            "title": "Built In",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+
+        } 
+    ],
+    "code":[
+        {
+            "id":1,
+            "title": "Core code",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+            
+        },
+        {
+            "id": 2,
+            "title": "Built In",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+
+        } 
+    ],
+    "cover":[
+        {
+            "id":1,
+            "title": "Core cover",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+            
+        },
+        {
+            "id": 2,
+            "title": "Built In",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+
+        } 
+    ],
+    "app":[
+        {
+            "id":1,
+            "title": "Core app",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+            
+        },
+        {
+            "id": 2,
+            "title": "Built In",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+
+        } 
+    ],
+    "network":[
+        {
+            "id":1,
+            "title": "Core network",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+            
+        },
+        {
+            "id": 2,
+            "title": "Built In",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+
+        } 
+    ],
+    "blog":[
+        {
+            "id":1,
+            "title": "Core Blog",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+            
+        },
+        {
+            "id": 2,
+            "title": "Built In",
+            "type" : "CPU",
+            "kind" : ["Atmega","Pic","Intel","AMD"],
+            "value1":false,
+            "value2":false
+
+        } 
+    ]
+}

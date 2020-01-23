@@ -164,7 +164,8 @@
         </div>
       </div>
     </div>
-    <!-- {{Math.ceil(counter)}} -->
+    <!-- {{Math.ceil(counter)}}   :style="{'position':'absolute','top':apiwidth,'left':apiheight}" v-if="apicall"    --> 
+    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:50%;left:50%" v-if="apicall" width="20%"/> -->
   </div>
 </template>
 
@@ -178,6 +179,9 @@ export default {
   name: "blog-list",
   data: function() {
     return {
+      apicall:true,
+      apiwidth:null,
+      apiheight:null,
       ts: new Date(),
       searchTerm: "",
       articles: articles,
@@ -199,6 +203,14 @@ export default {
     };
   },
   mounted(){
+    // (document.body.offsetWidth)/2
+    // (document.body.offsetHeight)/2
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    this.apiwidth = width/2;
+    this.apiheight = height/2;
+
     this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
       method: "get",
@@ -207,6 +219,12 @@ export default {
     };
 
     apiService(sendData, response => {
+      if (response != null) {
+         this.apicall = false;
+      } else {
+         this.apicall = true;
+      }
+     
       console.log(response.data);
       this.randomNumber = response.data;
       this.articleArrayaxios = Object.values(response.data.data);
@@ -261,6 +279,8 @@ export default {
             this.articleArray.push(item);
           }
         });
+        this.selectedkey(1);
+         
       }
     },
     search(e) {
