@@ -154,17 +154,45 @@
                 </div>
               </div>
             </div>
-            <div class="flex-shrink">
-              <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', 'cog']"/>
+            <div class="flex-shrink relative">
+              <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', 'cog']" @click="showDropDown=true"/>
+              <setting-drop-down @close="showDropDown=false"  v-if="showDropDown==true">
+                <div class="mb-3 mt-2">Mute</div>
+                <div class="mb-3">Archive chat</div>
+                <div class="mb-3">Delete chat</div>
+                <hr class="mb-3">
+                <div class="mb-3">Create group</div>
+                <div class="mb-3">Add participants</div>
+                <hr class="mb-3">
+                <div class="mb-3">Block</div>
+                <div class="mb-3">Suspend</div>
+                <div class="mb-3">Confirm</div>
+                <div class="mb-3">Report</div>
+              </setting-drop-down>
             </div>
           </div>
           <!--Options-->
-          <div class="cursor-pointer flex justify-between items-center border-b border-solid border-gray-300 p-5">
-            <div class="grow">
+          <div class="cursor-pointer border-b border-solid border-gray-300 p-5" >
+            <div class="flex justify-between items-center" @click="showOptions=!showOptions">
+            <div class="grow ">
               <h1 class="text-lg font-semibold text-gray-600">Options</h1>
             </div>
             <div class="flex-shrink">
-              <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', 'chevron-right']"/>
+              <font-awesome-icon class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer " :icon="['fas', showOptions?'chevron-down':'chevron-right']"/>
+            </div>
+            </div>
+            <div v-if="showOptions" class="text-ideeza-black mt-10 font-semibold">
+              <div class="mb-2 ">Search in conversation</div>
+              <div class="relative">
+                <input type="text" class="p-2 border rounded border-gray-400 w-full">
+                <font-awesome-icon class="absolute font-base right-0 text-gray-500 hover:text-gray-600 cursor-pointer mt-3 mr-2" :icon="['fas','search']"/>
+              </div>
+              <div class="mt-5 mb-2">Mark as unread</div>
+              <div class="mb-2">Edit message</div>
+              <div class="mb-2">Forward message</div>
+              <div class="mb-2">Go to project 
+                <nuxt-link to="admin/projects" class="text-ideeza inline">Magic car with bluetooth</nuxt-link>
+              </div>
             </div>
           </div>
           <!--Shared Files-->
@@ -271,15 +299,19 @@
 
 <script>
   import LeftMenu from '~/components/admin/messages/left-side-menu.vue'
-
+  import SettingDropDown from '~/components/admin/messages/setting-drop-down.vue'
   export default {
     layout: 'user',
     name: "messages-index",
     components: {
-      LeftMenu
+      LeftMenu,
+      SettingDropDown
     },
     data: function () {
-      return {}
+      return {
+        showOptions: false,
+        showDropDown: false
+      }
     },
     computed: {
       leftMenu() {
@@ -326,5 +358,9 @@
   }
   .shared-photo{
     height: 80px;
+  }
+  .dropdown{
+    top: 100%;
+    width: 200px;
   }
 </style>

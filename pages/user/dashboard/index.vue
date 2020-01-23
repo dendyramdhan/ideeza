@@ -74,22 +74,17 @@
                     <span class="text-ideeza-blue-gray text-lg block">My Score</span>
                   </div>
                 </div>
-                <span class="score-badge" 
-                  v-if="activities.myscore >= 0 &&  activities.myscore <=100"
-                  :class="{rookieColor: activities.myscore >= 0 &&  activities.myscore <=100}">Rookie</span>
-                
-                <span class="score-badge" 
-                  v-if="activities.myscore >= 101 &&  activities.myscore <=500"
-                  :class="{talentedColor: activities.myscore >= 101 &&  activities.myscore <=500}">Talented</span>
-                
-                <span class="score-badge" 
-                  v-if="activities.myscore >= 501 &&  activities.myscore <=1000"
-                  :class="{seniorColor: activities.myscore >= 501 &&  activities.myscore <=1000}">Senior</span>
-                
-                <span class="score-badge" 
-                  v-if="activities.myscore >= 1001"
-                  :class="{masterColor: activities.myscore >= 1001}">Master</span>
               </nuxt-link>
+              <div class="flex-1">
+                <span class="score-badge rookieColor" 
+                  :class="{'opacity-1': activities.myscore >= 0 &&  activities.myscore <=100}">Rookie</span>
+                <span class="score-badge talentedColor" 
+                :class="{'opacity-1': activities.myscore >= 101 &&  activities.myscore <=500}">Talented</span>
+                <span class="score-badge seniorColor" 
+                :class="{'opacity-1': activities.myscore >= 501 &&  activities.myscore <=1000}">Senior</span>
+                <span class="score-badge masterColor" :class="{'opacity-1':activities.myscore > 1000}"
+                  v-show="activities.myscore >= 1001">Master</span>
+              </div>
             </div>
 
             <div class="md:flex justify-between items-center pb-5 mt-6 border-b border-light-gray">
@@ -100,7 +95,7 @@
               >View all activities</button>
             </div>
 
-            <div style="overflow: scroll; height:200px">
+            <div style="overflow-y: scroll; height:200px" class="activities">
               <div class="table relative mb-5" v-for="userloginhistory in userloginhistories">
                 <div class="table-cell timeline-diaplay"></div>
                 <div class="table-cell pl-5">
@@ -119,7 +114,7 @@
             <div class="scroll-area" v-if="show">
               <no-ssr>
                 <!-- <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}"> -->
-                <div class="sm:flex flex-wrap" style="overflow: scroll; height: 600px;">
+                <div class="sm:flex flex-wrap pink-scroll-15 overflow-y-auto" style="height: 600px;">
                   <template>
                     <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovations">
                       <div class="m-1">
@@ -168,20 +163,28 @@
             </div>
           </div>
           <div class="sm:w-1/3">
-            <h1 class="font-semibold lg:text-3xl my-5">Top projects</h1>
+            <div class="flex justify-between items-center">
+              <h1 class="font-semibold lg:text-3xl my-5 flex-1">Top projects</h1>
+              <div class="flex flex-1 items-center px-5">
+                <div class="flex-1">Sort by</div>
+                <div class="flex-1">
+                  <drop-down :value="1" :data="['most viewed','recent']"/>
+                </div>
+              </div>
+            </div>
             <div class="scroll-area">
               <no-ssr>
                 <!-- <smooth-scrollbar ref="smooth-scroll-2" :options="{alwaysShowTracks: true}"> -->
-                <div class="flex flex-wrap" style="overflow: scroll; height: 600px;">
+                <div class="flex flex-wrap overflow-y-auto pink-scroll-15" style="height: 600px;">
                   <div class="w-1/2 p-2" v-for="topproject in topprojects">
                     <div class="p-2 border border-solid border-light-gray">
-                      <div class="w-full projects-image">
+                      <div class="w-full relative projects-image">
                         <img
                           :src="project_image_url + topproject.project_info.image"
                           class="object-contain object-center w-full"
                           alt
                         />
-                        <div class="my-1 flex justify-between items-center">
+                        <!-- <div class="my-1 flex justify-between items-center">
                           <div class="flex items-center">
                             <font-awesome-icon
                               class="mr-1 h-4 text-ideeza-gold"
@@ -190,7 +193,29 @@
                             <small class="text-xs">{{topproject.project_info.rating}}</small>
                           </div>
 
-                          <span class="text-xs">{{topproject.project_info.like}} likes</span>
+                          <span class="text-xs">{{topproject.project.like}} likes</span>
+                        </div> -->
+                        <div class="absolute bottom-0 right-0 mb-2 w-3/5 text-xs text-white">
+                          <div class="flex items-center">
+                            <div class="flex-1 mr-1">
+                            <font-awesome-icon
+                              :icon="['fas', 'eye']"
+                            />
+                            21
+                            </div>
+                            <div class="flex-1 mr-1">
+                            <font-awesome-icon
+                              :icon="['fas', 'play']"
+                            />
+                            12
+                            </div>
+                            <div class="flex-1 mr-1">
+                            <font-awesome-icon
+                              :icon="['fas', 'thumbs-up']"
+                            />
+                            61
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -218,7 +243,7 @@ import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
 import apiService from "~/apiService";
 import apiServiceWithToken from "~/apiService/have_token.js";
-
+import dropDown from "~/components/form/dropdown-field"
 Object.defineProperty(Array.prototype, "chunk_inefficient", {
   value: function(chunkSize) {
     var array = this;
@@ -237,7 +262,8 @@ export default {
   name: "dashboard-index",
   components: {
     LeftMenu,
-    MyIdeeza
+    MyIdeeza,
+    dropDown
   },
   data: function() {
     return {
@@ -416,7 +442,10 @@ export default {
 }
 .status-button {
   margin-bottom:  0px !important;
-  @apply p-3 m-3 border border-solid border-ideeza cursor-pointer rounded;
+  @apply p-3 cursor-pointer rounded border border-transparent;
+}
+.status-button:hover{
+  @apply border border-solid border-ideeza;
 }
 /deep/ .scrollbar-thumb {
   @apply bg-ideeza opacity-75;
@@ -424,18 +453,44 @@ export default {
 .top-50 {
   top: 50%;
 }
-
-
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
+.score-badge{
+  opacity: 0;
 }
-/* Track */
-::-webkit-scrollbar-track {
-  background: #E6E6E6; 
+.score-badge.opacity-1{
+  opacity: 1 !important;
 }
-::-webkit-scrollbar-thumb {
-  background: #FF09D0; 
+.activities::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
 }
 
+.activities::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: #F5F5F5;
+}
+
+.activities::-webkit-scrollbar-thumb
+{
+	background-color: #FF09D0;
+  border: 2px solid #FF09D0;
+}
+.pink-scroll-15::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.pink-scroll-15::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.pink-scroll-15::-webkit-scrollbar-thumb
+{
+	background-color: #FF09D0;
+  border: 2px solid #FF09D0;
+}
 </style>
