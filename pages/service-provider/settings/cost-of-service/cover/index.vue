@@ -167,6 +167,7 @@ export default {
 
       apiService(sendData2, response => {
         console.log(response);
+        alert("Successful!!!")
       });
     },
     change_material(evt) {
