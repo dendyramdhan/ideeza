@@ -1,9 +1,13 @@
 <template>
-  <div class="py-10 mb-16 hidden md:block mx-auto">
+  <div class="py-10 mb-16 hidden md:block mx-auto relative">
     <div class="stepper-container mx-auto">
+      <button class="p-3 rounded border text-gray-700 absolute top-0 left-0 bg-white" @click="$router.back()"><font-awesome-icon
+                class="mr-2 h-4 cursor-pointer"
+                :icon="['fas', 'arrow-left']"
+              />Go Back</button>
       <div class="stepper-bar bg-gray-500 relative mx-auto">
         <div class="stepper-bar-overlay bg-ideeza" :style="`width: ${overlayWidth}%` "></div>
-        <div class="absolute top-0 left-0 h-full w-full z-50 flex justify-between">
+        <div class="absolute top-0 left-0 h-full w-full z-40 flex justify-between">
 
           <!--1-->
           <div class="stepper-icon-wrapper relative active" :class="{'active': trackStep === 0, 'done': trackStep > 0}">
