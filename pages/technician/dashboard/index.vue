@@ -9,7 +9,7 @@
         <!--Status Cards-->
         <div class="lg:flex w-full cards-wrapper items-center">
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
-            <h1 class="text-3xl font-semibold text-gar-800 pl-3 lg:pl-0">Good morning, Chan!</h1>
+            <h1 class="text-3xl font-semibold text-gar-800 pl-3 lg:pl-0">Good morning, {{name}}!</h1>
           </div>
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
             <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
@@ -363,7 +363,8 @@ export default {
       counter: articles.length / this.$store.state.userBlogStore.scale,
       start: this.$store.state.userBlogStore.offset * 5 - 1,
       end: this.$store.state.userBlogStore.offset * 5 + 5,
-      counterarray: []
+      counterarray: [],
+      name: ''
     };
   },
 
@@ -389,7 +390,9 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted');
+    let firstname = window.$nuxt.$cookies.get("firstname");
+    let lastname = window.$nuxt.$cookies.get("lastname");
+    this.name = firstname + ' ' + lastname;
   },
   methods: {
     changeshowperiod(e) {

@@ -65,15 +65,15 @@
               class="text-lg border-b font-semibold border-solid border-gray-300 pb-5 text-gray-500"
             >PEOPLE YOU SHOULD CONNECT</div>
 
-            <div
-              class="flex justify-between items-center bg-white my-5"
-              v-for="connect in connects"
-            >
+            <div class="flex justify-between items-center bg-white my-5" v-for="user in users">
               <div class="flex items-center">
-                <img class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3" :src="connect.potrait_url" />
+                <img
+                  class="h-10 w-10 md:h-14 md:w-14 rounded-full mr-3"
+                  :src="avatar_base_url + user.avatar"
+                />
                 <div class="text-left mr-3">
-                  <h2 class="font-semibold text-gray-800">{{connect.name}}</h2>
-                  <div class="text-gray-600">{{connect.occupation}}</div>
+                  <h2 class="font-semibold text-gray-800">{{user.firstname + ' ' + user.lastname}}</h2>
+                  <div class="text-gray-600">{{user.role}}</div>
                 </div>
               </div>
 
@@ -91,6 +91,7 @@
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import NewsFeed from "~/components/user/news/feeds.vue";
 import connects from "~/json/connects.json";
+import apiServiceWithToken from "~/apiService/have_token.js";
 
 export default {
   middleware: "auth",
@@ -104,7 +105,8 @@ export default {
     return {
       feedType: null,
       tab: "local",
-      connects: connects
+      users: [],
+      avatar_base_url: process.env.avatar_base_url
     };
   },
   computed: {
@@ -112,7 +114,21 @@ export default {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-  mounted() {},
+  mounted() {
+    let getallusersurl = "/api/user/get_list";
+    let getallusersData = {
+      method: "get",
+      url: getallusersurl,
+      data: null
+    };
+
+    apiServiceWithToken(getallusersData, response => {
+      if (response.data["success"] == true) {
+        this.users = response.data["data"];
+        console.log("user lists: ", this.users);
+      }
+    });
+  },
   methods: {
     setTab(tab) {
       this.tab = tab;
