@@ -2,7 +2,7 @@
   <div class="flex flex-col h-full">
     <navigation class="flex-shrink"></navigation>
     <nuxt class="flex-grow" />
-    <!-- <img src="~/static/icons/new.gif"  style="position:absolute;top:45%;left:52%" v-if="apicall" width="15%"/> -->
+    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:50%;left:50%" v-if="apicall" width="20%"/> -->
 
 
 <client-only>
@@ -48,9 +48,6 @@
 import navigation from "~/components/user/header-bar.vue";
 import FloatButton from "~/components/user/float-button/right-bot-float-button.vue";
 import { mapMutations } from "vuex";
-
-import apiService from "~/apiService";
-
 export default {
   components: { navigation, FloatButton },
   data:function(){
@@ -63,10 +60,6 @@ export default {
     if (this.$device.isMobile) {
       this.toggleLeftMenu();
     }
-
-      setTimeout(function(){ this.apicall = flase;  }, 3000);
-
-
   },
   methods: {
     ...mapMutations({

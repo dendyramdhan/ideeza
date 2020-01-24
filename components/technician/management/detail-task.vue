@@ -233,7 +233,7 @@ export default {
     uploadapi(){
       const formData = new FormData();
       formData.set("taskid", this.projectidd);
-      formData.append("attached", this.file);
+      formData.append("attach", this.file);
       let sendData3 = {
         method: "post",
         url: this.geturl2,
