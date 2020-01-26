@@ -5,52 +5,65 @@
 
     <!-- Main Contents -->
     <div class="flex-grow">
-      <div class="main-contents">
+      <div class="main-contents" v-if="articleArray.length>0">
         <div class="projects-container">
-          <div class="lg:flex justify-between items-center pb-3">
+          <div class="lg:flex justify-between items-center pb-3 ml-4">
             <h1 class="text-xl text-gray-800 font-semibold">My projects</h1>
           </div>
 
           <div class="lg:flex flex-wrap">
             <template v-for="(info,index) in articleArray">
-            <div v-if="index==1" :key="index" class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative">
-              <carousel per-page="1">
-                <slide v-for="n in info.products.length+1 " :key="'d'+n">
-                  <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
+            <div v-if="info.products.length>1" :key="index+'d'" class="w-4/12 p-4 relative">
+              <carousel :per-page="1">
+                <slide v-for="product in info.products" :key="'d'+product.product_id" class="project-item-container relative">
+                  <!-- <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
                   <div class="image-container">
-                    <img class="project-item-container--image" :src="project_img_url + info.products[0].product_image" alt />asdf
+                    <img class="project-item-container--image" :src="project_img_url + product.product_image" alt />asdf
                   </div>
                   <div class="flex justify-between items-center text-xs text-ideeza-black mt-5">
                     <div class="flex items-center">
                       <font-awesome-icon class="mr-2 h-4 text-ideeza-gold" :icon="['fas', 'star']" />
-                      <span>{{info.products[0].rating}}</span>
+                      <span>{{product.rating}}</span>
                     </div>
                     <span
                       class="font-semibold"
-                    >{{info.products[0].like}} &nbsp; likes &nbsp; {{info.products[0].dislike}}&nbsp; dislikes </span>
+                    >{{product.like}} &nbsp; likes &nbsp; {{product.dislike}}&nbsp; dislikes </span>
                   </div>
+                </nuxt-link> -->
+                <nuxt-link tag="div" :to="'/user/projects/'+product.product_id">
+                <div class="cursor-pointer border p-4 bg-white" @mouseover="product.showDetails=true;$forceUpdate()" @mouseleave="product.showDetails=false;$forceUpdate()">
+                  <div class="porject-thum-img"><img class="product-img" :src="project_img_url+product.product_image"></div>
+                  <div class="flex pt-3">
+                    <div class="flex-1">
+                      <img src="~/static/images/star-icon-2.png" class="inline-block mr-4">{{product.rating}}
+                    </div>
+                    <div class="flex-1 text-right">{{product.like}} Likes</div>
+                  </div>
+                </div>
                 </nuxt-link>
                 </slide>
-              </carousel><br/>
-              <div
-                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 hidden pop-over"
-                
+              </carousel>
+              <template v-for="product in info.products">
+              <div :key="product.product_id+'as'"
+                class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 pop-over"
+                :class="{'hidden':product.showDetails==undefined||product.showDetails==false}"
               >
                 <div class="flex justify-between items-center">
                   <div class="flex items-center">
-                    <h1 class="font-semibold text-lg">{{info.products[0].product_title}}</h1>
+                    <h1 class="font-semibold text-lg">{{product.product_title}}</h1>
                     <span class="text-sm text-gray-600 ml-3">{{info.title}}</span>
                   </div>
-                  <div class="font-semibold text-ideeza-black">{{info.products[0].cost}}</div>
+                  <div class="font-semibold text-ideeza-black">${{product.cost}}</div>
                 </div>
-                <div class="text-sm mt-5">{{info.products[0].product_description}}</div>
+                <div class="text-sm mt-5">{{product.product_description}}</div>
               </div>
+              </template>
             </div>
-            <div :key="index" v-else
+            <!-- <div :key="index" v-else
               class="w-32p project-item-container w-full shadow border border-solid border-light-gray mt-12 relative"
-            >
+            > -->
              <!-- v-if="Project.flag == 1" -->
-              <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
+              <!-- <nuxt-link :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
                 <div class="image-container">
                   <img class="project-item-container--image" :src="project_img_url + info.products[0].product_image" alt />asdf
                 </div>
@@ -63,7 +76,17 @@
                     class="font-semibold"
                   >{{info.products[0].like}} &nbsp; likes &nbsp; {{info.products[0].dislike}}&nbsp; dislikes </span>
                 </div>
-              </nuxt-link>
+              </nuxt-link> -->
+              <div class="project-item-container relative w-4/12 p-4 relative" :key="index+'s'">
+                <nuxt-link tag="div" class="border p-4 cursor-pointer bg-white" :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
+                  <div class="porject-thum-img"><img class="product-img" :src="project_img_url+info.products[0].product_image"></div>
+                  <div class="flex pt-3">
+                    <div class="flex-1">
+                      <img src="~/static/images/star-icon-2.png" class="inline-block mr-4">{{info.products[0].rating}}
+                    </div>
+                    <div class="flex-1 text-right">{{info.products[0].like}} Likes</div>
+                  </div>
+                </nuxt-link>
 
               <div
                 class="absolute p-5 rounded-lg border-light-gray border-solid border shadow-md z-50 hidden pop-over"
@@ -73,7 +96,7 @@
                     <h1 class="font-semibold text-lg">{{info.products[0].product_title}}</h1>
                     <span class="text-sm text-gray-600 ml-3">{{info.title}}</span>
                   </div>
-                  <div class="font-semibold text-ideeza-black">{{info.products[0].cost}}</div>
+                  <div class="font-semibold text-ideeza-black">${{info.products[0].cost}}</div>
                 </div>
 
                 <div class="text-sm mt-5">{{info.products[0].product_description}}</div>
@@ -145,16 +168,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <ul>      
-       <li v-for="(info,index) in articleArray">       
-        <span v-for="innf in info.products">
-            {{innf.cost}}__<br/>
-        </span>
-        <br />      
-      </li>      
-    </ul> -->
-
   </div>
 </template>
 
@@ -229,10 +242,11 @@ export default {
 </script>
 
 <style scoped>
-.projects-container {
-  width: 100%;
+.VueCarousel-pagination {
+  position: absolute;
+  bottom: 5%;
 }
-.project-item-container {
+.projects-container {
   width: 100%;
 }
 .project-item-image {
@@ -245,15 +259,6 @@ export default {
 @screen lg {
   .projects-container {
     padding: 60px 50px;
-  }
-  .project-item-container {
-    padding: 10px;
-    max-width: 500px;
-    margin-right: 10px;
-  }
-
-  .project-item-container.double {
-    max-width: 1000px;
   }
 
   .double:before {
@@ -272,9 +277,9 @@ export default {
   }
   .pop-over {
     width: 500px;
-    top: 70%;
-    left: 20%;
-    background: #f2eef6;
+    top: 54%;
+    left:25%;
+    background: #fff;
   }
   .project-item-container:hover .pop-over {
     @apply block;
@@ -315,5 +320,9 @@ export default {
 			#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
 			#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
 				color: #2b6cb0;  /*Set to match the Tailwind colour you want the active one to be */
-			}
+      }
+      img.product-img{
+        height: 330px;
+        width: 100%;
+      }
 </style>

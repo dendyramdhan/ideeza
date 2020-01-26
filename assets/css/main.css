@@ -497,3 +497,7 @@ p.VuePagination__count{
   top: -11px;
   left: 20px;
 }
+.VueCarousel-pagination{
+  position: absolute;
+  bottom: 5%;
+}
