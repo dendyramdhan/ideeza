@@ -21,10 +21,10 @@
         <div class="lg:w-1/2">
           <div class="flex justify-between items-center">
             <h1 class="text-ideeza-dark font-semibold">Task Description</h1>
-            <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+            <!-- <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
               <span class="text-sm inline-block mr-1">Edit</span>
               <font-awesome-icon @click="close" class="mr-1 h-3" :icon="['fas', 'pen']" />
-            </div>
+            </div> -->
           </div>
           <div class="mt-5">
              <textarea
@@ -261,6 +261,7 @@ export default {
 
       apiService(sendData, response => {
         console.log(response);
+        window.location.reload();
       });
 
       //  this.user.map(item=>{

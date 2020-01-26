@@ -1,5 +1,21 @@
 <template>
   <div class="flex flex-col h-full">
+
+    <div style="width: 100%; height: 100%; background: white; z-index: 999; position: absolute; opacity: 0.5;" 
+      v-if="loaderFlag"
+    >
+
+    </div>
+
+    <img
+      src="~/assets/images/new.gif"
+
+      v-if="loaderFlag"
+      
+      style="position:absolute;top:40%;left:40%; z-index:1000"
+      width="15%"
+    />
+
     <navigation class="flex-shrink"></navigation>
     <div :class="{'hide-sider-bar':!leftMenu}" class="flex main-panel">
       <!--  Left Side Bar  -->
@@ -64,6 +80,7 @@
     },
     data: function () {
       return {
+      loaderFlag: true,
         botMenuItems: [{
             name: 'Help',
             icon: 'shopping-cart',
@@ -108,6 +125,13 @@
       }
     },
     mounted() {
+
+      let that  = this
+    setInterval(function(){
+      that.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
+      // console.log("loaderFlag:", that.loaderFlag )
+       }, 10);
+       
       console.log(this.$device.isMobile);
       if (this.$device.isMobile) {
         this.toggleLeftMenu();

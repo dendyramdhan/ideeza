@@ -1,6 +1,10 @@
 import axios from 'axios'
 export default (sendData, ctx)=>{
     let authToken = window.$nuxt.$cookies.get("authToken");
+    // this.$store.commit("loaderStorage/loader_flag_change1");
+
+    window.$nuxt.$cookies.set("loaderFlag",true)
+
     return axios({
         method: sendData.method,
         url: process.env.base_url + sendData.url,
@@ -8,8 +12,13 @@ export default (sendData, ctx)=>{
         headers: { Authorization: `Bearer ${authToken}` }
       })
     .then(response => {
+        
+        window.$nuxt.$cookies.set("loaderFlag",false)
 
         ctx(response)
+
+
+        // this.$store.commit("loaderStorage/loader_flag_change2");
 
     })
     .catch((error) => {

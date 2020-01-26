@@ -22,7 +22,7 @@
 
     <!--Electronics-->
     <div v-if="tabNumber === 0" class="mt-10">
-      <Progress width="60" />
+      <Progress width="35" />
       <h1 class="font-semibold my-5">Manufacturers working on project</h1>
       <div class="mb-10" v-for="Project in articleArray" >
         <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Electronics' ">
@@ -53,7 +53,7 @@
 
     <!--Freelancers-->
     <div v-if="tabNumber === 1" class="mt-10">
-      <Progress width="20" />
+      <Progress width="91" />
       <h1 class="font-semibold my-5">Freelancers working on project</h1>
       <div class="mb-10" v-for="Project in articleArray" >
         <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Freelancers' ">
@@ -84,7 +84,7 @@
 
     <!--Parts-->
     <div v-if="tabNumber === 2" class="mt-10">
-      <Progress width="80" />
+      <Progress width="73" />
       <h1 class="font-semibold my-5">People working on project</h1>
       <div class="mb-10" v-for="Project in articleArray" >
         <div class="flex justify-between items-center" v-if="Project.connector.kind == 'Parts' ">

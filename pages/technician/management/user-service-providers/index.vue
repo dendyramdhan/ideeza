@@ -68,7 +68,7 @@
             </th>-->
           </tr>
         </thead>
-         <tbody v-for="(Service, index) in articleArray">
+        <tbody v-for="(Service, index) in articleArray">
           <tr v-if="start < index && index < end ">
             <td>
               <nuxt-link
@@ -84,23 +84,34 @@
                 <img class="inline" src="~/static/images/star.png" alt />
               </span>
             </td>
-            
-             <td class="lg:text-right">
-               <nuxt-link
-                :to="{ path: '/technician/user-profile', query: { id: Service.userid}}"
-              ><font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" /></nuxt-link>
-               <nuxt-link
-                :to="{ path: '/technician/messages', query: { id: Service.userid}}"
-              ><font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" /></nuxt-link>
-              
-              
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']" @click="setstatus(Service.userid,'Active')" />
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']"   @click="setstatus(Service.userid,'Pause')" />
-              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']"   @click="setstatus(Service.userid,'Close')" />
+
+            <td class="lg:text-right">
+              <nuxt-link :to="{ path: '/technician/user-profile', query: { id: Service.userid}}">
+                <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+              </nuxt-link>
+              <nuxt-link :to="{ path: '/technician/messages', query: { id: Service.userid}}">
+                <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" />
+              </nuxt-link>
+
+              <font-awesome-icon
+                class="mr-2 h-4 cursor-pointer"
+                :icon="['fas', 'check']"
+                @click="setstatus(Service.userid,'Active')"
+              />
+              <font-awesome-icon
+                class="mr-2 h-4 cursor-pointer"
+                :icon="['fas', 'pause']"
+                @click="setstatus(Service.userid,'Pause')"
+              />
+              <font-awesome-icon
+                class="mr-2 h-4 cursor-pointer"
+                :icon="['fas', 'times']"
+                @click="setstatus(Service.userid,'Close')"
+              />
             </td>
-            <!-- <td class="lg:text-right text-xs">{{ts.toLocaleDateString(Service.created_at)}}</td> --> 
+            <!-- <td class="lg:text-right text-xs">{{ts.toLocaleDateString(Service.created_at)}}</td> -->
           </tr>
-        </tbody> 
+        </tbody>
       </table>
 
       <!--Table Stats-->
@@ -155,7 +166,6 @@ import Services from "~/data/TechnicianmanagementApi.json";
 import apiService from "~/apiService/have_token.js";
 import apiService2 from "~/apiService/have_data.js";
 
-
 export default {
   name: "user-service-providers",
   data: function() {
@@ -175,8 +185,7 @@ export default {
       articleArrayrout: [],
       randomNumber: {},
       geturl: "/api/user/get_list",
-      geturl2: "/api/user/change_status",
-
+      geturl2: "/api/user/change_status"
     };
   },
   mounted() {
@@ -198,10 +207,15 @@ export default {
       });
 
       this.length = this.articleArrayrout.length / 5 - 1;
-      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
-  
+      this.counter =
+        this.articleArrayrout.length /
+        this.$store.state.TechnicianProjectStore.scale;
+
       let i = 1;
-      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      let endd =
+        this.articleArrayrout.length /
+          this.$store.state.TechnicianProjectStore.scale +
+        1;
       //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
         this.counterarray.push(i);
@@ -210,8 +224,8 @@ export default {
   },
   created: function() {},
   methods: {
-      setstatus(userid, status){
-          const formData = new FormData();
+    setstatus(userid, status) {
+      const formData = new FormData();
       formData.set("status", status);
       formData.set("userid", userid);
       let sendData = {
@@ -221,12 +235,28 @@ export default {
       };
       apiService2(sendData, response => {
         console.log(response);
+        this.articleArray = [];
+        let sendData5 = {
+          method: "get",
+          url: this.geturl,
+          data: null
+        };
+
+        apiService(sendData5, response5 => {
+          console.log(response5.data);
+          // this.randomNumber = response.data;
+          this.articleArrayaxios = Object.values(response5.data.data);
+
+          this.articleArrayaxios.map(item => {
+            this.articleArrayrout.push(item);
+            this.articleArray.push(item);
+          });
+        });
       });
-      },
+    },
     // @click="setstatus(Service.userid,'Active')" />
     //           <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']"   @click="setstatus(Service.userid,'Pause')" />
     //           <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']"   @click="setstatus(Service.userid,'Close')" />
-
 
     search(e) {
       this.articleArray = [];

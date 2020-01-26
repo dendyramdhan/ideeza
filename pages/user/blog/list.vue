@@ -165,7 +165,7 @@
       </div>
     </div>
     <!-- {{Math.ceil(counter)}}   :style="{'position':'absolute','top':apiwidth,'left':apiheight}" v-if="apicall"    -->
-    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:50%;left:50%" v-if="apicall" width="20%"/> -->
+    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:40%;left:40%" v-if="loaderFlag" width="15%"/> -->
   </div>
 </template>
 
@@ -263,6 +263,32 @@ export default {
       };
       apiService2(sendData, response => {
         console.log(response);
+        this.articleArray = [];
+        let sendData5 = {
+          method: "get",
+          url: this.geturl,
+          data: null
+        };
+
+        apiService(sendData5, response5 => {
+          console.log(response5.data);
+          this.randomNumber = response5.data;
+          this.articleArrayaxios = Object.values(response5.data.data);
+
+          this.articleArrayaxios.map(item => {
+            this.articleArrayrout.push(item);
+            this.articleArray.push(item);
+          });
+        });
+
+        // this.articleArray = [];
+        // this.articleArrayrout.map((item,key) => {
+        //   if (item.id == userid) {
+        //     this.articleArray[key].state = status;
+        //     console.log("status:", status)
+        //     console.log("this status:",  this.articleArray[key].state)
+        //   } 
+        // });
       });
     },
     changeshowperiod(e) {

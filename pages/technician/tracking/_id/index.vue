@@ -95,8 +95,9 @@
           <tr
             class="flex w-full mb-4"
             v-for="task in articleArray2"
-            @click="taskdetailtrue(task.id)"
+           
           >
+           <!-- @click="taskdetailtrue(task.id)" -->
             <td class="w-2/12 text-ideeza-dark font-semibold">
               <div class="flex">
                 <div class="flex" @click.stop>

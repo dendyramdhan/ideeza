@@ -21,10 +21,10 @@
         <div class="lg:w-1/2">
           <div class="flex justify-between items-center">
             <h1 class="text-ideeza-dark font-semibold">Project Description</h1>
-            <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+            <!-- <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
               <span class="text-sm inline-block mr-1">Edit</span>
               <font-awesome-icon @click="close" class="mr-1 h-3" :icon="['fas', 'pen']" />
-            </div>
+            </div> -->
           </div>
           <div class="mt-5">
             <textarea
@@ -231,7 +231,10 @@ export default {
     send_add_request() {
       this.start=new Date(this.dateRange.start).getTime()
       this.end=new Date(this.dateRange.end).getTime()
-      const formData = new FormData();
+      if (this.start == null ||this.end == null ||this.user == null ||this.name == null ||this.description == null||this.status == null||this.file == null) {
+        alert("please input/select all data!!!")
+      } else {
+        const formData = new FormData();
        this.user.map(item=>{
         console.log("only:", item)
         formData.set("user", item);
@@ -252,6 +255,8 @@ export default {
 
       apiService(sendData, response => {
         console.log(response);
+        window.location.reload();
+
       });
 
       // alert("sending your add requset!!!"+this.name+this.description+this.status+new Date(this.dateRange.start).getTime() +"---------"+new Date(this.dateRange.end).getTime()+"ggg"+this.user);
@@ -263,6 +268,8 @@ export default {
       console.log("timeend:",this.end )
 
       this.$emit("onClose");
+      }
+      
     },
     close() {
       this.$emit("onClose");

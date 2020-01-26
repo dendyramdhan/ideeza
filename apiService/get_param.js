@@ -1,10 +1,14 @@
 import axios from 'axios'
 export default (sendData, ctx)=>{
+  window.$nuxt.$cookies.set("loaderFlag",true)
+
     axios
       .get(process.env.base_url + sendData.url, {
         params:sendData.param
       })
       .then(response => {
+        window.$nuxt.$cookies.set("loaderFlag",false)
+
         ctx(response)
       })
       .catch(() => {
