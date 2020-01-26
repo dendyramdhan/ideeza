@@ -318,6 +318,7 @@ export default {
     }
   }
 };
+
 function print() {
   var doc = new jsPDF();
   doc.text("Price: 210", 10, 10);
