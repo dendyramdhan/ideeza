@@ -13,6 +13,7 @@ export default (sendData, ctx)=>{
 
     })
     .catch((error) => {
+        console.log("api error : ", error)
         ctx(null)
     })
 

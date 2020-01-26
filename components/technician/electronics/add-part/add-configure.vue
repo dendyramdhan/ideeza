@@ -41,15 +41,17 @@
             </div>
           </div>
           <div class="shadow-md px-5 py-3 bg-white ">
+
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Height (H)</span>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Max</span>
                 <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
               </div>
-
             </div>
+
           </div>
+
           <div class="shadow-md px-5 py-3 bg-white ">
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Standoff Height (A1)</span>
@@ -57,17 +59,16 @@
                 <span class="inline-block mr-5">Min</span>
                 <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
               </div>
-
             </div>
           </div>
+
           <div class="shadow-md px-5 py-3 bg-white ">
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Chamfered Corner (CH)</span>
               <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
-
-
             </div>
           </div>
+
           <div class="shadow-md px-5 py-3 bg-white ">
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Pin 1 location</span>
@@ -105,8 +106,6 @@
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Chamfered Corner (CH)</span>
               <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
-
-
             </div>
           </div>
           <div class="shadow-md px-5 py-3 bg-white ">
@@ -115,10 +114,31 @@
               <select class="bg-white border border-gray-400 p-2">
                 <option value="">Side of D</option>
               </select>
-
-
             </div>
           </div>
+        </div>
+
+        <div v-if="step === 3">
+          <div class="shadow-md px-5 py-3 bg-white ">
+
+            <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
+              <span class="font-semibold ">2D Image</span>
+              <div class="flex items-center">
+                <input type="file" style="width: 235px" class="px-2 py-1 border border-gray-400 w-24 ">
+              </div>
+            </div>
+
+          </div>
+          <div class="shadow-md px-5 py-3 bg-white ">
+
+            <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
+              <span class="font-semibold ">3D Image</span>
+              <div class="flex items-center">
+                  <input type="file" style="width: 235px" class="px-2 py-1 border border-gray-400 w-24 ">
+              </div>
+            </div>
+          </div>
+          
         </div>
 
 
@@ -154,7 +174,7 @@
         data: () => {
             return {
                 step: 1,
-                maxStep: 10,
+                maxStep: 3,
                 activeView: '3D'
             }
         },

@@ -37,7 +37,7 @@
       </div>
 
       <AddPartSearch
-        @select="addPartSelect=true"
+        ref="addPartSearch"
         class="mt-10"
         v-if="step === 0 && !addPartSelect && !addPartSelectType"
       />
@@ -103,6 +103,8 @@ export default {
     };
   },
 
+
+
   components: {
     TextField,
     TextArea,
@@ -131,13 +133,24 @@ export default {
     },
     onNext() {
       // alert(this.step);
-      if (this.step < 6) this.step += 1;
+      if(this.step==0){
+         var selPart = this.$refs.addPartSearch.selectedPart
+        console.log("selected part : ", selPart)
+        if(!selPart)return;
+
+      }
+      
+
+       if (this.step < 6) this.step += 1;
     },
     onFinish(){
-
       console.log("finish")
 
     }
+  },
+  watch: {
+   
+
   }
 
 };
