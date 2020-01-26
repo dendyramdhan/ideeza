@@ -402,7 +402,7 @@ export default {
       formData.set("taskid", this.projectidd);
       this.user.map(item => {
         console.log("only:", item);
-        formData.set("userid", item);
+        formData.append("userid", item);
       });
       let sendData2 = {
         method: "post",

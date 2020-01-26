@@ -165,7 +165,7 @@
       </div>
     </div>
     <!-- {{Math.ceil(counter)}}   :style="{'position':'absolute','top':apiwidth,'left':apiheight}" v-if="apicall"    --> 
-    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:50%;left:50%" v-if="apicall" width="20%"/> -->
+    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:40%;left:40%" v-if="loaderFlag" width="15%"/> -->
   </div>
 </template>
 
@@ -179,7 +179,7 @@ export default {
   name: "blog-list",
   data: function() {
     return {
-      apicall:true,
+      loaderFlag:true,
       apiwidth:null,
       apiheight:null,
       ts: new Date(),

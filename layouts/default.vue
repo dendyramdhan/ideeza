@@ -3,7 +3,13 @@
     <nuxt />
   </div>
 </template>
-
+<script>
+export default {
+  mounted(){
+    // window.$nuxt.$cookies.set("loaderFlag",true)
+  },
+}
+</script>
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

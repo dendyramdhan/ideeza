@@ -1,46 +1,57 @@
 <template>
   <div class="flex flex-col h-full">
-    <navigation class="flex-shrink"></navigation>
-    <nuxt class="flex-grow" />
-    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:50%;left:50%" v-if="apicall" width="20%"/> -->
+    <div style="width: 100%; height: 100%; background: white; z-index: 999; position: absolute; opacity: 0.5;" 
+      v-if="loaderFlag"
+    >
 
+    </div>
 
-<client-only>
-    <notifications group="error" position="top right">
-      <template slot="body" slot-scope="props">
-        <div class="notify notify--error">
-          <div class="flex items-center text-white font-semibold">
-            <img class="mr-3" src="~/static/icons/exclaimation-icon.png" alt />
-            {{props.item.text}}
+    <img
+      src="~/assets/images/new.gif"
+
+      v-if="loaderFlag"
+      
+      style="position:absolute;top:40%;left:40%; z-index:1000"
+      width="15%"
+    />
+
+    <div>
+      <navigation class="flex-shrink"></navigation>
+      <nuxt class="flex-grow" />
+      <FloatButton />
+    </div>
+
+    <client-only>
+      <notifications group="error" position="top right">
+        <template slot="body" slot-scope="props">
+          <div class="notify notify--error">
+            <div class="flex items-center text-white font-semibold">
+              <img class="mr-3" src="~/static/icons/exclaimation-icon.png" alt />
+              {{props.item.text}}
+            </div>
+            <a class="close cursor-pointer" @click="props.close">
+              <font-awesome-icon class="mr-3 h-3 text-red-200 text-xs" :icon="['fas', 'times']" />
+            </a>
           </div>
+        </template>
+      </notifications>
+    </client-only>
 
-          <a class="close cursor-pointer" @click="props.close">
-            <font-awesome-icon class="mr-3 h-3 text-red-200 text-xs" :icon="['fas', 'times']" />
-          </a>
-        </div>
-      </template>
-    </notifications>
-</client-only>
-
-<client-only>
-
-    <notifications group="success" position="top right">
-      <template slot="body" slot-scope="props">
-        <div class="notify notify--success">
-          <div class="flex items-center text-white font-semibold">
-            <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt />
-            {{props.item.text}}
+    <client-only>
+      <notifications group="success" position="top right">
+        <template slot="body" slot-scope="props">
+          <div class="notify notify--success">
+            <div class="flex items-center text-white font-semibold">
+              <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt />
+              {{props.item.text}}
+            </div>
+            <a class="close cursor-pointer" @click="props.close">
+              <font-awesome-icon class="mr-3 h-3 text-green-200 text-xs" :icon="['fas', 'times']" />
+            </a>
           </div>
-          <a class="close cursor-pointer" @click="props.close">
-            <font-awesome-icon class="mr-3 h-3 text-green-200 text-xs" :icon="['fas', 'times']" />
-          </a>
-        </div>
-      </template>
-    </notifications>
-
-</client-only>
-
-    <FloatButton />
+        </template>
+      </notifications>
+    </client-only>
   </div>
 </template>
 
@@ -50,17 +61,51 @@ import FloatButton from "~/components/user/float-button/right-bot-float-button.v
 import { mapMutations } from "vuex";
 export default {
   components: { navigation, FloatButton },
-  data:function(){
-    return{
-      apicall:true,
-    }
+  data: function() {
+    return {
+      loaderFlag: true
+    };
   },
+  created() {
+    
+  },
+  // layout (context) {
+  //   this.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
+  //   return this.loaderFlag
+  // },
   mounted() {
-    console.log(this.$device.isMobile);
+
+    let that  = this
+    setInterval(function(){
+      that.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
+      // console.log("loaderFlag:", that.loaderFlag )
+       }, 10);
+       
+    //  this.loaderFlag = false;
+
+    // if (window.$nuxt.$cookies.get("loaderFlag")) {
+    //   this.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
+    // }
+    
+
+    // this.loaderFlag = this.$store.state.loaderStorage.loaderFlag;
+
+    // window.$nuxt.$cookies.set("loaderFlag",true)
+
+    console.log("mymobile:",this.$device.isMobile);
     if (this.$device.isMobile) {
       this.toggleLeftMenu();
     }
   },
+
+  // watch: {
+  //   name(newName) {
+  //     if (window.$nuxt.$cookies.get("loaderFlag")) {
+  //       this.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
+  //     }
+  //   }
+  // },
+
   methods: {
     ...mapMutations({
       toggleLeftMenu: "usermenu/toggleLeftMenu"

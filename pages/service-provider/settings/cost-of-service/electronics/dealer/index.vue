@@ -3,19 +3,19 @@
     <div>
         <div class="hidden xl:flex justify-between">
           <div class="flex">
-            <button class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza">+ Add new Part</button>
-            <select class="field field--border-light mr-1 h-12">
+            <button class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza" @click="addfileld">+ Add new Part</button>
+            <!-- <select class="field field--border-light mr-1 h-12">
               <option>Category</option>
             </select>
             <select class="field field--border-light mr-1 h-12">
               <option>Subcategory</option>
-            </select>
+            </select> -->
           </div>
           <div>
             <div
               class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center"
             >
-              <div class="h-12 relative w-10">
+              <!-- <div class="h-12 relative w-10">
                 <font-awesome-icon
                   class="ml-1 h-4 text-gray-400 absolute-center-h-v"
                   :icon="['fas', 'search']"
@@ -26,7 +26,7 @@
               class="bg-white outline-none h-8 text-gray-800 pr-3 border-gray"
               v-model="searchTerm"
               v-on:input="search"
-            />
+            /> -->
               <!-- <input
                 placeholder="search users"
                 class="bg-white outline-none h-12 text-gray-800 pr-3"
@@ -130,30 +130,30 @@
             <td class="text-left w-32 p-1 border-b border-gray-400">Manufacturer</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-10"  />
+                <input class="field h-10" :value="unit_stock" @change="change_unit_stock" />
               </div>
             </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-10"  />
+                <input class="field h-10" :value="price" @change="change_price"  />
               </div>
             </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-10"  />
+                <input class="field h-10" :value="package2" @change="change_package"  />
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">Product</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
-                <input class="field h-10"  />
+                <input class="field h-10" :value="availability" @change="change_availability"  />
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Category</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Subcategory</td>
           </tr>
-          <tr class="flex w-full" >
+          <!-- <tr class="flex w-full" >
             <td class="text-left w-24 p-1 border-b border-gray-400">Name</td>
             <td class="text-left w-16 p-1 border-b border-gray-400">2D</td>
             <td class="text-left w-16 p-1 border-b border-gray-400">3D</td>
@@ -182,17 +182,83 @@
             <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Category</td>
             <td class="text-left w-32 p-1 border-b border-gray-400">Subcategory</td>
-          </tr>
+          </tr> -->
         </simple-table>
   </div>
 
 </template>
 <script>
 import SimpleTable from '~/components/reusables/Table.vue'
+import apiService from "~/apiService/have_token.js";
 export default {
   layout:'user',
   components: {
     SimpleTable
+  },
+  data:function(){
+    return{
+      geturl2: "/api/service_provider/setting/cost_of_service/electronics/update_dealer",
+      geturl: "/api/service_provider/setting/cost_of_service/electronics/get_dealer",
+      articleArray: [],
+      randomNumber: {},
+      unit_stock: null,
+      price: null,
+      package2: null,
+      availability: null,
+    }
+  },
+  mounted(){
+    let senddata = {
+      method: "get",
+      url: this.geturl,
+      data: null
+    };
+    apiService(senddata, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArray = Object.values(response.data);
+
+      this.unit_stock = this.articleArray[0].unit_stock;
+      this.price = this.articleArray[0].price;
+      this.package2 = this.articleArray[0].package;
+      this.availability = this.articleArray[0].availability;
+    })
+
+  },
+  methods:{
+    addfileld(){
+      alert("add");
+       const formData = new FormData();
+      formData.set("unit_stock", this.unit_stock);
+      formData.set("price", this.price);
+      formData.set("package", this.package2);
+      formData.set("availability", this.availability);
+      let sendData2 = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+
+      apiService(sendData2, response => {
+        console.log(response);
+        alert("Successful!!!")
+
+      });
+
+    },
+    change_unit_stock(evt){
+      this.unit_stock = evt.target.value
+    },
+    change_price(evt){
+      this.price = evt.target.value
+    },
+    change_package(evt){
+      this.package2 = evt.target.value
+    },
+    change_availability(evt){
+      this.availability = evt.target.value
+    },
+
   }
 }
 </script>

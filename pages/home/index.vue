@@ -255,15 +255,14 @@ export default {
     TopHeader
   },
   data() {
-    return {
-      
-    }
+    return {};
   },
-  mounted() {
-
+  created() {
+    // localStorage.setItem("loaderFlag", true)
+    // window.$nuxt.$cookies.set("loaderFlag", true);
+    // console.log("loaderFlag:", localStorage.getItem("loaderFlag"));
   },
-  methods: {
-
-  }
+  mounted() {},
+  methods: {}
 };
 </script>

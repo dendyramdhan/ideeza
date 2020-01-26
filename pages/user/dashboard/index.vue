@@ -298,7 +298,7 @@ export default {
       };
 
       apiServiceWithToken(getallprojectsData, response => {
-        console.log(response.data);
+        console.log("getallprojectsData :", response.data);
         console.log(response.data["success"]);
         if (response.data["success"] == true) {
           this.lengthofprojects = response.data["data"].length;
