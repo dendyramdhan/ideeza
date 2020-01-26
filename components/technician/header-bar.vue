@@ -32,7 +32,7 @@
     <!--Menu-->
     <div class="flex items-center justify-end">
       <nuxt-link
-        to="/user/cart/overview"
+        to="/technician/cart/overview"
         class="cart-button bg-transparent rounded-full h-10 w-10 flex items-center justify-center mr-5 hidden lg:flex"
       >
         <img class="cart-icon" src="https://img.icons8.com/ios-glyphs/50/ffffff/shopping-cart.png" />
@@ -67,7 +67,7 @@
         />
         <div class="help-alert text-xs" v-show="showHelpAlert">
           <nuxt-link
-            to="/user/help"
+            to="/technician/help"
             class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
           >
             <div class="px-2 w-full flex items-center">
@@ -76,7 +76,7 @@
           </nuxt-link>
 
           <nuxt-link
-            to="/user/support"
+            to="/technician/support"
             class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
           >
             <div class="px-2 w-full flex items-center">
@@ -100,7 +100,7 @@
         </div>
         <div class="help-alert text-xs" v-show="showProfileAlert">
           <nuxt-link
-            to="/user/profile"
+            to="/technician/profile"
             class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
           >
             <div class="px-2 w-full flex items-center">
