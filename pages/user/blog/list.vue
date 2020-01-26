@@ -77,7 +77,7 @@
           <tr v-for="(tabledata, index) in articleArray" v-if="start < index && index < end ">
             <td class="font-semibold">{{tabledata.article}}</td>
             <td class>
-               {{ts.toLocaleDateString(tabledata.timestamp)}}
+              {{ts.toLocaleDateString(tabledata.timestamp)}}
               <!-- <span v-if="tabledata.flag"></span>
               <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
             </td>
@@ -91,8 +91,8 @@
               </p>
               <p v-else-if="tabledata.flag == 3  ">
                 <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
-              </p> -->
-               <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+              </p>-->
+              <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
             </td>
 
             <td class="text-gray-500">
@@ -114,12 +114,12 @@
               <font-awesome-icon
                 class="mr-1 h-3 cursor-pointer hover:text-gray-800"
                 :icon="['fas', 'check']"
-                 @click="setstatus(tabledata.id,'Active')"
+                @click="setstatus(tabledata.id,'Active')"
               />
               <font-awesome-icon
                 class="mr-1 h-3 cursor-pointer hover:text-gray-800"
                 :icon="['fas', 'times']"
-                 @click="setstatus(tabledata.id,'Close')"
+                @click="setstatus(tabledata.id,'Close')"
               />
             </td>
             <td></td>
@@ -164,7 +164,7 @@
         </div>
       </div>
     </div>
-    <!-- {{Math.ceil(counter)}}   :style="{'position':'absolute','top':apiwidth,'left':apiheight}" v-if="apicall"    --> 
+    <!-- {{Math.ceil(counter)}}   :style="{'position':'absolute','top':apiwidth,'left':apiheight}" v-if="apicall"    -->
     <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:40%;left:40%" v-if="loaderFlag" width="15%"/> -->
   </div>
 </template>
@@ -179,9 +179,8 @@ export default {
   name: "blog-list",
   data: function() {
     return {
-      loaderFlag:true,
-      apiwidth:null,
-      apiheight:null,
+      apiwidth: null,
+      apiheight: null,
       ts: new Date(),
       searchTerm: "",
       articles: articles,
@@ -195,21 +194,21 @@ export default {
       start: this.$store.state.userBlogStore.offset * 5 - 1,
       end: this.$store.state.userBlogStore.offset * 5 + 5,
       counterarray: [],
-       articleArrayaxios: [],
+      articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
       geturl: "/api/get_blogs",
-      geturl2: "/api/blog/change_status",
+      geturl2: "/api/blog/change_status"
     };
   },
-  mounted(){
+  mounted() {
     // (document.body.offsetWidth)/2
     // (document.body.offsetHeight)/2
     let width = window.innerWidth;
     let height = window.innerHeight;
 
-    this.apiwidth = width/2;
-    this.apiheight = height/2;
+    this.apiwidth = width / 2;
+    this.apiheight = height / 2;
 
     this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
@@ -219,12 +218,12 @@ export default {
     };
 
     apiService(sendData, response => {
-      if (response != null) {
-         this.apicall = false;
-      } else {
-         this.apicall = true;
-      }
-     
+      // if (response != null) {
+      //   this.apicall = false;
+      // } else {
+      //   this.apicall = true;
+      // }
+
       console.log(response.data);
       this.randomNumber = response.data;
       this.articleArrayaxios = Object.values(response.data.data);
@@ -235,23 +234,25 @@ export default {
       });
 
       this.length = this.articleArrayrout.length / 5 - 1;
-      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
-  
+      this.counter =
+        this.articleArrayrout.length /
+        this.$store.state.TechnicianProjectStore.scale;
+
       let i = 1;
-      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      let endd =
+        this.articleArrayrout.length /
+          this.$store.state.TechnicianProjectStore.scale +
+        1;
       //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
         this.counterarray.push(i);
       }
     });
   },
-  created: function() {
-    
- 
-  },
+  created: function() {},
   methods: {
-    setstatus(userid, status){
-          const formData = new FormData();
+    setstatus(userid, status) {
+      const formData = new FormData();
       formData.set("id", userid);
       formData.set("status", status);
       let sendData = {
@@ -261,8 +262,34 @@ export default {
       };
       apiService2(sendData, response => {
         console.log(response);
+        this.articleArray = [];
+        let sendData5 = {
+          method: "get",
+          url: this.geturl,
+          data: null
+        };
+
+        apiService(sendData5, response5 => {
+          console.log(response5.data);
+          this.randomNumber = response5.data;
+          this.articleArrayaxios = Object.values(response5.data.data);
+
+          this.articleArrayaxios.map(item => {
+            this.articleArrayrout.push(item);
+            this.articleArray.push(item);
+          });
+        });
+
+        // this.articleArray = [];
+        // this.articleArrayrout.map((item,key) => {
+        //   if (item.id == userid) {
+        //     this.articleArray[key].state = status;
+        //     console.log("status:", status)
+        //     console.log("this status:",  this.articleArray[key].state)
+        //   } 
+        // });
       });
-      },
+    },
     changeshowperiod(e) {
       this.articleArray = [];
       if (e.target.value == "all") {
@@ -280,7 +307,6 @@ export default {
           }
         });
         this.selectedkey(1);
-         
       }
     },
     search(e) {
@@ -301,7 +327,6 @@ export default {
       });
 
       console.log("search array :", this.articleArray, e.target.value);
-
     },
     sort: function(s) {
       console.log("sort key :", s, this.articleArray);
@@ -337,7 +362,7 @@ export default {
           break;
         case "Date":
           article_list.sort(function(a, b) {
-            var ts= new Date()
+            var ts = new Date();
             var x = ts.toLocaleDateString(a.timestamp).toLowerCase();
             var y = ts.toLocaleDateString(b.timestamp).toLowerCase();
             if (x < y) {

@@ -7,7 +7,7 @@
           <div class="flex items-center">
             <div>
               <div class="text-sm">Reviews</div>
-              <div class="text-3xl font-bold">56</div>
+              <div class="text-3xl font-bold">20</div>
             </div>
             <div class="absolute bottom-0 right-0 m-5">
               <img src="~/static/images/chat-icon.png" class="h-8" alt="chat-icon" />
@@ -18,7 +18,7 @@
           <div class="flex items-center">
             <div>
               <div class="text-sm">Money earned</div>
-              <div class="text-3xl font-bold">56</div>
+              <div class="text-3xl font-bold">350 $</div>
             </div>
             <div class="absolute bottom-0 right-0 m-5">
               <img src="~/static/images/money.png" class="h-8" alt="chat-icon" />
@@ -29,7 +29,7 @@
           <div class="flex items-center">
             <div>
               <div class="text-sm">Opened orders</div>
-              <div class="text-3xl font-bold">56</div>
+              <div class="text-3xl font-bold">25</div>
             </div>
             <div class="absolute bottom-0 right-0 m-5">
               <img src="~/static/images/order-box.png" class="h-8" alt="chat-icon" />
@@ -40,7 +40,7 @@
           <div class="flex items-center">
             <div>
               <div class="text-sm">Stars</div>
-              <div class="text-3xl font-bold">56</div>
+              <div class="text-3xl font-bold">15</div>
             </div>
             <div class="absolute bottom-0 right-0 m-5">
               <img src="~/static/images/star-icon.png" class="h-8" alt="chat-icon" />
