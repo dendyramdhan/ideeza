@@ -14,6 +14,7 @@
             </div>
           </div>
         </div>
+        
         <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
           <div class="flex items-center">
             <div>
