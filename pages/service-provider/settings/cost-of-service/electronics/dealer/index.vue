@@ -4,12 +4,12 @@
         <div class="hidden xl:flex justify-between">
           <div class="flex">
             <button class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza" @click="addfileld">+ Add new Part</button>
-            <!-- <select class="field field--border-light mr-1 h-12">
+            <select class="field field--border-light mr-1 h-12">
               <option>Category</option>
             </select>
             <select class="field field--border-light mr-1 h-12">
               <option>Subcategory</option>
-            </select> -->
+            </select>
           </div>
           <div>
             <div
