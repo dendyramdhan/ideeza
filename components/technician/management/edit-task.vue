@@ -343,6 +343,7 @@ export default {
 
       apiService(sendData2, response => {
         console.log(response.data);
+        window.location.reload();
       });
     },
     deleteassignuser(myuserid, taskid) {
@@ -358,6 +359,7 @@ export default {
 
       apiService(sendData3, response => {
         console.log(response.data);
+        window.location.reload();
       });
     },
     taskname(event) {
@@ -413,6 +415,7 @@ export default {
       apiService(sendData2, response => {
         console.log(response.data);
         this.close();
+        window.location.reload();
       });
     },
     close() {

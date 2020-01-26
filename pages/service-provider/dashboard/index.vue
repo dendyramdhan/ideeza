@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="md:flex items-center justify-between">
-      <h1 class="text-2xl font-bold mr-5">Good Morning Chan!</h1>
+      <h1 class="text-2xl font-bold mr-5">Good Morning {{firstname}}!</h1>
       <div class="md:flex justify-end">
         <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
           <div class="flex items-center">
@@ -122,6 +122,7 @@ export default {
     SimpleTable
   },
   mounted() {
+    this.firstname = window.$nuxt.$cookies.get('firstname');
     new VanillaCalendar({
       selector: "#myCalendar"
     });
@@ -166,6 +167,7 @@ export default {
   },
   data() {
     return {
+      firstname:null,
       date: new Date(),
       attributes: [
         {

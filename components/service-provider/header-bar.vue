@@ -148,6 +148,7 @@ export default {
       showProfileAlert: false,
       avatar: "",
       avatar_base_url: process.env.avatar_base_url,
+      name:null,
     };
   },
   computed: {
