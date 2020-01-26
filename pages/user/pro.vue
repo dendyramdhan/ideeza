@@ -426,7 +426,18 @@
           currentMenu: {},
           storeCurrentMenu: null,
           menuChildren: null,
-          searchVal: null
+          searchVal: null,
+          temporaryMenu: null
+        }
+      },
+      watch: {
+        searchVal(val){
+          if(val !== null&&val !== ''){
+            this.searchMenu(val)
+          }
+          else{
+            this.$forceUpdate()
+          }
         }
       },
       computed: {
@@ -437,8 +448,11 @@
           currentRightMenu : state => state.appMenu.currentMenu 
         })
       },
+      created() {
+        this.temporaryMenu = Object.assign({},this.menuData)
+      },
       mounted() {
-        this.addMenuState(this.menuData.electronic, 1);
+        this.addMenuState(this.menuData.cover, 1);
         console.log(this.$route.path)
         console.log(this.$route.path.includes('/user/pro/app'))
       },
@@ -481,11 +495,19 @@
               }
             });
             this.currentMenu.children = _.flattenDeep(results);
+            console.log(results)
+            this.menuData.app.children = _.flattenDeep(results);
+            this.menuData.code.children = _.flattenDeep(results);
+            this.menuData.cover.children = _.flattenDeep(results);
+            this.menuData.electronic.children = _.flattenDeep(results);
           }
         },
         recursiveSearch(obj, val, results){
           _.filter(obj.children, (obj) => {
             if(!_.isNil(obj.children)) {
+              if(_.toLower(obj.name).includes(val.toLowerCase())){
+                results.push(obj)  
+              }
               this.recursiveSearch(obj, val, results)
             } else if(_.toLower(obj.name).includes(val.toLowerCase())){
               results.push(obj)

@@ -3,13 +3,9 @@
     <div>
         <div class="hidden xl:flex justify-between">
           <div class="flex">
-            <button class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza" @click="addfileld">+ Add new Part</button>
-            <!-- <select class="field field--border-light mr-1 h-12">
-              <option>Category</option>
-            </select>
-            <select class="field field--border-light mr-1 h-12">
-              <option>Subcategory</option>
-            </select> -->
+            <nuxt-link class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza" to="/service-provider/settings/cost-of-service/electronics/add-part">
+             + Add new Part
+           </nuxt-link>
           </div>
           <div>
             <div
@@ -99,9 +95,9 @@
           <template v-slot:header>
           </template>
           <template v-slot:th>
-            <th class="text-left w-24 p-1">Name</th>
-            <th class="text-left w-16 p-1">2D</th>
-            <th class="text-left w-16 p-1">3D</th>
+            <th class="text-left w-32 p-1">Name</th>
+            <th class="text-left w-20 p-1">2D</th>
+            <th class="text-left w-20 p-1">3D</th>
             <th class="text-left w-32 p-1">Manufacturer</th>
             <th class="text-left w-32 p-1">Unit in stock</th>
             <th class="text-left w-32 p-1">Price</th>
@@ -124,10 +120,27 @@
                 </th> -->
           </template>
           <tr class="flex w-full" >
-            <td class="text-left w-24 p-1 border-b border-gray-400">Name</td>
-            <td class="text-left w-16 p-1 border-b border-gray-400">2D</td>
-            <td class="text-left w-16 p-1 border-b border-gray-400">3D</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">Manufacturer</td>
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <div class="field-input flex-grow">
+                <input class="field h-10"  />
+              </div>
+            </td>
+            <td class="text-left w-20 p-1 border-b border-gray-400">
+              <button @click="$refs.upload2D.click()" class="trigger">Uploads</button>
+              <input style="display: none;"  type="file" ref="upload2D"/>
+            </td>
+            <td class="text-left w-20 p-1 border-b border-gray-400">
+              <button @click="$refs.upload3D.click()" class="trigger">Uploads</button>
+              <input style="display: none;"  type="file" ref="upload3D"/>
+            </td>
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <select name="manufacturerList">
+                <option value="">Manufacturer 1</option>
+                <option value="">Manufacturer 2</option>
+                <option value="">Manufacturer 3</option>
+                <option value="">Manufacturer 4</option>
+              </select>
+            </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
                 <input class="field h-10" :value="unit_stock" @change="change_unit_stock" />
@@ -150,14 +163,49 @@
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">Category</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">Subcategory</td>
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <select name="category">
+                <option value="">Electronics</option>
+                <option value="">Code</option>
+                <option value="">Cover</option>
+              </select>
+            </td>
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <select name="subCategory">
+                <option value="">Placement</option>
+                <option value="">Show Top Layer</option>
+                <option value="">Show Bottom Layer</option>
+                <option value="">VR</option>
+                <option value="">Add Text</option>
+                <option value="">Create Routes</option>
+                <option value="">Get Data</option>
+                <option value="">Send Data</option>
+                <option value="">Save Board</option>
+              </select>
+            </td>
           </tr>
-          <!-- <tr class="flex w-full" >
-            <td class="text-left w-24 p-1 border-b border-gray-400">Name</td>
-            <td class="text-left w-16 p-1 border-b border-gray-400">2D</td>
-            <td class="text-left w-16 p-1 border-b border-gray-400">3D</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">Manufacturer</td>
+          <tr class="flex w-full" >
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <div class="field-input flex-grow">
+                <input class="field h-10"  />
+              </div>
+            </td>
+            <td class="text-left w-20 p-1 border-b border-gray-400">
+              <button @click="$refs.upload2D.click()" class="trigger">Uploads</button>
+              <input style="display: none;"  type="file" ref="upload2D"/>
+            </td>
+            <td class="text-left w-20 p-1 border-b border-gray-400">
+              <button @click="$refs.upload3D.click()" class="trigger">Uploads</button>
+              <input style="display: none;"  type="file" ref="upload3D"/>
+            </td>
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <select name="manufacturerList">
+                <option value="">Manufacturer 1</option>
+                <option value="">Manufacturer 2</option>
+                <option value="">Manufacturer 3</option>
+                <option value="">Manufacturer 4</option>
+              </select>
+            </td>
             <td class="text-left w-32 p-1 border-b border-gray-400">
               <div class="field-input flex-grow">
                 <input class="field h-10"  />
@@ -180,9 +228,27 @@
               </div>
             </td>
             <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">Category</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">Subcategory</td>
-          </tr> -->
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <select name="category">
+                <option value="">Electronics</option>
+                <option value="">Code</option>
+                <option value="">Cover</option>
+              </select>
+            </td>
+            <td class="text-left w-32 p-1 border-b border-gray-400">
+              <select name="subCategory">
+                <option value="">Placement</option>
+                <option value="">Show Top Layer</option>
+                <option value="">Show Bottom Layer</option>
+                <option value="">VR</option>
+                <option value="">Add Text</option>
+                <option value="">Create Routes</option>
+                <option value="">Get Data</option>
+                <option value="">Send Data</option>
+                <option value="">Save Board</option>
+              </select>
+            </td>
+          </tr>
         </simple-table>
   </div>
 

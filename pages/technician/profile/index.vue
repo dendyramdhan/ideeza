@@ -20,6 +20,12 @@
                     New York, USA
                   </div>
                 </div>
+                <nuxt-link to="/technician/settings/general">
+                  <font-awesome-icon
+                  class="mr-1 h-4 text-sm inline-block cursor-pointer float-right"
+                  :icon="['fas', 'cog']"
+                  />
+                </nuxt-link>
               </div>
 
               <!--Agency Details-->
@@ -101,7 +107,7 @@
                   <img class="mr-10" src="~/static/images/Layercar.png">
                   <div>
                     <h1 class="text-black text-xl font-semibold">Lamborghini<br>
-                      Aventado Project</h1>
+                    Aventado Project</h1>
                     <h3 class="text-gray-600 text-lg font-semibold">
                       Electronics + Cover
                     </h3>
@@ -130,7 +136,7 @@
                   <img class="mr-10" src="~/static/images/Layercar.png">
                   <div>
                     <h1 class="text-black text-xl font-semibold">Lamborghini<br>
-                      Aventado Project</h1>
+                    Aventado Project</h1>
                     <h3 class="text-gray-600 text-lg font-semibold">
                       Electronics + Cover
                     </h3>
@@ -162,7 +168,7 @@
             <!--Business Managers-->
             <div class="p-5 bg-white mt-10 lg:mt-0 shadow-lg">
               <h1 class="font-semibold text-gray-800 pb-3 border-b border-solid border-gray-300">Business
-                Review Expertise</h1>
+              Review Expertise</h1>
               <div class="font-semibold text-lg bg-white lg:p-1 xl:p-5">
                 <div class="mt-5">Fabrication</div>
                 <div class="mt-5">Assembly</div>
@@ -205,20 +211,20 @@
 </script>
 
 <style scoped>
-  p {
-    @apply mt-5 text-base font-semibold text-gray-500;
-  }
+p {
+  @apply mt-5 text-base font-semibold text-gray-500;
+}
 
-  .product-history-tile {
-    @apply pt-5 pb-5 border-b border-solid border-gray-300;
-  }
+.product-history-tile {
+  @apply pt-5 pb-5 border-b border-solid border-gray-300;
+}
 
-  .product-history-tile:last-child {
-    @apply border-b-0;
-  }
+.product-history-tile:last-child {
+  @apply border-b-0;
+}
 
-  .feed-back-container {
-    width: 200px;
-  }
+.feed-back-container {
+  width: 200px;
+}
 
 </style>

@@ -12,18 +12,24 @@
         class="track-container md:mx-auto p-5 lg:p-10 my-10 border border-solid border-ideeza bg-white relative"
       >
         <nuxt-child></nuxt-child>
-
-        <div v-if="trackStep === 0" class="mt-20 flex justify-center items-center">
-          <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt />
-          <div class="mx-5">
-            <span class="font-semibold block text-lg">John Snow</span>
-            <span class="text-sm text-gray-500 block">Project Manager</span>
+        <div v-if="trackStep === 0" class="mt-20 flex items-center">
+          <div class="flex-1 inline-flex">
+            <nuxt-link tag="button" to="/user/order-tracking/timeline" class="bg-ideeza text-white font-semibold rounded-lg px-10 py-6 z-10">Timeline</nuxt-link>
+            <nuxt-link tag="button" to="/user/order-tracking/making-product" class="bg-white border text-ideeza-dark font-semibold rounded-lg px-16 py-6 z-0 -ml-3">List</nuxt-link>
           </div>
-          <nuxt-link to="/user/profile">
-            <button
-              class="btn btn-normal shadow-lg text-white btn-ideeza-gradient btn-text-bold btn--rounded px-8 py-4 text-lg"
-            >Contact</button>
-          </nuxt-link>
+          <div class="justify-center items-center flex">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt />
+            <div class="mx-5">
+              <span class="font-semibold block text-lg">John Snow</span>
+              <span class="text-sm text-gray-500 block">Project Manager</span>
+            </div>
+            <nuxt-link to="/user/profile">
+              <button
+                class="btn btn-normal shadow-lg text-white btn-ideeza-gradient btn-text-bold btn--rounded px-8 py-4 text-lg"
+              >Contact</button>
+            </nuxt-link>
+          </div>
+          <div class="flex-1"></div>
         </div>
 
         <div v-if="trackStep === 2" class="mt-10 flex flex-col justify-center items-center">

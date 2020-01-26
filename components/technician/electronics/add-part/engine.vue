@@ -18,8 +18,8 @@
   import Engine from '@ideeza/vue3dengine'
   import {
     TQFNdata,
-    // FemaleHeaderdata,
-    // R0805data
+    FemaleHeaderdata,
+    R0805data
   } from '@ideeza/vue3dengine/src/engines/electronic_tech_part'
     export default {
       name: "3dengine",
@@ -28,10 +28,10 @@
       },
       data() {
         return {
-          initData: 'TQFN',   // name of one package - TQFN, FEMALEHEADER, R0805
-          dataForm: TQFNdata, // all the informations from form
-          toggle3d: true,     // show 3d
-          toggle2d: false,    // show 2d
+          initData: 'R0805',   // name of one package - TQFN, FEMALEHEADER, R0805
+          dataForm: R0805data, // all the informations from form
+          toggle3d: false,     // show 3d
+          toggle2d: true,    // show 2d
           togglesc: false,    // show schematic
           togglechecker: false, // show position checker
         }

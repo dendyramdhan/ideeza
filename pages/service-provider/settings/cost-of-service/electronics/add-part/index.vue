@@ -37,7 +37,7 @@
       </div>
 
       <AddPartSearch
-        ref="addPartSearch"
+        @select="addPartSelect=true"
         class="mt-10"
         v-if="step === 0 && !addPartSelect && !addPartSelectType"
       />
@@ -91,6 +91,7 @@ import AddGeneral from "~/components/technician/electronics/add-part/add-general
 import GeneralReview from "~/components/technician/electronics/add-part/general-review.vue";
 import AddFinish from "~/components/technician/electronics/add-part/add-finish.vue";
 export default {
+  layout: 'user',
   name: "index",
   data: function() {
 
@@ -102,8 +103,6 @@ export default {
       addPartSelectType: false,
     };
   },
-
-
 
   components: {
     TextField,
@@ -133,24 +132,13 @@ export default {
     },
     onNext() {
       // alert(this.step);
-      if(this.step==0){
-         var selPart = this.$refs.addPartSearch.selectedPart
-        console.log("selected part : ", selPart)
-        if(!selPart)return;
-
-      }
-      
-
-       if (this.step < 6) this.step += 1;
+      if (this.step < 6) this.step += 1;
     },
     onFinish(){
+
       console.log("finish")
 
     }
-  },
-  watch: {
-   
-
   }
 
 };
