@@ -50,7 +50,7 @@
 
     <div class="menu-item">
       <nuxt-link to="/technician/tasklist">
-        <TaskIcon class="fill-current mr-5" />Task List
+        <TaskIcon class="fill-current mr-5" />My Notes
       </nuxt-link>
     </div>
   </div>

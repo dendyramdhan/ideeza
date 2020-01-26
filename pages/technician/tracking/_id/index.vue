@@ -21,7 +21,7 @@
             />
             <label>Michael Scott</label>
           </div>
-          <button class="bg-ideeza px-3 py-2 text-white">Complete project</button>
+          <button @click.self="completeTask=true" class="bg-ideeza px-3 py-2 text-white">Complete project</button>
         </div>
         <div class="md:flex">
           <div class="w-4/6 bg-white p-5 border-ideeza border mb-5 rounded mr-2">

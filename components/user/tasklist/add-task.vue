@@ -50,17 +50,33 @@
         <div class="md:w-2/3 md:pl-10">
           <h1 class="font-semibold text-lg block">Deadline</h1>
           <!--Calendar-->
-          <vc-calendar
-            v-model="date"
-            @dayclick="selectDate"
+          <!-- <vc-calendar
+            v-model="dateRange"
+            @change="taskdeadline"
             mode="range"
-            value
+            :value="dateRange"
+            :popover="{ placement: 'bottom', visibility: 'click' }"
             class="mx-auto mt-5"
             color="pink"
             is-expanded
             :attributes="attributes"
             :theme="theme"
-          />
+          />-->
+          <vc-date-picker
+            v-model="dateRange"
+            color="pink"
+            mode="range"
+            :value="dateRange"
+            is-expanded
+            is-inline
+            @change="taskdeadline"
+            :theme="theme"
+          >
+            <font-awesome-icon
+              class="ml-2 h-4 cursor-pointer text-gray-800"
+              :icon="['fas', 'calendar-alt']"
+            />
+          </vc-date-picker>
         </div>
       </div>
 
@@ -88,17 +104,18 @@
 <script>
 import FileField from "~/components/form/file-field.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
+import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   name: "add-task",
   data: function() {
     return {
       date: new Date(),
       requestAddTasker: false,
-      dateRange: new Date().setHours(0, 0, 0, 0),
+      // dateRange: new Date().setHours(0, 0, 0, 0),
+      dateRange: new Date().toISOString().slice(0, 10),
       taskLink: null,
       taskName: null,
       taskDescription: null,
-      taskDeadLine: null,
       taskTaskers: null,
       taskAttachments: null,
       showMembers: false,
@@ -125,6 +142,11 @@ export default {
     InvitePopup
   },
   methods: {
+    taskdeadline(event) {
+      this.dateRange = event.target.value;
+      console.log("datapicker:", this.dateRange);
+    },
+
     close() {
       this.$emit("onClose");
     },
@@ -132,33 +154,39 @@ export default {
       this.showMembers = false;
     },
     addNewTask() {
-      var r = confirm("Do you want to add new task?");
+      var r = confirm("Do you want to add new note?");
       if (r == true) {
-        this.task = {
-          link: this.taskLink,
-          name: this.taskName,
-          description: this.taskDescription,
-          deadline: this.dateRange
-        };
-        const data = JSON.stringify(this.task);
-        alert(data);
-
+        let start = new Date(this.dateRange.start).getTime();
+        let end = new Date(this.dateRange.end).getTime();
+        let timestamp = new Date().setHours(0, 0, 0, 0);
         var addTaskFormData = new FormData();
         addTaskFormData.set("link", this.taskLink);
-        addTaskFormData.set("name", this.taskName);
+        addTaskFormData.set("title", this.taskName);
         addTaskFormData.set("description", this.taskDescription);
-        addTaskFormData.set("deadline", this.dateRange);
-        window.location.reload();
+        addTaskFormData.set("timestamp", timestamp);
+        addTaskFormData.set("start", start);
+        addTaskFormData.set("end", end);
+        // addTaskFormData.append("attachments", value, filename);
+
+        let addTaskurl = "/api/task/add_new";
+        let addTaskData = {
+          method: "post",
+          url: addTaskurl,
+          data: addTaskFormData
+        };
+
+        apiServiceWithToken(addTaskData, response => {
+          console.log(response);
+          if (response.data["success"] == true) {
+            window.location.reload();
+          }
+        });
       } else {
       }
     },
     onAddTaskers() {
       this.requestAddTasker = true;
       // alert();
-    },
-    selectDate(date) {
-      alert(date.dateTime);
-      this.dateRange = date.dateTime;
     }
   }
 };

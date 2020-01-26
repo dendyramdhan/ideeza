@@ -108,10 +108,10 @@
 
             <div class="py-10 px-5 text-gray-600" v-if="tab===0">
               <div class="lg:flex" v-for="Project in articleArray">
-                <div
-                  class="lg:flex"
+                <span
+                  class="lg:flex "
                   v-if="Project.project_id == $route.query.id "
-                >{{Project.description}}</div>
+                >{{Project.description}}</span>
               </div>
             </div>
             <div class="py-10 px-5 text-gray-600 w-full">
@@ -123,7 +123,7 @@
                   rows="10"
                   class="w-full border-light-gray border border-solid p-3"
                   v-if="Project.project_id == $route.query.id "
-                  @change="saveDescription"
+                  @change="changedescription"
                 >{{Project.description}}</textarea>
               </div>
 
@@ -224,42 +224,49 @@ export default {
     onClickOutside(event, el) {
       this.focus = false;
     },
+    changedescription(e){
+      this.description = e.target.value;
+    },
     saveDescription(e) {
-      if (this.description === "") {
-        this.$notify({
-          group: "error",
-          type: "error",
-          text: "Please fill in the description"
-        });
-      } else {
-        this.tab = 0;
-        this.description = e.target.value;
-        console.log("change description:",this.description);
+      console.log("change description:",this.description);
         console.log("change idid description:",this.$route.query.id);
 
         let rouu = this.$route.query.id
-        let description = e.target.value;
+        // let description = e.target.value;
 
         const formData = new FormData();
-        formData.set("project_id", rouu);
-        formData.set("description", description);
-        let sendData = {
-          method: "post",
-          url: this.geturl2,
-          data: formData
-        };
-        apiService2(sendData, response => {
+      formData.set("projectid", rouu);
+      formData.set("description", this.description);
+      let sendData = {
+        method: "post",
+        url: this.geturl2,
+        data: formData
+      };
+      apiService(sendData, response => {
+        console.log(response);
 
-          console.log(response);
-          this.articleArray.map(item=>{
-            if(item.project.id == this.$route.query.id)
+        this.articleArray.map(item=>{
+            if(item.project_id == this.$route.query.id)
               {
-                item.description = e.target.value
+                item.description = this.description
               }
           })
 
-        });
-      }
+      });
+      
+         this.tab = 0;
+
+      // if (this.description === "") {
+      //   this.$notify({
+      //     group: "error",
+      //     type: "error",
+      //     text: "Please fill in the description"
+      //   });
+      // } else {
+       
+      //   // this.description = e.target.value;
+        
+      // }
     },
     closeShareInternal() {
       this.internalShare = false;

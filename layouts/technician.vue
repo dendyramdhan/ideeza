@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import navigation from "~/components/user/header-bar.vue";
+import navigation from "~/components/technician/header-bar.vue";
 import { mapMutations } from "vuex";
 export default {
   components: { navigation },

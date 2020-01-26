@@ -2,8 +2,8 @@
   <div class="flex flex-col bg-white h-full shadow relative left-side-bar">
 
       <div class="p-10 flex justify-center items-center relative w-full  ">
-        <div @click="activeMenu='settings'" class="font-semibold mr-5 cursor-pointer" :class="{'text-ideeza underline': activeMenu === 'settings'}" >Settings</div>
-        <div @click="activeMenu='menu'" class="font-semibold cursor-pointer" :class="{'text-ideeza underline': activeMenu === 'menu'}" >Menu</div>
+        <div @click="activeMenu='settings'" class="font-semibold mr-5 cursor-pointer border-ideeza border px-3 py-1" :class="{'bg-ideeza text-white': activeMenu === 'settings'}" >Settings</div>
+        <div @click="activeMenu='menu'" class="font-semibold cursor-pointer border-ideeza border px-3 py-1" :class="{'bg-ideeza text-white': activeMenu === 'menu'}" >Menu</div>
       </div>
 
       <div class="relative w-full px-10" v-if="activeMenu === 'settings'">

@@ -213,14 +213,60 @@
 
           <!--Projects-->
           <div class="mt-5 flex flex-wrap" v-if="tabItem === 'projects'">
-            <div class="flex" v-for="project in projects">
-              <img
-                class="project-image"
-                v-for="product in project.products"
-                :src="project_image_url + product.product_image"
-                alt
-              />
+            <!--Public & Private Projects-->
+            <div class="tabs-container z-10 relative flex lg:mt-10">
+              <div
+                @click="tabChildItem='public'"
+                class="tab-item"
+                :class="{active: tabChildItem === 'public', 'border-bot': tabChildItem !== 'public'}"
+              >
+                Public
+              </div>
+
+              <div
+                @click="tabChildItem='private'"
+                class="tab-item"
+                :class="{active: tabChildItem === 'private', 'border-bot': tabChildItem !== 'private'}"
+              >
+                Private
+              </div>
             </div>
+            <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'public'">
+              <div class="flex">
+                <select class="border-0">
+                  <option>Owner</option>
+                  <option>Part of team</option>
+                </select>
+              </div>
+              
+              <div class="flex" v-for="project in projects">
+                <img
+                  class="project-image"
+                  v-for="product in project.products"
+                  :src="project_image_url + product.product_image"
+                  alt
+                />
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'private'">
+              <div class="flex">
+                <select class="border-0">
+                  <option>Owner</option>
+                  <option>Part of team</option>
+                </select>
+              </div>
+
+              <div class="flex" v-for="project in projects">
+                <img
+                  class="project-image"
+                  v-for="product in project.products"
+                  :src="project_image_url + product.product_image"
+                  alt
+                />
+              </div>
+            </div>
+
           </div>
 
           <!--Reviews-->
@@ -279,6 +325,7 @@ export default {
   data: function() {
     return {
       tabItem: "timeline",
+      tabChildItem: "public",
       focusMore: false,
       showComments: false,
       general_contactinfos: {},

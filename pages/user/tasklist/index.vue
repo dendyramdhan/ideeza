@@ -4,7 +4,7 @@
     <LeftMenu />
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:pt-16 lg:px-2">
+    <div class="flex-grow lg:pt-16 lg:px-10">
       <div
         class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0"
       >
@@ -118,7 +118,7 @@ export default {
       ],
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
-      id: 0,
+      id: 0
     };
   },
   computed: {
@@ -161,11 +161,6 @@ export default {
     };
   },
   mounted() {
-    this.tasks.map(item => {
-      this.week = item.date;
-      var s = new Date(this.week);
-      this.week = s.getWeek();
-    });
     var d = new Date();
     d.setHours(0, 0, 0, 0);
     this.filter_date = Number(d);
@@ -190,6 +185,12 @@ export default {
       }
     });
 
+    this.tasks.map(item => {
+      this.week = item.date;
+      var s = new Date(this.week);
+      this.week = s.getWeek();
+    });
+
     let getloginhistory = "/api/setting/login_history";
 
     let getloginhistoryData = {
@@ -197,6 +198,11 @@ export default {
       url: getloginhistory,
       data: null
     };
+    apiServiceWithToken(getloginhistoryData, response => {
+      if (response.data["success"] == true) {
+        console.log("tasks: ", response.data["data"]);
+      }
+    });
   },
   methods: {
     displayAddTask() {

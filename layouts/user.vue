@@ -2,6 +2,8 @@
   <div class="flex flex-col h-full">
     <navigation class="flex-shrink"></navigation>
     <nuxt class="flex-grow" />
+    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:50%;left:50%" v-if="apicall" width="20%"/> -->
+
 
 <client-only>
     <notifications group="error" position="top right">
@@ -48,6 +50,11 @@ import FloatButton from "~/components/user/float-button/right-bot-float-button.v
 import { mapMutations } from "vuex";
 export default {
   components: { navigation, FloatButton },
+  data:function(){
+    return{
+      apicall:true,
+    }
+  },
   mounted() {
     console.log(this.$device.isMobile);
     if (this.$device.isMobile) {
