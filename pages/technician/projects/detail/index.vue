@@ -19,7 +19,7 @@
             </div> -->
           </div>
           <div>
-            <button onclick="print()" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
+            <button @click="showModal=!showModal" class="btn btn-normal border-ideeza px-5 py-3">Open 3D</button>
             <button
               @click.self="completeTask=true"
               class="btn btn-normal btn--ideeza px-5 py-3"
@@ -46,8 +46,10 @@
           </div>
         </div>
 
-        <div class="text-ideeza my-5">Price: $210</div>
-
+        <!-- <div class="text-ideeza my-5">Price: $210</div> -->
+        <div class="h-128 text-center mb-5" v-if="showModal==true">
+          <img class="inline h-full" src="~/static/images/car-big.png">
+        </div>
         <div class="lg:flex justify-between">
           <div class="project-description lg:mr-16">
             <div class="gradient-bg px-8 py-5 text-white">Project Description</div>
@@ -201,10 +203,13 @@ import apiService2 from "~/apiService/get_param.js";
       this.randomNumber = response.data;
       this.articleArrayaxios = Object.values(response.data.data);
 
-      this.articleArrayaxios.map(item => {
-        this.articleArrayrout.push(item);
-        this.articleArray.push(item);
-      });
+      let item = this.articleArrayaxios.find(a => a.id == this.$route.query.id)
+      this.articleArrayrout.push(item);
+      this.articleArray.push(item);
+      // this.articleArrayaxios.map(item => {
+      //   this.articleArrayrout.push(item);
+      //   this.articleArray.push(item);
+      // });
     });
 
     const formData = new FormData();
@@ -275,6 +280,7 @@ import apiService2 from "~/apiService/get_param.js";
       task_img_url: process.env.task_image_url,
           project_img_url: process.env.project_image_url,
       ts: new Date(),
+      showModal: false,
       geturl: "/api/project/technician/get_all",
       articleArray: [],
       articleArrayrout: [],

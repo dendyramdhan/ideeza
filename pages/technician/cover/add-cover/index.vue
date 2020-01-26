@@ -13,9 +13,7 @@
 <script>
 
     import Search from '~/components/technician/cover/search.vue'
-
     import Cover from '~/components/technician/cover/add-component.vue'
-
     export default {
         name: "index",
         data: function () {

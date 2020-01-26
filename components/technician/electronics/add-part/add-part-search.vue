@@ -18,22 +18,23 @@
       />
     </div>
 
-    <div class="flex justify-between items-center p-4">
+    <div class="flex justify-between items-center p-4" v-if="selectedPart">
       <div class="flex items-center">
         <img src="~/static/images/add-part.png" alt />
         <div class="ml-5">
-          <span class="block font-semibold">ATMEGA32M1-AU</span>
+          <span class="block font-semibold">{{selectedPart.name}}</span>
           <span
             class="text-sm, text-gray-600"
-          >AVR microcontroller, EEPROM: 1KB; SRAM: 2KB; Flash: 32KB; TQFP32</span>
+          >{{selectedPart.snippet}}</span>
         </div>
       </div>
       <div>
-        <button class="btn pill-button px-8 py-0" @click="onDataSheet">Datasheet</button>
+        <a class="btn pill-button px-8 py-0" target="blank" :href="selectedPart.datasheet" style="padding: 6px 32px;" >Datasheet</a>
+
       </div>
     </div>
 
-    <table class>
+    <table>
       <thead>
         <tr class="text-gray-800 h10">
           <th class="text-left w-64">Name</th>
@@ -53,13 +54,14 @@
             <button @click="$emit('select')" class="btn pill-button px-4 py-0">select</button>
           </td>
         </tr> -->
-        <tr class v-for="article in articles">
+        <tr class v-for="(article, index) in partList" :key="`${index}`">
           <td class>{{article.name}}</td>
           <td>{{article.country}}</td>
           <td>{{article.package}}</td>
           <td class="text-ideeza">{{article.manufacturer}}</td>
           <td>
-            <button @click="$emit('select')" class="btn pill-button px-4 py-0">select</button>
+            <!-- <button @click="$emit('select', article)" class="btn pill-button px-4 py-0">select</button> -->
+            <button @click="select_part(index)" class="btn pill-button px-4 py-0">select</button>
           </td>
         </tr>
       </tbody>
@@ -113,7 +115,7 @@
 
 <script>
 import technicianaddpartsearchs from "~/json/technicianaddpartsearch.json";
-import apiService from "~/apiService/index.js"
+import apiService from "~/apiService/have_token.js"
 export default {
   name: "add-part-search",
   data: function() {
@@ -121,7 +123,9 @@ export default {
       // technicianaddpartsearchs: technicianaddpartsearchs,
       searchTerm: "",
       articles: technicianaddpartsearchs,
-      searchComponent: "",      
+      searchComponent: "",   
+      partList : [],
+      selectedPart : null
 
     };
   },
@@ -136,31 +140,59 @@ export default {
     changeshowperiod() {
 
     },
-    onDataSheet() {
-      alert();
+
+    select_part(index){
+      console.log("selected part : ", index)
+      this.selectedPart = this.partList[index]
     },
     search_component(e){
       if (this.searchComponent.length<3 ||  e.key != "Enter")
         return;
       console.log("search text : ", this.searchComponent)     
 
-      var data = {
-          q: "solid state relay",
-          start: 0,
-          limit: 10
-      };
+
+      let data = new FormData()
+      data.append("query", this.searchComponent)
+
       let sendData ={
         url: "/api/parts_search",
         method: "post",
-        data:{query: this.searchComponent}
+        data
       }
 
+      let partList = []
+
       apiService(sendData, (res)=>{
-        console.log("reponse : ", res)
+        console.log("reponse here: ", res)
+        if(res)
+          res.data.results.map(item=>{
+            let snippet = item.snippet
+            if(!item.snippet)item.snippet = "unknown unknown"
+            let snippets = item.snippet.split(' ')
+            let packages = snippets[snippets.length-1]
+            // packages = packages.split(" ")
+            let datasheet  = item.item.datasheets[0]
+            
+            if(!datasheet) 
+              datasheet="#"
+            else
+              datasheet = datasheet.url
+
+            partList.push({
+              uid: item.item.uid,
+              name: item.item.mpn,
+              country: res.data.user_country,
+              manufacturer: item.item.manufacturer.name,
+              snippet,
+              package: packages,
+              datasheet: item.item.datasheets[0].url
+            })
+          })
+
+        this.partList = partList
+        console.log("partList : ", partList)
+
       })
-
-      
-
     }
   }
 };

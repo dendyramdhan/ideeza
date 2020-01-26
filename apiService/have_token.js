@@ -22,8 +22,7 @@ export default (sendData, ctx)=>{
 
     })
     .catch((error) => {
-        console.log('error: ', error);
-
+        console.log("api error : ", error)
         ctx(null)
     })
 
