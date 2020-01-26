@@ -3,6 +3,15 @@ export default function ({ route, redirect }) {
   if (route.fullPath === "/") {
     return redirect('/home')
   }
+  if (route.fullPath === "/user") {
+    return redirect('/user/dashboard')
+  }
+  if (route.fullPath === "/technician") {
+    return redirect('/technician/dashboard')
+  }
+  if (route.fullPath === "/service-provider") {
+    return redirect('/service-provider/dashboard')
+  }
   if (route.fullPath === "/user/settings") {
     return redirect('/user/settings/general')
   }

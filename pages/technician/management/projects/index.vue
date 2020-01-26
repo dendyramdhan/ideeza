@@ -71,7 +71,9 @@
           <tbody v-for="(Service, index) in articleArray">
             <tr class="bg-ideeza-100" v-if="start < index && index < end ">
               <td>
-                <nuxt-link :to="{ path: '/technician/management/projects/detail', query: { id: Service.id}}" >{{Service.title}}</nuxt-link>
+                <nuxt-link
+                  :to="{ path: '/technician/management/projects/detail', query: { id: Service.id}}"
+                >{{Service.title}}</nuxt-link>
               </td>
               <td>
                 <span v-for="image in Service.assigned_users">
@@ -127,7 +129,7 @@
     <!-- <ul >
       <li v-for="info in articleArray">
         <span v-for="detail in info.assigned_users">{{detail.avatar}}</span></li><br/>
-    </ul> -->
+    </ul>-->
     <!-- {{articleArray}} -->
   </div>
 </template>
@@ -141,8 +143,6 @@ import AddNewProject from "~/components/technician/management/new-project.vue";
 import Services from "~/data/TechnicianProjectApi.json";
 
 import apiService from "~/apiService/have_token.js";
-
-
 
 export default {
   layout: "user",
@@ -168,11 +168,11 @@ export default {
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
       end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
       counterarray: [],
-       articleArrayaxios: [],
+      articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
       geturl: "/api/project/technician/get_all",
-      avata_img_url:process.env.avatar_base_url,
+      avata_img_url: process.env.avatar_base_url,
       addNewProject: false,
       dataDropDown: ["All", "Active", "Completed", "Priority", "Over Due"],
       sortDropDown: [
@@ -194,7 +194,6 @@ export default {
     //   this.counterarray.push(i);
     // }
     // // alert(this.counterarray);
-
     // this.Services.map(item => {
     //   this.articleArray.push(item);
     // });
@@ -205,7 +204,7 @@ export default {
     }
   },
   mounted() {
-     this.$store.commit("TechnicianProjectStore/viewflagchange2");
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -223,10 +222,15 @@ export default {
       });
 
       this.length = this.articleArrayrout.length / 5 - 1;
-      this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
-  
+      this.counter =
+        this.articleArrayrout.length /
+        this.$store.state.TechnicianProjectStore.scale;
+
       let i = 1;
-      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      let endd =
+        this.articleArrayrout.length /
+          this.$store.state.TechnicianProjectStore.scale +
+        1;
       //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
         this.counterarray.push(i);
