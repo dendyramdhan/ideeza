@@ -179,6 +179,7 @@ export default {
   name: "blog-list",
   data: function() {
     return {
+      apicall: true,
       apiwidth: null,
       apiheight: null,
       ts: new Date(),
@@ -218,11 +219,11 @@ export default {
     };
 
     apiService(sendData, response => {
-      // if (response != null) {
-      //   this.apicall = false;
-      // } else {
-      //   this.apicall = true;
-      // }
+      if (response != null) {
+        this.apicall = false;
+      } else {
+        this.apicall = true;
+      }
 
       console.log(response.data);
       this.randomNumber = response.data;
