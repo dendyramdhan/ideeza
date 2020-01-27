@@ -1,6 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <LeftMenu />
+  <div>
     <div class="main-contents">
       <div class="bg-white rounded border-ideeza border shadow p-4 mb-10">
         <h4 class="mb-10 text-ideeza font-bold">Adding new article</h4>
@@ -41,10 +40,8 @@
   import FileField from '~/components/form/file-field.vue'
   import TagsInput from '@voerro/vue-tagsinput/src/VoerroTagsInput.vue'
   export default {
-    layout: 'admin',
     name: "add-blog",
     components: {
-      'LeftMenu': LeftMenu,
       'file-field': FileField,
       'tag-input': TagsInput
     },
@@ -61,12 +58,7 @@
       previewArticle() {
         this.$router.push('/admin/invester/blog/1');
       }
-    },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    },
+    }
   }
 </script>
 

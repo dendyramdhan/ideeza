@@ -1,6 +1,5 @@
 <template>
-<div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-  <LeftMenu />
+<div>
   <div class="main-contents">
     <div class="flex-grow mb-20">
       <div class="md:w-full">
@@ -70,16 +69,13 @@
 </template>
 
 <script>
-  import LeftMenu from '~/components/admin/common-left-side-menu.vue'
   import TextField from '~/components/form/text-field.vue'
   import TextArea from '~/components/form/text-area.vue'
   import CategoryField from '~/components/form/category-field.vue'
   import FileField from '~/components/form/file-field.vue'
     export default {
-      layout: 'admin',
       name: "add-blog",
       components: {
-        'LeftMenu': LeftMenu,
         'text-field': TextField,
         'text-area': TextArea,
         'category-field': CategoryField,
@@ -103,12 +99,7 @@
         }
         this.$forceUpdate()
       }
-    },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    },
+    }
     }
 </script>
 

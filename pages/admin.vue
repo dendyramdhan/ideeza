@@ -1,7 +1,14 @@
 <template>
   <div class="flex flex-col h-full">
     <navigation class="flex-shrink"></navigation>
-    <nuxt-child class="flex-grow" />
+    <!--  Left Side Bar  -->
+    <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+      <LeftMenu v-if="$route.path.search('settings') < 0" />
+      <settingsLeftMenu v-else />
+      <div class="flex-grow">
+        <nuxt-child></nuxt-child>
+      </div>
+    </div>
     <notifications group="error" position="top right" >
       <template slot="body" slot-scope="props">
         <div class="notify notify--error">
@@ -37,15 +44,39 @@
 </template>
 
 <script>
+  import LeftMenu from '~/components/admin/common-left-side-menu.vue'
+  import settingsLeftMenu from "~/components/admin/settings/left-side-menu.vue";
   import navigation from '~/components/admin/header-bar.vue'
   import FloatButton from '~/components/user/float-button/right-bot-float-button.vue'
   import { mapMutations } from 'vuex'
   export default {
-    components: {navigation, FloatButton},
+    components: {
+      navigation, 
+      FloatButton, 
+      LeftMenu,
+      settingsLeftMenu
+    },
+    data() {
+      return {
+        settingLeftMenu: false
+      }
+    },
     mounted() {
+      if(this.$route.path.search('settings')){
+        this.settingLeftMenu = true;
+      }
+      else {
+        this.settingLeftMenu = false;
+      }
+
       console.log(this.$device.isMobile);
       if(this.$device.isMobile){
         this.toggleLeftMenu();
+      }
+    },
+    computed: {
+      leftMenu() {
+        return this.$store.state.usermenu.openLeftMenu;
       }
     },
     methods: {

@@ -1,8 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu/>
-
+  <div>
     <!-- Main Contents -->
     <div class="flex-grow lg:py-10 lg:px-3 xl:px-10">
       <div class="lg:flex">
@@ -298,13 +295,10 @@
 </template>
 
 <script>
-  import LeftMenu from '~/components/admin/messages/left-side-menu.vue'
   import SettingDropDown from '~/components/admin/messages/setting-drop-down.vue'
   export default {
-    layout: 'user',
     name: "messages-index",
     components: {
-      LeftMenu,
       SettingDropDown
     },
     data: function () {
@@ -312,16 +306,7 @@
         showOptions: false,
         showDropDown: false
       }
-    },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    },
-    mounted() {
-
-    },
-    methods: {}
+    }
   }
 </script>
 

@@ -26,6 +26,6 @@
     min-width: 300px;
   }
   .left-main-menu{
-
+    height: 100em;
   }
 </style>
