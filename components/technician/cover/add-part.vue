@@ -4,19 +4,25 @@
 
       <div class="p-5 md:flex justify-between items-center">
         <div class="md:flex items-center">
+
           <div class="flex items-center mr-5 mb-2 md:mb-0">
             <check-box :checked="true" @onChange="toggleGrid">Grid</check-box>
           </div>
+
           <div class="flex items-center mb-2 md:mb-0">
+
             <span class="mr-1">Category</span>
             <select class="w-32 bg-white p-1 border border-solid border-gray-400">
               <option></option>
             </select>
+
           </div>
+
         </div>
+        
         <div class="flex items-center">
           <file-field label="Upload 3D" @input="upload3dModel" />
-          <button @click="addImage" class="btn pill-button py-0 px-5" >Upload image</button>
+          <!-- <button @click="addImage" class="btn pill-button py-0 px-5" >Upload image</button> -->
         </div>
       </div>
 
@@ -57,19 +63,16 @@
             <span class="w-10 h-10 rounded-full" :style="{backgroundColor:objectColor}" @click="$refs['color'].click()"></span>
             <input v-model="objectColor" type="color" class="opacity-0" ref="color">
           </div>
-
           <!-- <div class="relative flex flex-col items-center text-xs">
             <span class="block">BG Color</span>
             <input v-model="background" type="color">
           </div> -->
-
         </div>
         <div class="flex mb-2 md:mb-0">
           <button @click="transform='translate'" class="btn pill-button py-0 px-5 " :class="{'pill-button--ideeza': transform === 'translate'}" >Translate</button>
           <button @click="transform='scale'" class="btn pill-button py-0 px-5 mx-5" :class="{'pill-button--ideeza': transform === 'scale'}" >Scale</button>
           <button @click="transform='rotate'" class="btn pill-button py-0 px-5" :class="{'pill-button--ideeza': transform === 'rotate'}" >Rotate</button>
         </div>
-
       </div>
 
       <div v-if="!description" @click="description=true" class="p-5 bg-gray-200 text-center cursor-pointer">
@@ -82,14 +85,12 @@
           <textarea rows="2" class="bg-white p-1 border border-solid border-gray-400 w-full"></textarea>
         </div>
       </div>
-
     </div>
 
     <div class="w-full mt-10 lg:flex justify-end">
       <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button>
       <button class="btn pill-button pill-button--ideeza py-0 px-12" >Save</button>
     </div>
-
   </div>
 
 </template>
@@ -153,6 +154,7 @@
           this.objectData = {'transform':{'position':[0,0,0],'rotation':[0,0,0],'scale':[1,1,1],'color':'#1f1f1f'},'url':'user-5272f6574e9b4c2b955bb3a6dbc45795.glb'};
         },
         upload3dModel(param){
+          console.log("param :", param)
           this.uploadData = param;
         },
         selectedObject(val) {

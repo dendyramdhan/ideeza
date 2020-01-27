@@ -1,7 +1,7 @@
 <template>
     <div class="email-support-container mx-auto mt-16">
 
-      <Search  class="mt-10"  />
+      <add-search  class="mt-10" />
 
       <div class="font-semibold text-xl my-10">Add Cover</div>
 
@@ -16,24 +16,34 @@
     import Cover from '~/components/technician/cover/add-component.vue'
     export default {
         name: "index",
+       
         data: function () {
             return {
 
             }
         },
-      components: {
+        components: {
 
-          Search,
-          Cover
+            Search,
+            Cover
 
-      },
-      computed: {
+        },
+        computed: {
 
-      },
+        },
+
         methods: {
 
+          upload_files(e) {
+            console.log("updated file ", e)
+
+          }
+
+        },
+        mounted(){
+          
         }
-    }
+      }
 </script>
 
 <style scoped>

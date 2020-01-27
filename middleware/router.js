@@ -18,4 +18,7 @@ export default function ({ route, redirect }) {
   if (route.fullPath === "/user/pro") {
     return redirect('/user/pro/electronics')
   }
+  if (route.fullPath === "/technician/cover") {
+    return redirect('/technician/cover/add-part')
+  }
 }

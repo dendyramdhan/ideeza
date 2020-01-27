@@ -1,12 +1,8 @@
 <template>
     <div class="email-support-container mx-auto mt-16">
-
-      <Search  class="mt-10"  />
-
+      <Search  class="mt-10"   @onUpdate="upload_files" />
       <div class="font-semibold text-xl my-10">Add Part</div>
-
-      <Cover />
-
+      <Cover ref="cover_engine"/>
     </div>
 </template>
 
@@ -20,20 +16,24 @@
         name: "index",
         data: function () {
             return {
-
+              upload_file: null
             }
         },
-      components: {
 
-          Search,
-          Cover
+        components: {
+            Search,
+            Cover
+        },
 
-      },
-      computed: {
+        computed: {
+        },
 
-      },
         methods: {
-
+          upload_files(e) {
+            if(e.target.files.length){
+              this.upload_file = e.target.files[0]
+            }
+          }
         }
     }
 </script>
