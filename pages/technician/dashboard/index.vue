@@ -12,54 +12,76 @@
             <h1 class="text-3xl font-semibold text-gar-800 pl-3 lg:pl-0">Good morning, {{name}}!</h1>
           </div>
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
-            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+            <div
+              class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
+            >
               <div class="text-base">Open Tickets</div>
-              <div class="flex justify-between items-center content-center ">
+              <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/opened-tickets.png" class="w-12 object-center object-right mr-5" alt="">
+                <img
+                  src="~/static/images/opened-tickets.png"
+                  class="w-12 object-center object-right mr-5"
+                  alt
+                />
               </div>
             </div>
           </div>
 
-
           <div class="card-container lg:mr-5 mr-0 mt-5 lg:mt-0">
-            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+            <div
+              class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
+            >
               <div class="text-base">Unopened Tickets</div>
-              <div class="flex justify-between items-center content-center ">
+              <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/un-opened-tickets.png" class="w-12 object-center object-right mr-5" alt="">
+                <img
+                  src="~/static/images/un-opened-tickets.png"
+                  class="w-12 object-center object-right mr-5"
+                  alt
+                />
               </div>
             </div>
           </div>
 
           <div class="card-container mt-5 lg:mr-5 lg:mt-0">
-            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+            <div
+              class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
+            >
               <div class="text-base">On Hold Tickets</div>
-              <div class="flex justify-between items-center content-center ">
+              <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/on-hold-tickets.png" class="w-12 object-center object-right mr-5" alt="">
+                <img
+                  src="~/static/images/on-hold-tickets.png"
+                  class="w-12 object-center object-right mr-5"
+                  alt
+                />
               </div>
             </div>
           </div>
 
           <div class="card-container mt-5 lg:mt-0">
-            <div class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative">
+            <div
+              class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
+            >
               <div class="text-base">Finished Tickets</div>
-              <div class="flex justify-between items-center content-center ">
+              <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/finished-tickets.png" class="w-12 object-center object-right mr-5" alt="">
+                <img
+                  src="~/static/images/finished-tickets.png"
+                  class="w-12 object-center object-right mr-5"
+                  alt
+                />
               </div>
             </div>
           </div>
-
         </div>
 
         <div class="xl:flex mt-10 justify-between">
@@ -68,48 +90,66 @@
             <!--List-->
             <div class="shadow-md mt-5 relative p-6 bg-white">
               <div class="flex justify-between">
-                <span class="text-gray-500 text-sm">2 tasks completed out of {{projects.length}}</span>
+                <span class="text-gray-500 text-sm">2 tasks completed out of {{tasks.length}}</span>
                 <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
               </div>
 
               <div
                 class="mt-5 w-full lg:flex justify-between items-center"
-                v-for="project in projects"
+                v-for="task in tasks"
               >
                 <div class="text-sm text-gray-600">
-                  <nuxt-link to="/technician/projects/technician-detail">{{project.projectName}}</nuxt-link>
+                  <nuxt-link to="/technician/projects/technician-detail">{{task.title}}</nuxt-link>
                 </div>
                 <div>
                   <img
                     class="avatar"
-                    v-for="profile_image in project.assigned_to_profile_image"
-                    :src="profile_image"
+                    v-for="assigned_user in task.assigned_users"
+                    :src="avatar_base_url + assigned_user.avatar"
                   />
                 </div>
-                <div class="text-sm text-gray-600">{{project.due_date}}</div>
-                <div class="text-sm text-orange-600">{{project.task_status}}</div>
-                <div class="text-sm text-ideeza">{{project.notification}}</div>
+                <div class="text-sm text-gray-600">{{new Date(task.start * 1000).toDateString()}} - {{new Date(task.end * 1000).toDateString()}}</div>
+                <div class="text-sm text-orange-600">{{task.status}}</div>
+                <!-- <div class="text-sm text-ideeza">{{task.notification}}</div> -->
+                
               </div>
             </div>
           </div>
           <div class="mt-5 lg:mt-0 md:w-1/3">
-            <vc-calendar class="mx-auto bg-white box-shadow rounded mb-3" color="pink" is-expanded :theme="theme" />
+            <vc-calendar
+              class="mx-auto bg-white box-shadow rounded mb-3"
+              color="pink"
+              is-expanded
+              :theme="theme"
+              :attributes="attributes"
+            />
             <div class="bg-white shadow rounded">
-            <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
-            <hr class="my-1">
-            <ul class="shadow-lg">
-                 <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="task in tasks">
-                    <div>
-                        <div class="text text-sm font-bold">{{task.title}}</div>
-                        <div class="text text-xs">{{task.duration}}</div>
-                    </div>
-                    <div class="event-icons text-right">
-                        <font-awesome-icon class="text text-xs text-gray-500 mr-2 cursor-pointer" :icon="['fa', 'pen']"  @click="onEditTask" />
-                        <font-awesome-icon class="text text-sm text-gray-500 cursor-pointer" :icon="['fas', 'times']" @click="onDeleteTask" />
-                    </div>
+              <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
+              <hr class="my-1" />
+              <ul class="shadow-lg">
+                <li
+                  class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event"
+                  v-for="task in tasks"
+                >
+                  <div>
+                    <div class="text text-sm font-bold">{{task.title}}</div>
+                    <div class="text text-xs">{{task.duration}}</div>
+                  </div>
+                  <div class="event-icons text-right">
+                    <font-awesome-icon
+                      class="text text-xs text-gray-500 mr-2 cursor-pointer"
+                      :icon="['fa', 'pen']"
+                      @click="onEditTask"
+                    />
+                    <font-awesome-icon
+                      class="text text-sm text-gray-500 cursor-pointer"
+                      :icon="['fas', 'times']"
+                      @click="onDeleteTask"
+                    />
+                  </div>
                 </li>
-            </ul>
-        </div>
+              </ul>
+            </div>
           </div>
           <!-- <div class="messages mt-5 lg:mt-0 lg:w-1/3">
             <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Task List</h1>
@@ -147,7 +187,7 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>-->
         </div>
 
         <div class="mt-10 orders">
@@ -200,109 +240,114 @@
             </div>
           </div>
           <div class="shadow-md">
-          <table class="mt-10">
-            <thead>
-              <tr class="text-gray-800 h16">
-                <th class="text-left">Username</th>
-                <th class="text-left">Role</th>
-                <th class="text-left">Status</th>
-                <th class="text-left">Join Date</th>
-                <th class="text-left">Rate</th>
-                <th class="text-left">Actions</th>
-                <th class="text-right">
-                  <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                :class="index%2!=0?'bg-white':'bg-gray-100'"
-                v-for="(tabledata, index) in articleArray"
-                v-if="start < index && index < end "
-              >
-                <td>{{tabledata.ArticlesName}}{{index}}{{tabledata.id}}</td>
-                <td>{{tabledata.role}}</td>
-                <td>{{tabledata.Status}}</td>
-                <td>{{tabledata.Date}}</td>
-                <td>
-                  <img class="inline" src="~/static/images/star.png" alt />
-                  <img class="inline" src="~/static/images/star.png" alt />
-                  <img class="inline" src="~/static/images/star.png" alt />
-                  <img class="inline" src="~/static/images/star.png" alt />
-                  <img class="inline" src="~/static/images/star.png" alt />
-                </td>
+            <table class="mt-10">
+              <thead>
+                <tr class="text-gray-800 h16">
+                  <th class="text-center">Username</th>
+                  <th class="text-center">Role</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Join Date</th>
+                  <th class="text-center">Rate</th>
+                  <th class="text-center">Actions</th>
+                  <th class="text-right">
+                    <font-awesome-icon
+                      class="mr-1 h-4 cursor-pointer"
+                      :icon="['fas', 'ellipsis-h']"
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  :class="index%2!=0?'bg-white':'bg-gray-100'"
+                  v-for="(tabledata, index) in articleArray"
+                  v-if="start < index && index < end "
+                >
+                  <td class="texct-center">{{tabledata.ArticlesName}}{{index}}{{tabledata.id}}</td>
+                  <td class="text-center">{{tabledata.role}}</td>
+                  <td class="text-center">{{tabledata.Status}}</td>
+                  <td class="text-center">{{tabledata.Date}}</td>
+                  <td class="text-center">
+                    <img class="inline" src="~/static/images/star.png" alt />
+                    <img class="inline" src="~/static/images/star.png" alt />
+                    <img class="inline" src="~/static/images/star.png" alt />
+                    <img class="inline" src="~/static/images/star.png" alt />
+                    <img class="inline" src="~/static/images/star.png" alt />
+                  </td>
 
-                <td class="lg:text-right">
-                  <nuxt-link :to="{ path: '/technician/profile', query: { id: tabledata.id}}">
-                    <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
-                  </nuxt-link>
-                  <nuxt-link :to="{ path: '/technician/messages', query: { id: tabledata.id}}">
-                    <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" />
-                  </nuxt-link>
-                  <font-awesome-icon
-                    class="mr-2 h-4 cursor-pointer"
-                    :icon="['fas', 'check']"
-                    @click="onApproveWork"
-                  />
-                  <font-awesome-icon
-                    class="mr-2 h-4 cursor-pointer"
-                    :icon="['fas', 'pause']"
-                    @click="onPauseWork"
-                  />
-                  <font-awesome-icon
-                    class="mr-2 h-4 cursor-pointer"
-                    :icon="['fas', 'times']"
-                    @click="onCancelWork"
-                  />
-                </td>
-                <td class="lg:text-right text-xs">5 mins ago</td>
-              </tr>
-            </tbody>
-          </table>
+                  <td class="lg:text-right">
+                    <nuxt-link :to="{ path: '/technician/profile', query: { id: tabledata.id}}">
+                      <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                    </nuxt-link>
+                    <nuxt-link :to="{ path: '/technician/messages', query: { id: tabledata.id}}">
+                      <font-awesome-icon
+                        class="mr-2 h-4 cursor-pointer"
+                        :icon="['fas', 'envelope']"
+                      />
+                    </nuxt-link>
+                    <font-awesome-icon
+                      class="mr-2 h-4 cursor-pointer"
+                      :icon="['fas', 'check']"
+                      @click="onApproveWork"
+                    />
+                    <font-awesome-icon
+                      class="mr-2 h-4 cursor-pointer"
+                      :icon="['fas', 'pause']"
+                      @click="onPauseWork"
+                    />
+                    <font-awesome-icon
+                      class="mr-2 h-4 cursor-pointer"
+                      :icon="['fas', 'times']"
+                      @click="onCancelWork"
+                    />
+                  </td>
+                  <td class="lg:text-right text-xs">5 mins ago</td>
+                </tr>
+              </tbody>
+            </table>
 
-          <!--Table Stats-->
-          <div class="mt-5 lg:flex justify-end">
-            <div class="lg:w-3/5 p-3 lg:flex justify-between">
-              <!--Paging-->
-              <div class="flex items-center">
-                <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
-                  <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
-                </span>
-                <span v-for="inde in counterarray " :key="inde">
-                  <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
-                    <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+            <!--Table Stats-->
+            <div class="mt-5 lg:flex justify-end">
+              <div class="lg:w-3/5 p-3 lg:flex justify-between">
+                <!--Paging-->
+                <div class="flex items-center">
+                  <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
+                    <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
                   </span>
-                  <span v-else>
-                    <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+                  <span v-for="inde in counterarray " :key="inde">
+                    <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
+                      <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+                    </span>
+                    <span v-else>
+                      <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+                    </span>
                   </span>
-                </span>
-                <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
-                  Next
-                  <font-awesome-icon
-                    class="ml-2 h-4 cursor-pointer"
-                    :icon="['fas', 'angle-double-right']"
-                  />
-                </span>
-              </div>
+                  <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
+                    Next
+                    <font-awesome-icon
+                      class="ml-2 h-4 cursor-pointer"
+                      :icon="['fas', 'angle-double-right']"
+                    />
+                  </span>
+                </div>
 
-              <div class="flex items-center">
-                <span class="inline-block ml-32">Show</span>
-                <select class="field field--border-none ml-2 h-10" @change="changeshowperiod">
-                  <option
-                    v-for="(tabledata, index) in articleArray"
-                    v-if="length > index "
-                  >{{(index)*5+1}}-{{(index)*5+5}}</option>
-                  <option>All</option>
-                </select>
+                <div class="flex items-center">
+                  <span class="inline-ock ml-32">Show</span>
+                  <select class="field field--border-none ml-2 h-10" @change="changeshowperiod">
+                    <option
+                      v-for="(tabledata, index) in articleArray"
+                      v-if="length > index "
+                    >{{(index)*5+1}}-{{(index)*5+5}}</option>
+                    <option>All</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
-          </div>
-        </div>
-          </div>
-
         </div>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -310,6 +355,7 @@ import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import articles from "~/json/messageCenter.json";
 import projects from "~/data/TechnicianProjectApi.json";
 import tasklists from "~/json/tasklist.json";
+import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   layout: "technician",
   name: "dashboard-index",
@@ -318,6 +364,15 @@ export default {
   },
   data: function() {
     return {
+
+      avatar_base_url: process.env.avatar_base_url,
+      attributes: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date()
+        }
+      ],
       years: [
         "2000",
         "2001",
@@ -343,20 +398,20 @@ export default {
         "2021"
       ],
       projects: projects.firstproject,
-      tasks: tasklists,
+      tasks: [],
       theme: {
-          container: {
-            light: 'ideeza-date-picker',
-          },
-          arrows: {
-            light: 'ideeza-arrow',
-          },
+        container: {
+          light: "ideeza-date-picker"
         },
-      searchTerm: '',
+        arrows: {
+          light: "ideeza-arrow"
+        }
+      },
+      searchTerm: "",
       articles: articles,
       articleArray: [],
-      currentSort: 'name',
-      currentSortDir: 'asc',
+      currentSort: "name",
+      currentSortDir: "asc",
       currentviewpoint: this.$store.state.userBlogStore.offset + 1,
       index: 0,
       length: articles.length / 5 - 1,
@@ -364,7 +419,7 @@ export default {
       start: this.$store.state.userBlogStore.offset * 5 - 1,
       end: this.$store.state.userBlogStore.offset * 5 + 5,
       counterarray: [],
-      name: ''
+      name: ""
     };
   },
 
@@ -392,7 +447,21 @@ export default {
   mounted() {
     let firstname = window.$nuxt.$cookies.get("firstname");
     let lastname = window.$nuxt.$cookies.get("lastname");
-    this.name = firstname + ' ' + lastname;
+    this.name = firstname + " " + lastname;
+
+    let getalltasksurl = "/api/project/technician/get_all";
+    let getalltasksData = {
+      method: "get",
+      url: getalltasksurl,
+      data: null
+    };
+
+    apiServiceWithToken(getalltasksData, response => {
+      if (response.data["success"] == true) {
+        this.tasks = response.data["data"];
+        console.log("tasks: ", response.data["data"]);
+      }
+    });
   },
   methods: {
     changeshowperiod(e) {
@@ -494,8 +563,8 @@ export default {
 </script>
 
 <style scoped>
-.due-date{
-    transform: translateX(-50%);
+.due-date {
+  transform: translateX(-50%);
 }
 .cards-wrapper {
   max-width: 1530px;
@@ -565,33 +634,32 @@ export default {
   }
 }
 
-
-  @screen lg{
-    .card-container{
-      @apply w-1/4;
-    }
-    table{
-      @apply mb-5 w-full table-fixed border-collapse text-gray-600;
-    }
-    thead tr{
-      @apply bg-white px-6 pl-16;
-    }
-    thead th{
-      @apply p-6;
-    }
-    thead th:first-child{
-      @apply pl-16;
-    }
-    tbody td{
-      @apply p-6;
-    }
-    tbody tr:even{
-      @apply bg-white;
-    }
-    tbody td:first-child{
-      @apply pl-16;
-    }
+@screen lg {
+  .card-container {
+    @apply w-1/4;
   }
+  table {
+    @apply mb-5 w-full table-fixed border-collapse text-gray-600;
+  }
+  thead tr {
+    @apply bg-white px-6 pl-16;
+  }
+  thead th {
+    @apply p-6;
+  }
+  thead th:first-child {
+    @apply pl-16;
+  }
+  tbody td {
+    @apply p-6;
+  }
+  tbody tr:even {
+    @apply bg-white;
+  }
+  tbody td:first-child {
+    @apply pl-16;
+  }
+}
 
 @media only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 1024px) {

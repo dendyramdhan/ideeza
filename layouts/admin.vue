@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-full">
     <navigation class="flex-shrink"></navigation>
-    <nuxt class="flex-grow" />
+    <nuxt-child class="flex-grow" />
     <notifications group="error" position="top right" >
       <template slot="body" slot-scope="props">
         <div class="notify notify--error">

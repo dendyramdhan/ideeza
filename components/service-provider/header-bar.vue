@@ -85,7 +85,44 @@
         </div>
       </div>
 
-      <div class="flex justify-center items-center content-center w-m-c">
+      <div class="flex items-center relative mr-5" v-click-outside="onClickOutsideProfile">
+        <div
+          class="flex items-center"
+          @click="showProfileAlert = !showProfileAlert"
+          style="cursor: pointer"
+        >
+          <img
+            class="h-10 w-10 rounded-full mr-2"
+            :src="avatar_base_url + avatar"
+          />
+          <span class="text-white inline-block">{{name}}</span>
+        </div>
+        <div class="help-alert text-xs" v-show="showProfileAlert">
+          <nuxt-link
+            to="/service-provider/profile"
+            class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
+          >
+            <div class="px-2 w-full flex items-center">
+              <font-awesome-icon class="mr-3 h-5 align-text-middle" :icon="['fas', 'user-alt']" />Profile
+            </div>
+          </nuxt-link>
+
+          <div
+            class="text-gray-500 hover:text-gray-800 font-semibold px-3 py-2 w-full block"
+            style="cursor: pointer"
+            @click="onSignOut"
+          >
+            <div class="px-2 w-full flex items-center">
+              <font-awesome-icon
+                class="mr-3 h-5 align-text-middle"
+                :icon="['fas', 'sign-out-alt']"
+              />Sign Out
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="flex justify-center items-center content-center w-m-c">
         <nuxt-link to="/service-provider/profile" class="flex items-center">
           <img
             class="h-10 w-10 rounded-full mr-2"
@@ -93,7 +130,7 @@
           />
           <span class="text-white inline-block">John Doe</span>
         </nuxt-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -107,7 +144,11 @@ export default {
     return {
       showInfoAlert: false,
       showHelpAlert: false,
-      news: news
+      news: news,
+      showProfileAlert: false,
+      avatar: "",
+      avatar_base_url: process.env.avatar_base_url,
+      name:null,
     };
   },
   computed: {
@@ -116,9 +157,25 @@ export default {
     }
   },
   mounted() {
+    let firstname = window.$nuxt.$cookies.get('firstname');
+    let lastname = window.$nuxt.$cookies.get('lastname');
+    let useravatar = window.$nuxt.$cookies.get("useravatar");
+    this.name = firstname + ' ' + lastname;
+    this.avatar = useravatar;
+
     console.log("news: ", this.news, this.showInfoAlert);
   },
   methods: {
+    onClickOutsideProfile() {
+      this.showProfileAlert = false;
+    },
+    onSignOut() {
+      window.$nuxt.$cookies.remove("authToken");
+      window.$nuxt.$cookies.remove("firstname");
+      window.$nuxt.$cookies.remove("lastname");
+      window.$nuxt.$cookies.remove("userid");
+      this.$router.push("/home");
+    },
     ...mapMutations({
       toggleLeftMenu: "usermenu/toggleLeftMenu"
     }),

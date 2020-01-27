@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex builder-panel main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu/>
+  <div>
     <!-- Main Contents -->
     <div class="flex-grow lg:p-10">
       <div class="lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
@@ -346,14 +344,9 @@
 </template>
 
 <script>
-  import LeftMenu from '~/components/user/common-left-side-menu.vue'
     export default {
       middleware: "auth",
-      layout: 'user',
       name: "profile-index",
-      components: {
-        LeftMenu,
-      },
       data: function() {
         return {
           tabItem: 'timeline',
@@ -362,9 +355,6 @@
         }
       },
       computed: {
-        leftMenu () {
-          return this.$store.state.usermenu.openLeftMenu;
-        },
         connected () {
           return this.isConnected ? 'Connected' : 'Connect';
         }

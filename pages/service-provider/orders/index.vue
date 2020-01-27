@@ -78,7 +78,7 @@
                 <div>{{order.date.end}}</div>
             </td>
             <td class="text-left">
-                <div><button class="py-2 px-3 mb-2 border border-gray-400">Invoice</button></div>
+                <div><button class="py-2 px-3 mb-2 border border-gray-400" onclick="print()">Invoice</button></div>
                 <div><nuxt-link :to="'/service-provider/orders/'+order.id" class="py-2 px-3 border border-gray-400">Details</nuxt-link></div>
             </td>
           </tr>
@@ -137,7 +137,8 @@ export default {
         return {
             orders: [],
             searchTerm: "",
-            counterarray: []
+            counterarray: [],
+            currentviewpoint:null,
         }
     },
     created: function() {
@@ -177,6 +178,11 @@ export default {
 
         }
     }
+}
+function print() {
+  var doc = new jsPDF();
+  doc.text("Price: 210", 10, 10);
+  doc.save("a4.pdf");
 }
 </script>
 <style scoped>

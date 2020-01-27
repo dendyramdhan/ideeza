@@ -198,6 +198,26 @@ export default {
       };
       apiService2(sendData, response => {
         console.log(response);
+
+        this.articleArray = [];
+        let sendData5 = {
+          method: "get",
+          url: this.geturl,
+          data: null
+        };
+
+        apiService(sendData5, response5 => {
+          console.log(response5.data);
+          // this.randomNumber = response.data;
+          this.articleArrayaxios = Object.values(response5.data.data);
+
+          this.articleArrayaxios.map(item => {
+            this.articleArrayrout.push(item);
+            this.articleArray.push(item);
+          });
+        });
+
+        
       });
       },
     search(e) {

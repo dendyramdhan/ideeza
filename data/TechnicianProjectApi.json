@@ -172,10 +172,9 @@
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
             "assigned_to_profile_image":[
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager1"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager2"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager3"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager4"]
+                ["https://randomuser.me/api/portraits/women/7.jpg","Jon Doe, Manager1"],
+                ["https://randomuser.me/api/portraits/women/8.jpg","Jon Doe, Manager2"],
+                ["https://randomuser.me/api/portraits/women/9.jpg","Jon Doe, Manager3"]
             ],
             "subtasks": [
                 {
@@ -194,10 +193,8 @@
                     "ImageUrl2": "/_nuxt/static/images/car-big.png",
                     "ImageUrl3": "/_nuxt/static/images/car-big.png",
                     "assigned_to_profile_image":[
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager1"],
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager2"],
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager3"],
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager4"]
+                        ["https://randomuser.me/api/portraits/women/1.jpg","Jon Doe, Manager1"],
+                        ["https://randomuser.me/api/portraits/women/2.jpg","Jon Doe, Manager2"]
                     ]
                 },
                 {
@@ -216,10 +213,10 @@
                     "ImageUrl2": "/_nuxt/static/images/car-big.png",
                     "ImageUrl3": "/_nuxt/static/images/car-big.png",
                     "assigned_to_profile_image":[
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager1"],
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager2"],
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager3"],
-                        ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager4"]
+                        ["https://randomuser.me/api/portraits/women/9.jpg","Jon Doe, Manager1"],
+                        ["https://randomuser.me/api/portraits/women/5.jpg","Jon Doe, Manager2"],
+                        ["https://randomuser.me/api/portraits/women/2.jpg","Jon Doe, Manager3"],
+                        ["https://randomuser.me/api/portraits/women/1.jpg","Jon Doe, Manager4"]
                     ]
                 }
             ] 
@@ -240,10 +237,10 @@
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
             "assigned_to_profile_image":[
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager1"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager2"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager3"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager4"]
+                ["https://randomuser.me/api/portraits/women/4.jpg","Jon Doe, Manager1"],
+                ["https://randomuser.me/api/portraits/women/5.jpg","Jon Doe, Manager2"],
+                ["https://randomuser.me/api/portraits/women/6.jpg","Jon Doe, Manager3"],
+                ["https://randomuser.me/api/portraits/women/2.jpg","Jon Doe, Manager4"]
             ],
             "subtasks": [
                 {
@@ -308,10 +305,10 @@
             "ImageUrl2": "/_nuxt/static/images/car-big.png",
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
             "assigned_to_profile_image":[
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager1"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager2"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager3"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager4"]
+                ["https://randomuser.me/api/portraits/women/9.jpg","Jon Doe, Manager1"],
+                ["https://randomuser.me/api/portraits/women/5.jpg","Jon Doe, Manager2"],
+                ["https://randomuser.me/api/portraits/women/3.jpg","Jon Doe, Manager3"],
+                ["https://randomuser.me/api/portraits/women/1.jpg","Jon Doe, Manager4"]
             ],
             "subtasks": [
                 {
@@ -377,9 +374,9 @@
             "ImageUrl3": "/_nuxt/static/images/car-big.png",
             "assigned_to_profile_image":[
                 ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager1"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager2"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager3"],
-                ["https://randomuser.me/api/portraits/women/14.jpg","Jon Doe, Manager4"]
+                ["https://randomuser.me/api/portraits/women/8.jpg","Jon Doe, Manager2"],
+                ["https://randomuser.me/api/portraits/women/5.jpg","Jon Doe, Manager3"],
+                ["https://randomuser.me/api/portraits/women/2.jpg","Jon Doe, Manager4"]
             ],
             "subtasks": [
                 {

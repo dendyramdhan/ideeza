@@ -31,8 +31,8 @@
       <div class="form-field md:flex items-center">
         <div class="field-label md:w-1/3 font-semibold">Size(single)</div>
         <div class="field-input md:flex flex-1">
-          <input class="border border-black mr-2 h-10 flex-1 mb-2 md:mb-0"   :value="size1" @change="change_size1"/>
-          <input class="border border-black mr-2 h-10 flex-1 mb-2 md:mb-0" :value="size2" @change="change_size2"/>
+          <input class="border border-black mr-2 h-10 flex-1 mb-2 md:mb-0" v-model="size1"     @change="change_size1"/>
+          <input class="border border-black mr-2 h-10 flex-1 mb-2 md:mb-0" v-model="size2"   @change="change_size2"/>
           <div class="flex-1">
           <select class="w-full border border-black flex-1 h-10" v-model="size3" @change="change_size3">
             <option>unit</option>
@@ -163,7 +163,7 @@
        <hr class="my-2">
 
        <div class="form-field md:flex items-center">
-        <div class="field-label md:w-1/3 font-semibold" >Silkscreen</div>
+        <div class="field-label md:w-1/3 font-semibold" >silkscreen</div>
         <div class="field-input flex-grow">
           <select class="h-10 border border-black w-full" v-model="silkscreen" @change="change_silkscreen">
             <option>White</option>
@@ -602,9 +602,9 @@ export default {
       const formData = new FormData();
       formData.set("board_type", this.board_type);
       formData.set("different_design_in_panel", this.different_design_in_panel);
-      formData.set("size", this.size1);
-      formData.set("size", this.size2);
-      formData.set("size", this.size3);
+      formData.append("size", this.size1);
+      formData.append("size", this.size2);
+      formData.append("size", this.size3);
       formData.set("quantity", this.quantity);
       formData.set("layers", this.layers);
       formData.set("material", this.material);
@@ -613,7 +613,6 @@ export default {
       formData.set("min_track", this.min_track);
       formData.set("min_hole_size", this.min_hole_size);
       formData.set("solder_mask", this.solder_mask);
-      formData.set("silkscreen", this.silkscreen);
       formData.set("gold_fingers", this.gold_fingers);
       formData.set("surface_finish", this.surface_finish);
       formData.set("via_process", this.via_process);
@@ -624,6 +623,7 @@ export default {
       formData.set("add_solder_mask", this.add_solder_mask);
       formData.set("add_fr4_tg", this.add_fr4_tg);
       formData.set("add_min_thickness", this.add_min_thickness);
+      formData.append("silkscreen", this.silkscreen);
       let sendData2 = {
         method: "post",
         url: this.geturl2,

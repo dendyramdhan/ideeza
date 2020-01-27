@@ -120,7 +120,6 @@
               <div class="grow">
                 <h1 class="text-lg font-semibold text-gray-600">Options</h1>
               </div>
-
               <div class="flex-shrink">
                 <font-awesome-icon
                   class="mr-1 h-4 text-gray-500 hover:text-gray-600 cursor-pointer"
@@ -257,7 +256,7 @@
 </template>
 
 <script>
-import LeftMenu from "~/components/user/messages/left-side-menu.vue";
+import LeftMenu from "~/components/technician/messages/left-side-menu.vue";
 import firebase from "firebase";
 import apiService from '~/apiService';
 

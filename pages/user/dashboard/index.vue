@@ -31,7 +31,6 @@
             </div>
           </div>
           <div class="lg:w-1/2 md:pl-10">
-
             <div class="md:flex justify-between">
               <nuxt-link to="/user/projects" class="flex-1">
                 <div class="status-button p-2">
@@ -76,14 +75,23 @@
                 </div>
               </nuxt-link>
               <div class="flex-1">
-                <span class="score-badge rookieColor" 
-                  :class="{'opacity-1': activities.myscore >= 0 &&  activities.myscore <=100}">Rookie</span>
-                <span class="score-badge talentedColor" 
-                :class="{'opacity-1': activities.myscore >= 101 &&  activities.myscore <=500}">Talented</span>
-                <span class="score-badge seniorColor" 
-                :class="{'opacity-1': activities.myscore >= 501 &&  activities.myscore <=1000}">Senior</span>
-                <span class="score-badge masterColor" :class="{'opacity-1':activities.myscore > 1000}"
-                  v-show="activities.myscore >= 1001">Master</span>
+                <span
+                  class="score-badge rookieColor"
+                  :class="{'opacity-1': activities.myscore >= 0 &&  activities.myscore <=100}"
+                >Rookie</span>
+                <span
+                  class="score-badge talentedColor"
+                  :class="{'opacity-1': activities.myscore >= 101 &&  activities.myscore <=500}"
+                >Talented</span>
+                <span
+                  class="score-badge seniorColor"
+                  :class="{'opacity-1': activities.myscore >= 501 &&  activities.myscore <=1000}"
+                >Senior</span>
+                <span
+                  class="score-badge masterColor"
+                  :class="{'opacity-1':activities.myscore > 1000}"
+                  v-show="activities.myscore >= 1001"
+                >Master</span>
               </div>
             </div>
 
@@ -114,7 +122,10 @@
             <div class="scroll-area" v-if="show">
               <no-ssr>
                 <!-- <smooth-scrollbar ref="smooth-scroll-1" :options="{alwaysShowTracks: true}"> -->
-                <div class="sm:flex flex-wrap pink-scroll-15 overflow-y-auto" style="height: 600px;">
+                <div
+                  class="sm:flex flex-wrap pink-scroll-15 overflow-y-auto"
+                  style="height: 600px;"
+                >
                   <template>
                     <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovations">
                       <div class="m-1">
@@ -128,11 +139,16 @@
                             />
                           </div>
                         </nuxt-link>
-                        <h3 class="font-semibold tex-2xl mb-2" style="height: 100px">{{innovation.article}}</h3>
+                        <h3
+                          class="font-semibold tex-2xl mb-2"
+                          style="height: 100px"
+                        >{{innovation.article}}</h3>
                         <p>{{innovation.description}}</p>
                         <div class="flex justify-between items-center mt-5">
-                          <small>{{new Date(innovation.timestamp*1000).getDate() + ' ' +  months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</small>
-                          <button class="btn btn--ideeza px-2 py-2" @click="readMore">Read more</button>
+                          <small>{{new Date(innovation.timestamp*1000).getDate() + ' ' + months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</small>
+                          <nuxt-link :to="{ path: '/user/blog/view', query: { id: innovation.id}}">
+                            <button class="btn btn--ideeza px-2 py-2">Read more</button>
+                          </nuxt-link>
                         </div>
                       </div>
                       <!-- <div class="m-1" v-else>
@@ -168,7 +184,7 @@
               <div class="flex flex-1 items-center px-5">
                 <div class="flex-1">Sort by</div>
                 <div class="flex-1">
-                  <drop-down :value="1" :data="['most viewed','recent']"/>
+                  <drop-down :value="1" :data="['most viewed','recent']" />
                 </div>
               </div>
             </div>
@@ -194,26 +210,17 @@
                           </div>
 
                           <span class="text-xs">{{topproject.project.like}} likes</span>
-                        </div> -->
+                        </div>-->
                         <div class="absolute bottom-0 right-0 mb-2 w-3/5 text-xs text-white">
                           <div class="flex items-center">
                             <div class="flex-1 mr-1">
-                            <font-awesome-icon
-                              :icon="['fas', 'eye']"
-                            />
-                            21
+                              <font-awesome-icon :icon="['fas', 'eye']" />21
                             </div>
                             <div class="flex-1 mr-1">
-                            <font-awesome-icon
-                              :icon="['fas', 'play']"
-                            />
-                            12
+                              <font-awesome-icon :icon="['fas', 'play']" />12
                             </div>
                             <div class="flex-1 mr-1">
-                            <font-awesome-icon
-                              :icon="['fas', 'thumbs-up']"
-                            />
-                            61
+                              <font-awesome-icon :icon="['fas', 'thumbs-up']" />61
                             </div>
                           </div>
                         </div>
@@ -230,7 +237,7 @@
     </div>
 
     <!--MyIdeeza Popup-->
-    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" @close="showMyIdeeza=false"  />
+    <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" @close="showMyIdeeza=false" />
   </div>
 </template>
 
@@ -243,7 +250,7 @@ import topprojects from "~/json/topprojects.json";
 import activity from "~/json/activity.json";
 import apiService from "~/apiService";
 import apiServiceWithToken from "~/apiService/have_token.js";
-import dropDown from "~/components/form/dropdown-field"
+import dropDown from "~/components/form/dropdown-field";
 Object.defineProperty(Array.prototype, "chunk_inefficient", {
   value: function(chunkSize) {
     var array = this;
@@ -277,18 +284,18 @@ export default {
       name: "",
       avatar: "",
       months: [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'Sepetember',
-        'Octobor',
-        'November',
-        'December'
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "Sepetember",
+        "Octobor",
+        "November",
+        "December"
       ],
       blog_post_url: process.env.blog_post_url,
       project_image_url: process.env.project_image_url
@@ -324,7 +331,7 @@ export default {
       };
 
       apiServiceWithToken(getallprojectsData, response => {
-        console.log(response.data);
+        console.log("getallprojectsData :", response.data);
         console.log(response.data["success"]);
         if (response.data["success"] == true) {
           this.lengthofprojects = response.data["data"].length;
@@ -397,9 +404,6 @@ export default {
       alert("Hello");
     },
     showMyProfile() {},
-    readMore() {
-      alert("Read More");
-    },
     viewLastActivity() {
       window.location.reload();
     }
@@ -409,23 +413,23 @@ export default {
 
 <style scoped>
 .score-badge {
-  color: #FFF;
+  color: #fff;
   font-weight: bold;
   margin-left: 12px;
   border-radius: 5px;
   padding: 0px 12px 4px 13px;
 }
 .rookieColor {
-  background: #FF33CC;
+  background: #ff33cc;
 }
 .talentedColor {
-  background: #CC0099;
+  background: #cc0099;
 }
 .seniorColor {
-  background: #7030A0;
+  background: #7030a0;
 }
 .masterColor {
-  background: #2E75B6;
+  background: #2e75b6;
 }
 .blog-image-container {
   width: 315px;
@@ -441,10 +445,10 @@ export default {
   @apply mt-2;
 }
 .status-button {
-  margin-bottom:  0px !important;
+  margin-bottom: 0px !important;
   @apply p-3 cursor-pointer rounded border border-transparent;
 }
-.status-button:hover{
+.status-button:hover {
   @apply border border-solid border-ideeza;
 }
 /deep/ .scrollbar-thumb {
@@ -453,44 +457,38 @@ export default {
 .top-50 {
   top: 50%;
 }
-.score-badge{
+.score-badge {
   opacity: 0;
 }
-.score-badge.opacity-1{
+.score-badge.opacity-1 {
   opacity: 1 !important;
 }
-.activities::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+.activities::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-.activities::-webkit-scrollbar
-{
-	width: 5px;
-	background-color: #F5F5F5;
+.activities::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
 }
 
-.activities::-webkit-scrollbar-thumb
-{
-	background-color: #FF09D0;
-  border: 2px solid #FF09D0;
+.activities::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
 }
-.pink-scroll-15::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+.pink-scroll-15::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
-.pink-scroll-15::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
+.pink-scroll-15::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
 }
 
-.pink-scroll-15::-webkit-scrollbar-thumb
-{
-	background-color: #FF09D0;
-  border: 2px solid #FF09D0;
+.pink-scroll-15::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
 }
 </style>
