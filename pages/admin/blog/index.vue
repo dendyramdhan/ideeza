@@ -15,7 +15,7 @@
                     </div>
                     <input placeholder="search" class="bg-white outline-none h-8 text-gray-800 pr-3">
                 </div>
-                <a href="/admin/invester/blog/add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">Add New <font-awesome-icon class="text-sm" :icon="['fa', 'plus']"/></a>
+                <a href="/admin/blog/add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">Add New <font-awesome-icon class="text-sm" :icon="['fa', 'plus']"/></a>
                 <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']"/>
             </div>
         </div>

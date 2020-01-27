@@ -56,7 +56,7 @@
         this.uploadData = param;
       },
       previewArticle() {
-        this.$router.push('/admin/invester/blog/1');
+        this.$router.push('/admin/blog/1');
       }
     }
   }
