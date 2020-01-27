@@ -1,8 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
-
+  <div>
     <!-- Main Contents -->
     <div class="flex-grow lg:py-5 lg:px-3 xl:px-3">
       <div class="lg:flex">
@@ -328,14 +325,11 @@
   </div>
 </template>
 <script>
-  import LeftMenu from '~/components/admin/common-left-side-menu.vue'
   import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
   import SimpleTable from '~/components/reusables/Table.vue'
 
   export default {
-    layout: 'admin',
     components: {
-      LeftMenu,
       MyIdeeza,
       SimpleTable,
     },
@@ -357,12 +351,7 @@
         }
         this.$forceUpdate()
       }
-    },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    },
+    }
   }
 
 </script>

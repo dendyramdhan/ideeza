@@ -71,13 +71,7 @@
 </template>
 <script>
   export default {
-    layout: 'admin',
     name: "settings-add-executive",
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    }
   }
 </script>
 <style scoped>

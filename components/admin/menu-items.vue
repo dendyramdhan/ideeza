@@ -12,9 +12,9 @@
         </div>
       </div>
       <div :class="[userActive ? 'block' : 'hidden']">
-        <nuxt-link to="/admin/user" class="block ml-12 text-base mt-2">Home</nuxt-link>
+        <nuxt-link to="/admin/user/dashboard" class="block ml-12 text-base mt-2">Dashboard</nuxt-link>
         <nuxt-link to="/admin/user/contact" class="block ml-12 text-base mt-2">Contacts</nuxt-link>
-        <nuxt-link to="/admin/users" class="block ml-12 text-base mt-2">Marketing</nuxt-link>
+        <nuxt-link to="/admin/user/marketing" class="block ml-12 text-base mt-2">Marketing</nuxt-link>
       </div>
     </div>
     <div class="menu-item flex-col">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div :class="[SPActive ? 'block' : 'hidden']">
-        <nuxt-link to="/admin/service" class="block ml-12 text-base mt-2">Home</nuxt-link>
+        <nuxt-link to="/admin/service/dashboard" class="block ml-12 text-base mt-2">Dashboard</nuxt-link>
         <nuxt-link to="/admin/service/contact" class="block ml-12 text-base mt-2">Contacts</nuxt-link>
         <nuxt-link to="/admin/service/deals" class="block ml-12 text-base mt-2">Deals</nuxt-link>
         <nuxt-link to="/admin/service/document" class="block ml-12 text-base mt-2">Documents</nuxt-link>
@@ -40,13 +40,12 @@
       </div>
 
       <div :class="[investActive ? 'block' : 'hidden']">
-        <nuxt-link to="/admin/invester" class="block ml-12 text-base mt-2">Home</nuxt-link>
+        <nuxt-link to="/admin/invester/dashboard" class="block ml-12 text-base mt-2">Dashboard</nuxt-link>
         <nuxt-link to="/admin/invester/contact" class="block ml-12 text-base mt-2">Contacts</nuxt-link>
         <nuxt-link to="/admin/invester/deals" class="block ml-12 text-base mt-2">Deals</nuxt-link>
         <nuxt-link to="/admin/invester/document" class="block ml-12 text-base mt-2">Documents</nuxt-link>
         <nuxt-link to="/admin/invester/inbox" class="block ml-12 text-base mt-2">Inbox</nuxt-link>
         <nuxt-link to="/admin/invester/activities" class="block ml-12 text-base mt-2">Activities</nuxt-link>
-        <nuxt-link to="/admin/invester/blog" class="block ml-12 text-base mt-2">Blog</nuxt-link>
         <nuxt-link to="/admin/invester/news" class="block ml-12 text-base mt-2">News</nuxt-link>
       </div>
     </div>
@@ -66,8 +65,8 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/admin/news">
-        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']"/> News
+      <nuxt-link to="/admin/blog">
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']"/> Blogs
       </nuxt-link>
     </div>
   </div>
