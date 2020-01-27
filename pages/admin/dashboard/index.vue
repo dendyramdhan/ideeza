@@ -380,4 +380,9 @@
 .simple-table th {
   font-size: 0.85rem;
 }
+.popup-overlay--contents{
+  width:96%;
+  height:96%;
+  overflow:auto;
+}
 </style>
