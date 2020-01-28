@@ -7,7 +7,7 @@
     </div>
     <div class="menu-item flex-col">
       <div class="flex">
-        <div class="w-1/2 cursor-pointer" @click="userActive = !userActive">
+        <div class="w-1/2 cursor-pointer" @click="userActive = !userActive; SPActive=false;investActive=false;">
           <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']"/> Users
         </div>
       </div>
@@ -19,7 +19,7 @@
     </div>
     <div class="menu-item flex-col">
       <div class="flex">
-        <div class="w-full cursor-pointer" @click="SPActive = !SPActive">
+        <div class="w-full cursor-pointer" @click="SPActive = !SPActive; userActive=false;investActive=false;">
           <UserIcon class="fill-current mr-3" /> Service providers
         </div>
       </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="menu-item flex-col">
       <div class="flex">
-        <div class="w-11/12 cursor-pointer" @click="investActive = !investActive">
+        <div class="w-11/12 cursor-pointer" @click="investActive = !investActive; userActive=false;SPActive=false;">
           <UserIcon class="fill-current mr-3" /> Investors
         </div>
       </div>
@@ -46,6 +46,7 @@
         <nuxt-link to="/admin/invester/document" class="block ml-12 text-base mt-2">Documents</nuxt-link>
         <nuxt-link to="/admin/invester/inbox" class="block ml-12 text-base mt-2">Inbox</nuxt-link>
         <nuxt-link to="/admin/invester/activities" class="block ml-12 text-base mt-2">Activities</nuxt-link>
+        <nuxt-link to="/admin/invester/blog" class="block ml-12 text-base mt-2">Blogs</nuxt-link>
         <nuxt-link to="/admin/invester/news" class="block ml-12 text-base mt-2">News</nuxt-link>
       </div>
     </div>

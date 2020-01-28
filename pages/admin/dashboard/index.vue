@@ -3,7 +3,18 @@
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
-        <div class="mb-3 flex relative content-center font-semibold text-ideeza-dark" >Dashboard</div>
+        <div class="flex mb-3">
+          <div class="flex w-1/2">
+            <h1 class="flex font-semibold text-ideeza-dark">Dashboard</h1>
+          </div>
+          <div class="flex w-1/2 justify-end">
+            <button @click="openGadgetsPopup" class="items-center bg-ideeza border rounded px-3 py-1 text-white ml-2">
+              <font-awesome-icon class="text-sm" :icon="['fas', 'plus']"/> Manage Order
+            </button>
+            
+          </div>
+        </div>
+
 
         <div class="md:flex">
           <div class="md:w-2/3 md:mr-3">
@@ -190,20 +201,24 @@
         </div>
       </div>
     </div>
+    <GadgetPopup v-if="gadgetPopup" @onClose="closeGadgetPopup" />
     <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" />
   </div>
 </template>
 <script>
+  import GadgetPopup from '~/components/admin/gadgets-popup.vue'
   import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
   import SimpleTable from '~/components/reusables/Table.vue'
 
   export default {
     components: {
+      GadgetPopup,
       MyIdeeza,
       SimpleTable,
     },
     data: function () {
       return {
+        gadgetPopup: false,
         searchbox: false,
         showMyIdeeza: false,
         users: [{
@@ -329,6 +344,12 @@
       }
     },
     methods: {
+      openGadgetsPopup() {
+        this.gadgetPopup = true;
+      },
+      closeGadgetPopup() {
+        this.gadgetPopup = false;
+      },
       selectall(value) {
         if (value == true) {
           this.users.forEach(element => {
