@@ -154,34 +154,50 @@ export default {
       this.showMembers = false;
     },
     addNewTask() {
-      var r = confirm("Do you want to add new note?");
-      if (r == true) {
-        let start = new Date(this.dateRange.start).getTime();
-        let end = new Date(this.dateRange.end).getTime();
-        let timestamp = new Date().setHours(0, 0, 0, 0);
-        var addTaskFormData = new FormData();
-        addTaskFormData.set("link", this.taskLink);
-        addTaskFormData.set("title", this.taskName);
-        addTaskFormData.set("description", this.taskDescription);
-        addTaskFormData.set("timestamp", timestamp);
-        addTaskFormData.set("start", start);
-        addTaskFormData.set("end", end);
-        // addTaskFormData.append("attachments", value, filename);
-
-        let addTaskurl = "/api/task/add_new";
-        let addTaskData = {
-          method: "post",
-          url: addTaskurl,
-          data: addTaskFormData
-        };
-
-        apiServiceWithToken(addTaskData, response => {
-          console.log(response);
-          if (response.data["success"] == true) {
-            window.location.reload();
-          }
-        });
+      let start = new Date(this.dateRange.start).getTime();
+      console.log('start', this.taskDescription)
+      console.log('start', start)
+      let end = new Date(this.dateRange.end).getTime();
+      let timestamp = new Date().setHours(0, 0, 0, 0);
+      var addTaskFormData = new FormData();
+      addTaskFormData.set("link", this.taskLink);
+      addTaskFormData.set("title", this.taskName);
+      addTaskFormData.set("description", this.taskDescription);
+      addTaskFormData.set("timestamp", timestamp);
+      addTaskFormData.set("start", start);
+      addTaskFormData.set("end", end);
+      if (start === NaN) {
+        alert("Please Enter Deadline!");
+        return;
+      } else if (end === NaN) {
+        alert("Please Enter Deadline!");
+        return;
+      } else if (this.taskName === '') {
+        alert("Please Enter Task Name!");
+        return;
+      } else if (this.taskDescription === '') {
+        alert("Please Enter Description!");
+        return;
       } else {
+        var r = confirm("Do you want to add new note?");
+        if (r == true) {
+          // addTaskFormData.append("attachments", value, filename);
+
+          let addTaskurl = "/api/task/add_new";
+          let addTaskData = {
+            method: "post",
+            url: addTaskurl,
+            data: addTaskFormData
+          };
+
+          apiServiceWithToken(addTaskData, response => {
+            console.log(response);
+            if (response.data["success"] == true) {
+              window.location.reload();
+            }
+          });
+        } else {
+        }
       }
     },
     onAddTaskers() {
