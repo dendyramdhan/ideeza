@@ -18,7 +18,7 @@
 
       <!--Task content-->
       <div :class="{'important': tk.important}" class="task task-contents">
-        <div class="task-time">{{tk.duration}}</div>
+        <div class="task-time">{{tk.start}}-{{tk.end}}</div>
         <div class="task-name">{{tk.title}}</div>
 
         <div v-if="tk.subtasks" class="text-sm font-normal">
