@@ -1,14 +1,17 @@
 <template>
   <div class="shadow-md w-full">
+
     <div
       class="search-container flex w-fit-content bg-white items-center content-center border border-solid border-gray-300"
     >
+
       <div class="h-12 relative w-10">
         <font-awesome-icon
           class="ml-1 h-4 text-gray-400 absolute-center-h-v"
           :icon="['fas', 'search']"
         />
       </div>
+
       <input
         placeholder="search name of the component"
         class="bg-white flex-grow outline-none h-8 text-gray-800 pr-3"
@@ -30,9 +33,9 @@
       </div>
       <div>
         <a class="btn pill-button px-8 py-0" target="blank" :href="selectedPart.datasheet" style="padding: 6px 32px;" >Datasheet</a>
-
       </div>
     </div>
+
 
     <table>
       <thead>
@@ -45,15 +48,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <tr class v-for="(tabledata, index) in articleArray" v-if="start < index && index < end ">
-          <td class>{{tabledata.name}}</td>
-          <td>{{tabledata.country}}</td>
-          <td>{{tabledata.package}}</td>
-          <td class="text-ideeza">{{tabledata.manufacturer}}</td>
-          <td>
-            <button @click="$emit('select')" class="btn pill-button px-4 py-0">select</button>
-          </td>
-        </tr> -->
+       
         <tr class v-for="(article, index) in partList" :key="`${index}`">
           <td class>{{article.name}}</td>
           <td>{{article.country}}</td>
@@ -138,9 +133,7 @@ export default {
 
     },
     changeshowperiod() {
-
     },
-
     select_part(index){
       console.log("selected part : ", index)
       this.selectedPart = this.partList[index]
@@ -148,8 +141,6 @@ export default {
     search_component(e){
       if (this.searchComponent.length<3 ||  e.key != "Enter")
         return;
-      console.log("search text : ", this.searchComponent)     
-
 
       let data = new FormData()
       data.append("query", this.searchComponent)
@@ -163,7 +154,9 @@ export default {
       let partList = []
 
       apiService(sendData, (res)=>{
+
         console.log("reponse here: ", res)
+        
         if(res)
           res.data.results.map(item=>{
             let snippet = item.snippet

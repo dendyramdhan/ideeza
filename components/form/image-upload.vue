@@ -40,12 +40,14 @@ export default {
     };
   },
   methods: {
+
      fileseleted(evt) {
       var reader = new FileReader();
       reader.onload = function(e) {
         // get loaded data and render thumbnail.
         document.getElementById("image").src = e.target.result;
       };
+
       // read the image file as a data URL.
       reader.readAsDataURL(evt.target.files[0]);
 
@@ -53,17 +55,19 @@ export default {
       console.log("file_upload:", evt);
       this.file = evt.target.files[0];
 
-       this.$emit('selected', this.file)
+      this.$emit('selected', this.file)
+
      },
-    handleFileChange(e) {
-      let file = e.target.files[0];
-      if (file && file.name) {
-        this.files = file.name;
-      } else {
-        this.files = null;
+      handleFileChange(e) {
+        let file = e.target.files[0];
+        if (file && file.name) {
+          this.files = file.name;
+        } else {
+          this.files = null;
+        }
+        this.$emit("input", file);
       }
-      this.$emit("input", file);
-    }
+
   }
 };
 </script>

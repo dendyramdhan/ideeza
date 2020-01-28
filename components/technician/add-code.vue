@@ -4,11 +4,11 @@
       <div class="bg-white p-5 md:flex items-center" >
         <div class="flex items-center mr-5">
           <span class="mr-2">File name </span>
-          <input placeholder="e.g filename.js" class="w-40 bg-white border border-solid border-gray-300 text-sm p-1 mb-2" style="margin: 0">
+          <input placeholder="e.g filename.js" v-model="file_name" class="w-40 bg-white border border-solid border-gray-300 text-sm p-1 mb-2" style="margin: 0">
         </div>
         <div class="flex items-center mr-5">
           <span class="mr-2">Language </span>
-          <select v-model="selectedLanguage" @change="languageChange"  class="language-select w-40 border mb-2" style="margin: 0">
+          <select v-model="selectedLanguage" @change="languageChange"  class="language-select w-40 border mb-2" ref="file_type" style="margin: 0">
             <option  value="sh" >
             Bash
           </option><option selected  value="c_cpp" >
@@ -76,7 +76,7 @@
     </div>
     <div>
       <div class="code-container relative w-full bg-black py-5">
-        <div id="editor"></div>
+        <div id="editor" ref="code_editor"></div>
       </div>
     </div>
   </div>
@@ -93,7 +93,8 @@
             return {
               editor: null,
               contents: "// type your code down. \n",
-              selectedLanguage: 'c_cpp'
+              selectedLanguage: 'c_cpp',
+              file_name: ""
             }
         },
       mounted() {
@@ -107,7 +108,9 @@
         methods: {
 
           languageChange() {
+
               this.editor.session.setMode('ace/mode/'+this.selectedLanguage);
+
           },
           setEditorTheme() {
             this.editor.setTheme('ace/theme/monokai');
