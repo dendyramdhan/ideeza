@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <div class="scroll-area" style="overflow: scroll; height: 1000px;">
+    <div class="scroll-area pink-scroll overflow-y-auto">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
       <div class="sm:flex mx-auto mb-10" v-for="feed in feeds">
         <img class="feed-owner-avatar rounded-full mr-5" :src="avatar_base_url + feed.avatar" alt />
@@ -48,10 +48,7 @@
                   :icon="['fas', 'share-alt']"
                 />SHARE
               </div>
-              <div
-                class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                @click="onComment"
-              >
+              <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
                 <font-awesome-icon
                   class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
                   :icon="['fas', 'comment-dots']"
@@ -119,7 +116,10 @@
                       <button class="w-1/2 block border border-600 mr-2">
                         <font-awesome-icon :icon="['fas', 'link']" />Connect
                       </button>
-                      <nuxt-link to="/user/messages" class="w-1/2 block flex-1 items-center border border-600">
+                      <nuxt-link
+                        to="/user/messages"
+                        class="w-1/2 block flex-1 items-center border border-600"
+                      >
                         <button class="block flex-1 border border-600">
                           <font-awesome-icon :icon="['fas', 'envelope']" />Message
                         </button>
@@ -136,7 +136,7 @@
                 <div class="flex items-center">
                   <div
                     class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                    @click="onCommentLike"
+                    @click="comment.like++"
                   >
                     <font-awesome-icon
                       class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
@@ -144,10 +144,7 @@
                     />
                     {{comment.like}}
                   </div>
-                  <div
-                    class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                    @click="onCommentComment"
-                  >
+                  <div class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5">
                     <font-awesome-icon
                       class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-1"
                       :icon="['fas', 'comment-dots']"
@@ -291,13 +288,7 @@ export default {
     onShare() {
       this.$emit("share");
     },
-    onComment() {
-      alert();
-    },
     onCommentLike() {
-      alert();
-    },
-    onCommentComment() {
       alert();
     },
     onShowComments(comments) {
@@ -322,9 +313,24 @@ export default {
   height: 64px;
 }
 
-.scroll-area {
+.pink-scroll {
   width: 100%;
   height: 700px;
+}
+
+.pink-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
 }
 
 .avatar {

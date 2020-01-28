@@ -159,6 +159,7 @@ export default {
       console.log('start', start)
       let end = new Date(this.dateRange.end).getTime();
       let timestamp = new Date().setHours(0, 0, 0, 0);
+      console.log('timestamp: ', typeof(timestamp));
       var addTaskFormData = new FormData();
       addTaskFormData.set("link", this.taskLink);
       addTaskFormData.set("title", this.taskName);

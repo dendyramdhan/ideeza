@@ -22,10 +22,10 @@
             :columns="columns"
             :options="options"
           >
-            <CheckBox slot="id" slot-scope="props" />
+            <CheckBox slot="id" slot-scope="props"/>
             <div class="flex items-center" slot="detail" slot-scope="props">
               <div class="mr-2">
-                <img src="~/static/images/Layercar.png" />
+                <img :src="project_image_url + props.row.product_image" />
               </div>
               <div class="my-auto">
                 <span class="block font-semibold">{{props.row.product_title}}</span>
@@ -37,14 +37,13 @@
                 <font-awesome-icon
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'minus']"
-                  @click="count--"
-                  v-if="count >= 1"
+                  @click="onDecrement(props.index)"
                 />
                 <div class="w-5">{{count}}</div>
                 <font-awesome-icon
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'plus']"
-                  @click="count++"
+                  @click="onIncrement(props.index)"
                 />
               </div>
             </div>
@@ -54,7 +53,7 @@
               slot-scope="props"
             >{{props.row.price | currency}}</span>
             <span class="font-semibold" slot="cost" slot-scope="props">{{props.row.cost | currency}}</span>
-            <div class="flex items-center justify-end" slot="actions" slot-scope="props">
+            <div class="flex items-center justify-center" slot="actions" slot-scope="props">
               <font-awesome-icon
                 class="mr-2 h-4 cursor-pointer text-ideeza"
                 :icon="['fas', 'trash']"
@@ -153,12 +152,13 @@ export default {
           price: "Price",
           quantity: "Quantity",
           cost: "Cost",
-          actions: ""
+          actions: "Actions"
         },
         sortable: [],
         filterable: false,
         childRowTogglerFirst: false
-      }
+      },
+      project_image_url: process.env.project_image_url
     };
   },
   mounted() {
@@ -192,6 +192,8 @@ export default {
         console.log("all manufactures: ", response.data["data"]);
       }
     });
+
+    console.log('props: ', this.data, this.index);
   },
   methods: {
     addManufacturer() {},
@@ -223,6 +225,14 @@ export default {
     onAddService(id) {
       window.$nuxt.$cookies.set("userprojectid", id);
       this.$router.push("/user/add-service");
+    },
+
+    onDecrement(index) {
+      this.count--;
+    },
+
+    onIncrement(index) {
+      this.count++;
     },
 
     moveNext() {

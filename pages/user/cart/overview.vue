@@ -60,7 +60,7 @@
                 <span class="block font-semibold">${{props.row.cost}}</span>
               </div>
             </div>
-            <div class="flex items-center justify-end" slot="actions" slot-scope="props">
+            <div class="flex items-center justify-center" slot="actions" slot-scope="props">
               <font-awesome-icon
                 @click="toggleChildRow(project.project_id, props.row.product_id)"
                 class="mr-2 h-4 cursor-pointer text-ideeza"
@@ -146,7 +146,7 @@ export default {
           id: "",
           detail: "Products",
           quantity: "Quantity",
-          actions: ""
+          actions: "Actions"
         },
         sortable: [],
         filterable: false,
