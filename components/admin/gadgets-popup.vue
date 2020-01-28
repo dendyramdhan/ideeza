@@ -626,4 +626,9 @@
   background: linear-gradient(180deg, rgba(178,36,239,1) 0%, rgba(117,120,255,1) 100%);
  
 }
+.popup-overlay--contents{
+  width:96%;
+  height:96%;
+  overflow:auto;
+}
 </style>
