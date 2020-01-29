@@ -88,16 +88,13 @@
           <div class="lg:w-2/3 lg:mr-5 w-full">
             <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Task Management</h1>
             <!--List-->
-            <div class="shadow-md mt-5 relative p-6 bg-white">
+            <div class="shadow-md mt-5 relative p-6 bg-white pink-scroll overflow-y-auto" style="height: 600px;">
               <div class="flex justify-between">
                 <span class="text-gray-500 text-sm">2 tasks completed out of {{tasks.length}}</span>
                 <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
               </div>
 
-              <div
-                class="mt-5 w-full lg:flex justify-between items-center"
-                v-for="task in tasks"
-              >
+              <div class="mt-5 w-full lg:flex justify-between items-center" v-for="task in tasks">
                 <div class="text-sm text-gray-600">
                   <nuxt-link to="/technician/projects/technician-detail">{{task.title}}</nuxt-link>
                 </div>
@@ -108,10 +105,11 @@
                     :src="avatar_base_url + assigned_user.avatar"
                   />
                 </div>
-                <div class="text-sm text-gray-600">{{new Date(task.start * 1000).toDateString()}} - {{new Date(task.end * 1000).toDateString()}}</div>
+                <div
+                  class="text-sm text-gray-600"
+                >{{new Date(task.start * 1000).toDateString()}} - {{new Date(task.end * 1000).toDateString()}}</div>
                 <div class="text-sm text-orange-600">{{task.status}}</div>
                 <!-- <div class="text-sm text-ideeza">{{task.notification}}</div> -->
-                
               </div>
             </div>
           </div>
@@ -123,7 +121,7 @@
               :theme="theme"
               :attributes="attributes"
             />
-            <div class="bg-white shadow rounded">
+            <div class="bg-white shadow rounded pink-scroll overflow-y-auto" style="height: 370px">
               <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
               <hr class="my-1" />
               <ul class="shadow-lg">
@@ -364,7 +362,6 @@ export default {
   },
   data: function() {
     return {
-
       avatar_base_url: process.env.avatar_base_url,
       attributes: [
         {
@@ -474,7 +471,7 @@ export default {
         var a = e.target.value.split("-");
         var a1 = a[0];
         var a2 = a[1];
-        alert("a1:" + a1 + "a2:" + a2);
+        // alert("a1:" + a1 + "a2:" + a2);
         this.articles.map((item, index) => {
           if (index >= a1 && index <= a2) {
             this.articleArray.push(item);
@@ -543,26 +540,31 @@ export default {
       }
     },
 
-    onEditTask() {
-      alert();
-    },
-    onDeleteTask() {
-      alert();
-    },
-    onApproveWork() {
-      alert();
-    },
-    onPauseWork() {
-      alert();
-    },
-    onCancelWork() {
-      alert();
-    }
+    onEditTask() {},
+    onDeleteTask() {},
+    onApproveWork() {},
+    onPauseWork() {},
+    onCancelWork() {}
   }
 };
 </script>
 
 <style scoped>
+
+.pink-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
+}
 .due-date {
   transform: translateX(-50%);
 }

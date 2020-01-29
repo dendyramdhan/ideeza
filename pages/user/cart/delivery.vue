@@ -125,17 +125,37 @@ export default {
   },
   methods: {
     moveNext() {
-      window.$nuxt.$cookies.set("d_firstname", this.firstname);
-      window.$nuxt.$cookies.set("d_lastname", this.lastname);
-      window.$nuxt.$cookies.set("d_phonenumber", this.phonenumber);
-      window.$nuxt.$cookies.set("d_address", this.address);
-      window.$nuxt.$cookies.set("d_zip", this.zip);
-      window.$nuxt.$cookies.set("d_email", this.email);
-      window.$nuxt.$cookies.set("d_country", this.country);
-      window.$nuxt.$cookies.set("d_city", this.city);
-      window.$nuxt.$cookies.set("d_shipping_service", this.shipping_service);
+      if (this.firstname == "") {
+        alert("please enter first name");
+      } else if (this.lastname == "") {
+        alert("please enter last name");
+      } else if (this.phonenumber == "") {
+        alert("please enter phone number");
+      } else if (this.address == "") {
+        alert("please enter address");
+      } else if (this.zip == "") {
+        alert("please enter zip");
+      } else if (this.email == "") {
+        alert("please enter email");
+      } else if (this.country == "") {
+        alert("please enter country");
+      } else if (this.city == "") {
+        alert("please enter city");
+      } else if (this.shipping_service == "") {
+        alert("please select shipping service");
+      } else {
+        window.$nuxt.$cookies.set("d_firstname", this.firstname);
+        window.$nuxt.$cookies.set("d_lastname", this.lastname);
+        window.$nuxt.$cookies.set("d_phonenumber", this.phonenumber);
+        window.$nuxt.$cookies.set("d_address", this.address);
+        window.$nuxt.$cookies.set("d_zip", this.zip);
+        window.$nuxt.$cookies.set("d_email", this.email);
+        window.$nuxt.$cookies.set("d_country", this.country);
+        window.$nuxt.$cookies.set("d_city", this.city);
+        window.$nuxt.$cookies.set("d_shipping_service", this.shipping_service);
 
-      this.$router.push("/user/cart/payment");
+        this.$router.push("/user/cart/payment");
+      }
     },
     moveBack() {
       this.$router.push("/user/cart/cart");
