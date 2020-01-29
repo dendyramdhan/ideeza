@@ -1,6 +1,6 @@
 <template>
     <div class="p-5">
-        <h5 class="font-semibold text-lg text-center mt-10">Image</h5>
+        <h5 class="font-semibold text-lg text-center mt-2">Image</h5>
       <ul class="mx-3 mt-5 text-lg">
         <li class="mb-3">
           <div class="mt-3 text-sm">

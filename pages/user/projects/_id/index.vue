@@ -226,7 +226,7 @@ export default {
   overflow-y: auto;
 }
 .project-description::-webkit-scrollbar {
-    width: 20px;;
+    width: 20px;
 }
 
 .project-description::-webkit-scrollbar-track {

@@ -112,6 +112,44 @@
         </div>
       </div>
     </div>
+    <div class="notifications">
+      <div class="track-heading">Notifications</div>
+      <div class="my-5">
+        <div class="mb-3 rounded-lg bg-white shadow-lg p-3 hover:bg-pink-200 cursor-pointer">
+          <div class="flex">
+            <div class="mr-2">
+              <img class="rounded-full h-16" src="https://randomuser.me/api/portraits/men/17.jpg">
+            </div>
+            <div class="flex-1">
+              <div class="font-bold text-xl">Peter</div>
+              <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 rounded-lg bg-white shadow-lg p-3 hover:bg-pink-200 cursor-pointer">
+          <div class="flex">
+            <div class="mr-2">
+              <img class="rounded-full h-16" src="https://randomuser.me/api/portraits/men/17.jpg">
+            </div>
+            <div class="flex-1">
+              <div class="font-bold text-xl">Peter</div>
+              <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 rounded-lg bg-white shadow-lg p-3 hover:bg-pink-200 cursor-pointer">
+          <div class="flex">
+            <div class="mr-2">
+              <img class="rounded-full h-16" src="https://randomuser.me/api/portraits/men/17.jpg">
+            </div>
+            <div class="flex-1">
+              <div class="font-bold text-xl">Peter</div>
+              <div>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- {{articleArray}}--{{projectidd}} -->
   </div>
 </template>

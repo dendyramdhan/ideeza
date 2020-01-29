@@ -1,6 +1,6 @@
 <template>
     <div class="p-5">
-        <h5 class="font-semibold text-lg text-center mt-10">Slider</h5>
+        <h5 class="font-semibold text-lg text-center mt-2">Slider</h5>
         
         <div class="mt-5 mx-3">
             <div>Color left</div>

@@ -19,12 +19,12 @@
                 class="font-semibold block text-3xl mb-3 w-full text-black text-center"
               >Now is your time to change the world.</span>
               <span
-                class="font-semibold block text-3xl mb-10 w-full text-black text-center"
+                class="font-semibold block text-3xl mb-3 w-full text-black text-center"
               >Dream, invent, create.</span>
 
               <img
                 @click="showMyIdeeza=true"
-                class="cursor-pointer absolute top-50"
+                class="cursor-pointer"
                 src="~/static/images/float-ideeza.png"
                 alt
               />
@@ -126,8 +126,34 @@
                   class="sm:flex flex-wrap pink-scroll-15 overflow-y-auto"
                   style="height: 600px;"
                 >
-                  <template>
-                    <div class="blog-container md:w-1/3" v-for="(innovation,index) in innovations">
+                  <template v-for="chunk in innovations.chunk_inefficient(3)">
+                    <div class="blog-container md:w-1/3" v-for="(innovation,index) in chunk">
+                      <template v-if="index==1">
+                        <div class="m-1">
+                        <h3
+                          class="font-semibold tex-2xl mb-2"
+                          style="height: 100px"
+                        >{{innovation.article}}</h3>
+                        <p>{{innovation.description}}</p>
+                        <div class="flex justify-between items-center mt-5">
+                          <small>{{new Date(innovation.timestamp*1000).getDate() + ' ' + months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</small>
+                          <nuxt-link :to="{ path: '/user/blog/view', query: { id: innovation.id}}">
+                            <button class="btn btn--ideeza px-2 py-2">Read more</button>
+                          </nuxt-link>
+                        </div>
+                        <nuxt-link to>
+                          <div class="mb-8">
+                            <img
+                              :src="blog_post_url + innovation.postimage"
+                              class="object-center object-contain"
+                              alt
+                              style="height: 200px"
+                            />
+                          </div>
+                        </nuxt-link>
+                      </div>
+                      </template>
+                      <template v-else>
                       <div class="m-1">
                         <nuxt-link to>
                           <div class="mb-8">
@@ -151,6 +177,7 @@
                           </nuxt-link>
                         </div>
                       </div>
+                      </template>
                       <!-- <div class="m-1" v-else>
                         <div class="flex justify-between items-center mb-5">
                           <small>{{new Date(innovation.timestamp*1000)}}</small>
@@ -182,9 +209,9 @@
             <div class="flex justify-between items-center">
               <h1 class="font-semibold lg:text-3xl my-5 flex-1">Top projects</h1>
               <div class="flex flex-1 items-center px-5">
-                <div class="flex-1">Sort by</div>
-                <div class="flex-1">
-                  <drop-down :value="1" :data="['most viewed','recent']" />
+                <div class="w-1/3">Sort by</div>
+                <div class="w-2/3">
+                  <drop-down :value="1" :data="['Most likes','Newest','Most viewed','Most Activities','Recent Uploaded']" />
                 </div>
               </div>
             </div>
