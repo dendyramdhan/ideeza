@@ -4,7 +4,7 @@
 
     <div class="cart-scroll-area">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
-      <div style="overflow: scroll; height: 480px">
+      <div class="pink-scroll overflow-y-auto" style="height: 480px">
         <div v-for="(project) in projects" :key="project.project_id">
           <div
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
@@ -219,6 +219,21 @@ export default {
 /deep/ .smooth-scrollbar {
   padding-right: 20px;
   margin-top: 15px;
+}
+
+.pink-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
 }
 
 /*Table*/

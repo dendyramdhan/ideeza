@@ -140,6 +140,21 @@ export default {
 
 <style scoped>
 /*Table*/
+
+.pink-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
+}
 @screen lg {
   table {
     @apply mb-5 w-full table-auto border-collapse text-gray-600 mx-auto;
