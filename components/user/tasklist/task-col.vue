@@ -58,9 +58,9 @@
       </div>
     </div>
 
-    <div class="text-center">
+    <!-- <div class="text-center">
       <button @click="$emit('showAddTask')" class="btn pill-button px-5 mt-5">+Add new note</button>
-    </div>
+    </div> -->
   </div>
 </template>
 

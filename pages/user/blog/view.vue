@@ -10,41 +10,30 @@
         >Back</nuxt-link>
       </div>
       <!--Blog Preview-->
-      <div class="lg:flex" v-for="descrition in articleArray">
-      <div   v-if="descrition.id == $route.query.id">
-        <div class="lg:flex">
-          <div class="blog-image-container mt-5 lg:mt-0 lg:mr-10">
-            <img class="w-full" :src=" blog_img_url + descrition.postimage" />
-          </div>
-          <div>
-            <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
-              <h1
-                class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
-              >{{descrition.category}}  </h1>
-            </div>
-            <div class="lg:my-10 my-3 flex items-center">
-              <div v-for="index in  descrition.rating" :key="index">
-                <font-awesome-icon
-                  class="mr-1 h-10 lg:text-2xl cursor-pointer text-yellow-600"
-                  :icon="['fas', 'star']"
-                />
-              </div>
-              Comment({{descrition.rating}})
-            </div>
-            <div class="lg:my-10 my-3 flex items-center">
-              <!-- <img class="h-12 w-12 mr-5 rounded-full" :src="descrition.profileimage" /> -->
-              <span class="text-gray-800 font-semibold text-xl">{{descrition.article}}  </span>
-            </div>
-
-            <p class="text-base lg:text-lg">
-              {{descrition.description}}  
-              <!-- -{{$route.query.id }} -->
-            </p>
-          </div>
-          </div>
+      <div v-for="descrition in articleArray">
+      <div class="md:flex" v-if="descrition.id == $route.query.id">
+        <div class="flex-1 mr-4">
+            <img :src="blog_img_url + descrition.postimage" alt="blog-image" class="w-full mb-3">
+            <div class="text-gray-700">Jul 19, 2019 <span class="cirlce"></span> 5 mins read</div>
         </div>
+        <div class="flex-1 ml-4">
+          <div class="flex items-center">
+            <div class="text-2xl my-1 text-black font-bold">
+                {{descrition.article}}
+            </div>
+            <div class="ratings ml-3">
+                <font-awesome-icon v-for="n in descrition.rating" :key="n+'star'" class="mr-1 text-ideeza-gold" :icon="['fas', 'star']" />
+                <font-awesome-icon v-for="n in 5-descrition.rating" :key="n+'blank'"  class="mr-1 text-black" :icon="['fas', 'star']" />
+            </div>
+          </div>
+            <nuxt-link to="/user/profile" class="flex items-center my-2">
+                <img class="h-10 w-10 rounded-full mr-2 " src="https://randomuser.me/api/portraits/men/17.jpg">
+                <span class="text-black inline-block">John Doe</span>
+            </nuxt-link>
+            <p class="leading-loose text-black font-semibold">{{descrition.description}}</p>
+        </div>
+    </div>
       </div>
-
       <!-- <p>{{$route.query.id }}</p>
         <p>{{this.$store.state.userBlogStore.ArticlesName }}</p>
         <p>{{this.$store.state.userBlogStore.CategoryName }}</p>

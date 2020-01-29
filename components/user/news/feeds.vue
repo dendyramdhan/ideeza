@@ -1,6 +1,40 @@
 <template>
   <div class="w-full">
-    <div class="scroll-area pink-scroll overflow-y-auto">
+    <div class="my-2">
+    <div
+        class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center mt-3 lg:mt-0"
+      >
+        <input
+          placeholder="Search..."
+          v-model="searchTerm"
+          v-on:input="search"
+          class="bg-white outline-none h-12 text-gray-800 pr-3 flex-1 pl-2 font-semibold"
+        />
+        <div class="h-12 relative w-10">
+          <font-awesome-icon
+            class="ml-1 h-4 text-ideeza absolute-center-h-v"
+            :icon="['fas', 'search']"
+          />
+        </div>
+        <!-- {{searchTerm}} -->
+        <!-- <button>Search</button> -->
+      </div>
+      <div class="flex mt-5 mb-10 text-black">
+        <div class="flex-1 flex items-center mr-2">
+          <div class="font-semibold text-base mr-2">Browse by tag</div>
+          <drop-down class="text-sm flex-1" :value="0" :data="['select a tag']" />
+        </div>
+        <div class="flex-1 flex items-center mr-2">
+          <div class="font-semibold text-base mr-2">Sort by</div>
+          <drop-down class="text-sm flex-1" :value="0" :data="['most viewed']" />
+        </div>
+        <div class="flex-1 flex items-center mr-2">
+          <div class="font-semibold text-base mr-2">From</div>
+          <drop-down class="text-sm flex-1" :value="0" :data="['Last week']" />
+        </div>
+      </div>
+    </div>
+    <div class="scroll-area" style="overflow-y: auto; height: 1000px;">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
       <div class="sm:flex mx-auto mb-10" v-for="feed in feeds">
         <img class="feed-owner-avatar rounded-full mr-5" :src="avatar_base_url + feed.avatar" alt />
@@ -247,10 +281,12 @@
 <script>
 import Modal from "~/components/reusables/Modal.vue";
 import apiServiceWithToken from "~/apiService/have_token.js";
+import dropDown from "~/components/form/dropdown-field";
 export default {
   name: "feeds",
   components: {
-    Modal
+    Modal,
+    dropDown
   },
   data: function() {
     return {
@@ -316,6 +352,7 @@ export default {
 .pink-scroll {
   width: 100%;
   height: 700px;
+  overflow-x: hidden;
 }
 
 .pink-scroll::-webkit-scrollbar-track {
@@ -337,5 +374,19 @@ export default {
   @apply rounded-full;
   width: 45px;
   height: 45px;
+}
+.scroll-area::-webkit-scrollbar {
+    width: 20px;;
+}
+
+.scroll-area::-webkit-scrollbar-track {
+    background: #8E6E87;
+    border-left: 9px solid white;
+    border-right: 9px solid white;
+}
+.scroll-area::-webkit-scrollbar-thumb {
+    background: #8E6E87;
+    border-left: 8px solid white;
+    border-right: 8px solid white;
 }
 </style>

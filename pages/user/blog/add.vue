@@ -13,20 +13,35 @@
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Category</div>
       <!-- <category-field placeholder="category" /> -->
-      <input
+      <!-- <input
         @change="categoryname"
         placeholder="category"
         class="w-full bg-white border border-solid border-gray-300 text-lg"
-      />
+      /> -->
+      <tag-input
+        element-id="tags"
+        v-model="categoryna"
+        :typeahead-hide-discard="true"
+        :limit="1"
+        placeholder="Add Category"
+        :typeahead-always-show="true"
+        :existing-tags="[
+        { key: 'code', value: 'Code' },
+        { key: 'electronics', value: 'Electronics' },
+        { key: 'parts', value: 'Parts' },
+        ]"
+        :typeahead="true"
+        ></tag-input>
     </div>
-    <div class="textarea mt-10">
+    <div class="mt-10">
       <div class="text-lg text-gray-800 mb-2">Description</div>
       <!-- <text-area placeholder="description" rows="7" /> -->
       <textarea
         placeholder="description"
         @change="descriptionNameChange"
-        v-model="descriptionName"
+        v-model="descripttionname2"
         rows="10"
+        class="w-full"
       ></textarea>
     </div>
     <div class="field-container mt-10">
@@ -36,13 +51,14 @@
       <form enctype="multipart/form-data">
         <!-- <file-field v-model="files" ref="file" id="file" @change="fileseleted"/> -->
 
-        <input
+        <file-field @input="fileseleted" border-class="border-ideeza-dark rounded" btn="btn--ideeza-dark" />
+        <!-- <input
           type="file"
           @change="fileseleted"
           ref="file_upload"
           class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
           style="display:none"
-        />
+        /> -->
         <!-- <button
        class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
         @click="$refs.file_upload.click()"
@@ -63,10 +79,9 @@
     </div>
 
     <div class="mt-12 text-center lg:text-left">
-      <button
+      <button @click="showPreview"
         class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg"
-        @click="$refs.file_upload.click()"
-      >SelectImage</button>
+      >Preview</button>
 
       <button
         class="btn btn-normal btn--ideeza px-10 py-4 lg: iinline-block"
@@ -89,6 +104,7 @@ import TextField from "~/components/form/text-field.vue";
 import TextArea from "~/components/form/text-area.vue";
 import CategoryField from "~/components/form/category-field.vue";
 import FileField from "~/components/form/file-field.vue";
+import TagsInput from '@voerro/vue-tagsinput/src/VoerroTagsInput.vue'
 
 export default {
   middleware: "auth",
@@ -97,7 +113,8 @@ export default {
     "text-field": TextField,
     "text-area": TextArea,
     "category-field": CategoryField,
-    "file-field": FileField
+    "file-field": FileField,
+    'tag-input': TagsInput
   },
   data: function() {
     return {
@@ -111,7 +128,8 @@ export default {
       selectedFile: null,
       images: [],
       image_fields: ["id", "name"],
-      total_images: 1
+      total_images: 1,
+      selectedTags: null
     };
   },
   methods: {
@@ -124,18 +142,18 @@ export default {
       // read the image file as a data URL.
       reader.readAsDataURL(evt.target.files[0]);
     },
-    fileseleted(evt) {
+    fileseleted(file) {
       var reader = new FileReader();
       reader.onload = function(e) {
         // get loaded data and render thumbnail.
         document.getElementById("image").src = e.target.result;
       };
       // read the image file as a data URL.
-      reader.readAsDataURL(evt.target.files[0]);
+      reader.readAsDataURL(file);
 
       // this.file = this.$refs.file.files[0];
-      console.log("file_upload:", evt);
-      this.file = evt.target.files[0];
+      console.log("file_upload:", file);
+      this.file = file;
     },
     articlename(event) {
       this.articlena = event.target.value;
@@ -152,10 +170,29 @@ export default {
     //   window.$nuxt.$cookies.set("blogdescriptionNameChange", this.articlena);
     //   this.$router.push("/user/blog/preview?" + this.foobar);
     // },
+    showPreview() {
+      let blog = {};
+      let category = '';
+      if(this.categoryna[0])
+      {
+        category = this.categoryna[0].value;
+      }
+      blog.article = this.articlena;
+      blog.category = category;
+      blog.description = this.descripttionname2;
+      blog.image = this.file;
+      this.$store.commit('blog/cacheBlog',blog);
+      this.$router.push({path: '/user/blog/pre'})
+    },
     uploadUserBlog() {
+      let category = '';
+      if(this.categoryna[0])
+      {
+        category = this.categoryna[0].value;
+      }
       const formData = new FormData();
       formData.set("article", this.articlena);
-      formData.set("category", this.categoryna);
+      formData.set("category", category);
       formData.set("description", this.descripttionname2);
       formData.append("image", this.file);
       let sendData = {
@@ -276,5 +313,21 @@ input {
 
 .file-select > input[type="file"] {
   display: none;
+}
+</style>
+<style>
+.tags-input-wrapper-default{
+  @apply border rounded border-ideeza-dark px-4 py-2 w-full mb-4;
+}
+.tags-input-root .tags-input-badge{
+  @apply border rounded bg-ideeza-dark py-1 px-2 mr-1 text-white text-sm;
+}
+.tags-input-root input{
+  background:transparent;
+}
+@screen md {
+  .tags-input-wrapper-default{
+    @apply w-64;
+  }
 }
 </style>

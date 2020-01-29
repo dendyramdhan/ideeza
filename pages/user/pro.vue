@@ -1,7 +1,8 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+  <div class="flex main-panel">
     <!--  Left Side Bar  -->
-    <div class="flex-shrink flex flex-col justify-between p-10 bg-white h-full shadow left-side-bar">
+    <div class="sidebar-container" :class="{'to-left':left}">
+    <div class="flex-shrink flex flex-col justify-between p-10 bg-white h-full shadow-lg left-side-bar">
       <div class="flex-shrink">
         <!--Search-->
         <div class="flex bg-gray-200 border border-solid border-gray-500 rounded-sm">
@@ -226,11 +227,20 @@
 
 
     </div>
+    <div class="icon">
+      <div @mouseenter="left=!left" v-if="!left">
+      <font-awesome-icon   class="mr-1 text-3xl" :icon="['fas', 'arrow-right']" />
+      </div>
+      <div v-else @click="left=!left">
+      <font-awesome-icon  class="mr-1 text-3xl" :icon="['fas', 'arrow-left']" />
+      </div>
+    </div>
+    </div>
 
     <!-- Main Contents -->
     <div class="flex-grow">
       <!--Panel Menu-->
-      <div class="main-contents" :class="{'app-layout':$route.path.includes('/user/pro/app/design')||$route.path.includes('/user/pro/app/prototype')}">
+      <div class="m-10">
         <div class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3">
           <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">Circuit Board</div>
           <div class="flex items-center justify-center content-center">
@@ -279,6 +289,7 @@
       },
       data: function () {
         return {
+          left: false,
           mainDropDownActive: false,
           showChooseLayout: false,
           menuData: {
@@ -586,4 +597,48 @@
   .active-link .submenu{
     display: block;
   }
+  .hide-side-bar .left-side-bar {
+    position: fixed;
+    z-index: 10;
+    top: 10vh;
+    height: 80vh;
+    overflow-y: auto
+  }
+  .sidebar-container {
+    position: fixed;
+    z-index: 10;
+    top: 15vh;
+    transition: all 0.5s;
+    margin-left:-300px;
+    left: 0;
+  }
+  .sidebar-container .left-side-bar{
+    height: 80vh;
+    overflow-y: auto;
+  }
+  .sidebar-container .icon{
+    position: absolute;
+    left: 100%;
+    top: 0;
+    z-index: 1;
+    background: white;
+    padding: 10px;
+  }
+  .to-left{
+    margin-left: 0;
+  }
+  .left-side-bar::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.left-side-bar::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.left-side-bar::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
+}
 </style>

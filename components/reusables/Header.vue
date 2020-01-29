@@ -202,8 +202,9 @@ v-if="showLoginModal"
         setManufacturerSignUp: 'modal/setManufacturerSignUp',
         }),
         openUserTypeModal() {
-          this.setSignUpModal(false);
-          this.setUserTypeModal(true);
+          this.setUserTypeModal(false);
+          this.setSignUpModal(true);
+          this.setUserType('creative');
         }
       }
     };

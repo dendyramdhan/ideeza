@@ -11,7 +11,7 @@
             <button class="border text-gray-600 py-2 px-10 text-xl ml-5">Code</button>
         </div>
     </div>
-    <side-bar></side-bar>
+      <side-bar></side-bar>
     <div class="w-full my-10 md:flex justify-center">
               
             <div class="bg-white rounded-lg shadow p-3 mr-5 mobile">
@@ -92,7 +92,8 @@ export default {
   },
   data() {
     return {
-      singleView: false
+      singleView: false,
+      left: false
     }
   }
 }
@@ -126,15 +127,6 @@ export default {
 
   .w-1-8 {
     width: 12.5%
-  }
-
-  .right-bar {
-    width: 300px;
-    top: 0;
-    right: 0;
-    z-index: 0;
-    padding-top: 50px;
-    height: 100vh;
   }
   .mobile{
     width: 360px;

@@ -24,7 +24,7 @@
             <div class="lg:flex flex-wrap items-center mt-5 lg:mt-0">
               <h1
                 class="lg:text-5xl font-semibold text-gray-800 lg:mr-2 leading-none"
-              >{{descrition.category}}</h1>
+              >{{descrition.article}}</h1>
             </div>
             <div class="lg:my-10 my-3 flex items-center">
               <div v-for="index in  descrition.rating" :key="index">
