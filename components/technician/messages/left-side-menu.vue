@@ -251,6 +251,7 @@
   .left-side-bar{
     width: 300px;
     min-width: 300px;
+    position:fixed;
   }
   .menu-item{
     @apply flex mb-5 content-center items-center mt-2 text-gray-700 text-lg font-semibold cursor-pointer;

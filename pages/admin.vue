@@ -5,7 +5,7 @@
     <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
       <LeftMenu v-if="$route.path.search('settings') < 0 && $route.path.search('messages') < 0" />
       <settingsLeftMenu v-else-if="$route.path.search('messages') < 0" />
-      <div class="flex-grow">
+      <div class="flex-grow center-content">
         <nuxt-child></nuxt-child>
       </div>
     </div>
@@ -108,5 +108,12 @@
 }
 .notify--success{
   @apply  bg-ideeza-green;
+}
+.center-content {
+  overflow-y: auto;
+  height: calc(100vh - 55px);
+}
+.center-content> .flex-grow{
+  margin-left: 300px;
 }
 </style>

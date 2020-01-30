@@ -16,7 +16,7 @@
     />
 
     <navigation class="flex-shrink"></navigation>
-    <nuxt class="flex-grow" />
+    <nuxt class="flex-grow center-content" />
   </div>
 </template>
 
@@ -56,5 +56,12 @@ export default {
 }
 #__layout {
   height: 100%;
+}
+.center-content {
+  overflow-y: auto;
+  height: calc(100vh - 55px);
+}
+.center-content> .flex-grow{
+  margin-left: 300px;
 }
 </style>

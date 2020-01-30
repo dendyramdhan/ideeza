@@ -132,11 +132,6 @@
       </div>
       </div>
     </div>
-    <div class="text-right absolute right-0 bottom-0">
-    <nuxt-link to="/user/order-tracking/making-product2">
-      <button class="btn btn-normal btn--ideeza btn-text-bold btn--rounded px-8 py-4 text-lg m-3" >Next</button>
-    </nuxt-link>
-    </div>
     </div>
     <!-- <div class="making-container">
       <div class="track-heading">Parts</div>

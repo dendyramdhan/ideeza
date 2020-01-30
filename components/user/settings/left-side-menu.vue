@@ -60,6 +60,7 @@
 .left-side-bar{
   width: 300px;
   min-width: 300px;
+  position:fixed;
 }
 .active-link{
   @apply text-gray-800;

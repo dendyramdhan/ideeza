@@ -6,16 +6,17 @@
     <!-- Main Contents -->
     <div class="support-container flex-grow lg:pt-10 px-2 lg:px-2 xl:pl-10">
       <h1 class="mb-20 text-gray-800 text-2xl lg:text-4xl lg:mt-10 font-semibold">Order Tracking</h1>
-      <Stepper />
+      <Stepper v-if="$route.query.id" :redirect="{path:'/user/projects/detail',query:{id:$route.query.id}}"/>
+      <Stepper v-else/>
 
       <div
-        class="track-container md:mx-auto p-5 lg:p-10 my-10 border border-solid border-ideeza bg-white relative"
+        class="track-container p-5 lg:p-10 my-10 border border-solid border-ideeza bg-white relative"
       >
         <nuxt-child></nuxt-child>
         <div v-if="trackStep === 0" class="mt-20 flex items-center">
           <div class="flex-1 inline-flex">
-            <nuxt-link tag="button" to="/user/order-tracking/timeline" class="bg-ideeza text-white font-semibold rounded-lg px-10 py-6 z-10">Timeline</nuxt-link>
-            <nuxt-link tag="button" to="/user/order-tracking/making-product" class="bg-white border text-ideeza-dark font-semibold rounded-lg px-16 py-6 z-0 -ml-3">List</nuxt-link>
+            <nuxt-link tag="button" to="/user/order-tracking/timeline" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-10 py-6 z-10">Timeline</nuxt-link>
+            <nuxt-link tag="button" to="/user/order-tracking/making-product" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-16 py-6 z-0 -ml-3">List</nuxt-link>
           </div>
           <div class="justify-center items-center flex">
             <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt />
@@ -23,7 +24,7 @@
               <span class="font-semibold block text-lg">John Snow</span>
               <span class="text-sm text-gray-500 block">Project Manager</span>
             </div>
-            <nuxt-link to="/user/profile">
+            <nuxt-link to="/user/messages">
               <button
                 class="btn btn-normal shadow-lg text-white btn-ideeza-gradient btn-text-bold btn--rounded px-8 py-4 text-lg"
               >Contact</button>
@@ -104,5 +105,8 @@ export default {
 }
 .btn-ideeza-gradient {
   background: linear-gradient(to left, #ff00c7, #ffb1ec);
+}
+.nuxt-link-exact-active.make-product{
+  @apply text-white bg-ideeza z-20;
 }
 </style>

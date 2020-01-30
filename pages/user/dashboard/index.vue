@@ -117,7 +117,7 @@
         </div>
 
         <div class="sm:flex">
-          <div class="sm:w-2/3">
+          <div class="sm:w-3/5">
             <h1 class="font-semibold lg:text-3xl my-5">World's last innovation</h1>
             <div class="scroll-area" v-if="show">
               <no-ssr>
@@ -130,15 +130,18 @@
                     <div class="blog-container md:w-1/3" v-for="(innovation,index) in chunk">
                       <template v-if="index==1">
                         <div class="m-1">
+                        <div class="flex items-center">
+                          <div class="border-r pr-2 text-ideeza text-base font-semibold capitalize">user</div>
+                          <div class="ml-2 text-gray-500 text-sm">{{new Date(innovation.timestamp*1000).getDate() + ' ' + months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</div>
+                        </div>
                         <h3
                           class="font-semibold tex-2xl mb-2"
-                          style="height: 100px"
                         >{{innovation.article}}</h3>
-                        <p>{{innovation.description}}</p>
+                        <p style="height: 100px">{{innovation.description}}</p>
                         <div class="flex justify-between items-center mt-5">
-                          <small>{{new Date(innovation.timestamp*1000).getDate() + ' ' + months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</small>
+                          <small class="text-ideeza">14 comments</small>
                           <nuxt-link :to="{ path: '/user/blog/view', query: { id: innovation.id}}">
-                            <button class="btn btn--ideeza px-2 py-2">Read more</button>
+                            <button class="bg-ideeza text-sm text-white px-2 py-2 rounded-lg">Read more</button>
                           </nuxt-link>
                         </div>
                         <nuxt-link to>
@@ -165,15 +168,18 @@
                             />
                           </div>
                         </nuxt-link>
+                        <div class="flex items-center">
+                          <div class="border-r pr-2 text-ideeza text-base font-semibold capitalize">user</div>
+                          <div class="ml-2 text-gray-500 text-sm">{{new Date(innovation.timestamp*1000).getDate() + ' ' + months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</div>
+                        </div>
                         <h3
                           class="font-semibold tex-2xl mb-2"
-                          style="height: 100px"
                         >{{innovation.article}}</h3>
-                        <p>{{innovation.description}}</p>
+                        <p style="height: 100px">{{innovation.description}}</p>
                         <div class="flex justify-between items-center mt-5">
-                          <small>{{new Date(innovation.timestamp*1000).getDate() + ' ' + months[new Date(innovation.timestamp*1000).getMonth()] + ' ' + new Date(innovation.timestamp*1000).getFullYear()}}</small>
+                          <small class="text-ideeza">14 comments</small>
                           <nuxt-link :to="{ path: '/user/blog/view', query: { id: innovation.id}}">
-                            <button class="btn btn--ideeza px-2 py-2">Read more</button>
+                            <button class="bg-ideeza text-sm text-white px-2 py-2 rounded-lg">Read more</button>
                           </nuxt-link>
                         </div>
                       </div>
@@ -205,7 +211,7 @@
               </no-ssr>
             </div>
           </div>
-          <div class="sm:w-1/3">
+          <div class="sm:w-2/5">
             <div class="flex justify-between items-center">
               <h1 class="font-semibold lg:text-3xl my-5 flex-1">Top projects</h1>
               <div class="flex flex-1 items-center px-5">
@@ -220,7 +226,7 @@
                 <!-- <smooth-scrollbar ref="smooth-scroll-2" :options="{alwaysShowTracks: true}"> -->
                 <div class="flex flex-wrap overflow-y-auto pink-scroll-15" style="height: 600px;">
                   <div class="w-1/2 p-2" v-for="topproject in topprojects">
-                    <div class="p-2 border border-solid border-light-gray">
+                    <nuxt-link tag="div" :to="{ path: '/user/projects/detail', query: { id: topproject.project_info.project_id}}" class="p-2 border border-solid border-light-gray bg-white cursor-pointer">
                       <div class="w-full relative projects-image">
                         <img
                           :src="project_image_url + topproject.project_info.image"
@@ -238,21 +244,37 @@
 
                           <span class="text-xs">{{topproject.project.like}} likes</span>
                         </div>-->
-                        <div class="absolute bottom-0 right-0 mb-2 w-3/5 text-xs text-white">
-                          <div class="flex items-center">
-                            <div class="flex-1 mr-1">
-                              <font-awesome-icon :icon="['fas', 'eye']" />21
-                            </div>
-                            <div class="flex-1 mr-1">
-                              <font-awesome-icon :icon="['fas', 'play']" />12
-                            </div>
-                            <div class="flex-1 mr-1">
-                              <font-awesome-icon :icon="['fas', 'thumbs-up']" />61
+                        <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md w-90">
+                            <div class="flex text-lg text-white text-sm">
+                              <div class="flex-1 tooltip">
+                                <div class="inline-block">
+                                  <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                                </div> 211
+                                <span class="tooltiptext">Views</span>
+                              </div>
+                              <div class="flex-1 tooltip">
+                                <img src="~/static/images/ideeza-play-icon.png" class="inline-block"> 76
+                                <span class="tooltiptext">Activities</span>
+                              </div>
+                              <div class="flex-1 tooltip">
+                                <img src="~/static/images/likeWhite.png" class="inline-block"> 34
+                                <span class="tooltiptext">Likes</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
                       </div>
-                    </div>
+                      <div class="mt-2">{{topproject.project_info.title}}</div>
+                      <div
+                        class="flex items-center"
+                        style="cursor: pointer"
+                      >
+                        <img
+                          class="h-10 w-10 rounded-full mr-2"
+                          src="https://randomuser.me/api/portraits/men/21.jpg"
+                        />
+                        <span class="text-ideeza font-semibold inline-block">Jhon Deo</span>
+                      </div>
+                    </nuxt-link>
                   </div>
                 </div>
                 <!-- </smooth-scrollbar> -->
@@ -517,5 +539,8 @@ export default {
 .pink-scroll-15::-webkit-scrollbar-thumb {
   background-color: #ff09d0;
   border: 2px solid #ff09d0;
+}
+.w-90{
+  width: 90%;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <div class="md:m-8 lg:m-8 m-2">
+  <div>
+    <div class="md:m-8 lg:m-8 m-2">
     <!---->
     <!--Payout Methods-->
     <!---->
@@ -48,6 +49,7 @@
 
 
 
+  </div>
   </div>
 </template>
 <script>

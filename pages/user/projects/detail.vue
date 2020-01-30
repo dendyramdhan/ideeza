@@ -20,19 +20,19 @@
             </div>
             <div class="flex flex-wrap items-center">
               <span class="panel-menu text-center">
-                <nuxt-link to="/user/pro">
+                <div @click="tab='electronics'" :class="{'text-ideeza':tab=='electronics'}">
                   <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']" />Electronics
-                </nuxt-link>
-              </span>
-              <span class="ml-5 panel-menu text-center active">
-                <nuxt-link to="/user/pro">
-                  <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'code']" />Code
-                </nuxt-link>
+                </div>
               </span>
               <span class="ml-5 panel-menu text-center">
-                <nuxt-link to="/user/pro">
+                <div @click="tab='code'" :class="{'text-ideeza':tab=='code'}">
+                  <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'code']" />Code
+                </div>
+              </span>
+              <span class="ml-5 panel-menu text-center">
+                <div @click="tab='cover'" :class="{'text-ideeza':tab=='cover'}">
                   <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']" />Cover
-                </nuxt-link>
+                </div>
               </span>
               <nuxt-link to="/user/pro" class="ml-5 panel-menu text-center">
                 <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']" />General
@@ -42,7 +42,13 @@
               </nuxt-link>
             </div>
           </div>
-
+          <template v-if="tab=='cover'">
+            <Cover />
+          </template>
+          <template v-if="tab=='electronics'">
+            <Electronics/>
+          </template>
+          <template v-if="tab=='code'">
           <div class="my-5 bg-white shadow">
             <div v-for="Project in articleArray">
               <div v-if="Project.project_id == $route.query.id ">
@@ -83,7 +89,7 @@
               >
                 <div>
                   <nuxt-link
-                    to="/user/order-tracking/making-product"
+                    :to="{path:'/user/order-tracking/making-product',query: { id: $route.query.id}}"
                     class="btn btn-normal btn--ideeza font-semibold px-5 py-2"
                   >Track the order</nuxt-link>
                 </div>
@@ -111,7 +117,7 @@
               </button>
             </div>
 
-            <div class="py-10 px-5 text-gray-600" v-if="tab===0">
+            <div class="py-10 px-5 text-gray-600" v-if="edit===0">
               <div class="lg:flex" v-for="Project in articleArray">
                 <span
                   class="lg:flex "
@@ -120,7 +126,7 @@
               </div>
             </div>
             <div class="py-10 px-5 text-gray-600 w-full">
-              <div v-if="tab===1" v-for="Project in articleArray">
+              <div v-if="edit===1" v-for="Project in articleArray">
                 <textarea
                   name
                   id
@@ -132,7 +138,7 @@
                 >{{Project.description}}</textarea>
               </div>
 
-              <div class="mt-5 flex justify-end">
+              <div class="mt-5 flex justify-end" v-if="edit===1">
                 <button class="btn pill-button--ideeza px-5 py-1" @click="saveDescription">Save</button>
               </div>
             </div>
@@ -234,6 +240,7 @@
             <input type="text" placeholder="Write your comment..." class="px-3 py-6 bg-gray-200 text-gray-700 w-full">
             </div>
           </div>
+          </template>
         </div>
 
         <!--Right Sidebar-->
@@ -258,6 +265,8 @@ import Projects from "~/data/UserProjectApi.json";
 
 import apiService from "~/apiService/have_token.js";
 import apiService2 from "~/apiService/have_data.js";
+import Electronics from '~/components/user/pro/pro-electronics.vue'
+import Cover from '~/components/user/pro/pro-cover.vue'
 
 export default {
   middleware: "auth",
@@ -268,12 +277,14 @@ export default {
     RightSideBar,
     ShareInternal,
     ShareExternal,
-    CustomizeIcon
+    CustomizeIcon,
+    Electronics,
+    Cover
   },
   data: function() {
     return {
       Projects: Projects.firstproject,
-      tab: 0,
+      edit: 0,
       mainDropDownActive: false,
       description: " ",
       currentMenu: {},
@@ -288,7 +299,7 @@ export default {
       articleArray: [],
       randomNumber: {},
       project_img_url:process.env.project_image_url,
-
+      tab: 'code'
     };
   },
   created: function() {},
@@ -314,7 +325,7 @@ export default {
   },
   methods: {
     EditTextarea1() {
-      this.tab = 1;
+      this.edit = 1;
       for (const [key, value] of Object.entries(this.Projects)) {
         console.log(key, value.id);
         if (this.$route.query.id == value.id) {
@@ -356,7 +367,7 @@ export default {
 
       });
       
-         this.tab = 0;
+         this.edit = 0;
 
       // if (this.description === "") {
       //   this.$notify({

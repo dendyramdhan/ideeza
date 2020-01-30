@@ -58,9 +58,28 @@
             <p>{{feed.description}}</p>
           </div>
 
-          <div class="bg-gray-200 mx-5">
+          <nuxt-link :to="{ path: '/user/projects/detail', query: { id: feed.project_id}}" tag="div" class="bg-gray-200 mx-5 relative">
             <img class="w-full object-fit object-center" :src="project_image_url + feed.image" alt />
-          </div>
+            <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md w-90">
+              <div class="flex text-lg text-white text-sm">
+                <div class="flex-1 flex items-center mr-2">
+                  <div class="inline-block">
+                    <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                  </div>
+                  <div>211</div>
+                </div>
+                <div class="flex-1 flex items-center mr-2">
+                  <img src="~/static/images/ideeza-play-icon.png" class="inline-block mr-2"> 
+                  <div>76</div>
+                </div>
+                <div class="flex-1 items-center flex mr-2">
+                  <img src="~/static/images/likeWhite.png" class="inline-block mr-2">
+                  <div>35</div>
+                </div>
+
+              </div>
+            </div>
+          </nuxt-link>
 
           <div class="p-10 md:flex justify-between items-center">
             <div class="flex items-center">

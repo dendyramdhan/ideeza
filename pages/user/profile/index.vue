@@ -141,12 +141,34 @@
                     />
                   </div>
                 </div>
-                <div class="bg-gray-200">
+                <div class="bg-gray-200 relative">
                   <img
                     class="w-full object-fit object-center"
                     :src="project_image_url + shared_project.projec_image"
                     alt
                   />
+                  <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md w-90">
+                    <div class="flex text-lg text-white text-sm">
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <div class="inline-block">
+                          <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                        </div>
+                        <div>211</div>
+                        <span class="tooltiptext">Views</span>
+                      </div>
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <img src="~/static/images/ideeza-play-icon.png" class="inline-block mr-2"> 
+                        <div>76</div>
+                        <span class="tooltiptext">Activities</span>
+                      </div>
+                      <div class="flex-1 items-center flex mr-2 tooltip">
+                        <img src="~/static/images/likeWhite.png" class="inline-block mr-2">
+                        <div>35</div>
+                        <span class="tooltiptext">Likes</span>
+                      </div>
+
+                    </div>
+                  </div>
                 </div>
                 <div class="mt-10 flex justify-between items-center">
                   <div class="flex items-center">
@@ -249,24 +271,70 @@
             <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'public'">
               
               <div class="flex" v-for="project in projects">
-                <img
-                  class="project-image"
-                  v-for="product in project.products"
-                  :src="project_image_url + product.product_image"
-                  alt
-                />
+                <div class="relative" v-for="product in project.products">
+                  <img
+                    class="project-image"
+                    :src="project_image_url + product.product_image"
+                    alt
+                  />
+                  <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md w-90">
+                    <div class="flex text-lg text-white text-sm">
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <div class="inline-block">
+                          <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                        </div>
+                        <div>211</div>
+                        <span class="tooltiptext">Views</span>
+                      </div>
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <img src="~/static/images/ideeza-play-icon.png" class="inline-block mr-2"> 
+                        <div>76</div>
+                        <span class="tooltiptext">Activities</span>
+                      </div>
+                      <div class="flex-1 items-center flex mr-2 tooltip">
+                        <img src="~/static/images/likeWhite.png" class="inline-block mr-2">
+                        <div>35</div>
+                        <span class="tooltiptext">Likes</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'private'">
 
               <div class="flex" v-for="project in projects">
-                <img
-                  class="project-image"
-                  v-for="product in project.products"
-                  :src="project_image_url + product.product_image"
-                  alt
-                />
+                <div class="relative" v-for="product in project.products">
+                  <img
+                    class="project-image"
+                    :src="project_image_url + product.product_image"
+                    alt
+                  />
+                  <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md w-90">
+                    <div class="flex text-lg text-white text-sm">
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <div class="inline-block">
+                          <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                        </div>
+                        <div>211</div>
+                        <span class="tooltiptext">Views</span>
+                      </div>
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <img src="~/static/images/ideeza-play-icon.png" class="inline-block mr-2"> 
+                        <div>76</div>
+                        <span class="tooltiptext">Activities</span>
+                      </div>
+                      <div class="flex-1 items-center flex mr-2 tooltip">
+                        <img src="~/static/images/likeWhite.png" class="inline-block mr-2">
+                        <div>35</div>
+                        <span class="tooltiptext">Likes</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 

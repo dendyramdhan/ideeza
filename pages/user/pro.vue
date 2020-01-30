@@ -238,11 +238,16 @@
     </div>
 
     <!-- Main Contents -->
-    <div class="flex-grow">
+    <div class="w-full">
       <!--Panel Menu-->
       <div class="m-10">
         <div class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3">
+          <div class="flex">
           <div class="text-xl font-bold m-3 lg:m-0 text-center lg:text-left">Circuit Board</div>
+          <div @click="$router.back()" class="bg-white border border-ideeza-dark p-3 rounded">
+            Back
+          </div>
+          </div>
           <div class="flex items-center justify-center content-center">
             <nuxt-link class="panel-menu text-center" to="/user/pro/electronics">
               <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'bolt']" />Electronics</nuxt-link>
@@ -252,7 +257,7 @@
               <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'cube']" />Cover</nuxt-link>
             <nuxt-link class="ml-5 panel-menu text-center" to="/user/pro/app">
               <font-awesome-icon class="mr-1 mobile" :icon="['far', 'square']" />App</nuxt-link>
-            <nuxt-link class="ml-5 panel-menu text-center" to="/user/pro/customize">
+            <nuxt-link class="ml-5 panel-menu text-center" to="/user/pro/general">
               <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'wrench']" />General</nuxt-link>
           </div>
         </div>
