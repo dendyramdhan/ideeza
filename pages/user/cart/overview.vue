@@ -42,14 +42,13 @@
             <div class="flex items-center" slot="quantity" slot-scope="props">
               <div class="mx-auto flex">
                 <font-awesome-icon
-                  @click="count--"
-                  v-if="count >= 1"
+                  @click="onDecrement(props.index, project.project_id, props.row.product_id)"
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'minus']"
                 />
-                <div class="w-5">{{count}}</div>
+                <div class="w-5">{{props.row.quantity}}</div>
                 <font-awesome-icon
-                  @click="count++"
+                  @click="onIncrement(props.index, project.project_id, props.row.product_id)"
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'plus']"
                 />
@@ -202,6 +201,31 @@ export default {
 
       console.log("product_id: ", product_id);
       this.$refs[ref][0].toggleChildRow();
+    },
+    onDecrement(index, pg_id, pd_id) {
+      this.projects.map(element => {
+        if (element.project_id == pg_id) {
+          element.products.map(p => {
+            if (p.product_id == pd_id) {
+              if (p.quantity > 0) {
+                p.quantity--;
+              }
+            }
+          });
+        }
+      });
+    },
+
+    onIncrement(index, pg_id, pd_id) {
+      this.projects.map(element => {
+        if (element.project_id == pg_id) {
+          element.products.map(p => {
+            if (p.product_id == pd_id) {
+              p.quantity++;
+            }
+          });
+        }
+      });
     },
     onRemove(project_id) {
       var d = confirm("Do you really want to remove?");
