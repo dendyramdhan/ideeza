@@ -16,16 +16,16 @@
       </nuxt-link>
     </div> -->
     <div class="menu-item">
-      <nuxt-link to="/user/tasklist">
-        <TaskIcon class="fill-current mr-5" />My Notes
-      </nuxt-link>
-    </div>
-    <div class="menu-item">
       <nuxt-link to="/user/news">
         <font-awesome-icon
           class="mr-5 w-8 h-8 text-2xl align-text-top"
           :icon="['far', 'newspaper']"
         />News Feed
+      </nuxt-link>
+    </div>
+    <div class="menu-item">
+      <nuxt-link to="/user/tasklist">
+        <TaskIcon class="fill-current mr-5" />My Notes
       </nuxt-link>
     </div>
     <div class="menu-item">

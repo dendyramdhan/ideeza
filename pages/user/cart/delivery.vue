@@ -21,7 +21,7 @@
     <!--Shipping form-->
     <div class="cart-scroll-area">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
-      <div style="overflow: scroll; height: 480px">
+      <div class="pink-scroll overflow-y-auto" style="height: 480px">
         <div class="my-5 lg:flex flex-wrap">
           <div class="lg:w-1/2 lg:pr-5">
             <div class="field-container mt-10">
@@ -125,17 +125,37 @@ export default {
   },
   methods: {
     moveNext() {
-      window.$nuxt.$cookies.set("d_firstname", this.firstname);
-      window.$nuxt.$cookies.set("d_lastname", this.lastname);
-      window.$nuxt.$cookies.set("d_phonenumber", this.phonenumber);
-      window.$nuxt.$cookies.set("d_address", this.address);
-      window.$nuxt.$cookies.set("d_zip", this.zip);
-      window.$nuxt.$cookies.set("d_email", this.email);
-      window.$nuxt.$cookies.set("d_country", this.country);
-      window.$nuxt.$cookies.set("d_city", this.city);
-      window.$nuxt.$cookies.set("d_shipping_service", this.shipping_service);
+      if (this.firstname == "") {
+        alert("please enter first name");
+      } else if (this.lastname == "") {
+        alert("please enter last name");
+      } else if (this.phonenumber == "") {
+        alert("please enter phone number");
+      } else if (this.address == "") {
+        alert("please enter address");
+      } else if (this.zip == "") {
+        alert("please enter zip");
+      } else if (this.email == "") {
+        alert("please enter email");
+      } else if (this.country == "") {
+        alert("please enter country");
+      } else if (this.city == "") {
+        alert("please enter city");
+      } else if (this.shipping_service == "") {
+        alert("please select shipping service");
+      } else {
+        window.$nuxt.$cookies.set("d_firstname", this.firstname);
+        window.$nuxt.$cookies.set("d_lastname", this.lastname);
+        window.$nuxt.$cookies.set("d_phonenumber", this.phonenumber);
+        window.$nuxt.$cookies.set("d_address", this.address);
+        window.$nuxt.$cookies.set("d_zip", this.zip);
+        window.$nuxt.$cookies.set("d_email", this.email);
+        window.$nuxt.$cookies.set("d_country", this.country);
+        window.$nuxt.$cookies.set("d_city", this.city);
+        window.$nuxt.$cookies.set("d_shipping_service", this.shipping_service);
 
-      this.$router.push("/user/cart/payment");
+        this.$router.push("/user/cart/payment");
+      }
     },
     moveBack() {
       this.$router.push("/user/cart/cart");
@@ -148,6 +168,21 @@ export default {
 /deep/ .smooth-scrollbar {
   padding-right: 20px;
   margin-top: 15px;
+}
+
+.pink-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
 }
 .services-dropdown {
   width: 270px;

@@ -33,12 +33,4 @@
   .w-1-8 {
     width: 12.5%
   }
-  .right-bar{
-    width: 300px;
-    top: 0;
-    right: 21px;
-    z-index: 0;
-    padding-top: 50px;
-    height: 100vh;
-  }
 </style>

@@ -6,7 +6,7 @@
     <div v-for="(tk, index) in task" class>
       <div
       class="py-6 px-5 text-xl font-semibold text-gray-800 border-b border-solid border-gray-400"
-    >{{new Date(tk.timestamp).toDateString()}}</div>
+    >{{new Date(parseInt(tk.timestamp)).toDateString()}}</div>
       <!-- <div
         @click="task.active = !task.active"
         class="cursor-pointer py-3 flex flex items-center"
@@ -18,7 +18,7 @@
 
       <!--Task content-->
       <div :class="{'important': tk.important}" class="task task-contents">
-        <div class="task-time">{{tk.duration}}</div>
+        <div class="task-time">{{new Date(parseInt(tk.start)).toDateString()}} - {{new Date(parseInt(tk.end)).toDateString()}}</div>
         <div class="task-name">{{tk.title}}</div>
 
         <div v-if="tk.subtasks" class="text-sm font-normal">
@@ -58,9 +58,9 @@
       </div>
     </div>
 
-    <div class="text-center">
+    <!-- <div class="text-center">
       <button @click="$emit('showAddTask')" class="btn pill-button px-5 mt-5">+Add new note</button>
-    </div>
+    </div> -->
   </div>
 </template>
 

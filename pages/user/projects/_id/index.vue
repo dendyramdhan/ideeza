@@ -28,7 +28,7 @@
             </div>
 
             <div class="lg:flex flex-wrap">
-              <div class="w-6/12">
+              <div class="w-6/12 project-description">
                 <h2 class="text-pink-900 font-bold text-2xl mt-10 mb-8 btm-underline">Description</h2>
                 <p
                   class="text-pink-900"
@@ -142,18 +142,18 @@
                   </div>
                 </div>
               </div>
-              <div class="w-6/12 pl-3">
+              <div class="w-6/12 pl-3" v-if="project">
                 <h2 class="text-pink-900 font-bold text-2xl mt-10 mb-8 btm-underline">Products</h2>
                 <div class="flex flex-wrap">
-                  <div class="w-6/12 p-2" v-for="project in projects">
-                  <div v-for="product in project.products">
+                  <template v-for="product in project.products">
+                  <div :key="product.product_id" class="w-full md:w-1/2 pr-1 mb-1">
                     <div class="shadow-lg">
                       <img :src="project_image_url + product.product_image" />
                     </div>
                     <h2 class="text-pink-900 font-bold text-xl pt-3">{{product.product_title}}</h2>
                     <p class="text-gray-700 text-md">{{product.product_description}}</p>
                   </div>
-                  </div>
+                  </template>
                 </div>
               </div>
             </div>
@@ -176,8 +176,12 @@ export default {
   data: function() {
     return {
       projects: [],
+      project: null,
       project_image_url: process.env.project_image_url
     };
+  },
+  asyncData({params}){
+    return{id: params.id}
   },
   computed: {
     leftMenu() {
@@ -196,6 +200,7 @@ export default {
       if (response.data["success"] == true) {
         this.projects = response.data["data"];
         console.log("projects: ", response.data["data"]);
+        this.project = this.projects.find(a =>  a.project_id == this.id.toString())
       }
     });
   },
@@ -215,5 +220,24 @@ export default {
   background: #febef0;
   bottom: -10px;
   left: 0;
+}
+.project-description{
+  height: 500px;
+  overflow-y: auto;
+}
+.project-description::-webkit-scrollbar {
+    width: 20px;
+}
+
+.project-description::-webkit-scrollbar-track {
+    background: #8E6E87;
+    border-left: 9px solid white;
+    border-right: 9px solid white;
+}
+
+.project-description::-webkit-scrollbar-thumb {
+    background: #8E6E87;
+    border-left: 8px solid white;
+    border-right: 8px solid white;
 }
 </style>

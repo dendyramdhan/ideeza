@@ -54,23 +54,28 @@
             </div>
 
             <div class="py-5 px-5 lg:flex justify-between items-center">
-              <div class="relative" v-click-outside="onClickOutside">
-                <div class="btn btn--ideeza px-6 py-1 mr-5" @click="focus = !focus">
-                  Share Inventions
-                  <font-awesome-icon class="ml-5 h-6 text-xl" :icon="['fas', 'star']" />
+              <div class="flex flex-start">
+                <div class="relative" v-click-outside="onClickOutside">
+                  <div class="btn btn--ideeza px-6 py-1 mr-5" @click="focus = !focus">
+                    Share Inventions
+                    <font-awesome-icon class="ml-5 h-6 text-xl" :icon="['fas', 'star']" />
+                  </div>
+                  <div class="z-50 absolute bg-white shadow-md py-2 px-1" v-show="focus">
+                    <div
+                      @click="showInternalShare"
+                      class="px-2 py-3 text-ideeza-black hover:text-ideeza block cursor-pointer"
+                    >Share in news feed</div>
+                    <div
+                      @click="showExternalShare"
+                      class="px-1 py-2 text-ideeza-black hover:text-ideeza block cursor-pointer"
+                    >Share external</div>
+                  </div>
                 </div>
-                <div class="z-50 absolute bg-white shadow-md py-2 px-1" v-show="focus">
-                  <div
-                    @click="showInternalShare"
-                    class="px-2 py-3 text-ideeza-black hover:text-ideeza block cursor-pointer"
-                  >Share in news feed</div>
-                  <div
-                    @click="showExternalShare"
-                    class="px-1 py-2 text-ideeza-black hover:text-ideeza block cursor-pointer"
-                  >Share external</div>
+                <div class="btn btn--ideeza px-6 py-1 mr-5">
+                    Join this project
+                  <font-awesome-icon class="ml-5 h-6 text-xl" :icon="['fas', 'user']" />
                 </div>
               </div>
-
               <div
                 class="flex items-center mt-5 lg:mt-0"
                 v-for="Project in articleArray"
@@ -130,6 +135,103 @@
               <div class="mt-5 flex justify-end">
                 <button class="btn pill-button--ideeza px-5 py-1" @click="saveDescription">Save</button>
               </div>
+            </div>
+            <div class="mx-3 mb-3">
+            <div class="flex mt-4">
+                  <div class="p-3">
+                    <div class="w-16 h-16 rounded-full overflow-hidden">
+                      <img src="https://randomuser.me/api/portraits/women/23.jpg" />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="p-3 bg-gray-300 rounded-lg">
+                      <div class="flex">
+                        <div class="flex-1">
+                          <h3 class="text-gray-700 font-bold text-xl">Mike Tayson</h3>
+                        </div>
+                        <div class="flex-1 text-right">3 min ago</div>
+                      </div>
+                      <p class="text-gray-700 text-md">Technican at Google</p>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.
+                      </p>
+                      <div class="py-3">
+                        <span class="inline-block">
+                          <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
+                        </span>
+                        <span class="inline-block">
+                          <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            <div class="flex mt-4">
+                  <div class="p-3">
+                    <div class="w-16 h-16 rounded-full overflow-hidden">
+                      <img src="https://randomuser.me/api/portraits/women/23.jpg" />
+                    </div>
+                  </div>
+                  <div>
+                    <div class="p-3 bg-gray-300 rounded-lg">
+                      <div class="flex">
+                        <div class="flex-1">
+                          <h3 class="text-gray-700 font-bold text-xl">Mike Tayson</h3>
+                        </div>
+                        <div class="flex-1 text-right">3 min ago</div>
+                      </div>
+                      <p class="text-gray-700 text-md">Technican at Google</p>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud
+                      </p>
+                      <div class="py-3">
+                        <span class="inline-block">
+                          <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
+                        </span>
+                        <span class="inline-block">
+                          <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex mt-4">
+                      <div class="p-3">
+                        <div class="w-16 h-16 rounded-full overflow-hidden">
+                          <img src="https://randomuser.me/api/portraits/women/21.jpg" />
+                        </div>
+                      </div>
+                      <div>
+                        <div class="p-3 bg-gray-300 rounded-lg">
+                          <div class="flex">
+                            <div class="flex-1">
+                              <h3 class="text-gray-700 font-bold text-xl">Mike Tayson</h3>
+                            </div>
+                            <div class="flex-1 text-right">3 min ago</div>
+                          </div>
+                          <p class="text-gray-700 text-md">Technican at Google</p>
+                          <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua.
+                          </p>
+                          <div class="py-3">
+                            <span class="inline-block">
+                              <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
+                            </span>
+                            <span class="inline-block">
+                              <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <hr>
+            <div class="p-3">
+            <input type="text" placeholder="Write your comment..." class="px-3 py-6 bg-gray-200 text-gray-700 w-full">
             </div>
           </div>
         </div>

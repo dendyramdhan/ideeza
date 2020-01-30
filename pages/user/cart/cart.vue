@@ -4,7 +4,7 @@
 
     <div class="cart-scroll-area">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
-      <div style="overflow: scroll; height: 480px">
+      <div class="pink-scroll overflow-y-auto" style="height: 480px">
         <div v-for="project in projects" :key="project.project_id">
           <div
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
@@ -22,10 +22,15 @@
             :columns="columns"
             :options="options"
           >
-            <CheckBox slot="id" slot-scope="props" />
+            <CheckBox
+              slot="id"
+              slot-scope="props"
+              :value="props.row.product_id"
+              @onChange="checkBoxClicked"
+            />
             <div class="flex items-center" slot="detail" slot-scope="props">
               <div class="mr-2">
-                <img src="~/static/images/Layercar.png" />
+                <img :src="project_image_url + props.row.product_image" />
               </div>
               <div class="my-auto">
                 <span class="block font-semibold">{{props.row.product_title}}</span>
@@ -37,14 +42,13 @@
                 <font-awesome-icon
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'minus']"
-                  @click="count--"
-                  v-if="count >= 1"
+                  @click="onDecrement(props.index, project.project_id, props.row.product_id)"
                 />
-                <div class="w-5">{{count}}</div>
+                <div class="w-5">{{props.row.quantity}}</div>
                 <font-awesome-icon
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'plus']"
-                  @click="count++"
+                  @click="onIncrement(props.index, project.project_id, props.row.product_id)"
                 />
               </div>
             </div>
@@ -54,7 +58,7 @@
               slot-scope="props"
             >{{props.row.price | currency}}</span>
             <span class="font-semibold" slot="cost" slot-scope="props">{{props.row.cost | currency}}</span>
-            <div class="flex items-center justify-end" slot="actions" slot-scope="props">
+            <div class="flex items-center justify-center" slot="actions" slot-scope="props">
               <font-awesome-icon
                 class="mr-2 h-4 cursor-pointer text-ideeza"
                 :icon="['fas', 'trash']"
@@ -144,6 +148,7 @@ export default {
       manufacturers: [],
       allmanufacturers: [],
       manufs: [],
+      checkedproducts: [],
 
       options: {
         headings: {
@@ -153,12 +158,13 @@ export default {
           price: "Price",
           quantity: "Quantity",
           cost: "Cost",
-          actions: ""
+          actions: "Actions"
         },
         sortable: [],
         filterable: false,
         childRowTogglerFirst: false
-      }
+      },
+      project_image_url: process.env.project_image_url
     };
   },
   mounted() {
@@ -194,13 +200,44 @@ export default {
     });
   },
   methods: {
+    checkBoxClicked(status, value) {
+      window.$nuxt.$cookies.set("productid", value);
+      this.allmanufacturers.map(element => {
+        if (element.product_id == value && status == true) {
+          this.manufs.push(element.manufacturer);
+        } else if (element.product_id == value && status == false) {
+          const index = this.manufs.indexOf(element.manufacturer);
+          if (index > -1) {
+            this.manufs.splice(index, 1);
+          }
+        }
+      });
+
+      this.projects.map(element => {
+        element.products.map(child_element => {
+          if (child_element.product_id == value && status == true) {
+            this.checkedproducts.push(child_element);
+          } else if (child_element.product_id == value && status == false) {
+            const index = this.checkedproducts.indexOf(child_element);
+            if (index > -1) {
+              this.checkedproducts.splice(index, 1);
+            }
+          }
+        });
+      });
+
+      this.manufacturers = this.manufs;
+      console.log("manufacturers per products: ", this.manufacturers);
+      console.log("this.checkedproducts: ", this.checkedproducts);
+    },
+
     addManufacturer() {},
     toggleChildRow(ref, product_id) {
       window.$nuxt.$cookies.set("productid", product_id);
       this.allmanufacturers.map(element => {
         if (element.product_id == product_id) {
           this.manufs.push(element.manufacturer);
-          console.log("element: ", this.manufacturers);
+          console.log("element: ", element.manufacturer);
         }
       });
 
@@ -225,7 +262,43 @@ export default {
       this.$router.push("/user/add-service");
     },
 
+    onDecrement(index, pg_id, pd_id) {
+      this.projects.map(element => {
+        if (element.project_id == pg_id) {
+          element.products.map(p => {
+            if (p.product_id == pd_id) {
+              if (p.quantity > 0) {
+                p.quantity--;
+              }
+            }
+          });
+        }
+      });
+    },
+
+    onIncrement(index, pg_id, pd_id) {
+      this.projects.map(element => {
+        if (element.project_id == pg_id) {
+          element.products.map(p => {
+            if (p.product_id == pd_id) {
+              p.quantity++;
+            }
+          });
+        }
+      });
+    },
+
     moveNext() {
+      this.$store.commit("cartstepper/checkedproduct", this.checkedproducts);
+      this.$store.commit(
+        "cartstepper/checkedmanufacturers",
+        this.manufacturers
+      );
+      console.log("this.checkedproducts: ", this.checkedproducts);
+      console.log(
+        "checkedproducts: ",
+        this.$store.state.cartstepper.checkedproducts
+      );
       this.$router.push("/user/cart/delivery");
     },
 
@@ -238,6 +311,21 @@ export default {
 
 <style scoped>
 /*Table*/
+
+.pink-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
+}
 
 /deep/ table {
   @apply mb-5 w-full table-auto border-collapse text-gray-600 mx-auto;

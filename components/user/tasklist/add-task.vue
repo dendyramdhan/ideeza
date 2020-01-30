@@ -26,16 +26,16 @@
             <textarea rows="5" class="taskDescription" v-model="taskDescription"></textarea>
           </div>
           <div class="input-container">
-            <label>Taskers</label>
+            <label>Note contacts</label>
             <div class="flex items-center">
-              <img
+              <!-- <img
                 class="h-10 w-10 mr-2 rounded-full"
                 src="https://randomuser.me/api/portraits/women/17.jpg"
               />
               <img
                 class="h-10 w-10 mr-2 rounded-full"
                 src="https://randomuser.me/api/portraits/men/16.jpg"
-              />
+              /> -->
               <div class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative">
                 <font-awesome-icon
                   class="absolute-center-h-v mr-1 h-4 text-gray-600 hover:text-gray-800 cursor-pointer"
@@ -82,11 +82,12 @@
 
       <div class="px-10">
         <h1 class="font-semibold text-lg block">Attachments</h1>
-        <FileField />
-        <div>
+        <FileField @input="saveFile"/>
+        <!-- in the below div we have to append the  -->
+        <div v-if="file">
           <div class="flex items-center mt-2">
-            <span class="text-ideeza text-xs">introduction to the task 4 attachment</span>
-            <font-awesome-icon
+            <span class="text-ideeza text-xs" v-if="file">{{file.name}}</span>
+            <font-awesome-icon @click="file=null"
               class="ml-2 h-3 inline text-ideeza-gray-300 cursor-pointer :hover:text-ideeza-gray-500"
               :icon="['fas', 'trash']"
             />
@@ -119,6 +120,7 @@ export default {
       taskTaskers: null,
       taskAttachments: null,
       showMembers: false,
+      file: null,
       task: null,
       theme: {
         container: {
@@ -146,7 +148,9 @@ export default {
       this.dateRange = event.target.value;
       console.log("datapicker:", this.dateRange);
     },
-
+    saveFile(file) {
+      this.file = file
+    },
     close() {
       this.$emit("onClose");
     },
@@ -154,34 +158,51 @@ export default {
       this.showMembers = false;
     },
     addNewTask() {
-      var r = confirm("Do you want to add new note?");
-      if (r == true) {
-        let start = new Date(this.dateRange.start).getTime();
-        let end = new Date(this.dateRange.end).getTime();
-        let timestamp = new Date().setHours(0, 0, 0, 0);
-        var addTaskFormData = new FormData();
-        addTaskFormData.set("link", this.taskLink);
-        addTaskFormData.set("title", this.taskName);
-        addTaskFormData.set("description", this.taskDescription);
-        addTaskFormData.set("timestamp", timestamp);
-        addTaskFormData.set("start", start);
-        addTaskFormData.set("end", end);
-        // addTaskFormData.append("attachments", value, filename);
-
-        let addTaskurl = "/api/task/add_new";
-        let addTaskData = {
-          method: "post",
-          url: addTaskurl,
-          data: addTaskFormData
-        };
-
-        apiServiceWithToken(addTaskData, response => {
-          console.log(response);
-          if (response.data["success"] == true) {
-            window.location.reload();
-          }
-        });
+      let start = new Date(this.dateRange.start).getTime();
+      console.log('start', this.taskDescription)
+      console.log('start', start)
+      let end = new Date(this.dateRange.end).getTime();
+      let timestamp = new Date().setHours(0, 0, 0, 0);
+      console.log('timestamp: ', typeof(timestamp));
+      var addTaskFormData = new FormData();
+      addTaskFormData.set("link", this.taskLink);
+      addTaskFormData.set("title", this.taskName);
+      addTaskFormData.set("description", this.taskDescription);
+      addTaskFormData.set("timestamp", timestamp);
+      addTaskFormData.set("start", start);
+      addTaskFormData.set("end", end);
+      if (start === NaN) {
+        alert("Please Enter Deadline!");
+        return;
+      } else if (end === NaN) {
+        alert("Please Enter Deadline!");
+        return;
+      } else if (this.taskName === '') {
+        alert("Please Enter Task Name!");
+        return;
+      } else if (this.taskDescription === '') {
+        alert("Please Enter Description!");
+        return;
       } else {
+        var r = confirm("Do you want to add new note?");
+        if (r == true) {
+          // addTaskFormData.append("attachments", value, filename);
+
+          let addTaskurl = "/api/task/add_new";
+          let addTaskData = {
+            method: "post",
+            url: addTaskurl,
+            data: addTaskFormData
+          };
+
+          apiServiceWithToken(addTaskData, response => {
+            console.log(response);
+            if (response.data["success"] == true) {
+              window.location.reload();
+            }
+          });
+        } else {
+        }
       }
     },
     onAddTaskers() {

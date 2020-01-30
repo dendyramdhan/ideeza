@@ -1,6 +1,6 @@
 <template>
     <div class="p-5">
-        <h5 class="font-semibold text-lg text-center mt-10">Label</h5>
+        <h5 class="font-semibold text-lg text-center mt-2">Label</h5>
         <div class="mt-5 mx-3">
             <div>Background Color</div>
             <div class="rounded p-4 text-white bg-green-300 mt-1">#FFFFFF

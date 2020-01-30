@@ -29,7 +29,7 @@
           <div class="mx-auto task-col md:flex flex-wrap">
             <template>
               <div v-if="filter_date==null"></div>
-              <div v-else>
+              <div v-else-if="tasks.length>0">
                 <TaskCol @showAddTask="displayAddTask" :task="tasks" />
               </div>
             </template>
@@ -43,12 +43,16 @@
               <div v-if="filter_week == null">
                 <!-- <TaskCol @showAddTask="displayAddTask" :task="tasks" /> -->
               </div>
-              <div v-else>
+              <div v-else-if="tasks.length>0">
                 <TaskCol @showAddTask="displayAddTask" :task="tasks" />
               </div>
             </template>
           </div>
         </div>
+      </div>
+      <div class="text-center" v-if="tasks.length==0">
+        <div class="text-lg text-black">Your notes are clear. Should you add new more?</div>
+        <button @click="displayAddTask" class="bg-ideeza text-white px-10 py-5 mt-5 rounded-lg">+Add new note</button>
       </div>
     </div>
 

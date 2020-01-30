@@ -501,3 +501,9 @@ p.VuePagination__count{
   position: absolute;
   bottom: 5%;
 }
+.private-projects .VueCarousel-pagination{
+  position: absolute;
+  bottom: 16%;
+  right: 35%;
+  top: -7px;
+}

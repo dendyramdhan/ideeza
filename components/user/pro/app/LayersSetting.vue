@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5 class="font-semibold text-lg text-center mt-10">Layers</h5>
+    <h5 class="font-semibold text-lg text-center mt-2">Layers</h5>
     <ul class="mx-6 mt-5 text-lg">
       <li class="mb-3">
         <div class="flex justify-between">

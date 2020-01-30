@@ -4,7 +4,7 @@
 
     <div class="cart-scroll-area">
       <!-- <smooth-scrollbar :options="{alwaysShowTracks: true}"> -->
-      <div style="overflow: scroll; height: 480px">
+      <div class="pink-scroll overflow-y-auto" style="height: 480px">
         <div v-for="(project) in projects" :key="project.project_id">
           <div
             class="p-3 my-3 gradient-bg text-white flex justify-between gradient-bg items-center"
@@ -42,14 +42,13 @@
             <div class="flex items-center" slot="quantity" slot-scope="props">
               <div class="mx-auto flex">
                 <font-awesome-icon
-                  @click="count--"
-                  v-if="count >= 1"
+                  @click="onDecrement(props.index, project.project_id, props.row.product_id)"
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'minus']"
                 />
-                <div class="w-5">{{count}}</div>
+                <div class="w-5">{{props.row.quantity}}</div>
                 <font-awesome-icon
-                  @click="count++"
+                  @click="onIncrement(props.index, project.project_id, props.row.product_id)"
                   class="mr-2 h-3 cursor-pointer my-auto"
                   :icon="['fas', 'plus']"
                 />
@@ -60,7 +59,7 @@
                 <span class="block font-semibold">${{props.row.cost}}</span>
               </div>
             </div>
-            <div class="flex items-center justify-end" slot="actions" slot-scope="props">
+            <div class="flex items-center justify-center" slot="actions" slot-scope="props">
               <font-awesome-icon
                 @click="toggleChildRow(project.project_id, props.row.product_id)"
                 class="mr-2 h-4 cursor-pointer text-ideeza"
@@ -146,7 +145,7 @@ export default {
           id: "",
           detail: "Products",
           quantity: "Quantity",
-          actions: ""
+          actions: "Actions"
         },
         sortable: [],
         filterable: false,
@@ -203,6 +202,31 @@ export default {
       console.log("product_id: ", product_id);
       this.$refs[ref][0].toggleChildRow();
     },
+    onDecrement(index, pg_id, pd_id) {
+      this.projects.map(element => {
+        if (element.project_id == pg_id) {
+          element.products.map(p => {
+            if (p.product_id == pd_id) {
+              if (p.quantity > 0) {
+                p.quantity--;
+              }
+            }
+          });
+        }
+      });
+    },
+
+    onIncrement(index, pg_id, pd_id) {
+      this.projects.map(element => {
+        if (element.project_id == pg_id) {
+          element.products.map(p => {
+            if (p.product_id == pd_id) {
+              p.quantity++;
+            }
+          });
+        }
+      });
+    },
     onRemove(project_id) {
       var d = confirm("Do you really want to remove?");
       if (d == true) {
@@ -219,6 +243,21 @@ export default {
 /deep/ .smooth-scrollbar {
   padding-right: 20px;
   margin-top: 15px;
+}
+
+.pink-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+.pink-scroll::-webkit-scrollbar-thumb {
+  background-color: #ff09d0;
+  border: 2px solid #ff09d0;
 }
 
 /*Table*/

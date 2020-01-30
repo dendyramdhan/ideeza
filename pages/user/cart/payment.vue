@@ -155,13 +155,36 @@ export default {
         "November",
         "December"
       ],
-      transaction_success: "false"
+      transaction_success: "false",
+      manufacturers: [],
+      products: [],
+      p_prices: 0,
+      m_prices: 0,
+      t_prices: 0
     };
   },
   mounted() {
     this.$store.commit("cartstepper/set", { position: 4 });
+    this.manufacturers = this.$store.state.cartstepper.manufacturers;
+    this.products = this.$store.state.cartstepper.checkedproducts;
 
-    PayPal();
+    this.products.map(p => {
+      this.p_prices += p.price;
+    });
+    this.manufacturers.map(m => {
+      this.m_prices += m.cost;
+    });
+
+    this.t_prices = this.p_prices + this.m_prices;
+
+    console.log("this.products: ", this.products);
+    console.log("this.manufacturers: ", this.manufacturers);
+    console.log("total prices: ", this.t_prices);
+
+    this.$store.commit("cartstepper/totalPrice", this.t_prices);
+    setTimeout(() => {
+      PayPal(this.t_prices);
+    }, 100);
   },
   components: {
     "text-field": TextField,
@@ -178,57 +201,7 @@ export default {
       this.tabItem = "paypal";
       if (this.tabItem == "paypal") {
         setTimeout(() => {
-          paypal
-            .Buttons({
-              createOrder: function(data, actions) {
-                // This function sets up the details of the transaction, including the amount and line item details.
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: "0.01"
-                      }
-                    }
-                  ]
-                });
-              },
-              onError: function(err) {
-                // that.toastService.show('Error with payment processing', 4000, 'red');
-                console.log("payPal onError", err);
-                return;
-              },
-              onCancel: function(data) {
-                console.log("payPal onCancel", data);
-                // that.toastService.show(
-                //   "The transaction was interrupted",
-                //   4000,
-                //   "red"
-                // );
-                return;
-              },
-              onApprove: function(data, actions) {
-                // This function captures the funds from the transaction.
-                return actions.order.capture().then(function(details) {
-                  // This function shows a transaction success message to your buyer.
-                  alert("Transaction completed by " + details.payer.name.given_name);
-                  console.log("Transaction completed by ", details);
-                  let transactionsurl = "/api/transaction/add";
-                  let transactionsData = {
-                    method: "post",
-                    url: transactionsurl,
-                    data: details
-                  };
-
-                  apiServiceWithToken(transactionsData, response => {
-                    console.log("response", response.data.success);
-                    if (response.data.success == true) {
-                      
-                    }
-                  });
-                });
-              }
-            })
-            .render("#paypal-button-container");
+          PayPal(this.t_prices);
         }, 100);
       } else {
       }
@@ -299,7 +272,7 @@ export default {
   }
 };
 
-function PayPal() {
+function PayPal(price) {
   paypal
     .Buttons({
       createOrder: function(data, actions) {
@@ -308,7 +281,7 @@ function PayPal() {
           purchase_units: [
             {
               amount: {
-                value: "0.01"
+                value: price
               }
             }
           ]

@@ -106,6 +106,20 @@
             >
               <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'star']" />Reviews
             </div>
+            <div
+              @click="tabItem='friends'"
+              class="tab-item"
+              :class="{active: tabItem === 'friends', 'border-bot': tabItem !== 'friends'}"
+            >
+              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'users']" />Friends
+            </div>
+            <div
+              @click="tabItem='activities'"
+              class="tab-item"
+              :class="{active: tabItem === 'activities', 'border-bot': tabItem !== 'activities'}"
+            >
+              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'users']" />Activities
+            </div>
           </div>
           <!--Time line-->
           <div v-if="tabItem === 'timeline'" class="mt-5">
@@ -216,28 +230,23 @@
             <!--Public & Private Projects-->
             <div class="tabs-container z-10 relative flex lg:mt-10">
               <div
-                @click="tabChildItem='public'"
-                class="tab-item"
-                :class="{active: tabChildItem === 'public', 'border-bot': tabChildItem !== 'public'}"
-              >
-                Public
-              </div>
-
-              <div
                 @click="tabChildItem='private'"
                 class="tab-item"
                 :class="{active: tabChildItem === 'private', 'border-bot': tabChildItem !== 'private'}"
               >
                 Private
               </div>
-            </div>
-            <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'public'">
-              <div class="flex">
-                <select class="border-0">
-                  <option>Owner</option>
-                  <option>Part of team</option>
-                </select>
+              <div
+                @click="tabChildItem='public'"
+                class="tab-item"
+                :class="{active: tabChildItem === 'public', 'border-bot': tabChildItem !== 'public'}"
+              >
+                Public
               </div>
+              
+            </div>
+            <drop-down class="w-full mt-3" :value="1" :data="['Owner','Part of team']" />
+            <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'public'">
               
               <div class="flex" v-for="project in projects">
                 <img
@@ -250,12 +259,6 @@
             </div>
 
             <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'private'">
-              <div class="flex">
-                <select class="border-0">
-                  <option>Owner</option>
-                  <option>Part of team</option>
-                </select>
-              </div>
 
               <div class="flex" v-for="project in projects">
                 <img
@@ -304,6 +307,106 @@
               </div>
             </div>
           </div>
+          <div class="mt-5" v-if="tabItem === 'friends'" style="overflow-y: auto; height: 600px">
+          <div class="flex flex-wrap friends">
+            <div class="mr-2 max-w-2xl">
+              <div class="border border-gray">
+                <div class="bg-gray-200 h-32 w-full"></div>
+                <img src="https://randomuser.me/api/portraits/men/17.jpg" class="-mt-20 mx-auto rounded-full mb-3">
+                <div class="text-center mb-3">
+                  <font-awesome-icon
+                  class="h-6 text-gray-500 inline text-4xl hover:text-gray-800 cursor-pointer"
+                  :icon="['fas', 'network-wired']"
+                  />
+                  <span class="inline">25 mutual connections</span>
+                </div>
+                <div class="flex mb-3 mx-2">
+                  <div class="flex-1">
+                    <h3 class="font-bold text-xl">Jhon Doe</h3>
+                    <p>Technician</p>
+                  </div>
+                  <div class="flex-1">
+                    <button class="px-4 py-3 text-center text-ideeza border border-ideeza rounded bg-white w-full">
+                      Visit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mr-2 max-w-2xl">
+              <div class="border border-gray">
+                <div class="bg-gray-200 h-32 w-full"></div>
+                <img src="https://randomuser.me/api/portraits/men/17.jpg" class="-mt-20 mx-auto rounded-full mb-3">
+                <div class="text-center mb-3">
+                  <font-awesome-icon
+                  class="h-6 text-gray-500 inline text-4xl hover:text-gray-800 cursor-pointer"
+                  :icon="['fas', 'network-wired']"
+                  />
+                  <span class="inline">25 mutual connections</span>
+                </div>
+                <div class="flex mb-3 mx-2">
+                  <div class="flex-1">
+                    <h3 class="font-bold text-xl">Jhon Doe</h3>
+                    <p>Technician</p>
+                  </div>
+                  <div class="flex-1">
+                    <button class="px-4 py-3 text-center text-ideeza border border-ideeza rounded bg-white w-full">
+                      Visit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mr-2 max-w-2xl">
+              <div class="border border-gray">
+                <div class="bg-gray-200 h-32 w-full"></div>
+                <img src="https://randomuser.me/api/portraits/men/17.jpg" class="-mt-20 mx-auto rounded-full mb-3">
+                <div class="text-center mb-3">
+                  <font-awesome-icon
+                  class="h-6 text-gray-500 inline text-4xl hover:text-gray-800 cursor-pointer"
+                  :icon="['fas', 'network-wired']"
+                  />
+                  <span class="inline">25 mutual connections</span>
+                </div>
+                <div class="flex mb-3 mx-2">
+                  <div class="flex-1">
+                    <h3 class="font-bold text-xl">Jhon Doe</h3>
+                    <p>Technician</p>
+                  </div>
+                  <div class="flex-1">
+                    <button class="px-4 py-3 text-center text-ideeza border border-ideeza rounded bg-white w-full">
+                      Visit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mr-2 max-w-2xl">
+              <div class="border border-gray">
+                <div class="bg-gray-200 h-32 w-full"></div>
+                <img src="https://randomuser.me/api/portraits/men/17.jpg" class="-mt-20 mx-auto rounded-full mb-3">
+                <div class="text-center mb-3">
+                  <font-awesome-icon
+                  class="h-6 text-gray-500 inline text-4xl hover:text-gray-800 cursor-pointer"
+                  :icon="['fas', 'network-wired']"
+                  />
+                  <span class="inline">25 mutual connections</span>
+                </div>
+                <div class="flex mb-3 mx-2">
+                  <div class="flex-1">
+                    <h3 class="font-bold text-xl">Jhon Doe</h3>
+                    <p>Technician</p>
+                  </div>
+                  <div class="flex-1">
+                    <button class="px-4 py-3 text-center text-ideeza border border-ideeza rounded bg-white w-full">
+                      Visit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
@@ -314,13 +417,15 @@
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import contactinfos from "~/json/contactinfos";
 import apiServiceWithToken from "~/apiService/have_token.js";
+import dropDown from "~/components/form/dropdown-field";
 
 export default {
   middleware: "auth",
   layout: "user",
   name: "profile-index",
   components: {
-    LeftMenu
+    LeftMenu,
+    dropDown
   },
   data: function() {
     return {
@@ -482,5 +587,9 @@ export default {
   .left-panel {
     max-width: 366px;
   }
+}
+.friends>div{
+  width: 32%;
+  @apply mb-2;
 }
 </style>

@@ -3,8 +3,8 @@
     <navigation class="flex-shrink"></navigation>
     <!--  Left Side Bar  -->
     <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-      <LeftMenu v-if="$route.path.search('settings') < 0" />
-      <settingsLeftMenu v-else />
+      <LeftMenu v-if="$route.path.search('settings') < 0 && $route.path.search('messages') < 0" />
+      <settingsLeftMenu v-else-if="$route.path.search('messages') < 0" />
       <div class="flex-grow">
         <nuxt-child></nuxt-child>
       </div>
