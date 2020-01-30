@@ -52,6 +52,18 @@
     </li>
 
     <li
+      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+      >
+      <nuxt-link to="/investor" class>Investor</nuxt-link>
+    </li>
+
+    <li
+      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+      >
+      <nuxt-link to="/success_story" class>Success Story</nuxt-link>
+    </li>
+
+    <li
     v-if="!auth"
     style="cursor: pointer"
     class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"

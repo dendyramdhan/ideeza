@@ -118,7 +118,7 @@
      <p class="text-gray-700 text-lg py-5 ">If you're on the fence on whether you need a big company behind you to succeed, these individuals prove that having vision and the drive is more than enough.</p>
 
      <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-       <nuxt-link to="/success_story" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">View Story</nuxt-link>
+       <nuxt-link to="/success_story/story" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">View Story</nuxt-link>
      </p>
    </div>
  </div>
