@@ -98,14 +98,14 @@
                         class="py-1 px-2 border border-solid border-light-gray mr-3 md:flex-none"
                       >{{Service.time}} Days</div>
                       <div
-                        class="py-1 px-2 border border-solid border-light-gray mr-3 md:flex-none"
+                        class="p-2 mr-3 flex justify-center rounded-full bg-orange-400 text-white"
                       >{{Service.cost}}</div>
-                      <div
+                      <!-- <div
                         v-if="index==0"
                         @click="requestQuote = !requestQuote"
                         :class="{'btn-green': quoteSend}"
                         class="py-1 px-2 border border-solid border-light-gray md:flex-none flex-1"
-                      >Request Quote</div>
+                      >Request Quote</div> -->
                     </div>
                   </div>
                   <div class="flex-1 my-5 flex justify-center md:justify-start items-center">
@@ -298,10 +298,10 @@ export default {
             var x = a.score;
             var y = b.score;
             if (x < y) {
-              return -1;
+              return 1;
             }
             if (x > y) {
-              return 1;
+              return -1;
             }
             return 0;
           });

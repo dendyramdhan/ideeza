@@ -23,6 +23,22 @@
                         @mouseleave="product.showDetails=false;$forceUpdate()">
                         <div class="porject-thum-img relative">
                           <img class="product-img" :src="project_img_url+product.product_image">
+                          <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md">
+                            <div class="flex text-lg text-white ">
+                              <div class="flex-1 w-32">
+                                <div class="inline-block">
+                                  <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                                </div> 211
+                              </div>
+                              <div class="flex-1">
+                                <img src="~/static/images/ideeza-play-icon.png" class="inline-block"> 76
+                              </div>
+                              <div class="flex-1">
+                                <img src="~/static/images/likeWhite.png" class="inline-block"> 34
+                              </div>
+
+                            </div>
+                          </div>
                         </div>
                         <div class="pt-3 text-black font-semibold text-lg">
                           {{product.product_title}}
@@ -51,6 +67,22 @@
                   :to="{ path: '/user/projects/detail', query: { id: info.project_id}}">
                   <div class="porject-thum-img relative">
                     <img class="product-img" :src="project_img_url+info.products[0].product_image">
+                    <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md">
+                      <div class="flex text-lg text-white ">
+                        <div class="flex-1 w-32">
+                          <div class="inline-block">
+                            <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                          </div> 211
+                        </div>
+                        <div class="flex-1">
+                          <img src="~/static/images/ideeza-play-icon.png" class="inline-block"> 76
+                        </div>
+                        <div class="flex-1">
+                          <img src="~/static/images/likeWhite.png" class="inline-block"> 34
+                        </div>
+
+                      </div>
+                    </div>
                   </div>
                   <div class="pt-3 text-black font-semibold text-lg">
                     {{info.products[0].product_title}}

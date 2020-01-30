@@ -24,6 +24,7 @@ export default {
 .left-side-bar {
   width: 300px;
   min-width: 300px;
+  position:fixed;
 }
 .left-main-menu {
 }

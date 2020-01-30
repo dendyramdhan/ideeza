@@ -7,8 +7,8 @@
       <!-- <sidebar-menu :menu-items="menu" :bot-menu-items="botMenuItems" /> -->
       <LeftMenu />
       <!-- Main Contents -->
-      <div class="flex-grow page-container p-2">
-        <nuxt />
+      <div class="flex-grow page-container">
+        <nuxt class="service-provider-content p-2"/>
       </div>
 
     </div>
@@ -154,5 +154,9 @@
 }
 .main-panel {
   z-index: 1;
+}
+.service-provider-content {
+  overflow-y: auto;
+  height: calc(100vh - 55px);
 }
 </style>

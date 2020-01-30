@@ -1,5 +1,6 @@
 <template>
-  <div class="md:m-8 lg:m-8 m-2">
+  <div>
+    <div class="md:m-8 lg:m-8 m-2">
     <div class="my-2">
       <div class="max-w-xl">
         <h1 class="text-gray-800 text-xl font-semibold">Change Your Password</h1>
@@ -100,6 +101,7 @@
         </div>
       </div> -->
     </div>
+  </div>
   </div>
 </template>
 <script>

@@ -1,5 +1,6 @@
 <template>
-    <div class="md:m-8 lg:m-8 m-2 xl:max-w-4xl">
+    <div>
+        <div class="md:m-8 lg:m-8 m-2 xl:max-w-4xl">
         <h1 class="text-gray-800 text-xl font-semibold">
             Upgrade Your Pricing Plan
         </h1>
@@ -123,6 +124,7 @@
                 </ul>
             </div>
         </div>
+    </div>
     </div>
 </template>
 <script>
