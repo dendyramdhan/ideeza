@@ -143,7 +143,7 @@ We packed the crowd knowledge in small packages, and by using our Artificial Int
         To give you the full reward for contributing to the community, you will get points according to your activities. That way you can stand out in our service providers list, so clients can find you easily in our marketplace for private jobs.</p>
         <p class="text-gray-700 text-lg py-5 ">In this way, we believe that we can thank you on behalf of the global open knowledge community.</p>
         <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-          <nuxt-link to="" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">LEARN MORE</nuxt-link>
+          <nuxt-link to="/landing/pointslevel" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">LEARN MORE</nuxt-link>
         </p>
       </div>
       <img src="~/static/images/ref_img_1251.png" class="md:absolute static left-0 max-width-half">
