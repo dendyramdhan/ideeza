@@ -98,25 +98,25 @@
   >
   <nuxt-link
   to="/user/profile"
-  class="md:ml-0 mr-4 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300"
+  class="md:ml-0 mr-1 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300"
   >
   <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'linkedin']" />
 </nuxt-link>
 <nuxt-link
 to="/user/profile"
-class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
 >
 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'twitter-square']" />
 </nuxt-link>
 <nuxt-link
 to="/user/profile"
-class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
 >
 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'instagram']" />
 </nuxt-link>
 <nuxt-link
 to="/user/profile"
-class="md:my-0 my-3 mr-12 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+class="md:my-0 my-3 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
 >
 <font-awesome-icon
 class="text-xl text-gray-500"
