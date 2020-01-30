@@ -10,25 +10,22 @@
           </div>
 
           <div class="flex items-center mb-2 md:mb-0">
-
             <span class="mr-1">Category</span>
             <select class="w-32 bg-white p-1 border border-solid border-gray-400">
               <option></option>
             </select>
-
           </div>
-
         </div>
         
         <div class="flex items-center">
-          <file-field label="Upload 3D" @input="upload3dModel" />
+          <!-- <file-field label="Upload 3D" @input="upload3dModel" /> -->
           <!-- <button @click="addImage" class="btn pill-button py-0 px-5" >Upload image</button> -->
         </div>
       </div>
 
       <div class="content-container relative">
-        <client-only>
 
+        <client-only>
           <engine class="border border-light-gray engine-container"
                   :init-data="initDataForEngine"
                   :router="router"
@@ -42,20 +39,23 @@
                   :apiPlatform="apiPlatform"
                   :searchFor="searchFor"
                   @selectObject="selectedObject"
+
+                  ref="engine"
           />
           <spinner slot="placeholder" />
         </client-only>
+
       </div>
 
       <div class="md:flex justify-between items-center p-5 w-full">
         <div class="flex items-center font-semibold text-gray-800 mb-2 md:mb-0">
           <span class="mr-2">Axis</span>
           <span class="mr-2 text-lg">X</span>
-          <input @input="setTransform($event.target.value, 'X')" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
+          <input @input="setTransform($event.target.value, 'X')" :value="pointValue.X" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
           <span class="mr-2 text-lg">Y</span>
-          <input @input="setTransform($event.target.value, 'Y')" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
+          <input @input="setTransform($event.target.value, 'Y')" :value="pointValue.Y" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
           <span class="mr-2 text-lg">Z</span>
-          <input @input="setTransform($event.target.value, 'Z')" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
+          <input @input="setTransform($event.target.value, 'Z')" :value="pointValue.Z" type="text" class="w-20 bg-white p-1 border border-solid border-gray-400 mr-2">
         </div>
         <div class="flex items-center font-semibold text-gray-800 mb-2 md:mb-0">
           <div class="relative mr-5 flex flex-col items-center text-xs">
@@ -82,15 +82,16 @@
       <div v-if="description" class="w-full flex p-5 border-t border-solid border-gray-300">
         <span class="font-semibold mr-5 flex-shrink">Description</span>
         <div class="flex-grow">
-          <textarea rows="2" class="bg-white p-1 border border-solid border-gray-400 w-full"></textarea>
+          <textarea rows="2" class="bg-white p-1 border border-solid border-gray-400 w-full" v-model="descriptionText"></textarea>
         </div>
       </div>
     </div>
 
     <div class="w-full mt-10 lg:flex justify-end">
-      <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button>
-      <button class="btn pill-button pill-button--ideeza py-0 px-12" >Save</button>
+      <!-- <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button> -->
+      <button class="btn pill-button pill-button--ideeza py-0 px-12" @click="save_part" >Save</button>
     </div>
+
   </div>
 
 </template>
@@ -100,68 +101,117 @@
   import CheckBox from '~/components/form/checkbox.vue'
   import FilesField from '~/components/form/file-field-button.vue'
   import Spinner from '~/components/loader/spinner.vue'
+  import apiService from "~/apiService/have_token.js"
+
     export default {
+
         name: "cover",
-      data: () => {
-          return {
-            colorPicker: false,
-            description: false,
-            visibleGrid: true,        // show the grid
-            initDataForEngine: {},    // the entire object need to init the engine, at the begining is empty
-            router: 0,                // type of scene - part -0, component -1, cover -2
-            background: "#ffffff",    // backround color - hex string
-            transform: "translate",   // type of transform in scene - translate, rotate, scale
-            objectData: {},           // the object used to import a 3d object
-            uploadData: null,         // the event from upload
-            transformData: [0, 'X'],  // first is the value of input, second is axis - X,Y,Z(string)
-            objectColor: "#2B6CB0",   // color of object
-            apiPlatform: "polygoogle",// site where we search polygoogle/remix3d
-            searchFor: "",            // text after we search
-          }
-      },
-      components: {
-        'engine': Engine.ct,
-        'check-box': CheckBox,
-        'spinner': Spinner,
-        'file-field': FilesField
-      },
-      mounted() {
-          console.log('mounted');
-          //this.objectData =
-      },
-      computed: {
-          backgroundDisplayStyle() {
-            return `background-color: ${this.background}`;
+        props:['babyFile'],
+        data: () => {
+            return {
+              colorPicker: false,
+              description: false,
+              visibleGrid: true,        // show the grid
+              initDataForEngine: {},    // the entire object need to init the engine, at the begining is empty
+              router: 0,                // type of scene - part -0, component -1, cover -2
+              background: "#ffffff",    // backround color - hex string
+              transform: "translate",   // type of transform in scene - translate, rotate, scale
+              objectData: {},           // the object used to import a 3d object
+              uploadData: null,         // the event from upload
+              transformData: [0, 'X'],  // first is the value of input, second is axis - X,Y,Z(string)
+              objectColor: "#2B6CB0",   // color of object
+              apiPlatform: "polygoogle",// site where we search polygoogle/remix3d
+              searchFor: "",            // text after we search
+              pointValue: {'X':0, 'Y': 0, 'Z': 0},
+              descriptionText: "",
+              savedPartList: []
+            }
+        },
+        components: {
+          'engine': Engine.ct,
+          'check-box': CheckBox,
+          'spinner': Spinner,
+          'file-field': FilesField
+        },
+        mounted() {
+
+        },
+        computed: {
+
+            backgroundDisplayStyle() {
+              return `background-color: ${this.background}`;
+            },
+            objectDisplayStyle() {
+              return `background-color: ${this.objectColor}`;
+            }
+
+        },
+
+        methods: {
+
+          toggleGrid(state){
+            this.visibleGrid = state;
           },
-          objectDisplayStyle() {
-            return `background-color: ${this.objectColor}`;
+
+          showColorPicker() {
+            this.showColorPicker = true;
+          },
+
+          setTransform(val, position){
+            if(!isNaN(val)){
+              console.log(val)
+              this.transformData = [val, position]
+              this.pointValue[position] = val
+            }
+          },
+
+          addImage(){
+            this.objectData = {'transform':{'position':[0,0,0],'rotation':[0,0,0],'scale':[1,1,1],'color':'#1f1f1f'},'url':'user-5272f6574e9b4c2b955bb3a6dbc45795.glb'};
+          },
+
+        
+          selectedObject(val) {
+          },
+
+          save_part(){
+
+            if(!this.uploadData)return
+
+            let getDataInfo = this.$refs.engine.getData()
+            let selectedPartInfo =  this.$parent.$data.selectedPart
+            let partInfo = {
+
+              selectedPartInfo,
+              descriptionText: this.descriptionText,
+              transData: getDataInfo 
+
+            }
+            console.log("part info : ", partInfo)
+            partInfo = JSON.stringify(partInfo)
+            let data = new FormData()
+
+            data.append("part_info", partInfo)
+            data.append("attach", this.uploadData.target.files[0])
+
+            let sendData ={
+              url: "/api/save_cover_part",
+              method: "post",
+              data
+            }      
+
+            apiService(sendData, (res)=>{
+
+              if(res.data.success)
+                 this.$emit('updatePartList')
+
+              console.log("save_cover_part response : ", res)
+
+            })
+
           }
-      },
-      methods: {
-        toggleGrid(state){
-          this.visibleGrid = state;
-        },
-        showColorPicker() {
-          this.showColorPicker = true;
-        },
-        setTransform(val, position){
-          if(!isNaN(val)){
-            console.log(val)
-            this.transformData = [val, position]
-          }
-        },
-        addImage(){
-          this.objectData = {'transform':{'position':[0,0,0],'rotation':[0,0,0],'scale':[1,1,1],'color':'#1f1f1f'},'url':'user-5272f6574e9b4c2b955bb3a6dbc45795.glb'};
-        },
-        upload3dModel(param){
-          console.log("param :", param)
-          this.uploadData = param;
-        },
-        selectedObject(val) {
 
         }
       }
-    }
 </script>
 
 <style scoped>

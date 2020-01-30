@@ -121,7 +121,6 @@
         'spinner': Spinner,
       },
       mounted() {
-          console.log('mounted');
           //this.objectData =
       },
       computed: {

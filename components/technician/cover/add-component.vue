@@ -122,7 +122,6 @@
         'spinner': Spinner,
       },
       mounted() {
-          console.log('mounted');
           //this.objectData =
       },
       computed: {
@@ -146,8 +145,9 @@
             this.transformData = [val, position]
           }
         },
-        addImage(){
-          this.objectData = {'transform':{'position':[0,0,0],'rotation':[0,0,0],'scale':[1,1,1],'color':'#1f1f1f'},'url':'user-5272f6574e9b4c2b955bb3a6dbc45795.glb'};
+        addImage(obj){
+          this.objectData = obj
+          // this.objectData = {'transform':{'position':[0,0,0],'rotation':[0,0,0],'scale':[1,1,1],'color':'#1f1f1f'},'url':'user-5272f6574e9b4c2b955bb3a6dbc45795.glb'};
         },
         selectedObject(val) {
 

@@ -24,6 +24,7 @@
 
       <div>
         <file-field label="Upload 3D" v-on:input="upload3dModel" />
+
         <!-- <button @click="select_part()"  class="btn pill-button px-4 py-0">Upload 3D</button> -->
       </div>
 
@@ -36,20 +37,18 @@
           <th class="text-left">Country</th>
           <th class="text-left">Package</th>
           <th class="text-left">Manufacturer</th>
-          <th class="text-left">Action</th>
+          <th class="text-left">Created At</th>
         </tr>
       </thead>
       <tbody>
        
         <tr class v-for="(article, index) in partList" :key="`${index}`">
-          <td class>{{article.name}}</td>
-          <td>{{article.country}}</td>
-          <td>{{article.package}}</td>
-          <td class="text-ideeza">{{article.manufacturer}}</td>
-          <td>
-            <!-- <button @click="$emit('select', article)" class="btn pill-button px-4 py-0">select</button> -->
-            <button @click="select_part(index)" class="btn pill-button px-4 py-0">select</button>
-          </td>
+          <td class>{{article.partInfo.selectedPartInfo.name}}</td>
+          <td>{{article.partInfo.selectedPartInfo.country}}</td>
+          <td>{{article.partInfo.selectedPartInfo.package}}</td>
+          <td class="text-ideeza">{{article.partInfo.selectedPartInfo.manufacturer}}</td>
+          <td class="text-ideeza">{{article.created_at}}</td>
+        
         </tr>
       </tbody>
     </table>
@@ -64,7 +63,7 @@
     import FilesField from '~/components/form/file-field-button.vue'
 
     export default {
-        name: "add-search",
+        name: "search-list",
         data: function() {
           return {
             // technicianaddpartsearchs: technicianaddpartsearchs,
@@ -78,66 +77,46 @@
         },
 
         methods: {
-
           search_component(e){
-            if (this.searchComponent.length<3 ||  e.key != "Enter")
+
+             if (this.searchComponent.length<3 ||  e.key != "Enter")
               return;
 
-            let data = new FormData()
-            data.append("query", this.searchComponent)
+          }
+          ,update_part_list(){
+
             let sendData ={
-              url: "/api/parts_search",
+              url: "/api/get_cover_part_list",
               method: "post",
-              data
-            }
-            let partList = []
-
+              data: null
+            }      
+            const fileUrl = "api/technician/cover_part/"
             apiService(sendData, (res)=>{
-              console.log("reponse here: ", res)
-              if(res)
-                res.data.results.map(item=>{
-                  let snippet = item.snippet
-                  if(!item.snippet)item.snippet = "unknown unknown"
-                  let snippets = item.snippet.split(' ')
-                  let packages = snippets[snippets.length-1]
-                  // packages = packages.split(" ")
-                  let datasheet  = item.item.datasheets[0]
+             
+              this.partList = []
+              if(res.data.list.length>0){
+                res.data.list.map(item=>{
                   
-                  if(!datasheet) 
-                    datasheet="#"
-                  else
-                    datasheet = datasheet.url
+                  let partInfo = JSON.parse(item.part_info)
+                  let dateTime =  new Date(item.created_at)
 
-                  partList.push({
-                    uid: item.item.uid,
-                    name: item.item.mpn,
-                    country: res.data.user_country,
-                    manufacturer: item.item.manufacturer.name,
-                    snippet,
-                    package: packages,
-                    datasheet
-                  })
+                  let itemData = {
+                    id: item.id,
+                    created_at: dateTime.toISOString().substring(0, 10),
+                    partInfo,
+                    attach: item.attach
+                  }
+
+                  this.partList.push(itemData)
+
                 })
-
-              this.partList = partList
-              console.log("partList : ", partList)
-
+              }
+              console.log("get part list array : ", this.partList)
             })
-          },
-
-          select_part(index){
-            console.log("selected part : ", index)
-            this.selectedPart = this.partList[index]
-          },
-          upload3dModel(param){
-             this.$emit('onUpdate', param)
-             this.selectedPart = null
-             console.log("select param :", param, this.$parent)
-          },
+          }
         },
-
         mounted(){
-
+          this.update_part_list()          
         }
 }
 </script>

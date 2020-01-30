@@ -124,7 +124,6 @@
         'file-field': FilesField
       },
       mounted() {
-          console.log('mounted');
           //this.objectData =
       },
       computed: {

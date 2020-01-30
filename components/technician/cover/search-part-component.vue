@@ -11,20 +11,19 @@
     >
     </div>
 
-    <div class="flex justify-between items-center p-4" v-if="selectedPart">
+    <div class="flex justify-between items-center p-4" v-if="selectedFlag">
       <div class="flex items-center">
         <img src="~/static/images/add-part.png" alt />
         <div class="ml-5">
-          <span class="block font-semibold">{{selectedPart.name}}</span>
+          <span class="block font-semibold">{{selectedPart.partInfo.selectedPartInfo.name}}</span>
           <span
             class="text-sm, text-gray-600"
-          >{{selectedPart.snippet}}</span>
+          >{{selectedPart.partInfo.selectedPartInfo.snippet}}</span>
         </div>
       </div>
 
       <div>
-        <file-field label="Upload 3D" v-on:input="upload3dModel" />
-        <!-- <button @click="select_part()"  class="btn pill-button px-4 py-0">Upload 3D</button> -->
+        <button @click="import_part()"  class="btn pill-button px-4 py-0">Import</button>
       </div>
 
     </div>
@@ -36,41 +35,43 @@
           <th class="text-left">Country</th>
           <th class="text-left">Package</th>
           <th class="text-left">Manufacturer</th>
+          <th class="text-left">Created At</th>
           <th class="text-left">Action</th>
         </tr>
       </thead>
       <tbody>
        
         <tr class v-for="(article, index) in partList" :key="`${index}`">
-          <td class>{{article.name}}</td>
-          <td>{{article.country}}</td>
-          <td>{{article.package}}</td>
-          <td class="text-ideeza">{{article.manufacturer}}</td>
+
+          <td class>{{article.partInfo.selectedPartInfo.name}}</td>
+          <td>{{article.partInfo.selectedPartInfo.country}}</td>
+          <td>{{article.partInfo.selectedPartInfo.package}}</td>
+          <td class="text-ideeza">{{article.partInfo.selectedPartInfo.manufacturer}}</td>
+          <td class="text-ideeza">{{article.created_at}}</td>
           <td>
             <!-- <button @click="$emit('select', article)" class="btn pill-button px-4 py-0">select</button> -->
-            <button @click="select_part(index)" class="btn pill-button px-4 py-0">select</button>
+            <button @click="select_part(index)" class="btn pill-button px-4 py-0">Select</button>
           </td>
+
         </tr>
       </tbody>
     </table>
-
-
-
   </div>
 </template>
-
 <script>
+
     import apiService from "~/apiService/have_token.js"
     import FilesField from '~/components/form/file-field-button.vue'
 
     export default {
-        name: "add-search",
+        name: "search-list",
         data: function() {
           return {
             // technicianaddpartsearchs: technicianaddpartsearchs,
             searchComponent: "",   
             partList : [],
-            selectedPart : null
+            selectedPart : null,
+            selectedFlag: false
           };
         },
         components: {
@@ -80,64 +81,69 @@
         methods: {
 
           search_component(e){
-            if (this.searchComponent.length<3 ||  e.key != "Enter")
+             if (this.searchComponent.length<3 ||  e.key != "Enter")
               return;
+            console.log("search component : ", e)
+          },
+          
+          select_part(index){
 
-            let data = new FormData()
-            data.append("query", this.searchComponent)
+            this.selectedPart = this.partList[index]
+            this.selectedFlag = true
+            // console.log("selected part : ", index, this.selectedPart)
+
+          },
+
+          update_part_list(){
+
             let sendData ={
-              url: "/api/parts_search",
+              url: "/api/get_cover_part_list",
               method: "post",
-              data
-            }
-            let partList = []
+              data: null
+            }      
+
+            const fileUrl = "api/technician/cover_part/"
 
             apiService(sendData, (res)=>{
-              console.log("reponse here: ", res)
-              if(res)
-                res.data.results.map(item=>{
-                  let snippet = item.snippet
-                  if(!item.snippet)item.snippet = "unknown unknown"
-                  let snippets = item.snippet.split(' ')
-                  let packages = snippets[snippets.length-1]
-                  // packages = packages.split(" ")
-                  let datasheet  = item.item.datasheets[0]
-                  
-                  if(!datasheet) 
-                    datasheet="#"
-                  else
-                    datasheet = datasheet.url
+              console.log("get cover part list : ", res)
+              this.partList = []
+              if(res.data.list.length>0){
 
-                  partList.push({
-                    uid: item.item.uid,
-                    name: item.item.mpn,
-                    country: res.data.user_country,
-                    manufacturer: item.item.manufacturer.name,
-                    snippet,
-                    package: packages,
-                    datasheet
-                  })
+                res.data.list.map(item=>{                  
+                  let partInfo = JSON.parse(item.part_info)
+                  let dateTime =  new Date(item.created_at)
+                  let itemData = {
+                    id: item.id,
+                    created_at: dateTime.toISOString().substring(0, 10),
+                    partInfo,
+                    attach: item.attach
+                  }
+                  this.partList.push(itemData)
                 })
 
-              this.partList = partList
-              console.log("partList : ", partList)
-
+              }
+              console.log("get part list array : ", this.partList)
             })
           },
+          import_part(){
 
-          select_part(index){
-            console.log("selected part : ", index)
-            this.selectedPart = this.partList[index]
-          },
-          upload3dModel(param){
-             this.$emit('onUpdate', param)
-             this.selectedPart = null
-             console.log("select param :", param, this.$parent)
-          },
+            // console.log("select part : ", this.selectedPart)
+            this.$emit("uploadModel", this.selectedPart) 
+            // this.selectedPart = null
+            this.selectedFlag = false
+
+          }
+
+
         },
 
         mounted(){
 
+          this.update_part_list()
+          
+            
+
+          
         }
 }
 </script>

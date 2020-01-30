@@ -37,7 +37,6 @@ export default {
       // console.log("loaderFlag:", that.loaderFlag )
        }, 10);
        
-    console.log("technician mounted");
     console.log(this.$device.isMobile);
     if (this.$device.isMobile) {
       this.toggleLeftMenu();
