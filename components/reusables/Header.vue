@@ -45,12 +45,17 @@
       >
       <nuxt-link to="/user/support" class>Contact Us</nuxt-link>
     </li>
+    <li
+      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+      >
+      <nuxt-link to="/blog" class>Blog</nuxt-link>
+    </li>
 
     <li
     v-if="!auth"
     style="cursor: pointer"
     class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
-    @click="openUserTypeModal"
+    @click="showSignupModal=true"
     >Sign Up</li>
 
     <li
@@ -109,77 +114,53 @@ class="text-xl text-gray-500"
 </nav>
 </div>
 </div>
-<login
-v-if="showLoginModal"
-@close="showLoginModal=false"
-@signup="showLoginModal=false;showSignupModal=true"
-@reset="showLoginModal=false;showResetModal=true;"
-/>
-    <!-- <signup
+    <login
+    v-if="showLoginModal"
+    @close="showLoginModal=false"
+    @signup="showLoginModal=false;showSignupModal=true"
+    @reset="showLoginModal=false;showResetModal=true;"
+    />
+    <signup
       v-if="showSignupModal"
       @close="showSignupModal=false"
       @login="showSignupModal=false;showLoginModal=true"
       @signup="showSignupModal=false;showEmailSignupModal=true;"
-      /> -->
-
-      <Signup v-if="getSignUpModal" @close="setSignUpModal(false)" />
-
-      <EmailSignup v-if="getCreativeSignUp" @close="setCreativeSignUp(false)" />
-
-      <ManufacturerEmailSignup v-if="getManufacturerSignUp" @close="setManufacturerSignUp(false)" />
-
-      <UserType v-if="getUserTypeModal" @close="setUserTypeModal(false)" />
+      />
 
       <reset-password
       v-if="showResetModal"
       @login="showLoginModal=true;showResetModal=false"
       @close="showResetModal=false"
       />
-      <!-- <email-signup
+      <email-signup
       v-if="showEmailSignupModal"
       @close="showEmailSignupModal=false"
       @login="showLoginModal=true;showEmailSignupModal=false"
-      /> -->
+      />
     </div>
   </template>
   <script>
-    import {mapGetters, mapMutations} from 'vuex';
     import Login from "~/components/reusables/Login.vue";
     import Signup from "~/components/reusables/Signup.vue";
     import EmailSignup from "~/components/reusables/EmailSignup.vue";
-    import ManufacturerEmailSignup from "~/components/reusables/ManufacturerEmailSignup.vue";
-    import UserType from "~/components/reusables/UserType.vue";
     import ResetPassword from "~/components/reusables/ResetPassword.vue";
     export default {
       components: {
         Login,
         Signup,
-        UserType,
         ResetPassword,
         EmailSignup,
-        ManufacturerEmailSignup,
       },
       data() {
         return {
           isOpen: false,
           showLoginModal: false,
           showSignupModal: false,
-          showUserTypeModal: false,
           showResetModal: false,
           showEmailSignupModal: false,
           name: "",
           auth: false
         };
-      },
-      computed: {
-        ...mapGetters({
-          getUserTypeModal: 'modal/getUserTypeModal',
-          getSignUpModal: 'modal/getSignUpModal',
-          getUserType: 'modal/getUserType',
-        getCreativeSignUp: 'modal/getCreativeSignUp',
-        getManufacturerSignUp: 'modal/getManufacturerSignUp',
-
-        })
       },
 
       mounted() {
@@ -191,20 +172,6 @@ v-if="showLoginModal"
           this.name = firstname + " " + lastname;
         } else {
           this.auth = false;
-        }
-      },
-      methods: {
-        ...mapMutations({
-          setUserTypeModal: 'modal/setUserTypeModal',
-          setSignUpModal: 'modal/setSignUpModal',
-          setUserType: 'modal/setUserType',
-          setCreativeSignUp: 'modal/setCreativeSignUp',
-        setManufacturerSignUp: 'modal/setManufacturerSignUp',
-        }),
-        openUserTypeModal() {
-          this.setUserTypeModal(false);
-          this.setSignUpModal(true);
-          this.setUserType('creative');
         }
       }
     };
