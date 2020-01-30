@@ -23,8 +23,10 @@
             </div>
             <div class="font-semibold">
               {{delivery_address}}
-              <br />{{delivery_city}},
-              <br />{{delivery_country}}
+              <br />
+              {{delivery_city}},
+              <br />
+              {{delivery_country}}
             </div>
           </div>
         </div>
@@ -45,12 +47,12 @@
           <thead>
             <tr class="border-b border-solid border-gray-500">
               <th class="text-left font-semibold text-xl text-gray-500 pb-3">Cart</th>
-              <th class="text-left font-semibold text-xl text-gray-500 pb-3">Manufacturer</th>
+              <th class="text-right font-semibold text-xl text-gray-500 pb-3">Manufacturer</th>
               <th class="pb-3"></th>
             </tr>
           </thead>
           <tbody class="mt-5">
-            <tr v-for="cart in carts">
+            <!-- <tr v-for="cart in carts">
               <td class="product">
                 <div class="lg:flex">
                   <div class="mr-2">
@@ -72,13 +74,36 @@
                 <span class="font-semibold block">{{cart.cover_description}}</span>
               </td>
               <td class="lg:text-right">{{cart.price}}</td>
+            </tr> -->
+            <tr v-for="cart in products">
+              <td class="product">
+                <div class="lg:flex">
+                  <div class="mr-2">
+                    <img class="w-20" :src="project_image_url + cart.product_image" style="height: 100%;"/>
+                  </div>
+                  <div class="my-auto px-5">
+                    <span class="block font-semibold">
+                      {{cart.product_title}}
+                      <br />Project
+                    </span>
+                    <span class="block text-sm text-gray-500">{{cart.product_description}}</span>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="text-gray-500 text-sm block">Electronics:</span>
+                <span class="font-semibold block">{{cart.eletronics_description}}</span>
+                <span class="text-gray-400 text-sm block mt-2">Cover:</span>
+                <span class="font-semibold block">{{cart.cover_description}}</span>
+              </td>
+              <td class="lg:text-right">{{cart.price}}</td>
             </tr>
           </tbody>
         </table>
 
         <div class="text-right text-gray-500">
           Total:
-          <span class="font-semibold text-gray-800 text-lg ml-10 inline-block">$30,000</span>
+          <span class="font-semibold text-gray-800 text-lg ml-10 inline-block">${{totlaprice}}</span>
         </div>
       </div>
     </div>
@@ -88,7 +113,7 @@
       </button>
       <div class="order-1 lg:order-2 items-center content-center">
         <span class="text-gray-500 font-semibold">Total Price:</span>
-        <span class="text-gray-800 text-xl font-semibold ml-10">$1000,000</span>
+        <span class="text-gray-800 text-xl font-semibold ml-10">${{delivery_price + totlaprice}}</span>
       </div>
       <nuxt-link
         to="/user/cart/thankyou"
@@ -107,16 +132,27 @@ export default {
 
   data: function() {
     return {
+      products: [],
+      manufactureres: [],
       carts: carts,
-      delivery_address: null,
-      delivery_city: null,
-      delivery_country: null,
-      delivery_price: null,
-      delivery_service: 'Experss'
+      delivery_address: '',
+      delivery_city: '',
+      delivery_country: '',
+      delivery_price: 0,
+      delivery_service: "Experss",
+      totlaprice: 0,
+      project_image_url: process.env.project_image_url
     };
   },
   mounted() {
     this.$store.commit("cartstepper/set", { position: 5 });
+
+    this.totalprice = this.$store.state.cartstepper.totalprice;
+    this.products = this.$store.state.cartstepper.checkedproducts;
+    this.manufactureres = this.$store.state.cartstepper.manufactureres;
+
+    console.log("checked products: ", this.products);
+    console.log("manufacturers: ", this.manufactureres);
 
     window.$nuxt.$cookies.get("d_firstname");
     window.$nuxt.$cookies.get("d_lastname");
@@ -127,7 +163,6 @@ export default {
     this.delivery_country = window.$nuxt.$cookies.get("d_country");
     this.delivery_city = window.$nuxt.$cookies.get("d_city");
     this.delivery_service = window.$nuxt.$cookies.get("d_shipping_service");
-
   },
 
   methods: {

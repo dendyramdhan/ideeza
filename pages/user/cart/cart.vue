@@ -148,6 +148,7 @@ export default {
       manufacturers: [],
       allmanufacturers: [],
       manufs: [],
+      checkedproducts: [],
 
       options: {
         headings: {
@@ -200,17 +201,34 @@ export default {
   },
   methods: {
     checkBoxClicked(status, value) {
-      console.log("Here Value", status + " " + value);
-
       window.$nuxt.$cookies.set("productid", value);
       this.allmanufacturers.map(element => {
-        if (element.product_id == value) {
+        if (element.product_id == value && status == true) {
           this.manufs.push(element.manufacturer);
+        } else if (element.product_id == value && status == false) {
+          const index = this.manufs.indexOf(element.manufacturer);
+          if (index > -1) {
+            this.manufs.splice(index, 1);
+          }
         }
       });
 
+      this.projects.map(element => {
+        element.products.map(child_element => {
+          if (child_element.product_id == value && status == true) {
+            this.checkedproducts.push(child_element);
+          } else if (child_element.product_id == value && status == false) {
+            const index = this.checkedproducts.indexOf(child_element);
+            if (index > -1) {
+              this.checkedproducts.splice(index, 1);
+            }
+          }
+        });
+      });
+
       this.manufacturers = this.manufs;
-      this.manufs = [];
+      console.log("manufacturers per products: ", this.manufacturers);
+      console.log("this.checkedproducts: ", this.checkedproducts);
     },
 
     addManufacturer() {},
@@ -271,8 +289,16 @@ export default {
     },
 
     moveNext() {
-
-
+      this.$store.commit("cartstepper/checkedproduct", this.checkedproducts);
+      this.$store.commit(
+        "cartstepper/checkedmanufacturers",
+        this.manufacturers
+      );
+      console.log("this.checkedproducts: ", this.checkedproducts);
+      console.log(
+        "checkedproducts: ",
+        this.$store.state.cartstepper.checkedproducts
+      );
       this.$router.push("/user/cart/delivery");
     },
 

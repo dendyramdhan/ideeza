@@ -1,5 +1,8 @@
 export const state = () => ({
-  cartStep: -1
+  cartStep: -1,
+  manufacturers: [],
+  checkedproducts: [],
+  totalprice: 0,
 });
 
 export const mutations = {
@@ -15,5 +18,21 @@ export const mutations = {
   },
   set(state, { position }) {
     state.cartStep = position;
+  },
+  checkedproduct(state, value) {
+
+    state.checkedproducts = value;
+
+  },
+
+  checkedmanufacturers(state, value) {
+
+    state.manufacturers = value;
+
+  },
+
+  totalPrice(state, value) {
+    state.totalprice = value;
   }
+
 };
