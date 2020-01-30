@@ -23,6 +23,10 @@
             class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
           >Contact Us</nuxt-link>
           <nuxt-link
+            to="/blog"
+            class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
+          >Blog</nuxt-link>
+          <nuxt-link
             to="/user/profile"
             class="md:ml-0 mr-4 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300"
           >

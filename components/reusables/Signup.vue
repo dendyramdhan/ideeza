@@ -40,7 +40,7 @@
       </div>
       <button
       class="rounded-full bg-ideeza text-white text-center w-full py-3 mb-1"
-      @click="openSignUpForm"
+      @click="$emit('signup')"
       >
       <font-awesome-icon class="text-base mr-2" :icon="['fa', 'envelope']" />Sign up with Email
     </button>
@@ -55,7 +55,6 @@
 </div>
 </template>
 <script>
-  import {mapGetters, mapMutations} from 'vuex';
   import Modal from "~/components/reusables/Modal.vue";
   import firebase from "firebase";
   import axios from "axios";
@@ -63,32 +62,7 @@
     components: {
       Modal,
     },
-    computed: {
-      ...mapGetters({
-        getUserType: 'modal/getUserType',
-        getCreativeSignUp: 'modal/getCreativeSignUp',
-        getManufacturerSignUp: 'modal/getManufacturerSignUp',
-      })
-    },
     methods: {
-      ...mapMutations({
-        setCreativeSignUp: 'modal/setCreativeSignUp',
-        setManufacturerSignUp: 'modal/setManufacturerSignUp',
-        setSignUpModal: 'modal/setSignUpModal'
-      }),
-      openSignUpForm() {
-        this.setSignUpModal(false);
-        console.log(this.getUserType);
-        if(this.getUserType === 'creative') {
-          console.log('a');
-          this.setCreativeSignUp(true);
-          console.log(this.getCreativeSignUp);
-        } 
-        else {
-          console.log('b');
-          this.setManufacturerSignUp(true);
-        }
-      },
       googleSignin() {
       // const provider = new firebase.auth.GoogleAuthProvider();
 
