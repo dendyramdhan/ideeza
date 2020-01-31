@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="px-5 md:flex sm:block py-4">
-      <div class="md:w-1/4 sm:w-full logo">
+      <div class="md:w-2/12 sm:w-full logo">
         <nuxt-link to class="inline-block">
-          <img src="~static/images/logo-1.png" />
+          <img src="~static/images/logo-2.png" />
         </nuxt-link>
 
         <div class="md:hidden float-right">
@@ -27,59 +27,61 @@
         </button>
       </div>
     </div>
-    <div class="md:w-2/3 sm:w-full">
+    <div class="md:w-10/12 sm:w-full">
       <nav :class="isOpen ? 'block' : 'hidden'" class="px-2 pt-2 pb-4 md:flex sm:p-0 justify-end">
         <ul class="flex items-center text-white text-right block">
           <li
-          class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+          class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
           >
           <nuxt-link to="/about" class>About Us</nuxt-link>
         </li>
         <li
-        class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+        class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
         >
         <nuxt-link to="/pricing" class>Pricing</nuxt-link>
       </li>
       <li
-      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
       >
       <nuxt-link to="/user/support" class>Contact Us</nuxt-link>
     </li>
     <li
-      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
       >
       <nuxt-link to="/blog" class>Blog</nuxt-link>
     </li>
 
     <li
-      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
       >
       <nuxt-link to="/investor" class>Investor</nuxt-link>
     </li>
 
     <li
-      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+      class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
       >
       <nuxt-link to="/success_story" class>Success Story</nuxt-link>
     </li>
-
+    <li  class="md:inline-block sm:block text-left sm:border-b md:border-b-0  py-4 md:py-0 border-gray-400 px-2"> 
+<button class="text-white py-2 px-4 bg-ideeza inline-block text-center text-lg rounded-full cursor-pointer" @click="showLoginModal=true">Start Project</button>
+</li>
     <li
     v-if="!auth"
     style="cursor: pointer"
-    class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+    class="md:inline-block sm:block text-left sm:border-b md:border-b-0  py-4 md:py-0 border-gray-400 px-2 border-r border-white"
     @click="showSignupModal=true"
-    >Sign Up</li>
+    >Sign Up </li>
 
     <li
     v-if="!auth"
     style="cursor: pointer"
-    class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+    class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
     @click="showLoginModal=true"
     >Log In</li>
 
     <li
     v-else
-    class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5"
+    class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2"
     >
     <nuxt-link to="/user/profile" class>
       <div class="flex items-center" style="cursor: pointer">
@@ -92,29 +94,29 @@
     </nuxt-link>
   </li>
   <li
-  class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-5 social-link"
+  class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2 social-link"
   >
   <nuxt-link
   to="/user/profile"
-  class="md:ml-0 mr-4 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300"
+  class="md:ml-0 mr-1 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300"
   >
   <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'linkedin']" />
 </nuxt-link>
 <nuxt-link
 to="/user/profile"
-class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
 >
 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'twitter-square']" />
 </nuxt-link>
 <nuxt-link
 to="/user/profile"
-class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
 >
 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'instagram']" />
 </nuxt-link>
 <nuxt-link
 to="/user/profile"
-class="md:my-0 my-3 mr-12 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
+class="md:my-0 my-3 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
 >
 <font-awesome-icon
 class="text-xl text-gray-500"
