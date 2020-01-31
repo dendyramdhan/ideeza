@@ -169,19 +169,19 @@
 
             if(!this.descriptionText){
               let date = Date.now()
-              this.descriptionText = "component_" + date
+              this.descriptionText = "cover_" + date
             }
 
             data.append("part_info", partInfo)
             data.append("descriptionText", this.descriptionText)
 
             let sendData ={
-              url: "/api/save_cover_component",
+              url: "/api/save_cover_cover",
               method: "post",
               data
             }      
             apiService(sendData, (res)=>{
-              console.log("save_cover_component response : ", res)              
+              console.log("save_cover_cover response : ", res)              
               if(res.data.success){
 
                 this.$emit("updateComponent")
