@@ -4,7 +4,7 @@
     <LeftMenu />
 
     <!-- Main Contents -->
-    <div class="flex-grow" v-for="info in articleArray" v-if="info.id == $route.query.id">
+    <div class="flex-grow" v-for="info in articleArray" v-if="info.id == id">
       <div class="main-contents p-5">
         <div class="md:flex text-black justify-between mb-5">
           <h1 class="font-bold text-3xl">Project: {{info.title}}</h1>
@@ -21,7 +21,6 @@
             />
             <label>Michael Scott</label>
           </div>
-          <button @click.self="completeTask=true" class="bg-ideeza px-3 py-2 text-white">Complete project</button>
         </div>
         <div class="md:flex">
           <div class="w-4/6 bg-white p-5 border-ideeza border mb-5 rounded mr-2">
@@ -35,9 +34,8 @@
                 <span class="block text-xs">3 pics attached</span>
                 <div class="flex flex-wrap attached-images-wrapper mt-2">
                   <span v-for="image in info.attach">
-                    <img :src="project_img_url + image.image" />
+                    <img :src="project_img_url + image.image" height="150px" />
                   </span>
-                  <img src="https://picsum.photos/200" alt />
                 </div>
                 <div class="mt-5">Link attached:</div>
                 <div class="text-xs">
@@ -100,7 +98,7 @@
            <!-- @click="taskdetailtrue(task.id)" -->
             <td class="w-2/12 text-ideeza-dark font-semibold">
               <div class="flex">
-                <div class="flex" @click.stop>
+                <div class="flex" @click.stop="detailTask=true">
                   <!-- <input type="checkbox" :id="task.id" v-model="task.selected" />
                   <label :for="task.id"></label>-->
                   <img :src="avata_img_url +useravatar" class="h-10 w-10 rounded-full mr-2" />
@@ -136,6 +134,7 @@
           @onEdit="detailTask=false;editTask=true"
           v-if="detailTask"
           @complete="detailTask=false;completeTask=true"
+          :edit="false"
         />
         <complete-task @onClose="completeTask=false" v-if="completeTask" />
       </div>
@@ -159,6 +158,11 @@ export default {
     DetailTask,
     CompleteTask
   },
+  asyncData({ params }) {
+    return {
+      id: params.id
+    };
+  },
   mounted() {
     this.username =
       window.$nuxt.$cookies.get("firstname") +
@@ -166,8 +170,8 @@ export default {
       window.$nuxt.$cookies.get("lastname");
     this.useravatar = window.$nuxt.$cookies.get("useravatar");
 
-    this.projectidd = this.$route.query.id;
-    window.$nuxt.$cookies.set("technicianprojectid", this.$route.query.id);
+    this.projectidd = this.id;
+    window.$nuxt.$cookies.set("technicianprojectid", this.id);
 
     this.$store.commit("TechnicianProjectStore/viewflagchange2");
 

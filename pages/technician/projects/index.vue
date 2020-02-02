@@ -61,10 +61,19 @@
         <table class="mt-10 shadow-md">
           <thead>
             <tr class="text-white h16 gradient-bg">
-              <th class="text-left">Projects</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Projects</th>
               <!-- <th class="text-left">Assigned to</th> -->
-              <th class="text-left">Due Date</th>
-              <th class="text-left">Task Status</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Due Date</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Task Status</th>
               <th class="text-left">Notification</th>
             </tr>
           </thead>
@@ -79,7 +88,18 @@
                 </span>
               </td> -->
               <td>{{ts.toLocaleDateString(Service.end - Service.start)}}</td>
-              <td class="status status--completed">{{Service.status}}</td>
+              <td class="status status--completed">
+                <p v-if="Service.status == 'Active' ">
+                <span class="text-green-500 font-semibold">{{Service.status}}</span>
+              </p>
+              <p v-else-if="Service.status == 'Completed'|| Service.status == 'Completed' ">
+                <span class="font-semibold text-gray-700">{{Service.status}}</span>
+              </p>
+              <p v-else-if="Service.status == 'Waiting'||Service.status == 'Wating'">
+                <span class="text-red-500 font-semibold">{{Service.status}}</span>
+              </p>
+              <span v-else class="text-green-500 font-semibold">{{Service.status}}</span>
+              </td>
               <td class="notifications">2 new notification</td>
             </tr>
           </tbody>

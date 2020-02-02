@@ -7,7 +7,7 @@
           type="text"
           class="outline-none border-0 text-ideeza text-xl placeholder-ideeza lg:w-1/2"
            @change="taskname"
-          placeholder="Add new task...."
+          placeholder="Add name for the task...."
         />
         <font-awesome-icon
           @click="close"

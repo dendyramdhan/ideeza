@@ -21,35 +21,50 @@
           <template v-slot:th>
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza-dark p-3">
               <!-- <input type="checkbox" id="ad" v-model="selected" @change="selectall" /> -->
-              <label for="ad">User name</label>
+              <label for="ad"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />User name</label>
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              Project name
+              <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Project name
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3 text-center">
-              Service Providers
+              <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Service Providers
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              Deadline
+              <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Deadline
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              Completed
+              <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Completed
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"

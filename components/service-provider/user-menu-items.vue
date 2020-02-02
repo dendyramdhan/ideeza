@@ -6,16 +6,16 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
+      <nuxt-link to="/service-provider/projects">
+        <ProjectsIcon class="fill-current mr-5" />Projects
+      </nuxt-link>
+    </div>
+    <div class="menu-item">
       <nuxt-link to="/service-provider/orders">
         <font-awesome-icon
           class="mr-5 w-8 h-8 align-text-top"
           :icon="['fas', 'shopping-cart']"
-        />Orders
-      </nuxt-link>
-    </div>
-    <div class="menu-item">
-      <nuxt-link to="/service-provider/projects">
-        <ProjectsIcon class="fill-current mr-5" />Projects
+        />Old Orders
       </nuxt-link>
     </div>
     <div class="menu-item">
@@ -27,6 +27,11 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
+      <nuxt-link to="/service-provider/tasklist">
+        <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['fas', 'list-alt']" /> My Notes
+      </nuxt-link>
+    </div>
+    <div class="menu-item">
       <nuxt-link to="/service-provider/messages">
         <font-awesome-icon
           class="mr-5 w-8 h-8 align-text-top"
@@ -35,8 +40,8 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/service-provider/help">
-        <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['fas', 'info-circle']" /> Help
+      <nuxt-link to="/service-provider/blog/list">
+        <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['fas', 'bold']" />Blog
       </nuxt-link>
     </div>
   </div>

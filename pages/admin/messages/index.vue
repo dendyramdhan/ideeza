@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel messages-panel">
     <!--  Left Side Bar  -->
     <LeftMenu :userList="userList" :selectedUserIndex="selectedUserIndex" @select_user="select_user" />
 
@@ -525,6 +525,9 @@ export default {
 </script>
 
 <style scoped>
+.message-panel.hide-left-bar{
+  
+}
 .messages {
   @apply py-1 px-2 text-base;
   width: fit-content;

@@ -44,22 +44,52 @@
         </div>
 
         <!--Contents-->
-        <div class="p-5 md:px-20 mt-5 md:flex popup-body">
-          <div class="lg:w-2/3">
-            <div class="flex justify-between items-center">
-              <h1 class="text-ideeza-dark font-bold text-2xl">Here is Task Description</h1>
-              <div
-                class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer"
-                @click="$emit('onEdit')"
-              >
-                <span class="text-sm inline-block mr-1">Edit</span>
-                <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
+        <div class="p-5 md:px-20 mt-5 md:flex flex-wrap popup-body">
+          <div class="w-full">
+            <div class="flex min-h">
+              <div class="w-2/3 pr-10 mr-10">
+                <div class="flex justify-between items-center">
+                <h1 class="text-ideeza-dark font-bold text-2xl">Here is Task Description</h1>
+                <div v-if="edit"
+                  class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer"
+                  @click="$emit('onEdit')"
+                >
+                  <span class="text-sm inline-block mr-1">Edit</span>
+                  <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
+                  </div>
+                </div>
+                <div class="mt-5 min-h">
+                  <p class="rounded-sm text-black tracking-wider leading-loose">{{info.description}}</p>
+                </div>
+              </div>
+              <div class="flex-1">
+                <div>
+                  <check-box>Mark as Complete</check-box>
+                </div>
+                <div class="flex justify-between mt-2">
+                  <div class="text-xl">Assigned members</div>
+                  <div class="bg-ideeza text-white p-2">Add +</div>
+                </div>
+                <div class="mt-2">
+                <div v-for="n in 5" class="mt-2 flex members justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="https://picsum.photos/200" class="mr-2 rounded-full w-8">
+                    <div class="font-semibold text-black mr-2">She is someone, manager</div>
+                  </div>
+                  <div>
+                    <font-awesome-icon
+                    @click="close"
+                    class="mr-1 h-4 cursor-pointer text-ideeza hover:text-gray-800"
+                    :icon="['fas', 'trash']"
+                  />
+                  </div>
+                </div>
+                </div>
               </div>
             </div>
-            <div class="mt-5">
-              <p class="rounded-sm text-gray-500 leading-loose">{{info.description}}</p>
-            </div>
             <div class="flex-grow">
+              <div class="flex min-h">
+                <div class="w-2/3">
               <div class="mb-2 text-black text-2xl font-bold">Attachments</div>
               <div class="bg-white">
                 <span class="block text-xs">3 pics attached</span>
@@ -77,74 +107,55 @@
                   >https://google.com</a>
                 </div>
                 <div class="mt-5">
-                  <!-- <span class="inline-block mb-2">Attach</span>
-                  <img id="image" />
-                  <form enctype="multipart/form-data">
-                    <input
-                      type="file"
-                      @change="fileseleted"
-                      ref="file_upload2"
-                      class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
-                      style="display:none"
-                    />
-                  </form>
-                  <button
-                    class="ml-5 btn btn-small btn--ideeza px-2 text-xs"
-                    @click="$refs.file_upload2.click()"
-                  >SelectImage</button> -->
                   <image-upload  @selected="sendapi" />
                  
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div class="lg:ml-5 w-1/3">
-            <div class="mb-2 ml-5 flex justify-between">
-              <span>Notification Center:</span>
-              <nuxt-link :to="{ path: '/technician/messages', query: { id:  userid}}">
-                <button class="btn--ideeza px-3 py-1">
-                  Compose
-                  <font-awesome-icon
-                    class="text text-xs text-gray-500"
-                    :icon="['far', 'paper-plane']"
-                  />
-                </button>
-              </nuxt-link>
-            </div>
-            <ul class="events mb-5">
-              <li
-                class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event"
-                v-for="member in info.assigned_users"
-              >
-                <div v-if="member.id == null">&nbsp;</div>
-                <div v-else>
-                  <div class="text text-sm font-bold">{{member.name}}</div>
-                  <div class="text text-xs">Completed</div>
                 </div>
-                <!-- <div class="event-icons text-right">
-                  <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
-                  <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
-                </div> -->
-              </li>
-            </ul>
-            <div class="mb-10 ml-5">
-              <button class="px-3 py-2 bg-ideeza-dark text-white">Make a Call</button>
+                <div class="flex-1">
+                  <div class="mt-5 mb-2 ml-5 flex justify-between">
+                  <span>Notification Center:</span>
+                  <nuxt-link :to="{ path: '/technician/messages', query: { id:  userid}}">
+                    <button class="btn--ideeza px-3 py-1">
+                      Compose
+                      <font-awesome-icon
+                        class="text text-xs text-gray-500"
+                        :icon="['far', 'paper-plane']"
+                      />
+                    </button>
+                  </nuxt-link>
+                </div>
+                <ul class="events mt-2 mb-5">
+                  <li
+                    class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event"
+                    v-for="member in info.assigned_users"
+                  >
+                    <div v-if="member.id == null">&nbsp;</div>
+                    <div v-else>
+                      <div class="text text-sm font-bold">{{member.name}}</div>
+                      <div class="text text-xs">Completed</div>
+                    </div>
+                    <!-- <div class="event-icons text-right">
+                      <font-awesome-icon class="text text-xs text-gray-500 mr-2" :icon="['fa', 'pen']" />
+                      <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
+                    </div> -->
+                  </li>
+                </ul>
+                </div>
+              </div>
             </div>
-            <div class="ml-5 mb-2 text-base font-bold text-black">Category:</div>
-            <div class="ml-5 mb-2 text-ideeza">
-              <u>Electronics</u>
+            <div class="flex">
+              <div class="w-2/3">&nbsp;</div>
+              <div class="flex-1">
+                <div class="mb-10 ml-5" v-if="edit">
+                  <button class="px-3 py-2 bg-ideeza-dark text-white">Make a Call</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="text-right px-20" @click="$emit('complete')">
+        <div class="text-right py-10 px-20" v-if="edit" @click="$emit('complete')">
           <button class="btn--ideeza bg-ideeza text-white px-3 py-2">Complete Task</button>
-          <!-- <span v-for="(info,index) in articleArray" v-if="index==0">
-           {{info.name}}
-
-          </span>
-          {{articleArray}}-->
-          <!-- {{articleArray}}--{{projectidd}} -->
         </div>
       </div>
     </div>
@@ -159,13 +170,18 @@ import CheckBoxField from "~/components/form/checkbox-plus.vue";
 import FileField from "~/components/form/file-field.vue";
 import ImageUpload from "~/components/form/image-upload";
 import FileFieldButton from "~/components/form/file-field-button.vue";
+import CheckBox from "~/components/form/checkbox.vue"
 
 import apiService from "~/apiService/have_token.js";
 
 export default {
   name: "new-project",
   props: {
-    parentData: String
+    parentData: String,
+    edit: {
+      default: true,
+      type: Boolean
+    }
   },
   data: function() {
     return {
@@ -218,7 +234,8 @@ export default {
     CheckBoxField,
     FileField,
     FileFieldButton,
-    ImageUpload
+    ImageUpload,
+    CheckBox
   },
   methods: {
     sendapi(value){
@@ -255,9 +272,8 @@ export default {
 
 <style scoped>
 .add-new-container {
-  @apply w-full h-full;
+  @apply w-full;
   max-width: 1300px;
-  max-height: 900px;
 }
 .members-container {
   height: 200px;
@@ -272,11 +288,15 @@ export default {
   @apply w-4 rounded-full inline;
 }
 .popup-body {
-  max-height: 60vh;
+  max-height: 70vh;
   overflow-y: auto;
 }
 .events {
+  min-height: 300px;
   max-height: 300px;
   overflow-y: auto;
+}
+.min-h{
+  min-height: 200px;
 }
 </style>

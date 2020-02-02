@@ -15,11 +15,6 @@
               </div>-->
             </div>
             <div>
-              <button onclick="print()" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
-              <button
-                @click.self="completeTask=true"
-                class="btn btn-normal btn--ideeza px-5 py-3"
-              >Complete Project</button>
               <button
                 @click.self="$router.push('/service-provider/projects')"
                 class="btn btn-normal btn--ideeza-gray-500 px-5 py-3"
@@ -43,8 +38,6 @@
               <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']" />
             </div>
           </div>
-
-          <div class="text-ideeza my-5">Price: $210</div>
 
           <div class="lg:flex justify-between">
             <div class="project-description lg:mr-16">
@@ -129,10 +122,6 @@
               </template>
             </tbody>
           </table>
-          <button
-            @click.self="addNewTask=true"
-            class="btn btn-normal btn--ideeza-dark px-5 py-3 mt-5"
-          >Add New Task +</button>
 
           <div class="mt-20">
             <div class="gradient-bg px-8 py-5 text-white">Timeline</div>
@@ -155,6 +144,7 @@
             v-if="detailTask"
             @complete="detailTask=false;completeTask=true"
             :parentData="sendparentdata"
+            :edit="false"
           />
           <complete-task @onClose="completeTask=false" v-if="completeTask" />
 
