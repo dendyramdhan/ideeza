@@ -92,7 +92,16 @@
               <p v-else-if="tabledata.flag == 3  ">
                 <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
               </p> -->
-               <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+               <p v-if="tabledata.status == 'Approved' ">
+                <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+              </p>
+              <p v-else-if="tabledata.status == 'Closed'|| tabledata.status == 'Close' ">
+                <span class="font-semibold">{{tabledata.status}}</span>
+              </p>
+              <p v-else-if="tabledata.status == 'Not Approved'">
+                <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
+              </p>
+              <span v-else class="text-green-500 font-semibold">{{tabledata.status}}</span>
             </td>
 
             <td class="text-gray-500">

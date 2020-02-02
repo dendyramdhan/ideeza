@@ -65,7 +65,7 @@
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">Due Date</th>
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">Posted before</th>
           </template>
-          <tr class="flex w-full mb-4" v-for="(project,index) in articleArray">
+          <tr class="flex w-full mb-4 cursor-pointer" v-for="(project,index) in articleArray" @click="$router.push('/service-provider/projects/detail?id='+project.id)">
             <td class="w-2/5" >
               <div class="font-bold text-black">{{project.title}}</div>
               <div class="text-sm">{{project.description}}</div>
@@ -86,12 +86,12 @@
           color="pink"
           is-expanded
           :theme="theme"
-      v-model="date" 
-      :attributes="attributes"
-
+          v-model="date" 
+          :attributes="attributes"
+          @dayclick="dayClick"
         />
         <div class="bg-white shadow rounded">
-          <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
+          <div class="py-3 px-5 bg-ideeza text-white text-center rounded">{{date}}</div>
           <hr class="my-1" />
           <ul class="shadow-lg">
             <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="(Service, index) in articleArray2" >
@@ -121,6 +121,10 @@ export default {
   layout: "service-provider",
   components: {
     SimpleTable
+  },
+  created() {
+    this.date = new Date();
+    this.date = this.date.getDate()+' '+this.monthNames[this.date.getMonth()]
   },
   mounted() {
     this.firstname = window.$nuxt.$cookies.get('firstname');
@@ -166,15 +170,37 @@ export default {
 
 
   },
+  methods:{
+    dayClick(day){
+      console.log(this.monthNames[day.date.getMonth()])
+      console.log(day.date.getDay())
+      this.date = day.date.getDate() + ' ' + this.monthNames[day.date.getMonth()]
+    }
+  },
   data() {
     return {
       firstname:null,
       date: new Date(),
+      monthNames :[
+         "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ],
       attributes: [
         {
           key: "today",
           highlight: true,
           dates: new Date()
+        },
+        {
+          dot: {
+            color: 'red',
+            class: 'my-dot-class',
+          },
+          dates: [
+            new Date(2020, 1, 6), // Jan 1st
+            new Date(2020, 1, 10), // Jan 10th
+            new Date(2020, 1, 22), // Jan 22nd
+          ],
         }
       ],
       ts: new Date(),

@@ -15,8 +15,14 @@
         <nuxt-child></nuxt-child>
         <div v-if="trackStep === 0" class="mt-20 flex items-center">
           <div class="flex-1 inline-flex">
-            <nuxt-link tag="button" to="/user/order-tracking/timeline" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-10 py-6 z-10">Timeline</nuxt-link>
-            <nuxt-link tag="button" to="/user/order-tracking/making-product" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-16 py-6 z-0 -ml-3">List</nuxt-link>
+            <template v-if="$route.query.id">
+              <nuxt-link tag="button" :to="'/user/order-tracking/timeline?id='+$route.query.id" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-10 py-6 z-10">Timeline</nuxt-link>
+              <nuxt-link tag="button" :to="'/user/order-tracking/making-product?id='+$route.query.id" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-16 py-6 z-0 -ml-3">List</nuxt-link>
+            </template>
+            <template v-else> 
+              <nuxt-link tag="button" to="/user/order-tracking/timeline" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-10 py-6 z-10">Timeline</nuxt-link>
+              <nuxt-link tag="button" to="/user/order-tracking/making-product" class="make-product bg-white border text-ideeza-dark font-semibold rounded-lg px-16 py-6 z-0 -ml-3">List</nuxt-link>
+            </template>
           </div>
           <div class="justify-center items-center flex">
             <img class="avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt />

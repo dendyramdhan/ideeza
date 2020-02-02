@@ -13,7 +13,7 @@
             </div>
           </div>
           <div>
-            <button onclick="print()" class="btn btn-normal border-ideeza px-5 py-3">Invoice</button>
+            <button @click="editProject=true" class="btn btn-normal border-ideeza px-5 py-3">Edit</button>
             <button
               @click.self="completeTask=true"
               class="btn btn-normal btn--ideeza px-5 py-3"
@@ -39,9 +39,6 @@
             <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']" />
           </div>
         </div>
-
-        <div class="text-ideeza my-5">Price: $210</div>
-
         <div class="lg:flex justify-between">
           <div class="project-description lg:mr-16">
             <div class="gradient-bg px-8 py-5 text-white">Project Description</div>
@@ -71,16 +68,31 @@
         <table class="mt-10 shadow-md">
           <thead>
             <tr class="text-white h16 gradient-bg">
-              <th class="text-left">Tasks</th>
-              <th class="text-left">Domain</th>
-              <th class="text-left">Assigned to</th>
-              <th class="text-left">Due Date</th>
-              <th class="text-left">Task Status</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Tasks</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Domain</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Assigned to</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Due Date</th>
+              <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Task Status</th>
               <th class="text-left">Notification</th>
             </tr>
           </thead>
           <tbody>
-            <template v-for="task in articleArray2">
+            <template v-for="(task,index) in articleArray2">
               <tr class="bg-ideeza-100">
                 <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
                   <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
@@ -106,12 +118,33 @@
                     ></div>
                   </div>
                 </td>
-                <td>{{task.status}}</td>
+                <td>
+                  <p v-if="task.status == 'Active' ">
+                <span class="text-green-500 font-semibold">{{task.status}}</span>
+              </p>
+              <p v-else-if="task.status == 'completed'|| task.status == 'completed' ">
+                <span class="font-semibold">{{task.status}}</span>
+              </p>
+              <p v-else-if="task.status == 'waiting'">
+                <span class="text-red-500 font-semibold">{{task.status}}</span>
+              </p>
+              <span v-else class="text-green-500 font-semibold">{{task.status}}</span>
+                </td>
                 <td class="notifications">
                   <font-awesome-icon
-                    class="mr-1 text-lg text-ideeza-gold"
-                    :icon="['fas', 'exclamation-circle']"
-                  />
+                      v-if="index == 1"
+                      class="mr-1 text-lg text-blue-700"
+                      :icon="['fas', 'bell']"
+                    />
+                    <font-awesome-icon
+                      v-else-if="index == 2"
+                      class="mr-1 text-lg text-red-500"
+                      :icon="['far', 'clock']"
+                    />
+                      <font-awesome-icon v-else
+                        class="mr-1 text-lg text-ideeza-gold"
+                        :icon="['fas', 'exclamation-circle']"
+                      />
                 </td>
 
                 <!-- <td class="cursor-pointer" @click.self="expand(task.id)">
@@ -322,7 +355,7 @@
           :parentData="sendparentdata"
         />
         <complete-task @onClose="completeTask=false" v-if="completeTask" />
-
+        <edit-project :project="info" v-if="editProject" @onClose="editProject=false" :tasks="articleArray2"/>
         <!-- <span v-for="info in articleArray" v-if="info.id == $route.query.id">
       {{info}}
     </span>
@@ -340,6 +373,7 @@ import EditTask from "~/components/technician/management/edit-task.vue";
 import DetailTask from "~/components/technician/management/detail-task.vue";
 import TaskTimeLine from "~/components/technician/management/task-timeline.vue";
 import CompleteTask from "~/components/technician/management/complete-task.vue";
+import EditProject from "~/components/technician/management/edit-project.vue"
 
 import apiService from "~/apiService/have_token.js";
 import apiService2 from "~/apiService/get_param.js";
@@ -394,7 +428,8 @@ export default {
     "edit-task": EditTask,
     "task-timeline": TaskTimeLine,
     DetailTask,
-    CompleteTask
+    CompleteTask,
+    EditProject
   },
   methods: {
     setEditvalue(){
@@ -434,7 +469,7 @@ export default {
       geturl2: "/api/project/get_tasks",
       articleArrayaxios2: [],
       randomNumber2: [],
-
+      editProject: false,
       addNewProject: false,
       addNewTask: false,
       editTask: false,

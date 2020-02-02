@@ -57,11 +57,26 @@
       <table class="mt-10 shadow-md">
         <thead>
           <tr class="text-gray-800 h16">
-            <th class="text-left">Username</th>
-            <th class="text-left">Role</th>
-            <th class="text-left">Status</th>
-            <th class="text-left">Join Date</th>
-            <th class="text-left">Rate</th>
+            <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Username</th>
+            <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Role</th>
+            <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Status</th>
+            <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Join Date</th>
+            <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Rate</th>
             <th class="text-left">Actions</th>
             <!-- <th class="text-right">
               <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />

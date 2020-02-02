@@ -15,7 +15,7 @@
             <div
               class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
             >
-              <div class="text-base">Open Tickets</div>
+              <div class="text-base">Open Tasks</div>
               <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
@@ -33,7 +33,7 @@
             <div
               class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
             >
-              <div class="text-base">Unopened Tickets</div>
+              <div class="text-base">New Tasks</div>
               <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
@@ -51,7 +51,7 @@
             <div
               class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
             >
-              <div class="text-base">On Hold Tickets</div>
+              <div class="text-base">On Hold Tasks</div>
               <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
@@ -69,7 +69,7 @@
             <div
               class="mx-auto lg:mx-none status-card bg-white shadow-lg rounded-lg mt-5 px-3 py-5 relative"
             >
-              <div class="text-base">Finished Tickets</div>
+              <div class="text-base">Finished Tasks</div>
               <div class="flex justify-between items-center content-center">
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
@@ -84,34 +84,364 @@
           </div>
         </div>
 
-        <div class="xl:flex mt-10 justify-between">
-          <div class="lg:w-2/3 lg:mr-5 w-full">
+        <div class="md:flex mt-10 justify-between">
+          <div class="md:w-2/3 md:mr-5 w-full">
             <h1 class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0">Task Management</h1>
             <!--List-->
-            <div class="shadow-md mt-5 relative p-6 bg-white pink-scroll overflow-y-auto" style="height: 600px;">
-              <div class="flex justify-between">
-                <span class="text-gray-500 text-sm">2 tasks completed out of {{tasks.length}}</span>
-                <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
-              </div>
-
-              <div class="mt-5 w-full lg:flex justify-between items-center" v-for="task in tasks">
-                <div class="text-sm text-gray-600">
-                  <nuxt-link to="/technician/projects/technician-detail">{{task.title}}</nuxt-link>
-                </div>
-                <div>
-                  <img
-                    class="avatar"
-                    v-for="assigned_user in task.assigned_users"
-                    :src="avatar_base_url + assigned_user.avatar"
+            <table class="mt-10 shadow-lg">
+          <thead>
+            <tr class="text-black font-semibold h16">
+              <th colspan="2" class="text-left">Tasks&nbsp; <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                /></th>
+              <th class="text-left">Domain&nbsp; <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                /></th>
+              <th class="text-left">Due Date&nbsp; <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                /></th>
+              <th class="text-left">Task Status&nbsp; <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                /></th>
+              <th class="text-right">
+                <font-awesome-icon class="mr-1 text-lg h-4" :icon="['fas', 'ellipsis-h']" />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-for="(task,index) in articleArray2">
+              <tr class="bg-white">
+                <td colspan="2" class="cursor-pointer text-black" @click="taskdetailtrue(task.id)">
+                  <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
+                  <!-- <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-up']" /> -->
+                  {{task.name}}
+                </td>
+                <td class="text-black">{{task.domain}}</td>
+                <td class="text-center">
+                  <div
+                    class="text-sm text-gray-600 w-3/4 bg-gray-700 h-8 text-center rounded-full relative"
+                  >
+                    <span class="absolute due-date text-white">{{(task.end - task.start)/100000000}}</span>
+                    <div
+                      class="bg-ideeza rounded-full h-8"
+                      :style="{ width: ((task.end - task.start)/100000000) +'%'}"
+                    ></div>
+                  </div>
+                </td>
+                <td class="text-black">{{task.status}}</td>
+                <td class="notifications">
+                <font-awesome-icon
+                  v-if="index == 1"
+                  class="mr-1 text-lg text-blue-700"
+                  :icon="['fas', 'bell']"
+                />
+                <font-awesome-icon
+                  v-else-if="index == 2"
+                  class="mr-1 text-lg text-red-500"
+                  :icon="['far', 'clock']"
+                />
+                  <font-awesome-icon v-else
+                    class="mr-1 text-lg text-ideeza-gold"
+                    :icon="['fas', 'exclamation-circle']"
                   />
-                </div>
+                </td>
+
+                <!-- <td class="cursor-pointer" @click.self="expand(task.id)">
+              <font-awesome-icon
+                class="mr-1 text-lg text-ideeza"
+                :icon="['fas', 'caret-up']"
+                v-if="task.id in expanded&&expanded[task.id]==true"
+              />
+              <font-awesome-icon
+                class="mr-1 text-lg text-ideeza"
+                :icon="['fas', 'caret-down']"
+                v-else
+              />
+              {{task.name}}
+            </td>
+            <td>{{task.domain}}</td>
+            <td>
+                <img v-for="image in task.assigned_to" :src="image.url" class="avatar" />-->
+                <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+                                              <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+                <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
+                <!-- </td>
+            <td class="text-center">
+              <div
+                class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
+              >
+                <span class="absolute due-date text-black">{{task.timeline.date}}</span>
                 <div
-                  class="text-sm text-gray-600"
-                >{{new Date(task.start * 1000).toDateString()}} - {{new Date(task.end * 1000).toDateString()}}</div>
-                <div class="text-sm text-orange-600">{{task.status}}</div>
-                <!-- <div class="text-sm text-ideeza">{{task.notification}}</div> -->
+                  class="bg-ideeza rounded-full h-8"
+                  :style="{ width: task.timeline.progress+'%'}"
+                ></div>
+              </div>
+            </td>
+            <td class="status status--completed" v-if="task.status == 1">completed</td>
+            <td v-if="task.status == 2" class="status status--over">over due</td>
+                <td v-if="task.status == 3" class="status status--progress">in progress</td>-->
+                <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
+                <!-- <td class="notifications">
+              <font-awesome-icon
+                v-if="task.status == 1"
+                class="mr-1 text-lg text-ideeza-gold"
+                :icon="['fas', 'exclamation-circle']"
+              />
+              <font-awesome-icon
+                v-else-if="task.status == 2"
+                class="mr-1 text-lg text-blue-700"
+                :icon="['fas', 'bell']"
+              />
+              <font-awesome-icon
+                v-else-if="task.status == 3"
+                class="mr-1 text-lg text-red-500"
+                :icon="['far', 'clock']"
+              />
+                </td>-->
+              </tr>
+
+              <!-- <template v-if="task.id in expanded&&expanded[task.id]==true">
+            <tr class="bg-pink-200" v-for="(subtask) in task.subtasks">
+              <td
+                class="cursor-pointer md:text-right"
+                @click.self="detailTask=true"
+              >{{subtask.name}}</td>
+              <td>{{subtask.domain}}</td>
+              <td>
+              <img v-for="image in subtask.assigned_to" :src="image.url" class="avatar" />-->
+              <!-- <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+              <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">-->
+              <!-- </td>
+              <td class="text-center">
+                <div
+                  class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
+                >
+                  <span class="absolute due-date text-black">{{subtask.timeline.date}}</span>
+                  <div
+                    class="bg-ideeza rounded-full h-8"
+                    :style="{ width: subtask.timeline.progress+'%'}"
+                  ></div>
+                </div>
+              </td>
+              <td class="status status--completed" v-if="subtask.status == 1">completed</td>
+              <td v-if="subtask.status == 2" class="status status--over">over due</td>
+              <td v-if="subtask.status == 3" class="status status--progress">in progress</td>-->
+              <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
+              <!-- <td class="notifications">
+                <font-awesome-icon
+                  v-if="subtask.status == 1"
+                  class="mr-1 text-lg text-ideeza-gold"
+                  :icon="['fas', 'exclamation-circle']"
+                />
+                <font-awesome-icon
+                  v-else-if="subtask.status == 2"
+                  class="mr-1 text-lg text-blue-700"
+                  :icon="['fas', 'bell']"
+                />
+                <font-awesome-icon
+                  v-else-if="subtask.status == 3"
+                  class="mr-1 text-lg text-red-500"
+                  :icon="['far', 'clock']"
+                />
+              </td>
+            </tr>
+              </template>-->
+            </template>
+
+            <!-- <tr class="cursor-pointer" @click.self="editTask=true">
+          <td >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
+            Iron Making
+          </td>
+          <td>Cover</td>
+          <td>
+            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">16.11.2019</span>
+              <div class="bg-ideeza rounded-full h-8" style="width:80%;">
               </div>
             </div>
+          </td>
+          <td class="status status--over">over due</td>
+          <td class="notifications">
+            <font-awesome-icon class="mr-1 text-lg text-blue-700" :icon="['fas', 'bell']"/>
+          </td>
+
+
+        </tr>
+        <tr class="bg-ideeza-100">
+          <td class="cursor-pointer" @click.self="editTask=true" >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
+            Iron Making
+          </td>
+          <td>Code</td>
+          <td>
+            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">16.11.2019</span>
+              <div class="bg-ideeza rounded-full h-8" style="width:60%;">
+              </div>
+            </div>
+          </td>
+          <td class="status status--progress">in progress</td>
+          <td class="notifications">
+            <font-awesome-icon class="mr-1 text-lg text-red-500" :icon="['far', 'clock']"/>
+          </td>
+
+
+        </tr>
+        <tr class="">
+          <td class="cursor-pointer" @click.self="editTask=true" >
+            <font-awesome-icon class="mr-1 text-lg text-ideeza" :icon="['fas', 'caret-down']"/> 
+            Iron Making
+          </td>
+          <td>Electronics</td>
+          <td>
+            <img class="avatar" src="https://randomuser.me/api/portraits/women/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/20.jpg">
+            <img class="avatar" src="https://randomuser.me/api/portraits/men/12.jpg">
+          </td>
+          <td class="text-center">
+            <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+              <span class="absolute due-date text-black">16.11.2019</span>
+              <div class="bg-ideeza rounded-full h-8" style="width:90%;">
+              </div>
+            </div>
+          </td>
+          <td class="status status--completed">COMPLETED</td>
+          <td class="notifications">
+            <font-awesome-icon class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']"/> 
+          </td>
+
+
+            </tr>-->
+          </tbody>
+        </table>
+            <h1
+            class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0 pb-3 mb-3 mt-3"
+          >Message Center</h1>
+
+          <div>
+            <div
+              class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative mt-2 ml-2 bg-white"
+            >
+              <font-awesome-icon
+                class="ml-1 h-6 text-gray-600 absolute-center-h-v"
+                :icon="['fas', 'sliders-h']"
+              />
+            </div>
+          </div>
+          <div class="shadow-lg">
+            <table class="mt-10">
+              <thead>
+                <tr class="text-gray-800 h16">
+                  <th class="text-center">Username &nbsp; <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                /></th>
+                  <th class="text-center">Role &nbsp; <font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                /></th>
+                  <th class="text-center">Actions</th>
+                  <th class="text-right">
+                    <font-awesome-icon
+                      class="mr-1 h-4 cursor-pointer"
+                      :icon="['fas', 'ellipsis-h']"
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  :class="index%2!=0?'bg-white':'bg-gray-100'"
+                  v-for="(tabledata, index) in articleArray"
+                  v-if="start < index && index < end "
+                >
+                  <td class="texct-center" @click="$router.push('/technician/messages')">{{tabledata.ArticlesName}}{{index}}{{tabledata.id}}</td>
+                  <td class="text-center" @click="$router.push('/technician/messages')">{{tabledata.role}}</td>
+                  <td class="lg:text-right">
+                    <nuxt-link :to="{ path: '/technician/profile', query: { id: tabledata.id}}">
+                      <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                    </nuxt-link>
+                    <nuxt-link @click.stop :to="{ path: '/technician/messages', query: { id: tabledata.id}}">
+                      <font-awesome-icon
+                        class="mr-2 h-4 cursor-pointer"
+                        :icon="['fas', 'envelope']"
+                      />
+                    </nuxt-link>
+                    <font-awesome-icon
+                      class="mr-2 h-4 cursor-pointer"
+                      :icon="['fas', 'check']"
+                      @click.stop="onApproveWork"
+                    />
+                    <font-awesome-icon
+                      class="mr-2 h-4 cursor-pointer"
+                      :icon="['fas', 'pause']"
+                      @click.stop="onPauseWork"
+                    />
+                    <font-awesome-icon
+                      class="mr-2 h-4 cursor-pointer"
+                      :icon="['fas', 'times']"
+                      @click.stop="onCancelWork"
+                    />
+                  </td>
+                  <td class="lg:text-right text-xs">5 mins ago</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!--Table Stats-->
+            <div class="mt-5 lg:flex justify-end">
+              <div class="p-3 lg:flex justify-between">
+                <!--Paging-->
+                <div class="flex items-center">
+                  <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
+                    <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
+                  </span>
+                  <span v-for="inde in counterarray " :key="inde">
+                    <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
+                      <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+                    </span>
+                    <span v-else>
+                      <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+                    </span>
+                  </span>
+                  <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
+                    Next
+                    <font-awesome-icon
+                      class="ml-2 h-4 cursor-pointer"
+                      :icon="['fas', 'angle-double-right']"
+                    />
+                  </span>
+                </div>
+
+                <div class="flex items-center">
+                  <span class="inline-ock ml-32">Show</span>
+                  <select class="field field--border-none ml-2 h-10" @change="changeshowperiod">
+                    <option
+                      v-for="(tabledata, index) in articleArray"
+                      v-if="length > index "
+                    >{{(index)*5+1}}-{{(index)*5+5}}</option>
+                    <option>All</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
           <div class="mt-5 lg:mt-0 md:w-1/3">
             <vc-calendar
@@ -120,9 +450,10 @@
               is-expanded
               :theme="theme"
               :attributes="attributes"
+              @dayclick="dayClick"
             />
             <div class="bg-white shadow rounded pink-scroll overflow-y-auto" style="height: 370px">
-              <div class="py-3 px-5 bg-ideeza text-white text-center rounded">3rd March</div>
+              <div class="py-3 px-5 bg-ideeza text-white text-center rounded">{{date}}</div>
               <hr class="my-1" />
               <ul class="shadow-lg">
                 <li
@@ -187,164 +518,16 @@
             </div>
           </div>-->
         </div>
-
-        <div class="mt-10 orders">
-          <h1
-            class="text-xl font-semibold text-gar-800 pl-3 lg:pl-0 pb-3 mb-3 border-b border-solid border-gary-300"
-          >Message Center</h1>
-
-          <div>
-            <div class="hidden xl:flex justify-between">
-              <div class="flex flex-wrap">
-                <select class="field field--border-light mr-1 h-12">
-                  <option>All payout methods</option>
-                </select>
-                <select class="field field--border-light mr-1 h-12">
-                  <option>All type products</option>
-                </select>
-                <select class="field field--border-light mr-1 h-12">
-                  <option v-for="year in years">{{year}}</option>
-                </select>
-                <select class="field field--border-light mr-1 h-12">
-                  <option>Order status</option>
-                </select>
-              </div>
-              <div>
-                <div
-                  class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center"
-                >
-                  <div class="h-12 relative w-10">
-                    <font-awesome-icon
-                      class="ml-1 h-4 text-gray-400 absolute-center-h-v"
-                      :icon="['fas', 'search']"
-                    />
-                  </div>
-                  <input
-                    placeholder="search users"
-                    v-model="searchTerm"
-                    v-on:input="search"
-                    class="bg-white outline-none h-12 text-gray-800 pr-3"
-                  />
-                </div>
-              </div>
-            </div>
-            <div
-              class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative mt-2 ml-2 bg-white"
-            >
-              <font-awesome-icon
-                class="ml-1 h-6 text-gray-600 absolute-center-h-v"
-                :icon="['fas', 'sliders-h']"
-              />
-            </div>
-          </div>
-          <div class="shadow-md">
-            <table class="mt-10">
-              <thead>
-                <tr class="text-gray-800 h16">
-                  <th class="text-center">Username</th>
-                  <th class="text-center">Role</th>
-                  <th class="text-center">Status</th>
-                  <th class="text-center">Join Date</th>
-                  <th class="text-center">Rate</th>
-                  <th class="text-center">Actions</th>
-                  <th class="text-right">
-                    <font-awesome-icon
-                      class="mr-1 h-4 cursor-pointer"
-                      :icon="['fas', 'ellipsis-h']"
-                    />
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  :class="index%2!=0?'bg-white':'bg-gray-100'"
-                  v-for="(tabledata, index) in articleArray"
-                  v-if="start < index && index < end "
-                >
-                  <td class="texct-center">{{tabledata.ArticlesName}}{{index}}{{tabledata.id}}</td>
-                  <td class="text-center">{{tabledata.role}}</td>
-                  <td class="text-center">{{tabledata.Status}}</td>
-                  <td class="text-center">{{tabledata.Date}}</td>
-                  <td class="text-center">
-                    <img class="inline" src="~/static/images/star.png" alt />
-                    <img class="inline" src="~/static/images/star.png" alt />
-                    <img class="inline" src="~/static/images/star.png" alt />
-                    <img class="inline" src="~/static/images/star.png" alt />
-                    <img class="inline" src="~/static/images/star.png" alt />
-                  </td>
-
-                  <td class="lg:text-right">
-                    <nuxt-link :to="{ path: '/technician/profile', query: { id: tabledata.id}}">
-                      <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
-                    </nuxt-link>
-                    <nuxt-link :to="{ path: '/technician/messages', query: { id: tabledata.id}}">
-                      <font-awesome-icon
-                        class="mr-2 h-4 cursor-pointer"
-                        :icon="['fas', 'envelope']"
-                      />
-                    </nuxt-link>
-                    <font-awesome-icon
-                      class="mr-2 h-4 cursor-pointer"
-                      :icon="['fas', 'check']"
-                      @click="onApproveWork"
-                    />
-                    <font-awesome-icon
-                      class="mr-2 h-4 cursor-pointer"
-                      :icon="['fas', 'pause']"
-                      @click="onPauseWork"
-                    />
-                    <font-awesome-icon
-                      class="mr-2 h-4 cursor-pointer"
-                      :icon="['fas', 'times']"
-                      @click="onCancelWork"
-                    />
-                  </td>
-                  <td class="lg:text-right text-xs">5 mins ago</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!--Table Stats-->
-            <div class="mt-5 lg:flex justify-end">
-              <div class="lg:w-3/5 p-3 lg:flex justify-between">
-                <!--Paging-->
-                <div class="flex items-center">
-                  <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
-                    <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
-                  </span>
-                  <span v-for="inde in counterarray " :key="inde">
-                    <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
-                      <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
-                    </span>
-                    <span v-else>
-                      <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
-                    </span>
-                  </span>
-                  <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
-                    Next
-                    <font-awesome-icon
-                      class="ml-2 h-4 cursor-pointer"
-                      :icon="['fas', 'angle-double-right']"
-                    />
-                  </span>
-                </div>
-
-                <div class="flex items-center">
-                  <span class="inline-ock ml-32">Show</span>
-                  <select class="field field--border-none ml-2 h-10" @change="changeshowperiod">
-                    <option
-                      v-for="(tabledata, index) in articleArray"
-                      v-if="length > index "
-                    >{{(index)*5+1}}-{{(index)*5+5}}</option>
-                    <option>All</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
+    <detail-task
+      :edit="false"
+      @onClose="detailTask=false"
+      @onEdit="detailTask=false;editTask=true"
+      v-if="detailTask"
+      @complete="detailTask=false;completeTask=true"
+      :parentData="sendparentdata"
+    />
   </div>
 </template>
 
@@ -354,20 +537,34 @@ import articles from "~/json/messageCenter.json";
 import projects from "~/data/TechnicianProjectApi.json";
 import tasklists from "~/json/tasklist.json";
 import apiServiceWithToken from "~/apiService/have_token.js";
+import DetailTask from "~/components/technician/management/detail-task.vue";
 export default {
   layout: "technician",
   name: "dashboard-index",
   components: {
-    LeftMenu
+    LeftMenu,
+    DetailTask
   },
   data: function() {
     return {
       avatar_base_url: process.env.avatar_base_url,
+      detailTask: false,
       attributes: [
         {
           key: "today",
           highlight: true,
           dates: new Date()
+        },
+        {
+          dot: {
+            color: 'red',
+            class: 'my-dot-class',
+          },
+          dates: [
+            new Date(2020, 1, 6), // Jan 1st
+            new Date(2020, 1, 10), // Jan 10th
+            new Date(2020, 1, 22), // Jan 22nd
+          ],
         }
       ],
       years: [
@@ -394,6 +591,10 @@ export default {
         "2020",
         "2021"
       ],
+       monthNames :[
+         "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ],
       projects: projects.firstproject,
       tasks: [],
       theme: {
@@ -416,11 +617,19 @@ export default {
       start: this.$store.state.userBlogStore.offset * 5 - 1,
       end: this.$store.state.userBlogStore.offset * 5 + 5,
       counterarray: [],
-      name: ""
+      name: "",
+      date: null,
+      projectidd:'00f604de-d205-48e9-888c-a2fea41b0f06',
+      articleArrayaxios2: null,
+      randomNumber2: null,
+      articleArray2: [],
+      geturl2: "/api/project/get_tasks"
     };
   },
 
   created: function() {
+    this.date = new Date();
+    this.date = this.date.getDate()+' '+this.monthNames[this.date.getMonth()]
     this.$store.commit("userBlogStore/viewflagchange2");
     let i = 1;
     let array1 = [];
@@ -459,8 +668,36 @@ export default {
         console.log("tasks: ", response.data["data"]);
       }
     });
+    const formData = new FormData();
+    formData.set("projectid", this.projectidd);
+    let sendData2 = {
+      method: "post",
+      url: this.geturl2,
+      data: formData
+    };
+
+    apiServiceWithToken(sendData2, response => {
+      console.log(response.data);
+      this.randomNumber2 = response.data;
+      this.articleArrayaxios2 = Object.values(response.data.tasks);
+
+      this.articleArrayaxios2.map(item => {
+        this.articleArray2.push(item);
+      });
+    });
   },
   methods: {
+    taskdetailtrue(myid) {
+      window.$nuxt.$cookies.set("techniciantaskid", myid);
+      console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));
+      this.sendparentdata = myid;
+      this.detailTask = true;
+    },
+    dayClick(day){
+      console.log(this.monthNames[day.date.getMonth()])
+      console.log(day.date.getDay())
+      this.date = day.date.getDate() + ' ' + this.monthNames[day.date.getMonth()]
+    },
     changeshowperiod(e) {
       this.articleArray = [];
       if (e.target.value == "all") {
@@ -566,7 +803,9 @@ export default {
   border: 2px solid #ff09d0;
 }
 .due-date {
-  transform: translateX(-50%);
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .cards-wrapper {
   max-width: 1530px;
