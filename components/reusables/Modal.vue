@@ -6,11 +6,9 @@
           <div v-if="!forGuide" class="modal-header">
             <slot name="header"></slot>
           </div>
-
           <div :class="{'no-padd':forGuide}" class="modal-body text-center">
             <slot name="body"></slot>
           </div>
-
           <div v-if="hidefooter==false" class="modal-footer">
             <slot name="footer"></slot>
           </div>
@@ -19,7 +17,6 @@
     </div>
   </transition>
 </template>
-
 <script>
 export default {
   props: {
@@ -54,60 +51,65 @@ export default {
     }
   }
 }
+
 </script>
 <style>
-
 .modal-mask {
-    position: fixed;
-    z-index: 10000;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    display: table;
-    transition: opacity .15s ease;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: table;
+  transition: opacity .15s ease;
 }
+
 .modal-wrapper {
-    display: table-cell;
-    vertical-align: middle;
+  display: table-cell;
+  vertical-align: middle;
 }
+
 .modal-container {
-    max-width: 500px;
-    margin: 0px auto;
-    position: relative;
-    background-color: #fff;
-    transition: all .3s ease;
-    box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
-    border-radius: 6px;
-    border: none;
+  max-width: 500px;
+  margin: 0px auto;
+  position: relative;
+  background-color: #fff;
+  transition: all .3s ease;
+  box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22);
+  border-radius: 6px;
+  border: none;
 }
+
 .modal-body {
-    max-height: 80vh;
-    overflow-y: auto;
+  max-height: 80vh;
+  overflow-y: auto;
 }
-.modal-enter-active, .modal-leave-active {
+
+.modal-enter-active,
+.modal-leave-active {
   transition: opacity 0.5s;
 }
 
-.modal-enter, .modal-leave-to {
+.modal-enter,
+.modal-leave-to {
   opacity: 0;
 }
-.modal-body::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+
+.modal-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
 }
 
-.modal-body::-webkit-scrollbar
-{
-	width: 10px;
-	background-color: #F5F5F5;
+.modal-body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
 }
 
-.modal-body::-webkit-scrollbar-thumb
-{
-	background-color: #999999;
-	border: 2px solid #999999;
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: #999999;
+  border: 2px solid #999999;
 }
+
 </style>
