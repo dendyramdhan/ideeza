@@ -18,11 +18,13 @@
 
         <div class="md:flex">
           <div class="md:w-2/3 md:mr-3">
-        <simple-table @selectall="selectall" :fields="['Name','Email','Title','Date Modified','Role']">
+        <simple-table title="" @selectall="selectall" :check="false" :fields="['Name','Email','Title','Date Modified','Role']">
+          <template v-slot:title>
+            <input placeholder="Search" class="bg-white outline-none border border-gray-300 p-3 text-gray-800 w-48">
+          </template>
           <tr class="flex w-full mb-4" v-for="(user,index) in users">
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">
-              <input type="checkbox" :id="user.id" v-model="user.selected" />
-              <label :for="user.id">{{user.name}}</label>
+              {{user.name}}
             </td>
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">{{user.email}}</td>
             <td class="p-2 w-1/5" :class="{'border-b':users.length-1 != index}" v-if="user.type == 1">
@@ -38,7 +40,17 @@
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">{{user.date_modified}}</td>
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">
               {{user.role==1?'User':'Service provider'}}
-              <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500 float-right" :icon="['fa', 'grip-vertical']" />
+              <span @click.stop="user.showpopup = !user.showpopup;$forceUpdate();">
+              <font-awesome-icon
+                class="text-xl mt-2 ml-4 text-green-300 float-right"
+                :icon="['fa', 'grip-vertical']"
+              />
+              </span>
+              <div class="bg-white shadow-md relative w-64" v-if="user.showpopup" @click="project.showpopup = false;$forceUpdate();">
+                <div class="p-3 select-none cursor-pointer">Send message</div>
+                <div class="p-3 select-none cursor-pointer">Block project</div>
+                <div class="p-3 select-none cursor-pointer">Change to Public/Private</div>
+              </div>
             </td>
           </tr>
         </simple-table>

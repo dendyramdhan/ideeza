@@ -7,8 +7,19 @@
     </div>
 
     <div class="menu-item">
-      <nuxt-link to="/technician/management/user-service-providers">
-        <ProjectsIcon class="fill-current mr-5" />Management
+      <nuxt-link to="/technician/management">
+        <div>
+          <ProjectsIcon class="fill-current mr-5" />Management
+        </div>
+        <div class="childs">
+          <nuxt-link to="/technician/management/user-service-providers" class="block ml-12 text-gray-700 text-base mt-2">User</nuxt-link>
+          <nuxt-link to="/technician/management/added-parts/electronics" class="block ml-12 text-gray-700 text-base mt-2">Electronics</nuxt-link>
+          <nuxt-link to="/technician/management/categories/electronics" class="block ml-12 text-gray-700 text-base mt-2">Categories</nuxt-link>
+          <nuxt-link to="/technician/management/projects" class="block ml-12 text-gray-700 text-base mt-2">Projects</nuxt-link>
+          <nuxt-link to="/technician/management/blogs" class="block ml-12 text-gray-700 text-base mt-2">Blogs</nuxt-link>
+          <nuxt-link to="/technician/management/add-tech" class="block text-gray-700 ml-12 text-base mt-2">Add Technician</nuxt-link>
+          <nuxt-link to="/technician/management/orders" class="block text-gray-700 ml-12 text-base mt-2">Orders</nuxt-link>
+        </div>
       </nuxt-link>
     </div>
 
@@ -43,16 +54,23 @@
     </div>
 
     <div class="menu-item">
+      <nuxt-link to="/technician/tasklist">
+        <TaskIcon class="fill-current mr-5" />My Notes
+      </nuxt-link>
+    </div>
+
+    <div class="menu-item">
       <nuxt-link to="/technician/messages">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'comments']" />Messages
       </nuxt-link>
     </div>
 
     <div class="menu-item">
-      <nuxt-link to="/technician/tasklist">
-        <TaskIcon class="fill-current mr-5" />My Notes
+      <nuxt-link to="/technician/blog/list">
+        <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'bold']" />Blog
       </nuxt-link>
     </div>
+
   </div>
 </template>
 
@@ -87,5 +105,13 @@ export default {
 .active-link,
 .active-link svg {
   @apply text-ideeza;
+}
+
+.childs{
+  display: none;
+}
+
+.active-link .childs{
+  display: block;
 }
 </style>

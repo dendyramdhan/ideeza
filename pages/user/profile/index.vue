@@ -91,13 +91,6 @@
             >
               <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'lightbulb']" />Projects
             </div>
-            <div
-              @click="tabItem='timeline'"
-              class="tab-item"
-              :class="{active: tabItem === 'timeline', 'border-bot': tabItem !== 'timeline'}"
-            >
-              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'eye']" />Shared Projects
-            </div>
 
             <div
               @click="tabItem='reviews'"
@@ -121,95 +114,6 @@
               <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'users']" />Activities
             </div>
           </div>
-          <!--Time line-->
-          <div v-if="tabItem === 'timeline'" class="mt-5">
-            <div class="flex mb-10">
-              <div class="flex-grow bg-white p-5 shadow" v-for="shared_project in shared_projects">
-                <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
-                  <div>
-                    {{shared_project.name}}
-                    <span class="font-normal">add a new project</span>
-                    <span class="text-gray-800">Retro Headphones</span> •
-                    <span
-                      class="font-normal text-xs"
-                    >{{new Date(shared_project.created_at).getDate()}} weeks ago</span>
-                  </div>
-                  <div>
-                    <font-awesome-icon
-                      class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer"
-                      :icon="['fas', 'ellipsis-h']"
-                    />
-                  </div>
-                </div>
-                <div class="bg-gray-200 relative">
-                  <img
-                    class="w-full object-fit object-center"
-                    :src="project_image_url + shared_project.projec_image"
-                    alt
-                  />
-                  <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md w-90">
-                    <div class="flex text-lg text-white text-sm">
-                      <div class="flex-1 flex items-center mr-2 tooltip">
-                        <div class="inline-block">
-                          <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
-                        </div>
-                        <div>211</div>
-                        <span class="tooltiptext">Views</span>
-                      </div>
-                      <div class="flex-1 flex items-center mr-2 tooltip">
-                        <img src="~/static/images/ideeza-play-icon.png" class="inline-block mr-2"> 
-                        <div>76</div>
-                        <span class="tooltiptext">Activities</span>
-                      </div>
-                      <div class="flex-1 items-center flex mr-2 tooltip">
-                        <img src="~/static/images/likeWhite.png" class="inline-block mr-2">
-                        <div>35</div>
-                        <span class="tooltiptext">Likes</span>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="mt-10 flex justify-between items-center">
-                  <div class="flex items-center">
-                    <div
-                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                      @click="onLike"
-                    >
-                      <font-awesome-icon
-                        class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                        :icon="['fas', 'thumbs-up']"
-                      />LIKE
-                    </div>
-                    <div
-                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                      @click="onShare"
-                    >
-                      <font-awesome-icon
-                        class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                        :icon="['fas', 'share-alt']"
-                      />SHARE
-                    </div>
-                    <div
-                      class="flex items-center cursor-pointer text-xs text-ideeza-black mr-5"
-                      @click="onComment"
-                    >
-                      <font-awesome-icon
-                        class="mr-1 h-4 text-sm inline-block text-ideeza-dark mr-3"
-                        :icon="['fas', 'comment-dots']"
-                      />COMMENT
-                    </div>
-                  </div>
-
-                  <div class="flex items-center font-semibold">
-                    <div class="mr-6 text-ideeza">{{shared_project.comment_count}} comments</div>
-                    <div class="mr-6">{{shared_project.share_count}} share</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!--About-->
           <div class="mt-5" v-if="tabItem === 'about'">
             <div class="flex justify-between items-center">
@@ -267,9 +171,8 @@
               </div>
               
             </div>
-            <drop-down class="w-full mt-3" :value="1" :data="['Owner','Part of team']" />
             <div class="mt-8 flex flex-wrap" v-if="tabChildItem === 'public'">
-              
+              <drop-down class="w-full mt-3" :value="1" :data="['Owner','Part of team']" />
               <div class="flex" v-for="project in projects">
                 <div class="relative" v-for="product in project.products">
                   <img
@@ -497,7 +400,7 @@ export default {
   },
   data: function() {
     return {
-      tabItem: "timeline",
+      tabItem: "about",
       tabChildItem: "public",
       focusMore: false,
       showComments: false,
@@ -523,7 +426,12 @@ export default {
       url: getallcontactsurl,
       data: null
     };
-
+    if(this.$route.query){
+      if(this.$route.query.tab){
+        this.tabItem = this.$route.query.tab;
+      }
+    }
+    console.log(this.$route.query)
     apiServiceWithToken(getallcontactsData, response => {
       if (response.data["success"] == true) {
         this.general_contactinfos = response.data["data"].general_profile;

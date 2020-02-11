@@ -48,7 +48,7 @@
                   </div>
                 </div>
               </nuxt-link>
-              <nuxt-link to="/user/profile" class="flex-1">
+              <nuxt-link to="/user/profile?tab=friends" class="flex-1">
                 <div class="status-button p-2">
                   <div class="flex items-center">
                     <img class="mr-6" src="~/static/icons/users.svg" alt />
@@ -97,10 +97,10 @@
 
             <div class="md:flex justify-between items-center pb-5 mt-6 border-b border-light-gray">
               <h2 class="font-semibold block text-3xl">Last Activities</h2>
-              <button
+              <nuxt-link to="/user/profile?tab=activities"
                 class="btn pill-button px-10 text-lg"
-                @click="viewLastActivity"
-              >View all activities</button>
+                tag="button"
+              >View all activities</nuxt-link>
             </div>
 
             <div style="overflow-y: scroll; height:200px" class="activities">

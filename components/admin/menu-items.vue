@@ -61,6 +61,11 @@
       </nuxt-link>
     </div>
     <div class="menu-item">
+      <nuxt-link to="/admin/tasklist">
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']"/> My Notes
+      </nuxt-link>
+    </div>
+    <div class="menu-item">
       <nuxt-link to="/admin/messages">
         <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'comments']"/> Messages
       </nuxt-link>

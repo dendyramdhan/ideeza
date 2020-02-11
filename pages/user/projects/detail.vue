@@ -7,6 +7,10 @@
       <div class="main-contents md:flex">
         <div class="detail-main md:w-2/3">
           <!--Panel Menu-->
+          <nuxt-link tag="button" to="/user/projects/" class="p-2 bg-white border border-gray-300 mb-2">
+            <font-awesome-icon class="mr-1 panel-menu-icon" :icon="['fas', 'arrow-left']" />
+            back
+          </nuxt-link>
           <div
             class="flex justify-between flex-col lg:flex-row border-b border-gray-400 pl-5 pr-5 lg:pl-0 lg:pr-0 pb-3"
           >
@@ -143,37 +147,8 @@
               </div>
             </div>
             <div class="mx-3 mb-3">
-            <div class="flex mt-4">
-                  <div class="p-3">
-                    <div class="w-16 h-16 rounded-full overflow-hidden">
-                      <img src="https://randomuser.me/api/portraits/women/23.jpg" />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="p-3 bg-gray-300 rounded-lg">
-                      <div class="flex">
-                        <div class="flex-1">
-                          <h3 class="text-gray-700 font-bold text-xl">Mike Tayson</h3>
-                        </div>
-                        <div class="flex-1 text-right">3 min ago</div>
-                      </div>
-                      <p class="text-gray-700 text-md">Technican at Google</p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
-                      </p>
-                      <div class="py-3">
-                        <span class="inline-block">
-                          <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
-                        </span>
-                        <span class="inline-block">
-                          <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            <div class="flex mt-4">
+            <template v-for="comment in comments">
+            <div class="flex mt-4" :key="comment">
                   <div class="p-3">
                     <div class="w-16 h-16 rounded-full overflow-hidden">
                       <img src="https://randomuser.me/api/portraits/women/23.jpg" />
@@ -197,12 +172,12 @@
                         <span class="inline-block">
                           <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
                         </span>
-                        <span class="inline-block">
+                        <span class="inline-block" @click="comment.show_text_box=!comment.show_text_box">
                           <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
                         </span>
                       </div>
                     </div>
-                    <div class="flex mt-4">
+                    <div class="flex mt-4" v-for="com in comment.childs" :key="com">
                       <div class="p-3">
                         <div class="w-16 h-16 rounded-full overflow-hidden">
                           <img src="https://randomuser.me/api/portraits/women/21.jpg" />
@@ -232,8 +207,10 @@
                         </div>
                       </div>
                     </div>
+                    <input type="text" v-if="comment.show_text_box==true" placeholder="Write your comment..." class="mt-2 px-3 py-6 bg-gray-200 text-gray-700 w-full">
                   </div>
                 </div>
+            </template>
             </div>
             <hr>
             <div class="p-3">
@@ -299,7 +276,29 @@ export default {
       articleArray: [],
       randomNumber: {},
       project_img_url:process.env.project_image_url,
-      tab: 'code'
+      tab: 'code',
+      comments:[
+        {
+          childs: 1,
+          show_text_box: false
+        },
+        {
+          childs: 3,
+          show_text_box: false
+        },
+        {
+          childs: 2,
+          show_text_box: false
+        },
+        {
+          childs: 0,
+          show_text_box: false
+        },
+        {
+          childs: 1,
+          show_text_box: false
+        }
+      ]
     };
   },
   created: function() {},

@@ -64,7 +64,7 @@
               <button
                 @click="$router.back()"
                 class="ml-5 btn btn-normal btn--ideeza-dark px-8 py-2"
-              >< Go Back</button>
+              > Go Back</button>
             </div>
           </div>
 
