@@ -11,8 +11,8 @@
       <div class="mx-5">
         <div class="text-center">
           Sign up with
-          <span class="text-ideeza font-bold">Facebook</span> or
-          <span class="text-ideeza font-bold">Google</span>
+          <span class="text-ideeza font-bold cursor-pointer" @click="facebookSignin">Facebook</span> or
+          <span class="text-ideeza font-bold cursor-pointer" @click="googleSignin">Google</span>
         </div>
         <div class="flex items-center justify-between mb-3">
           <hr class="flex-1 mt-1" />
@@ -21,69 +21,27 @@
         </div>
         <div>
           <div class="text-left">
-            <input
-              type="email"
-              class="block w-full border border-gray px-3 py-3 mb-3"
-              placeholder="Email Address"
-              v-model="email"
-            />
-            <input
-              type="text"
-              class="block w-full border border-gray px-3 py-3 mb-3"
-              placeholder="First Name"
-              v-model="firstname"
-            />
-            <input
-              type="text"
-              class="block w-full border border-gray px-3 py-3 mb-3"
-              placeholder="Last Name"
-              v-model="lastname"
-            />
-            <input
-              type="password"
-              class="block w-full border border-gray px-3 py-3 mb-3"
-              placeholder="Create a Password"
-              v-model="password"
-            />
+            <input type="email" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="Email Address" v-model="email" />
+            <input type="text" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="First Name" v-model="firstname" />
+            <input type="text" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="Last Name" v-model="lastname" />
+            <input type="password" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="Create a Password" v-model="password" />
             <div class="font-bold text-lg text-black mb-2">Birthday</div>
             <div class="text-base mb-1">Other people won't see your birthday.</div>
             <div class="flex justify-between mb-3">
-              <input
-                type="text"
-                class="border border-gray px-3 py-3 mr-1 w-1/3"
-                placeholder="Month"
-                v-model="month"
-              />
-              <input
-                type="text"
-                class="border border-gray px-3 py-3 mr-1 w-1/3"
-                placeholder="Day"
-                v-model="day"
-              />
-              <input
-                type="text"
-                class="border border-gray px-3 py-3 mr-1 w-1/3"
-                placeholder="Year"
-                v-model="year"
-              />
+              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Month" v-model="month" />
+              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Day" v-model="day" />
+              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Year" v-model="year" />
             </div>
             <label class="leading-normal flex text-sm mb-1">
               <input type="checkbox" class="mt-1 mr-2" />
               <span>i'd like to recieve marketing promotions, special offers, inspiration and policy updates from ideeza. You can opt out any time.</span>
             </label>
-            <button
-              class="rounded-full bg-ideeza text-white text-center w-full py-3 mb-1"
-              @click="signup"
-            >Sign up</button>
+            <button class="rounded-full bg-ideeza text-white text-center w-full py-3 mb-1" @click="signup">Sign up</button>
           </div>
         </div>
         <div class="text-center mb-5">
           Already have an ideeza account?
-          <a
-            href="#"
-            @click="$emit('login')"
-            class="text-ideeza font-bold"
-          >Log in</a>
+          <a href="#" @click="$emit('login')" class="text-ideeza font-bold">Log in</a>
         </div>
       </div>
     </template>
@@ -109,6 +67,65 @@ export default {
     };
   },
   methods: {
+    googleSignin() {
+      // const provider = new firebase.auth.GoogleAuthProvider();
+      var _this = this;
+      this.provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(this.provider)
+        .then(function(result) {
+          // store the user ore wathever
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          console.log('googleSign', result);
+
+          var fullName = user.displayName.split(' ');
+          var firstname = fullName[0];
+          var lastname = fullName[fullName.length - 1];
+          window.$nuxt.$cookies.set("authToken", token);
+          window.$nuxt.$cookies.set("firstname", firstname);
+          window.$nuxt.$cookies.set("lastname", lastname);
+          window.$nuxt.$cookies.set("userid", user.uid);
+
+          _this.$router.push("/user/dashboard");
+        })
+        .catch(function(e) {
+          console.log(e);
+        });
+    },
+    facebookSignin() {
+      var provider = new firebase.auth.FacebookAuthProvider();
+      var _this = this;
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function(result) {
+          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          // var fullName = user.displayName.split(' ');
+          // var firstname = fullName[0];
+          // var lastname = fullName[fullName.length - 1];
+          // window.$nuxt.$cookies.set("authToken", token);
+          // window.$nuxt.$cookies.set("firstname", firstname);
+          // window.$nuxt.$cookies.set("lastname", lastname);
+          // window.$nuxt.$cookies.set("userid", user.uid);
+          // ...
+        })
+        .catch(function(e) {
+          // Handle Errors here.
+          var errorCode = e.code;
+          var errorMessage = e.message;
+          // The email of the user's account used.
+          var email = e.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = e.credential;
+          // ...
+        });
+    },
     async signup() {
       if (validate_email(this.email) && validatePassword(this.password)) {
         var registerurl = "/api/user/register";
@@ -159,8 +176,7 @@ export default {
             });
           }
         });
-      } else {
-      }
+      } else {}
     }
   },
   mounted() {
@@ -209,8 +225,8 @@ function validatePassword(password) {
   //   alert(error);
   //   return false;
   // }
-  else {
-  }
+  else {}
   return true;
 }
+
 </script>

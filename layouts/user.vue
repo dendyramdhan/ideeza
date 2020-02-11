@@ -1,26 +1,13 @@
 <template>
   <div class="flex flex-col h-full">
-    <div style="width: 100%; height: 100%; background: white; z-index: 999; position: absolute; opacity: 0.5;" 
-      v-if="loaderFlag"
-    >
-
+    <div style="width: 100%; height: 100%; background: white; z-index: 999; position: absolute; opacity: 0.5;" v-if="loaderFlag">
     </div>
-
-    <img
-      src="~/assets/images/new.gif"
-
-      v-if="loaderFlag"
-      
-      style="position:absolute;top:40%;left:40%; z-index:1000"
-      width="15%"
-    />
-
+    <img src="~/assets/images/new.gif" v-if="loaderFlag" style="position:absolute;top:40%;left:40%; z-index:1000" width="15%" />
     <div>
       <navigation class="flex-shrink"></navigation>
       <nuxt class="flex-grow" />
       <FloatButton />
     </div>
-
     <client-only>
       <notifications group="error" position="top right">
         <template slot="body" slot-scope="props">
@@ -36,7 +23,6 @@
         </template>
       </notifications>
     </client-only>
-
     <client-only>
       <notifications group="success" position="top right">
         <template slot="body" slot-scope="props">
@@ -54,7 +40,6 @@
     </client-only>
   </div>
 </template>
-
 <script>
 import navigation from "~/components/user/header-bar.vue";
 import FloatButton from "~/components/user/float-button/right-bot-float-button.vue";
@@ -67,7 +52,7 @@ export default {
     };
   },
   created() {
-    
+
   },
   // layout (context) {
   //   this.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
@@ -75,24 +60,24 @@ export default {
   // },
   mounted() {
 
-    let that  = this
-    setInterval(function(){
+    let that = this
+    setInterval(function() {
       that.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
       // console.log("loaderFlag:", that.loaderFlag )
-       }, 10);
-       
+    }, 10);
+
     //  this.loaderFlag = false;
 
     // if (window.$nuxt.$cookies.get("loaderFlag")) {
     //   this.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
     // }
-    
+
 
     // this.loaderFlag = this.$store.state.loaderStorage.loaderFlag;
 
     // window.$nuxt.$cookies.set("loaderFlag",true)
 
-    console.log("mymobile:",this.$device.isMobile);
+    console.log("mymobile:", this.$device.isMobile);
     if (this.$device.isMobile) {
       this.toggleLeftMenu();
     }
@@ -112,28 +97,34 @@ export default {
     })
   }
 };
-</script>
 
+</script>
 <style>
 #__nuxt {
   height: 100%;
 }
+
 #__layout {
   height: 100%;
 }
+
 .vue-notification-group {
   width: 350px !important;
   top: 30px !important;
   right: 30px !important;
 }
+
 .notify {
   @apply flex justify-between items-center px-3 py-2;
   width: 350px;
 }
+
 .notify--error {
   @apply bg-ideeza-red;
 }
+
 .notify--success {
   @apply bg-ideeza-green;
 }
+
 </style>

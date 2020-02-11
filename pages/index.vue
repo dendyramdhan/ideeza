@@ -9,25 +9,16 @@
         Ideeza app
       </h2>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
+        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
           Documentation
         </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
+        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">
           GitHub
         </a>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import Logo from '~/components/Logo.vue'
 
@@ -36,8 +27,8 @@ export default {
     Logo
   }
 }
-</script>
 
+</script>
 <style>
 /* Sample `apply` at-rules with Tailwind CSS
 .container {
@@ -74,4 +65,5 @@ export default {
 .links {
   padding-top: 15px;
 }
+
 </style>

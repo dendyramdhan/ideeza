@@ -9,30 +9,12 @@
     </template>
     <template slot="body">
       <div class="my-5 mx-5">
-        <button
-          class="rounded-full bg-blue-700 text-white text-center w-full py-3 mb-2"
-          @click="facebookSignin"
-        >
+        <button class="rounded-full bg-blue-700 text-white text-center w-full py-3 mb-2" @click="facebookSignin">
           <font-awesome-icon class="text-base mr-2" :icon="['fab', 'facebook-f']" />Continue with Facebook
         </button>
-        <button
-          class="rounded-full bg-white border border-black text-black text-center w-full py-3"
-          @click="googleSignin"
-        >
-          <svg
-            width="17"
-            height="17"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="847 405 17 17"
-          >
-            <image
-              xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAACOklEQVQ4T52US0hUYRTH/8frvMxxakzapLmoJkVbtDCMFsJMDgiJFdO6MWnZQkl7QEYb7ywmggiCoZR2GZEw0oQN5aJC22TERIshCNLowdRcreY+5p64k3O7M+L0uLvvnO/8+J/v/M8llH3ZYKeXtPwAM/WCuB1AHYAMgBQR4nlNiW2aXfhqLSPrQfJ3HGcgCsBTDrecsyCc9CSf3SzGTIjk7xAZGKlQXEzJIJxYA5ECe/uZ+XoZ4CNA90D8lhmNBPQU8npVn+fR3HxJOzxZ2yCN+1JQhAaLvIjbnhmlRFouxriry7niyrrdieefytWSOoMRPeMU5Ts7wRkniEmsezh/5i/aMq+Q+gBPAXRyToA6tSNds6S1WRWErnKtquQ2rwetElgzIBIAt3GJCBPVAYStBX3RH8eIaLyCss8GhH/rwkVbAKP/CIEBya4a6r+UEPDNeNgnIOzTQRA135tby+0tr47eVopqQpe/N6ks7DEnx3ACbBjNVogRHpOaxLDEtsiQuhtzej3AEF8fnFl3OoejuQgThi1PcIo4iXq/vD+1xDVbzARD1AThQronYfqkdTJk3/7+2piQ3zBoXQEmR3PB9r54MEzEN8om8AGgBDG/08HbiOiAQ272Ni6et9u0XxNn5vDUkGvC3J1d8e4xEE7/yWTV+Y3YungWrpxPvDvoKrRdssW+6e5+Ai5V3mJadshN514ciV1Zs8XFQOv9oJdVfYCJegG0rQK/AHjJhGmXosQWDs2W/E9+AgWG2UG1pUUZAAAAAElFTkSuQmCC"
-              width="17"
-              height="17"
-              x="847"
-              y="405"
-            />
+        <button class="rounded-full bg-white border border-black text-black text-center w-full py-3" @click="googleSignin">
+          <svg width="17" height="17" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="847 405 17 17">
+            <image xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAARCAYAAAA7bUf6AAACOklEQVQ4T52US0hUYRTH/8frvMxxakzapLmoJkVbtDCMFsJMDgiJFdO6MWnZQkl7QEYb7ywmggiCoZR2GZEw0oQN5aJC22TERIshCNLowdRcreY+5p64k3O7M+L0uLvvnO/8+J/v/M8llH3ZYKeXtPwAM/WCuB1AHYAMgBQR4nlNiW2aXfhqLSPrQfJ3HGcgCsBTDrecsyCc9CSf3SzGTIjk7xAZGKlQXEzJIJxYA5ECe/uZ+XoZ4CNA90D8lhmNBPQU8npVn+fR3HxJOzxZ2yCN+1JQhAaLvIjbnhmlRFouxriry7niyrrdieefytWSOoMRPeMU5Ts7wRkniEmsezh/5i/aMq+Q+gBPAXRyToA6tSNds6S1WRWErnKtquQ2rwetElgzIBIAt3GJCBPVAYStBX3RH8eIaLyCss8GhH/rwkVbAKP/CIEBya4a6r+UEPDNeNgnIOzTQRA135tby+0tr47eVopqQpe/N6ks7DEnx3ACbBjNVogRHpOaxLDEtsiQuhtzej3AEF8fnFl3OoejuQgThi1PcIo4iXq/vD+1xDVbzARD1AThQronYfqkdTJk3/7+2piQ3zBoXQEmR3PB9r54MEzEN8om8AGgBDG/08HbiOiAQ272Ni6et9u0XxNn5vDUkGvC3J1d8e4xEE7/yWTV+Y3YungWrpxPvDvoKrRdssW+6e5+Ai5V3mJadshN514ciV1Zs8XFQOv9oJdVfYCJegG0rQK/AHjJhGmXosQWDs2W/E9+AgWG2UG1pUUZAAAAAElFTkSuQmCC" width="17" height="17" x="847" y="405" />
           </svg>
           Continue with Google
         </button>
@@ -43,25 +25,12 @@
         </div>
         <div>
           <div class="text-left">
-            <input
-              type="email"
-              class="block w-full border border-black px-3 py-3 mb-3"
-              placeholder="Email"
-              v-model="email"
-            />
-            <input
-              type="password"
-              class="block w-full border border-black px-3 py-3 mb-3"
-              placeholder="Password"
-              v-model="password"
-            />
+            <input type="email" class="block w-full border border-black px-3 py-3 mb-3" placeholder="Email" v-model="email" />
+            <input type="password" class="block w-full border border-black px-3 py-3 mb-3" placeholder="Password" v-model="password" />
             <div v-if="!auth" style="color: red">Your Email or password is incorrect!</div>
             <input type="checkbox" class="mb-3" /> Remember me
             <!-- <nuxt-link to="/user/dashboard"> -->
-            <button
-              class="rounded-full bg-ideeza text-white text-center w-full py-3 mb-1"
-              @click="login"
-            >Login</button>
+            <button class="rounded-full bg-ideeza text-white text-center w-full py-3 mb-1" @click="login">Login</button>
             <!-- </nuxt-link> -->
           </div>
         </div>
@@ -70,11 +39,7 @@
         </div>
         <div class="text-center">
           Don't have account an account?
-          <a
-            href="#"
-            @click="$emit('signup')"
-            class="text-ideeza font-bold"
-          >Sign up</a>
+          <a href="#" @click="$emit('signup')" class="text-ideeza font-bold">Sign up</a>
         </div>
       </div>
     </template>
@@ -139,13 +104,12 @@ export default {
             this.auth = false;
           }
         });
-      } else {
-      }
+      } else {}
     },
 
     googleSignin() {
       // const provider = new firebase.auth.GoogleAuthProvider();
-
+      var _this = this;
       this.provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
@@ -155,16 +119,25 @@ export default {
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          console.log("googleSignin", result);
-          this.$router.push("/user/dashboard");
+          console.log('googleSign', result);
+
+          var fullName = user.displayName.split(' ');
+          var firstname = fullName[0];
+          var lastname = fullName[fullName.length - 1];
+          window.$nuxt.$cookies.set("authToken", token);
+          window.$nuxt.$cookies.set("firstname", firstname);
+          window.$nuxt.$cookies.set("lastname", lastname);
+          window.$nuxt.$cookies.set("userid", user.uid);
+
+          _this.$router.push("/user/dashboard");
         })
         .catch(function(e) {
           console.log(e);
         });
     },
-
     facebookSignin() {
       var provider = new firebase.auth.FacebookAuthProvider();
+      var _this = this;
       firebase
         .auth()
         .signInWithPopup(provider)
@@ -173,6 +146,13 @@ export default {
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
+          // var fullName = user.displayName.split(' ');
+          // var firstname = fullName[0];
+          // var lastname = fullName[fullName.length - 1];
+          // window.$nuxt.$cookies.set("authToken", token);
+          // window.$nuxt.$cookies.set("firstname", firstname);
+          // window.$nuxt.$cookies.set("lastname", lastname);
+          // window.$nuxt.$cookies.set("userid", user.uid);
           // ...
         })
         .catch(function(e) {
@@ -185,7 +165,7 @@ export default {
           var credential = e.credential;
           // ...
         });
-    }
+    },
   }
 };
 
@@ -221,7 +201,7 @@ function validatePassword(password) {
     error = "The password contains illegal characters.\n";
     alert(error);
     return false;
-  } 
+  }
   // else if (
   //   password.search(/[a-zA-Z]+/) == -1 ||
   //   password.search(/[0-9]+/) == -1
@@ -230,8 +210,8 @@ function validatePassword(password) {
   //   alert(error);
   //   return false;
   // } 
-  else {
-  }
+  else {}
   return true;
 }
+
 </script>
