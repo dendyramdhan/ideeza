@@ -49,8 +49,8 @@
                     <div class="inline-block px-2">11 Shares</div>
                   </div>
                 </div>
-
-                <div class="flex mt-4">
+                <template v-for="comment in comments">
+            <div class="flex mt-4" :key="comment">
                   <div class="p-3">
                     <div class="w-16 h-16 rounded-full overflow-hidden">
                       <img src="https://randomuser.me/api/portraits/women/23.jpg" />
@@ -74,12 +74,12 @@
                         <span class="inline-block">
                           <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
                         </span>
-                        <span class="inline-block">
+                        <span class="inline-block" @click="comment.show_text_box=!comment.show_text_box">
                           <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
                         </span>
                       </div>
                     </div>
-                    <div class="flex mt-4">
+                    <div class="flex mt-4" v-for="com in comment.childs" :key="com">
                       <div class="p-3">
                         <div class="w-16 h-16 rounded-full overflow-hidden">
                           <img src="https://randomuser.me/api/portraits/women/21.jpg" />
@@ -109,38 +109,10 @@
                         </div>
                       </div>
                     </div>
+                    <input type="text" v-if="comment.show_text_box==true" placeholder="Write your comment..." class="mt-2 px-3 py-6 bg-gray-200 text-gray-700 w-full">
                   </div>
                 </div>
-                <div class="flex mt-4">
-                  <div class="p-3">
-                    <div class="w-16 h-16 rounded-full overflow-hidden">
-                      <img src="https://randomuser.me/api/portraits/women/23.jpg" />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="p-3 bg-gray-300 rounded-lg">
-                      <div class="flex">
-                        <div class="flex-1">
-                          <h3 class="text-gray-700 font-bold text-xl">Mike Tayson</h3>
-                        </div>
-                        <div class="flex-1 text-right">3 min ago</div>
-                      </div>
-                      <p class="text-gray-700 text-md">Technican at Google</p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
-                      </p>
-                      <div class="py-3">
-                        <span class="inline-block">
-                          <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
-                        </span>
-                        <span class="inline-block">
-                          <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            </template>
                 <div class="py-3">
                   <input type="text" placeholder="Write your comment..." class="px-3 py-6 bg-gray-200 text-gray-700 w-full">
                 </div>
@@ -202,7 +174,29 @@ export default {
     return {
       projects: [],
       project: null,
-      project_image_url: process.env.project_image_url
+      project_image_url: process.env.project_image_url,
+      comments:[
+        {
+          childs: 1,
+          show_text_box: false
+        },
+        {
+          childs: 3,
+          show_text_box: false
+        },
+        {
+          childs: 2,
+          show_text_box: false
+        },
+        {
+          childs: 0,
+          show_text_box: false
+        },
+        {
+          childs: 1,
+          show_text_box: false
+        }
+      ]
     };
   },
   asyncData({params}){

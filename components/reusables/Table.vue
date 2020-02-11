@@ -2,7 +2,9 @@
   <div class="bg-white rounded border shadow" :class="border">
     <template v-if="header==true">
     <div class="flex justify-between pt-5 pl-5 pr-5 mb-3 flex-wrap md:flex-no-wrap items-end md:items-center">
-      <h6 class="text-ideeza font-bold text-sm flex-1 mb-2 md:mb-0">{{title}}</h6>
+      <slot name="title">
+        <h6 class="text-ideeza font-bold text-sm flex-1 mb-2 md:mb-0" v-if="title!==''||title!==null">{{title}}</h6>
+      </slot>
       <div class="flex justify-end flex-1 flex-wrap-reverse md:flex-no-wrap md:items-center items-end">
         <div v-if="searchbox"
           class="flex w-fit-content bg-white border border-ideeza rounded items-center mr-2 content-center mb-2 md:mb-0">
@@ -35,7 +37,7 @@
               <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length"
                 v-for="(field,index) in fields">
                 <template v-if="index==0">
-                  <input type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)" />
+                  <input v-if="check==true" type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)" />
                   <label for="ad">{{field}}</label>
                   <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']" />
                 </template>
@@ -85,6 +87,10 @@
         default: 'border-ideeza'
       },
       add: {
+        type: Boolean,
+        default: true
+      },
+      check: {
         type: Boolean,
         default: true
       }

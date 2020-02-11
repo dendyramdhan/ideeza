@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
+  <div class="flex main-panel">
 
     <!-- Main Contents -->
     <div class="flex-grow lg:pt-16 lg:px-10">
@@ -21,6 +19,7 @@
             @click="tab='weekly'"
           >Weekly</span>
         </div>
+        
       </div>
 
       <div class="w-full scroll-container mx-auto">
@@ -79,7 +78,7 @@
 <script>
 import AddTask from "~/components/user/tasklist/add-task";
 import TaskCol from "~/components/user/tasklist/task-col";
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
+import LeftMenu from "~/components/admin/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import taskslist from "~/json/tasklist.json";
