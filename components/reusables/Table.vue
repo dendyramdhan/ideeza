@@ -17,6 +17,11 @@
           </button>
           <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']" />
         </div>
+        <button v-if="add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza mb-2 md:mb-0 h-12" @click="$emit('addnewuser')">
+          Add New
+          <font-awesome-icon class="text-sm" :icon="['fa', 'plus']" />
+        </button>
+        <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']" />
       </div>
       <div class="pl-5 pb-2">
         <slot name="header">
