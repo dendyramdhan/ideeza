@@ -13,7 +13,7 @@
           </div>
           <input placeholder="Search" class="bg-white outline-none h-12 text-gray-800 pr-3 w-2/3 md:w-full">
         </div>
-        <button v-if="add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza mb-2 md:mb-0 h-12" @click="$emit('add')">
+        <button v-if="add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza mb-2 md:mb-0 h-12" @click="$emit('addnewuser')">
           Add New
           <font-awesome-icon class="text-sm" :icon="['fa', 'plus']" />
         </button>

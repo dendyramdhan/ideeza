@@ -67,36 +67,36 @@
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
                     Title
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
                     Username
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
                     Role
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
                     Quantity
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
                     Price
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
                     Visalibity
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
                 <th class="p-4 border-t border-b border-blue-300 w-1/8">
                     Start End
-                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/> 
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                 </th>
             </tr>
 		      </thead>
     <tbody class="bg-grey-light overflow-y-auto text-ideeza-dark" >
-      <tr class="w-full mb-4" v-for="index in 4" :key="index">
+      <tr class="w-full mb-4" v-for="(user,index) in users" :key="index">
               <td class="p-4 text-sm border-b">
                 <input type="checkbox" />
                 <label><img class="inline-flex h-20" src="~/static/images/product.png"></label>
@@ -116,10 +116,20 @@
                   <span class="text-xs">End:</span><br>
                   <span class="text-base">04/24/2018</span><br>
                 </p>
-                <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fa', 'grip-vertical']" />
+                <span @click.stop="user.showpopup = !user.showpopup;$forceUpdate();">
+              <font-awesome-icon
+                class="text-xl mt-2 ml-4 text-green-300 float-right"
+                :icon="['fa', 'grip-vertical']"
+              />
+              </span>
+              <div class="bg-white shadow-md relative w-64" v-if="user.showpopup" @click="user.showpopup = false;$forceUpdate();">
+                <div class="p-3 select-none cursor-pointer">Send message</div>
+                <div class="p-3 select-none cursor-pointer">Block project</div>
+                <div class="p-3 select-none cursor-pointer">Change to Public/Private</div>
+              </div>
               </td>
             </tr>
-            
+
       </tbody>
 	</table>
 
@@ -134,7 +144,7 @@
     </div>
         </div>
         </div>
-        
+
       </div>
     </div>
     <MyIdeeza v-click-outside="onClickOutside" v-if="showMyIdeeza" />
@@ -151,6 +161,7 @@
     },
     data: function () {
       return {
+
         showMyIdeeza: false,
         users: [{
             id: 1,
