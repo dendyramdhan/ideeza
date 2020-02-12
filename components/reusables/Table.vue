@@ -31,6 +31,7 @@
           <button class="font-bold text-sm mr-3 text-ideeza-dark">Make Manager</button>
         </slot>
       </div>
+    </div>
     </template>
     <div class="overflow-x-auto max-96-vw">
       <table class="text-left w-full simple-table">
@@ -96,29 +97,6 @@
         default: true
       }
     },
-    fields: {
-      type: Array,
-      default: () => {
-        return []
-      }
-    },
-    searchbox: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: 'Table'
-    },
-    border: {
-      type: String,
-      default: 'border-ideeza'
-    },
-    add: {
-      type: Boolean,
-      default: true
-    }
-  },
   data() {
     return {
       selected: false

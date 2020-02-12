@@ -4,8 +4,8 @@
       <Search  class="mt-10"   @onUpdate="upload_files" ref="search_part" />
       <div class="font-semibold text-xl my-10">Add Part</div>
       <Cover ref="cover_engine"  @updatePartList ="update_part_list"  />
-      <div class="font-semibold text-xl my-10">Saved Part List</div>
-      <SearchPart ref="part_list_show"  />
+      <!-- <div class="font-semibold text-xl my-10">Saved Part List</div> -->
+      <!-- <SearchPart ref="part_list_show"  /> -->
     </div>
 </template>
 
