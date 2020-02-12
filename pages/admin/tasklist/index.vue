@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
+  <div class="flex main-panel">
 
     <!-- Main Contents -->
     <div class="flex-grow lg:pt-16 lg:px-10">
@@ -21,6 +19,7 @@
             @click="tab='weekly'"
           >Weekly</span>
         </div>
+        
       </div>
 
       <div class="w-full scroll-container mx-auto">
@@ -29,7 +28,7 @@
           <div class="mx-auto task-col md:flex flex-wrap">
             <template>
               <div v-if="filter_date==null"></div>
-              <div v-else>
+              <div v-else-if="tasks.length>0">
                 <TaskCol @showAddTask="displayAddTask" :task="tasks" />
               </div>
             </template>
@@ -43,12 +42,16 @@
               <div v-if="filter_week == null">
                 <!-- <TaskCol @showAddTask="displayAddTask" :task="tasks" /> -->
               </div>
-              <div v-else>
+              <div v-else-if="tasks.length>0">
                 <TaskCol @showAddTask="displayAddTask" :task="tasks" />
               </div>
             </template>
           </div>
         </div>
+      </div>
+      <div class="text-center" v-if="tasks.length==0">
+        <div class="text-lg text-black">Your notes are clear. Should you add new more?</div>
+        <button @click="displayAddTask" class="bg-ideeza text-white px-10 py-5 mt-5 rounded-lg">+Add new note</button>
       </div>
     </div>
 
@@ -75,14 +78,14 @@
 <script>
 import AddTask from "~/components/user/tasklist/add-task";
 import TaskCol from "~/components/user/tasklist/task-col";
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
+import LeftMenu from "~/components/admin/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import taskslist from "~/json/tasklist.json";
 import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   middleware: "auth",
-  layout: "technician",
+  layout: "user",
   name: "task-index",
   components: {
     LeftMenu,
@@ -118,7 +121,7 @@ export default {
       ],
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
-      id: 0,
+      id: 0
     };
   },
   computed: {
@@ -161,11 +164,6 @@ export default {
     };
   },
   mounted() {
-    this.tasks.map(item => {
-      this.week = item.date;
-      var s = new Date(this.week);
-      this.week = s.getWeek();
-    });
     var d = new Date();
     d.setHours(0, 0, 0, 0);
     this.filter_date = Number(d);
@@ -190,6 +188,12 @@ export default {
       }
     });
 
+    this.tasks.map(item => {
+      this.week = item.date;
+      var s = new Date(this.week);
+      this.week = s.getWeek();
+    });
+
     let getloginhistory = "/api/setting/login_history";
 
     let getloginhistoryData = {
@@ -197,6 +201,11 @@ export default {
       url: getloginhistory,
       data: null
     };
+    apiServiceWithToken(getloginhistoryData, response => {
+      if (response.data["success"] == true) {
+        console.log("tasks: ", response.data["data"]);
+      }
+    });
   },
   methods: {
     displayAddTask() {

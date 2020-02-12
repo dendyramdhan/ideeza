@@ -16,7 +16,7 @@
             </div>
             <div class>
               <h2 class="text-pink-900 mt-5 font-bold text-4xl">Lamborgini toy car</h2>
-              <div class="flex mt-4">
+              <nuxt-link tag="div" to="/user/profile" class="flex mt-4">
                 <div class="w-16 h-16 rounded-full overflow-hidden">
                   <img src="https://randomuser.me/api/portraits/women/17.jpg" />
                 </div>
@@ -24,7 +24,7 @@
                   <h3 class="text-pink-700 font-bold text-2xl">Alex Gordon</h3>
                   <p class="text-pink-700">Technican at Google</p>
                 </div>
-              </div>
+              </nuxt-link>
             </div>
 
             <div class="lg:flex flex-wrap">
@@ -49,8 +49,8 @@
                     <div class="inline-block px-2">11 Shares</div>
                   </div>
                 </div>
-
-                <div class="flex mt-4">
+                <template v-for="comment in comments">
+            <div class="flex mt-4" :key="comment">
                   <div class="p-3">
                     <div class="w-16 h-16 rounded-full overflow-hidden">
                       <img src="https://randomuser.me/api/portraits/women/23.jpg" />
@@ -74,12 +74,12 @@
                         <span class="inline-block">
                           <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
                         </span>
-                        <span class="inline-block">
+                        <span class="inline-block" @click="comment.show_text_box=!comment.show_text_box">
                           <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
                         </span>
                       </div>
                     </div>
-                    <div class="flex mt-4">
+                    <div class="flex mt-4" v-for="com in comment.childs" :key="com">
                       <div class="p-3">
                         <div class="w-16 h-16 rounded-full overflow-hidden">
                           <img src="https://randomuser.me/api/portraits/women/21.jpg" />
@@ -109,50 +109,47 @@
                         </div>
                       </div>
                     </div>
+                    <input type="text" v-if="comment.show_text_box==true" placeholder="Write your comment..." class="mt-2 px-3 py-6 bg-gray-200 text-gray-700 w-full">
                   </div>
                 </div>
-                <div class="flex mt-4">
-                  <div class="p-3">
-                    <div class="w-16 h-16 rounded-full overflow-hidden">
-                      <img src="https://randomuser.me/api/portraits/women/23.jpg" />
-                    </div>
-                  </div>
-                  <div>
-                    <div class="p-3 bg-gray-300 rounded-lg">
-                      <div class="flex">
-                        <div class="flex-1">
-                          <h3 class="text-gray-700 font-bold text-xl">Mike Tayson</h3>
-                        </div>
-                        <div class="flex-1 text-right">3 min ago</div>
-                      </div>
-                      <p class="text-gray-700 text-md">Technican at Google</p>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
-                      </p>
-                      <div class="py-3">
-                        <span class="inline-block">
-                          <img src="~/static/images/like-min.png" class="inline-block mr-2" /> 92 Likes
-                        </span>
-                        <span class="inline-block">
-                          <img src="~/static/images/comment.png" class="inline-block mr-2" />92 comments
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+            </template>
+                <div class="py-3">
+                  <input type="text" placeholder="Write your comment..." class="px-3 py-6 bg-gray-200 text-gray-700 w-full">
                 </div>
               </div>
               <div class="w-6/12 pl-3" v-if="project">
                 <h2 class="text-pink-900 font-bold text-2xl mt-10 mb-8 btm-underline">Products</h2>
                 <div class="flex flex-wrap">
                   <template v-for="product in project.products">
-                  <div :key="product.product_id" class="w-full md:w-1/2 pr-1 mb-1">
-                    <div class="shadow-lg">
+                  <nuxt-link :to="{ path: '/user/projects/detail', query: { id: product.product_id}}" :key="product.product_id" class="w-full md:w-1/2 pr-1 mb-1 cursor-pointer">
+                    <div class="shadow-lg relative">
                       <img :src="project_image_url + product.product_image" />
+                      <div class="absolute bottom-0 right-0 text-right px-3 py-3 text-md w-90">
+                    <div class="flex text-lg text-white text-sm">
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <div class="inline-block">
+                          <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
+                        </div>
+                        <div>211</div>
+                        <span class="tooltiptext">Views</span>
+                      </div>
+                      <div class="flex-1 flex items-center mr-2 tooltip">
+                        <img src="~/static/images/ideeza-play-icon.png" class="inline-block mr-2"> 
+                        <div>76</div>
+                        <span class="tooltiptext">Activities</span>
+                      </div>
+                      <div class="flex-1 items-center flex mr-2 tooltip">
+                        <img src="~/static/images/likeWhite.png" class="inline-block mr-2">
+                        <div>35</div>
+                        <span class="tooltiptext">Likes</span>
+                      </div>
+
+                    </div>
+                  </div>
                     </div>
                     <h2 class="text-pink-900 font-bold text-xl pt-3">{{product.product_title}}</h2>
                     <p class="text-gray-700 text-md">{{product.product_description}}</p>
-                  </div>
+                  </nuxt-link>
                   </template>
                 </div>
               </div>
@@ -177,7 +174,29 @@ export default {
     return {
       projects: [],
       project: null,
-      project_image_url: process.env.project_image_url
+      project_image_url: process.env.project_image_url,
+      comments:[
+        {
+          childs: 1,
+          show_text_box: false
+        },
+        {
+          childs: 3,
+          show_text_box: false
+        },
+        {
+          childs: 2,
+          show_text_box: false
+        },
+        {
+          childs: 0,
+          show_text_box: false
+        },
+        {
+          childs: 1,
+          show_text_box: false
+        }
+      ]
     };
   },
   asyncData({params}){

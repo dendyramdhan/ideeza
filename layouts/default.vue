@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt />
+    <nuxt class="home-content" />
   </div>
 </template>
 <script>
@@ -57,5 +57,9 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+.home-content{
+  overflow-y: auto;
+  height: 100vh;
 }
 </style>

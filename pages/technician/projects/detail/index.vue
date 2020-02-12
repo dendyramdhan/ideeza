@@ -23,10 +23,6 @@
                 class="btn btn-normal border-ideeza px-5 py-3"
               >Open 3D</button>
               <button
-                @click.self="completeTask=true"
-                class="btn btn-normal btn--ideeza px-5 py-3"
-              >Complete Project</button>
-              <button
                 @click.self="$router.push('/technician/management/projects')"
                 class="btn btn-normal btn--ideeza-gray-500 px-5 py-3"
               >Back</button>
@@ -86,16 +82,28 @@
           <table class="mt-10 shadow-md">
             <thead>
               <tr class="text-white h16 gradient-bg">
-                <th class="text-left">Tasks</th>
-                <th class="text-left">Domain</th>
+                <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Tasks</th>
+                <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Domain</th>
                 <th class="text-left">Assigned to</th>
-                <th class="text-left">Due Date</th>
-                <th class="text-left">Task Status</th>
+                <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Due Date</th>
+                <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-white"
+                  :icon="['fas', 'sort']"
+                />Task Status</th>
                 <th class="text-left">Notification</th>
               </tr>
             </thead>
             <tbody>
-              <template v-for="task in articleArray2">
+              <template v-for="(task,index) in articleArray2">
                 <tr class="bg-ideeza-100">
                   <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
                     <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
@@ -123,21 +131,37 @@
                       ></div>
                     </div>
                   </td>
-                  <td>{{task.status}}</td>
+                  <td>
+                    <p v-if="task.status == 'Active' ">
+                <span class="text-green-500 font-semibold">{{task.status}}</span>
+              </p>
+              <p v-else-if="task.status == 'completed'|| task.status == 'completed' ">
+                <span class="font-semibold">{{task.status}}</span>
+              </p>
+              <p v-else-if="task.status == 'waiting'">
+                <span class="text-red-500 font-semibold">{{task.status}}</span>
+              </p>
+                  </td>
                   <td class="notifications">
                     <font-awesome-icon
-                      class="mr-1 text-lg text-ideeza-gold"
-                      :icon="['fas', 'exclamation-circle']"
+                      v-if="index == 1"
+                      class="mr-1 text-lg text-blue-700"
+                      :icon="['fas', 'bell']"
                     />
+                    <font-awesome-icon
+                      v-else-if="index == 2"
+                      class="mr-1 text-lg text-red-500"
+                      :icon="['far', 'clock']"
+                    />
+                      <font-awesome-icon v-else
+                        class="mr-1 text-lg text-ideeza-gold"
+                        :icon="['fas', 'exclamation-circle']"
+                      />
                   </td>
                 </tr>
               </template>
             </tbody>
           </table>
-          <button
-            @click.self="addNewTask=true"
-            class="btn btn-normal btn--ideeza-dark px-5 py-3 mt-5"
-          >Add New Task +</button>
 
           <div class="mt-20">
             <div class="gradient-bg px-8 py-5 text-white">Timeline</div>

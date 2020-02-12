@@ -30,6 +30,9 @@
         <nuxt-link to="/user/settings/security" >Security</nuxt-link>
       </div>
       <div class="menu-item">
+        <nuxt-link to="/user/settings/agents" >Agents & Permission</nuxt-link>
+      </div>
+      <div class="menu-item">
         <nuxt-link to="/user/settings/account-actions" >Account Actions</nuxt-link>
       </div>
 
@@ -60,6 +63,7 @@
 .left-side-bar{
   width: 300px;
   min-width: 300px;
+  position:fixed;
 }
 .active-link{
   @apply text-gray-800;

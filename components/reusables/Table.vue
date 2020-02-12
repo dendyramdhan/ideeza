@@ -1,14 +1,15 @@
 <template>
   <div class="bg-white rounded border shadow" :class="border">
     <template v-if="header==true">
-      <div class="flex justify-between pt-5 pl-5 pr-5 mb-3 flex-wrap md:flex-no-wrap items-end md:items-center">
-        <h6 class="text-ideeza font-bold text-sm flex-1 mb-2 md:mb-0">{{title}}</h6>
-        <div class="flex justify-end flex-1 flex-wrap-reverse md:flex-no-wrap md:items-center items-end">
-          <div v-if="searchbox" class="flex w-fit-content bg-white border border-ideeza rounded items-center mr-2 content-center mb-2 md:mb-0">
-            <div class="h-12 relative w-10">
-              <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
-            </div>
-            <input placeholder="Search" class="bg-white outline-none h-12 text-gray-800 pr-3 w-2/3 md:w-full">
+    <div class="flex justify-between pt-5 pl-5 pr-5 mb-3 flex-wrap md:flex-no-wrap items-end md:items-center">
+      <slot name="title">
+        <h6 class="text-ideeza font-bold text-sm flex-1 mb-2 md:mb-0" v-if="title!==''||title!==null">{{title}}</h6>
+      </slot>
+      <div class="flex justify-end flex-1 flex-wrap-reverse md:flex-no-wrap md:items-center items-end">
+        <div v-if="searchbox"
+          class="flex w-fit-content bg-white border border-ideeza rounded items-center mr-2 content-center mb-2 md:mb-0">
+          <div class="h-12 relative w-10">
+            <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
           </div>
           <button v-if="add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza mb-2 md:mb-0 h-12" @click="$emit('add')">
             Add New
@@ -16,6 +17,11 @@
           </button>
           <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']" />
         </div>
+        <button v-if="add" class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza mb-2 md:mb-0 h-12" @click="$emit('addnewuser')">
+          Add New
+          <font-awesome-icon class="text-sm" :icon="['fa', 'plus']" />
+        </button>
+        <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']" />
       </div>
       <div class="pl-5 pb-2">
         <slot name="header">
@@ -25,6 +31,7 @@
           <button class="font-bold text-sm mr-3 text-ideeza-dark">Make Manager</button>
         </slot>
       </div>
+    </div>
     </template>
     <div class="overflow-x-auto max-96-vw">
       <table class="text-left w-full simple-table">
@@ -33,7 +40,7 @@
             <slot name="th">
               <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length" v-for="(field,index) in fields">
                 <template v-if="index==0">
-                  <input type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)" />
+                  <input v-if="check==true" type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)" />
                   <label for="ad">{{field}}</label>
                   <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']" />
                 </template>
@@ -57,35 +64,39 @@
   </div>
 </template>
 <script>
-export default {
-  props: {
-    header: {
-      default: true,
-      type: Boolean
-    },
-    fields: {
-      type: Array,
-      default: () => {
-        return []
+  export default {
+    props: {
+      header: {
+        default: true,
+        type: Boolean
+      },
+      fields: {
+        type: Array,
+        default: () => {
+          return []
+        }
+      },
+      searchbox: {
+        type: Boolean,
+        default: false
+      },
+      title: {
+          type: String,
+          default: 'Table'
+      },
+      border: {
+        type: String,
+        default: 'border-ideeza'
+      },
+      add: {
+        type: Boolean,
+        default: true
+      },
+      check: {
+        type: Boolean,
+        default: true
       }
     },
-    searchbox: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: 'Table'
-    },
-    border: {
-      type: String,
-      default: 'border-ideeza'
-    },
-    add: {
-      type: Boolean,
-      default: true
-    }
-  },
   data() {
     return {
       selected: false

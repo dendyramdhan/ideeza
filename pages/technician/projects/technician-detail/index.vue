@@ -61,11 +61,23 @@
       <table class="mt-10 shadow-md">
         <thead>
         <tr class="text-white h16 gradient-bg">
-          <th class="text-left ">Tasks</th>
-          <th class="text-left">Domain</th>
+          <th class="text-left "><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Tasks</th>
+          <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Domain</th>
           <th class="text-left">Assigned to</th>
-          <th class="text-left">Due Date</th>
-          <th class="text-left">Task Status</th>
+          <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Due Date</th>
+          <th class="text-left"><font-awesome-icon
+                  class="mr-1 text-lg text-black"
+                  :icon="['fas', 'sort']"
+                />Task Status</th>
           <th class="text-left">Notification</th>
         </tr>
         </thead>

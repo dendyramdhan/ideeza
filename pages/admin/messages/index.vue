@@ -1,10 +1,10 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel messages-panel">
     <!--  Left Side Bar  -->
     <LeftMenu :userList="userList" :selectedUserIndex="selectedUserIndex" @select_user="select_user" />
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:py-10 lg:px-3 xl:px-10">
+    <div class="flex-grow lg:py-10 lg:px-3 xl:px-10 message-content">
       <div class="lg:flex">
         <div class="lg:w-3/4 lg:mr-3 shadow-md bg-white">
           <div class="chat-board" id="message-container">
@@ -525,6 +525,9 @@ export default {
 </script>
 
 <style scoped>
+.message-panel.hide-left-bar{
+  
+}
 .messages {
   @apply py-1 px-2 text-base;
   width: fit-content;
@@ -566,5 +569,8 @@ export default {
 }
 .hidden {
   display: none;
+}
+.message-content{
+  margin-left:300px;
 }
 </style>

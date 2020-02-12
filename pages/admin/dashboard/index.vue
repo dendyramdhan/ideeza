@@ -9,20 +9,22 @@
           </div>
           <div class="flex w-1/2 justify-end">
             <button @click="openGadgetsPopup" class="items-center bg-ideeza border rounded px-3 py-1 text-white ml-2">
-              <font-awesome-icon class="text-sm" :icon="['fas', 'plus']"/> Manage Order
+              <font-awesome-icon class="text-sm" :icon="['fas', 'plus']"/> Add Widget
             </button>
-            
+
           </div>
         </div>
 
 
         <div class="md:flex">
           <div class="md:w-2/3 md:mr-3">
-        <simple-table @selectall="selectall" :fields="['Name','Email','Title','Date Modified','Role']">
+        <simple-table title="" @addnewuser="addNewUser=true" @selectall="selectall" :check="false" :fields="['Name','Email','Title','Date Modified','Role']">
+          <template v-slot:title>
+            <input placeholder="Search" class="bg-white outline-none border border-gray-300 p-3 text-gray-800 w-48">
+          </template>
           <tr class="flex w-full mb-4" v-for="(user,index) in users">
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">
-              <input type="checkbox" :id="user.id" v-model="user.selected" />
-              <label :for="user.id">{{user.name}}</label>
+              {{user.name}}
             </td>
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">{{user.email}}</td>
             <td class="p-2 w-1/5" :class="{'border-b':users.length-1 != index}" v-if="user.type == 1">
@@ -38,10 +40,22 @@
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">{{user.date_modified}}</td>
             <td class="p-2 w-1/5 text-sm" :class="{'border-b':users.length-1 != index}">
               {{user.role==1?'User':'Service provider'}}
-              <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500 float-right" :icon="['fa', 'grip-vertical']" />
+              <span @click.stop="user.showpopup = !user.showpopup;$forceUpdate();">
+              <font-awesome-icon
+                class="text-xl mt-2 ml-4 text-green-300 float-right"
+                :icon="['fa', 'grip-vertical']"
+              />
+              </span>
+              <div class="bg-white shadow-md relative w-64" v-if="user.showpopup" @click="project.showpopup = false;$forceUpdate();">
+                <div class="p-3 select-none cursor-pointer">Send message</div>
+                <div class="p-3 select-none cursor-pointer">Block project</div>
+                <div class="p-3 select-none cursor-pointer">Change to Public/Private</div>
+              </div>
             </td>
           </tr>
         </simple-table>
+
+        <new-user @onClose="addNewUser=false" v-if="addNewUser" />
         </div>
 
         <div class="md:w-1/3">
@@ -55,10 +69,18 @@
                     </div>
                     <input placeholder="search users" class="bg-white outline-none h-12 text-gray-800 pr-3">
                 </div>
-                <button class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">
-                    Today <font-awesome-icon class="text-sm" :icon="['fa', 'chevron-down']"/>
-                </button>
-                <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']"/>
+                <select class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">
+                    <option>Today</option>
+                    <option>Last Week</option>
+                    <option>Last Month</option>
+                    <option>Overall</option>
+                </select>
+                <span @click.stop="showpopup = !showpopup;$forceUpdate();"><font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']"/>
+                </span>
+                <div class="bg-white shadow-md relative w-full" v-if="showpopup" @click="showpopup = false;$forceUpdate();">
+                <div class="p-3 select-none cursor-pointer">Settings</div>
+                <div class="p-3 select-none cursor-pointer">Close</div>
+              </div>
             </div>
         </div>
               <div class="">
@@ -75,10 +97,18 @@
                     </div>
                     <input placeholder="search users" class="bg-white outline-none h-12 text-gray-800 pr-3">
                 </div>
-                <button class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">
-                    Today <font-awesome-icon class="text-sm" :icon="['fa', 'chevron-down']"/>
-                </button>
-                <font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']"/>
+                <select class="bg-white border border-ideeza rounded px-3 py-1 text-ideeza">
+                    <option>Today</option>
+                    <option>Last Week</option>
+                    <option>Last Month</option>
+                    <option>Overall</option>
+                </select>
+                <span @click.stop="sales_showpopup = !sales_showpopup;$forceUpdate();"><font-awesome-icon class="text-xl mt-2 ml-4 text-gray-500" :icon="['fas', 'cog']"/>
+                </span>
+                <div class="bg-white shadow-md relative w-full" v-if="sales_showpopup" @click="sales_showpopup = false;$forceUpdate();">
+                <div class="p-3 select-none cursor-pointer">Settings</div>
+                <div class="p-3 select-none cursor-pointer">Close</div>
+              </div>
             </div>
         </div>
               <div class="">
@@ -86,8 +116,8 @@
                   <table class="text-left w-full">
                     <tbody class="bg-grey-light w-full text-ideeza-dark">
                       <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
+                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td>
+                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td>
                         <td class="p-2 border-b">
                           <div id="chart-spark3">
                             <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
@@ -101,8 +131,8 @@
                         </td>
                       </tr>
                       <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
+                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td>
+                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td>
                         <td class="p-2 border-b">
                           <div id="chart-spark3">
                             <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
@@ -116,8 +146,8 @@
                         </td>
                       </tr>
                       <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
+                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td>
+                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td>
                         <td class="p-2 border-b">
                           <div id="chart-spark3">
                             <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
@@ -131,8 +161,8 @@
                         </td>
                       </tr>
                       <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
+                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td>
+                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td>
                         <td class="p-2 border-b">
                           <div id="chart-spark3">
                             <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
@@ -146,8 +176,8 @@
                         </td>
                       </tr>
                       <tr class="w-full mb-3">
-                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td> 
-                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td> 
+                        <td class="p-2 border-b font-bold text-xs text-ideeza-dark">Jim</td>
+                        <td class="p-2 border-b font-bold text-1xl text-ideeza-dark">$86000</td>
                         <td class="p-2 border-b">
                           <div id="chart-spark3">
                             <apexchart type="area" height="30" :options="chartOptionsSpark3" :series="seriesSpark3"></apexchart>
@@ -209,15 +239,21 @@
   import GadgetPopup from '~/components/admin/gadgets-popup.vue'
   import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
   import SimpleTable from '~/components/reusables/Table.vue'
+  import addNewUser from "~/components/admin/user/new-user.vue";
+
 
   export default {
     components: {
       GadgetPopup,
       MyIdeeza,
       SimpleTable,
+      "new-user":addNewUser,
     },
     data: function () {
       return {
+        sales_showpopup:false,
+        showpopup:false,
+        addNewUser:false,
         gadgetPopup: false,
         searchbox: false,
         showMyIdeeza: false,

@@ -12,11 +12,21 @@
             <div class="flex items-center ml-5 text-xs">
               Sort By:
               <button class="px-3 py-1 text-gray-800 text-bold">
-                Date Created <font-awesome-icon class="text-sm" :icon="['fa', 'chevron-down']"/>
+              File type <font-awesome-icon class="text-sm" :icon="['fa', 'chevron-down']"/>
               </button>
+
             </div>
+
+
           </div>
+          <div class="flex w-fit-content bg-white justify-center border border-ideeza rounded items-center mr-2 content-center">
+                    <div class="h-8 relative w-10">
+                        <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
+                    </div>
+                    <input placeholder="search" class="bg-white outline-none h-8 text-gray-800 pr-3">
+                </div>
           <div class="flex w-1/2 justify-end">
+
             <button class="items-center bg-white border border-gray-300 rounded px-3 py-1 text-gray-600">
               <font-awesome-icon class="text-sm" :icon="['fas', 'bars']"/>
             </button>
@@ -43,6 +53,7 @@
                 <th class="py-2 uppercase">Owner</th>
                 <th class="py-2 uppercase">Related Contacts</th>
                 <th class="py-2 uppercase">Created Date</th>
+                <th class="py-2 uppercase">File Types</th>
             </tr>
 		      </thead>
     <tbody class="bg-grey-light overflow-y-auto text-gray-700">
@@ -58,7 +69,7 @@
               <td class="py-2 text-sm border-b-4">abc@xyz.com</td>
               <td class="py-2 text-sm border-b-4">Fri, Nov 29, 2019, 09:00 PM</td>
             </tr>
-            
+
       </tbody>
 	</table>
         </div>

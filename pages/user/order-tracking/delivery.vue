@@ -31,16 +31,6 @@
     <div class="mt-10 mb-20">
       <img src="~/static/images/track-map.png" class="w-full object-cover object-center" alt />
     </div>
-    <div class="text-right absolute left-0 bottom-0">
-      <nuxt-link to="/user/order-tracking/making-product"> 
-        <button class="btn btn-normal btn--ideeza-dark btn-text-bold btn--rounded px-8 py-4 text-lg m-3">Back</button>
-      </nuxt-link>
-    </div>
-    <div class="text-right absolute right-0 bottom-0">
-      <nuxt-link to="/user/order-tracking/pick-up" >
-        <button class="btn btn-normal btn--ideeza btn-text-bold btn--rounded px-8 py-4 text-lg m-3">Next</button>
-      </nuxt-link>
-    </div>
     <!-- <div class="mt-10">
        <nuxt-link to="/user/order-tracking/making-product"> 
         <button class="btn btn-normal btn--ideeza-dark btn-text-bold btn--rounded px-8 py-4 text-lg">Back</button>

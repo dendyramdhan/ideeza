@@ -1,6 +1,6 @@
 <template>
-<div class="md:m-8 lg:m-8 m-2">
-  <div>
+<div>
+  <div class="md:m-8 lg:m-8 m-2">
     <div class="max-w-2xl">
       <div>
         <h1 class="text-gray-800 text-xl font-semibold">Agents & Permissions</h1>

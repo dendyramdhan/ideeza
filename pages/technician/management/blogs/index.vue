@@ -92,7 +92,16 @@
               <p v-else-if="tabledata.flag == 3  ">
                 <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
               </p> -->
-               <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+               <p v-if="tabledata.status == 'Approved' ">
+                <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
+              </p>
+              <p v-else-if="tabledata.status == 'Closed'|| tabledata.status == 'Close' ">
+                <span class="font-semibold">{{tabledata.status}}</span>
+              </p>
+              <p v-else-if="tabledata.status == 'Not Approved'">
+                <span class="text-red-500 font-semibold">{{tabledata.status}}</span>
+              </p>
+              <span v-else class="text-green-500 font-semibold">{{tabledata.status}}</span>
             </td>
 
             <td class="text-gray-500">
@@ -124,7 +133,17 @@
 
               />
             </td>
-            <td></td>
+            <td>
+              <span @click.stop="tabledata.showpopup = !tabledata.showpopup;$forceUpdate();">
+              <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
+              </span>
+              <div class="bg-white shadow-md absolute right-0 w-64" v-if="tabledata.showpopup" @click="project.showpopup = false;$forceUpdate();">
+                <div class="p-3 select-none cursor-pointer">Message</div>
+                <div class="p-3 select-none cursor-pointer">Approve</div>
+                <div class="p-3 select-none cursor-pointer">Pause</div>
+                <div class="p-3 select-none cursor-pointer">Cancel</div>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

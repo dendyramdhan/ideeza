@@ -190,6 +190,7 @@
   .left-side-bar{
     width: 300px;
     min-width: 300px;
+    position: fixed;
   }
   .user-item{
     cursor:pointer;

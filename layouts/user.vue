@@ -5,7 +5,7 @@
     <img src="~/assets/images/new.gif" v-if="loaderFlag" style="position:absolute;top:40%;left:40%; z-index:1000" width="15%" />
     <div>
       <navigation class="flex-shrink"></navigation>
-      <nuxt class="flex-grow" />
+      <nuxt class="flex-grow center-content" />
       <FloatButton />
     </div>
     <client-only>
@@ -126,5 +126,11 @@ export default {
 .notify--success {
   @apply bg-ideeza-green;
 }
-
+.center-content {
+  overflow-y: auto;
+  height: calc(100vh - 55px);
+}
+.center-content> .flex-grow{
+  margin-left: 300px;
+}
 </style>

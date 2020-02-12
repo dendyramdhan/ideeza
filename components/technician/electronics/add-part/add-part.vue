@@ -41,13 +41,13 @@
 
             <span class="font-semibold text-center mb-5">Choose the type of Model</span>
             <button
-              @click="$emit('onSelectType')"
+              @click="$emit('next')"
               class="btn pill-button pill-button--ideeza px-24 py-0 mb-5"
             >SMT</button>
             <hr data-content="or" class="hr-text my-5" />
 
             <button
-              @click="$emit('onSelectType')"
+              @click="$emit('next')"
               class="btn pill-button pill-button--ideeza px-16 py-0"
             >Through Hole</button>
 

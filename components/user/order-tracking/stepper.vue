@@ -1,10 +1,10 @@
 <template>
   <div class="py-10 mb-16 hidden md:block mx-auto relative">
+    <nuxt-link v-if="redirect" tag="button" class="mx-auto p-3 rounded border text-gray-700 absolute top-0 left-0 bg-white" :to="redirect">
+      <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'arrow-left']"/>
+      Go Back
+    </nuxt-link>
     <div class="stepper-container mx-auto">
-      <button class="p-3 rounded border text-gray-700 absolute top-0 left-0 bg-white" @click="$router.back()"><font-awesome-icon
-                class="mr-2 h-4 cursor-pointer"
-                :icon="['fas', 'arrow-left']"
-              />Go Back</button>
       <div class="stepper-bar bg-gray-500 relative mx-auto">
         <div class="stepper-bar-overlay bg-ideeza" :style="`width: ${overlayWidth}%` "></div>
         <div class="absolute top-0 left-0 h-full w-full z-40 flex justify-between">
@@ -44,6 +44,12 @@
   import StepFour from '~/components/partials/icons/finish-icon.vue'
   export default {
     name: "cart-stepper",
+    props: {
+      redirect:{
+        type: Object,
+        default: null
+      }
+    },
     components: {
       StepOne,
       StepTwo,

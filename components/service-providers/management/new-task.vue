@@ -3,7 +3,7 @@
       <div class="popup-overlay--contents add-new-container">
         <!--Header-->
         <div class="flex justify-between border-b-2 border-solid border-ideeza pb-5 px-20 pt-20">
-          <input type="text" class="outline-none border-0 text-ideeza text-xl placeholder-ideeza lg:w-1/2" placeholder="Add new task...." >
+          <input type="text" class="outline-none border-0 text-ideeza text-xl placeholder-ideeza lg:w-1/2" placeholder="Add name for the task...." >
           <font-awesome-icon @click="close" class="mr-1 h-4 cursor-pointer text-gray-500 hover:text-gray-800" :icon="['fas', 'times']"/>
         </div>
 

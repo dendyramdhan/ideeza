@@ -51,7 +51,19 @@
           <input class="border border-gray-400 rounded w-full h-12 px-2" type="password" placeholder="Choose a password"/>
         </div>
 
-        
+        <div class="py-2">
+          <select class="border border-gray-400 rounded w-full h-12 px">
+            <option value="blogger">Blogger</option>
+            <option value="blogger">Code</option>
+            <option value="blogger">Customer Service</option>
+            <option value="blogger">Electric</option>
+            <option value="blogger">Machanics</option>
+            <option value="blogger">Project Manager</option>
+            <option value="blogger">Super Technician</option>
+            <option value="blogger">Tracker</option>
+            <option value="blogger">Other</option>
+          </select>
+        </div>
 
         <h2 class="text-4xl font-bold text-gray-700">Birthday</h2>
         <p class="text-gray-700 py-3">Other people won't see your birthday.</p>

@@ -1,262 +1,220 @@
 <template>
-  <div>
-    <div class="mt-10">
-      <h3 class="font-semi-bold text-2xl">Order Details</h3>
-    </div>
-    <hr class="mt-2 mb-4" />
-    <div>
-      <!-- <div>
-        <div class="hidden xl:flex justify-between">
-          <div class="flex">
-            <select class="field field--border-light mr-1 h-12">
-              <option>All payout methods</option>
-            </select>
-            <select class="field field--border-light mr-1 h-12">
-              <option>All products</option>
-            </select>
-            <select class="field field--border-light mr-1 h-12">
-              <option>2018</option>
-            </select>
-            <select class="field field--border-light mr-1 h-12">
-              <option>Order Status</option>
-            </select>
-            <select class="field field--border-light mr-1 h-12">
-              <option>Type</option>
-            </select>
-          </div>
-          <div>
-            <div class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center">
-              <div class="h-12 relative w-10">
-                <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
-              </div>
-              <input placeholder="Find and order by detail..." class="bg-white outline-none h-8 text-gray-800 pr-3"
-                v-model="searchTerm" v-on:input="search" />
+  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+    <!-- Main Contents -->
+    <div class="flex-grow" v-for="info in articleArray" v-if="info.id == id">
+      <div class="main-contents">
+        <div class="mt-10">
+          <div class="flex justify-between items-center border-b-4 border-solid border-ideeza pb-5">
+            <div class="flex">
+              <span
+                class="text-ideeza-dark text-xl inline-block font-semibold mr-5"
+              >Project: {{info.title}}</span>
+              <!-- <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
+                <span class="text-sm inline-block mr-1">Edit</span>
+                <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
+              </div>-->
+            </div>
+            <div>
+              <button
+                @click.self="$router.push('/service-provider/projects')"
+                class="btn btn-normal btn--ideeza-gray-500 px-5 py-3"
+              >Back</button>
             </div>
           </div>
-        </div>
-        <div class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative mt-2 ml-2 bg-white">
-          <font-awesome-icon class="ml-1 h-6 text-gray-600 absolute-center-h-v" :icon="['fas', 'sliders-h']" />
-        </div>
-      </div>-->
-      <div class="px-3 bg-white shadow-lg">
-        <table class="mt-5">
-          <thead>
-            <tr class="text-gray-800 h16 border-b border-gray-500">
-              <th colspan="2" class="text-left">Image</th>
-              <th class="text-left" colspan="2">Title</th>
-              <th class="text-left">ID</th>
-              <th class="text-left">Type</th>
-              <th class="text-left">Quantity</th>
-              <th class="text-left">Price</th>
-              <th class="text-left">Status</th>
-              <th class="text-left" colspan="2">Start-End</th>
-              <th class="text-left"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="font-semibold">
-              <td colspan="2" class="text-left">
-                <img :src="order.image" class="w-full" />
-              </td>
-              <td colspan="2">
-                <div>{{order.title}}</div>
-                <div class="font-light">{{order.type}}</div>
-              </td>
-              <td>{{order.id}}</td>
-              <td>{{order.type_2}}</td>
-              <td>{{order.quantity}}</td>
-              <td>{{order.price}}</td>
-              <td>{{order.status}}</td>
-              <td colspan="2">
-                <div class="font-light">Start:</div>
-                <div>{{order.date.start}}</div>
-                <div class="font-light">End:</div>
-                <div>{{order.date.end}}</div>
-              </td>
-              <td class="text-left">
-                <div>
-                  <button class="py-2 px-3 mb-2 border border-gray-400"  onclick="print()" >Invoice</button>
+
+          <div class="flex items-center justify-between my-5">
+            <div>
+              Status:
+              <span class="text-ideeza uppercase">{{info.status}}</span>
+            </div>
+            <div class="flex items-center">
+              <div class="text-xl">
+                Project Duration:
+                <span
+                  class="text-ideeza"
+                >{{ts.toLocaleDateString(0 - info.start)}} -</span>
+                <span class="text-ideeza">{{ts.toLocaleDateString(info.end - 0)}}</span>
+              </div>
+              <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']" />
+            </div>
+          </div>
+
+          <div class="lg:flex justify-between">
+            <div class="project-description lg:mr-16">
+              <div class="gradient-bg px-8 py-5 text-white">Project Description</div>
+              <p class="p-5 bg-white text-black">{{info.description}}</p>
+            </div>
+
+            <div class="flex-grow">
+              <div class="gradient-bg px-8 py-5 text-white">Attachments</div>
+              <div class="p-5 bg-white">
+                <span class="block text-xs">3 pics attached</span>
+                <div class="flex flex-wrap attached-images-wrapper mt-2">
+                  <!-- <img src="https://picsum.photos/200" alt /> -->
+                  <span v-for="image in info.attach">
+                    <img :src="project_img_url + image.image" />
+                  </span>
+                  <img src="https://picsum.photos/200" alt />
+                  <!-- <img v-for="image in info.attach" :src="project_img_url+image.image" alt />{{project_img_url}}{{image.image}} -->
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="ml-6">
-          <h4 class="font-semibold">Details</h4>
-          <div class="md:flex justify-between" v-if="order">
-            <div class="md:w-1/3">
-              <div class="making-container mx-auto">
-                <div class="track-heading mt-6">Combine & QA</div>
-                <div class="mt-10">
-                  <Progress :width="order.progress" />
-                  <div class="my-10" v-for="worker in order.workers">
+                <div class="text-xs mt-5">
+                  link attached:
+                  <a
+                    class="text-blue-500"
+                    href="https://google.com"
+                  >https://google.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class="mt-10 shadow-md">
+            <thead>
+              <tr class="text-white h16 gradient-bg">
+                <th class="text-left">Tasks</th>
+                <th class="text-left">Domain</th>
+                <th class="text-left">Assigned to</th>
+                <th class="text-left">Due Date</th>
+                <th class="text-left">Task Status</th>
+                <th class="text-left">Notification</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template v-for="task in articleArray2">
+                <tr class="bg-ideeza-100">
+                  <td class="cursor-pointer" @click="taskdetailtrue(task.id)">
+                    <!-- @click.self="detailTask=true;window.$nuxt.$cookies.set('techniciantaskid', task.id)" -->
+                    <!-- <font-awesome-icon
+                      class="mr-1 text-lg text-ideeza"
+                      :icon="['fas', 'caret-up']"
+                    />-->
+                    {{task.name}}
+                  </td>
+                  <td>{{task.domain}}</td>
+                  <td>
+                    <img
+                      v-for="image in task.assigned_user"
+                      :src="avata_img_url + image.avatar"
+                      class="avatar"
+                    />
+                  </td>
+                  <td class="text-center">
                     <div
-                      class="flex justify-between items-center"
-                      v-if="worker.kind == 'Eletronics' "
+                      class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
                     >
-                      <div class="flex items-center">
-                        <div class="mr-2">
-                          <img class="avatar" :src="worker.profileimage" alt />
-                        </div>
-                        <div>
-                          <span class="block font-semibold text-sm">{{worker.name}}</span>
-                          <span class="block text-sm text-gray-500">{{worker.consultantKind}}</span>
-                        </div>
-                      </div>
-                      <div class="flex items-center">
-                        <div class="text-sm text-gray-500 mr-2">
-                          <span
-                            class="block font-semibold text-sm text-ideeza"
-                          >{{worker.consultantname}}</span>
-                          <span class="block text-xs font-bold text-gray-500">{{worker.state}}</span>
-                        </div>
-                        <nuxt-link :to="{ path: '/user/messages', query: { id: worker.id}}">
-                          <font-awesome-icon
-                            class="mr-2 h-6 text-ideeza text-xl cursor-pointer"
-                            :icon="['far', 'envelope']"
-                          />
-                        </nuxt-link>
-                      </div>
+                      <span
+                        class="absolute due-date text-black"
+                      >{{ts.toLocaleDateString(task.end - task.start)}}</span>
+                      <div
+                        class="bg-ideeza rounded-full h-8"
+                        :style="{ width: ((task.end - task.start)/100000000) +'%'}"
+                      ></div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="flex-1">
-              <table class="shadow-md">
-                <thead>
-                  <tr class="text-white h16 gradient-bg">
-                    <th class="text-left" colspan="2">Tasks</th>
-                    <th class="text-left" colspan="2">Domain</th>
-                    <th class="text-left" colspan="2">Assigned to</th>
-                    <th class="text-left" colspan="2">Due Date</th>
-                    <th class="text-left">Task Status</th>
-                    <th class="text-left" colspan="2">Notification</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <template v-for="(Service,index) in articleArray">
-                    <tr :class="{'bg-ideeza-100': index % 2== 0,'bg-white': index%2 != 0}">
-                      <td class="cursor-pointer" @click="taskdetailtrue(Service.id)" colspan="2">
-                        <!-- <font-awesome-icon
-                          class="mr-1 text-lg text-ideeza"
-                          :icon="['fas', 'caret-up']"
-                          v-if="Service.id in expanded&&expanded[Service.id]==true"
-                        />
-                        <font-awesome-icon
-                          class="mr-1 text-lg text-ideeza"
-                          :icon="['fas', 'caret-down']"
-                          v-else
-                        />-->
-                        {{Service.TaskName}}
-                      </td>
-                      <td colspan="2">{{Service.domain}}</td>
-                      <td colspan="2">
-                        <img
-                          v-for="image in Service.assigned_to_profile_image"
-                          :src="image[0]"
-                          class="avatar"
-                        />
-                      </td>
-                      <td class="text-center" colspan="2">
-                        <div
-                          class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
-                        >
-                          <span class="absolute due-date text-black">{{Service.due_date}}</span>
-                          <div class="bg-ideeza rounded-full h-8" :style="{ width:'30%'}"></div>
-                        </div>
-                      </td>
-                      <td
-                        class="status status--completed"
-                        v-if="Service.task_status=='completed'"
-                      >completed</td>
-                      <td
-                        v-if="Service.task_status == 'Over Due'"
-                        class="status status--over"
-                      >Over Due</td>
-                      <td
-                        v-if="Service.task_status== 'Active'"
-                        class="status status--progress"
-                      >Active</td>
-                      <td
-                        class="status status--priority"
-                        v-if="Service.task_status=='Priority'"
-                      >Priority</td>
-                      <!-- 1 for completed, 2 for over_due, 3 for in_progress -->
-                      <td class="notifications" colspan="2">
-                        <font-awesome-icon
-                          v-if="Service.task_status=='completed'"
-                          class="mr-1 text-lg text-ideeza-gold"
-                          :icon="['fas', 'exclamation-circle']"
-                        />
-                        <font-awesome-icon
-                          v-else-if="Service.task_status == 'Over Due'"
-                          class="mr-1 text-lg text-blue-700"
-                          :icon="['fas', 'bell']"
-                        />
-                        <font-awesome-icon
-                          v-else-if="Service.task_status == 'Priority'"
-                          class="mr-1 text-lg text-red-700"
-                          :icon="['fas', 'bell']"
-                        />
-                        <font-awesome-icon
-                          v-else-if="Service.task_status == 'Active'"
-                          class="mr-1 text-lg text-red-500"
-                          :icon="['far', 'clock']"
-                        />
-                      </td>
-                    </tr>
-                  </template>
-                </tbody>
-              </table>
-            </div>
+                  </td>
+                  <td>{{task.status}}</td>
+                  <td class="notifications">
+                    <font-awesome-icon
+                      class="mr-1 text-lg text-ideeza-gold"
+                      :icon="['fas', 'exclamation-circle']"
+                    />
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+
+          <div class="mt-20">
+            <div class="gradient-bg px-8 py-5 text-white">Timeline</div>
+
+            <task-timeline />
           </div>
+
+          <!--Add new project-->
+          <new-project @onClose="addNewProject=false" v-if="addNewProject" />
+
+          <!--Add new task-->
+          <new-task @onClose="addNewTask=false" v-if="addNewTask" />
+
+          <!--Edit task-->
+          <edit-task @onClose="editTask=false" v-if="editTask" />
+
+          <detail-task
+            @onClose="detailTask=false"
+            @onEdit="detailTask=false;editTask=true"
+            v-if="detailTask"
+            @complete="detailTask=false;completeTask=true"
+            :parentData="sendparentdata"
+            :edit="false"
+          />
+          <complete-task @onClose="completeTask=false" v-if="completeTask" />
+
+          <!-- <span v-for="info in articleArray" v-if="info.id == id">
+      {{info}}
+    </span>
+    --{{id}}
+          {{articleArray2}}--{{projectidd}}-->
         </div>
       </div>
     </div>
-    <new-task @onClose="addNewTask=false" v-if="addNewTask" />
-    <edit-task @onClose="editTask=false" v-if="editTask" />
-    <detail-task
-      @onClose="detailTask=false"
-      @onEdit="detailTask=false;editTask=true"
-      v-if="detailTask"
-      @complete="detailTask=false;completeTask=true"
-      :parentData="sendparentdata"
-    />
-    <complete-task @onClose="completeTask=false" v-if="completeTask" />
   </div>
 </template>
+
 <script>
-import ordersdata from "~/data/OrderApi.json";
-import Progress from "~/components/user/order-tracking/progress-bar.vue";
-import Services from "~/data/TechnicianProjectApi.json";
 import AddNewProject from "~/components/technician/management/new-project.vue";
 import AddNewTask from "~/components/technician/management/new-task.vue";
 import EditTask from "~/components/technician/management/edit-task.vue";
 import TaskTimeLine from "~/components/technician/management/task-timeline.vue";
 import DetailTask from "~/components/technician/management/detail-task.vue";
 import CompleteTask from "~/components/technician/management/complete-task.vue";
+import Services from "~/data/TechnicianProjectApi.json";
 
 import apiService from "~/apiService/have_token.js";
+import apiService2 from "~/apiService/get_param.js";
 
 export default {
   layout: "service-provider",
-  data() {
-    return {
-      order: [],
-      searchTerm: "",
-      articleArray: [],
-      Servicestask: Services.firsttask,
-      expanded: {},
-      addNewProject: false,
-      addNewTask: false,
-      editTask: false,
-      detailTask: false,
-      completeTask: false,
-      geturl2: "/api/project/get_tasks",
-      articleArrayaxios2: [],
-      randomNumber2: []
+  name: "detail",
+  mounted() {
+    this.projectidd = this.id;
+    window.$nuxt.$cookies.set("technicianprojectid", this.id);
+
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
+
+    let sendData = {
+      method: "get",
+      url: this.geturl,
+      data: null
     };
+
+    apiService(sendData, response => {
+      console.log(response.data);
+      this.randomNumber = response.data;
+      this.articleArrayaxios = Object.values(response.data.data);
+
+      this.articleArrayaxios.map(item => {
+        this.articleArrayrout.push(item);
+        this.articleArray.push(item);
+      });
+    });
+
+    const formData = new FormData();
+    formData.set("projectid", this.projectidd);
+    let sendData2 = {
+      method: "post",
+      url: this.geturl2,
+      data: formData
+    };
+
+    apiService(sendData2, response => {
+      console.log(response.data);
+      this.randomNumber2 = response.data;
+      this.articleArrayaxios2 = Object.values(response.data.tasks);
+
+      this.articleArrayaxios2.map(item => {
+        this.articleArrayrout2.push(item);
+        this.articleArray2.push(item);
+      });
+    });
   },
   asyncData({ params }) {
     return {
@@ -264,7 +222,6 @@ export default {
     };
   },
   components: {
-    Progress,
     "new-project": AddNewProject,
     "new-task": AddNewTask,
     "edit-task": EditTask,
@@ -272,34 +229,10 @@ export default {
     DetailTask,
     CompleteTask
   },
-  // mounted() {
-  //   let projectid = "00f604de-d205-48e9-888c-a2fea41b0f06";
-  //   const formData = new FormData();
-  //   formData.set("projectid", projectid);
-  //   let sendData2 = {
-  //     method: "post",
-  //     url: this.geturl2,
-  //     data: formData
-  //   };
-
-  //   apiService(sendData2, response => {
-  //     console.log(response.data);
-  //     this.randomNumber2 = response.data;
-  //     this.articleArrayaxios2 = Object.values(response.data.tasks);
-
-  //     this.articleArrayaxios2.map(item => {
-  //       this.articleArray.push(item);
-  //     });
-  //     Object.assign(this.order, ordersdata);
-  //     this.order = this.order.find(a => a.id.toString() == this.id);
-  //   });
-  // },
-  created: function() {
-    this.Servicestask.map(item => {
-      this.articleArray.push(item);
-    });
-    Object.assign(this.order, ordersdata);
-    this.order = this.order.find(a => a.id.toString() == this.id);
+  computed: {
+    leftMenu() {
+      return this.$store.state.usermenu.openLeftMenu;
+    }
   },
   methods: {
     taskdetailtrue(myid) {
@@ -307,6 +240,11 @@ export default {
       console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));
       this.sendparentdata = myid;
       this.detailTask = true;
+    },    
+    changeid(id) {
+      // alert(id)
+      this.$store.commit("TechnicianProjectStore/projectTaskkeychange1", id);
+      // alert(this.$store.state.TechnicianProjectStore.projectTaskkey)
     },
     expand(id) {
       if (id in this.expanded && this.expanded[id] == true) {
@@ -316,45 +254,324 @@ export default {
       }
       this.$forceUpdate();
     }
+  },
+  data: function() {
+    return {
+      project_img_url: process.env.project_image_url,
+      ts: new Date(),
+      geturl: "/api/project/technician/get_all",
+      articleArray: [],
+      articleArrayrout: [],
+      articleArrayaxios: [],
+      projectidd: null,
+      randomNumber: {},
+      avata_img_url: process.env.avatar_base_url,
+      project_img_url: process.env.project_image_url,
+      articleArray2: [],
+      articleArrayrout2: [],
+      geturl2: "/api/project/get_tasks",
+      articleArrayaxios2: [],
+      randomNumber2: [],
+
+      Servicestask: Services.firsttask,
+      Servicesproject: Services.firstproject,
+
+      addNewProject: false,
+      addNewTask: false,
+      editTask: false,
+      detailTask: false,
+      completeTask: false,
+      expanded: {},
+      tasks: [
+        {
+          id: 1,
+          name: "Make Iron from steal: first phase",
+          domain: "Electronics",
+          assigned_to: [
+            {
+              url: "https://randomuser.me/api/portraits/women/20.jpg"
+            },
+            {
+              url: "https://randomuser.me/api/portraits/men/20.jpg"
+            },
+            {
+              url: "https://randomuser.me/api/portraits/men/12.jpg"
+            }
+          ],
+          timeline: {
+            progress: 30,
+            date: "02.10.2020"
+          },
+          status: 1, //1 for completed, 2 for over_due, 3 for in_progress
+          subtasks: [
+            {
+              id: 2,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: "https://randomuser.me/api/portraits/women/20.jpg"
+                },
+                {
+                  url: "https://randomuser.me/api/portraits/men/20.jpg"
+                },
+                {
+                  url: "https://randomuser.me/api/portraits/men/12.jpg"
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 1
+            },
+            {
+              id: 3,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: ""
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 1
+            },
+            {
+              id: 4,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: "https://randomuser.me/api/portraits/women/20.jpg"
+                },
+                {
+                  url: "https://randomuser.me/api/portraits/men/20.jpg"
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 1
+            }
+          ]
+        },
+        {
+          id: 5,
+          name: "Make Iron from steal: first phase",
+          domain: "Electronics",
+          assigned_to: [
+            {
+              url: "https://randomuser.me/api/portraits/women/20.jpg"
+            },
+            {
+              url: "https://randomuser.me/api/portraits/men/20.jpg"
+            }
+          ],
+          timeline: {
+            progress: 80,
+            date: "02.10.2020"
+          },
+          status: 2, //1 for completed, 2 for over_due, 3 for in_progress
+          subtasks: [
+            {
+              id: 6,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: "https://randomuser.me/api/portraits/men/20.jpg"
+                },
+                {
+                  url: "https://randomuser.me/api/portraits/men/12.jpg"
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 1
+            },
+            {
+              id: 7,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: ""
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 2
+            },
+            {
+              id: 8,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: ""
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 2
+            }
+          ]
+        },
+        {
+          id: 9,
+          name: "Make Iron from steal: first phase",
+          domain: "Electronics",
+          assigned_to: [
+            {
+              url: "https://randomuser.me/api/portraits/women/20.jpg"
+            }
+          ],
+          timeline: {
+            progress: 70,
+            date: "02.10.2020"
+          },
+          status: 3, //1 for completed, 2 for over_due, 3 for in_progress
+          subtasks: [
+            {
+              id: 10,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: ""
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 1
+            },
+            {
+              id: 11,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: ""
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 2
+            },
+            {
+              id: 11,
+              name: "Make Iron from steal: first phase",
+              domain: "Electronics",
+              assigned_to: [
+                {
+                  url: ""
+                }
+              ],
+              timeline: {
+                progress: 30,
+                date: "02.10.2020"
+              },
+              status: 3
+            }
+          ]
+        }
+      ]
+    };
+  },
+  created: function() {
+    this.Servicestask.map(item => {
+      this.articleArray.push(item);
+    });
   }
 };
-
-function print() {
-  var doc = new jsPDF();
-  doc.text("Price: 210", 10, 10);
-  doc.save("a4.pdf");
-}
 </script>
-<style scoped>
+
+      <style scoped>
+.project-description {
+  width: 100%;
+  max-width: 1000px;
+}
+.attached-images-wrapper img {
+  @apply mr-3;
+  max-width: 30%;
+  width: 100%;
+}
+.avatar {
+  @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;
+}
+.avatar:hover {
+  @apply shadow-md;
+}
+.avatar:first-child {
+  @apply ml-0;
+}
+.avatar-timeline {
+  @apply w-6 rounded-full shadow inline cursor-pointer;
+}
+.status {
+  @apply uppercase;
+}
+.status--completed {
+  @apply text-green-500;
+}
+.status--progress {
+  @apply text-orange-500;
+}
+.status--over {
+  @apply text-red-500;
+}
+.notifications {
+  @apply text-sm text-ideeza;
+}
+.time-line-contents {
+  width: 220px;
+}
+.timeline-days-container div {
+}
+.timeline-line {
+  width: 5.6%;
+}
 @screen lg {
   table {
-    @apply w-full table-fixed border-collapse text-gray-600;
+    @apply mb-5 w-full table-fixed border-collapse text-gray-600;
   }
-
   thead tr {
     @apply bg-white px-6 pl-16;
   }
-
+  thead th {
+    @apply p-6;
+  }
   thead th:first-child {
-    @apply p-6;
+    @apply pl-16;
   }
-
-  /* thead th:first-child {
-    @apply pl-0;
-  } */
-  tbody td:first-child {
-    @apply p-6;
+  tbody td {
+    @apply p-6 border-r border-solid border-gray-300;
   }
-
   tbody tr:even {
     @apply bg-white;
   }
-
-  /* tbody td:first-child {
-    @apply pl-0;
-  } */
+  tbody td:first-child {
+    @apply pl-16;
+  }
+  tbody td:last-child {
+    @apply border-r-0;
+  }
 }
-
 @media only screen and (max-width: 760px),
   (min-device-width: 768px) and (max-device-width: 1024px) {
   /* Force table to not be like tables anymore */
@@ -400,98 +617,31 @@ function print() {
   }
 
   /*
-      Label the data
-      */
+        Label the data
+        */
   td:nth-of-type(1):before {
-    content: "Title";
+    content: "Tasks";
   }
-
   td:nth-of-type(2):before {
-    content: "ID";
+    content: "Domain";
   }
-
   td:nth-of-type(3):before {
-    content: "Type";
+    content: "Assigned To";
   }
-
   td:nth-of-type(4):before {
-    content: "Quantity";
+    content: "Due Date";
   }
-
   td:nth-of-type(5):before {
-    content: "Date";
+    content: "Task Status";
   }
-
   td:nth-of-type(6):before {
-    content: "Payout Methods";
+    content: "Notification";
   }
-
-  td:nth-of-type(7):before {
-    content: "Price";
-  }
-
-  td:nth-of-type(8):before {
-    content: "Invoice";
-  }
-}
-
-.making-container {
-  @apply px-2;
-  width: 100%;
-  max-width: 370px;
-}
-
-.avatar {
-  @apply rounded-full;
-  width: 45px;
-  height: auto;
-}
-
-.track-heading {
-  @apply text-2xl font-semibold relative;
-  width: fit-content;
-}
-
-.track-heading:before {
-  @apply border-b-4 border-solid border-ideeza left-0;
-  content: "";
-  position: absolute;
-  width: 80px;
-  bottom: -10px;
-}
-.avatar {
-  @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;
-}
-.avatar:hover {
-  @apply shadow-md;
-}
-.avatar:first-child {
-  @apply ml-0;
-}
-.avatar-timeline {
-  @apply w-6 rounded-full shadow inline cursor-pointer;
-}
-.notifications {
-  @apply text-sm text-ideeza text-right;
 }
 .due-date {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.status {
-  @apply uppercase;
-}
-.status--completed {
-  @apply text-green-500;
-}
-.status--progress {
-  @apply text-orange-500;
-}
-.status--over {
-  @apply text-red-500;
-}
-.status--priority {
-  @apply text-blue-300;
-}
 </style>
+  

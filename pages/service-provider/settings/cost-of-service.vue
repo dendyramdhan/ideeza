@@ -1,5 +1,6 @@
 <template>
-    <div class="md:m-8 lg:m-8 my-2">
+    <div class="">
+      <div class="md:m-8 lg:m-8 my-2">
       <div class="flex">
         <div class="mr-4">
           <nuxt-link to="/service-provider/settings/cost-of-service/electronics" class="px-5 border border-gray-300 md:px-20 py-2 font-semibold">
@@ -12,8 +13,7 @@
         </div>
       </div>
       <nuxt-child class="xl:max-w-5xl mt-5"/>
-
-
+      </div>
     </div>
 </template>
 <script>
