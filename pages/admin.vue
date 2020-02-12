@@ -115,4 +115,11 @@ export default {
 .center-content> .flex-grow{
   margin-left: 300px;
 }
+.center-content {
+  overflow-y: auto;
+  height: calc(100vh - 55px);
+}
+.center-content> .flex-grow{
+  margin-left: 300px;
+}
 </style>
