@@ -56,13 +56,17 @@
       </div>
 
       <div v-if="electronic === 'leg'">
-        <leg-meaning @next="$emit('next')" @back="$emit('back')" />
+        <leg-meaning @next="$emit('next')" @back="showSelection=true" />
       </div>
 
       <div v-if="electronic === 'chart'">
-        <bar-chart @next="$emit('next')" @back="$emit('back')" />
+        <bar-chart @next="$emit('next')" @back="showSelection=true" />
       </div>
     </div>
+    <div v-else class="flex justify-between mt-10 mr-5">
+        <button @click="$emit('back')" class="btn pill-button px-16 py-0">Back</button>
+        <button @click="$emit('next')" class="btn pill-button pill-button--ideeza px-16 py-0">Next</button>
+      </div>
   </div>
 </template>
 
