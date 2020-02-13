@@ -25,12 +25,14 @@
             <input type="text" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="First Name" v-model="firstname" />
             <input type="text" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="Last Name" v-model="lastname" />
             <input type="password" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="Create a Password" v-model="password" />
+            <input type="password" class="block w-full border border-gray px-3 py-3 mb-3" placeholder="Confirm Password" v-model="password1" />
             <div class="font-bold text-lg text-black mb-2">Birthday</div>
             <div class="text-base mb-1">Other people won't see your birthday.</div>
             <div class="flex justify-between mb-3">
-              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Month" v-model="month" />
+              <datepicker v-model="date_of_birth" class="border border-gray px-3 py-3 mr-1 w-1/3" format="yyyy-MM-dd" placeholder="Select Date"></datepicker>
+              <!-- <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Month" v-model="month" />
               <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Day" v-model="day" />
-              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Year" v-model="year" />
+              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Year" v-model="year" /> -->
             </div>
             <label class="leading-normal flex text-sm mb-1">
               <input type="checkbox" class="mt-1 mr-2" />
@@ -51,19 +53,21 @@
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
 import apiService from "~/apiService";
+import apiService2 from "~/apiService/get_param.js";
+import VueJwtDecode from 'vue-jwt-decode'
+import moment from 'moment'
 export default {
   components: {
-    Modal
+    Modal,
   },
   data() {
     return {
       email: "",
       password: "",
+      password1: "",
       firstname: "",
       lastname: "",
-      day: "",
-      month: "",
-      year: ""
+      date_of_birth: null,
     };
   },
   methods: {
@@ -79,7 +83,6 @@ export default {
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          console.log('googleSign', result);
 
           var fullName = user.displayName.split(' ');
           var firstname = fullName[0];
@@ -127,16 +130,18 @@ export default {
         });
     },
     async signup() {
-      if (validate_email(this.email) && validatePassword(this.password)) {
-        var registerurl = "/api/user/register";
-        var birthday = this.day + "/" + this.month + "/" + this.year;
-
+      if (validate_email(this.email) && validatePassword(this.password) && validateConfirmPassword(this.password, this.password1)) {
+        var registerurl = "/accounts/register/";
+        var dob = moment(this.date_of_birth).format('YYYY-MM-DD');
+        var birthday = new Date(dob).toISOString();
         var signupFormData = new FormData();
         signupFormData.set("email", this.email);
         signupFormData.set("password", this.password);
-        signupFormData.set("firstname", this.firstname);
-        signupFormData.set("lastname", this.lastname);
-        signupFormData.set("birthday", birthday);
+        signupFormData.set("password2", this.password);
+        signupFormData.set("password1", this.password1);
+        signupFormData.set("first_name", this.firstname);
+        signupFormData.set("last_name", this.lastname);
+        signupFormData.set("date_of_birth", birthday);
 
         let sendData = {
           method: "post",
@@ -145,10 +150,8 @@ export default {
         };
 
         apiService(sendData, response => {
-          console.log(response.data);
-          console.log(response.data.success);
-          if (response.data.success == true) {
-            let signinurl = "/api/user/login";
+          if (response.status == 200) {
+            let signinurl = "/accounts/token/";
 
             let Data = {
               method: "post",
@@ -156,22 +159,26 @@ export default {
               data: signupFormData
             };
 
-            apiService(Data, response => {
-              console.log(response.data);
-              console.log(response.data.success);
-              if (response.data.success == true) {
-                var token = response.data["data"].token;
-                var userdata = response.data["data"].userdata;
-                var firstname = userdata.firstname;
-                var lastname = userdata.lastname;
-                var userid = userdata.id;
+            apiService(Data, response2 => {
+              if (response2.status === 200) {
+                var access = response2.data.access;
+                var refresh = response2.data.refresh;
+                var userdata = VueJwtDecode.decode(access)
+                var userid = userdata.user_id;
+                window.$nuxt.$cookies.set("authToken", access);
+                window.$nuxt.$cookies.set("refreshToken", refresh);
 
-                window.$nuxt.$cookies.set("authToken", token);
-                window.$nuxt.$cookies.set("firstname", firstname);
-                window.$nuxt.$cookies.set("lastname", lastname);
-                window.$nuxt.$cookies.set("userid", userid);
-                console.log("Here: ", window.$nuxt.$cookies.get("authToken"));
-                this.$router.push("/user/dashboard");
+                let getUserData = {
+                  method: "get",
+                  url: `/accounts/users/${userid}/`,
+                };
+
+                apiService2(getUserData, response3 => {
+                  window.$nuxt.$cookies.set("firstname", response3.data.first_name);
+                  window.$nuxt.$cookies.set("lastname", response3.data.last_name);
+                  window.$nuxt.$cookies.set("userid", response3.data.id);
+                  this.$router.push("/user/dashboard");
+                });
               }
             });
           }
@@ -209,6 +216,39 @@ function validatePassword(password) {
     alert(error);
     return false;
   } else if (password.length < 3 || password.length > 15) {
+    error = "The password is the wrong length. \n";
+    alert(error);
+    return false;
+  } else if (illegalChars.test(password)) {
+    error = "The password contains illegal characters.\n";
+    alert(error);
+    return false;
+  }
+  // else if (
+  //   password.search(/[a-zA-Z]+/) == -1 ||
+  //   password.search(/[0-9]+/) == -1
+  // ) {
+  //   error = "The password must contain at least one numeral.\n";
+  //   alert(error);
+  //   return false;
+  // }
+  else {}
+  return true;
+}
+
+function validateConfirmPassword(password, password1) {
+  var error = "";
+  var illegalChars = /[\W_]/; // allow only letters and numbers
+
+  if (password == "" || password1 == "") {
+    error = "You didn't enter a password.\n";
+    alert(error);
+    return false;
+  } else if (password !== password1) {
+    error = "Password didn't match with confirm password.\n";
+    alert(error);
+    return false;
+  } else if ((password.length < 3 || password.length > 15) || (password1.length < 3 || password1.length > 15)) {
     error = "The password is the wrong length. \n";
     alert(error);
     return false;

@@ -1,4 +1,3 @@
-
 const env = require('dotenv').config()
 
 console.log(env)
@@ -7,8 +6,8 @@ export default {
   mode: 'universal',
   env: env.parsed,
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -27,21 +26,22 @@ export default {
     ]
   },
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#ff00c7' },
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   css: [
     // CSS file in the project
     '@/assets/css/main.css',
     '@/assets/css/customcss.css',
   ],
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
+    { src: '~/plugins/vuejs-datepicker', ssr: false },
     { src: '~/plugins/datepicker', ssr: false },
     { src: '~/plugins/clickoutside', ssr: false },
     { src: '~/plugins/dragged-plugin.js', ssr: false },
@@ -57,21 +57,20 @@ export default {
     { src: '~/plugins/vue-carousal.js', ssr: false, mode: 'client' }
   ],
   /*
-  ** Nuxt.js dev-modules
-  */
+   ** Nuxt.js dev-modules
+   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
   ],
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     '@nuxtjs/pwa',
     '@nuxtjs/device',
     ['nuxt-fontawesome', {
-      imports: [
-        {
+      imports: [{
           set: '@fortawesome/free-solid-svg-icons',
           icons: ['fas']
         },
@@ -100,13 +99,12 @@ export default {
     linkActiveClass: 'active-link'
   },
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
-    extend(config, ctx) {
-    }
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {}
   }
 }
