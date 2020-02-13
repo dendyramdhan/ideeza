@@ -220,6 +220,7 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import LeftMenu from "~/components/user/common-left-side-menu.vue";
 import MyIdeeza from "~/components/user/my-ideeza/new-ideeza.vue";
 import axios from "axios";
@@ -250,7 +251,7 @@ export default {
     MyIdeeza,
     dropDown
   },
-  data: function() {
+  data() {
     return {
       showMyIdeeza: false,
       topprojects: [],
@@ -280,111 +281,112 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      projects: 'projects/getProjects'
+    }),
     leftMenu() {
       return this.$store.state.usermenu.openLeftMenu;
     }
   },
-
-  created() {},
   mounted() {
     // let authToken = window.$nuxt.$cookies.get("authToken");
-    let authToken = window.$nuxt.$cookies.get("authToken");
-    console.log("authToken: ", authToken);
-    if (authToken != null) {
-      // this.name =
-      //   window.$nuxt.$cookies.get("firstname") +
-      //   " " +
-      //   window.$nuxt.$cookies.get("lastname");
-      let firstname = window.$nuxt.$cookies.get("firstname");
-      let lastname = window.$nuxt.$cookies.get("lastname");
-      let useravatar = window.$nuxt.$cookies.get("useravatar");
-      this.name = firstname + " " + lastname;
-      this.avatar = useravatar;
+    // let authToken = window.$nuxt.$cookies.get("authToken");
+    // console.log("authToken: ", authToken);
+    // if (authToken != null) {
+    // this.name =
+    //   window.$nuxt.$cookies.get("firstname") +
+    //   " " +
+    //   window.$nuxt.$cookies.get("lastname");
+    // let firstname = window.$nuxt.$cookies.get("firstname");
+    // let lastname = window.$nuxt.$cookies.get("lastname");
+    // let useravatar = window.$nuxt.$cookies.get("useravatar");
+    // this.name = firstname + " " + lastname;
+    // this.avatar = useravatar;
 
-      let getallprojectsurl = "/api/project/get_all";
-      let getallprojectsData = {
-        method: "get",
-        url: getallprojectsurl,
-        data: null
-      };
+    // let getallprojectsurl = "/api/project/get_all";
+    // let getallprojectsData = {
+    //   method: "get",
+    //   url: getallprojectsurl,
+    //   data: null
+    // };
 
-      apiServiceWithToken(getallprojectsData, response => {
-        console.log("getallprojectsData :", response.data);
-        console.log(response.data["success"]);
-        if (response.data["success"] == true) {
-          this.lengthofprojects = response.data["data"].length;
-          console.log("projects: ", response.data["data"].genera);
-        }
-      });
+    // apiServiceWithToken(getallprojectsData, response => {
+    //   console.log("getallprojectsData :", response.data);
+    //   console.log(response.data["success"]);
+    //   if (response.data["success"] == true) {
+    //     this.lengthofprojects = response.data["data"].length;
+    //     console.log("projects: ", response.data["data"].genera);
+    //   }
+    // });
 
-      let getloginhistory = "/api/setting/login_history";
+    // let getloginhistory = "/api/setting/login_history";
 
-      let getloginhistoryData = {
-        method: "get",
-        url: getloginhistory,
-        data: null
-      };
+    // let getloginhistoryData = {
+    //   method: "get",
+    //   url: getloginhistory,
+    //   data: null
+    // };
 
-      apiServiceWithToken(getloginhistoryData, response => {
-        console.log(response.data);
-        console.log(response.data["success"]);
-        if (response.data["success"] == true) {
-          // this.lengthofprojects = response.data["data"].length;
-          this.userloginhistories = response.data["data"];
-          console.log("history: ", response.data["data"]);
-        }
-      });
+    // apiServiceWithToken(getloginhistoryData, response => {
+    //   console.log(response.data);
+    //   console.log(response.data["success"]);
+    //   if (response.data["success"] == true) {
+    //     // this.lengthofprojects = response.data["data"].length;
+    //     this.userloginhistories = response.data["data"];
+    //     console.log("history: ", response.data["data"]);
+    //   }
+    // });
 
-      let gettopprojectsurl = "/api/project/top_projects";
+    // let gettopprojectsurl = "/api/project/top_projects";
 
-      let gettopprojectsData = {
-        method: "get",
-        url: gettopprojectsurl,
-        data: null
-      };
+    // let gettopprojectsData = {
+    //   method: "get",
+    //   url: gettopprojectsurl,
+    //   data: null
+    // };
 
-      apiServiceWithToken(gettopprojectsData, response => {
-        console.log("topprojectData: ", response.data);
-        console.log(response.data["success"]);
-        if (response.data["success"] == true) {
-          // this.lengthofprojects = response.data["data"].length;
-          this.topprojects = response.data["data"];
-          console.log("history: ", response.data["data"]);
-        }
-      });
+    // apiServiceWithToken(gettopprojectsData, response => {
+    //   console.log("topprojectData: ", response.data);
+    //   console.log(response.data["success"]);
+    //   if (response.data["success"] == true) {
+    //     // this.lengthofprojects = response.data["data"].length;
+    //     this.topprojects = response.data["data"];
+    //     console.log("history: ", response.data["data"]);
+    //   }
+    // });
 
-      let getblogsurl = "/api/get_blogs";
+    // let getblogsurl = "/api/get_blogs";
 
-      let getblogsurlData = {
-        method: "get",
-        url: getblogsurl,
-        data: null
-      };
+    // let getblogsurlData = {
+    //   method: "get",
+    //   url: getblogsurl,
+    //   data: null
+    // };
 
-      apiServiceWithToken(getblogsurlData, response => {
-        console.log("blogsData: ", response.data);
-        console.log(response.data["success"]);
-        if (response.data["success"] == true) {
-          // this.lengthofprojects = response.data["data"].length;
-          this.innovations = response.data["data"];
-          console.log("innovations: ", this.innovations);
-        }
-      });
-    } else {
-      this.$router.push("/");
-    }
+    // apiServiceWithToken(getblogsurlData, response => {
+    //   console.log("blogsData: ", response.data);
+    //   console.log(response.data["success"]);
+    //   if (response.data["success"] == true) {
+    //     // this.lengthofprojects = response.data["data"].length;
+    //     this.innovations = response.data["data"];
+    //     console.log("innovations: ", this.innovations);
+    //   }
+    // });
+    // } else {
+    //   this.$router.push("/");
+    // }
+  },
+  created() {
+    console.log('fetchProjects created');
+    this.fetchProjects();
   },
   methods: {
+    ...mapActions({
+      fetchProjects: 'projects/fetchProjects'
+    }),
     onClickOutside() {
       this.showMyIdeeza = false;
     },
-    showMyProjects() {
-      alert("Hello");
-    },
-    showMyProfile() {},
-    viewLastActivity() {
-      window.location.reload();
-    }
   }
 };
 

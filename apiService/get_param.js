@@ -3,7 +3,7 @@ export default (sendData, ctx) => {
   let authToken = window.$nuxt.$cookies.get("authToken");
   // this.$store.commit("loaderStorage/loader_flag_change1");
 
-  window.$nuxt.$cookies.set("loaderFlag", true)
+  window.$nuxt.$cookies.set("loaderFlag", false)
 
   return axios({
       method: sendData.method,

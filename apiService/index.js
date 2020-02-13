@@ -2,7 +2,7 @@ import axios from 'axios'
 export default (sendData, ctx) => {
   let preload = " <img src='~/assets/images/new.gif' style='position:absolute;top:50%;left:50%' width='20%'/>";
 
-  window.$nuxt.$cookies.set("loaderFlag", true)
+  window.$nuxt.$cookies.set("loaderFlag", false)
 
   return axios({
       method: sendData.method,

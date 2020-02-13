@@ -1,7 +1,7 @@
 import axios from 'axios'
 export default (sendData, ctx) => {
 
-  window.$nuxt.$cookies.set("loaderFlag", true)
+  window.$nuxt.$cookies.set("loaderFlag", false)
 
   return axios({
       method: sendData.method,

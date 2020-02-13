@@ -1,23 +1,18 @@
 import axios from "axios";
-
 export const state = () => ({
-  blog: null,
-  blogs: []
+  activities: [],
 
 });
 
 export const mutations = {
-  cacheBlog(state, blog) {
-    state.blog = blog;
+  setActivities(state, payload) {
+    state.activities = payload
   },
-  setBlogs(state, payload) {
-    state.blogs = payload;
-  }
 };
 
 export const actions = {
   // getActivities({ commit }, payload) {
-  //   commit("setProjects", payload);
+  //   commit("setActivities", payload);
   // },
 
   // async createCompanyData({ commit }, payload) {
@@ -32,30 +27,26 @@ export const actions = {
   //   }
   // }
 
-  // addBlog({ commit }, payload) {
-    //   return new Promise((resolve, reject) => {
-    //     let authToken = window.$nuxt.$cookies.get("authToken");
-
-    //     axios.post(process.env.base_url + "/blog/", { item: item }, { headers: { 'Authorization': `Bearer ${authToken}` } })
-    //       .then((response) => {
-    //         commit('setBlogs', Object.assign(item, { id: response.data.id }))
-    //         resolve(response)
-    //       })
-    //       .catch((error) => { reject(error) })
-    //   })
-    // },
-
-  // fetchProjects({ commit }) {
+  // addItem({ commit }, item) {
   //   return new Promise((resolve, reject) => {
-  //     let authToken = window.$nuxt.$cookies.get("authToken");
-  //     axios.get(process.env.base_url + "/project/", { headers: { Authorization: `Bearer ${authToken}` } })
+  //     axios.post("/api/data-list/products/", { item: item })
   //       .then((response) => {
-  //         commit('setProjects', response.data)
+  //         commit('ADD_ITEM', Object.assign(item, { id: response.data.id }))
   //         resolve(response)
   //       })
   //       .catch((error) => { reject(error) })
   //   })
   // },
+  fetchActivities({ commit }) {
+    return new Promise((resolve, reject) => {
+      axios.get("/api/data-list/products")
+        .then((response) => {
+          commit('setActivities', response.data)
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+    })
+  },
 
   // updateItem({ commit }, item) {
   //   return new Promise((resolve, reject) => {
@@ -80,7 +71,7 @@ export const actions = {
 };
 
 export const getters = {
-  getProjects(state) {
-    return state.projects;
+  getActivities(state) {
+    return state.activities;
   },
 };
