@@ -41,6 +41,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    { src: '~/plugins/vee-validate' },
     { src: '~/plugins/vuejs-datepicker', ssr: false },
     { src: '~/plugins/datepicker', ssr: false },
     { src: '~/plugins/clickoutside', ssr: false },
