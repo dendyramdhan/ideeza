@@ -137,6 +137,7 @@ export default {
     select_part(index){
       console.log("selected part : ", index)
       this.selectedPart = this.partList[index]
+      this.$store.commit('part/selectPart',this.selectedPart)
     },
     search_component(e){
       if (this.searchComponent.length<3 ||  e.key != "Enter")
