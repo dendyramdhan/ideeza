@@ -85,7 +85,7 @@ export default {
           blog.description = this.articleDescription;
           blog.image = this.file;
           this.$store.commit('blog/cacheBlog', blog);
-          this.$router.push({ path: '/admin/blog/pre' });
+          this.$router.push({ path: '/user/blog/pre' });
         }
       });
     },
@@ -110,7 +110,7 @@ export default {
           };
           apiService(sendData, response => {
             if (response.status === 201) {
-              this.$router.push('/admin/blog');
+              this.$router.push('/technician/management/blogs');
             }
           });
         }

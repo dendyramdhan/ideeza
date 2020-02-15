@@ -98,22 +98,21 @@ export default {
           if (this.categories[0]) {
             category = this.categories[0].key;
           }
-          console.log('this.categories', this.categories);
-          console.log('this.categories[0]', this.categories[0]);
           const formData = new FormData();
           formData.set("title", this.articleName);
           formData.set("category", category);
-          // formData.set("description", this.articleDescription);
-          // formData.append("image", this.file);
+          formData.set("description", this.articleDescription);
+          formData.append("image", this.file);
 
           let sendData = {
             method: "post",
             url: this.geturl,
             data: formData,
           };
-          console.log('sendData', sendData);
           apiService(sendData, response => {
-            console.log(response);
+            if (response.status === 201) {
+              this.$router.push('/user/blog');
+            }
           });
         }
       });

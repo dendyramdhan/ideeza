@@ -2,7 +2,7 @@
   <div class="main-contents">
     <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Your articles</h1>
     <div class="lg:flex justify-between items-center my-5">
-      <nuxt-link to="/user/blog/add" class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block">
+      <nuxt-link to="/user/blog/add" class="btn btn-normal btn--ideeza px-10 py-4 block lg: inline-block">
         <button @click="uploadUserBlogkey">Add new article</button>
         <span class="ml-5">+</span>
       </nuxt-link>
@@ -11,8 +11,6 @@
           <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
         </div>
         <input placeholder="search article" v-model="searchTerm" v-on:input="search" class="bg-white outline-none h-12 text-gray-800 pr-3" />
-        <!-- {{searchTerm}} -->
-        <!-- <button>Search</button> -->
       </div>
     </div>
     <!--Blog List-->
@@ -24,7 +22,7 @@
               <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt />
               Article name
             </td>
-            <td class="flex items-center" @click="sort('Date')">
+            <td @click="sort('Date')">
               <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt />
               Date
             </td>
@@ -32,24 +30,21 @@
               <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt />
               Status
             </td>
-            <td @click="sort('Status')">
+            <td>
               <img class="inline-block mr-1 align-baseline" src="~/static/icons/sort-arrows.png" alt />
               Actions
             </td>
-            <td class="text-right">
-              <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
+            <td>
+              Message
             </td>
           </tr>
         </thead>
         <tbody class="text-gray-800">
           <tr v-for="(tabledata, index) in articleArray" v-if="start < index && index < end ">
-            <td class="font-semibold">{{tabledata.article}}</td>
-            <td class>
-              {{ts.toLocaleDateString(tabledata.timestamp)}}
-              <!-- <span v-if="tabledata.flag"></span>
-              <span v-else="!tabledata.flag">{{tabledata.flag=size;}}</span>-->
+            <td class="font-semibold">{{tabledata.title}}</td>
+            <td>
+              {{createdAtArticle(tabledata.created_at)}}
             </td>
-            <!-- <td class="font-semibold">{{tabledata.Status}}</td> -->
             <td>
               <p v-if="tabledata.status == 'Approved' ">
                 <span class="text-green-500 font-semibold">{{tabledata.status}}</span>
@@ -64,22 +59,24 @@
             </td>
             <td class="text-gray-500">
               <nuxt-link :to="{ path: '/user/blog/view', query: { id: tabledata.id}}">
-                <!-- <nuxt-link to="/user/blog/view"> -->
                 <button @click="uploadUserBlogkey2">
                   <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'eye']" />
                 </button>
               </nuxt-link>
               <nuxt-link :to="{ path: '/user/messages', query: { id: tabledata.id}}">
-                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'envelope']" />
+                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'pause']" />
               </nuxt-link>
               <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'check']" @click="setstatus(tabledata.id,'Active')" />
               <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'times']" @click="setstatus(tabledata.id,'Close')" />
             </td>
-            <td></td>
+            <td class="text-gray-500">
+              <nuxt-link :to="{ path: '/user/messages', query: { id: tabledata.id}}">
+                <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'envelope']" />
+              </nuxt-link>
+            </td>
           </tr>
         </tbody>
       </table>
-      <!-- debug: sort={{currentSort}}, dir={{currentSortDir}} -->
       <!--Table Stats-->
       <div class="mt-5 relative">
         <!--Paging-->
@@ -109,26 +106,19 @@
         </div>
       </div>
     </div>
-    <!-- {{Math.ceil(counter)}}   :style="{'position':'absolute','top':apiwidth,'left':apiheight}" v-if="apicall"    -->
-    <!-- <img src="~/assets/images/new.gif"  style="position:absolute;top:40%;left:40%" v-if="loaderFlag" width="15%"/> -->
   </div>
 </template>
 <script>
-import articles from "../../../data/BlogApi.json";
+import moment from 'moment';
 import apiService from "~/apiService";
 import apiService2 from "~/apiService/have_data.js";
 
-import { teal } from "color-name";
 export default {
   name: "blog-list",
   data: function() {
     return {
-      apicall: true,
-      apiwidth: null,
-      apiheight: null,
       ts: new Date(),
       searchTerm: "",
-      articles: articles,
       articleArray: [],
       currentSort: "name",
       currentSortDir: "asc",
@@ -141,19 +131,11 @@ export default {
       counterarray: [],
       articleArrayaxios: [],
       articleArrayrout: [],
-      randomNumber: [],
-      geturl: "/api/get_blogs",
+      geturl: "/blog/",
       geturl2: "/api/blog/change_status"
     };
   },
   mounted() {
-    // (document.body.offsetWidth)/2
-    // (document.body.offsetHeight)/2
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    this.apiwidth = width / 2;
-    this.apiheight = height / 2;
 
     this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
@@ -163,16 +145,8 @@ export default {
     };
 
     apiService(sendData, response => {
-      if (response != null) {
-        this.apicall = false;
-      } else {
-        this.apicall = true;
-      }
 
-      console.log(response.data);
-      this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
-
+      this.articleArrayaxios = response.data;
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);
         this.articleArray.push(item);
@@ -188,14 +162,15 @@ export default {
         this.articleArrayrout.length /
         this.$store.state.TechnicianProjectStore.scale +
         1;
-      //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
         this.counterarray.push(i);
       }
     });
   },
-  created: function() {},
   methods: {
+    createdAtArticle(date) {
+      return moment(date).format('MM MMMM YYYY');
+    },
     setstatus(userid, status) {
       const formData = new FormData();
       formData.set("id", userid);
@@ -206,7 +181,6 @@ export default {
         data: formData
       };
       apiService2(sendData, response => {
-        console.log(response);
         this.articleArray = [];
         let sendData5 = {
           method: "get",
@@ -215,8 +189,6 @@ export default {
         };
 
         apiService(sendData5, response5 => {
-          console.log(response5.data);
-          this.randomNumber = response5.data;
           this.articleArrayaxios = Object.values(response5.data.data);
 
           this.articleArrayaxios.map(item => {
@@ -225,14 +197,6 @@ export default {
           });
         });
 
-        // this.articleArray = [];
-        // this.articleArrayrout.map((item,key) => {
-        //   if (item.id == userid) {
-        //     this.articleArray[key].state = status;
-        //     console.log("status:", status)
-        //     console.log("this status:",  this.articleArray[key].state)
-        //   } 
-        // });
       });
     },
     changeshowperiod(e) {
@@ -259,22 +223,18 @@ export default {
 
       let article_list = this.articleArrayrout;
       article_list.map(element => {
-        const a_text = element.article.toLowerCase() + "";
+        const a_text = element.title.toLowerCase() + "";
         const b_text = e.target.value.toLowerCase() + "";
-        // const b_text = "master"
 
         let s_index = a_text.indexOf(b_text) + 1;
-        // console.log("search ", a_text, b_text, s_index);
 
         if (s_index > 0 || e.target.value == "") {
           this.articleArray.push(element);
         }
       });
 
-      console.log("search array :", this.articleArray, e.target.value);
     },
     sort: function(s) {
-      console.log("sort key :", s, this.articleArray);
       let direction = 1;
 
       if (s === this.currentSort) {
@@ -292,8 +252,8 @@ export default {
       switch (s) {
         case "name":
           article_list.sort(function(a, b) {
-            var x = a.article.toLowerCase();
-            var y = b.article.toLowerCase();
+            var x = a.title.toLowerCase();
+            var y = b.title.toLowerCase();
             if (x < y) {
               return -1 * direction;
             }
@@ -303,7 +263,6 @@ export default {
             return 0;
           });
 
-          // console.log("sorted : ", article_list);
           break;
         case "Date":
           article_list.sort(function(a, b) {
@@ -319,7 +278,6 @@ export default {
             return 0;
           });
 
-          // console.log("sorted : ", article_list);
           break;
         case "Status":
           article_list.sort(function(a, b) {
@@ -334,7 +292,6 @@ export default {
             return 0;
           });
 
-          // console.log("sorted : ", article_list);
           break;
 
         default:
@@ -344,15 +301,11 @@ export default {
     },
     selectedkey(e) {
       this.$store.commit("userBlogStore/selectedkeyChange", e - 1);
-      // $router.go({path:'/news', force: true})
-      console.log(this.currentviewpoint + "_");
       this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
       this.counter =
         this.articleArray.length / this.$store.state.userBlogStore.scale;
       this.start = this.$store.state.userBlogStore.offset * 5 - 1;
       this.end = this.$store.state.userBlogStore.offset * 5 + 5;
-      console.log("start and end :", this.start, this.end);
-      // this.$refs.page.$forceUpdate();
     },
     increasekey() {
       if (
@@ -365,8 +318,6 @@ export default {
           this.articleArray.length / this.$store.state.userBlogStore.scale;
         this.start = this.$store.state.userBlogStore.offset * 5 - 1;
         this.end = this.$store.state.userBlogStore.offset * 5 + 5;
-        // $router.go({path:'/news', force: true})
-        // this.$refs.page.$forceUpdate();
       }
     },
     decreasekey() {
@@ -377,8 +328,6 @@ export default {
           this.articleArray.length / this.$store.state.userBlogStore.scale;
         this.start = this.$store.state.userBlogStore.offset * 5 - 1;
         this.end = this.$store.state.userBlogStore.offset * 5 + 5;
-        // $router.go({path:'/news', force: true})
-        // this.$refs.page.$forceUpdate();
       }
     },
     uploadUserBlogkey() {
@@ -389,10 +338,6 @@ export default {
     }
   }
 };
-
-// export default {
-//     name: "blog-list"
-// }
 
 </script>
 <style scoped>

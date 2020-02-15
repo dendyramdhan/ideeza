@@ -10,7 +10,7 @@
         </div>
         <div class="flex-1 ml-4">
           <div class="text-2xl my-1 text-black font-bold">
-            {{blog.article}}
+            {{blog.title}}
           </div>
           <div class="ratings">
             <font-awesome-icon class="mr-1 text-ideeza-gold" :icon="['fas', 'star']" />
@@ -52,17 +52,11 @@ export default {
     let useravatar = window.$nuxt.$cookies.get("useravatar");
     this.name = firstname + ' ' + lastname;
     this.avatar = useravatar;
-    console.log('bloggg', this.blog);
     var reader = new FileReader();
     reader.onload = function(e) {
-      // get loaded data and render thumbnail.
       document.getElementById("image").src = e.target.result;
     };
-    // // read the image file as a data URL.
     reader.readAsDataURL(this.blog.image);
-
-    // // this.file = this.$refs.file.files[0];
-    console.log("file_upload:", this.blog.image);
   }
 }
 
