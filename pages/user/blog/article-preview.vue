@@ -7,7 +7,14 @@
       <nuxt />
       
     </div>
-
+    <div class="flex justify-between py-6 px-3">
+      <div class=" pt-3">
+        <h2 class="text-2xl font-bold">Perview</h2>
+      </div>
+      <div class="">
+        <a href="" class="text-white py-3 px-6 bg-purple-800 inline-block">Go Back</a>
+      </div>
+    </div>
     <div class="w-full">
       <img src="~static/images/blog-banner.png" class="inline-block">
     </div>
@@ -44,4 +51,5 @@
 </div>
 </div> 
 </template>
+ 
  
