@@ -68,7 +68,7 @@
           </ul>
           <h3 class="text-black text-2xl font-bold py-5 text-center">The result is Ideeza, a smarter maker, powered by the knowledge and drive of thousands of makers’ ideas, successes, mistakes.</h3>
           <p class="my-5 py-5 text-center">
-            <button class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 btn-lg rounded-full">Join Now</button>
+            <button @click="showSignupModal=true" class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 btn-lg rounded-full">Join Now</button>
           </p>
         </div>
       </div>
@@ -79,19 +79,39 @@
           <div class="mt-5 w-4/5  m-auto">
             <h2 class="text-white md:text-6xl sm:text-5xl font-bold py-5">Create something amazing</h2>
             <p class="text-white text-lg">Join free, launch project and start building your smart prototype.</p>
-            <button class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 btn-lg rounded-full shadow-lg mt-5">Launch your Ideeza</button>
+            <button @click="showSignupModal=true" class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 btn-lg rounded-full shadow-lg mt-5">Launch your Ideeza</button>
           </div>
         </div>
         <div class="float-right"><img src="~static/images/bot-hand.png"></div>
       </div>
     </div>
+    <login v-if="showLoginModal" @close="showLoginModal=false" @signup="showLoginModal=false;showSignupModal=true" @reset="showLoginModal=false;showResetModal=true;" />
+    <signup v-if="showSignupModal" @close="showSignupModal=false" @login="showSignupModal=false;showLoginModal=true" @signup="showSignupModal=false;showEmailSignupModal=true;" />
+    <reset-password v-if="showResetModal" @login="showLoginModal=true;showResetModal=false" @close="showResetModal=false" />
+    <email-signup v-if="showEmailSignupModal" @close="showEmailSignupModal=false" @login="showLoginModal=true;showEmailSignupModal=false" />
   </div>
 </template>
 <script>
 import TopHeader from '~/components/reusables/Header';
+import Login from "~/components/reusables/Login.vue";
+import Signup from "~/components/reusables/Signup.vue";
+import EmailSignup from "~/components/reusables/EmailSignup.vue";
+import ResetPassword from "~/components/reusables/ResetPassword.vue";
 export default {
   components: {
-    TopHeader
+    TopHeader,
+    Login,
+    Signup,
+    ResetPassword
+  },
+  data() {
+    return {
+      showLoginModal: false,
+      showSignupModal: false,
+      showResetModal: false,
+      showEmailSignupModal: false,
+      showManufacturerEmailSignupModal: false,
+    }
   }
 }
 
