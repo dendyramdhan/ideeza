@@ -7,7 +7,7 @@
             Chart Title
           </div>
           <div class="flex-grow">
-            <input @input="updateChartTitle($event)"  type="text" class="chart-input w-full">
+            <input @input="change" name="title" :value="chart.title"  type="text" class="chart-input w-full">
           </div>
         </div>
         <div class="flex items-center bg-white p-3 pb-1 border-b border-solid border-gray-300">
@@ -17,34 +17,34 @@
           <div class="flex-grow flex justify-between">
             <div class="flex items-center">
               <span class="text3-xl inline-block ">X</span>
-              <input @input="updateChartXTitle($event)" type="text" class="chart-input w-32 mx-2">
-              <select class="select">
+              <input @input="change" name="labelX" :value="chart.labelX" type="text" class="chart-input w-32 mx-2">
+              <select class="select" :value="chart.unitX" @change="change" name="unitX">
                 <option>mV</option>
               </select>
             </div>
             <div class="flex items-center justify-end">
               <span class="text3-xl inline-block mr-2">Y</span>
-              <input @input="updateChartYTitle($event)" type="text" class="chart-input w-32 mx-2">
-              <select class="select">
+              <input @input="change" :value="chart.labelY" name="labelY" type="text" class="chart-input w-32 mx-2">
+              <select class="select" :value="chart.unitY" @change="change" name="unitY">
                 <option>mV</option>
               </select>
             </div>
           </div>
         </div>
 
-        <div v-for="(chart,index) in chartFaker" :key="`${chart.y}-${index} `" class="flex items-center bg-white p-3 pb-1 border-b border-solid border-gray-300">
+        <div v-for="(chart,index) in values" :key="`${chart.y}-${index} `" class="flex items-center bg-white p-3 pb-1 border-b border-solid border-gray-300">
           <div class="w-32 font-semibold">
             Add Value
           </div>
           <div class="flex-grow flex justify-between">
             <div class="flex items-center">
               <span class="text3-xl inline-block mr-2">X</span>
-              <input @input="updateChartValueX($event, index)" v-model="chart.x"   type="text" class="chart-input w-48">
+              <input v-model="chart.x"   type="text" class="chart-input w-48">
 
             </div>
             <div class="flex items-center">
               <span class="text3-xl inline-block mr-2">Y</span>
-              <input @input="updateChartValueY($event, index)" v-model="chart.y"  type="text" class="chart-input w-48">
+              <input v-model="chart.y"  type="text" class="chart-input w-48">
 
             </div>
             <div>
@@ -62,7 +62,7 @@
       <!--Navigation-->
       <div class="flex justify-between mt-10 mr-5">
         <button @click="$emit('back')" class="btn pill-button px-16 py-0">Back</button>
-        <button @click="$emit('next')" class="btn pill-button pill-button--ideeza px-16 py-0">Next</button>
+        <button @click="next" class="btn pill-button pill-button--ideeza px-16 py-0">Next</button>
       </div>
     </div>
 
@@ -112,11 +112,35 @@
 
             ]
           }],
-          chartFaker: []
+          chartFaker: [],
+          values: [],
+          chart: {}
         }
       },
-
+      beforeDestroy() {
+        this.$store.commit('part/saveChartValues',this.values)
+      },
+      created() {
+        this.values = this.$store.state.part.selected_part.chart.values.map(a => {
+          return a;
+        })
+        this.chart.title = this.$store.state.part.selected_part.chart.title
+        this.chart.labelX = this.$store.state.part.selected_part.chart.labelX
+        this.chart.labelY = this.$store.state.part.selected_part.chart.labelY
+        this.chart.unitX = this.$store.state.part.selected_part.chart.unitX
+        this.chart.unitY = this.$store.state.part.selected_part.chart.unitY
+      },
       methods: {
+        change(val){
+          this.$store.commit('part/savePartChart',{
+            key: val.target.name,
+            value: val.target.value
+          })
+        },
+        next() {
+          this.$store.commit('part/saveChartValues',this.values)
+          this.$emit('next')
+        },
           updateChartValueX($event, index) {
             this.chartFaker[index].x = $event.target.value;
             if(!_.isNil(this.chartFaker[index].x) && !_.isNil(this.chartFaker[index].y)) {
@@ -150,16 +174,15 @@
         },
         addChartValue() {
 
-          this.chartFaker.push({
+          this.values.push({
             x: null,
             y: null
           });
 
         },
         removeChartValue(index) {
-          this.chartFaker.splice(index, 1);
-          console.log(this.chartFaker)
-          this.chartData = [{data: this.chartFaker}];
+          this.values.splice(index, 1);
+          this.chartData = [{data: this.values}];
         },
         updateChartTitle($event) {
           this.chartOptions = {

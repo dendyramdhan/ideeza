@@ -16,20 +16,29 @@
 
 <script>
   import Engine from '@ideeza/vue3dengine'
-  import {
-    TQFNdata,
-    FemaleHeaderdata,
-    R0805data
-  } from '@ideeza/vue3dengine/src/engines/electronic_tech_part'
+  import * as packages from '@ideeza/vue3dengine/src/engines/electronic_tech_part'
+  import { mapState } from 'vuex'
     export default {
       name: "3dengine",
       components: {
         'engine': Engine.etp,
       },
+      props: [
+        'package'
+      ],
+      computed: {
+        ...mapState({
+          part: state => state.part.selected_part
+        })
+      },
+      created() {
+        this.dataForm = packages[this.part.package+'data']
+        this.initData = this.part.package
+      },
       data() {
         return {
-          initData: 'R0805',   // name of one package - TQFN, FEMALEHEADER, R0805
-          dataForm: R0805data, // all the informations from form
+          initData: null,   // name of one package - TQFN, FEMALEHEADER, R0805
+          dataForm: null, // all the informations from form
           toggle3d: false,     // show 3d
           toggle2d: true,    // show 2d
           togglesc: false,    // show schematic

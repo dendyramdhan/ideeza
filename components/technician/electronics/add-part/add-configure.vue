@@ -19,11 +19,11 @@
               <span class="font-semibold ">Body Span Range (E)</span>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Min</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24" :value="part.dimensions.t_min_bandwidth" name="t_min_bandwidth" @input="change">
               </div>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Max</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24" :value="part.dimensions.t_max_bandwidth" name="t_max_bandwidth" @input="change">
               </div>
             </div>
           </div>
@@ -32,11 +32,11 @@
               <span class="font-semibold ">Body Span Range (D)</span>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Min</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24" :value="part.dimensions.min_body_width_w" name="min_body_width_w" @input="change">
               </div>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Max</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24" :value="part.dimensions.max_body_width_w" name="max_body_width_w" @input="change">
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@
               <span class="font-semibold ">Height (H)</span>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Max</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24 " :value="part.dimensions.maximum_height" name="maximum_height" @input="change">
               </div>
             </div>
 
@@ -57,7 +57,7 @@
               <span class="font-semibold ">Standoff Height (A1)</span>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Min</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24 " :value="part.dimensions.minimum_height" name="minimum_height" @input="change">
               </div>
             </div>
           </div>
@@ -65,15 +65,15 @@
           <div class="shadow-md px-5 py-3 bg-white ">
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Chamfered Corner (CH)</span>
-              <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
+              <input type="text" class="px-2 py-1 border border-gray-400 w-24 " name="chamfered_corner" :value="part.dimensions.chamfered_corner" @input="change">
             </div>
           </div>
 
           <div class="shadow-md px-5 py-3 bg-white ">
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Pin 1 location</span>
-              <select class="bg-white border border-gray-400 p-2">
-                <option value="">Side of D</option>
+              <select class="bg-white border border-gray-400 p-2" :value="part.dimensions.pin_location" name="pin_location" @input="change">
+                <option value="sided">Side of D</option>
               </select>
 
 
@@ -87,7 +87,7 @@
               <span class="font-semibold ">Height (H)</span>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Max</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24 " v-model="part.dimensions.minimum_height" name="minimum_height" @input="change">
               </div>
 
             </div>
@@ -97,7 +97,7 @@
               <span class="font-semibold ">Standoff Height (A1)</span>
               <div class="flex items-center">
                 <span class="inline-block mr-5">Min</span>
-                <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
+                <input type="text" class="px-2 py-1 border border-gray-400 w-24 " v-model="part.dimensions.maximum_height" name="maximum_height" @input="change">
               </div>
 
             </div>
@@ -105,14 +105,14 @@
           <div class="shadow-md px-5 py-3 bg-white ">
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Chamfered Corner (CH)</span>
-              <input type="text" class="px-2 py-1 border border-gray-400 w-24 ">
+              <input type="text" class="px-2 py-1 border border-gray-400 w-24 " name="chamfered_corner" :value="part.dimensions.chamfered_corner" @input="change">
             </div>
           </div>
           <div class="shadow-md px-5 py-3 bg-white ">
             <div class="w-392 flex items-center justify-between pb-2 border-b border-solid border-gray-400 relative">
               <span class="font-semibold ">Pin 1 location</span>
-              <select class="bg-white border border-gray-400 p-2">
-                <option value="">Side of D</option>
+              <select class="bg-white border border-gray-400 p-2" :value="part.dimensions.pin_location" name="pin_location" @input="change">
+                <option value="side_d">Side of D</option>
               </select>
             </div>
           </div>
@@ -160,7 +160,7 @@
           </div>
         </div>
         <div class="view-container bg-gray-500">
-          <Engine />
+          <Engine :package="part.package"/>
         </div>
       </div>
     </div>
@@ -169,6 +169,7 @@
 
 <script>
   import Engine from '~/components/technician/electronics/add-part/engine.vue'
+  import { mapState } from 'vuex'
     export default {
         name: "configure",
         data: () => {
@@ -181,6 +182,11 @@
       components: {
           Engine
       },
+      computed:{
+        ...mapState({
+          part: state => state.part.selected_part
+        })
+      },
         methods: {
             back () {
                 if(this.step > 1)
@@ -189,6 +195,13 @@
             next () {
                 if(this.step < this.maxStep)
                     this.step += 1;
+            },
+            change(val){
+              console.log(val)
+              this.$store.commit('part/saveDimension',{
+                key: val.target.name,
+                value: val.target.value
+              })
             }
         }
     }
