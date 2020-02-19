@@ -58,7 +58,7 @@
             <h2 class="text-gray-900 text-5xl font-bold">TOGETHER!</h2>
             <p class="text-gray-700 text-lg py-5 ">We believe in collaboration and together with the power of Artificial Intelligence it leads to amazing results, empowering the full potential of the world! For the first time, you can use, contribute, and empower the community knowledge - by a click, thousands of brains will come together to provide the unique solution for your idea!</p>
             <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <nuxt-link to="/landing/collaboration" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">Read More</nuxt-link>
+              <nuxt-link to="/collaboration/" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">Read More</nuxt-link>
             </p>
           </div>
         </div>

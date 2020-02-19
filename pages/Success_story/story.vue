@@ -67,7 +67,7 @@
       </div>
       <div class="py-16 text-center">
         <h2 class="text-5xl font-bold">Want to work with us?</h2>
-        <nuxt-link to="" class="text-white px-10 mt-10 py-4 rounded-lg btn-gradient-bg inline-block text-xl">Yes, Continue</nuxt-link>
+        <button @click="showSignupModal=true" class="text-white px-10 mt-10 py-4 rounded-lg btn-gradient-bg inline-block text-xl">Yes, Continue</button>
       </div>
     </div>
     <div class="curve-bg-gradient clearfix">

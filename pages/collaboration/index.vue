@@ -8,7 +8,7 @@
           <p class="text-xl text-purple-900 font-bold pr-5">Together we grow the community knowledge to a new level.</p>
           <h2 class="md:text-3xl sm:text-4xl mt-5 font-bold text-gray-900">It's more then technology, it's your home!</h2>
           <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-            <nuxt-link to="" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">JOIN NOW</nuxt-link>
+            <button @click="showSignupModal=true" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">JOIN NOW</button>
           </p>
         </div>
       </div>
@@ -91,7 +91,7 @@
           <h2 class="text-gray-900 text-4xl font-extrabold">John Doe’s Dream</h2>
           <p class="text-gray-700 text-lg py-5 ">If you're on the fence on whether you need a big company behind you to succeed, these individuals prove that having vision and the drive is more than enough.</p>
           <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-            <nuxt-link to="" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">View Story</nuxt-link>
+            <nuxt-link to="/success_story" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">View Story</nuxt-link>
           </p>
         </div>
       </div>
@@ -105,7 +105,7 @@
             <p class="text-gray-700 text-lg py-5 ">On top of this amazing capability, IDEEZAs platform uses an automated processes for PCB and 3D design, production optimization and a marketplace with the top notch service providers for production and more. For the first time, by one click, thousands of brains will come together to help you and provide your unique solution.</p>
             <p class="text-purple-900 font-bold">Thats all? </p>
             <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <nuxt-link to="" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">Launch your Ideeza</nuxt-link>
+              <button @click="showSignupModal=true" to="" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">Launch your Ideeza</button>
             </p>
           </div>
           <img src="~/static/images/ref_img_1252.png" class="md:absolute static right-0 max-width-half2">
@@ -124,7 +124,7 @@
               To give you the full reward for contributing to the community, you will get points according to your activities. That way you can stand out in our service providers list, so clients can find you easily in our marketplace for private jobs.</p>
             <p class="text-gray-700 text-lg py-5 ">In this way, we believe that we can thank you on behalf of the global open knowledge community.</p>
             <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <nuxt-link to="/landing/pointslevel" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">LEARN MORE</nuxt-link>
+              <nuxt-link to="/collaboration/points-level" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">LEARN MORE</nuxt-link>
             </p>
           </div>
           <img src="~/static/images/ref_img_1251.png" class="md:absolute static left-0 max-width-half">
@@ -136,7 +136,7 @@
         <div class="container lg m-auto text-white">
           <div class="mt-5 w-4/5  m-auto text-center">
             <h2 class="text-white md:text-3xl sm:text-3xl font-bold py-5 ">Join a growing maker community</h2>
-            <button class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 w-64 rounded-full shadow-lg mt-5">Join Now</button>
+            <button @click="showSignupModal=true" class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 w-64 rounded-full shadow-lg mt-5">Join Now</button>
           </div>
           <div class="w-full md:flex flex-wrap border-t-2 pb-10 mt-10 border-pink-600">
             <div class="flex-1 text-center md:text-left pt-5 w-full">
@@ -151,13 +151,36 @@
         </div>
       </div>
     </div>
+    <login v-if="showLoginModal" @close="showLoginModal=false" @signup="showLoginModal=false;showSignupModal=true" @reset="showLoginModal=false;showResetModal=true;" />
+    <signup v-if="showSignupModal" @close="showSignupModal=false" @login="showSignupModal=false;showLoginModal=true" @signup="showSignupModal=false;showEmailSignupModal=true;" />
+    <reset-password v-if="showResetModal" @login="showLoginModal=true;showResetModal=false" @close="showResetModal=false" />
+    <email-signup v-if="showEmailSignupModal" @close="showEmailSignupModal=false" @login="showLoginModal=true;showEmailSignupModal=false" />
   </div>
 </template>
 <script>
 import TopHeader from '~/components/reusables/Header';
+import Login from "~/components/reusables/Login.vue";
+import Signup from "~/components/reusables/Signup.vue";
+import EmailSignup from "~/components/reusables/EmailSignup.vue";
+import ManufacturerEmailSignup from "~/components/reusables/ManufacturerEmailSignup.vue";
+import ResetPassword from "~/components/reusables/ResetPassword.vue";
 export default {
   components: {
-    TopHeader
+    TopHeader,
+    Login,
+    Signup,
+    ResetPassword,
+    EmailSignup,
+    ManufacturerEmailSignup,
+  },
+  data() {
+    return {
+      showLoginModal: false,
+      showSignupModal: false,
+      showResetModal: false,
+      showEmailSignupModal: false,
+      showManufacturerEmailSignupModal: false,
+    }
   }
 }
 

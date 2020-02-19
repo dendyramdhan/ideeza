@@ -85,6 +85,26 @@
         <div class="float-right"><img src="~static/images/bot-hand.png"></div>
       </div>
     </div>
+    <div class="footer-bg bg-cover clearfix">
+      <div class="curve-bg-gradient-new pt-8 clearfix">
+        <div class="container lg m-auto text-white">
+          <div class="mt-5 w-4/5  m-auto text-center">
+            <h2 class="text-white md:text-3xl sm:text-3xl font-bold py-5 ">Join a growing maker community</h2>
+            <button @click="showSignupModal=true" class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 w-64 rounded-full shadow-lg mt-5">Join Now</button>
+          </div>
+          <div class="w-full md:flex flex-wrap border-t-2 pb-10 mt-10 border-pink-600">
+            <div class="flex-1 text-center md:text-left pt-5 w-full">
+              <img src="~static/images/logo-2.png" class="inline-block">
+            </div>
+            <div class="flex-1 text-center md:text-center w-full text-white pt-10">© 2016 Ideeza All rights reserved</div>
+            <div class="flex-1 text-center md:text-right w-full text-white pt-10">
+              <nuxt-link to="" class="text-white px-3">Privacy Policy</nuxt-link> |
+              <nuxt-link to="" class="text-white px-3">Term & Condition</nuxt-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <login v-if="showLoginModal" @close="showLoginModal=false" @signup="showLoginModal=false;showSignupModal=true" @reset="showLoginModal=false;showResetModal=true;" />
     <signup v-if="showSignupModal" @close="showSignupModal=false" @login="showSignupModal=false;showLoginModal=true" @signup="showSignupModal=false;showEmailSignupModal=true;" />
     <reset-password v-if="showResetModal" @login="showLoginModal=true;showResetModal=false" @close="showResetModal=false" />

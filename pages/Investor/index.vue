@@ -11,8 +11,7 @@
               <p class="text-lg mt-5">with ideeza we go together to invest in everythins. you receive a hugee amount of profit by investing in us by giving people the ability to make the things happen.</p>
             </div>
           </div>
-          <div class="md:w-4/5 w-full">
-            <iframe width="100%" height="800" src="https://www.youtube.com/embed/uVCKsSqvPhc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="md:w-4/5 w-full"><iframe width="100%" height="800" src="https://www.youtube.com/embed/PdlO0NRWdtI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -98,7 +97,7 @@
           <div class="flex">
             <div class="flex-1 text-gray-600 text-md">21 October, 2019</div>
             <div class="flex-1">
-              <nuxt-link to="" class="text-white px-5 py-3 rounded-lg bg-pink-CM inline-block">Read More</nuxt-link>
+              <nuxt-link to="/blog" class="text-white px-5 py-3 rounded-lg bg-pink-CM inline-block">Read More</nuxt-link>
             </div>
           </div>
         </div>
@@ -113,7 +112,7 @@
           <div class="flex">
             <div class="flex-1 text-gray-600 text-md">21 October, 2019</div>
             <div class="flex-1">
-              <nuxt-link to="" class="text-white px-5 py-3 rounded-lg bg-pink-CM inline-block">Read More</nuxt-link>
+              <nuxt-link to="/blog" class="text-white px-5 py-3 rounded-lg bg-pink-CM inline-block">Read More</nuxt-link>
             </div>
           </div>
         </div>
@@ -139,7 +138,7 @@
       <div class="w-full mt-24 py-5">
         <div class="flex flex-wrap">
           <div class="md:w-2/4 w-full">
-            <iframe width="100%" height="500" class="mt-16" src="https://www.youtube.com/embed/wbnaHgSttVo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="500" src="https://www.youtube.com/embed/fcu97dta2_E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="md:w-2/4 w-full relative">
             <div class="md:absolute static bg-white p-10 rounded-sm  md:mr-12 mr-0 succe_box-w2 shadow-lg">
@@ -150,10 +149,10 @@
                 happen.</p>
               <div class="flex text-center">
                 <div class="flex-1 mt-10"><img src="~static/images/download.png" class="inline-block">
-                  <nuxt-link to="" class="text-lg text-gray-900 font-bold">Download the<br /> pitchdeck</nuxt-link>
+                  <a href="/static/files/ES-IDEZZA.pdf" download class="text-lg text-gray-900 font-bold">Download the<br /> pitchdeck</a>
                 </div>
                 <div class="flex-1 mt-10"><img src="~static/images/download.png" class="inline-block">
-                  <nuxt-link to="" class="text-lg text-gray-900 font-bold">Download <br />Executive summary</nuxt-link>
+                  <a href="/static/files/IDEEZA-Presentation.pdf" download class="text-lg text-gray-900 font-bold">Download <br />Executive summary</a>
                 </div>
               </div>
             </div>

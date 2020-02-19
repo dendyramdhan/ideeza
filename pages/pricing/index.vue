@@ -10,60 +10,29 @@
       </div>
       <div class="md:flex items-center justify-around">
         <div class="md:flex block justify-center items-center content-center w-m-c">
-          <nuxt-link
-            to="/about"
-            class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
-          >About Us</nuxt-link>
-          <nuxt-link
-            to="/pricing"
-            class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
-          >Pricing</nuxt-link>
-          <nuxt-link
-            to="/user/support"
-            class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
-          >Contact Us</nuxt-link>
-          <nuxt-link
-            to="/blog"
-            class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300"
-          >Blog</nuxt-link>
-          <nuxt-link
-            to="/user/profile"
-            class="md:ml-0 mr-4 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300"
-          >
+          <nuxt-link to="/about" class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300">About Us</nuxt-link>
+          <nuxt-link to="/pricing" class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300">Pricing</nuxt-link>
+          <nuxt-link to="/user/support" class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300">Contact Us</nuxt-link>
+          <nuxt-link to="/blog" class="block md:inline-block ml-5 md:ml-0 py-2 md:py-0 mr-12 text-base text-white text-gray-300">Blog</nuxt-link>
+          <nuxt-link to="/user/profile" class="md:ml-0 mr-4 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300">
             <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'linkedin']" />
           </nuxt-link>
-          <nuxt-link
-            to="/user/profile"
-            class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
-          >
+          <nuxt-link to="/user/profile" class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
             <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'twitter-square']" />
           </nuxt-link>
-          <nuxt-link
-            to="/user/profile"
-            class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
-          >
+          <nuxt-link to="/user/profile" class="md:my-0 my-3 mr-4 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
             <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'instagram']" />
           </nuxt-link>
-          <nuxt-link
-            to="/user/profile"
-            class="md:my-0 my-3 mr-12 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300"
-          >
+          <nuxt-link to="/user/profile" class="md:my-0 my-3 mr-12 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
             <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'facebook-square']" />
           </nuxt-link>
-          <button
-            v-if="!auth"
-            @click="showLoginModal=true"
-            class="auth-btn ml-5 md:ml-0 my-1 md:my-0 rounded-full px-3 py-2 border-0 text-gray-300"
-          >
+          <button v-if="!auth" @click="showLoginModal=true" class="auth-btn ml-5 md:ml-0 my-1 md:my-0 rounded-full px-3 py-2 border-0 text-gray-300">
             Sign Up/
             Log In
           </button>
           <nuxt-link v-else to="/user/profile">
             <div class="flex items-center" style="cursor: pointer">
-              <img
-                class="h-8 w-8 rounded-full mr-2"
-                src="https://randomuser.me/api/portraits/men/17.jpg"
-              />
+              <img class="h-8 w-8 rounded-full mr-2" src="https://randomuser.me/api/portraits/men/17.jpg" />
               <span class="text-white inline-block">{{name}}</span>
             </div>
           </nuxt-link>
@@ -89,10 +58,7 @@
     </div>
     <div class="flex flex-wrap justify-center px-5 py-10">
       <div class="lg:w-1/4 md:w-1/2 w-full pr-2 mb-3">
-        <div
-          class="bg-white shadow-lg rounded relative pricing-card"
-          :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}"
-        >
+        <div class="bg-white shadow-lg rounded relative pricing-card" :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}">
           <div class="flex pt-10 px-10 pb-10 items-start">
             <div class="mr-5">
               <img src="~/static/images/rockit.png" alt="rockit" class="h-20" />
@@ -124,10 +90,7 @@
         </div>
       </div>
       <div class="lg:w-1/4 md:w-1/2 w-full pr-2 mb-3">
-        <div
-          class="bg-white shadow-lg rounded relative pricing-card creator-maker"
-          :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}"
-        >
+        <div class="bg-white shadow-lg rounded relative pricing-card creator-maker" :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}">
           <div class="popular-badge-text">Most Popular</div>
           <div class="popular-badge">
             <font-awesome-icon :icon="['far', 'star']" />
@@ -169,17 +132,12 @@
           <div class="text-center text-4xl pb-10">Private</div>
           <div class="p-10 text-center">
             <button class="btn-top-white rounded-lg bg-white text-center px-10 py-3 w-full">$799</button>
-            <button
-              class="btn-bot-black rounded-b-lg bg-black text-white text-center py-2 w-3/4 btn-gray"
-            >$69 X 12 = $828</button>
+            <button class="btn-bot-black rounded-b-lg bg-black text-white text-center py-2 w-3/4 btn-gray">$69 X 12 = $828</button>
           </div>
         </div>
       </div>
       <div class="lg:w-1/4 md:w-1/2 w-full pr-2 mb-3">
-        <div
-          class="bg-white shadow-lg rounded relative pricing-card innovator"
-          :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}"
-        >
+        <div class="bg-white shadow-lg rounded relative pricing-card innovator" :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}">
           <div class="flex pt-10 px-10 pb-10 items-start h-40">
             <div class="mr-5">
               <img src="~/static/images/enperprise.png" alt="rockit" class="w-24" />
@@ -219,18 +177,13 @@
           </div>
           <div class="text-center text-4xl pb-10">Private</div>
           <div class="p-10 text-center">
-            <button
-              class="btn-top-black rounded-t-lg bg-black text-white text-center py-2 w-3/4 btn-gray"
-            >$799 X 12 = $11988</button>
+            <button class="btn-top-black rounded-t-lg bg-black text-white text-center py-2 w-3/4 btn-gray">$799 X 12 = $11988</button>
             <button class="btn-bot-white rounded-lg bg-white text-center px-10 py-3 w-full">$9999</button>
           </div>
         </div>
       </div>
       <div class="lg:w-1/4 md:w-1/2 w-full pr-2 mb-3">
-        <div
-          class="bg-white shadow-lg rounded relative pricing-card team"
-          :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}"
-        >
+        <div class="bg-white shadow-lg rounded relative pricing-card team" :style="{'background-image':'url('+backgroundUrl1+'),url('+backgroundUrl2+'),url('+backgroundUrl3+');'}">
           <div class="flex pt-10 px-10 pb-10 items-start h-40">
             <div class="mr-5">
               <img src="~/static/images/cup.png" alt="rockit" class="h-20" />
@@ -274,35 +227,15 @@
           <div class="text-center text-4xl pb-10">Private</div>
           <div class="p-10 text-center">
             <button class="btn-top-white rounded-lg bg-white text-center px-10 py-3 w-full">$9999</button>
-            <button
-              class="btn-bot-black rounded-b-lg bg-black text-white text-center py-2 w-3/4 btn-gray"
-            >$799 X 12 = $11988</button>
+            <button class="btn-bot-black rounded-b-lg bg-black text-white text-center py-2 w-3/4 btn-gray">$799 X 12 = $11988</button>
           </div>
         </div>
       </div>
     </div>
-    <login
-      v-if="showLoginModal"
-      @close="showLoginModal=false"
-      @signup="showLoginModal=false;showSignupModal=true"
-      @reset="showLoginModal=false;showResetModal=true;"
-    />
-    <signup
-      v-if="showSignupModal"
-      @close="showSignupModal=false"
-      @login="showSignupModal=false;showLoginModal=true"
-      @signup="showSignupModal=false;showEmailSignupModal=true;"
-    />
-    <reset-password
-      v-if="showResetModal"
-      @login="showLoginModal=true;showResetModal=false"
-      @close="showResetModal=false"
-    />
-    <email-signup
-      v-if="showEmailSignupModal"
-      @close="showEmailSignupModal=false"
-      @login="showLoginModal=true;showEmailSignupModal=false"
-    />
+    <login v-if="showLoginModal" @close="showLoginModal=false" @signup="showLoginModal=false;showSignupModal=true" @reset="showLoginModal=false;showResetModal=true;" />
+    <signup v-if="showSignupModal" @close="showSignupModal=false" @login="showSignupModal=false;showLoginModal=true" @signup="showSignupModal=false;showEmailSignupModal=true;" />
+    <reset-password v-if="showResetModal" @login="showLoginModal=true;showResetModal=false" @close="showResetModal=false" />
+    <email-signup v-if="showEmailSignupModal" @close="showEmailSignupModal=false" @login="showLoginModal=true;showEmailSignupModal=false" />
   </div>
 </template>
 <script>
@@ -311,8 +244,6 @@ import Signup from "~/components/reusables/Signup.vue";
 import ResetPassword from "~/components/reusables/ResetPassword.vue";
 import EmailSignup from "~/components/reusables/EmailSignup.vue";
 export default {
-  middleware: "auth",
-  layout: "pricing",
   components: {
     Login,
     Signup,
@@ -343,6 +274,7 @@ export default {
     }
   }
 };
+
 </script>
 <style scoped>
 .logo {
@@ -421,6 +353,7 @@ export default {
   bottom: 7.6%;
   transform: translateX(-50%);
 }
+
 .popular-badge {
   position: absolute;
   width: 50px;
@@ -434,10 +367,12 @@ export default {
   /* font-size: 20px; */
   padding: 6px 6px;
 }
+
 .popular-badge svg {
   font-size: 23px;
   color: #ecec00;
 }
+
 .popular-badge-text {
   background: white;
   height: 37px;
@@ -449,4 +384,5 @@ export default {
   top: -37px;
   border-top-right-radius: 13px;
 }
+
 </style>

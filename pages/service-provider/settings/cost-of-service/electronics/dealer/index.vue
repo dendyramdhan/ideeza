@@ -1,27 +1,19 @@
 <template>
-  <div >
+  <div>
     <div>
-        <div class="hidden xl:flex justify-between">
-          <div class="flex">
-<<<<<<< HEAD
-            <button class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza" @click="addfileld">+ Add new Part</button>
-            <select class="field field--border-light mr-1 h-12">
-              <option>Category</option>
-            </select>
-            <select class="field field--border-light mr-1 h-12">
-              <option>Subcategory</option>
-            </select>
-=======
-            <nuxt-link class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza" to="/service-provider/settings/cost-of-service/electronics/add-part">
-             + Add new Part
-           </nuxt-link>
->>>>>>> 8d2138bb469b39d2423f505c5a831a6ec010057b
-          </div>
-          <div>
-            <div
-              class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center"
-            >
-              <!-- <div class="h-12 relative w-10">
+      <div class="hidden xl:flex justify-between">
+        <div class="flex">
+          <button class="bg-gray px-2 py-1 border border-gray mr-1 text-ideeza" @click="addfileld">+ Add new Part</button>
+          <select class="field field--border-light mr-1 h-12">
+            <option>Category</option>
+          </select>
+          <select class="field field--border-light mr-1 h-12">
+            <option>Subcategory</option>
+          </select>
+        </div>
+        <div>
+          <div class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center">
+            <!-- <div class="h-12 relative w-10">
                 <font-awesome-icon
                   class="ml-1 h-4 text-gray-400 absolute-center-h-v"
                   :icon="['fas', 'search']"
@@ -33,23 +25,18 @@
               v-model="searchTerm"
               v-on:input="search"
             /> -->
-              <!-- <input
+            <!-- <input
                 placeholder="search users"
                 class="bg-white outline-none h-12 text-gray-800 pr-3"
               /> -->
-            </div>
           </div>
         </div>
-        <div
-          class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative mt-2 ml-2 bg-white"
-        >
-          <font-awesome-icon
-            class="ml-1 h-6 text-gray-600 absolute-center-h-v"
-            :icon="['fas', 'sliders-h']"
-          />
-        </div>
       </div>
-      <!-- <table class="mt-10 shadow-md">
+      <div class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative mt-2 ml-2 bg-white">
+        <font-awesome-icon class="ml-1 h-6 text-gray-600 absolute-center-h-v" :icon="['fas', 'sliders-h']" />
+      </div>
+    </div>
+    <!-- <table class="mt-10 shadow-md">
         <thead>
           <tr class="text-gray-800 h16">
             <th class="text-left">Name</th>
@@ -101,23 +88,23 @@
           </tr>
         </tbody>
       </table> -->
-      <simple-table title="" :header="false" border="border-0 shadow-md" class="mt-4">
-          <template v-slot:header>
-          </template>
-          <template v-slot:th>
-            <th class="text-left w-32 p-1">Name</th>
-            <th class="text-left w-20 p-1">2D</th>
-            <th class="text-left w-20 p-1">3D</th>
-            <th class="text-left w-32 p-1">Manufacturer</th>
-            <th class="text-left w-32 p-1">Unit in stock</th>
-            <th class="text-left w-32 p-1">Price</th>
-            <th class="text-left w-32 p-1">Package</th>
-            <th class="text-left w-24 p-1">Product</th>
-            <th class="text-left w-32 p-1">Availability</th>
-            <th class="text-left w-24 p-1">ROHS?</th>
-            <th class="text-left w-32 p-1">Category</th>
-            <th class="text-left w-32 p-1">Subcategory</th>
-            <!-- <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length" v-for="(field,index) in fields">
+    <simple-table title="" :header="false" border="border-0 shadow-md" class="mt-4">
+      <template v-slot:header>
+      </template>
+      <template v-slot:th>
+        <th class="text-left w-32 p-1">Name</th>
+        <th class="text-left w-20 p-1">2D</th>
+        <th class="text-left w-20 p-1">3D</th>
+        <th class="text-left w-32 p-1">Manufacturer</th>
+        <th class="text-left w-32 p-1">Unit in stock</th>
+        <th class="text-left w-32 p-1">Price</th>
+        <th class="text-left w-32 p-1">Package</th>
+        <th class="text-left w-24 p-1">Product</th>
+        <th class="text-left w-32 p-1">Availability</th>
+        <th class="text-left w-24 p-1">ROHS?</th>
+        <th class="text-left w-32 p-1">Category</th>
+        <th class="text-left w-32 p-1">Subcategory</th>
+        <!-- <th class="p-4 border-t border-b border-blue-300" :class="'w-1/'+fields.length" v-for="(field,index) in fields">
                     <template v-if="index==0">
                         <input  type="checkbox" id="ad" v-model="selected" @change="$emit('selectall',selected)"/>
                         <label for="ad">{{field}}</label>
@@ -125,154 +112,153 @@
                     </template>
                     <template v-else>
                         {{field}}
-                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>    
+                        <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
                     </template>
                 </th> -->
-          </template>
-          <tr class="flex w-full" >
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10"  />
-              </div>
-            </td>
-            <td class="text-left w-20 p-1 border-b border-gray-400">
-              <button @click="$refs.upload2D.click()" class="trigger">Uploads</button>
-              <input style="display: none;"  type="file" ref="upload2D"/>
-            </td>
-            <td class="text-left w-20 p-1 border-b border-gray-400">
-              <button @click="$refs.upload3D.click()" class="trigger">Uploads</button>
-              <input style="display: none;"  type="file" ref="upload3D"/>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <select name="manufacturerList">
-                <option value="">Manufacturer 1</option>
-                <option value="">Manufacturer 2</option>
-                <option value="">Manufacturer 3</option>
-                <option value="">Manufacturer 4</option>
-              </select>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10" :value="unit_stock" @change="change_unit_stock" />
-              </div>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10" :value="price" @change="change_price"  />
-              </div>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10" :value="package2" @change="change_package"  />
-              </div>
-            </td>
-            <td class="text-left w-24 p-1 border-b border-gray-400">Product</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10" :value="availability" @change="change_availability"  />
-              </div>
-            </td>
-            <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <select name="category">
-                <option value="">Electronics</option>
-                <option value="">Code</option>
-                <option value="">Cover</option>
-              </select>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <select name="subCategory">
-                <option value="">Placement</option>
-                <option value="">Show Top Layer</option>
-                <option value="">Show Bottom Layer</option>
-                <option value="">VR</option>
-                <option value="">Add Text</option>
-                <option value="">Create Routes</option>
-                <option value="">Get Data</option>
-                <option value="">Send Data</option>
-                <option value="">Save Board</option>
-              </select>
-            </td>
-          </tr>
-          <tr class="flex w-full" >
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10"  />
-              </div>
-            </td>
-            <td class="text-left w-20 p-1 border-b border-gray-400">
-              <button @click="$refs.upload2D.click()" class="trigger">Uploads</button>
-              <input style="display: none;"  type="file" ref="upload2D"/>
-            </td>
-            <td class="text-left w-20 p-1 border-b border-gray-400">
-              <button @click="$refs.upload3D.click()" class="trigger">Uploads</button>
-              <input style="display: none;"  type="file" ref="upload3D"/>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <select name="manufacturerList">
-                <option value="">Manufacturer 1</option>
-                <option value="">Manufacturer 2</option>
-                <option value="">Manufacturer 3</option>
-                <option value="">Manufacturer 4</option>
-              </select>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10"  />
-              </div>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10"  />
-              </div>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10"  />
-              </div>
-            </td>
-            <td class="text-left w-24 p-1 border-b border-gray-400">Product</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <div class="field-input flex-grow">
-                <input class="field h-10"  />
-              </div>
-            </td>
-            <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <select name="category">
-                <option value="">Electronics</option>
-                <option value="">Code</option>
-                <option value="">Cover</option>
-              </select>
-            </td>
-            <td class="text-left w-32 p-1 border-b border-gray-400">
-              <select name="subCategory">
-                <option value="">Placement</option>
-                <option value="">Show Top Layer</option>
-                <option value="">Show Bottom Layer</option>
-                <option value="">VR</option>
-                <option value="">Add Text</option>
-                <option value="">Create Routes</option>
-                <option value="">Get Data</option>
-                <option value="">Send Data</option>
-                <option value="">Save Board</option>
-              </select>
-            </td>
-          </tr>
-        </simple-table>
+      </template>
+      <tr class="flex w-full">
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" />
+          </div>
+        </td>
+        <td class="text-left w-20 p-1 border-b border-gray-400">
+          <button @click="$refs.upload2D.click()" class="trigger">Uploads</button>
+          <input style="display: none;" type="file" ref="upload2D" />
+        </td>
+        <td class="text-left w-20 p-1 border-b border-gray-400">
+          <button @click="$refs.upload3D.click()" class="trigger">Uploads</button>
+          <input style="display: none;" type="file" ref="upload3D" />
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <select name="manufacturerList">
+            <option value="">Manufacturer 1</option>
+            <option value="">Manufacturer 2</option>
+            <option value="">Manufacturer 3</option>
+            <option value="">Manufacturer 4</option>
+          </select>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" :value="unit_stock" @change="change_unit_stock" />
+          </div>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" :value="price" @change="change_price" />
+          </div>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" :value="package2" @change="change_package" />
+          </div>
+        </td>
+        <td class="text-left w-24 p-1 border-b border-gray-400">Product</td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" :value="availability" @change="change_availability" />
+          </div>
+        </td>
+        <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <select name="category">
+            <option value="">Electronics</option>
+            <option value="">Code</option>
+            <option value="">Cover</option>
+          </select>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <select name="subCategory">
+            <option value="">Placement</option>
+            <option value="">Show Top Layer</option>
+            <option value="">Show Bottom Layer</option>
+            <option value="">VR</option>
+            <option value="">Add Text</option>
+            <option value="">Create Routes</option>
+            <option value="">Get Data</option>
+            <option value="">Send Data</option>
+            <option value="">Save Board</option>
+          </select>
+        </td>
+      </tr>
+      <tr class="flex w-full">
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" />
+          </div>
+        </td>
+        <td class="text-left w-20 p-1 border-b border-gray-400">
+          <button @click="$refs.upload2D.click()" class="trigger">Uploads</button>
+          <input style="display: none;" type="file" ref="upload2D" />
+        </td>
+        <td class="text-left w-20 p-1 border-b border-gray-400">
+          <button @click="$refs.upload3D.click()" class="trigger">Uploads</button>
+          <input style="display: none;" type="file" ref="upload3D" />
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <select name="manufacturerList">
+            <option value="">Manufacturer 1</option>
+            <option value="">Manufacturer 2</option>
+            <option value="">Manufacturer 3</option>
+            <option value="">Manufacturer 4</option>
+          </select>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" />
+          </div>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" />
+          </div>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" />
+          </div>
+        </td>
+        <td class="text-left w-24 p-1 border-b border-gray-400">Product</td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <div class="field-input flex-grow">
+            <input class="field h-10" />
+          </div>
+        </td>
+        <td class="text-left w-24 p-1 border-b border-gray-400">ROHS?</td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <select name="category">
+            <option value="">Electronics</option>
+            <option value="">Code</option>
+            <option value="">Cover</option>
+          </select>
+        </td>
+        <td class="text-left w-32 p-1 border-b border-gray-400">
+          <select name="subCategory">
+            <option value="">Placement</option>
+            <option value="">Show Top Layer</option>
+            <option value="">Show Bottom Layer</option>
+            <option value="">VR</option>
+            <option value="">Add Text</option>
+            <option value="">Create Routes</option>
+            <option value="">Get Data</option>
+            <option value="">Send Data</option>
+            <option value="">Save Board</option>
+          </select>
+        </td>
+      </tr>
+    </simple-table>
   </div>
-
 </template>
 <script>
 import SimpleTable from '~/components/reusables/Table.vue'
 import apiService from "~/apiService/have_token.js";
 export default {
-  layout:'user',
+  layout: 'user',
   components: {
     SimpleTable
   },
-  data:function(){
-    return{
+  data: function() {
+    return {
       geturl2: "/api/service_provider/setting/cost_of_service/electronics/update_dealer",
       geturl: "/api/service_provider/setting/cost_of_service/electronics/get_dealer",
       articleArray: [],
@@ -283,7 +269,7 @@ export default {
       availability: null,
     }
   },
-  mounted(){
+  mounted() {
     let senddata = {
       method: "get",
       url: this.geturl,
@@ -301,10 +287,10 @@ export default {
     })
 
   },
-  methods:{
-    addfileld(){
+  methods: {
+    addfileld() {
       alert("add");
-       const formData = new FormData();
+      const formData = new FormData();
       formData.set("unit_stock", this.unit_stock);
       formData.set("price", this.price);
       formData.set("package", this.package2);
@@ -322,19 +308,20 @@ export default {
       });
 
     },
-    change_unit_stock(evt){
+    change_unit_stock(evt) {
       this.unit_stock = evt.target.value
     },
-    change_price(evt){
+    change_price(evt) {
       this.price = evt.target.value
     },
-    change_package(evt){
+    change_package(evt) {
       this.package2 = evt.target.value
     },
-    change_availability(evt){
+    change_availability(evt) {
       this.availability = evt.target.value
     },
 
   }
 }
+
 </script>
