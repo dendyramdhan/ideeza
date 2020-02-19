@@ -3,98 +3,43 @@
     <h1 class="text-xl text-gray-800 font-semibold border-b heading-border pb-3">Add new article</h1>
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Article name</div>
-      <!-- <text-field /> -->
-      <input
-        @change="articlename"
-        placeholder
-        class="w-full bg-white border border-solid border-gray-300 text-lg"
-      />
+      <input v-model="articleName" name="articleName" data-vv-as="article name" v-validate="'required'" class="w-full bg-white border border-solid border-gray-300 text-lg" />
+      <div class="validate-error-msg">
+        <span class="caption" v-if="errors.first('articleName')">
+          {{ errors.first('articleName') }}
+        </span>
+      </div>
     </div>
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Category</div>
-      <!-- <category-field placeholder="category" /> -->
-      <!-- <input
-        @change="categoryname"
-        placeholder="category"
-        class="w-full bg-white border border-solid border-gray-300 text-lg"
-      /> -->
-      <tag-input
-        element-id="tags"
-        v-model="categoryna"
-        :typeahead-hide-discard="true"
-        :limit="1"
-        placeholder="Add Category"
-        :typeahead-always-show="true"
-        :existing-tags="[
+      <tag-input element-id="tags" v-model="categories" :typeahead-hide-discard="true" :limit="1" placeholder="Add Category" :typeahead-always-show="true" :existing-tags="[
         { key: 'code', value: 'Code' },
         { key: 'electronics', value: 'Electronics' },
         { key: 'parts', value: 'Parts' },
-        ]"
-        :typeahead="true"
-        ></tag-input>
+        ]" :typeahead="true"></tag-input>
     </div>
     <div class="mt-10">
       <div class="text-lg text-gray-800 mb-2">Description</div>
-      <!-- <text-area placeholder="description" rows="7" /> -->
-      <textarea
-        placeholder="description"
-        @change="descriptionNameChange"
-        v-model="descripttionname2"
-        rows="10"
-        class="w-full"
-      ></textarea>
+      <textarea placeholder="description" v-model="articleDescription" name="articleDescription" v-validate="'required'" data-vv-as="description" rows="10" class="w-full"></textarea>
+      <div class="validate-error-msg">
+        <span class="caption" v-if="errors.first('articleDescription')">
+          {{ errors.first('articleDescription') }}
+        </span>
+      </div>
     </div>
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Image</div>
       <img id="image" />
-      <!-- <input type="file" ref="file_preview" id="files" @change="previewimage" style="display:none"/> -->
       <form enctype="multipart/form-data">
-        <!-- <file-field v-model="files" ref="file" id="file" @change="fileseleted"/> -->
-
         <file-field @input="fileseleted" border-class="border-ideeza-dark rounded" btn="btn--ideeza-dark" />
-        <!-- <input
-          type="file"
-          @change="fileseleted"
-          ref="file_upload"
-          class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
-          style="display:none"
-        /> -->
-        <!-- <button
-       class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
-        @click="$refs.file_upload.click()"
-        >select</button>-->
-
-        <!-- 
-        <label class="file-select" :class="borderClass">
-    <div class="flex items-center">
-      <div class="btn px-3 py-2 text-xs mr-5" :class="btn">Choose</div>
-      <div class="text-sm">
-        <span class="text-gray-800" v-if="files">{{files}}</span>
-        <span class="text-gray-400" v-else>No file choosen</span>
-      </div>
-    </div>
-    <input type="file" @change="handleFileChange" />
-        </label>-->
       </form>
     </div>
-
     <div class="mt-12 text-center lg:text-left">
-      <button @click="showPreview"
-        class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg"
-      >Preview</button>
-
-      <button
-        class="btn btn-normal btn--ideeza px-10 py-4 lg: iinline-block"
-        @click="uploadUserBlog"
-      >Publish</button>
-
-      <!-- <nuxt-link :to="{ path: '/user/blog/view', query: { id: counter, name:ArticlesName}}"></nuxt-link>  -->
-
-      <!-- {{this.$store.state.userBlogStore.viewflag }} -->
+      <button @click="showPreview" class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
+      <button class="btn btn-normal btn--ideeza px-10 py-4 lg: iinline-block" @click="uploadUserBlog">Publish</button>
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import apiService from "~/apiService/have_token.js";
@@ -131,6 +76,13 @@ export default {
       total_images: 1,
       selectedTags: null
     };
+  },
+  mounted() {
+    if (this.previewBlog != null) {
+      this.articleName = this.previewBlog.article;
+      this.articleDescription = this.previewBlog.description;
+      this.fileseleted(this.previewBlog.image);
+    }
   },
   methods: {
     previewimage(evt) {
@@ -173,21 +125,19 @@ export default {
     showPreview() {
       let blog = {};
       let category = '';
-      if(this.categoryna[0])
-      {
+      if (this.categoryna[0]) {
         category = this.categoryna[0].value;
       }
       blog.article = this.articlena;
       blog.category = category;
       blog.description = this.descripttionname2;
       blog.image = this.file;
-      this.$store.commit('blog/cacheBlog',blog);
-      this.$router.push({path: '/user/blog/pre'})
+      this.$store.commit('blog/cacheBlog', blog);
+      this.$router.push({ path: '/technician/blog/pre' })
     },
     uploadUserBlog() {
       let category = '';
-      if(this.categoryna[0])
-      {
+      if (this.categoryna[0]) {
         category = this.categoryna[0].value;
       }
       const formData = new FormData();
@@ -270,18 +220,20 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .blog-container {
   width: 100%;
   max-width: 1530px;
   padding: 20px 5px;
 }
+
 .field-container {
   width: 100%;
   max-width: 375px;
 }
+
 .textarea {
   width: 100%;
   max-width: 700px;
@@ -296,10 +248,12 @@ export default {
 input {
   padding: 12px 24px;
 }
+
 .file-select {
   @apply block w-full bg-white border border-solid border-gray-300 text-lg p-2;
 }
-.file-select > .select-button {
+
+.file-select>.select-button {
   padding: 1rem;
 
   color: white;
@@ -311,23 +265,33 @@ input {
   font-weight: bold;
 }
 
-.file-select > input[type="file"] {
+.file-select>input[type="file"] {
   display: none;
 }
+
 </style>
 <style>
-.tags-input-wrapper-default{
+.tags-input-wrapper-default {
   @apply border rounded border-ideeza-dark px-4 py-2 w-full mb-4;
 }
-.tags-input-root .tags-input-badge{
+
+.tags-input-root .tags-input-badge {
   @apply border rounded bg-ideeza-dark py-1 px-2 mr-1 text-white text-sm;
 }
-.tags-input-root input{
-  background:transparent;
+
+.tags-input-root input {
+  background: transparent;
 }
+
 @screen md {
-  .tags-input-wrapper-default{
+  .tags-input-wrapper-default {
     @apply w-64;
   }
 }
+
+.validate-error-msg {
+  height: 1.25rem;
+  color: red;
+}
+
 </style>

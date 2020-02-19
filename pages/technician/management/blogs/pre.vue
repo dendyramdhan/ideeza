@@ -1,15 +1,15 @@
 <template>
   <div>
-    <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
         <div class="bg-white rounded border-ideeza border shadow p-4">
-          <nuxt-link to="" class="float-right py-1 px-2 border border-ideeza rounded text-ideeza text-sm">Go Back</nuxt-link>
+          <nuxt-link to="/technician/management/blogs/add" class="float-right py-1 px-2 border border-ideeza rounded text-ideeza text-sm">Go Back</nuxt-link>
           <div class="text-ideeza font-bold text-sm mb-5">Article Preview</div>
           <div class="md:flex">
             <div class="flex-1 mr-4">
               <img src="~/static/images/blog-image.png" alt="blog-image" class="w-full mb-3">
-              <div class="text-gray-700">Jul 19, 2019 <span class="circle"></span> 5 mins read</div>
+              <div class="text-gray-700">Jul 19, 2019
+                <span class="circle"></span> 5 mins read</div>
             </div>
             <div class="flex-1 ml-4">
               <div class="text-2xl my-1 text-black font-bold">
@@ -37,27 +37,51 @@
   </div>
 </template>
 <script>
-  import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
-  export default {
-    components: {
-      MyIdeeza,
-    },
-    data: function () {
-      return {
-        showMyIdeeza: false,
-      }
+import { mapState } from 'vuex'
+import MyIdeeza from '~/components/user/my-ideeza/new-ideeza.vue'
+export default {
+  components: {
+    MyIdeeza,
+  },
+  data() {
+    return {
+      name: "",
+      avatar: "",
+      avatar_base_url: process.env.avatar_base_url,
+      showMyIdeeza: false,
     }
+  },
+  computed: {
+    ...mapState({
+      blog: state => state.blog.blog
+    })
+  },
+  mounted() {
+    let firstname = window.$nuxt.$cookies.get('firstname');
+    let lastname = window.$nuxt.$cookies.get('lastname');
+    let useravatar = window.$nuxt.$cookies.get("useravatar");
+    this.name = firstname + ' ' + lastname;
+    this.avatar = useravatar;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      // get loaded data and render thumbnail.
+      document.getElementById("image").src = e.target.result;
+    };
+    reader.readAsDataURL(this.blog.image);
+
   }
+}
 
 </script>
 <style>
-  .circle {
-    background: gray;
-    width: 4px;
-    height: 4px;
-    border-radius: 9999px;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 3px;
-  }
+.circle {
+  background: gray;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 3px;
+}
+
 </style>

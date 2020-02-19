@@ -1,42 +1,52 @@
 import axios from 'axios'
-export default (sendData, ctx)=>{
-  window.$nuxt.$cookies.set("loaderFlag",true)
+export default (sendData, ctx) => {
+  let authToken = window.$nuxt.$cookies.get("authToken");
+  // this.$store.commit("loaderStorage/loader_flag_change1");
 
-    axios
-      .get(process.env.base_url + sendData.url, {
-        params:sendData.param
-      })
-      .then(response => {
-        window.$nuxt.$cookies.set("loaderFlag",false)
+  window.$nuxt.$cookies.set("loaderFlag", false)
 
-        ctx(response)
-      })
-      .catch(() => {
-        ctx(null)
-      });
-      
-    // return axios({
-    //     method: sendData.method,
-    //     url: process.env.base_url + sendData.url,
-    //     data: sendData.data,
-    //     headers: { Authorization: `Bearer ${authToken}` }
-    //   })
-    // .then(response => {
+  return axios({
+      method: sendData.method,
+      url: process.env.base_url + sendData.url,
+      headers: { Authorization: `Bearer ${authToken}` }
+    })
+    .then(response => {
 
-    //     ctx(response)
+      window.$nuxt.$cookies.set("loaderFlag", false)
 
-    // })
-    // .catch((error) => {
-    //     ctx(null)
-    // })
+      ctx(response)
 
 
-    // return axios.get(base_url)
-    // .then((res) => {
-    //   ctx(res)
-    // })
-    // .catch((e) => {
-    //   error({ statusCode: 404, message: 'Post not found' })
-    //   ctx(null)
-    // })
+      // this.$store.commit("loaderStorage/loader_flag_change2");
+
+    })
+    .catch((error) => {
+      console.log("api error : ", error)
+      ctx(null)
+    })
+
+  // return axios({
+  //     method: sendData.method,
+  //     url: process.env.base_url + sendData.url,
+  //     data: sendData.data,
+  //     headers: { Authorization: `Bearer ${authToken}` }
+  //   })
+  // .then(response => {
+
+  //     ctx(response)
+
+  // })
+  // .catch((error) => {
+  //     ctx(null)
+  // })
+
+
+  // return axios.get(base_url)
+  // .then((res) => {
+  //   ctx(res)
+  // })
+  // .catch((e) => {
+  //   error({ statusCode: 404, message: 'Post not found' })
+  //   ctx(null)
+  // })
 }
