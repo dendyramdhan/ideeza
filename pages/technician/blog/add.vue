@@ -77,6 +77,13 @@ export default {
       selectedTags: null
     };
   },
+  mounted() {
+    if (this.previewBlog != null) {
+      this.articleName = this.previewBlog.article;
+      this.articleDescription = this.previewBlog.description;
+      this.fileseleted(this.previewBlog.image);
+    }
+  },
   methods: {
     previewimage(evt) {
       var reader = new FileReader();

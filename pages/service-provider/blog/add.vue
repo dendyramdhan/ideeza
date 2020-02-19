@@ -62,6 +62,13 @@ export default {
       articleDescription: "",
     };
   },
+  mounted() {
+    if (this.previewBlog != null) {
+      this.articleName = this.previewBlog.article;
+      this.articleDescription = this.previewBlog.description;
+      this.fileseleted(this.previewBlog.image);
+    }
+  },
   methods: {
     fileseleted(file) {
       var reader = new FileReader();

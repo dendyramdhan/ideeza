@@ -60,7 +60,7 @@
                   <span v-else class="text-green-500 font-semibold">{{tabledata.status}}</span>
                 </td>
                 <td class="text-gray-500">
-                  <nuxt-link :to="{ path: '/technician/management/blogs/view', query: { id: tabledata.id}}">
+                  <nuxt-link :to="`/blog/${tabledata.id}`">
                     <button @click="uploadUserBlogkey2">
                       <font-awesome-icon class="mr-1 h-3 cursor-pointer hover:text-gray-800" :icon="['fas', 'eye']" />
                     </button>

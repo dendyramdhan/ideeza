@@ -41,6 +41,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 import apiService from "~/apiService/have_token.js";
 import FileField from "~/components/form/file-field.vue";
 import TagsInput from '@voerro/vue-tagsinput/src/VoerroTagsInput.vue'
@@ -60,6 +61,18 @@ export default {
       categories: [],
       articleDescription: "",
     };
+  },
+  computed: {
+    ...mapState({
+      previewBlog: state => state.blog.blog
+    })
+  },
+  mounted() {
+    if (this.previewBlog != null) {
+      this.articleName = this.previewBlog.article;
+      this.articleDescription = this.previewBlog.description;
+      this.fileseleted(this.previewBlog.image);
+    }
   },
   methods: {
     fileseleted(file) {
