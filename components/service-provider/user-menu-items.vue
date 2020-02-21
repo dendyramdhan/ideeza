@@ -12,18 +12,12 @@
     </div>
     <div class="menu-item">
       <nuxt-link to="/service-provider/orders">
-        <font-awesome-icon
-          class="mr-5 w-8 h-8 align-text-top"
-          :icon="['fas', 'shopping-cart']"
-        />Old Orders
+        <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['fas', 'shopping-cart']" />Old Orders
       </nuxt-link>
     </div>
     <div class="menu-item">
       <nuxt-link to="/service-provider/transactions">
-        <font-awesome-icon
-          class="mr-5 w-8 h-8 align-text-top"
-          :icon="['far', 'list-alt']"
-        />Transactions
+        <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['far', 'list-alt']" />Transactions
       </nuxt-link>
     </div>
     <div class="menu-item">
@@ -33,20 +27,16 @@
     </div>
     <div class="menu-item">
       <nuxt-link to="/service-provider/messages">
-        <font-awesome-icon
-          class="mr-5 w-8 h-8 align-text-top"
-          :icon="['fas', 'comments']"
-        />Messages
+        <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['fas', 'comments']" />Messages
       </nuxt-link>
     </div>
     <div class="menu-item">
-      <nuxt-link to="/service-provider/blog/list">
+      <nuxt-link to="/service-provider/blog">
         <font-awesome-icon class="mr-5 w-8 h-8 align-text-top" :icon="['fas', 'bold']" />Blog
       </nuxt-link>
     </div>
   </div>
 </template>
-
 <script>
 import DashBoardIcon from "~/components/partials/icons/dashboard-icon.vue";
 import ProjectsIcon from "~/components/partials/icons/bars-icon.vue";
@@ -59,8 +49,8 @@ export default {
     TaskIcon
   }
 };
-</script>
 
+</script>
 <style scoped>
 .menu-item {
   @apply flex mb-8 content-center items-center mt-2 text-gray-700 text-base font-semibold cursor-pointer;
@@ -69,14 +59,18 @@ export default {
 .menu-item:hover {
   @apply text-ideeza;
 }
+
 .left-main-menu svg {
   @apply text-gray-500;
 }
+
 .menu-item:hover svg {
   @apply text-ideeza;
 }
+
 .active-link,
 .active-link svg {
   @apply text-ideeza;
 }
+
 </style>
