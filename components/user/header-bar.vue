@@ -113,7 +113,7 @@ export default {
       this.showProfileAlert = false;
     },
     onSeeMore() {
-      alert();
+      this.$router.push('/user/notification');
     },
     onSignOut() {
       window.$nuxt.$cookies.remove("authToken");
