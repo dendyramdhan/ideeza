@@ -164,8 +164,8 @@ export default {
 
     apiService(sendData, response => {
       console.log(response.data);
-      this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
+      //this.randomNumber = response.data;
+      this.articleArrayaxios = response.data;
 
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);
@@ -180,26 +180,6 @@ export default {
         this.counterarray.push(i);
       }
     });
-
-    let sendData2 = {
-      method: "get",
-      url: this.geturl2,
-      data: null
-    };
-
-    apiService(sendData2, response => {
-      console.log(response.data);
-      this.randomNumber2 = response.data;
-      this.articleArrayaxios2 = Object.values(response.data.data);
-
-      this.articleArrayaxios2.map(item => {
-        this.articleArrayrout2.push(item);
-        this.articleArray2.push(item);
-      });
-
-    });
-
-
   },
   methods: {
     dayClick(day) {
@@ -297,7 +277,7 @@ export default {
       articleArrayrout: [],
       randomNumber: [],
       counterarray: [],
-      geturl: "/api/project/technician/get_all",
+      geturl: "/feeds/",
       articleArray2: [],
       articleArrayaxios2: [],
       articleArrayrout2: [],

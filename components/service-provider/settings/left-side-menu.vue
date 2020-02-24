@@ -18,7 +18,11 @@
         <nuxt-link to="/service-provider/settings/payout-preferences">Payout Preferences</nuxt-link>
       </div>
       <div class="menu-item">
-        <nuxt-link to="/service-provider/settings/cost-of-service">Cost of Service</nuxt-link>
+        <div @click="costActive = !costActive;">Cost of Service</div>
+        <div :class="[costActive ? 'block' : 'hidden']">
+          <nuxt-link to="/service-provider/settings/cost-of-service/electronics/fabrication" class="block ml-12 text-base mt-2">Electronics</nuxt-link>
+          <nuxt-link to="/service-provider/settings/cost-of-service/cover" class="block ml-12 text-base mt-2">Cover</nuxt-link>
+        </div>
       </div>
       <div class="menu-item">
         <nuxt-link to="/service-provider/settings/agents">Agents</nuxt-link>
@@ -38,6 +42,9 @@
       <div class="menu-item">
         <nuxt-link to="/service-provider/settings/get-paid">Get Paid</nuxt-link>
       </div>
+      <div class="menu-item">
+        <nuxt-link to="/service-provider/settings/tax">Tax</nuxt-link>
+      </div>
     </div>
     <div v-if="activeMenu === 'menu'" class="px-10 relative w-full">
       <CommonMenu />
@@ -55,7 +62,8 @@ export default {
   },
   data: function() {
     return {
-      activeMenu: 'settings'
+      activeMenu: 'settings',
+      costActive: false,
     }
   }
 }

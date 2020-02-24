@@ -24,7 +24,7 @@
               <nuxt-link to="/pricing" class>Pricing</nuxt-link>
             </li>
             <li class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2">
-              <nuxt-link to="/user/support" class>Contact Us</nuxt-link>
+              <nuxt-link to="/contact" class>Contact Us</nuxt-link>
             </li>
             <li class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2">
               <nuxt-link to="/blog" class>Blog</nuxt-link>
@@ -49,18 +49,18 @@
               </nuxt-link>
             </li>
             <li class="md:inline-block sm:block text-left border-b md:border-0 py-4 md:py-0 border-gray-400 px-2 social-link">
-              <nuxt-link to="/user/profile" class="md:ml-0 mr-1 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300">
+              <a href="https://www.linkedin.com/company/makeideeza" class="md:ml-0 mr-1 ml-5 md:ml-0 my-3 md:my-0 py-2 md:py-0 text-base text-white text-gray-300">
                 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'linkedin']" />
-              </nuxt-link>
-              <nuxt-link to="/user/profile" class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
+              </a>
+              <a href="https://twitter.com/MAKE_IDEEZA" class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
                 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'twitter-square']" />
-              </nuxt-link>
-              <nuxt-link to="/user/profile" class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
+              </a>
+              <a href="https://www.instagram.com/the_ideeza/" class="md:my-0 my-3 mr-1 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
                 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'instagram']" />
-              </nuxt-link>
-              <nuxt-link to="/user/profile" class="md:my-0 my-3 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
+              </a>
+              <a href="https://www.facebook.com/makeideeza/" class="md:my-0 my-3 ml-5 md:ml-0 py-2 md:py-0 text-base text-white text-gray-300">
                 <font-awesome-icon class="text-xl text-gray-500" :icon="['fab', 'facebook-square']" />
-              </nuxt-link>
+              </a>
             </li>
           </ul>
         </nav>
