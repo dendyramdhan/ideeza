@@ -2,210 +2,187 @@
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <LeftMenu />
-
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
         <h1 class="text-indigo-800 font-bold text-2xl border-b-4 border-solid border-ideeza pb-5 mt-8">Machines</h1>
-
         <div class="flex py-2">
           <div class="w-1/2 flex">
-          <div class="relative mr-3">
-            <select class="block appearance-none w-24 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-              <option>All</option>
-              <option>Missouri</option>
-              <option>Texas</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            <div class="relative mr-3">
+              <select class="block appearance-none w-24 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option>All</option>
+                <option>Missouri</option>
+                <option>Texas</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+              </div>
             </div>
-          </div>
-
-
             <div class="flex w-fit-content bg-white justify-center  rounded items-center mr-2 content-center">
-                <div class="h-8 relative w-10">
-                    <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']"/>
-                </div>
-                <input placeholder="search" class="bg-white outline-none h-8 text-gray-800 pr-3">
+              <div class="h-8 relative w-10">
+                <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
+              </div>
+              <input placeholder="search" class="bg-white outline-none h-8 text-gray-800 pr-3">
             </div>
           </div>
           <div class="w-1/2 flex justify-end">
             <button class="bg-ideeza border text-white rounded px-3 py-1">
-                Create new machine 
+              Create new machine
             </button>
             <div class="relative ml-3">
-            <select class="block appearance-none w-24 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-              <option>Sort by</option>
-              <option>asda</option>
-              <option>asdasd</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+              <select class="block appearance-none w-24 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                <option>Sort by</option>
+                <option>asda</option>
+                <option>asdasd</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-
-      <div class="bg-white rounded p-3">
-        <table cellpadding="0" cellspacing="0" width="100%" class="text-left">
-          <tr class="">
-            <th class="text-gray-600 py-3 px-2">
-              Name <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            </th>
-            <th class="text-gray-600 py-3 px-2">
-              process <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            </th>
-            <th class="text-gray-600 py-3 px-2">
-              Subprocess <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            </th>
-            <th class="text-gray-600 py-3 px-2">
-              Producer <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            </th>
-            <th class="text-gray-600 py-3 px-2">
-              Picture <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            </th>
-            <th class="text-gray-600 py-3 px-2 text-right">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'ellipsis-h']"
-                />
-            </th>
-          </tr>
-          <tr class="bg-gray-200">
-            <td class="px-2 py-3">Flame reducers for military</td>
-            <td class="px-2 py-3">3D modeling</td>
-            <td class="px-2 py-3">Binder jetting - BJ</td>
-            <td class="px-2 py-3">Google Inc.</td>
-            <td class="px-2 py-3"><img src="~/static/images/product_ref_1223.png"></td>
-            <td class="px-2 py-3">
-              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']"/>
-            </td>
-          </tr>
-
-          <tr class="bg-white">
-            <td class="px-2 py-3">Flame reducers for military</td>
-            <td class="px-2 py-3">3D modeling</td>
-            <td class="px-2 py-3">Binder jetting - BJ</td>
-            <td class="px-2 py-3">Google Inc.</td>
-            <td class="px-2 py-3"><img src="~/static/images/product_ref_1224.png"></td>
-            <td class="px-2 py-3">
-              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']"/>
-            </td>
-          </tr>
-
-          <tr class="bg-gray-200">
-            <td class="px-2 py-3">Flame reducers for military</td>
-            <td class="px-2 py-3">3D modeling</td>
-            <td class="px-2 py-3">Binder jetting - BJ</td>
-            <td class="px-2 py-3">Google Inc.</td>
-            <td class="px-2 py-3"><img src="~/static/images/product_ref_1225.png"></td>
-            <td class="px-2 py-3">
-              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']"/>
-            </td>
-          </tr>
-
-          <tr class="bg-white">
-            <td class="px-2 py-3">Flame reducers for military</td>
-            <td class="px-2 py-3">3D modeling</td>
-            <td class="px-2 py-3">Binder jetting - BJ</td>
-            <td class="px-2 py-3">Google Inc.</td>
-            <td class="px-2 py-3"><img src="~/static/images/product_ref_1226.png"></td>
-            <td class="px-2 py-3">
-              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']"/>
-            </td>
-          </tr>
-           
-
-           
-        </table>
-      
-      <div class="flex mt-8">
-        <div class="w-10/12 flex justify-center py-5">
-          <div class="p-3"><<</div> 
-          <div class="p-3">Previous</div>
-          <div class="p-3">1</div>
-          <div class="p-3 text-ideeza">2</div>
-          <div class="p-3">3</div>
-          <div class="p-3">Next</div>
-          <div class="p-3">>></div>
-        </div>
-        <div class="w-2/12 py-3">
-          <div class="relative ml-3">
-            <select class="block appearance-none w-24 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
-              <option>Sort by</option>
-              <option>1-6</option>
-              <option>7-11</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        <div class="bg-white rounded p-3">
+          <table cellpadding="0" cellspacing="0" width="100%" class="text-left">
+            <tr class="">
+              <th class="text-gray-600 py-3 px-2">
+                Name
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              </th>
+              <th class="text-gray-600 py-3 px-2">
+                process
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              </th>
+              <th class="text-gray-600 py-3 px-2">
+                Subprocess
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              </th>
+              <th class="text-gray-600 py-3 px-2">
+                Producer
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              </th>
+              <th class="text-gray-600 py-3 px-2">
+                Picture
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              </th>
+              <th class="text-gray-600 py-3 px-2 text-right">
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']" />
+              </th>
+            </tr>
+            <tr class="bg-gray-200">
+              <td class="px-2 py-3">Flame reducers for military</td>
+              <td class="px-2 py-3">3D modeling</td>
+              <td class="px-2 py-3">Binder jetting - BJ</td>
+              <td class="px-2 py-3">Google Inc.</td>
+              <td class="px-2 py-3"><img src="~/static/images/product_ref_1223.png"></td>
+              <td class="px-2 py-3">
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']" />
+              </td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-2 py-3">Flame reducers for military</td>
+              <td class="px-2 py-3">3D modeling</td>
+              <td class="px-2 py-3">Binder jetting - BJ</td>
+              <td class="px-2 py-3">Google Inc.</td>
+              <td class="px-2 py-3"><img src="~/static/images/product_ref_1224.png"></td>
+              <td class="px-2 py-3">
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']" />
+              </td>
+            </tr>
+            <tr class="bg-gray-200">
+              <td class="px-2 py-3">Flame reducers for military</td>
+              <td class="px-2 py-3">3D modeling</td>
+              <td class="px-2 py-3">Binder jetting - BJ</td>
+              <td class="px-2 py-3">Google Inc.</td>
+              <td class="px-2 py-3"><img src="~/static/images/product_ref_1225.png"></td>
+              <td class="px-2 py-3">
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']" />
+              </td>
+            </tr>
+            <tr class="bg-white">
+              <td class="px-2 py-3">Flame reducers for military</td>
+              <td class="px-2 py-3">3D modeling</td>
+              <td class="px-2 py-3">Binder jetting - BJ</td>
+              <td class="px-2 py-3">Google Inc.</td>
+              <td class="px-2 py-3"><img src="~/static/images/product_ref_1226.png"></td>
+              <td class="px-2 py-3">
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'ellipsis-h']" />
+              </td>
+            </tr>
+          </table>
+          <div class="flex mt-8">
+            <div class="w-10/12 flex justify-center py-5">
+              <div class="p-3">
+                <<</div> <div class="p-3">Previous
+              </div>
+              <div class="p-3">1</div>
+              <div class="p-3 text-ideeza">2</div>
+              <div class="p-3">3</div>
+              <div class="p-3">Next</div>
+              <div class="p-3">>></div>
+            </div>
+            <div class="w-2/12 py-3">
+              <div class="relative ml-3">
+                <select class="block appearance-none w-24 bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                  <option>Sort by</option>
+                  <option>1-6</option>
+                  <option>7-11</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                  <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      </div>
-      <div class="flex w-6/12 p-4 m-auto bg-white border border-gray-600 shadow fixed z-50 top-0 left-0 right-0 m-auto mt-32">
-         
-        <div class="w-1/3">
-          <div class="text-center">
-            <img src="~/static/images/product_ref_1223.png" class="inline-block">
+        <div class="flex w-6/12 p-4 m-auto bg-white border border-gray-600 shadow fixed z-50 top-0 left-0 right-0 m-auto mt-32">
+          <div class="w-1/3">
+            <div class="text-center">
+              <img src="~/static/images/product_ref_1223.png" class="inline-block">
+            </div>
+            <div class="py-2">
+              <p class="text-lg text-gray-800">Flame reducers for military</p>
+              <p class="text-sm text-gray-600">Note</p>
+            </div>
+            <div class="py-2">
+              <p class="text-lg text-gray-600">Process</p>
+              <p class="text-lg text-gray-800">Note</p>
+            </div>
+            <div class="py-2">
+              <p class="text-lg text-gray-600">Sub-process</p>
+              <p class="text-lg text-gray-800">Binder jetting - BJ</p>
+            </div>
+            <div class="py-2">
+              <p class="text-lg text-gray-600">Producer</p>
+              <p class="text-lg text-gray-800">Google Inc.</p>
+            </div>
           </div>
-          <div class="py-2">
-            <p class="text-lg text-gray-800">Flame reducers for military</p>
-            <p class="text-sm text-gray-600">Note</p>
-          </div>
-          <div class="py-2">
-            <p class="text-lg text-gray-600">Process</p>
-            <p class="text-lg text-gray-800">Note</p>
-          </div>
-          <div class="py-2">
-            <p class="text-lg text-gray-600">Sub-process</p>
-            <p class="text-lg text-gray-800">Binder jetting - BJ</p>
-          </div>
-          <div class="py-2">
-            <p class="text-lg text-gray-600">Producer</p>
-            <p class="text-lg text-gray-800">Google Inc.</p>
-          </div>
-
-        </div>
-        <div class="w-2/3">
+          <div class="w-2/3">
             <div class="flex">
-           <h2 class="text-2xl font-bold text-gray-800">Description: </h2><font-awesome-icon class=" text-gray-800 mt-0 ml-4 text-4xl" :icon="['fas', 'edit']"/></div>
-           <p class="text-lg text-gray-800 py-3">
-             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-           </p>
-           <div class="flex">
-             <div class="">
+              <h2 class="text-2xl font-bold text-gray-800">Description: </h2>
+              <font-awesome-icon class=" text-gray-800 mt-0 ml-4 text-4xl" :icon="['fas', 'edit']" />
+            </div>
+            <p class="text-lg text-gray-800 py-3">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+            </p>
+            <div class="flex">
+              <div class="">
                 <p class="text-lg text-gray-600">Year produced</p>
                 <p class="text-lg text-gray-800">2020</p>
-             </div>
-             <div class="">
+              </div>
+              <div class="">
                 <p class="text-lg text-gray-600">Accuracy</p>
                 <p class="text-lg text-gray-800">0.2<span class="text-sm">mm</span></p>
-             </div>
-           </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
-
 <script>
 import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
@@ -242,11 +219,11 @@ export default {
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
       end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
       counterarray: [],
-       articleArrayaxios: [],
+      articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
       geturl: "/api/project/technician/get_all",
-      avata_img_url:process.env.avatar_base_url,
+      avata_img_url: process.env.avatar_base_url,
       addNewProject: false,
       dataDropDown: ["All", "Active", "Completed", "Priority", "Over Due"],
       sortDropDown: [
@@ -279,7 +256,7 @@ export default {
     }
   },
   mounted() {
-     this.$store.commit("TechnicianProjectStore/viewflagchange2");
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -298,9 +275,9 @@ export default {
 
       this.length = this.articleArrayrout.length / 5 - 1;
       this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
-  
+
       let i = 1;
-      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      let endd = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale + 1;
       //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
         this.counterarray.push(i);
@@ -448,8 +425,7 @@ export default {
       if (
         this.currentviewpoint == this.counter ||
         this.currentviewpoint > this.counter
-      ) {
-      } else {
+      ) {} else {
         this.$store.commit("TechnicianProjectStore/increasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -463,8 +439,7 @@ export default {
       }
     },
     decreasekey() {
-      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
-      } else {
+      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {} else {
         this.$store.commit("TechnicianProjectStore/decreasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -479,11 +454,12 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 select {
-    min-width: auto;
-    max-width: initial;
+  min-width: auto;
+  max-width: initial;
 }
+
 </style>
