@@ -5,7 +5,6 @@
         <DashBoardIcon class="fill-current mr-5" />Dashboard
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/management">
         <div>
@@ -19,61 +18,63 @@
           <nuxt-link to="/technician/management/blogs" class="block ml-12 text-gray-700 text-base mt-2">Blogs</nuxt-link>
           <nuxt-link to="/technician/management/add-tech" class="block text-gray-700 ml-12 text-base mt-2">Add Technician</nuxt-link>
           <nuxt-link to="/technician/management/orders" class="block text-gray-700 ml-12 text-base mt-2">Orders</nuxt-link>
+          <div class="block text-gray-700 ml-12 text-base mt-2">
+            <div @click="toggleServiceProviderMenu">
+              Service Provider
+            </div>
+            <div class="childs" v-show="serviceProviderMenu">
+              <nuxt-link to="/technician/management/service-provider/process" class="block ml-12 text-gray-700 text-base mt-2">Process</nuxt-link>
+              <nuxt-link to="/technician/management/service-provider/machines" class="block ml-12 text-gray-700 text-base mt-2">Machines</nuxt-link>
+              <nuxt-link to="/technician/management/service-provider/services" class="block ml-12 text-gray-700 text-base mt-2">Services</nuxt-link>
+              <nuxt-link to="/technician/management/service-provider/certifications" class="block ml-12 text-gray-700 text-base mt-2">Certifications</nuxt-link>
+              <nuxt-link to="/technician/management/service-provider/corporations" class="block ml-12 text-gray-700 text-base mt-2">Corporations</nuxt-link>
+            </div>
+          </div>
         </div>
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/electronics/add-part">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'bolt']" />Electronics
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/code">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'code']" />Code
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/cover">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'cube']" />Cover
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/projects">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'project-diagram']" />Projects
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/tracking">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'chalkboard']" />Tracking
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/tasklist">
         <TaskIcon class="fill-current mr-5" />My Notes
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/messages">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'comments']" />Messages
       </nuxt-link>
     </div>
-
     <div class="menu-item">
       <nuxt-link to="/technician/blog/list">
         <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'bold']" />Blog
       </nuxt-link>
     </div>
-
   </div>
 </template>
-
 <script>
 import DashBoardIcon from "~/components/partials/icons/dashboard-icon.vue";
 import ProjectsIcon from "~/components/partials/icons/bars-icon.vue";
@@ -84,10 +85,20 @@ export default {
     DashBoardIcon,
     ProjectsIcon,
     TaskIcon
+  },
+  data() {
+    return {
+      serviceProviderMenu: false
+    }
+  },
+  methods: {
+    toggleServiceProviderMenu() {
+      this.serviceProviderMenu = !this.serviceProviderMenu;
+    }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .menu-item {
   @apply flex mb-8 content-center items-center mt-2 text-gray-700 text-xl font-semibold cursor-pointer;
@@ -96,22 +107,26 @@ export default {
 .menu-item:hover {
   @apply text-ideeza;
 }
+
 .left-main-menu svg {
   @apply text-gray-500;
 }
+
 .menu-item:hover svg {
   @apply text-ideeza;
 }
+
 .active-link,
 .active-link svg {
   @apply text-ideeza;
 }
 
-.childs{
+.childs {
   display: none;
 }
 
-.active-link .childs{
+.active-link .childs {
   display: block;
 }
+
 </style>
