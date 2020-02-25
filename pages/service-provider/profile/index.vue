@@ -13,11 +13,8 @@
                 New York, USA
               </div>
             </div>
-            <nuxt-link to="/service-provider/settings/general">
-              <font-awesome-icon
-              class="mr-1 h-4 text-sm inline-block cursor-pointer float-right"
-              :icon="['fas', 'cog']"
-              />
+            <nuxt-link to="/service-provider/settings/general" class="float-right">
+              <font-awesome-icon class="mr-1 h-4 text-sm inline-block cursor-pointer float-right" :icon="['fas', 'cog']" />
             </nuxt-link>
           </div>
           <hr class="mb-3">
@@ -117,7 +114,7 @@
             <div>
               <div class="border border-gray px-4 py-2">
                 <font-awesome-icon :icon="['fas', 'envelope']" />
-              Message</div>
+                Message</div>
             </div>
           </div>
         </div>
@@ -135,7 +132,7 @@
             <div>
               <div class="border border-gray px-4 py-2">
                 <font-awesome-icon :icon="['fas', 'envelope']" />
-              Message</div>
+                Message</div>
             </div>
           </div>
           <div class="flex justify-between mb-5">
@@ -149,7 +146,7 @@
             <div>
               <div class="border border-gray px-4 py-2">
                 <font-awesome-icon :icon="['fas', 'envelope']" />
-              Message</div>
+                Message</div>
             </div>
           </div>
           <div class="flex justify-between mb-5">
@@ -163,7 +160,7 @@
             <div>
               <div class="border border-gray px-4 py-2">
                 <font-awesome-icon :icon="['fas', 'envelope']" />
-              Message</div>
+                Message</div>
             </div>
           </div>
           <div class="flex justify-between mb-5">
@@ -196,14 +193,14 @@
   </div>
 </template>
 <script>
-  export default {
-    layout: 'service-provider',
-    data() {
-      return {
-        readMoreActivated: false,
-        longText: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque!'
-      }
-    },
-  }
+export default {
+  layout: 'service-provider',
+  data() {
+    return {
+      readMoreActivated: false,
+      longText: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, quos. Soluta nobis, inventore mollitia reiciendis a facere deserunt voluptates, debitis reprehenderit deleniti porro quidem nam commodi magnam eveniet minus. Consequatur! Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi praesentium inventore at facilis? Modi placeat ad porro a nostrum, repudiandae totam eos temporibus dolores illum asperiores dolore magnam obcaecati officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptates, ipsam consectetur alias nam dolorum totam dolores corrupti pariatur itaque cupiditate! Eius, velit consectetur laboriosam ad adipisci itaque est neque!'
+    }
+  },
+}
 
 </script>

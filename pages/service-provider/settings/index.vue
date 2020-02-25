@@ -3,8 +3,9 @@
 </template>
 <script>
 export default {
-  asyncData ({redirect}) {
+  asyncData({ redirect }) {
     redirect('/service-provider/settings/general')
   }
 }
+
 </script>

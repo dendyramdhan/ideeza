@@ -8,7 +8,7 @@
     <div class="menu-item flex-col">
       <div class="flex">
         <div class="w-1/2 cursor-pointer" @click="userActive = !userActive; SPActive=false;investActive=false;">
-          <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']"/> Users
+          <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'user']" /> Users
         </div>
       </div>
       <div :class="[userActive ? 'block' : 'hidden']">
@@ -34,11 +34,11 @@
     </div>
     <div class="menu-item flex-col">
       <div class="flex">
-        <div class="w-11/12 cursor-pointer" @click="investActive = !investActive; userActive=false;SPActive=false;">
+        <div class="w-11/12 cursor-pointer" @click="investActive = !investActive;
+ userActive=false;SPActive=false;">
           <UserIcon class="fill-current mr-3" /> Investors
         </div>
       </div>
-
       <div :class="[investActive ? 'block' : 'hidden']">
         <nuxt-link to="/admin/invester/dashboard" class="block ml-12 text-base mt-2">Dashboard</nuxt-link>
         <nuxt-link to="/admin/invester/contact" class="block ml-12 text-base mt-2">Contacts</nuxt-link>
@@ -57,66 +57,69 @@
     </div>
     <div class="menu-item">
       <nuxt-link to="/admin/order">
-        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'shopping-cart']"/> Orders
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['fas', 'shopping-cart']" /> Orders
       </nuxt-link>
     </div>
     <div class="menu-item">
       <nuxt-link to="/admin/tasklist">
-        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']"/> My Notes
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']" /> My Notes
       </nuxt-link>
     </div>
     <div class="menu-item">
       <nuxt-link to="/admin/messages">
-        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'comments']"/> Messages
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'comments']" /> Messages
       </nuxt-link>
     </div>
     <div class="menu-item">
       <nuxt-link to="/admin/blog">
-        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']"/> Blogs
+        <font-awesome-icon class="mr-5 w-8 h-8 text-2xl align-text-top" :icon="['far', 'newspaper']" /> Blogs
       </nuxt-link>
     </div>
   </div>
 </template>
-
 <script>
-  import DashBoardIcon from '~/components/partials/icons/dashboard-icon.vue'
-  import ProductIcon from '~/components/partials/icons/product-icon.vue'
-  import TaskIcon from '~/components/partials/icons/list-icon.vue'
-  import UserIcon from '~/components/partials/icons/user-icon.vue'
-    export default {
-      name: "menu-items",
-      components: {
-        DashBoardIcon,
-        ProductIcon,
-        TaskIcon,
-        UserIcon
-      },
-      data() {
-        return {
-          userActive: false,
-          SPActive: false,
-          investActive: false
-        }
-      }
+import DashBoardIcon from '~/components/partials/icons/dashboard-icon.vue'
+import ProductIcon from '~/components/partials/icons/product-icon.vue'
+import TaskIcon from '~/components/partials/icons/list-icon.vue'
+import UserIcon from '~/components/partials/icons/user-icon.vue'
+export default {
+  name: "menu-items",
+  components: {
+    DashBoardIcon,
+    ProductIcon,
+    TaskIcon,
+    UserIcon
+  },
+  data() {
+    return {
+      userActive: false,
+      SPActive: false,
+      investActive: false
     }
+  }
+}
+
 </script>
-
 <style scoped>
-  .menu-item{
-    @apply flex mb-8 content-center mt-2 text-gray-700 text-xl font-semibold cursor-pointer;
-  }
+.menu-item {
+  @apply flex mb-8 content-center mt-2 text-gray-700 text-xl font-semibold cursor-pointer;
+}
 
-  .menu-item a:hover{
-    @apply text-ideeza;
-  }
-  .left-main-menu svg{
-    @apply text-gray-500;
-  }
-  .menu-item:hover svg{
-    @apply text-ideeza;
-  }
-  .active-link,
-  .active-link svg{
-    @apply text-ideeza;
-  }
+.menu-item a:hover {
+  @apply text-ideeza;
+}
+
+.left-main-menu svg {
+  @apply text-gray-500;
+}
+
+.menu-item:hover svg {
+  @apply text-ideeza;
+}
+
+.active-link,
+.active-link svg {
+  @apply text-ideeza;
+}
+
 </style>

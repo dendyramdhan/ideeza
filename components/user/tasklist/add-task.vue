@@ -4,18 +4,13 @@
       <!--Header-->
       <div class="flex justify-between px-10 pt-5">
         <h1 class="font-semibold text-xl">Add new note</h1>
-        <font-awesome-icon
-          @click="close"
-          class="mr-1 h-4 cursor-pointer text-gray-500 hover:text-gray-800"
-          :icon="['fas', 'times']"
-        />
+        <font-awesome-icon @click="close" class="mr-1 h-4 cursor-pointer text-gray-500 hover:text-gray-800" :icon="['fas', 'times']" />
       </div>
-
       <div class="my-5 md:flex justify-between px-5 md:px-10">
         <div class="md:w-1/2">
           <div class="input-container">
             <label>Link to (Option)</label>
-            <input placeholder="Project or layer" v-model="taskLink" />
+            <input placeholder="Project or layer" v-model="taskLink" required />
           </div>
           <div class="input-container">
             <label>Name</label>
@@ -37,11 +32,7 @@
                 src="https://randomuser.me/api/portraits/men/16.jpg"
               /> -->
               <div class="add-member h-10 w-10 mr-2 bg-gray-300 rounded-full relative">
-                <font-awesome-icon
-                  class="absolute-center-h-v mr-1 h-4 text-gray-600 hover:text-gray-800 cursor-pointer"
-                  :icon="['fas', 'plus']"
-                  @click="onAddTaskers"
-                />
+                <font-awesome-icon class="absolute-center-h-v mr-1 h-4 text-gray-600 hover:text-gray-800 cursor-pointer" :icon="['fas', 'plus']" @click="onAddTaskers" />
                 <InvitePopup v-if="requestAddTasker" />
               </div>
             </div>
@@ -62,46 +53,28 @@
             :attributes="attributes"
             :theme="theme"
           />-->
-          <vc-date-picker
-            v-model="dateRange"
-            color="pink"
-            mode="range"
-            :value="dateRange"
-            is-expanded
-            is-inline
-            @change="taskdeadline"
-            :theme="theme"
-          >
-            <font-awesome-icon
-              class="ml-2 h-4 cursor-pointer text-gray-800"
-              :icon="['fas', 'calendar-alt']"
-            />
+          <vc-date-picker v-model="dateRange" color="pink" mode="range" :value="dateRange" is-expanded is-inline @change="taskdeadline" :theme="theme">
+            <font-awesome-icon class="ml-2 h-4 cursor-pointer text-gray-800" :icon="['fas', 'calendar-alt']" />
           </vc-date-picker>
         </div>
       </div>
-
       <div class="px-10">
         <h1 class="font-semibold text-lg block">Attachments</h1>
-        <FileField @input="saveFile"/>
+        <FileField @input="saveFile" />
         <!-- in the below div we have to append the  -->
         <div v-if="file">
           <div class="flex items-center mt-2">
             <span class="text-ideeza text-xs" v-if="file">{{file.name}}</span>
-            <font-awesome-icon @click="file=null"
-              class="ml-2 h-3 inline text-ideeza-gray-300 cursor-pointer :hover:text-ideeza-gray-500"
-              :icon="['fas', 'trash']"
-            />
+            <font-awesome-icon @click="file=null" class="ml-2 h-3 inline text-ideeza-gray-300 cursor-pointer :hover:text-ideeza-gray-500" :icon="['fas', 'trash']" />
           </div>
         </div>
       </div>
-
       <div class="flex justify-end px-10 mb-5">
         <button class="btn btn--ideeza px-3 py-1" @click="addNewTask">Add Task</button>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import FileField from "~/components/form/file-field.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
@@ -130,13 +103,11 @@ export default {
           light: "ideeza-arrow"
         }
       },
-      attributes: [
-        {
-          key: "today",
-          highlight: true,
-          dates: new Date()
-        }
-      ]
+      attributes: [{
+        key: "today",
+        highlight: true,
+        dates: new Date()
+      }]
     };
   },
   components: {
@@ -159,8 +130,6 @@ export default {
     },
     addNewTask() {
       let start = new Date(this.dateRange.start).getTime();
-      console.log('start', this.taskDescription)
-      console.log('start', start)
       let end = new Date(this.dateRange.end).getTime();
       let timestamp = new Date().setHours(0, 0, 0, 0);
       console.log('timestamp: ', typeof(timestamp));
@@ -171,6 +140,7 @@ export default {
       addTaskFormData.set("timestamp", timestamp);
       addTaskFormData.set("start", start);
       addTaskFormData.set("end", end);
+      console.log(addTaskFormData);
       if (start === NaN) {
         alert("Please Enter Deadline!");
         return;
@@ -188,7 +158,7 @@ export default {
         if (r == true) {
           // addTaskFormData.append("attachments", value, filename);
 
-          let addTaskurl = "/api/task/add_new";
+          let addTaskurl = "/tasks/";
           let addTaskData = {
             method: "post",
             url: addTaskurl,
@@ -197,12 +167,11 @@ export default {
 
           apiServiceWithToken(addTaskData, response => {
             console.log(response);
-            if (response.data["success"] == true) {
-              window.location.reload();
-            }
+            // if (response.data["success"] == true) {
+            //   window.location.reload();
+            // }
           });
-        } else {
-        }
+        } else {}
       }
     },
     onAddTaskers() {
@@ -211,23 +180,27 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .input-container {
   @apply my-5;
 }
+
 label {
   @apply font-semibold text-lg block mb-2 text-ideeza-black;
 }
+
 input {
   @apply p-2 rounded-sm outline-none border border-solid border-ideeza-gray-300;
   width: 90%;
 }
+
 textarea {
   @apply p-2 rounded-sm outline-none border border-solid border-ideeza-gray-300;
   width: 90%;
 }
+
 .add-new-container {
   @apply w-full;
   max-width: 1000px;
@@ -238,4 +211,5 @@ textarea {
 .avatar {
   @apply w-4 rounded-full inline;
 }
+
 </style>
