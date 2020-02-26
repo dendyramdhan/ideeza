@@ -6,114 +6,133 @@
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents p-5">
-        <simple-table
-          :searchbox="false"
-          :add="false"
-          :header="true"
-          title="Projects"
-          border="border-gray"
-        >
-          <template v-slot:header>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Delete</button>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Print</button>
-            <button class="font-bold text-sm mr-3 text-ideeza-dark">Export</button>
-          </template>
-          <template v-slot:th>
-            <th class="border-t border-b border-blue-300 w-1/5 text-ideeza-dark p-3">
-              <!-- <input type="checkbox" id="ad" v-model="selected" @change="selectall" /> -->
-              <label for="ad"><font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />User name</label>
-              <!-- <font-awesome-icon
-                class="text-sm mt-2 ml-1 text-green-300"
-                :icon="['fas', 'arrow-down']"
-              />-->
-            </th>
-            <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Project name
-              <!-- <font-awesome-icon
-                class="text-sm mt-2 ml-1 text-green-300"
-                :icon="['fas', 'arrow-down']"
-              />-->
-            </th>
-            <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3 text-center">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Service Providers
-              <!-- <font-awesome-icon
-                class="text-sm mt-2 ml-1 text-green-300"
-                :icon="['fas', 'arrow-down']"
-              />-->
-            </th>
-            <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Deadline
-              <!-- <font-awesome-icon
-                class="text-sm mt-2 ml-1 text-green-300"
-                :icon="['fas', 'arrow-down']"
-              />-->
-            </th>
-            <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Completed
-              <!-- <font-awesome-icon
-                class="text-sm mt-2 ml-1 text-green-300"
-                :icon="['fas', 'arrow-down']"
-              />-->
-            </th>
-            <th class="border-t border-b border-blue-300 w-13 text-ideeza-dark p-3"></th>
-          </template>
-          <tr
-            class="flex w-full mb-4"
-            v-for="(project,index) in articleArray"
-            @click="$router.push('/technician/tracking/_id?id='+project.id)"
-            style="cursor:pointer"
-          >
-            <td class="w-1/5 text-ideeza-dark font-semibold">
-              <div class="flex">
-                <div class="flex"  >
-                  <!-- <input type="checkbox" :id="project.id" v-model="project.selected" /> -->
-                  <!-- <label :for="project.id"></label> -->
-                </div>
-                <img :src="avata_img_url +useravatar" class="h-10 w-10 rounded-full mr-2" />
-                <label style="cursor:pointer">{{ username}}</label>
-                
-              </div>
-            </td>
-            <td class="w-2/12 text-sm text-ideeza-dark font-semibold">{{project.title}}</td>
-            <td class="w-2/12 text-sm text-ideeza-dark text-center">
-             <img
-                   v-for="info2 in project.assigned_users" 
-                    :src="avata_img_url + info2.avatar"
-                     class="avatar"
-                  />
-              <!-- hhh{{project.assigned_users}} -->
-              <!-- +{{project.service_providers.length}} -->
-            </td>
-            <td class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left">
-              <div class="ml-2">{{ts.toLocaleDateString(project.end - project.start)}}</div>
-            </td>
-            <td class="w-13 text-sm text-ideeza-dark font-semibold pl-2 text-left">
-              <div class="ml-5">{{(project.end - project.start)/100000000}}%</div>
-            </td>
-            <td class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left">
-              <button class="border border-ideeza-dark py-2 px-3 rounded">Track order</button>
-              <!-- <font-awesome-icon
-                class="text-xl mt-2 ml-4 text-green-300 float-right"
-                :icon="['fa', 'grip-vertical']"
-              /> -->
-            </td>
-          </tr>
-        </simple-table>
+         <div class="bg-white shadow p-5 border border-ideeza rounded relative">
+          <div class="absolute right-0 top-0">
+            <button><font-awesome-icon class="text-3xl mt-2 ml-1 mt-4 mr-4 text-gray-300" :icon="['fas', 'cog']"/></button>
+          </div>
+           <div class="">
+             <h2 class="text-ideeza text-2xl">Projects</h2>
+             <div class="flex mt-5">
+               <button class="text-purple-900 font-bold mr-2">Delete</button>
+               <button class="text-purple-900 font-bold mr-2">Print</button>
+               <button class="text-purple-900 font-bold mr-2">Export</button>
+             </div>
+           </div>
+
+           <table class="text-left w-full border-collapse simple-table mt-5">
+          <thead class="bg-white text-ideeza-dark">
+              <tr class="mb-4">
+                <th class="p-4 border-t border-b border-blue-300">
+                  <input  type="checkbox" id="ad"/>
+                  <label for="ad">User name</label>
+                  <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
+                </th>
+                <th class="p-4 border-t border-b border-blue-300">
+                    Project name
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
+                </th>
+                <th class="p-4 border-t border-b border-blue-300">
+                    Service providers
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
+                </th>
+                <th class="p-4 border-t border-b border-blue-300">
+                    Deadline
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
+                </th>
+                <th class="p-4 border-t border-b border-blue-300">
+                    Completed
+                    <font-awesome-icon class="text-sm mt-2 ml-1 text-green-300" :icon="['fas', 'arrow-down']"/>
+                </th>
+                <th class="p-4 border-t border-b border-blue-300"></th>
+                <th class="p-4 border-t border-b border-blue-300"></th>
+            </tr>
+          </thead>
+              <tbody class="bg-grey-light overflow-y-auto text-ideeza-dark" >
+                <tr class="w-full mb-4">
+                        <td class="p-4 text-sm border-b">
+                          <input  type="checkbox" id="ad2"/>
+                          <label for="ad2"></label>
+                          <div class="h-12 w-12 ml-3 inline-flex align-middle"><img class=" h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/20.jpg"></div>
+                          <span class="inline-flex ml-2  align-middle">Michael Scott</span>
+                        </td>
+                        <td class="p-4 text-sm border-b">Porsche 219mm</td>
+                        <td class="p-4 text-sm border-b relative">
+
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/26.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/25.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/24.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/23.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/22.jpg"> 
+                         +30 </td>
+                        <td class="p-4 text-sm border-b">Dispute in progress</td>
+                        <td class="p-4 text-sm border-b">
+                          <button class="border rounded border-gray-800 text-gray-800 py-3 px-8">Track order
+                          </button>
+                        </td>
+                        <td class="p-4 text-sm border-b">
+                          <font-awesome-icon class="text-2xl mt-2 ml-1 text-green-300" :icon="['fas', 'ellipsis-v']"/>
+                          <font-awesome-icon class="text-2xl mt-2 text-green-300" :icon="['fas', 'ellipsis-v']"/>
+                        </td>
+                      </tr>
+
+                      <tr class="w-full mb-4">
+                        <td class="p-4 text-sm border-b">
+                          <input  type="checkbox" id="ad3"/>
+                          <label for="ad3"></label>
+                          <div class="h-12 w-12 ml-3 inline-flex align-middle"><img class=" h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/20.jpg"></div>
+                          <span class="inline-flex ml-2  align-middle">Michael Scott</span>
+                        </td>
+                        <td class="p-4 text-sm border-b">Porsche 219mm</td>
+                        <td class="p-4 text-sm border-b relative">
+
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/26.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/25.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/24.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/23.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/22.jpg"> 
+                         +30 </td>
+                        <td class="p-4 text-sm border-b">Dispute in progress</td>
+                        <td class="p-4 text-sm border-b">
+                          <button class="border rounded border-gray-800 text-gray-800 py-3 px-8">Track order
+                          </button>
+                        </td>
+                        <td class="p-4 text-sm border-b">
+                          <font-awesome-icon class="text-2xl mt-2 ml-1 text-green-300" :icon="['fas', 'ellipsis-v']"/>
+                          <font-awesome-icon class="text-2xl mt-2 text-green-300" :icon="['fas', 'ellipsis-v']"/>
+                        </td>
+                      </tr>
+
+                      <tr class="w-full mb-4">
+                        <td class="p-4 text-sm border-b">
+                          <input  type="checkbox" id="ad4"/>
+                          <label for="ad4"></label>
+                          <div class="h-12 w-12 ml-3 inline-flex align-middle"><img class=" h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/20.jpg"></div>
+                          <span class="inline-flex ml-2  align-middle">Michael Scott</span>
+                        </td>
+                        <td class="p-4 text-sm border-b">Porsche 219mm</td>
+                        <td class="p-4 text-sm border-b relative">
+
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/26.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/25.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/24.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/23.jpg">
+                          <img class="avatar" src="https://randomuser.me/api/portraits/men/22.jpg"> 
+                         +30 </td>
+                        <td class="p-4 text-sm border-b">Dispute in progress</td>
+                        <td class="p-4 text-sm border-b">
+                          <button class="border rounded border-gray-800 text-gray-800 py-3 px-8">Track order
+                          </button>
+                        </td>
+                        <td class="p-4 text-sm border-b">
+                          <font-awesome-icon class="text-2xl mt-2 ml-1 text-green-300" :icon="['fas', 'ellipsis-v']"/>
+                          <font-awesome-icon class="text-2xl mt-2 text-green-300" :icon="['fas', 'ellipsis-v']"/>
+                        </td>
+                      </tr>
+
+                </tbody>
+            </table>
+
+         </div>
       </div>
     </div>
     <!-- <span v-for="(info,index) in articleArray"  >
@@ -239,7 +258,16 @@ export default {
 .w-13 {
   width: 13.333333%;
 }
-.avatar {
-  @apply w-8 rounded-full -ml-2 shadow inline cursor-pointer;
-}
+  .avatar{
+    @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;
+  }
+  .avatar:hover{
+    @apply shadow-md;
+  }
+  .avatar:first-child{
+    @apply ml-0;
+  }
+  .avatar-timeline{
+    @apply w-6 rounded-full shadow inline cursor-pointer;
+  }
 </style>
