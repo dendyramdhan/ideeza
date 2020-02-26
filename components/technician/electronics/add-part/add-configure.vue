@@ -1,10 +1,9 @@
 <template>
   <div >
 
-    <div class="md:flex">
-
-      <div class="md:w-3/5 ">
-        <div class="flex justify-between items-center mb-5">
+    <div class="w-full">
+      <component :is="loadForm" @next="$emit('next')"></component>
+        <!-- <div class="flex justify-between items-center mb-5">
           <span class="font-semibold">
             Edit QFN Square Package Overall Dimensions
           </span>
@@ -141,18 +140,16 @@
           
         </div>
 
-
-        <!--Navigation-->
         <div class="md:flex justify-between mt-10">
           <button @click="back" class="btn pill-button px-16 py-0 mb-2 md:mb-0">Back</button>
           <button @click="next" class="btn pill-button px-16 py-0 mb-2 md:mb-0">Next</button>
           <button @click="$emit('next')" class="btn pill-button pill-button--ideeza px-16 py-0 mb-2 md:mb-0">Finish</button>
-        </div>
+        </div> -->
       </div>
 
 
 
-      <div class="md:w-2/5 md:pl-5">
+      <!-- <div class="md:w-2/5 md:pl-5">
         <div class="md:flex items-center mb-5 justify-end">
           <div class="view-button-container">
             <div @click="activeView = '2D'" :class="{'active': activeView === '2D'}" class="view-style b-right">2D Preview</div>
@@ -160,15 +157,14 @@
           </div>
         </div>
         <div class="view-container bg-gray-500">
-          <Engine :package="part.package"/>
+          <Engine v-if="loading==false" :package="part.package"/>
         </div>
-      </div>
-    </div>
+      </div> -->
   </div>
 </template>
 
 <script>
-  import Engine from '~/components/technician/electronics/add-part/engine.vue'
+  // import Engine from '~/components/technician/electronics/add-part/engine.vue'
   import { mapState } from 'vuex'
     export default {
         name: "configure",
@@ -176,18 +172,28 @@
             return {
                 step: 1,
                 maxStep: 3,
-                activeView: '3D'
+                activeView: '3D',
+                loading: true
             }
         },
-      components: {
-          Engine
-      },
+      // components: {
+      //     Engine
+      // },
       computed:{
         ...mapState({
           part: state => state.part.selected_part
         })
       },
+      mounted() {
+        let that = this
+        setTimeout(() => {
+          that.loading = false
+        }, 3000);
+      },
         methods: {
+            loadForm() {
+              return import(`./forms/${this.part.package}/index.vue`)
+            },
             back () {
                 if(this.step > 1)
                     this.step -= 1;
@@ -210,9 +216,6 @@
 <style scoped>
 .w-392{
   width: 392px;
-}
-.view-container{
-  height: 480px;
 }
 .view-button-container{
   @apply flex justify-between rounded-full border border-solid border-gray-400 relative bg-gray-300;

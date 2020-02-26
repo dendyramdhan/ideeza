@@ -1,5 +1,6 @@
 export const strict = false;
 export const state = () => ({
+    packageSelected: false,
     selected_part: {
         nameFontSize: 0,
         legs: 2,
@@ -48,6 +49,12 @@ export const state = () => ({
 })
 
 export const mutations = {
+    packageSelected(state, payload){
+        state.packageSelected = payload
+    },
+    updatePart(state, payload){
+        state.selected_part = {...state.selected_part,...payload}
+    },
     selectPart(state, payload) {
         state.selected_part = {
             nameFontSize: 0,
@@ -126,6 +133,15 @@ export const mutations = {
     },
     saveDimension(state,payload) {
         state.selected_part.dimensions[payload.key] = payload.value
+    },
+    savePackagePin(state, payload){
+        state.selected_part.package_pin[payload.key] = payload.value
+    },
+    packageThermalPad(state,payload){
+        state.selected_part.package_thermal_pad[payload.key] = payload.value
+    },
+    updateField(state,payload){
+        state.selected_part[payload.field][payload.key] = payload.value
     }
 }
 

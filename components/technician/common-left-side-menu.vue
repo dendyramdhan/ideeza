@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar overflow-scroll">
+  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar">
     <!--Left Menu-->
-    <div class="left-main-menu p-10 relative w-full">
+    <div class="left-main-menu p-10 relative w-full tech-menu">
       <CommonMenuItems />
     </div>
 
@@ -26,5 +26,9 @@ export default {
   position: fixed;
 }
 .left-main-menu {
+}
+.tech-menu{
+  max-height: 95vh;
+  overflow-y: auto;
 }
 </style>

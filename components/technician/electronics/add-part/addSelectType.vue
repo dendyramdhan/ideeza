@@ -23,7 +23,7 @@
               <button @click="$emit('selectType','R0805')" class="btn pill-button px-4 py-0">select</button>
             </td>
           </tr>
-          <tr class="bg-gray-200">
+          <tr>
             <td class>tqfn</td>
             <td>tqfn</td>
             <td>tqfn</td>
@@ -31,7 +31,7 @@
               <button @click="$emit('selectType','TQFN')" class="btn pill-button px-4 py-0">select</button>
             </td>
           </tr>
-          <tr class>
+          <tr class="bg-gray-200">
             <td class>female header</td>
             <td>female header</td>
             <td>female header</td>

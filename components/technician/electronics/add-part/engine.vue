@@ -1,6 +1,6 @@
 <template>
   <div>
-    <client-only placeholder="Loading...">
+    <client-only placeholder="Loading..." v-if="loading==false">
       <engine
         :initData = initData
         :defaultData="dataForm"
@@ -34,6 +34,8 @@
       created() {
         this.dataForm = packages[this.part.package+'data']
         this.initData = this.part.package
+        this.dataForm.dimensions = this.part.dimensions
+        this.loading = false
       },
       data() {
         return {
@@ -43,6 +45,7 @@
           toggle2d: true,    // show 2d
           togglesc: false,    // show schematic
           togglechecker: false, // show position checker
+          loading: true
         }
       },
     }

@@ -110,7 +110,8 @@
 
 <script>
 import technicianaddpartsearchs from "~/json/technicianaddpartsearch.json";
-import apiService from "~/apiService/have_token.js"
+import apiService from "~/apiService"
+import axios from 'axios'
 export default {
   name: "add-part-search",
   data: function() {
@@ -138,39 +139,45 @@ export default {
       console.log("selected part : ", index)
       this.selectedPart = this.partList[index]
       this.$store.commit('part/selectPart',this.selectedPart)
+      this.$emit('next')
     },
-    search_component(e){
+    async search_component(e){
       if (this.searchComponent.length<3 ||  e.key != "Enter")
         return;
 
-      let data = new FormData()
-      data.append("query", this.searchComponent)
-
+      let data = {
+        query: this.searchComponent
+      }
       let sendData ={
-        url: "/api/parts_search",
-        method: "post",
+        url: "/octapart/search/",
+        method: "get",
         data
       }
-
+      let authToken = window.$nuxt.$cookies.get("authToken")
       let partList = []
 
-      apiService(sendData, (res)=>{
-
-        console.log("reponse here: ", res)
-        
+      window.$nuxt.$cookies.set("loaderFlag", true)
+      await axios.get('http://94.130.57.88:8000/api/v1/octapart/search/',{
+        params: {
+          query: this.searchComponent
+        },
+        headers: { Authorization: `Bearer ${authToken}` }
+      },)
+      .then(res => {
         if(res)
+        console.log(res.data)
           res.data.results.map(item=>{
             let snippet = item.snippet
             if(!item.snippet)item.snippet = "unknown unknown"
             let snippets = item.snippet.split(' ')
             let packages = snippets[snippets.length-1]
             // packages = packages.split(" ")
-            let datasheet  = item.item.datasheets[0]
+            // let datasheet  = item.item.datasheets[0]
             
-            if(!datasheet) 
-              datasheet="#"
-            else
-              datasheet = datasheet.url
+            // if(!datasheet) 
+            //   datasheet="#"
+            // else
+            //   datasheet = datasheet.url
 
             partList.push({
               uid: item.item.uid,
@@ -179,14 +186,46 @@ export default {
               manufacturer: item.item.manufacturer.name,
               snippet,
               package: packages,
-              datasheet: item.item.datasheets[0].url
+              // datasheet: item.item.datasheets[0].url
             })
           })
-
-        this.partList = partList
-        console.log("partList : ", partList)
-
+          this.partList = partList
       })
+      window.$nuxt.$cookies.set("loaderFlag", false)
+    
+      // apiService(sendData, (res)=>{
+
+      //   console.log("reponse here: ", res)
+        
+      //   if(res)
+      //     res.data.results.map(item=>{
+      //       let snippet = item.snippet
+      //       if(!item.snippet)item.snippet = "unknown unknown"
+      //       let snippets = item.snippet.split(' ')
+      //       let packages = snippets[snippets.length-1]
+      //       // packages = packages.split(" ")
+      //       let datasheet  = item.item.datasheets[0]
+            
+      //       if(!datasheet) 
+      //         datasheet="#"
+      //       else
+      //         datasheet = datasheet.url
+
+      //       partList.push({
+      //         uid: item.item.uid,
+      //         name: item.item.mpn,
+      //         country: res.data.user_country,
+      //         manufacturer: item.item.manufacturer.name,
+      //         snippet,
+      //         package: packages,
+      //         datasheet: item.item.datasheets[0].url
+      //       })
+      //     })
+
+      //   this.partList = partList
+      //   console.log("partList : ", partList)
+
+      // })
     }
   }
 };

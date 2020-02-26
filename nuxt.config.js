@@ -51,67 +51,25 @@ export default {
     /*
    ** Plugins to load before mounting the App
    */
-    plugins: [ {
-        src: '~/plugins/vee-validate'
-    }
-    ,
-    {
-        src: '~/plugins/vuejs-datepicker', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/datepicker', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/clickoutside', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/dragged-plugin.js', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/apex-chart-plugin.js', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/ace-editor-plugin.js', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/scrollbar-plugin.js', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/notification-plugin.js', ssr: false
-    }
-    ,
-    {
-        src: '~/plugins/table-plugin.js'
-    }
-    ,
-    {
-        src: '~/plugins/vue2-filters-plugin'
-    }
-    ,
-    {
-        src: '~/plugins/calendar.js', ssr: false, mode: 'client'
-    }
-    ,
-    {
-        src: '~/plugins/firebase.js', ssr: false, mode: 'client'
-    }
-    ,
-    {
-        src: '~/plugins/jspdf.js', ssr: false, mode: 'client'
-    }
-    ,
-    {
-        src: '~/plugins/vue-carousal.js', ssr: false, mode: 'client'
-    }
-    ],
-    /*
+  plugins: [
+    { src: '~/plugins/vee-validate' },
+    { src: '~/plugins/vuejs-datepicker', ssr: false },
+    { src: '~/plugins/datepicker', ssr: false },
+    { src: '~/plugins/clickoutside', ssr: false },
+    { src: '~/plugins/dragged-plugin.js', ssr: false },
+    { src: '~/plugins/apex-chart-plugin.js', ssr: false },
+    { src: '~/plugins/ace-editor-plugin.js', ssr: false },
+    { src: '~/plugins/scrollbar-plugin.js', ssr: false },
+    { src: '~/plugins/notification-plugin.js', ssr: false },
+    { src: '~/plugins/table-plugin.js' },
+    { src: '~/plugins/vue2-filters-plugin' },
+    { src: '~/plugins/calendar.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/firebase.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/jspdf.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/ideeza-engine.js', ssr: false, mode: 'client' },
+    { src: '~/plugins/vue-carousal.js', ssr: false, mode: 'client' }
+  ],
+  /*
    ** Nuxt.js dev-modules
    */
     buildModules: [ // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
