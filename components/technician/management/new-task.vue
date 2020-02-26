@@ -3,19 +3,9 @@
     <div class="popup-overlay--contents add-new-container">
       <!--Header-->
       <div class="flex justify-between border-b-2 border-solid border-ideeza pb-5 px-20 pt-20">
-        <input
-          type="text"
-          class="outline-none border-0 text-ideeza text-xl placeholder-ideeza lg:w-1/2"
-           @change="taskname"
-          placeholder="Add name for the task...."
-        />
-        <font-awesome-icon
-          @click="close"
-          class="mr-1 h-4 cursor-pointer text-gray-500 hover:text-gray-800"
-          :icon="['fas', 'times']"
-        />
+        <input type="text" class="outline-none border-0 text-ideeza text-xl placeholder-ideeza lg:w-1/2" @change="taskname" placeholder="Add name for the task...." />
+        <font-awesome-icon @click="close" class="mr-1 h-4 cursor-pointer text-gray-500 hover:text-gray-800" :icon="['fas', 'times']" />
       </div>
-
       <!--Contents-->
       <div class="p-5 md:p-20 mt-10 md:flex popup-body">
         <div class="lg:w-1/2">
@@ -27,90 +17,53 @@
             </div> -->
           </div>
           <div class="mt-5">
-             <textarea
-        placeholder="Add project description here ...." @change="taskdescription" style="width:100%;height:150px;"
-      ></textarea>
-            <!-- <TextAreaField rows="5" placeholder="Add project description here ...."  @change="taskdescription"/> -->
+            <textarea placeholder="Add project description here ...." @change="taskdescription" style="width:100%;height:150px;"></textarea>
           </div>
           <div class="mt-10">
             <span class="inline-block mb-2">Attach</span>
             <!-- <FileField /> -->
             <img id="image" />
             <form enctype="multipart/form-data">
-            <input
-          type="file"
-          @change="fileseleted"
-          ref="file_upload"
-          class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block"
-          style="display:none"
-        />
-         </form>
-         <button
-       class="ml-5 btn btn-small btn--ideeza px-2 text-xs"
-        @click="$refs.file_upload.click()"
-      >SelectImage</button>
+              <input type="file" @change="fileseleted" ref="file_upload" class="btn btn-normal btn--ideeza px-10 py-4 block lg: iinline-block" style="display:none" />
+            </form>
+            <button class="ml-5 btn btn-small btn--ideeza px-2 text-xs" @click="$refs.file_upload.click()">SelectImage</button>
           </div>
         </div>
-
         <div class="lg:ml-20">
           <div class="flex items-center">
             <span class="text-gray-800 inline-block">Task Duration</span>
             <!--Calendar-->
-           <vc-date-picker
-              v-model="dateRange"
-              color="pink"
-              mode="range"
-              :value="dateRange"
-              :popover="{ placement: 'bottom', visibility: 'click' }"
-              @change="taskdeadline"
-            >
-              <font-awesome-icon
-                class="ml-2 h-4 cursor-pointer text-gray-800"
-                :icon="['fas', 'calendar-alt']"
-              />
+            <vc-date-picker v-model="dateRange" color="pink" mode="range" :value="dateRange" :popover="{ placement: 'bottom', visibility: 'click' }" @change="taskdeadline">
+              <font-awesome-icon class="ml-2 h-4 cursor-pointer text-gray-800" :icon="['fas', 'calendar-alt']" />
             </vc-date-picker>
           </div>
-
           <div class="mt-5 w-40">
             <span class="inline-block mb-2">Mark Status</span>
             <!-- <DropDownField :data="markStatusData" styleHeight="mini" /> -->
-             <select  @change="taskstatus"   styleHeight="mini">
+            <select @change="taskstatus" styleHeight="mini">
               <option v-for="options in markStatusData" :value="options">{{options}}</option>
             </select>
           </div>
-
           <div class="mt-10 relative">
             Assigned members:
-            <button
-              @click.self="showMembers = true"
-              class="ml-5 btn btn-small btn--ideeza px-2 text-xs"
-            >Add +</button>
-            <div
-              v-click-outside="hideMembers"
-              v-if="showMembers"
-              class="members-container absolute left-0 z-50 bg-white shadow-md p-2"
-            >
+            <button @click.self="showMembers = true" class="ml-5 btn btn-small btn--ideeza px-2 text-xs">Add +</button>
+            <div v-click-outside="hideMembers" v-if="showMembers" class="members-container absolute left-0 z-50 bg-white shadow-md p-2">
               <div>
                 <SearchField bg="bg-gray-100" placeholder="search member" />
               </div>
               <div class="mt-2 flex justify-between items-center" v-for="info in articleArray">
                 <div class="flex items-center">
-                  <img class="avatar" :src="avata_img_url+info.avatar" alt />
-                  <span class="member-name">{{info.firstname}}</span>
+                  <!-- <img class="avatar" :src="avata_img_url+info.avatar" alt /> -->
+                  <span class="member-name">{{info.first_name}}</span>
                 </div>
-                <input type="checkbox" @click="taskuser(info.userid)"/>
+                <input type="checkbox" @click="taskuser(info.id)" />
                 <!-- <CheckBoxField  /> -->
               </div>
-              
             </div>
           </div>
-
           <div class="mt-10">
             Notification center:
-            <button
-              @click.self="showNotifications = true"
-              class="ml-5 btn btn-small btn--ideeza px-2 text-xs"
-            >
+            <button @click.self="showNotifications = true" class="ml-5 btn btn-small btn--ideeza px-2 text-xs">
               Compose
               <font-awesome-icon class="ml-2 h-3 text-white" :icon="['fas', 'paper-plane']" />
             </button>
@@ -120,7 +73,7 @@
           </div>
           <div class="my-10">
             <span class="inline-block mb-2">Assigned Layer</span>
-             <select  @change="taskasignlayer"   styleHeight="mini">
+            <select @change="taskasignlayer" styleHeight="mini">
               <option v-for="options in layers" :value="options">{{options}}</option>
             </select>
             <!-- <DropDownField :data="layers" styleHeight="mini" /> -->
@@ -128,15 +81,11 @@
         </div>
       </div>
       <div class="text-center">
-        <button
-          @click="send_add_request"
-          class="mt-5 btn btn-normal btn--ideeza px-6 py-2"
-        >Add Task +</button>
+        <button @click="send_add_request" class="mt-5 btn btn-normal btn--ideeza px-6 py-2">Add Task +</button>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import TextAreaField from "~/components/form/text-area.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
@@ -165,13 +114,12 @@ export default {
       domain: null,
       file: null,
       user: [],
-      geturl2: "/api/user/get_list",
+      geturl2: "/accounts/users/",
       articleArray: [],
       articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
       projectid: null,
-      avata_img_url: process.env.avatar_base_url
     };
   },
   mounted() {
@@ -186,12 +134,12 @@ export default {
     apiService2(sendData, response => {
       console.log(response.data);
       // this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
+      this.articleArrayaxios = Object.values(response.data);
 
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);
         this.articleArray.push(item);
-      });      
+      });
     });
   },
   components: {
@@ -205,12 +153,12 @@ export default {
     taskname(event) {
       this.name = event.target.value;
     },
-    taskdescription(event){
+    taskdescription(event) {
       this.description = event.target.value;
     },
-    taskdeadline(event){
+    taskdeadline(event) {
       this.dateRange = event.target.value;
-      console.log("datapicker:",this.dateRange )      
+      console.log("datapicker:", this.dateRange)
     },
     fileseleted(evt) {
       var reader = new FileReader();
@@ -225,21 +173,21 @@ export default {
       console.log("file_upload:", evt);
       this.file = evt.target.files[0];
     },
-    taskstatus(event){
+    taskstatus(event) {
       this.status = event.target.value;
     },
-    taskasignlayer(event){
+    taskasignlayer(event) {
       this.domain = event.target.value;
     },
-    taskuser(event){
-      this.user.push(event)      
+    taskuser(event) {
+      this.user.push(event)
     },
     send_add_request() {
-      this.start=new Date(this.dateRange.start).getTime()
-      this.end=new Date(this.dateRange.end).getTime()
-      
+      this.start = new Date(this.dateRange.start).getTime()
+      this.end = new Date(this.dateRange.end).getTime()
+
       const formData = new FormData();
-       this.user.map(item=>{
+      this.user.map(item => {
         console.log("only:", item)
         formData.set("assigned_user", item);
       })
@@ -267,7 +215,7 @@ export default {
       //  this.user.map(item=>{
       //   console.log("only:", item)
       // })
-      
+
       // console.log("name:",this.name )
       // console.log("description:",this.description )
       // console.log("status:",this.status )
@@ -287,28 +235,33 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .add-new-container {
   @apply w-full h-full;
   max-width: 1300px;
   max-height: 900px;
 }
+
 .members-container {
   height: 200px;
   overflow-y: auto;
 }
+
 .member-name {
   @apply text-gray-600 ml-2;
   font-size: 10px;
   font-weight: lighter;
 }
+
 .avatar {
   @apply w-4 rounded-full inline;
 }
+
 .popup-body {
   max-height: 60vh;
   overflow-y: auto;
 }
+
 </style>
