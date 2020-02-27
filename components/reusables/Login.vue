@@ -49,7 +49,8 @@
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
 import apiService from "~/apiService";
-
+import apiService2 from "~/apiService/get_param.js";
+import VueJwtDecode from 'vue-jwt-decode'
 export default {
   components: {
     Modal
@@ -66,7 +67,7 @@ export default {
   methods: {
     async login() {
       if (validate_email(this.email) && validatePassword(this.password)) {
-        let signinurl = "/api/user/login";
+        let signinurl = "/accounts/token/";
         var bodyFormData = new FormData();
         bodyFormData.set("email", this.email);
         bodyFormData.set("password", this.password);
@@ -77,28 +78,26 @@ export default {
           data: bodyFormData
         };
         apiService(sendData, response => {
-          if (response.data.success == true) {
+          if (response.status === 200) {
             this.auth = true;
-            var token = response.data["data"].token;
-            var userdata = response.data["data"].userdata;
-            var firstname = userdata.firstname;
-            var lastname = userdata.lastname;
-            var userid = userdata.id;
-            var useravatar = userdata.avatar;
+            var access = response.data.access;
+            var refresh = response.data.refresh;
+            var userdata = VueJwtDecode.decode(access)
+            var userid = userdata.user_id;
+            window.$nuxt.$cookies.set("authToken", access);
+            window.$nuxt.$cookies.set("refreshToken", refresh);
 
-            // window.$nuxt.$cookies.set("authToken", token);
-            // window.$nuxt.$cookies.set("firstname", firstname);
-            // window.$nuxt.$cookies.set("lastname", lastname);
-            // window.$nuxt.$cookies.set("userid", userid);
-            console.log("window.$nuxt.$cookies", window.$nuxt);
+            let getUserData = {
+              method: "get",
+              url: `/accounts/users/${userid}/`,
+            };
 
-            window.$nuxt.$cookies.set("authToken", token);
-            window.$nuxt.$cookies.set("firstname", firstname);
-            window.$nuxt.$cookies.set("lastname", lastname);
-            window.$nuxt.$cookies.set("userid", userid);
-            window.$nuxt.$cookies.set("useravatar", useravatar);
-            // console.log("Here: ", window.$nuxt.$cookies.get("authToken"));
-            this.$router.push("/user/dashboard");
+            apiService2(getUserData, response2 => {
+              window.$nuxt.$cookies.set("firstname", response2.data.first_name);
+              window.$nuxt.$cookies.set("lastname", response2.data.last_name);
+              window.$nuxt.$cookies.set("userid", response2.data.id);
+              this.$router.push("/user/dashboard");
+            });
           } else {
             // alert(response.data.message)
             this.auth = false;
@@ -119,7 +118,6 @@ export default {
           var token = result.credential.accessToken;
           // The signed-in user info.
           var user = result.user;
-          console.log('googleSign', result);
 
           var fullName = user.displayName.split(' ');
           var firstname = fullName[0];

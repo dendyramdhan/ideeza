@@ -14,7 +14,6 @@
             </div>
           </div>
         </div>
-        
         <div class="bg-white rounded border shadow md:mr-3 mb-3 md:mb-0 py-3 px-5 md:w-48 relative">
           <div class="flex items-center">
             <div>
@@ -56,111 +55,72 @@
     </div>
     <div class="md:flex">
       <div class="md:w-9/12 mb-5 md:mb-0">
-        <simple-table
-          :header="false"
-          :searchbox="true"
-          title="Manage articles"
-          border="border-gray"
-        >
+        <simple-table :header="false" :searchbox="true" title="Manage articles" border="border-gray">
           <template v-slot:th>
             <th class="border-t border-b border-blue-300 w-2/5 text-ideeza p-3">
-            <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            Description</th>
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              Description</th>
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
-            <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            Domain</th>
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              Domain</th>
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
-            <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            Due Date</th>
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              Due Date</th>
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
-            <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            Price</th>
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              Price</th>
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza p-3">
-            <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />
-            Posted before</th>
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />
+              Posted before</th>
           </template>
           <tr class="flex w-full mb-4 cursor-pointer" v-for="(project,index) in articleArray" @click="$router.push('/service-provider/projects/detail?id='+project.id)">
-            <td class="w-2/5" >
+            <td class="w-2/5">
               <div class="font-bold text-black">{{project.title}}</div>
               <div class="text-sm">{{project.description}}</div>
             </td>
-            <td class="w-1/6" >PCB & Asamble</td>
-            <td class="w-1/6" >{{ts.toLocaleDateString(project.end - project.start)}}</td>
-            <td class="w-1/6" >10$</td>
-            <td
-              class="w-1/6"
-              
-            >{{ts.toLocaleDateString(0-project.start)}}</td>
+            <td class="w-1/6">PCB & Asamble</td>
+            <td class="w-1/6">{{ts.toLocaleDateString(project.end - project.start)}}</td>
+            <td class="w-1/6">10$</td>
+            <td class="w-1/6">{{ts.toLocaleDateString(0-project.start)}}</td>
           </tr>
         </simple-table>
         <div class="mt-5 relative">
-        <!--Paging-->
-        <div class="mx-auto w-content">
-          <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
-            <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
-          </span>
-
-          <span v-for="inde in counterarray " :key="inde">
-            <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
-              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+          <!--Paging-->
+          <div class="mx-auto w-content">
+            <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
+              <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
             </span>
-            <span v-else>
-              <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+            <span v-for="inde in counterarray " :key="inde">
+              <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
+                <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+              </span>
+              <span v-else>
+                <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
+              </span>
             </span>
-          </span>
-
-          <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
-            Next
-            <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
-          </span>
+            <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
+              Next
+              <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
+            </span>
+          </div>
+          <div class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0">
+            <span class="inline-block">Show</span>
+            <select class="inline field ml-2 h-10" @change="changeshowperiod">
+              <option v-for="(tabledata, index) in articleArray" v-if="length > index ">{{(index)*5+1}}-{{(index)*5+5}}</option>
+              <option>all</option>
+            </select>
+          </div>
         </div>
-
-        <div
-          class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
-        >
-          <span class="inline-block">Show</span>
-          <select class="inline field ml-2 h-10" @change="changeshowperiod">
-            <option
-              v-for="(tabledata, index) in articleArray"
-              v-if="length > index "
-            >{{(index)*5+1}}-{{(index)*5+5}}</option>
-            <option>all</option>
-          </select>
-        </div>
-      </div>
       </div>
       <div class="md:w-3/12 md:mx-3">
         <!-- <vc-calendar color="pink" is-expanded :theme="theme" /> -->
-        <vc-calendar
-          class="mx-auto bg-white box-shadow rounded mb-3"
-          color="pink"
-          is-expanded
-          :theme="theme"
-          v-model="date" 
-          :attributes="attributes"
-          @dayclick="dayClick"
-        />
+        <vc-calendar class="mx-auto bg-white box-shadow rounded mb-3" color="pink" is-expanded :theme="theme" v-model="date" :attributes="attributes" @dayclick="dayClick" />
         <div class="bg-white shadow rounded">
           <div class="py-3 px-5 bg-ideeza text-white text-center rounded">{{date}}</div>
           <hr class="my-1" />
           <ul class="shadow-lg">
-            <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="(Service, index) in articleArray2" >
-              <div >
+            <li class="flex justify-between hover:bg-ideeza-dark py-3 px-5 event" v-for="(Service, index) in articleArray2">
+              <div>
                 <div class="text text-sm font-bold">{{Service.title}}</div>
                 <div class="text text-xs">Completed</div>
               </div>
@@ -169,7 +129,6 @@
                 <font-awesome-icon class="text text-sm text-gray-500" :icon="['fas', 'times']" />
               </div> -->
             </li>
-            
           </ul>
         </div>
         <!-- <div id="myCalendar" class="vanilla-calendar"></div> -->
@@ -189,7 +148,7 @@ export default {
   },
   created() {
     this.date = new Date();
-    this.date = this.date.getDate()+' '+this.monthNames[this.date.getMonth()]
+    this.date = this.date.getDate() + ' ' + this.monthNames[this.date.getMonth()]
   },
   mounted() {
     this.firstname = window.$nuxt.$cookies.get('firstname');
@@ -205,8 +164,8 @@ export default {
 
     apiService(sendData, response => {
       console.log(response.data);
-      this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
+      //this.randomNumber = response.data;
+      this.articleArrayaxios = response.data;
 
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);
@@ -215,35 +174,15 @@ export default {
 
       let endd =
         this.articleArrayrout.length /
-          this.$store.state.TechnicianProjectStore.scale +
+        this.$store.state.TechnicianProjectStore.scale +
         1;
       for (let i = 1; i <= endd; i++) {
         this.counterarray.push(i);
       }
     });
-
-    let sendData2 = {
-      method: "get",
-      url: this.geturl2,
-      data: null
-    };
-
-    apiService(sendData2, response => {
-      console.log(response.data);
-      this.randomNumber2 = response.data;
-      this.articleArrayaxios2 = Object.values(response.data.data);
-
-      this.articleArrayaxios2.map(item => {
-        this.articleArrayrout2.push(item);
-        this.articleArray2.push(item);
-      });
-
-    });
-
-
   },
-  methods:{
-    dayClick(day){
+  methods: {
+    dayClick(day) {
       console.log(this.monthNames[day.date.getMonth()])
       console.log(day.date.getDay())
       this.date = day.date.getDate() + ' ' + this.monthNames[day.date.getMonth()]
@@ -283,8 +222,7 @@ export default {
       if (
         this.currentviewpoint == this.counter ||
         this.currentviewpoint > this.counter
-      ) {
-      } else {
+      ) {} else {
         this.$store.commit("userBlogStore/increasekeyChange");
         this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
         this.counter =
@@ -296,8 +234,7 @@ export default {
       }
     },
     decreasekey() {
-      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
-      } else {
+      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {} else {
         this.$store.commit("userBlogStore/decreasekeyChange");
         this.currentviewpoint = this.$store.state.userBlogStore.offset + 1;
         this.counter =
@@ -311,14 +248,13 @@ export default {
   },
   data() {
     return {
-      firstname:null,
+      firstname: null,
       date: new Date(),
-      monthNames :[
-         "January", "February", "March", "April", "May", "June",
+      monthNames: [
+        "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
       ],
-      attributes: [
-        {
+      attributes: [{
           key: "today",
           highlight: true,
           dates: new Date()
@@ -341,7 +277,7 @@ export default {
       articleArrayrout: [],
       randomNumber: [],
       counterarray: [],
-      geturl: "/api/project/technician/get_all",
+      geturl: "/feeds/",
       articleArray2: [],
       articleArrayaxios2: [],
       articleArrayrout2: [],
@@ -355,8 +291,7 @@ export default {
           light: "ideeza-arrow"
         }
       },
-      blogs: [
-        {
+      blogs: [{
           id: 1,
           name: "How ideeza can make the world a better place",
           date: "10 jul, 2019"
@@ -377,12 +312,10 @@ export default {
           date: "10 jul, 2019"
         }
       ],
-      projects: [
-        {
+      projects: [{
           description: {
             title: "Washing machine requirements",
-            text:
-              "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
+            text: "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
           },
           domain: "PCB & Asamble",
           due_date: "01.01.2020",
@@ -391,8 +324,7 @@ export default {
         {
           description: {
             title: "Washing machine requirements",
-            text:
-              "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
+            text: "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
           },
           domain: "PCB & Asamble",
           due_date: "01.01.2020",
@@ -401,8 +333,7 @@ export default {
         {
           description: {
             title: "Washing machine requirements",
-            text:
-              "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
+            text: "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
           },
           domain: "PCB & Asamble",
           due_date: "01.01.2020",
@@ -411,8 +342,7 @@ export default {
         {
           description: {
             title: "Washing machine requirements",
-            text:
-              "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
+            text: "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
           },
           domain: "PCB & Asamble",
           due_date: "01.01.2020",
@@ -421,8 +351,7 @@ export default {
         {
           description: {
             title: "Washing machine requirements",
-            text:
-              "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
+            text: "lorem asdsad asd asd asdas dasd asd asd asd asdasd asd asd qweqwe qwe wqe"
           },
           domain: "PCB & Asamble",
           due_date: "01.01.2020",
@@ -432,9 +361,11 @@ export default {
     };
   }
 };
+
 </script>
 <style>
 .event:hover .text {
   color: white;
 }
+
 </style>

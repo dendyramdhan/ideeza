@@ -1,0 +1,88 @@
+<template>
+<div class="">
+	<div class="flex mt-10 border-gray-300 border-b pb-10 justify-end">
+      <div class="px-3">
+          <font-awesome-icon class="" :icon="['fas', 'bolt']"></font-awesome-icon>
+        <span class="ml-3">Electronics</span>
+      </div>
+      <div class="px-3">
+          <font-awesome-icon class="" :icon="['fas', 'code']"></font-awesome-icon>
+          <span class="ml-3">Code</span>
+      </div>
+      <div class="px-3 ">
+          <img src="~static/images/cover.png" class="inline-block mx-3">
+          <span class="ml-3 text-ideeza">Cover</span>
+      </div>
+      <div class="px-3 ">
+          <img src="~static/images/settings.png" class="inline-block mx-3">
+          <span class="ml-3">Genral</span>
+      </div>
+    </div>
+    <div class="w-full relative">
+	    <div class="m-auto absolute left-0 right-0">
+			<div class="flex justify-center py-1 text-3xl text-black">
+				<div class="px-3 py-2 sub_tool_list flex items-center bg-white rounded-b relative have_sublist">
+					<font-awesome-icon class="" :icon="['fas', 'backward']"></font-awesome-icon>
+					 
+				</div>
+				<div class="px-3 py-2 py-1 sub_tool_list flex items-center bg-white rounded-b">
+					<font-awesome-icon class="" :icon="['fas', 'forward']"></font-awesome-icon>
+				</div>
+				<div class="px-3 py-2 py-1 sub_tool_list flex items-center bg-white rounded-b">
+					<font-awesome-icon class="" :icon="['fas', 'save']"></font-awesome-icon>
+				</div>
+				<div class="px-3 py-2 py-1 sub_tool_list flex items-center bg-white rounded-b">
+					<font-awesome-icon class="" :icon="['fas', 'copy']"></font-awesome-icon></div>
+				<div class="px-3 py-2 py-1 sub_tool_list flex items-center bg-white rounded-b">
+					<font-awesome-icon class="" :icon="['fas', 'paste']"></font-awesome-icon></div>
+				 
+			</div>
+		</div>
+		<img src="~/static/images/canva.png">
+	</div>
+   <!--  <div class="md:flex">
+        <Electronics class="flex-1"/>
+        <Cover class="flex-1 cover"/>
+    </div> -->
+</div>
+</template>
+<script>
+import Electronics from '~/components/user/pro/pro-electronics.vue'
+import Cover from '~/components/user/pro/pro-cover.vue'
+export default {
+    components: {
+        Electronics,
+        Cover
+    }
+}
+</script>
+<style scoped>
+.cover{
+    margin-top: 197px;
+}
+.sub_tool_list .sub_tool_lavel2 {
+    left: 0;
+    top: 100%;
+    display:none;
+}
+.sub_tool_lavel3 {
+	left: 0;
+    top: 100%;
+    display:none;
+}
+.bg-transp{
+ background: rgba(255,255,255,0.6);
+}
+.arrow-tip{
+	position: absolute;
+    top: -20px;
+    font-size: 21px;
+    color: #ffffffab;
+}
+.have_sublist:hover .sub_tool_lavel2{
+	display:block;
+}
+.sub_tool_lavel2:hover .sub_tool_lavel3{
+	display:block;
+}
+</style>

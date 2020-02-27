@@ -6,22 +6,16 @@
         <div class="mt-10">
           <div class="flex justify-between items-center border-b-4 border-solid border-ideeza pb-5">
             <div class="flex">
-              <span
-                class="text-ideeza-dark text-xl inline-block font-semibold mr-5"
-              >Project: {{info.title}}</span>
+              <span class="text-ideeza-dark text-xl inline-block font-semibold mr-5">Project: {{info.title}}</span>
               <!-- <div class="flex items-center text-gray-500 hover:text-gray-800 cursor-pointer">
                 <span class="text-sm inline-block mr-1">Edit</span>
                 <font-awesome-icon class="mr-1 h-3" :icon="['fas', 'pen']" />
               </div>-->
             </div>
             <div>
-              <button
-                @click.self="$router.push('/service-provider/projects')"
-                class="btn btn-normal btn--ideeza-gray-500 px-5 py-3"
-              >Back</button>
+              <button @click.self="$router.push('/service-provider/projects')" class="btn btn-normal btn--ideeza-gray-500 px-5 py-3">Back</button>
             </div>
           </div>
-
           <div class="flex items-center justify-between my-5">
             <div>
               Status:
@@ -30,21 +24,17 @@
             <div class="flex items-center">
               <div class="text-xl">
                 Project Duration:
-                <span
-                  class="text-ideeza"
-                >{{ts.toLocaleDateString(0 - info.start)}} -</span>
+                <span class="text-ideeza">{{ts.toLocaleDateString(0 - info.start)}} -</span>
                 <span class="text-ideeza">{{ts.toLocaleDateString(info.end - 0)}}</span>
               </div>
               <font-awesome-icon class="ml-3 h-4 text-gray-800" :icon="['fas', 'calendar-alt']" />
             </div>
           </div>
-
           <div class="lg:flex justify-between">
             <div class="project-description lg:mr-16">
               <div class="gradient-bg px-8 py-5 text-white">Project Description</div>
               <p class="p-5 bg-white text-black">{{info.description}}</p>
             </div>
-
             <div class="flex-grow">
               <div class="gradient-bg px-8 py-5 text-white">Attachments</div>
               <div class="p-5 bg-white">
@@ -59,15 +49,11 @@
                 </div>
                 <div class="text-xs mt-5">
                   link attached:
-                  <a
-                    class="text-blue-500"
-                    href="https://google.com"
-                  >https://google.com</a>
+                  <a class="text-blue-500" href="https://google.com">https://google.com</a>
                 </div>
               </div>
             </div>
           </div>
-
           <table class="mt-10 shadow-md">
             <thead>
               <tr class="text-white h16 gradient-bg">
@@ -92,62 +78,34 @@
                   </td>
                   <td>{{task.domain}}</td>
                   <td>
-                    <img
-                      v-for="image in task.assigned_user"
-                      :src="avata_img_url + image.avatar"
-                      class="avatar"
-                    />
+                    <img v-for="image in task.assigned_user" :src="avata_img_url + image.avatar" class="avatar" />
                   </td>
                   <td class="text-center">
-                    <div
-                      class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative"
-                    >
-                      <span
-                        class="absolute due-date text-black"
-                      >{{ts.toLocaleDateString(task.end - task.start)}}</span>
-                      <div
-                        class="bg-ideeza rounded-full h-8"
-                        :style="{ width: ((task.end - task.start)/100000000) +'%'}"
-                      ></div>
+                    <div class="text-sm text-gray-600 w-3/4 bg-white h-8 text-center rounded-full relative">
+                      <span class="absolute due-date text-black">{{ts.toLocaleDateString(task.end - task.start)}}</span>
+                      <div class="bg-ideeza rounded-full h-8" :style="{ width: ((task.end - task.start)/100000000) +'%'}"></div>
                     </div>
                   </td>
                   <td>{{task.status}}</td>
                   <td class="notifications">
-                    <font-awesome-icon
-                      class="mr-1 text-lg text-ideeza-gold"
-                      :icon="['fas', 'exclamation-circle']"
-                    />
+                    <font-awesome-icon class="mr-1 text-lg text-ideeza-gold" :icon="['fas', 'exclamation-circle']" />
                   </td>
                 </tr>
               </template>
             </tbody>
           </table>
-
           <div class="mt-20">
             <div class="gradient-bg px-8 py-5 text-white">Timeline</div>
-
             <task-timeline />
           </div>
-
           <!--Add new project-->
           <new-project @onClose="addNewProject=false" v-if="addNewProject" />
-
           <!--Add new task-->
           <new-task @onClose="addNewTask=false" v-if="addNewTask" />
-
           <!--Edit task-->
           <edit-task @onClose="editTask=false" v-if="editTask" />
-
-          <detail-task
-            @onClose="detailTask=false"
-            @onEdit="detailTask=false;editTask=true"
-            v-if="detailTask"
-            @complete="detailTask=false;completeTask=true"
-            :parentData="sendparentdata"
-            :edit="false"
-          />
+          <detail-task @onClose="detailTask=false" @onEdit="detailTask=false;editTask=true" v-if="detailTask" @complete="detailTask=false;completeTask=true" :parentData="sendparentdata" :edit="false" />
           <complete-task @onClose="completeTask=false" v-if="completeTask" />
-
           <!-- <span v-for="info in articleArray" v-if="info.id == id">
       {{info}}
     </span>
@@ -158,7 +116,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import AddNewProject from "~/components/technician/management/new-project.vue";
 import AddNewTask from "~/components/technician/management/new-task.vue";
@@ -240,7 +197,7 @@ export default {
       console.log("taskid:", window.$nuxt.$cookies.get("techniciantaskid"));
       this.sendparentdata = myid;
       this.detailTask = true;
-    },    
+    },
     changeid(id) {
       // alert(id)
       this.$store.commit("TechnicianProjectStore/projectTaskkeychange1", id);
@@ -282,13 +239,11 @@ export default {
       detailTask: false,
       completeTask: false,
       expanded: {},
-      tasks: [
-        {
+      tasks: [{
           id: 1,
           name: "Make Iron from steal: first phase",
           domain: "Electronics",
-          assigned_to: [
-            {
+          assigned_to: [{
               url: "https://randomuser.me/api/portraits/women/20.jpg"
             },
             {
@@ -303,13 +258,11 @@ export default {
             date: "02.10.2020"
           },
           status: 1, //1 for completed, 2 for over_due, 3 for in_progress
-          subtasks: [
-            {
+          subtasks: [{
               id: 2,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
+              assigned_to: [{
                   url: "https://randomuser.me/api/portraits/women/20.jpg"
                 },
                 {
@@ -329,11 +282,9 @@ export default {
               id: 3,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
-                  url: ""
-                }
-              ],
+              assigned_to: [{
+                url: ""
+              }],
               timeline: {
                 progress: 30,
                 date: "02.10.2020"
@@ -344,8 +295,7 @@ export default {
               id: 4,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
+              assigned_to: [{
                   url: "https://randomuser.me/api/portraits/women/20.jpg"
                 },
                 {
@@ -364,8 +314,7 @@ export default {
           id: 5,
           name: "Make Iron from steal: first phase",
           domain: "Electronics",
-          assigned_to: [
-            {
+          assigned_to: [{
               url: "https://randomuser.me/api/portraits/women/20.jpg"
             },
             {
@@ -377,13 +326,11 @@ export default {
             date: "02.10.2020"
           },
           status: 2, //1 for completed, 2 for over_due, 3 for in_progress
-          subtasks: [
-            {
+          subtasks: [{
               id: 6,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
+              assigned_to: [{
                   url: "https://randomuser.me/api/portraits/men/20.jpg"
                 },
                 {
@@ -400,11 +347,9 @@ export default {
               id: 7,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
-                  url: ""
-                }
-              ],
+              assigned_to: [{
+                url: ""
+              }],
               timeline: {
                 progress: 30,
                 date: "02.10.2020"
@@ -415,11 +360,9 @@ export default {
               id: 8,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
-                  url: ""
-                }
-              ],
+              assigned_to: [{
+                url: ""
+              }],
               timeline: {
                 progress: 30,
                 date: "02.10.2020"
@@ -432,26 +375,21 @@ export default {
           id: 9,
           name: "Make Iron from steal: first phase",
           domain: "Electronics",
-          assigned_to: [
-            {
-              url: "https://randomuser.me/api/portraits/women/20.jpg"
-            }
-          ],
+          assigned_to: [{
+            url: "https://randomuser.me/api/portraits/women/20.jpg"
+          }],
           timeline: {
             progress: 70,
             date: "02.10.2020"
           },
           status: 3, //1 for completed, 2 for over_due, 3 for in_progress
-          subtasks: [
-            {
+          subtasks: [{
               id: 10,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
-                  url: ""
-                }
-              ],
+              assigned_to: [{
+                url: ""
+              }],
               timeline: {
                 progress: 30,
                 date: "02.10.2020"
@@ -462,11 +400,9 @@ export default {
               id: 11,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
-                  url: ""
-                }
-              ],
+              assigned_to: [{
+                url: ""
+              }],
               timeline: {
                 progress: 30,
                 date: "02.10.2020"
@@ -477,11 +413,9 @@ export default {
               id: 11,
               name: "Make Iron from steal: first phase",
               domain: "Electronics",
-              assigned_to: [
-                {
-                  url: ""
-                }
-              ],
+              assigned_to: [{
+                url: ""
+              }],
               timeline: {
                 progress: 30,
                 date: "02.10.2020"
@@ -499,81 +433,103 @@ export default {
     });
   }
 };
-</script>
 
-      <style scoped>
+</script>
+<style scoped>
 .project-description {
   width: 100%;
   max-width: 1000px;
 }
+
 .attached-images-wrapper img {
   @apply mr-3;
   max-width: 30%;
   width: 100%;
 }
+
 .avatar {
   @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;
 }
+
 .avatar:hover {
   @apply shadow-md;
 }
+
 .avatar:first-child {
   @apply ml-0;
 }
+
 .avatar-timeline {
   @apply w-6 rounded-full shadow inline cursor-pointer;
 }
+
 .status {
   @apply uppercase;
 }
+
 .status--completed {
   @apply text-green-500;
 }
+
 .status--progress {
   @apply text-orange-500;
 }
+
 .status--over {
   @apply text-red-500;
 }
+
 .notifications {
   @apply text-sm text-ideeza;
 }
+
 .time-line-contents {
   width: 220px;
 }
-.timeline-days-container div {
-}
+
+.timeline-days-container div {}
+
 .timeline-line {
   width: 5.6%;
 }
+
 @screen lg {
   table {
     @apply mb-5 w-full table-fixed border-collapse text-gray-600;
   }
+
   thead tr {
     @apply bg-white px-6 pl-16;
   }
+
   thead th {
     @apply p-6;
   }
+
   thead th:first-child {
     @apply pl-16;
   }
+
   tbody td {
     @apply p-6 border-r border-solid border-gray-300;
   }
+
   tbody tr:even {
     @apply bg-white;
   }
+
   tbody td:first-child {
     @apply pl-16;
   }
+
   tbody td:last-child {
     @apply border-r-0;
   }
 }
+
 @media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
   /* Force table to not be like tables anymore */
   table,
   thead,
@@ -622,26 +578,32 @@ export default {
   td:nth-of-type(1):before {
     content: "Tasks";
   }
+
   td:nth-of-type(2):before {
     content: "Domain";
   }
+
   td:nth-of-type(3):before {
     content: "Assigned To";
   }
+
   td:nth-of-type(4):before {
     content: "Due Date";
   }
+
   td:nth-of-type(5):before {
     content: "Task Status";
   }
+
   td:nth-of-type(6):before {
     content: "Notification";
   }
 }
+
 .due-date {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
 </style>
-  

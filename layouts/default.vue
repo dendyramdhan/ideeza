@@ -5,10 +5,11 @@
 </template>
 <script>
 export default {
-  mounted(){
+  mounted() {
     // window.$nuxt.$cookies.set("loaderFlag",true)
   },
 }
+
 </script>
 <style>
 html {
@@ -58,8 +59,10 @@ html {
   color: #fff;
   background-color: #35495e;
 }
-.home-content{
+
+.home-content {
   overflow-y: auto;
   height: 100vh;
 }
+
 </style>
