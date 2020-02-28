@@ -9,9 +9,8 @@
           <h2 class="md:text-4xl sm:text-2xl mt-5 font-extrabold text-white">Become the 4th industrial revolution deriver</h2>
              
             <div class="lg:w-4/5 sm:w-full">
-              <p class="text-xl text-white mt-5 py-4 pr-5">With Ideeza we go together to invest in everything. You receive a huge amount of profit by investing
-in us by giving people the ability to make the things
-happen.</p>
+              <p class="text-xl text-white mt-5 py-4 pr-5">Ideeza is first in kind that using the power of AI and automatic process for fast development and industrial connection.
+Beat competitors with massive and growing work channels that match to your expertise.</p>
             </div>
 
           </div>
@@ -24,7 +23,7 @@ happen.</p>
         <div class="mt-5 w-full m-auto text-center">
           
           <h2 class="text-purple-800 text-4xl font-extrabold">Connect your skills to Ideeza</h2>
-          <h3 class=" text-2xl font-bold ">and start winning works<br/>automatically!</h3>
+          <h3 class=" text-2xl font-bold text-gray-400">and start winning works<br/>automatically!</h3>
           
 
           <div class="m-auto video-screen mt-16">
@@ -40,7 +39,7 @@ happen.</p>
       <div class="curve-bg-footer-bg-img py-24 clearfix">
         <div class="container lg m-auto text-white flex"> 
           <div class="mt-5 w-6/12 text-center">
-            <h2 class="text-white md:text-3xl sm:text-2xl font-bold py-5 text-left">Create something amazing</h2>
+            <h2 class="text-white md:text-3xl sm:text-2xl font-bold py-5 text-left">If you offer one of these abilities</h2>
             <h2 class="text-white md:text-3xl sm:text-2xl font-bold text-left text-purple-800 text-center border-b-2 inline-block border-pink-600 "> PCB Manufacturer</h2>
             <h2 class="text-white md:text-3xl sm:text-2xl font-bold py-5 text-right">Your place is with us!</h2>
  
@@ -57,25 +56,31 @@ happen.</p>
     <div class="w-full relative mt-20 py-6">
      <div class="container lg m-auto ">
       <div class="md:flex sm:block">
+        <div class="md:w-6/12 sm:w-full px-3 order-2">
+           <img src="~/static/images/img_ref_2335.png" class="right-0 max-width-half">
+        </div>
         <div class="md:w-6/12 sm:w-full px-3">
-          <h2 class="text-purple-700 text-5xl font-bold">Easy Earning</h2>
+          <h2 class="text-purple-700 text-5xl font-bold mt-24">Easy Earning</h2>
           <h2 class="text-purple-900 text-3xl font-bold">Receive works automatically based on your tools and capabilities.</h2>
-          <p class="text-purple-800 text-lg py-5 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In placerat tortor vitae risus feugiat, ut venenatis massa faucibus. Maecenas euismod molestie urna, vel sodales felis posuere at. Proin vitae justo lectus. In lacinia sem in ante fermentum pulvinar vitae ac neque. Praesent facilisis justo vel ipsum faucibus lobortis. In vestibulum porttitor viverra. Fusce mattis metus nec efficitur vehicula. Nunc tempor lectus ex. Aenean sagittis neque eget suscipit imperdiet. Proin vel viverra diam. Proin sollicitudin nisi vel leo mattis, rhoncus molestie quam ultrices. Aenean tristique ligula non odio porttitor vehicula.</p>
+          <p class="text-purple-800 text-lg py-5 ">Ideeza's platform generates a blueprint based on machines' abilities and pushes work to you based on user optimization and your score.</p>
            
        </div>
-       <img src="~/static/images/img_ref_2335.png" class="md:absolute static right-0 max-width-half">
+       
      </div>
    </div>
  </div>
 
  <div class="w-full relative py-6 mt-20">
    <div class="container lg m-auto">
-    <div class="md:flex sm:block justify-end">
-      <img src="~/static/images/img_ref_2336.png" class="md:absolute static left-0 max-width-half">
+    <div class="md:flex sm:block">
+      <div class="md:w-6/12 sm:w-full px-3">
+         <img src="~/static/images/img_ref_2336.png" class="right-0 max-width-half">
+       </div>
+       
       <div class="md:w-6/12 sm:w-full pt-10 ">
-        <h2 class="text-purple-700 text-5xl font-bold">Efficiently work</h2>
+        <h2 class="text-purple-700 text-5xl font-bold mt-24">Efficiently work</h2>
         <h2 class="text-purple-900 text-3xl font-bold">Less Idle time, more capacity.</h2>
-        <p class="text-purple-900 text-lg py-5 ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In placerat tortor vitae risus feugiat, ut venenatis massa faucibus. Maecenas euismod molestie urna, vel sodales felis posuere at. Proin vitae justo lectus. In lacinia sem in ante fermentum pulvinar vitae ac neque. Praesent facilisis justo vel ipsum faucibus lobortis. In vestibulum porttitor viverra. Fusce mattis metus nec efficitur vehicula. Nunc tempor lectus ex. Aenean sagittis neque eget suscipit imperdiet. Proin vel viverra diam. Proin sollicitudin nisi vel leo mattis, rhoncus molestie quam ultrices. Aenean tristique ligula non odio porttitor vehicula.</p>
+        <p class="text-purple-900 text-lg py-5 ">Ideeza's process finds works that fits in your feasibility and automatically connects to your potential customers.</p>
          
       </div>
     </div>
@@ -85,14 +90,17 @@ happen.</p>
 <div class="w-full relative py-6 mb-12 mt-20">
 	<div class="container lg m-auto ">
     <div class="md:flex sm:block">
+      <div class="md:w-6/12 sm:w-full px-3 order-2">
+        <img src="~/static/images/img_ref_2337.png" class="right-0 max-width-half">
+      </div>
       <div class="md:w-6/12 sm:w-full pt-10">
-        <h2 class="text-purple-700 text-5xl font-bold">Futurist supply chain</h2>
+        <h2 class="text-purple-700 text-5xl font-bold mt-24">Futurist supply chain</h2>
         <h2 class="text-purple-900 text-3xl font-bold">No more time wasted. Be part of collaborative tracking space</h2>
-        <p class="text-purple-900 text-lg py-5 ">YLorem ipsum dolor sit amet, consectetur adipiscing elit. In placerat tortor vitae risus feugiat, ut venenatis massa faucibus. Maecenas euismod molestie urna, vel sodales felis posuere at. Proin vitae justo lectus. In lacinia sem in ante fermentum pulvinar vitae ac neque. Praesent facilisis justo vel ipsum faucibus lobortis. In vestibulum porttitor viverra. Fusce mattis metus nec efficitur vehicula. Nunc tempor lectus ex. Aenean sagittis neque eget suscipit imperdiet. Proin vel viverra diam. Proin sollicitudin nisi vel leo mattis, rhoncus molestie quam ultrices. Aenean tristique ligula non odio porttitor vehicula. </p>
+        <p class="text-purple-900 text-lg py-5 ">Ideeza's platform stores key manufacturing and delivery data across the entire supply chain to track any issues that may arise.</p>
          
 
       </div>
-      <img src="~/static/images/img_ref_2337.png" class="md:absolute static right-0 max-width-half">
+      
     </div>
   </div>
 </div>
@@ -104,8 +112,7 @@ happen.</p>
   <div class="curve-bg-gradient-new pt-8 clearfix">
     <div class="container lg m-auto text-white"> 
       <div class="mt-5 w-4/5  m-auto text-center">
-        <h2 class="text-white md:text-3xl sm:text-3xl font-bold py-5 ">Don't waste your time anymore, 
-<br/><b>and become a LEADER!</b></h2>
+        <h2 class="text-white md:text-3xl sm:text-3xl font-bold py-5 ">Become an IDEEZA's Service Provider</h2>
 
         <button @click="showSignupModal=true" class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 w-64 rounded-full shadow-lg mt-5">Join Now</button>
       </div>
@@ -196,7 +203,7 @@ happen.</p>
   background:url('~static/images/footer-bg.png') no-repeat center center;
 }
 .max-width-half{
-  max-width:45%;
+  max-width:80%;
   max-height:100%;
   top:0;
   bottom:0;

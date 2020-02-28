@@ -20,6 +20,10 @@
                 <button class="block bg-white text-xl font-bold border border-gray-300 text-gray-900 py-5 w-full">
                   <img src="~static/images/cover.png" class="inline-block mx-3">Cover</button>
               </div>
+              <div class="flex-1 px-3 ">
+                <button class="block bg-white text-xl font-bold border border-gray-300 text-gray-900 py-5 w-full">
+                  <img src="~static/images/law.png" class="inline-block mx-3">Lawyer</button>
+              </div>
             </div>
 
 
