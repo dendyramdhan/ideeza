@@ -57,7 +57,6 @@
                   :apiPlatform="apiPlatform"
                   :searchFor="searchFor"
                   @selectObject="selectedObject"
-
                   ref="engine"
           />
           <spinner slot="placeholder" />
@@ -104,6 +103,8 @@
         </div>
       </div>
     </div>
+
+    <button class="bg-ideeza p-3" @click="save">save</button>
 
     <div class="w-full mt-10 lg:flex justify-end">
       <!-- <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button> -->
@@ -166,6 +167,9 @@
         },
 
         methods: {
+          save() {
+            console.log(this.$refs.engine.getData())
+          },
           clear(){
             this.uploadData = null;
           },
