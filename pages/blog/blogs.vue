@@ -7,7 +7,7 @@
         <nuxt />
         <div class="w-full flex flex-wrap m-auto">
           <div class="flex-1 mt-16  hidden md:block">
-            <img src="~static/images/blog-banner2.png" class="inline-block">
+            <img src="~static/images/blog-banner2.png" class="inline-block w-full">
           </div>
           <div class="md:flex-1 md:mt-40 block w-full mt-16 md:mt-0 mb-16">
             <div class="text-white text-center">
