@@ -2,7 +2,6 @@
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <LeftMenu />
-
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
@@ -21,20 +20,14 @@
                   </div>
                 </div>
                 <nuxt-link to="/technician/settings/general">
-                  <font-awesome-icon
-                  class="mr-1 h-4 text-sm inline-block cursor-pointer float-right"
-                  :icon="['fas', 'cog']"
-                  />
+                  <font-awesome-icon class="mr-1 h-4 text-sm inline-block cursor-pointer float-right" :icon="['fas', 'cog']" />
                 </nuxt-link>
               </div>
-
               <!--Agency Details-->
               <div class="mt-5">
-
                 <h1 class="text-black font-semibold text-xl">
                   Description
                 </h1>
-
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a augue id eros gravida condimentum.
                   Ut
@@ -45,7 +38,6 @@
                   augue
                   in ultrices imperdiet, nisl tellus scelerisque velit.
                 </p>
-
                 <p>
                   Curabitur sit amet auctor nulla. Quisque maximus nisi mauris, a fringilla arcu molestie ut. Praesent
                   vitae
@@ -55,9 +47,7 @@
                   lobortis
                   vitae id nisi.
                 </p>
-
               </div>
-
               <!--Agency Stats-->
               <div class="mt-10 pt-10 flex flex-col lg:flex-row border-t border-solid border-gray-300">
                 <div class="lg:w-1/4 p-1">
@@ -107,7 +97,7 @@
                   <img class="mr-10" src="~/static/images/Layercar.png">
                   <div>
                     <h1 class="text-black text-xl font-semibold">Lamborghini<br>
-                    Aventado Project</h1>
+                      Aventado Project</h1>
                     <h3 class="text-gray-600 text-lg font-semibold">
                       Electronics + Cover
                     </h3>
@@ -136,7 +126,7 @@
                   <img class="mr-10" src="~/static/images/Layercar.png">
                   <div>
                     <h1 class="text-black text-xl font-semibold">Lamborghini<br>
-                    Aventado Project</h1>
+                      Aventado Project</h1>
                     <h3 class="text-gray-600 text-lg font-semibold">
                       Electronics + Cover
                     </h3>
@@ -168,7 +158,7 @@
             <!--Business Managers-->
             <div class="p-5 bg-white mt-10 lg:mt-0 shadow-lg">
               <h1 class="font-semibold text-gray-800 pb-3 border-b border-solid border-gray-300">Business
-              Review Expertise</h1>
+                Review Expertise</h1>
               <div class="font-semibold text-lg bg-white lg:p-1 xl:p-5">
                 <div class="mt-5">Fabrication</div>
                 <div class="mt-5">Assembly</div>
@@ -179,37 +169,32 @@
         </div>
       </div>
     </div>
-
   </div>
-
-
 </template>
-
 <script>
-  import LeftMenu from '~/components/technician/common-left-side-menu.vue'
+import LeftMenu from '~/components/technician/common-left-side-menu.vue'
 
-  export default {
-    layout: 'user',
-    name: "agency-index",
-    components: {
-      LeftMenu
-    },
-    data: function () {
-      return {}
-    },
-    computed: {
-      leftMenu() {
-        return this.$store.state.usermenu.openLeftMenu;
-      }
-    },
-    mounted() {
+export default {
+  layout: 'technician',
+  name: "agency-index",
+  components: {
+    LeftMenu
+  },
+  data: function() {
+    return {}
+  },
+  computed: {
+    leftMenu() {
+      return this.$store.state.usermenu.openLeftMenu;
+    }
+  },
+  mounted() {
 
-    },
-    methods: {}
-  }
+  },
+  methods: {}
+}
 
 </script>
-
 <style scoped>
 p {
   @apply mt-5 text-base font-semibold text-gray-500;

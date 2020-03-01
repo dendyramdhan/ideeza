@@ -33,6 +33,11 @@
       <form enctype="multipart/form-data">
         <file-field @input="fileseleted" border-class="border-ideeza-dark rounded" btn="btn--ideeza-dark" />
       </form>
+      <div class="validate-error-msg">
+        <span class="caption" v-if="fileError">
+          {{ fileError }}
+        </span>
+      </div>
     </div>
     <div class="mt-12 text-center lg:text-left">
       <button @click="showPreview" class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
@@ -57,6 +62,7 @@ export default {
     return {
       geturl: "/blog/",
       file: null,
+      fileError: null,
       articleName: "",
       categories: [],
       articleDescription: "",
@@ -86,7 +92,7 @@ export default {
 
       this.file = file;
     },
-    showPreview() {
+    showPreview(e) {
       this.$validator.validateAll().then(result => {
         if (result) {
           let blog = {};
@@ -97,6 +103,11 @@ export default {
           blog.article = this.articleName;
           blog.category = category;
           blog.description = this.articleDescription;
+          if (!this.file) {
+            e.preventDefault();
+            this.fileError = 'No file chosen';
+            return;
+          }
           blog.image = this.file;
           this.$store.commit('blog/cacheBlog', blog);
           this.$router.push({ path: '/user/blog/pre' });

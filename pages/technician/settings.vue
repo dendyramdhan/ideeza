@@ -2,19 +2,17 @@
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <LeftMenu />
-
     <!-- Main Contents -->
     <div class="flex-grow bg-settings">
       <nuxt-child></nuxt-child>
     </div>
   </div>
 </template>
-
 <script>
 import LeftMenu from "~/components/technician/settings/left-side-menu.vue";
 
 export default {
-  layout: "user",
+  layout: "technician",
   name: "settings-index",
   components: {
     LeftMenu
@@ -30,10 +28,11 @@ export default {
   mounted() {},
   methods: {}
 };
-</script>
 
+</script>
 <style scoped>
-.bg-settings{
+.bg-settings {
   background-color: #F8F9FA;
 }
+
 </style>

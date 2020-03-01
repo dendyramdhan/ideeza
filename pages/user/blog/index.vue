@@ -150,6 +150,7 @@ export default {
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);
         this.articleArray.push(item);
+        console.log(this.articleArray);
       });
 
       this.length = this.articleArrayrout.length / 5 - 1;

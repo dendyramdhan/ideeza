@@ -87,11 +87,11 @@
   </div>
 </template>
 <script>
-import LeftMenu from "~/components/user/common-left-side-menu.vue";
+import LeftMenu from "~/components/technician/settings/left-side-menu.vue";
 export default {
   name: "notifications",
   middleware: "auth",
-  layout: "user",
+  layout: "technician",
   components: {
     LeftMenu,
   },
