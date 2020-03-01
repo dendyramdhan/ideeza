@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="w-full">
-      <img id="image" class="inline-block">
+      <img id="image" class="inline-block w-full">
     </div>
     <div class="container lg m-auto my-20 px-4">
       <div class="w-full md:w-3/4 m-auto">

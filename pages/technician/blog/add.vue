@@ -29,7 +29,7 @@
     </div>
     <div class="field-container mt-10">
       <div class="text-lg text-gray-800 mb-2">Image</div>
-      <img id="image" />
+      <img id="image" class="w-full" />
       <form enctype="multipart/form-data">
         <file-field @input="fileseleted" border-class="border-ideeza-dark rounded" btn="btn--ideeza-dark" />
       </form>
