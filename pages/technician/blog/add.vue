@@ -33,6 +33,11 @@
       <form enctype="multipart/form-data">
         <file-field @input="fileseleted" border-class="border-ideeza-dark rounded" btn="btn--ideeza-dark" />
       </form>
+      <div class="validate-error-msg">
+        <span class="caption" v-if="fileError">
+          {{ fileError }}
+        </span>
+      </div>
     </div>
     <div class="mt-12 text-center lg:text-left">
       <button @click="showPreview" class="btn btn-normal btn--ideeza-dark py-4 px-10 text-lg">Preview</button>
@@ -67,6 +72,7 @@ export default {
       counter: articles.length + 1,
       geturl: "/api/add_blog",
       file: null,
+      fileError: null,
       articlena: "",
       categoryna: "",
       descripttionname2: "",
@@ -122,7 +128,7 @@ export default {
     //   window.$nuxt.$cookies.set("blogdescriptionNameChange", this.articlena);
     //   this.$router.push("/user/blog/preview?" + this.foobar);
     // },
-    showPreview() {
+    showPreview(e) {
       let blog = {};
       let category = '';
       if (this.categoryna[0]) {
@@ -131,6 +137,11 @@ export default {
       blog.article = this.articlena;
       blog.category = category;
       blog.description = this.descripttionname2;
+      if (!this.file) {
+        e.preventDefault();
+        this.fileError = 'No file chosen';
+        return;
+      }
       blog.image = this.file;
       this.$store.commit('blog/cacheBlog', blog);
       this.$router.push({ path: '/technician/blog/pre' })
