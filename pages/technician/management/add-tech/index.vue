@@ -68,7 +68,7 @@
                 @change="changemonth"
               />
             </div>
-            <div class="flex-1 px-2">
+            <!-- <div class="flex-1 px-2">
               <input
                 class="border border-gray-400 rounded w-full h-12 px-2 pr-6 overflow-hidden"
                 type="text"
@@ -84,7 +84,7 @@
                 placeholder="Year"
                 @change="changeyear"
               />
-            </div>
+            </div> -->
           </div>
 
           <div class="mt-8 mb-3 text-center">
