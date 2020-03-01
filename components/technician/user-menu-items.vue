@@ -5,12 +5,12 @@
         <DashBoardIcon class="fill-current mr-5" />Dashboard
       </nuxt-link>
     </div>
-    <div class="menu-item">
-      <nuxt-link to="/technician/management">
-        <div>
+    <div class="menu-item" :class="{ shows: managementMenu }">
+      <!-- <nuxt-link to="/technician/management/user-service-providers"> -->
+        <div @click="toggleManagementMenu">
           <ProjectsIcon class="fill-current mr-5" />Management
         </div>
-        <div class="childs">
+        <div :class="{ childs: !managementMenu }">
           <nuxt-link to="/technician/management/user-service-providers" class="block ml-12 text-gray-700 text-base mt-2">User</nuxt-link>
           <nuxt-link to="/technician/management/added-parts/electronics" class="block ml-12 text-gray-700 text-base mt-2">Electronics</nuxt-link>
           <nuxt-link to="/technician/management/categories/electronics" class="block ml-12 text-gray-700 text-base mt-2">Categories</nuxt-link>
@@ -22,7 +22,7 @@
             <div @click="toggleServiceProviderMenu">
               Service Provider
             </div>
-            <div class="childs" v-show="serviceProviderMenu">
+            <div v-show="serviceProviderMenu">
               <nuxt-link to="/technician/management/service-provider/process" class="block ml-12 text-gray-700 text-base mt-2">Process</nuxt-link>
               <nuxt-link to="/technician/management/service-provider/machines" class="block ml-12 text-gray-700 text-base mt-2">Machines</nuxt-link>
               <nuxt-link to="/technician/management/service-provider/services" class="block ml-12 text-gray-700 text-base mt-2">Services</nuxt-link>
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-      </nuxt-link>
+      <!-- </nuxt-link> -->
     </div>
     <div class="menu-item">
       <nuxt-link to="/technician/electronics/add-part">
@@ -88,12 +88,26 @@ export default {
   },
   data() {
     return {
+      managementMenu: false,
       serviceProviderMenu: false
     }
   },
   methods: {
+    toggleManagementMenu() {
+      this.managementMenu = !this.managementMenu;
+      if (this.managementMenu) {
+        this.$router.push({
+          path: '/technician/management/user-service-providers'
+        })
+      }
+    },
     toggleServiceProviderMenu() {
       this.serviceProviderMenu = !this.serviceProviderMenu;
+      if (this.serviceProviderMenu) {
+        this.$router.push({
+          path: '/technician/management/service-provider/process'
+        }) 
+      }
     }
   }
 };
@@ -123,6 +137,10 @@ export default {
 
 .childs {
   display: none;
+}
+
+.shows {
+  display: block;
 }
 
 .active-link .childs {

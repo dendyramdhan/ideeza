@@ -26,6 +26,7 @@
     "chart.js": "^2.9.3",
     "clone": "^2.1.2",
     "cookie-universal-nuxt": "^2.1.0",
+    "core-js": "^2.6.10",
     "debounce": "^1.2.0",
     "dotenv": "^8.2.0",
     "eventsource-polyfill": "^0.9.6",
