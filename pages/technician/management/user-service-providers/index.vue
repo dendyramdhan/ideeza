@@ -73,10 +73,6 @@
                   class="mr-1 text-lg text-black"
                   :icon="['fas', 'sort']"
                 />Join Date</th>
-            <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Rate</th>
             <th class="text-left">Actions</th>
             <!-- <th class="text-right">
               <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
@@ -94,12 +90,6 @@
             <td>{{Service.status}}</td>
             <td v-if="Service.created_at != null ">{{ts.toLocaleDateString(Service.created_at)}}</td>
             <td v-else>{{Service.created_at}}</td>
-            <td>
-              <span v-for="counter in Service.rating">
-                <img class="inline" src="~/static/images/star.png" alt />
-              </span>
-            </td>
-
             <td class="lg:text-right">
               <nuxt-link :to="{ path: '/technician/user-profile', query: { id: Service.userid}}">
                 <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
