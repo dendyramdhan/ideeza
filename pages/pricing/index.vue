@@ -1,5 +1,6 @@
 <template>
   <div>
+  <div class="landing-bg-gradient">
     <div class="md:flex justify-around">
       <div class="p-5">
         <div class="logo md:ml-10">
@@ -237,6 +238,7 @@
     <reset-password v-if="showResetModal" @login="showLoginModal=true;showResetModal=false" @close="showResetModal=false" />
     <email-signup v-if="showEmailSignupModal" @close="showEmailSignupModal=false" @login="showLoginModal=true;showEmailSignupModal=false" />
   </div>
+  </div>
 </template>
 <script>
 import Login from "~/components/reusables/Login.vue";
@@ -384,5 +386,9 @@ export default {
   top: -37px;
   border-top-right-radius: 13px;
 }
-
+.landing-bg-gradient {
+  background:url(~static/images/curve-bg-1.png) no-repeat;
+  background-size: 100%;
+  background-position: center -100px; 
+}
 </style>
