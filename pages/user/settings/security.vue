@@ -4,12 +4,9 @@
     <!--Profile Information-->
     <!---->
     <div class="security-form">
-      <div
-        class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0"
-      >
+      <div class="md:flex justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0">
         <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Change your password</h1>
       </div>
-
       <!--Form Container-->
       <div class="my-5 p-5 bg-white shadow-md">
         <!--Form Fields-->
@@ -19,39 +16,29 @@
             <input class="field h-10" name v-model="old_password" />
           </div>
         </div>
-
         <div class="form-field">
           <div class="field-label">New Password</div>
           <div class="field-input flex-grow">
             <input class="field h-10" name v-model="new_password" />
           </div>
         </div>
-
         <div class="form-field">
           <div class="field-label">Confirm Password</div>
           <div class="field-input flex-grow">
             <input class="field h-10" name v-model="password_confirm" />
           </div>
         </div>
-
         <div class="mt-8 mb-3 text-center">
-          <button
-            class="btn px-20 pill-button pill-button--ideeza"
-            @click="updatepassword"
-          >Update Password</button>
+          <button class="btn px-20 pill-button pill-button--ideeza" @click="updatepassword">Update Password</button>
         </div>
       </div>
     </div>
-
     <!---->
     <!--Login History-->
     <!---->
-    <div
-      class="md:flex mt-20 justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0"
-    >
+    <div class="md:flex mt-20 justify-between items-center pb-3 border-b border-solid border-gray-400 p-5 lg:p-0">
       <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">Login History</h1>
     </div>
-
     <!--Container-->
     <div class="my-5 p-5 bg-white shadow-md">
       <table>
@@ -69,11 +56,7 @@
             <td>{{ Project.location}}</td>
             <td>{{ ts.toLocaleDateString(Project.timestamp)}}</td>
             <td class="lg:text-right">
-              <font-awesome-icon
-                class="ml-1 h-4 cursor-pointer text-gray-400"
-                :icon="['fas', 'times']"
-                @click="delete_login_history(Project.id)"
-              />
+              <font-awesome-icon class="ml-1 h-4 cursor-pointer text-gray-400" :icon="['fas', 'times']" @click="delete_login_history(Project.id)" />
             </td>
           </tr>
         </tbody>
@@ -86,7 +69,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import Projects from "~/data/UserSettingApi.json";
 import axios from "axios";
@@ -149,8 +131,7 @@ export default {
         console.log("before delete : ", this.randomNumber, evt);
         this.randomNumber.map(item => {
           // console.log("item id : ", item.history.id)
-          if (item.history.id == evt) {
-          } else {
+          if (item.history.id == evt) {} else {
             // this.articleArray.push(item);
             listArray.push(item);
           }
@@ -177,21 +158,25 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .settings-security {
   max-width: 900px;
 }
+
 .security-form {
   max-width: 600px;
 }
+
 .form-field {
   @apply py-4 border-b border-solid border-gray-300;
 }
+
 .form-field:last-child {
   @apply border-0;
 }
+
 .field-label {
   @apply w-56 text-gray-600 text-xl font-semibold;
 }
@@ -206,16 +191,19 @@ export default {
   table {
     @apply mb-5 w-full table-auto border-collapse text-gray-600;
   }
+
   tbody td {
     @apply border-t border-solid border-gray-400 py-3 my-3;
   }
+
   tbody tr:last-child td {
     @apply border-b border-solid border-gray-400 py-3 my-3;
   }
 }
 
 @media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
   /* Force table to not be like tables anymore */
   table,
   thead,
@@ -264,14 +252,18 @@ export default {
   td:nth-of-type(1):before {
     content: "Browser/Device";
   }
+
   td:nth-of-type(2):before {
     content: "Location";
   }
+
   td:nth-of-type(3):before {
     content: "Recent Activity";
   }
+
   td:nth-of-type(4):before {
     content: " ";
   }
 }
+
 </style>
