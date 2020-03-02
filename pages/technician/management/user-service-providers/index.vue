@@ -1,9 +1,6 @@
 <template>
   <div>
-    <h1
-      class="text-2xl border-b-4 border-solid border-ideeza pb-5 mt-8"
-    >Manage Users & Service Providers & Technician</h1>
-
+    <h1 class="text-2xl border-b-4 border-solid border-ideeza pb-5 mt-8">Manage Users & Service Providers & Technician</h1>
     <div class="mt-10">
       <div>
         <div class="hidden xl:flex justify-between">
@@ -22,21 +19,11 @@
             </select>
           </div>
           <div>
-            <div
-              class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center"
-            >
+            <div class="flex w-fit-content bg-white justify-center border-light-gray items-center content-center">
               <div class="h-12 relative w-10">
-                <font-awesome-icon
-                  class="ml-1 h-4 text-gray-400 absolute-center-h-v"
-                  :icon="['fas', 'search']"
-                />
+                <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
               </div>
-              <input
-                placeholder="search Project..."
-                class="bg-white outline-none h-8 text-gray-800 pr-3"
-                v-model="searchTerm"
-                v-on:input="search"
-              />
+              <input placeholder="search Project..." class="bg-white outline-none h-8 text-gray-800 pr-3" v-model="searchTerm" v-on:input="search" />
               <!-- <input
                 placeholder="search users"
                 class="bg-white outline-none h-12 text-gray-800 pr-3"
@@ -44,35 +31,21 @@
             </div>
           </div>
         </div>
-        <div
-          class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative mt-2 ml-2 bg-white"
-        >
-          <font-awesome-icon
-            class="ml-1 h-6 text-gray-600 absolute-center-h-v"
-            :icon="['fas', 'sliders-h']"
-          />
+        <div class="xl:hidden cursor-pointer border-light-gray w-10 h-8 relative mt-2 ml-2 bg-white">
+          <font-awesome-icon class="ml-1 h-6 text-gray-600 absolute-center-h-v" :icon="['fas', 'sliders-h']" />
         </div>
       </div>
-
       <table class="mt-10 shadow-md">
         <thead>
           <tr class="text-gray-800 h16">
-            <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Username</th>
-            <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Role</th>
-            <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Status</th>
-            <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Join Date</th>
+            <th class="text-left">
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Username</th>
+            <th class="text-left">
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Role</th>
+            <th class="text-left">
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Status</th>
+            <th class="text-left">
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Join Date</th>
             <th class="text-left">Actions</th>
             <!-- <th class="text-right">
               <font-awesome-icon class="mr-1 h-4 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
@@ -82,9 +55,7 @@
         <tbody v-for="(Service, index) in articleArray">
           <tr v-if="start < index && index < end ">
             <td>
-              <nuxt-link
-                :to="{ path: '/technician/user-profile', query: { id: Service.userid}}"
-              >{{Service.firstname}}</nuxt-link>
+              <nuxt-link :to="{ path: '/technician/user-profile', query: { id: Service.userid}}">{{Service.first_name}}</nuxt-link>
             </td>
             <td>{{Service.role}}</td>
             <td>{{Service.status}}</td>
@@ -97,28 +68,14 @@
               <nuxt-link :to="{ path: '/technician/messages', query: { id: Service.userid}}">
                 <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'envelope']" />
               </nuxt-link>
-
-              <font-awesome-icon
-                class="mr-2 h-4 cursor-pointer"
-                :icon="['fas', 'check']"
-                @click="setstatus(Service.userid,'Active')"
-              />
-              <font-awesome-icon
-                class="mr-2 h-4 cursor-pointer"
-                :icon="['fas', 'pause']"
-                @click="setstatus(Service.userid,'Pause')"
-              />
-              <font-awesome-icon
-                class="mr-2 h-4 cursor-pointer"
-                :icon="['fas', 'times']"
-                @click="setstatus(Service.userid,'Close')"
-              />
+              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'check']" @click="setstatus(Service.userid,'Active')" />
+              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'pause']" @click="setstatus(Service.userid,'Pause')" />
+              <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'times']" @click="setstatus(Service.userid,'Close')" />
             </td>
             <!-- <td class="lg:text-right text-xs">{{ts.toLocaleDateString(Service.created_at)}}</td> -->
           </tr>
         </tbody>
       </table>
-
       <!--Table Stats-->
       <!-- <div class="mt-5 lg:flex justify-end">
       <div class="lg:w-3/5 p-3 lg:flex justify-between">-->
@@ -133,13 +90,11 @@
               :icon="['fas', 'angle-double-right']"
             />
       </div>-->
-
       <!--Paging-->
       <div class="mx-auto w-content">
         <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
           <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
         </span>
-
         <span v-for="inde in counterarray " :key="inde">
           <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
             <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
@@ -148,13 +103,11 @@
             <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
           </span>
         </span>
-
         <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
           Next
           <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
         </span>
       </div>
-
       <div class="flex items-center">
         <!-- <span class="inline-block ml-32">Show</span>
             <select class="field field--border-none ml-2 h-10">
@@ -165,7 +118,6 @@
     <!-- {{articleArray}}- -->
   </div>
 </template>
-
 <script>
 import Services from "~/data/TechnicianmanagementApi.json";
 import apiService from "~/apiService/have_token.js";
@@ -189,7 +141,7 @@ export default {
       articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: {},
-      geturl: "/api/user/get_list",
+      geturl: "/accounts/users/",
       geturl2: "/api/user/change_status"
     };
   },
@@ -204,7 +156,7 @@ export default {
     apiService(sendData, response => {
       console.log(response.data);
       // this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
+      this.articleArrayaxios = Object.values(response.data);
 
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);
@@ -219,7 +171,7 @@ export default {
       let i = 1;
       let endd =
         this.articleArrayrout.length /
-          this.$store.state.TechnicianProjectStore.scale +
+        this.$store.state.TechnicianProjectStore.scale +
         1;
       //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
@@ -300,8 +252,7 @@ export default {
       if (
         this.currentviewpoint == this.counter ||
         this.currentviewpoint > this.counter
-      ) {
-      } else {
+      ) {} else {
         this.$store.commit("TechnicianProjectStore/increasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -315,8 +266,7 @@ export default {
       }
     },
     decreasekey() {
-      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
-      } else {
+      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {} else {
         this.$store.commit("TechnicianProjectStore/decreasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -331,35 +281,42 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 @screen lg {
   table {
     @apply mb-5 w-full table-fixed border-collapse text-gray-600;
   }
+
   thead tr {
     @apply bg-white px-6 pl-16;
   }
+
   thead th {
     @apply p-6;
   }
+
   thead th:first-child {
     @apply pl-16;
   }
+
   tbody td {
     @apply p-6;
   }
+
   tbody tr:even {
     @apply bg-white;
   }
+
   tbody td:first-child {
     @apply pl-16;
   }
 }
 
 @media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
   /* Force table to not be like tables anymore */
   table,
   thead,
@@ -408,20 +365,26 @@ export default {
   td:nth-of-type(1):before {
     content: "Products";
   }
+
   td:nth-of-type(2):before {
     content: "Color";
   }
+
   td:nth-of-type(3):before {
     content: "Price";
   }
+
   td:nth-of-type(4):before {
     content: "Quantity";
   }
+
   td:nth-of-type(5):before {
     content: "Cost";
   }
+
   td:nth-of-type(6):before {
     content: "Action";
   }
 }
+
 </style>
