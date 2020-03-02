@@ -25,7 +25,9 @@
           <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'plus']" />Add Technician</nuxt-link>
         <nuxt-link to="/technician/management/orders" class="block text-gray-700 ml-12 text-base mt-2">
           <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'clipboard-list']" /> Orders</nuxt-link>
-        <div class="block text-gray-700 ml-12 text-base mt-2">
+        <nuxt-link to="/technician/management/newtwork" class="block text-gray-700 ml-12 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'network-wired']" />Network</nuxt-link>
+<div class="block text-gray-700 ml-12 text-base mt-2">
           <div @click="toggleServiceProviderMenu">
             <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'fort-awesome']" /> Service Provider
           </div>
