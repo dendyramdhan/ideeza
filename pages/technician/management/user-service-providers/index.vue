@@ -55,7 +55,7 @@
         <tbody v-for="(Service, index) in articleArray">
           <tr v-if="start < index && index < end ">
             <td>
-              <nuxt-link :to="{ path: '/technician/user-profile', query: { id: Service.userid}}">{{Service.firstname}}</nuxt-link>
+              <nuxt-link :to="{ path: '/technician/user-profile', query: { id: Service.userid}}">{{Service.first_name}}</nuxt-link>
             </td>
             <td>{{Service.role}}</td>
             <td>{{Service.status}}</td>
@@ -141,7 +141,7 @@ export default {
       articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: {},
-      geturl: "/api/user/get_list",
+      geturl: "/accounts/users/",
       geturl2: "/api/user/change_status"
     };
   },
@@ -156,7 +156,7 @@ export default {
     apiService(sendData, response => {
       console.log(response.data);
       // this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
+      this.articleArrayaxios = Object.values(response.data);
 
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);

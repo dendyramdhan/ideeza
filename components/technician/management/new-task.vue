@@ -87,6 +87,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment';
 import TextAreaField from "~/components/form/text-area.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
 import SearchField from "~/components/form/search-mini.vue";
@@ -103,9 +104,11 @@ export default {
       dateRange: new Date().toISOString().slice(0, 10),
       showMembers: false,
       showNotifications: false,
-      markStatusData: ["Waiting", "Active", "Completed", "Over Due"],
-      layers: ["Electronics", "Code", "Cover"],
-      geturl: "/api/project/add_task",
+      markStatusData: ["waiting", "active", "completed", "overdue"],
+      layers: ["electronics", "code", "cover"],
+      geturl: "/tasks/",
+      geturl2: "/accounts/users/",
+      geturl3: "/task-attachments/",
       name: null,
       description: null,
       start: null,
@@ -114,7 +117,6 @@ export default {
       domain: null,
       file: null,
       user: [],
-      geturl2: "/accounts/users/",
       articleArray: [],
       articleArrayaxios: [],
       articleArrayrout: [],
@@ -178,54 +180,66 @@ export default {
     },
     taskasignlayer(event) {
       this.domain = event.target.value;
+      console.log(this.domain);
     },
     taskuser(event) {
       this.user.push(event)
     },
     send_add_request() {
-      this.start = new Date(this.dateRange.start).getTime()
-      this.end = new Date(this.dateRange.end).getTime()
+      let startDate = new Date(this.dateRange.start);
+      this.start = moment(startDate).format('YYYY-MM-DD');
+      let endDate = new Date(this.dateRange.end);
+      this.end = moment(endDate).format('YYYY-MM-DD');
 
-      const formData = new FormData();
-      this.user.map(item => {
-        console.log("only:", item)
-        formData.set("assigned_user", item);
-      })
-      // formData.set("user", this.articlena);
-      // formData.set("user", this.articlena);this.projectidd
-      formData.set("projectid", this.projectid);
-      formData.set("name", this.name);
-      formData.set("description", this.description);
-      formData.set("start", this.start);
-      formData.set("end", this.end);
-      formData.set("status", this.status);
-      formData.set("domain", this.domain);
-      formData.append("attached", this.file);
-      let sendData = {
-        method: "post",
-        url: this.geturl,
-        data: formData
-      };
+      if (this.start == null || this.end == null || this.name == null || this.description == null || this.status == null || this.file == null) {
+        alert("please input/select all data!!!")
+      } else {
 
-      apiService(sendData, response => {
-        console.log(response);
-        window.location.reload();
-      });
 
-      //  this.user.map(item=>{
-      //   console.log("only:", item)
-      // })
+        // Save Project File
+        const imageFormData = new FormData();
+        imageFormData.append("file", this.file);
+        let sendImage = {
+          method: "post",
+          url: this.geturl3,
+          data: imageFormData
+        };
 
-      // console.log("name:",this.name )
-      // console.log("description:",this.description )
-      // console.log("status:",this.status )
-      // console.log("domain:",this.domain )
-      // console.log("assigned_user:",this.user)
-      // console.log("attached:",this.file)
-      // console.log("timestart:",this.start )
-      // console.log("timeend:",this.end )
+        apiService(sendImage, imageResponse => {
+          let imageId = imageResponse.data.id;
+          const formData = new FormData();
+          this.user.map(item => {
+            formData.append("users", item);
+          })
 
-      this.$emit("onClose");
+          formData.set("title", this.name);
+          formData.set("description", this.description);
+          formData.set("start_date", this.start);
+          formData.set("time_passed", 0);
+          formData.set("end_date", this.end);
+          formData.set("status", this.status);
+          formData.set("domain", this.domain);
+          formData.set("user", window.$nuxt.$cookies.get("userid"));
+          formData.append("attachments", imageId);
+          let sendData = {
+            method: "post",
+            url: this.geturl,
+            data: formData
+          };
+
+          for (let value of formData.values()) {
+            console.log("value", value);
+          }
+
+          apiService(sendData, response => {
+            console.log("responseeeeeee", response);
+            // window.location.reload();
+          });
+        });
+
+        this.$emit("onClose");
+      }
+
     },
     close() {
       this.$emit("onClose");
