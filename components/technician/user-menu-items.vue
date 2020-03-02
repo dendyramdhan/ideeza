@@ -7,35 +7,42 @@
     </div>
     <div class="menu-item" :class="{ shows: managementMenu }">
       <!-- <nuxt-link to="/technician/management/user-service-providers"> -->
-        <div @click="toggleManagementMenu">
-          <ProjectsIcon class="fill-current mr-5" />Management
-        </div>
- 
-        <div :class="{ childs: !managementMenu }">
-
-          <nuxt-link to="/technician/management/user-service-providers" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'users']" /> User</nuxt-link>
-          <nuxt-link to="/technician/management/added-parts/electronics" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'bolt']" /> Electronics</nuxt-link>
-          <nuxt-link to="/technician/management/categories/electronics" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'network-wired']" /> Categories</nuxt-link>
-          <nuxt-link to="/technician/management/projects" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'project-diagram']" /> Projects</nuxt-link>
-          <nuxt-link to="/technician/management/blogs" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'bold']" /> Blogs</nuxt-link>
-          <nuxt-link to="/technician/management/add-tech" class="block text-gray-700 ml-12 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'plus']" />Add Technician</nuxt-link>
-          <nuxt-link to="/technician/management/orders" class="block text-gray-700 ml-12 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'clipboard-list']" /> Orders</nuxt-link>
- 
-          <div class="block text-gray-700 ml-12 text-base mt-2">
-            <div @click="toggleServiceProviderMenu">
-             <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'fort-awesome']" /> Service Provider
-            </div>
- 
-            <div class="childs" v-show="serviceProviderMenu">
-              <nuxt-link to="/technician/management/service-provider/process" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'pinterest-p']" /> Process</nuxt-link>
-              <nuxt-link to="/technician/management/service-provider/machines" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'robot']" /> Machines</nuxt-link>
-              <nuxt-link to="/technician/management/service-provider/services" class="block ml-12 text-gray-700 text-base mt-2"> <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'mobile']" /> Services</nuxt-link>
-              <nuxt-link to="/technician/management/service-provider/certifications" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'certificate']" /> Certifications</nuxt-link>
-              <nuxt-link to="/technician/management/service-provider/corporations" class="block ml-12 text-gray-700 text-base mt-2"><font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'fort-awesome']" /> Corporations</nuxt-link>
- 
-            </div>
+      <div @click="toggleManagementMenu">
+        <ProjectsIcon class="fill-current mr-5" />Management
+      </div>
+      <div :class="{ childs: !managementMenu }">
+        <nuxt-link to="/technician/management/user-service-providers" class="block ml-12 text-gray-700 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'users']" /> User</nuxt-link>
+        <nuxt-link to="/technician/management/added-parts/electronics" class="block ml-12 text-gray-700 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'bolt']" /> Electronics</nuxt-link>
+        <nuxt-link to="/technician/management/categories/electronics" class="block ml-12 text-gray-700 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'network-wired']" /> Categories</nuxt-link>
+        <nuxt-link to="/technician/management/projects" class="block ml-12 text-gray-700 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'project-diagram']" /> Projects</nuxt-link>
+        <nuxt-link to="/technician/management/blogs" class="block ml-12 text-gray-700 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'bold']" /> Blogs</nuxt-link>
+        <nuxt-link to="/technician/management/add-tech" class="block text-gray-700 ml-12 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'plus']" />Add Technician</nuxt-link>
+        <nuxt-link to="/technician/management/orders" class="block text-gray-700 ml-12 text-base mt-2">
+          <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'clipboard-list']" /> Orders</nuxt-link>
+        <div class="block text-gray-700 ml-12 text-base mt-2">
+          <div @click="toggleServiceProviderMenu">
+            <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'fort-awesome']" /> Service Provider
+          </div>
+          <div class="childs" v-show="serviceProviderMenu">
+            <nuxt-link to="/technician/management/service-provider/process" class="block ml-12 text-gray-700 text-base mt-2">
+              <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'pinterest-p']" /> Process</nuxt-link>
+            <nuxt-link to="/technician/management/service-provider/machines" class="block ml-12 text-gray-700 text-base mt-2">
+              <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'robot']" /> Machines</nuxt-link>
+            <nuxt-link to="/technician/management/service-provider/services" class="block ml-12 text-gray-700 text-base mt-2">
+              <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'mobile']" /> Services</nuxt-link>
+            <nuxt-link to="/technician/management/service-provider/certifications" class="block ml-12 text-gray-700 text-base mt-2">
+              <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fas', 'certificate']" /> Certifications</nuxt-link>
+            <nuxt-link to="/technician/management/service-provider/corporations" class="block ml-12 text-gray-700 text-base mt-2">
+              <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'fort-awesome']" /> Corporations</nuxt-link>
           </div>
         </div>
+      </div>
       <!-- </nuxt-link> -->
     </div>
     <div class="menu-item">
@@ -111,7 +118,7 @@ export default {
       if (this.serviceProviderMenu) {
         this.$router.push({
           path: '/technician/management/service-provider/process'
-        }) 
+        })
       }
     }
   }

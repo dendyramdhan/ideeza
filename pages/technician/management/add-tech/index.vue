@@ -7,68 +7,38 @@
         <div class="w-8/12 mx-auto my-5 p-5 bg-white shadow-md">
           <!--Form Fields-->
           <div class="py-2">
-            <input
-              class="border border-gray-400 rounded w-full h-12 px-2"
-              type="text"
-              placeholder="Email address"
-              @change="changeemail"
-            />
+            <input class="border border-gray-400 rounded w-full h-12 px-2" type="text" placeholder="Email address" @change="changeemail" />
           </div>
-
           <div class="py-2">
-            <input
-              class="border border-gray-400 rounded w-full h-12 px-2"
-              type="text"
-              placeholder="First name"
-              @change="changefirstname"
-            />
+            <input class="border border-gray-400 rounded w-full h-12 px-2" type="text" placeholder="First name" @change="changefirstname" />
           </div>
-
           <div class="py-2">
-            <input
-              class="border border-gray-400 rounded w-full h-12 px-2"
-              type="text"
-              placeholder="Last name"
-              @change="changelastname"
-            />
+            <input class="border border-gray-400 rounded w-full h-12 px-2" type="text" placeholder="Last name" @change="changelastname" />
           </div>
-
           <div class="py-2">
-            <input
-              class="border border-gray-400 rounded w-full h-12 px-2"
-              type="password"
-              placeholder="Choose a password"
-              @change="changepassword"
-            />
+            <input class="border border-gray-400 rounded w-full h-12 px-2" type="password" placeholder="Choose a password" @change="changepassword" />
           </div>
-
           <div class="py-2">
-            <select class="border border-gray-400 rounded w-full h-12 px">
-              <option value="blogger">Blogger</option>
-              <option value="blogger">Code</option>
-              <option value="blogger">Customer Service</option>
-              <option value="blogger">Electric</option>
-              <option value="blogger">Machanics</option>
-              <option value="blogger">Project Manager</option>
-              <option value="blogger">Super Technician</option>
-              <option value="blogger">Tracker</option>
-              <option value="blogger">Other</option>
-            </select>
-          </div>
-
-          <h2 class="text-4xl font-bold text-gray-700">Birthday</h2>
-          <p class="text-gray-700 py-3">Other people won't see your birthday.</p>
-
-          <div class="flex py-2">
-            <div class="flex-1 px-2">
-              <input
-                class="border border-gray-400 rounded w-full h-12 px-2 pr-6 overflow-hidden"
-                type="date"
-                placeholder="Month"
-                @change="changemonth"
-              />
+            <div class="py-2">
+              <select class="border border-gray-400 rounded w-full h-12" v-model="permission">
+                <option value="blogger">Blogger</option>
+                <option value="code">Code</option>
+                <option value="customer_service">Customer Service</option>
+                <option value="electric">Electric</option>
+                <option value="mechanics">Mechanics</option>
+                <option value="project_manager">Project Manager</option>
+                <option value="super_technician">Super Technician</option>
+                <option value="tracker">Tracker</option>
+                <option value="other">Other</option>
+              </select>
             </div>
-            <!-- <div class="flex-1 px-2">
+            <h2 class="text-4xl font-bold text-gray-700">Birthday</h2>
+            <p class="text-gray-700 py-3">Other people won't see your birthday.</p>
+            <div class="flex py-2">
+              <div class="flex-1 px-2">
+                <input class="border border-gray-400 rounded w-full h-12 px-2 pr-6 overflow-hidden" type="date" placeholder="Month" @change="changemonth" />
+              </div>
+              <!-- <div class="flex-1 px-2">
               <input
                 class="border border-gray-400 rounded w-full h-12 px-2 pr-6 overflow-hidden"
                 type="text"
@@ -85,17 +55,16 @@
                 @change="changeyear"
               />
             </div> -->
-          </div>
-
-          <div class="mt-8 mb-3 text-center">
-            <button class="px-16 bg-ideeza rounded py-4 text-white text-xl" @click="addtech">Sign up</button>
+            </div>
+            <div class="mt-8 mb-3 text-center">
+              <button class="px-16 bg-ideeza rounded py-4 text-white text-xl" @click="addtech">Sign up</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </template>
- <script>
+<script>
 import apiService from "~/apiService/have_token.js";
 
 export default {
@@ -115,8 +84,8 @@ export default {
       month: null,
       day: null,
       year: null,
-      geturl: "/api/user/register",
-
+      permission: null,
+      geturl: "/accounts/users/",
     };
   },
   mounted() {},
@@ -143,41 +112,42 @@ export default {
       this.year = evt.target.value;
     },
     addtech() {
-      // alert(
-      //   this.email +
-      //     "_" +
-      //     this.firstname +
-      //     "_" +
-      //     this.lastname +
-      //     "_" +
-      //     this.password +
-      //     "_" +
-      //     this.month +
-      //     "_" +
-      //     this.day +
-      //     "_" +
-      //     this.year +
-      //     "_"
-      // );
-      let birthday=this.month+"/"+this.day+"/"+this.year
+
+      let dateFormat = this.year + " " + this.month + " " + this.day;
+      let birthday = new Date(dateFormat).toISOString();
+
+      let groups = [];
+      let permissions = [];
+      permissions.push({ "codename": this.permission });
+      groups.push({
+        "name": "technician",
+        "permissions": permissions
+      });
+
       const formData = new FormData();
       formData.set("email", this.email);
       formData.set("password", this.password);
-      formData.set("firstname", this.firstname);
-      formData.set("lastname", this.lastname);
-      formData.set("birthday", birthday);
+      formData.set("first_name", this.firstname);
+      formData.set("last_name", this.lastname);
+      formData.set("date_of_birth", birthday);
+      formData.set("groups", groups);
+      formData.set("username", this.email);
       let sendData = {
         method: "post",
         url: this.geturl,
         data: formData
       };
-
       apiService(sendData, response => {
-        console.log(response);
+        this.email = '';
+        this.password = '';
+        this.firstname = '';
+        this.lastname = '';
+        this.permission = null;
       });
     }
   }
 };
+
 </script>
 <style scoped>
 select {
@@ -185,53 +155,59 @@ select {
 }
 
 input[type="date"] {
-  display:block;
-  position:relative;
+  display: block;
+  position: relative;
   background:
-    white
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='22' viewBox='0 0 20 22'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23688EBB' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' transform='translate(1 1)'%3E%3Crect width='18' height='18' y='2' rx='2'/%3E%3Cpath d='M13 0L13 4M5 0L5 4M0 8L18 8'/%3E%3C/g%3E%3C/svg%3E")
-    right 1rem
-    center
-    no-repeat;
-  
-  cursor:pointer;
+    white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='22' viewBox='0 0 20 22'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23688EBB' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' transform='translate(1 1)'%3E%3Crect width='18' height='18' y='2' rx='2'/%3E%3Cpath d='M13 0L13 4M5 0L5 4M0 8L18 8'/%3E%3C/g%3E%3C/svg%3E") right 1rem center no-repeat;
+
+  cursor: pointer;
 }
+
 input[type="date"]:focus {
-  outline:none;
-   
-  box-shadow:0 0 0 0.25rem rgba(0, 120, 250, 0.1);
+  outline: none;
+
+  box-shadow: 0 0 0 0.25rem rgba(0, 120, 250, 0.1);
 }
 
 ::-webkit-datetime-edit {}
+
 ::-webkit-datetime-edit-fields-wrapper {}
+
 ::-webkit-datetime-edit-month-field:hover,
 ::-webkit-datetime-edit-day-field:hover,
-::-webkit-datetime-edit-year-field:hover {
- }
+::-webkit-datetime-edit-year-field:hover {}
+
 ::-webkit-datetime-edit-text {
-  opacity:0;
-}
-::-webkit-clear-button,
-::-webkit-inner-spin-button {
-  display:none;
-}
-::-webkit-calendar-picker-indicator {
-  position:absolute;
-  width:2.5rem;
-  height:100%;
-  top:0;
-  right:0;
-  bottom:0;
-  
-  opacity:0;
-  cursor:pointer;
-  
-  color:rgba(0, 120, 250, 1);
-  background:rgba(0, 120, 250, 1);
- 
+  opacity: 0;
 }
 
-input[type="date"]:hover::-webkit-calendar-picker-indicator { opacity:0.05; }
-input[type="date"]:hover::-webkit-calendar-picker-indicator:hover { opacity:0.15; }
+::-webkit-clear-button,
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  position: absolute;
+  width: 2.5rem;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  opacity: 0;
+  cursor: pointer;
+
+  color: rgba(0, 120, 250, 1);
+  background: rgba(0, 120, 250, 1);
+
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator {
+  opacity: 0.05;
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.15;
+}
 
 </style>
