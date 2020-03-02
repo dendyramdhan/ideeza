@@ -41,9 +41,9 @@
               <div class="mt-2 flex justify-between items-center" v-for="info in articleArray">
                 <div class="flex items-center">
                   <img class="avatar" :src="avata_img_url+info.avatar" alt />
-                  <span class="member-name">{{info.firstname}}</span>
+                  <span class="member-name">{{info.first_name}}</span>
                 </div>
-                <input type="checkbox" @click="projectuser(info.userid)" />
+                <input type="checkbox" @click="projectuser(info.id)" />
                 <!-- <CheckBoxField  /> -->
               </div>
             </div>
@@ -63,6 +63,7 @@
   </div>
 </template>
 <script>
+import moment from 'moment';
 import TextAreaField from "~/components/form/text-area.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
 import SearchField from "~/components/form/search-mini.vue";
@@ -79,7 +80,7 @@ export default {
     return {
       dateRange: new Date().toISOString().slice(0, 10),
       showMembers: false,
-      markStatusData: ["Waiting", "Active", "Completed", "Over Due"],
+      markStatusData: ["waiting", "active", "completed", "overdue"],
       geturl: "/projects/",
       name: null,
       description: null,
@@ -88,7 +89,8 @@ export default {
       status: null,
       file: null,
       user: [],
-      geturl2: "/api/user/get_list",
+      geturl2: "/accounts/users/",
+      geturl3: "/project-attachments/",
       articleArray: [],
       articleArrayaxios: [],
       articleArrayrout: [],
@@ -107,9 +109,8 @@ export default {
     };
 
     apiService2(sendData, response => {
-      console.log(response.data);
       // this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
+      this.articleArrayaxios = Object.values(response.data);
 
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);
@@ -175,41 +176,49 @@ export default {
       this.user.push(event)
     },
     send_add_request() {
-      this.start = new Date(this.dateRange.start).getTime()
-      this.end = new Date(this.dateRange.end).getTime()
+      let startDate = new Date(this.dateRange.start);
+      this.start = moment(startDate).format('YYYY-MM-DD');
+      let endDate = new Date(this.dateRange.end);
+      this.end = moment(endDate).format('YYYY-MM-DD');
+
       if (this.start == null || this.end == null || this.user == null || this.name == null || this.description == null || this.status == null || this.file == null) {
         alert("please input/select all data!!!")
       } else {
-        const formData = new FormData();
-        this.user.map(item => {
-          console.log("only:", item)
-          formData.set("user", item);
-        })
-        // formData.set("user", this.articlena);
-        // formData.set("user", this.articlena);
-        formData.set("name", this.name);
-        formData.set("description", this.description);
-        formData.set("start", this.start);
-        formData.set("end", this.end);
-        formData.set("status", this.status);
-        formData.append("attached", this.file);
-        let sendData = {
+
+
+        // Save Project File
+        const imageFormData = new FormData();
+        imageFormData.append("file", this.file);
+        let sendImage = {
           method: "post",
-          url: this.geturl,
-          data: formData
+          url: this.geturl3,
+          data: imageFormData
         };
 
-        apiService(sendData, response => {
-          console.log(response);
+        apiService(sendImage, imageResponse => {
+          let imageId = imageResponse.data.id;
+          const formData = new FormData();
+          this.user.map(item => {
+            formData.append("users", item);
+          })
+
+          formData.set("title", this.name);
+          formData.set("description", this.description);
+          formData.set("start_date", this.start);
+          formData.set("end_date", this.end);
+          formData.set("status", this.status);
+          formData.set("user", window.$nuxt.$cookies.get("userid"));
+          formData.append("attachments", imageId);
+          let sendData = {
+            method: "post",
+            url: this.geturl,
+            data: formData
+          };
+
+          apiService(sendData, response => {
+            console.log("responseeeeeee", response);
+          });
         });
-
-        // alert("sending your add requset!!!"+this.name+this.description+this.status+new Date(this.dateRange.start).getTime() +"---------"+new Date(this.dateRange.end).getTime()+"ggg"+this.user);
-        //  this.user.map(item=>{
-        //   console.log("only:", item)
-        // })
-
-        console.log("timestart:", this.start)
-        console.log("timeend:", this.end)
 
         this.$emit("onClose");
       }

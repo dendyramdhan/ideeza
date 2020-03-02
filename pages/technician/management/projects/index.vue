@@ -56,11 +56,12 @@
                 <nuxt-link :to="{ path: '/technician/management/projects/detail', query: { id: Service.id}}">{{Service.title}}</nuxt-link>
               </td>
               <td>
-                <span v-for="image in Service.assigned_users">
-                  <img class="avatar" :src="avata_img_url + image.avatar" />
+                <span v-for="user in Service.users">
+                  <img class="avatar" :src="avata_img_url + user.avatar" />
+                  {{user.first_name}}
                 </span>
               </td>
-              <td>{{ts.toLocaleDateString(Service.end - Service.start)}}</td>
+              <td>{{Service.end_date}}</td>
               <td class="status status--completed">
                 <p v-if="Service.status == 'Active' ">
                   <span class="text-green-500 font-semibold">{{Service.status}}</span>
@@ -156,7 +157,7 @@ export default {
       articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
-      geturl: "/api/project/technician/get_all",
+      geturl: "/projects/",
       avata_img_url: process.env.avatar_base_url,
       addNewProject: false,
       dataDropDown: ["All", "Active", "Completed", "Priority", "Over Due"],
@@ -199,7 +200,7 @@ export default {
     apiService(sendData, response => {
       console.log(response.data);
       this.randomNumber = response.data;
-      this.articleArrayaxios = Object.values(response.data.data);
+      this.articleArrayaxios = Object.values(response.data);
 
       this.articleArrayaxios.map(item => {
         this.articleArrayrout.push(item);

@@ -38,10 +38,9 @@
             <div class="font-bold text-lg text-black mb-2">Birthday</div>
             <div class="text-base mb-1">Other people won't see your birthday.</div>
             <div class="flex justify-between mb-3">
-              <input
-                class="border border-gray-400 rounded w-full h-12 px-2 pr-6 overflow-hidden"
-                type="date"
-              />
+              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Month" v-model="month" />
+              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Day" v-model="day" />
+              <input type="text" class="border border-gray px-3 py-3 mr-1 w-1/3" placeholder="Year" v-model="year" />
             </div>
             <label class="leading-normal flex text-sm mb-1">
               <input type="checkbox" class="mt-1 mr-2" />
@@ -264,60 +263,3 @@ function validatePassword(password) {
 }
 
 </script>
-<style scoped>
-select {
-  max-width: none;
-}
-
-input[type="date"] {
-  display:block;
-  position:relative;
-  background:
-    white
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='22' viewBox='0 0 20 22'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23688EBB' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' transform='translate(1 1)'%3E%3Crect width='18' height='18' y='2' rx='2'/%3E%3Cpath d='M13 0L13 4M5 0L5 4M0 8L18 8'/%3E%3C/g%3E%3C/svg%3E")
-    right 1rem
-    center
-    no-repeat;
-  
-  cursor:pointer;
-}
-input[type="date"]:focus {
-  outline:none;
-   
-  box-shadow:0 0 0 0.25rem rgba(0, 120, 250, 0.1);
-}
-
-::-webkit-datetime-edit {}
-::-webkit-datetime-edit-fields-wrapper {}
-::-webkit-datetime-edit-month-field:hover,
-::-webkit-datetime-edit-day-field:hover,
-::-webkit-datetime-edit-year-field:hover {
- }
-::-webkit-datetime-edit-text {
-  opacity:0;
-}
-::-webkit-clear-button,
-::-webkit-inner-spin-button {
-  display:none;
-}
-::-webkit-calendar-picker-indicator {
-  position:absolute;
-  width:2.5rem;
-  height:100%;
-  top:0;
-  right:0;
-  bottom:0;
-  
-  opacity:0;
-  cursor:pointer;
-  
-  color:rgba(0, 120, 250, 1);
-  background:rgba(0, 120, 250, 1);
- 
-}
-
-input[type="date"]:hover::-webkit-calendar-picker-indicator { opacity:0.05; }
-input[type="date"]:hover::-webkit-calendar-picker-indicator:hover { opacity:0.15; }
-
-</style>
-
