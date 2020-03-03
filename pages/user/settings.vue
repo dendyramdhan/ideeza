@@ -11,26 +11,26 @@
 </template>
 
 <script>
-import LeftMenu from "~/components/user/settings/left-side-menu.vue";
+  import LeftMenu from "~/components/user/settings/left-side-menu.vue";
 
-export default {
-  middleware: "auth",
-  layout: "user",
-  name: "settings-index",
-  components: {
-    LeftMenu
-  },
-  data: function() {
-    return {};
-  },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
-  mounted() {},
-  methods: {}
-};
+  export default {
+    middleware: "auth",
+    layout: "user",
+    name: "settings-index",
+    components: {
+      LeftMenu
+    },
+    data: function() {
+      return {};
+    },
+    computed: {
+      leftMenu() {
+        return this.$store.state.usermenu.openLeftMenu;
+      }
+    },
+    mounted() {},
+    methods: {}
+  };
 </script>
 
 <style scoped>
