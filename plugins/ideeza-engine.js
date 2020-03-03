@@ -9,7 +9,8 @@ const Components = {
   'eus':Engine.eus,
   'cu':Engine.cu,
   'eud':Engine.eud,
-  'cou':Engine.cou
+  'cou':Engine.cou,
+  'gu': Engine.gu
 };
 
 Object.keys(Components).forEach(name => {

@@ -2,6 +2,7 @@
   <div class="w-full h-full relative">
     <client-only>
       <engine
+        ref="engine"
         :init-data="initDataForEngine"
         :visibleGrid="visibleGrid"
         :group-button="doAction"
@@ -11,6 +12,7 @@
       />
       <spinner slot="placeholder" />
     </client-only>
+    <button @click="save" class="p-3 bg-ideeza">save</button>
   </div>
 </template>
 
@@ -58,6 +60,9 @@
           this.showTech = true
           /* eslint-disable no-console */
           console.log('data of this comp ',JSON.stringify(param))
+        },
+        save() {
+          console.log(this.$refs.engine.getData())
         }
       }
     }

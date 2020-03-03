@@ -168,7 +168,7 @@
 
         methods: {
           save() {
-            console.log(this.$refs.engine.getData())
+            console.log(JSON.stringify(this.$refs.engine.getData()))
           },
           clear(){
             this.uploadData = null;
