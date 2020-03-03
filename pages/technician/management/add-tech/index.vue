@@ -63,6 +63,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 <script>
 import apiService from "~/apiService/have_token.js";
