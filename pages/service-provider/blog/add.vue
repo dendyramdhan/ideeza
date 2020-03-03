@@ -53,7 +53,6 @@ import TagsInput from '@voerro/vue-tagsinput/src/VoerroTagsInput.vue'
 export default {
   middleware: "auth",
   name: "add-blog",
-  layout: 'service-provider',
   components: {
     "file-field": FileField,
     'tag-input': TagsInput

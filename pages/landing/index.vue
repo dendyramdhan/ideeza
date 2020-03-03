@@ -1,35 +1,38 @@
 <template>
-  <div class="landingBanner-bg">
-    <top-header />
-    <nuxt />
-    <div class="w-full pb-32">
-      <div class="container lg m-auto text-white px-5 py-8">
-        <div class="pb-5 mb-5 px-5 md:w-8/12 w-full">
-          <h2 class="md:text-3xl sm:text-2xl mt-5 font-bold text-gray-700">
-            <span class="text-ideeza">You dream it</span> &
-            <span class="text-purple-900">IDEEZA designs it.</span></h2>
-          <h2 class="md:text-3xl sm:text-2xl font-bold text-gray-900">Our Service providers executes it.</h2>
-          <div class="lg:w-4/5 sm:w-full">
-            <p class="text-lg text-gray-700 py-4 pr-5">IDEEZA is an end-to-end hardware product development platform. Enables anyone to generate a new product from a simple description for free and within minutes by using automatic and AI processes. </p>
+  <div class="">
+    <div class="inv_Banner-bg">
+      <top-header />
+      <nuxt />
+      <div class="w-full pb-32 ">
+        <div class="container lg m-auto text-white px-5 py-8 flex justify-end">
+          <div class="pb-5 mb-5 px-5 md:w-8/12 w-full">
+            <h2 class="md:text-4xl sm:text-2xl mt-5 font-extrabold text-white">Become the 4th industrial revolution deriver</h2>
+            <div class="lg:w-4/5 sm:w-full">
+              <p class="text-xl text-white mt-5 py-4 pr-5">Ideeza is first in kind that using the power of AI and automatic process for fast development and industrial connection.
+                Beat competitors with massive and growing work channels that match to your expertise.</p>
+            </div>
           </div>
-        </div>
-        <div class="bg-white rounded-sm overflow-hidden md:w-6/12 w-full flex shadow rounded-md border-2 border-purple-900">
-          <img src="~/static/images/ideeza-icon.png">
-          <input type="text" class="text-gray-700 py-3 px-3 flex-1 broder-l" placeholder="Start now – type your idea here...">
-          <button class=" px-5 text-center">
-            <img src="~static/images/search-purple.png" class="inline-block w-6">
-          </button>
         </div>
       </div>
     </div>
     <div class="video-sec">
       <div class="container lg m-auto mt-20">
         <div class="mt-5 w-full m-auto text-center">
-          <h3 class="text-purple-900 text-2xl font-bold">AI Maker for</h3>
-          <h2 class="text-gray-900 text-4xl font-extrabold">Connected Devices</h2>
-          <p class="text-gray-700 text-lg py-5">Building IoT prototypes used to need months, engineers, hair-ripping budgets and dev tools creep. Good times.</p>
-          <div class="m-auto video-screen">
+          <h2 class="text-purple-800 text-4xl font-extrabold">Connect your skills to Ideeza</h2>
+          <h3 class=" text-2xl font-bold text-gray-400">and start winning works<br />automatically!</h3>
+          <div class="m-auto video-screen mt-16">
             <iframe width="100%" height="390" src="https://www.youtube.com/embed/GDoI16RmxqQ" frameborder="0" allow="accelerometer; autoplay;" class="m-auto" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix mt-20 idea-sec-bg-img2 bg-cover">
+      <div class="curve-bg-footer-bg-img py-24 clearfix">
+        <div class="container lg m-auto text-white flex">
+          <div class="mt-5 w-6/12 text-center">
+            <h2 class="text-white md:text-3xl sm:text-2xl font-bold py-5 text-left">If you offer one of these abilities</h2>
+            <h2 class="text-white md:text-3xl sm:text-2xl font-bold text-left text-purple-800 text-center border-b-2 inline-block border-pink-600 "> PCB Manufacturer</h2>
+            <h2 class="text-white md:text-3xl sm:text-2xl font-bold py-5 text-right">Your place is with us!</h2>
           </div>
         </div>
       </div>
@@ -37,29 +40,27 @@
     <div class="w-full relative mt-20 py-6">
       <div class="container lg m-auto ">
         <div class="md:flex sm:block">
-          <div class="md:w-6/12 sm:w-full px-3">
-            <h3 class="text-purple-900 text-2xl font-bold">Empower your ideas</h3>
-            <h2 class="text-gray-900 text-4xl font-bold">BY YOURSELF!</h2>
-            <p class="text-gray-700 text-lg py-5 ">IDEEZA enables anyone, even without technology knowledge to take full ownership on their products development process, by using its powerful AI engine and an automated process to fulfill any dream!</p>
-            <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <div class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full cursor-pointer" @click="showLoginModal=true">Try Free</div>
-            </p>
+          <div class="md:w-6/12 sm:w-full px-3 order-2">
+            <img src="~/static/images/img_ref_2335.png" class="right-0 max-width-half">
           </div>
-          <img src="~/static/images/ref_img_1242.png" class="md:absolute static right-0 max-width-half">
+          <div class="md:w-6/12 sm:w-full px-3">
+            <h2 class="text-purple-700 text-5xl font-bold mt-24">Easy Earning</h2>
+            <h2 class="text-purple-900 text-3xl font-bold">Receive works automatically based on your tools and capabilities.</h2>
+            <p class="text-purple-800 text-lg py-5 ">Ideeza's platform generates a blueprint based on machines' abilities and pushes work to you based on user optimization and your score.</p>
+          </div>
         </div>
       </div>
     </div>
     <div class="w-full relative py-6 mt-20">
       <div class="container lg m-auto">
-        <div class="md:flex sm:block justify-end">
-          <img src="~/static/images/ref_img_1243.png" class="md:absolute static left-0 max-width-half">
+        <div class="md:flex sm:block">
+          <div class="md:w-6/12 sm:w-full px-3">
+            <img src="~/static/images/img_ref_2336.png" class="right-0 max-width-half">
+          </div>
           <div class="md:w-6/12 sm:w-full pt-10 ">
-            <h3 class="text-purple-900 text-2xl font-bold">Creating better technology,</h3>
-            <h2 class="text-gray-900 text-5xl font-bold">TOGETHER!</h2>
-            <p class="text-gray-700 text-lg py-5 ">We believe in collaboration and together with the power of Artificial Intelligence it leads to amazing results, empowering the full potential of the world! For the first time, you can use, contribute, and empower the community knowledge - by a click, thousands of brains will come together to provide the unique solution for your idea!</p>
-            <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <nuxt-link to="/landing/collaboration" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">Read More</nuxt-link>
-            </p>
+            <h2 class="text-purple-700 text-5xl font-bold mt-24">Efficiently work</h2>
+            <h2 class="text-purple-900 text-3xl font-bold">Less Idle time, more capacity.</h2>
+            <p class="text-purple-900 text-lg py-5 ">Ideeza's process finds works that fits in your feasibility and automatically connects to your potential customers.</p>
           </div>
         </div>
       </div>
@@ -67,47 +68,14 @@
     <div class="w-full relative py-6 mb-12 mt-20">
       <div class="container lg m-auto ">
         <div class="md:flex sm:block">
+          <div class="md:w-6/12 sm:w-full px-3 order-2">
+            <img src="~/static/images/img_ref_2337.png" class="right-0 max-width-half">
+          </div>
           <div class="md:w-6/12 sm:w-full pt-10">
-            <h3 class="text-purple-900 text-2xl font-bold">Work your way,</h3>
-            <h2 class="text-gray-900 text-5xl font-bold">TODAY!</h2>
-            <p class="text-gray-700 text-lg py-5 ">You bring the skill. We'll make earning easy.
-              With IDEEZA you have the freedom to work on any project that suits your exact ability, whether you are an open source engineer, designer, manufacturer, patent attorney or any other supplier.
-              From our many and diverse projects you can easily find your way to success and rapid growth. </p>
-            <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <div class="cursor-pointer text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full" @click="showManufacturerEmailSignupModal=true">Connect Us</div>
-            </p>
+            <h2 class="text-purple-700 text-5xl font-bold mt-24">Futurist supply chain</h2>
+            <h2 class="text-purple-900 text-3xl font-bold">No more time wasted. Be part of collaborative tracking space</h2>
+            <p class="text-purple-900 text-lg py-5 ">Ideeza's platform stores key manufacturing and delivery data across the entire supply chain to track any issues that may arise.</p>
           </div>
-          <img src="~/static/images/ref_img_1244.png" class="md:absolute static right-0 max-width-half">
-        </div>
-      </div>
-    </div>
-    <div class="clearfix mt-20 idea-sec-bg-img bg-cover">
-      <div class="curve-bg-footer-bg-img py-24 clearfix">
-        <div class="container lg m-auto text-white">
-          <div class="mt-5 w-4/5  m-auto text-center">
-            <h2 class="text-white md:text-6xl sm:text-5xl font-bold py-5">Create something amazing</h2>
-            <p class="text-white text-lg">Join free, launch project and start building your smart prototype.</p>
-            <button @click="showLoginModal=true" class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 btn-lg rounded-full shadow-lg mt-5">Launch your Ideeza</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container lg m-auto mt-20">
-      <div class="mt-5 w-6/12  text-left">
-        <h3 class="text-purple-900 text-2xl font-bold">Top notch public projects </h3>
-        <h2 class="text-gray-900 text-4xl font-bold">made with IDEEZA</h2>
-        <p class="text-gray-900 text-lg">Success Stories from Ideeza’s growing comunity</p>
-      </div>
-      <div class="md:flex sm:block mt-20">
-        <div class="md:w-6/12 sm:w-full px-3">
-          <img src="~static/images/silder-placeholder.png" class="inline-block">
-        </div>
-        <div class="md:w-6/12 sm:w-full px-3">
-          <h2 class="text-gray-900 text-5xl font-bold">John Doe’s Dream</h2>
-          <p class="text-gray-700 text-lg py-5 ">If you're on the fence on whether you need a big company behind you to succeed, these individuals prove that having vision and the drive is more than enough.</p>
-          <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-            <nuxt-link to="/success_story/story" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">View Story</nuxt-link>
-          </p>
         </div>
       </div>
     </div>
@@ -115,7 +83,7 @@
       <div class="curve-bg-gradient-new pt-8 clearfix">
         <div class="container lg m-auto text-white">
           <div class="mt-5 w-4/5  m-auto text-center">
-            <h2 class="text-white md:text-3xl sm:text-3xl font-bold py-5 ">Join a growing maker community</h2>
+            <h2 class="text-white md:text-3xl sm:text-3xl font-bold py-5 ">Become an IDEEZA's Service Provider</h2>
             <button @click="showSignupModal=true" class="bg-pink-CM hover:bg-pink-400 text-white font-bold py-2 px-4 w-64 rounded-full shadow-lg mt-5">Join Now</button>
           </div>
           <div class="w-full md:flex flex-wrap border-t-2 pb-10 mt-10 border-pink-600">
@@ -167,14 +135,9 @@ export default {
 
 </script>
 <style>
-.landing-bg-gradient {
-  background: rgb(98, 18, 156);
-  background: linear-gradient(86deg, rgba(242, 3, 210, 1) 0%, rgba(98, 18, 156, 1) 100%);
-}
-
-.landingBanner-bg {
-  background: url('~static/images/newhomeBanner_bg1.png') no-repeat right top;
-  background-size: 80%;
+.inv_Banner-bg {
+  background: url('~static/images/img_ref_2334.png') no-repeat center top;
+  background-size: 100%;
 }
 
 .bg-pattern {
@@ -186,7 +149,7 @@ export default {
 }
 
 .max-width-half {
-  max-width: 45%;
+  max-width: 80%;
   max-height: 100%;
   top: 0;
   bottom: 0;
@@ -212,8 +175,9 @@ export default {
   max-width: 100%;
 }
 
-.idea-sec-bg-img {
-  background: url('~static/images/ref_bg_1232.png') no-repeat center center;
+.idea-sec-bg-img2 {
+  background: url('~static/images/bg_ref_2337.png') no-repeat center center;
+  background-size: 100%;
 }
 
 @media(max-width:736px) {

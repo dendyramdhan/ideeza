@@ -121,7 +121,6 @@
 <script>
 import transactionsdata from "~/data/transactions.json"
 export default {
-  layout: 'service-provider',
   data() {
     return {
       transactions: [],

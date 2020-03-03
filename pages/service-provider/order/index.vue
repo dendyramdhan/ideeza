@@ -2,7 +2,6 @@
   <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
     <!--  Left Side Bar  -->
     <LeftMenu />
-
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
@@ -31,20 +30,14 @@
             </button>
           </div>
           <div class="flex justify-between flex-none">
-            <div
-              class="flex w-fit-content bg-white justify-center border border-gray-400 rounded items-center mr-2 content-center"
-            >
+            <div class="flex w-fit-content bg-white justify-center border border-gray-400 rounded items-center mr-2 content-center">
               <div class="h-8 relative w-10">
-                <font-awesome-icon
-                  class="ml-1 h-4 text-gray-400 absolute-center-h-v"
-                  :icon="['fas', 'search']"
-                />
+                <font-awesome-icon class="ml-1 h-4 text-gray-400 absolute-center-h-v" :icon="['fas', 'search']" />
               </div>
               <input placeholder="Find order" class="bg-white outline-none h-8 text-gray-800 pr-3" />
             </div>
           </div>
         </div>
-
         <div class="md:flex">
           <div class="md:w-full">
             <div class="bg-white rounded border-gray-400 border shadow">
@@ -112,19 +105,13 @@
                           <br />
                         </p>
                         <div>
-                          <button
-                            class="bg-white border border-gray-400 rounded px-3 py-2 text-xs"
-                            onclick="print()"
-                          >Invoice</button>
-                          <button
-                            class="bg-white border border-gray-400 rounded px-3 py-2 text-xs"
-                          >Details</button>
+                          <button class="bg-white border border-gray-400 rounded px-3 py-2 text-xs" onclick="print()">Invoice</button>
+                          <button class="bg-white border border-gray-400 rounded px-3 py-2 text-xs">Details</button>
                         </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-
                 <div class="mt-5 relative">
                   <!--Paging-->
                   <div class="mx-auto w-content">
@@ -138,9 +125,7 @@
                       <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
                     </span>
                   </div>
-                  <div
-                    class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0"
-                  >
+                  <div class="lg:absolute flex items-center top-0 w-content lg:w-auto right-0 my-3 lg:my-0 mx-auto lg:mx-0">
                     <span class="inline-block">Show</span>
                     <select class="inline field ml-2 h-10">
                       <option>1-3</option>
@@ -161,7 +146,6 @@ import LeftMenu from "~/components/service-provider/common-left-side-menu.vue";
 import MyIdeeza from "~/components/user/my-ideeza/new-ideeza.vue";
 
 export default {
-  layout: "service-provider",
   components: {
     LeftMenu,
     MyIdeeza
@@ -191,9 +175,11 @@ export default {
     }
   }
 };
+
 function print() {
   var doc = new jsPDF();
   doc.text("Price: 210", 10, 10);
   doc.save("a4.pdf");
 }
+
 </script>

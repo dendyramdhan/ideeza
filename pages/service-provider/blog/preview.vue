@@ -82,7 +82,6 @@ import articles from "~/data/BlogApi.json";
 export default {
   middleware: "auth",
   name: "blog-preview",
-  layout: 'service-provider',
   data: function() {
     return {
       articles: articles,

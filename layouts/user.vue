@@ -126,11 +126,14 @@ export default {
 .notify--success {
   @apply bg-ideeza-green;
 }
+
 .center-content {
   overflow-y: auto;
   height: calc(100vh - 55px);
 }
-.center-content> .flex-grow{
+
+.center-content>.flex-grow {
   margin-left: 300px;
 }
+
 </style>

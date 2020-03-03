@@ -194,7 +194,6 @@
 </template>
 <script>
 export default {
-  layout: 'service-provider',
   data() {
     return {
       readMoreActivated: false,
