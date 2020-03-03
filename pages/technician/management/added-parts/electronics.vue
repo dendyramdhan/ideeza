@@ -39,30 +39,30 @@
       </div>
     </div>
 
-    <table class="mt-10 shadow-md">
+    <table id="mytableapp" class="mt-10 shadow-md">
       <thead>
       <tr class="text-gray-800 h16">
-        <th class="text-left "><font-awesome-icon
+        <th class="text-left"  @click="sort('role')"><font-awesome-icon
                   class="mr-1 text-lg text-black"
                   :icon="['fas', 'sort']"
                 />Role</th>
-        <th class="text-left"><font-awesome-icon
+        <th class="text-left"  @click="sort('id')"><font-awesome-icon
                   class="mr-1 text-lg text-black"
                   :icon="['fas', 'sort']"
                 />Id</th>
-        <th class="text-left"><font-awesome-icon
+        <th class="text-left"  @click="sort('name')"><font-awesome-icon
                   class="mr-1 text-lg text-black"
                   :icon="['fas', 'sort']"
                 />Name</th>
-        <th class="text-left"><font-awesome-icon
+        <th class="text-left"  @click="sort('package')"><font-awesome-icon
                   class="mr-1 text-lg text-black"
                   :icon="['fas', 'sort']"
                 />Package</th>
-        <th class="text-left"><font-awesome-icon
+        <th class="text-left"  @click="sort('category')"><font-awesome-icon
                   class="mr-1 text-lg text-black"
                   :icon="['fas', 'sort']"
                 />Category</th>
-        <th class="text-left"><font-awesome-icon
+        <th class="text-left"  @click="sort('subcategory')"><font-awesome-icon
                   class="mr-1 text-lg text-black"
                   :icon="['fas', 'sort']"
                 />Sub-Category</th>
@@ -158,6 +158,8 @@ export default {
       searchTerm: "",
       counterarray: [],
       articleArray: [],
+      currentSort: "username",
+      currentSortDir: "asc",
       Services: Services.second_submenu_add_parts_electronics,
       currentviewpoint: this.$store.state.TechnicianProjectStore.offset + 1,
       index: 0,
@@ -238,6 +240,111 @@ export default {
         
       });
       },
+      sort: function(s) {
+      let direction = 1;
+
+      if (s === this.currentSort) {
+        if (this.currentSortDir == "asc") {
+          direction = 1;
+        } else if (this.currentSortDir == "desc") {
+          direction = -1;
+        }
+
+        this.currentSortDir = this.currentSortDir === "asc" ? "desc" : "asc";
+      }
+
+      this.currentSortDir;
+      let article_list = this.articleArray;
+      switch (s) {
+        case "role":
+          article_list.sort(function(a, b) {
+            var x = a.role ? a.role.toLowerCase() : a.role;
+            var y = b.role ? b.role.toLowerCase() : b.role;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "id":
+          article_list.sort(function(a, b) {
+            var x = a.id ? a.id.toLowerCase() : a.id;
+            var y = b.id ? b.id.toLowerCase() : b.id;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "name":
+          article_list.sort(function(a, b) {
+            var x = a.name ? a.name.toLowerCase() : a.name;
+            var y = b.name ? b.name.toLowerCase() : b.name;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "package":
+          article_list.sort(function(a, b) {
+            var x = a.package ? a.package.toLowerCase() : a.package;
+            var y = b.package ? b.package.toLowerCase() : b.package;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "category":
+          article_list.sort(function(a, b) {
+            var x = a.category ? a.category.toLowerCase() : a.category;
+            var y = b.category ? b.category.toLowerCase() : b.category;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "subcategory":
+          article_list.sort(function(a, b) {
+            var x = a.subcategory ? a.subcategory.toLowerCase() : a.subcategory;
+            var y = b.subcategory ? b.subcategory.toLowerCase() : b.subcategory;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        default:
+          break;
+      }
+      this.currentSort = s;
+    },
     search(e) {
       this.articleArray = [];
 
@@ -309,6 +416,9 @@ export default {
 </script>
 
 <style scoped>
+  #mytableapp thead tr th {
+    cursor: pointer;
+  }
 
   @screen lg{
 
