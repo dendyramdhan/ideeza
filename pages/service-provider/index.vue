@@ -15,7 +15,6 @@ import LeftMenu from '~/components/user/common-left-side-menu.vue'
 import SidebarMenu from '~/components/reusables/SideBar.vue'
 
 export default {
-  layout: 'user',
   name: "project-index",
   components: {
     LeftMenu,

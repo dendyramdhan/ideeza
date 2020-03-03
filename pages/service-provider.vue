@@ -4,18 +4,18 @@
     </div>
     <img src="~/assets/images/new.gif" v-if="loaderFlag" style="position:absolute;top:40%;left:40%; z-index:1000" width="15%" />
     <navigation class="flex-shrink"></navigation>
-    <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
+    <div :class="{'hide-sider-bar':!leftMenu}" class="flex main-panel">
       <LeftMenu v-if="$route.path.search('settings') < 0 && $route.path.search('messages') < 0" />
       <settingsLeftMenu v-else-if="$route.path.search('messages') < 0" />
-      <div class="flex-grow center-content">
-        <nuxt-child></nuxt-child>
+      <div class="flex-grow page-container">
+        <nuxt-child class="service-provider-content p-2"></nuxt-child>
       </div>
     </div>
     <notifications group="error" position="top right">
       <template slot="body" slot-scope="props">
         <div class="notify notify--error">
           <div class="flex items-center text-white font-semibold">
-            <img class="mr-3" src="~/static/icons/exclaimation-icon.png" alt="">
+            <img class="mr-3" src="~/static/icons/exclaimation-icon.png" alt />
             {{props.item.text}}
           </div>
           <a class="close cursor-pointer" @click="props.close">
@@ -28,7 +28,7 @@
       <template slot="body" slot-scope="props">
         <div class="notify notify--success">
           <div class="flex items-center text-white font-semibold">
-            <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt="">
+            <img class="mr-3" src="~/static/icons/notificication-success-icon.png" alt />
             {{props.item.text}}
           </div>
           <a class="close cursor-pointer" @click="props.close">
@@ -41,34 +41,60 @@
   </div>
 </template>
 <script>
-import LeftMenu from '~/components/admin/common-left-side-menu.vue'
-import settingsLeftMenu from "~/components/admin/settings/left-side-menu.vue";
-import navigation from '~/components/admin/header-bar.vue'
-import FloatButton from '~/components/user/float-button/right-bot-float-button.vue'
-import { mapMutations } from 'vuex'
+import LeftMenu from '~/components/service-provider/common-left-side-menu.vue'
+import navigation from "~/components/service-provider/header-bar.vue";
+import FloatButton from "~/components/user/float-button/right-bot-float-button.vue";
+import settingsLeftMenu from "~/components/service-provider/settings/left-side-menu.vue";
+import {
+  mapMutations
+} from "vuex";
 export default {
+  name: "service-provider-layout",
   components: {
+    LeftMenu,
     navigation,
     FloatButton,
-    LeftMenu,
     settingsLeftMenu
   },
-  data() {
+  data: function() {
     return {
-      settingLeftMenu: false,
       loaderFlag: true,
-    }
-  },
-  mounted() {
-    if (this.$route.path.search('settings')) {
-      this.settingLeftMenu = true;
-    } else {
-      this.settingLeftMenu = false;
-    }
-
-    console.log(this.$device.isMobile);
-    if (this.$device.isMobile) {
-      this.toggleLeftMenu();
+      botMenuItems: [{
+        name: 'Help',
+        icon: 'shopping-cart',
+        link: 'orders'
+      }],
+      menu: [{
+          name: 'Dashboard',
+          iconComponent: 'DashBoardIcon',
+          link: 'dashboard'
+        },
+        {
+          name: 'Orders',
+          icon: 'shopping-cart',
+          link: 'orders'
+        },
+        {
+          name: 'Projects',
+          icon: 'project-diagram',
+          link: 'projects'
+        },
+        {
+          name: 'Transactions',
+          icon: 'list-alt',
+          link: 'transactions'
+        },
+        {
+          name: 'Messages',
+          icon: 'envelope',
+          link: 'messages'
+        },
+        {
+          name: 'Help',
+          icon: 'info-circle',
+          link: 'help'
+        },
+      ]
     }
   },
   computed: {
@@ -81,21 +107,23 @@ export default {
     let that = this
     setInterval(function() {
       that.loaderFlag = window.$nuxt.$cookies.get("loaderFlag");
+      // console.log("loaderFlag:", that.loaderFlag )
     }, 10);
 
+    console.log(this.$device.isMobile);
     if (this.$device.isMobile) {
       this.toggleLeftMenu();
     }
   },
   methods: {
     ...mapMutations({
-      toggleLeftMenu: 'usermenu/toggleLeftMenu'
+      toggleLeftMenu: "usermenu/toggleLeftMenu"
     })
   }
 }
 
 </script>
-<style>
+<style scoped>
 #__nuxt {
   height: 100%;
 }
@@ -123,22 +151,14 @@ export default {
   @apply bg-ideeza-green;
 }
 
-.center-content {
+.page-container {
+  min-height: calc(100vh - 40px);
+  background: #F5F5F5;
+}
+
+.service-provider-content {
   overflow-y: auto;
   height: calc(100vh - 55px);
-}
-
-.center-content>.flex-grow {
-  margin-left: 300px;
-}
-
-.center-content {
-  overflow-y: auto;
-  height: calc(100vh - 55px);
-}
-
-.center-content>.flex-grow {
-  margin-left: 300px;
 }
 
 </style>

@@ -50,7 +50,6 @@ import apiService from "~/apiService";
 export default {
   middleware: "auth",
   name: "blog-view",
-  layout: 'service-provider',
   data: function() {
     return {
       // articles: articles,

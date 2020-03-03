@@ -60,7 +60,6 @@ import taskslist from "~/json/tasklist.json";
 import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   middleware: "auth",
-  layout: "service-provider",
   name: "task-index",
   components: {
     LeftMenu,

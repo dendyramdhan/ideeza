@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col bg-white h-full shadow left-side-bar fixed nav">
+  <div class="flex flex-col bg-white h-full shadow left-side-bar relative">
     <div class="pt-20 px-10 pb-10 flex justify-center items-center relative w-full  ">
       <div @click="activeMenu='settings'" class="font-semibold mr-5 cursor-pointer px-3 border-ideeza py-1 border" :class="{'bg-ideeza text-white': activeMenu === 'settings'}">Settings</div>
       <div @click="activeMenu='menu'" class="font-semibold cursor-pointer px-3 border-ideeza border py-1" :class="{'bg-ideeza text-white': activeMenu === 'menu'}">Menu</div>

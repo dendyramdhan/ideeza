@@ -437,7 +437,6 @@
 <script>
 import apiService from "~/apiService/have_token.js";
 export default {
-  layout: 'user',
   data: function() {
     return {
       geturl2: "/api/service_provider/setting/cost_of_service/electronics/update_fabrication",
