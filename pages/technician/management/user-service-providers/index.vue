@@ -35,16 +35,16 @@
           <font-awesome-icon class="ml-1 h-6 text-gray-600 absolute-center-h-v" :icon="['fas', 'sliders-h']" />
         </div>
       </div>
-      <table class="mt-10 shadow-md">
+      <table id="mytableapp" class="mt-10 shadow-md">
         <thead>
           <tr class="text-gray-800 h16">
-            <th class="text-left">
+            <th class="text-left" @click="sort('username')">
               <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Username</th>
-            <th class="text-left">
+            <th class="text-left" @click="sort('role')">
               <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Role</th>
-            <th class="text-left">
+            <th class="text-left" @click="sort('status')">
               <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Status</th>
-            <th class="text-left">
+            <th class="text-left" @click="sort('join_date')">
               <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Join Date</th>
             <th class="text-left">Actions</th>
             <!-- <th class="text-right">
@@ -59,8 +59,8 @@
             </td>
             <td>{{Service.role}}</td>
             <td>{{Service.status}}</td>
-            <td v-if="Service.created_at != null ">{{ts.toLocaleDateString(Service.created_at)}}</td>
-            <td v-else>{{Service.created_at}}</td>
+            <td v-if="Service.date_joined != null ">{{new Date(Service.date_joined).toLocaleDateString()}}</td>
+            <td v-else>{{Service.date_joined}}</td>
             <td class="lg:text-right">
               <nuxt-link :to="{ path: '/technician/user-profile', query: { id: Service.userid}}">
                 <font-awesome-icon class="mr-2 h-4 cursor-pointer" :icon="['fas', 'eye']" />
@@ -131,6 +131,8 @@ export default {
       searchTerm: "",
       counterarray: [],
       articleArray: [],
+      currentSort: "username",
+      currentSortDir: "asc",
       Services: Services.first_submenu_User_provider,
       currentviewpoint: this.$store.state.TechnicianProjectStore.offset + 1,
       index: 0,
@@ -234,6 +236,83 @@ export default {
 
       console.log("search array :", this.articleArray, e.target.value);
     },
+    sort: function(s) {
+      let direction = 1;
+
+      if (s === this.currentSort) {
+        if (this.currentSortDir == "asc") {
+          direction = 1;
+        } else if (this.currentSortDir == "desc") {
+          direction = -1;
+        }
+
+        this.currentSortDir = this.currentSortDir === "asc" ? "desc" : "asc";
+      }
+
+      this.currentSortDir;
+      let article_list = this.articleArray;
+      switch (s) {
+        case "username":
+          article_list.sort(function(a, b) {
+            var x = a.first_name.toLowerCase();
+            var y = b.first_name.toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "role":
+          article_list.sort(function(a, b) {
+            var x = a.role ? a.role.toLowerCase() : a.role;
+            var y = b.role ? b.role.toLowerCase() : b.role;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "status":
+          article_list.sort(function(a, b) {
+            var x = a.status ? a.status.toLowerCase() : a.status;
+            var y = b.status ? b.status.toLowerCase() : b.status;
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        case "join_date":
+          article_list.sort(function(a, b) {
+            var x = new Date(a.date_joined).toLocaleDateString().toLowerCase();
+            var y = new Date(b.date_joined).toLocaleDateString().toLowerCase();
+            if (x < y) {
+              return -1 * direction;
+            }
+            if (x > y) {
+              return 1 * direction;
+            }
+            return 0;
+          });
+
+          break;
+        default:
+          break;
+      }
+      this.currentSort = s;
+    },
     selectedkey(e) {
       this.$store.commit("TechnicianProjectStore/selectedkeyChange", e - 1);
       // $router.go({path:'/news', force: true})
@@ -284,6 +363,10 @@ export default {
 
 </script>
 <style scoped>
+#mytableapp thead tr th {
+  cursor: pointer;
+}
+
 @screen lg {
   table {
     @apply mb-5 w-full table-fixed border-collapse text-gray-600;
