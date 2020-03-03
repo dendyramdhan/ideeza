@@ -29,7 +29,7 @@
           <h2 class="text-gray-900 text-4xl font-extrabold">Connected Devices</h2>
           <p class="text-gray-700 text-lg py-5">Building IoT prototypes used to need months, engineers, hair-ripping budgets and dev tools creep. Good times.</p>
           <div class="m-auto video-screen">
-            <iframe width="100%" height="390" src="https://www.youtube.com/embed/PdlO0NRWdtI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="390" src="https://www.youtube.com/embed/GDoI16RmxqQ" frameborder="0" allow="accelerometer; autoplay;" class="m-auto" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
             <h2 class="text-gray-900 text-5xl font-bold">TOGETHER!</h2>
             <p class="text-gray-700 text-lg py-5 ">We believe in collaboration and together with the power of Artificial Intelligence it leads to amazing results, empowering the full potential of the world! For the first time, you can use, contribute, and empower the community knowledge - by a click, thousands of brains will come together to provide the unique solution for your idea!</p>
             <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <nuxt-link to="/collaboration/" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">Read More</nuxt-link>
+              <nuxt-link to="/landing/collaboration" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">Read More</nuxt-link>
             </p>
           </div>
         </div>
@@ -73,11 +73,8 @@
             <p class="text-gray-700 text-lg py-5 ">You bring the skill. We'll make earning easy.
               With IDEEZA you have the freedom to work on any project that suits your exact ability, whether you are an open source engineer, designer, manufacturer, patent attorney or any other supplier.
               From our many and diverse projects you can easily find your way to success and rapid growth. </p>
-            <!-- <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <div class="cursor-pointer text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full" @click="showManufacturerEmailSignupModal=true">Connect Us</div>
-            </p> -->
             <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-              <nuxt-link class="cursor-pointer text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full" to="/landing">Connect Us</nuxt-link>
+              <div class="cursor-pointer text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full" @click="showManufacturerEmailSignupModal=true">Connect Us</div>
             </p>
           </div>
           <img src="~/static/images/ref_img_1244.png" class="md:absolute static right-0 max-width-half">
@@ -109,7 +106,7 @@
           <h2 class="text-gray-900 text-5xl font-bold">John Doe’s Dream</h2>
           <p class="text-gray-700 text-lg py-5 ">If you're on the fence on whether you need a big company behind you to succeed, these individuals prove that having vision and the drive is more than enough.</p>
           <p class="text-gray-700 text-2xl font-bold py-5 bg-i">
-            <nuxt-link to="/success_story/" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">View Story</nuxt-link>
+            <nuxt-link to="/success_story/story" class="text-white py-2 btn-md bg-ideeza inline-block text-center text-lg rounded-full">View Story</nuxt-link>
           </p>
         </div>
       </div>
