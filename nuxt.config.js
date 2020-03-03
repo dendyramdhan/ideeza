@@ -1,4 +1,5 @@
-const env=require('dotenv').config() console.log(env) export default {
+const env=require('dotenv').config()
+export default {
     mode: 'universal',
     env: env.parsed,
     /*
