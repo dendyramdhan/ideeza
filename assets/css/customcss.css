@@ -1,3 +1,12 @@
+.flex.main-panel{
+	padding-top: 56px;
+}
+.header-bar.gradient-bg.flex-shrink {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+}
 .curve-bg{
   background: url(~static/images/curve-bg-1.png) no-repeat;
   background-size: 101%;
