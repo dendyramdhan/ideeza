@@ -88,7 +88,6 @@
 <script>
 export default {
   name: "notifications",
-  layout: "service-provider",
 };
 
 </script>
