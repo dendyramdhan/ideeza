@@ -253,4 +253,7 @@ input[type="checkbox"] {
   padding: 10px;
   margin: 5px;
 }
+.center-content> .flex-grow {
+    margin-left: 0 !important;
+}
 </style>
