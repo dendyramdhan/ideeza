@@ -240,9 +240,7 @@ export default {
 </script>
 
 <style scoped>
-.settings-privacy {
-  max-width: 950px;
-}
+ 
 input[type="checkbox"] {
   /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */
