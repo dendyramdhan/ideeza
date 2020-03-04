@@ -125,7 +125,6 @@ import Services from "~/data/TechnicianProjectApi.json";
 import apiService from "~/apiService/have_token.js";
 
 export default {
-  layout: "technician",
   name: "projects-index",
   components: {
     AddCorporation,

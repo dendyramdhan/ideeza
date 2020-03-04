@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents p-5">
@@ -134,15 +132,11 @@
   </div>
 </template>
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import SimpleTable from "~/components/reusables/Table.vue";
-
 import apiService from "~/apiService/have_token.js";
 
-export default {
-  layout: "technician",
+export default { 
   components: {
-    LeftMenu,
     SimpleTable
   },
   data() {
@@ -222,11 +216,6 @@ export default {
       });
     });
   },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
   methods: {
     selectall() {
       if (this.selected == true) {
@@ -244,6 +233,7 @@ export default {
 };
 
 </script>
+
 <style scoped>
 .w-13 {
   width: 13.333333%;

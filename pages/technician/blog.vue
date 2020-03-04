@@ -1,8 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
-    <!-- <sidebar-menu :menu-items="menu" /> -->
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow">
       <div></div>
@@ -10,23 +7,18 @@
     </div>
   </div>
 </template>
-
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import SidebarMenu from "~/components/reusables/SideBar.vue";
 
 export default {
   middleware: "auth",
-  layout: "technician",
   name: "blog-index",
   components: {
-    LeftMenu,
     SidebarMenu
   },
   data: function() {
     return {
-      menu: [
-        {
+      menu: [{
           name: "Dashboard",
           iconComponent: "DashBoardIcon",
           link: "/user/dashboard"
@@ -35,8 +27,7 @@ export default {
           name: "Users",
           icon: "user",
           link: "/user/home",
-          childs: [
-            {
+          childs: [{
               name: "Home",
               link: "/user/home"
             },
@@ -83,15 +74,8 @@ export default {
       ]
     };
   },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
-  mounted() {},
-  methods: {}
 };
-</script>
 
+</script>
 <style scoped>
 </style>

@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
+  <div>
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
@@ -414,18 +412,14 @@
   </div>
 </template>
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
-
 import articles from "~/json/messageCenter.json";
 import projects from "~/data/TechnicianProjectApi.json";
 import tasklists from "~/json/tasklist.json";
 import apiServiceWithToken from "~/apiService/have_token.js";
 import DetailTask from "~/components/technician/management/detail-task.vue";
 export default {
-  layout: "technician",
   name: "dashboard-index",
   components: {
-    LeftMenu,
     DetailTask
   },
   data: function() {
@@ -526,11 +520,6 @@ export default {
     this.articles.map(item => {
       this.articleArray.push(item);
     });
-  },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
   },
   mounted() {
     let firstname = window.$nuxt.$cookies.get("firstname");

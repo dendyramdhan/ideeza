@@ -127,7 +127,6 @@ import apiService from "~/apiService/have_token.js";
 
 
 export default {
-  layout: "technician",
   name: "projects-index",
   components: {
     "drop-down": DropDownField,

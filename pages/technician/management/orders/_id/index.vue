@@ -1,24 +1,15 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
-
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow" v-for="info in articleArray" v-if="info.id == id">
       <div class="main-contents p-5">
         <div class="md:flex text-black justify-between mb-5">
           <h1 class="font-bold text-3xl">Project: {{info.title}}</h1>
-          <button
-            class="bg-ideeza-dark px-3 py-2 text-white"
-            @click.self="$router.push('/technician/tracking')"
-          >Back</button>
+          <button class="bg-ideeza-dark px-3 py-2 text-white" @click.self="$router.push('/technician/tracking')">Back</button>
         </div>
         <div class="md:flex text-ideeza-dark mb-5 items-center font-semibold justify-between">
           <div class="md:flex items-center">
-            <img
-              src="https://randomuser.me/api/portraits/women/20.jpg"
-              class="h-10 w-10 rounded-full mr-5"
-            />
+            <img src="https://randomuser.me/api/portraits/women/20.jpg" class="h-10 w-10 rounded-full mr-5" />
             <label>Michael Scott</label>
           </div>
         </div>
@@ -90,30 +81,21 @@
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3"></th>
           </template>
-          <tr
-            class="flex w-full mb-4"
-            v-for="task in articleArray2"
-           
-          >
-           <!-- @click="taskdetailtrue(task.id)" -->
+          <tr class="flex w-full mb-4" v-for="task in articleArray2">
+            <!-- @click="taskdetailtrue(task.id)" -->
             <td class="w-2/12 text-ideeza-dark font-semibold">
               <div class="flex">
                 <div class="flex" @click.stop="detailTask=true">
                   <!-- <input type="checkbox" :id="task.id" v-model="task.selected" />
                   <label :for="task.id"></label>-->
                   <img :src="avata_img_url +useravatar" class="h-10 w-10 rounded-full mr-2" />
-
                   <label>{{username}}</label>
                 </div>
               </div>
             </td>
             <td class="w-2/12 text-sm text-ideeza-dark font-semibold">{{task.name}}</td>
             <td class="w-2/12 text-sm text-ideeza-dark text-center">
-              <img
-                v-for="image in task.assigned_user"
-                :src="avata_img_url + image.avatar"
-                class="avatar"
-              />
+              <img v-for="image in task.assigned_user" :src="avata_img_url + image.avatar" class="avatar" />
             </td>
             <td class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left">
               <div class="ml-2">{{ts.toLocaleDateString(task.end - task.start)}}</div>
@@ -129,20 +111,13 @@
             </td>
           </tr>
         </simple-table>
-        <detail-task
-          @onClose="detailTask=false"
-          @onEdit="detailTask=false;editTask=true"
-          v-if="detailTask"
-          @complete="detailTask=false;completeTask=true"
-          :edit="false"
-        />
+        <detail-task @onClose="detailTask=false" @onEdit="detailTask=false;editTask=true" v-if="detailTask" @complete="detailTask=false;completeTask=true" :edit="false" />
         <complete-task @onClose="completeTask=false" v-if="completeTask" />
       </div>
     </div>
   </div>
 </template>
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import SimpleTable from "~/components/reusables/Table.vue";
 import DetailTask from "~/components/technician/management/detail-task.vue";
 import CompleteTask from "~/components/technician/management/complete-task.vue";
@@ -151,9 +126,7 @@ import apiService from "~/apiService/have_token.js";
 import apiService2 from "~/apiService/get_param.js";
 
 export default {
-  layout: "user",
   components: {
-    LeftMenu,
     SimpleTable,
     DetailTask,
     CompleteTask
@@ -233,36 +206,28 @@ export default {
       selected: false,
       detailTask: false,
       completeTask: false,
-      tasks: [
-        {
-          id: 1,
-          category: {
-            name: "Code"
+      tasks: [{
+        id: 1,
+        category: {
+          name: "Code"
+        },
+        task: {
+          name: "Make Iron from steal"
+        },
+        service_providers: [{
+            url: "https://randomuser.me/api/portraits/women/20.jpg"
           },
-          task: {
-            name: "Make Iron from steal"
+          {
+            url: "https://randomuser.me/api/portraits/men/20.jpg"
           },
-          service_providers: [
-            {
-              url: "https://randomuser.me/api/portraits/women/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/20.jpg"
-            },
-            {
-              url: "https://randomuser.me/api/portraits/men/12.jpg"
-            }
-          ],
-          deadline: "07/04/1927",
-          completed: 30
-        }
-      ]
+          {
+            url: "https://randomuser.me/api/portraits/men/12.jpg"
+          }
+        ],
+        deadline: "07/04/1927",
+        completed: 30
+      }]
     };
-  },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
   },
   methods: {
     taskdetailtrue(myid) {
@@ -283,17 +248,21 @@ export default {
     }
   }
 };
+
 </script>
 <style scoped>
 .w-13 {
   width: 13.333333%;
 }
+
 .avatar {
   @apply w-8 rounded-full -ml-2 shadow inline cursor-pointer;
 }
+
 .attached-images-wrapper img {
   @apply mr-3 mb-3;
   max-width: 30%;
   width: 100%;
 }
+
 </style>

@@ -185,7 +185,6 @@ import apiService from '~/apiService';
 
 export default {
   middleware: 'auth',
-  layout: "technician",
   name: "messages-index",
   components: {
     LeftMenu

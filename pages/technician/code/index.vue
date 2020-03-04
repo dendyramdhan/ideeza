@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="code-contents w-full mx-auto">
@@ -78,16 +76,13 @@
   </div>
 </template>
 <script>
-import LeftMenu from '~/components/technician/common-left-side-menu.vue'
 import AddCode from '~/components/technician/add-code.vue'
 import apiService from "~/apiService/have_token.js"
 
 
 export default {
-  layout: 'technician',
   name: "code-index",
   components: {
-    LeftMenu,
     AddCode
   },
 
@@ -99,11 +94,6 @@ export default {
     }
   },
 
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
   methods: {
     save_data() {
       let data = new FormData()

@@ -1,48 +1,35 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
-
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
-          <h1 class="text-indigo-800 font-bold text-2xl border-b-4 border-solid border-ideeza pb-5 mt-8">Create process</h1>
+        <h1 class="text-indigo-800 font-bold text-2xl border-b-4 border-solid border-ideeza pb-5 mt-8">Create process</h1>
         <div class="w-full max-w-lg">
-            <form class="rounded px-8 pt-6 pb-8 mb-4">
-              <div class="mb-4">
-                <input class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="" type="text" placeholder="Name of the process">
-              </div>
-
-              <div class="mb-4">
-                <textarea class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="" type="text" placeholder="Name subprocesses ( divide with commas )" rows="6"></textarea>
-              </div>
-
-              <div class="mb-4">
-                <textarea class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="" type="text" placeholder="Name Machines ( divide with commas )" rows="6"></textarea>
-              </div>
-               
-              <div class="">
-                <button class="bg-ideeza text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-white" type="button">
-                  Create process
-                </button>
-
-                <button class="bg-white text-gray-700 border border-gray-400 ml-4 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                  Cancel
-                </button>
-                 
-              </div>
-            </form>
-             
-          </div>
-
-
+          <form class="rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+              <input class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="" type="text" placeholder="Name of the process">
+            </div>
+            <div class="mb-4">
+              <textarea class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="" type="text" placeholder="Name subprocesses ( divide with commas )" rows="6"></textarea>
+            </div>
+            <div class="mb-4">
+              <textarea class="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="" type="text" placeholder="Name Machines ( divide with commas )" rows="6"></textarea>
+            </div>
+            <div class="">
+              <button class="bg-ideeza text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline text-white" type="button">
+                Create process
+              </button>
+              <button class="bg-white text-gray-700 border border-gray-400 ml-4 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
 import SearchField from "~/components/form/search.vue";
 import AddNewProject from "~/components/technician/management/new-project.vue";
@@ -54,10 +41,8 @@ import apiService from "~/apiService/have_token.js";
 
 
 export default {
-  layout: "user",
   name: "projects-index",
   components: {
-    LeftMenu,
     "drop-down": DropDownField,
     "search-field": SearchField,
     "new-project": AddNewProject
@@ -77,11 +62,11 @@ export default {
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
       end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
       counterarray: [],
-       articleArrayaxios: [],
+      articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
       geturl: "/api/project/technician/get_all",
-      avata_img_url:process.env.avatar_base_url,
+      avata_img_url: process.env.avatar_base_url,
       addNewProject: false,
       dataDropDown: ["All", "Active", "Completed", "Priority", "Over Due"],
       sortDropDown: [
@@ -108,13 +93,8 @@ export default {
     //   this.articleArray.push(item);
     // });
   },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
   mounted() {
-     this.$store.commit("TechnicianProjectStore/viewflagchange2");
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -133,9 +113,9 @@ export default {
 
       this.length = this.articleArrayrout.length / 5 - 1;
       this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
-  
+
       let i = 1;
-      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      let endd = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale + 1;
       //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
         this.counterarray.push(i);
@@ -283,8 +263,7 @@ export default {
       if (
         this.currentviewpoint == this.counter ||
         this.currentviewpoint > this.counter
-      ) {
-      } else {
+      ) {} else {
         this.$store.commit("TechnicianProjectStore/increasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -298,8 +277,7 @@ export default {
       }
     },
     decreasekey() {
-      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
-      } else {
+      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {} else {
         this.$store.commit("TechnicianProjectStore/decreasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -314,11 +292,12 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 select {
-    min-width: auto;
-    max-width: initial;
+  min-width: auto;
+  max-width: initial;
 }
+
 </style>

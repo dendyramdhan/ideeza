@@ -1,28 +1,14 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
-
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow lg:pt-16 lg:px-10 main-contents">
-      <div
-        class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0"
-      >
+      <div class="flex justify-between items-center pb-3 mb-5 border-b border-solid border-gray-400 p-5 lg:p-0">
         <h1 class="text-gray-800 text-xl lg:text-3xl font-semibold">My Notes</h1>
         <div class="flex items-center">
-          <span
-            class="text-lg font-semibold cursor-pointer mr-5 text-ideeza-black hover:text-ideeza"
-            :class="{'text-ideeza': tab === 'daily'}"
-            @click="tab='daily'"
-          >Daily</span>
-          <span
-            class="text-lg font-semibold cursor-pointer text-ideeza-black hover:text-ideeza"
-            :class="{'text-ideeza': tab === 'weekly'}"
-            @click="tab='weekly'"
-          >Weekly</span>
+          <span class="text-lg font-semibold cursor-pointer mr-5 text-ideeza-black hover:text-ideeza" :class="{'text-ideeza': tab === 'daily'}" @click="tab='daily'">Daily</span>
+          <span class="text-lg font-semibold cursor-pointer text-ideeza-black hover:text-ideeza" :class="{'text-ideeza': tab === 'weekly'}" @click="tab='weekly'">Weekly</span>
         </div>
       </div>
-
       <div class="w-full scroll-container mx-auto">
         <div v-if="tab==='daily'" class="task-wrapper flex mb-10">
           <!--Task Col Daily-->
@@ -35,7 +21,6 @@
             </template>
           </div>
         </div>
-
         <div v-if="tab==='weekly'" class="task-wrapper flex mb-10">
           <!--Task Col Weekly-->
           <div class="mx-auto task-col md:flex flex-wrap">
@@ -51,23 +36,12 @@
         </div>
       </div>
     </div>
-
     <!--RightBar-->
     <div class="hidden lg:block task-right-bar bg-white shadow-md py-16">
       <div class="text-gray-800 text-2xl font-semibold text-center">Calendar</div>
       <!--Calendar-->
-      <vc-calendar
-        class="mx-auto mt-5"
-        @dayclick="addTasks"
-        v-model="date"
-        color="pink"
-        is-expanded
-        :theme="theme"
-        :attributes="attributes"
-        :value="null"
-      />
+      <vc-calendar class="mx-auto mt-5" @dayclick="addTasks" v-model="date" color="pink" is-expanded :theme="theme" :attributes="attributes" :value="null" />
     </div>
-
     <!--Add Task-->
     <AddTask @onClose="closeAddTask" v-if="showAddTask" />
   </div>
@@ -75,17 +49,14 @@
 <script>
 import AddTask from "~/components/user/tasklist/add-task";
 import TaskCol from "~/components/user/tasklist/task-col";
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import CheckBox from "~/components/form/checkbox.vue";
 import InvitePopup from "~/components/user/add-member/add-member-popup.vue";
 import taskslist from "~/json/tasklist.json";
 import apiServiceWithToken from "~/apiService/have_token.js";
 export default {
   middleware: "auth",
- layout: "technician",
   name: "task-index",
   components: {
-    LeftMenu,
     CheckBox,
     InvitePopup,
     AddTask,
@@ -109,24 +80,16 @@ export default {
           light: "ideeza-arrow"
         }
       },
-      attributes: [
-        {
-          key: "today",
-          highlight: true,
-          dates: new Date()
-        }
-      ],
+      attributes: [{
+        key: "today",
+        highlight: true,
+        dates: new Date()
+      }],
       tasksDaily: [],
       tasksWeekly: [{ id: 1 }],
       id: 0,
     };
   },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
-
   created: function() {
     Date.prototype.getWeek = function(dowOffset) {
       /*getWeek() was developed by Nick Baicoianu at MeanFreePath: http://www.meanfreepath.com */
@@ -140,7 +103,7 @@ export default {
           (this.getTime() -
             newYear.getTime() -
             (this.getTimezoneOffset() - newYear.getTimezoneOffset()) * 60000) /
-            86400000
+          86400000
         ) + 1;
       var weeknum;
       //if the year starts before the middle of a week
@@ -259,17 +222,19 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .my-scrollbar {
   width: 100%;
   min-width: 300px;
 }
+
 .task-col {
   @apply mt-5;
   width: 100%;
 }
+
 .task-wrapper {
   max-width: 1200px;
 }
@@ -283,7 +248,9 @@ export default {
 .accordion-container {
   @apply border-t border-b border-solid border border-gray-300;
 }
+
 .accordion-container--title {
   @apply flex py-2 px-1;
 }
+
 </style>
