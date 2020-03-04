@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar">
+  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar overflow-scroll">
 
     <!--Search-->
     <div class="px-10 mt-5">
