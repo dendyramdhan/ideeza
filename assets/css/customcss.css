@@ -256,11 +256,11 @@
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #ff00c7; 
+  background: #fc00c547; 
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff00c7; 
+  background: #ff00c787; 
 }
