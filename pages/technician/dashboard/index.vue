@@ -15,7 +15,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/opened-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2337.png" class="w-12 object-center object-right mr-5" alt />
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/un-opened-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2338.png" class="w-12 object-center object-right mr-5" alt />
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/on-hold-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2339.png" class="w-12 object-center object-right mr-5" alt />
               </div>
             </div>
           </div>
@@ -48,7 +48,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/finished-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2340.png" class="w-12 object-center object-right mr-5" alt /> 
               </div>
             </div>
           </div>

@@ -215,7 +215,13 @@
     .idea-sec-bg-img {
         background: url('~static/images/ref_bg_1232.png') no-repeat center center;
     }
-
+    #__layout{
+        overflow-y:auto; 
+    }
+    .landingBanner-bg.home-content {
+        overflow: unset;
+        height: auto;
+    }
     @media(max-width:736px) {
         .max-width-half {
             max-width: 100%;
