@@ -266,10 +266,8 @@ export default {
             },
             {
               url: 'https://randomuser.me/api/portraits/men/20.jpg'
-            }, >>>
-            >>>
-            >
-            technician layout change {
+            },
+            {
               url: 'https://randomuser.me/api/portraits/men/12.jpg'
             }
           ],
