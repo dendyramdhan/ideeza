@@ -1,17 +1,9 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents p-5">
-        <simple-table
-          :searchbox="false"
-          :add="false"
-          :header="true"
-          title="Projects"
-          border="border-gray"
-        >
+        <simple-table :searchbox="false" :add="false" :header="true" title="Projects" border="border-gray">
           <template v-slot:header>
             <button class="font-bold text-sm mr-3 text-ideeza-dark">Delete</button>
             <button class="font-bold text-sm mr-3 text-ideeza-dark">Print</button>
@@ -20,50 +12,36 @@
           <template v-slot:th>
             <th class="border-t border-b border-blue-300 w-1/5 text-ideeza-dark p-3">
               <!-- <input type="checkbox" id="ad" v-model="selected" @change="selectall" /> -->
-              <label for="ad"><font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />User name</label>
+              <label for="ad">
+                <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />User name</label>
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Project name
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Project name
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3 text-center">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Service Providers
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Service Providers
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Deadline
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Deadline
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
               />-->
             </th>
             <th class="border-t border-b border-blue-300 w-2/12 text-ideeza-dark p-3">
-              <font-awesome-icon
-                  class="mr-1 text-lg text-black"
-                  :icon="['fas', 'sort']"
-                />Completed
+              <font-awesome-icon class="mr-1 text-lg text-black" :icon="['fas', 'sort']" />Completed
               <!-- <font-awesome-icon
                 class="text-sm mt-2 ml-1 text-green-300"
                 :icon="['fas', 'arrow-down']"
@@ -71,30 +49,20 @@
             </th>
             <th class="border-t border-b border-blue-300 w-13 text-ideeza-dark p-3"></th>
           </template>
-          <tr
-            class="flex w-full mb-4"
-            v-for="(project,index) in articleArray"
-            @click="$router.push('/technician/tracking/_id?id='+project.id)"
-            style="cursor:pointer"
-          >
+          <tr class="flex w-full mb-4" v-for="(project,index) in articleArray" @click="$router.push('/technician/tracking/_id?id='+project.id)" style="cursor:pointer">
             <td class="w-1/5 text-ideeza-dark font-semibold">
               <div class="flex">
-                <div class="flex"  >
+                <div class="flex">
                   <!-- <input type="checkbox" :id="project.id" v-model="project.selected" /> -->
                   <!-- <label :for="project.id"></label> -->
                 </div>
                 <img :src="avata_img_url +useravatar" class="h-10 w-10 rounded-full mr-2" />
                 <label style="cursor:pointer">{{ username}}</label>
-                
               </div>
             </td>
             <td class="w-2/12 text-sm text-ideeza-dark font-semibold">{{project.title}}</td>
             <td class="w-2/12 text-sm text-ideeza-dark text-center">
-             <img
-                   v-for="info2 in project.assigned_users" 
-                    :src="avata_img_url + info2.avatar"
-                     class="avatar"
-                  />
+              <img v-for="info2 in project.assigned_users" :src="avata_img_url + info2.avatar" class="avatar" />
               <!-- hhh{{project.assigned_users}} -->
               <!-- +{{project.service_providers.length}} -->
             </td>
@@ -107,10 +75,7 @@
             <td class="w-2/12 text-sm text-ideeza-dark font-semibold pl-2 text-left">
               <button class="border border-ideeza-dark py-2 px-3 rounded">Track order</button>
               <span @click.stop="project.showpopup = !project.showpopup;$forceUpdate();">
-              <font-awesome-icon
-                class="text-xl mt-2 ml-4 text-green-300 float-right"
-                :icon="['fa', 'grip-vertical']"
-              />
+                <font-awesome-icon class="text-xl mt-2 ml-4 text-green-300 float-right" :icon="['fa', 'grip-vertical']" />
               </span>
               <div class="bg-white shadow-md relative w-64" v-if="project.showpopup" @click="project.showpopup = false;$forceUpdate();">
                 <div class="p-3 select-none cursor-pointer">Send message</div>
@@ -129,15 +94,10 @@
   </div>
 </template>
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import SimpleTable from "~/components/reusables/Table.vue";
-
 import apiService from "~/apiService/have_token.js";
-
 export default {
-  layout: "user",
   components: {
-    LeftMenu,
     SimpleTable
   },
   data() {
@@ -149,19 +109,17 @@ export default {
       randomNumber: [],
       geturl: "/api/project/technician/get_all",
       avata_img_url: process.env.avatar_base_url,
-      username:null,
-      useravatar:null,
+      username: null,
+      useravatar: null,
       selected: false,
-      projects: [
-        {
+      projects: [{
           id: 1,
           user: {
             name: "Michael Scott",
             avatar: "https://randomuser.me/api/portraits/women/20.jpg"
           },
           name: "Porsche 219mm",
-          service_providers: [
-            {
+          service_providers: [{
               url: "https://randomuser.me/api/portraits/women/20.jpg"
             },
             {
@@ -182,8 +140,7 @@ export default {
             avatar: "https://randomuser.me/api/portraits/men/20.jpg"
           },
           name: "Porsche 219mm",
-          service_providers: [
-            {
+          service_providers: [{
               url: "https://randomuser.me/api/portraits/women/20.jpg"
             },
             {
@@ -201,7 +158,7 @@ export default {
     };
   },
   mounted() {
-    this.username = window.$nuxt.$cookies.get("firstname") + " "+ window.$nuxt.$cookies.get("lastname");
+    this.username = window.$nuxt.$cookies.get("firstname") + " " + window.$nuxt.$cookies.get("lastname");
     this.useravatar = window.$nuxt.$cookies.get("useravatar");
     let sendData = {
       method: "get",
@@ -220,11 +177,6 @@ export default {
       });
     });
   },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
   methods: {
     selectall() {
       if (this.selected == true) {
@@ -240,12 +192,15 @@ export default {
     }
   }
 };
+
 </script>
 <style scoped>
 .w-13 {
   width: 13.333333%;
 }
+
 .avatar {
   @apply w-8 rounded-full -ml-2 shadow inline cursor-pointer;
 }
+
 </style>

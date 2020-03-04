@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <!-- <LeftMenu /> -->
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
@@ -121,7 +119,6 @@
   </div>
 </template>
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
 import SearchField from "~/components/form/search.vue";
 import AddNewProject from "~/components/technician/management/new-project.vue";
@@ -133,7 +130,6 @@ import apiService from "~/apiService/have_token.js";
 export default {
   name: "projects-index",
   components: {
-    LeftMenu,
     "drop-down": DropDownField,
     "search-field": SearchField,
     "new-project": AddNewProject
@@ -182,11 +178,6 @@ export default {
     // this.Services.map(item => {
     //   this.articleArray.push(item);
     // });
-  },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
   },
   mounted() {
     this.$store.commit("TechnicianProjectStore/viewflagchange2");

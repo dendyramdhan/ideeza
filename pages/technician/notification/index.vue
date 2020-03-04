@@ -91,7 +91,6 @@ import LeftMenu from "~/components/technician/settings/left-side-menu.vue";
 export default {
   name: "notifications",
   middleware: "auth",
-  layout: "technician",
   components: {
     LeftMenu,
   },

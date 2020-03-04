@@ -44,7 +44,6 @@
   </div>
 </template>
 <script>
-import LeftMenu from '~/components/admin/common-left-side-menu.vue'
 import FileField from '~/components/form/file-field.vue'
 import TagsInput from '@voerro/vue-tagsinput/src/VoerroTagsInput.vue'
 import apiService from "~/apiService/have_token.js";
