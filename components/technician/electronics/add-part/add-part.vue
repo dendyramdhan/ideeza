@@ -41,13 +41,13 @@
 
             <span class="font-semibold text-center mb-5">Choose the type of Model</span>
             <button
-              @click="$emit('next')"
+              @click="selectModel"
               class="btn pill-button pill-button--ideeza px-24 py-0 mb-5"
             >SMT</button>
             <hr data-content="or" class="hr-text my-5" />
 
             <button
-              @click="$emit('next')"
+              @click="selectModel"
               class="btn pill-button pill-button--ideeza px-16 py-0"
             >Through Hole</button>
 
@@ -58,13 +58,29 @@
   </div>
 </template>
 <script>
-
+import { mapState } from 'vuex';
 export default {
   name: "add-part",
   data: () => {
     return {
       createModel: false
     };
+  },
+  computed: {
+    ...mapState({
+      part: state => state.part.selected_part
+    })
+  },
+  methods: {
+    selectModel() {
+      let that = this
+     if(['TQFN','R0805','FemaleHeader','femaleheader'].find(a => a == that.part.package)){
+       this.$emit('next')
+     }
+     else{
+       this.$emit('notSupported')
+     }
+    }
   }
 };
 </script>

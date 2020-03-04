@@ -16,43 +16,27 @@
         </thead>
         <tbody>
           <tr class="bg-gray-200">
-            <td class>ATMEGA32M1-AU-ND</td>
-            <td>Some description</td>
-            <td>BGBPA</td>
+            <td class>r005</td>
+            <td>r005</td>
+            <td>r005</td>
             <td>
-              <button @click="$emit('selectType')" class="btn pill-button px-4 py-0">select</button>
+              <button @click="$emit('selectType','R0805')" class="btn pill-button px-4 py-0">select</button>
             </td>
           </tr>
-          <tr class>
-            <td class>ATMEGA32M1-AU-ND</td>
-            <td>Some description</td>
-            <td>BGBPA</td>
+          <tr>
+            <td class>tqfn</td>
+            <td>tqfn</td>
+            <td>tqfn</td>
             <td>
-              <button @click="$emit('selectType')" class="btn pill-button px-4 py-0">select</button>
-            </td>
-          </tr>
-          <tr class="bg-gray-200">
-            <td class>ATMEGA32M1-AU-ND</td>
-            <td>Some description</td>
-            <td>BGBPA</td>
-            <td>
-              <button @click="$emit('selectType')" class="btn pill-button px-4 py-0">select</button>
-            </td>
-          </tr>
-          <tr class>
-            <td class>ATMEGA32M1-AU-ND</td>
-            <td>Some description</td>
-            <td>BGBPA</td>
-            <td>
-              <button @click="$emit('selectType')" class="btn pill-button px-4 py-0">select</button>
+              <button @click="$emit('selectType','TQFN')" class="btn pill-button px-4 py-0">select</button>
             </td>
           </tr>
           <tr class="bg-gray-200">
-            <td class>ATMEGA32M1-AU-ND</td>
-            <td>Some description</td>
-            <td>BGBPA</td>
+            <td class>female header</td>
+            <td>female header</td>
+            <td>female header</td>
             <td>
-              <button @click="$emit('selectType')" class="btn pill-button px-4 py-0">select</button>
+              <button @click="$emit('selectType','FemaleHeader')" class="btn pill-button px-4 py-0">select</button>
             </td>
           </tr>
         </tbody>

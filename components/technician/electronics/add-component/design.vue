@@ -22,15 +22,17 @@
     <client-only placeholder="Loading...">
 
       <engine class="border border-light-gray"
-              :init-data="initDataForEngine"
+              :init-data="model"
               :visibleGrid="visibleGrid"
               :componentSize="componentSize"
               :visible3d="visible3d"
               :group-button="doAction"
               :resolution="parseInt(resolution)"
               @selectObject="selectedObject"
+              ref="engine"
       />
     </client-only>
+    <button @click="save">save</button>
   </div>
 
 </template>
@@ -45,6 +47,12 @@
   import DropDown from '~/components/form/dropdown-field.vue'
   export default {
         name: "design",
+    props: {
+      model: {
+        default: null,
+        type: Object
+      }
+    },
     data() {
       return {
         resolutionValue: 10,
@@ -70,6 +78,9 @@
       'vue-slider': VueSlider
     },
     methods: {
+      save() {
+        console.log(JSON.stringify(this.$refs['engine'].getData()))
+      },
       setAction(val) {
         this.doAction = val;
       } ,

@@ -86,8 +86,9 @@
 
     <div class="w-full mt-10 lg:flex justify-end">
       <!-- <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button> -->
-      <button class="btn pill-button pill-button--ideeza py-0 px-12" @click="save_component" >Save</button>
+      <button class="btn pill-button pill-button--ideeza py-0 px-12" @click="save_component" >Saveas</button>
     </div>
+    
 
   </div>
 
@@ -106,7 +107,7 @@
             colorPicker: false,
             description: false,
             visibleGrid: true,        // show the grid
-            initDataForEngine: {},    // the entire object need to init the engine, at the begining is empty
+            initDataForEngine: {"url":"user-ef148c156c834b169ed457ede5c1d876.glb","transform":{"position":[0,0,0],"rotation":[0,0,0],"scale":[0.8789532978852608,1.3682913445509002,1.0082649505514545],"color":"#7F7F7F"}},    // the entire object need to init the engine, at the begining is empty
             router: 1,                // type of scene - part -0, component -1, cover -2
             background: "#ffffff",    // backround color - hex string
             transform: "translate",   // type of transform in scene - translate, rotate, scale
@@ -156,6 +157,8 @@
         },
         save_component(){
 
+          this.initDataForEngine = {"url":"user-ef148c156c834b169ed457ede5c1d876.glb","transform":{"position":[0,0,0],"rotation":[0,0,0],"scale":[0.8789532978852608,1.3682913445509002,1.0082649505514545],"color":"#7F7F2F"}};
+          return;
           let partInfo = this.$refs.engine.getData()
 
           if(partInfo.length <1){
