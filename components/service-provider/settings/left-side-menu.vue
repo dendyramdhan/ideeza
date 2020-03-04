@@ -12,12 +12,6 @@
         <nuxt-link to="/service-provider/settings/notifications">Notifications</nuxt-link>
       </div>
       <div class="menu-item">
-        <nuxt-link to="/service-provider/settings/payment-methods">Payment Methods</nuxt-link>
-      </div>
-      <div class="menu-item">
-        <nuxt-link to="/service-provider/settings/payout-preferences">Payout Preferences</nuxt-link>
-      </div>
-      <div class="menu-item">
         <div @click="costActive = !costActive;">Cost of Service</div>
         <div :class="[costActive ? 'block' : 'hidden']">
           <nuxt-link to="/service-provider/settings/cost-of-service/electronics/fabrication" class="block ml-12 text-base mt-2">Electronics</nuxt-link>

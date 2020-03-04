@@ -15,6 +15,12 @@
                 <nuxt-link to="/user/settings/notifications">Notifications</nuxt-link>
             </div>
             <div class="menu-item">
+                <nuxt-link to="/user/settings/payment-methods">Payment Methods</nuxt-link>
+            </div>
+            <div class="menu-item">
+                <nuxt-link to="/user/settings/payout-methods">Payout Preferences</nuxt-link>
+            </div>
+            <div class="menu-item">
                 <nuxt-link to="/user/settings/transaction-history">Transaction History</nuxt-link>
             </div>
             <div class="menu-item">
