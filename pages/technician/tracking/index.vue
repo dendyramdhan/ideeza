@@ -140,7 +140,7 @@ import SimpleTable from "~/components/reusables/Table.vue";
 import apiService from "~/apiService/have_token.js";
 
 export default {
-  layout: "user",
+  layout: "technician",
   components: {
     LeftMenu,
     SimpleTable

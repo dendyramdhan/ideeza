@@ -4,7 +4,7 @@
     <LeftMenu :userList="userList" :selectedUserIndex="selectedUserIndex" @select_user="select_user" />
 
     <!-- Main Contents -->
-    <div class="flex-grow lg:py-10 lg:px-3 xl:px-10">
+    <div class="flex-grow lg:py-10 lg:px-3 xl:px-10 main-contents">
       <div class="lg:flex">
         <div class="lg:w-3/4 lg:mr-3 shadow-md bg-white">
           <div class="chat-board" id="message-container">

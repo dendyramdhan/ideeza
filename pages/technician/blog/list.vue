@@ -115,6 +115,7 @@ import apiService2 from "~/apiService/have_data.js";
 
 export default {
   name: "blog-list",
+  layout: "technician",
   data: function() {
     return {
       ts: new Date(),

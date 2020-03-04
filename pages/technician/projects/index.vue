@@ -165,7 +165,7 @@ import apiService from "~/apiService/have_token.js";
 
 
 export default {
-  layout: "user",
+  layout: "technician",
   name: "projects-index",
   components: {
     LeftMenu,

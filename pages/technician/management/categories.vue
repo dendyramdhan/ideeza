@@ -11,7 +11,7 @@
       <nuxt-link class="mr-10" to="/technician/management/categories/blog">Blog</nuxt-link>
     </div>
 
-    <nuxt-child></nuxt-child>
+    <nuxt-child class="main-contents"></nuxt-child>
 
   </div>
 </template>
@@ -20,7 +20,6 @@
 
     export default {
         name: "user-service-providers",
-
     }
 </script>
 

@@ -17,7 +17,7 @@ import SidebarMenu from "~/components/reusables/SideBar.vue";
 
 export default {
   middleware: "auth",
-  layout: "user",
+  layout: "technician",
   name: "blog-index",
   components: {
     LeftMenu,

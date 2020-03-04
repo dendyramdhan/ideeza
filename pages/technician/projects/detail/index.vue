@@ -212,7 +212,7 @@ import apiService from "~/apiService/have_token.js";
 import apiService2 from "~/apiService/get_param.js";
 
 export default {
-  layout: "user",
+  layout: "technician",
   name: "detail",
   mounted() {
     this.projectidd = this.$route.query.id;
