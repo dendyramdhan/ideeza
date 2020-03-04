@@ -161,10 +161,7 @@ export default {
         this.articleArray.push(item);
       });
 
-      this.sort('name');
-
-      console.log(this.articleArray, 'this.articleArray');
-      
+      this.sort('name');      
 
       this.length = this.articleArrayrout.length / 5 - 1;
       this.counter =
