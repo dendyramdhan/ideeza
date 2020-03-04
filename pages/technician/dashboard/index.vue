@@ -48,7 +48,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/icon_ref_2340.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2340.png" class="w-12 object-center object-right mr-5" alt /> 
               </div>
             </div>
           </div>

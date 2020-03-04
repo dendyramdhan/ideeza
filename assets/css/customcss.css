@@ -1,6 +1,9 @@
 .flex.main-panel{
 	padding-top: 56px;
 }
+.main-panel .main-panel{
+	padding-top: 0;
+}
 .header-bar.gradient-bg.flex-shrink {
     position: fixed;
     width: 100%;
@@ -245,7 +248,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 
 /* Track */
