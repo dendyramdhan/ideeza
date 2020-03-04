@@ -61,16 +61,6 @@
               </div>
             </div>
           </div>
-          <div class="mt-10">
-            Notification center:
-            <button @click.self="showNotifications = true" class="ml-5 btn btn-small btn--ideeza px-2 text-xs">
-              Compose
-              <font-awesome-icon class="ml-2 h-3 text-white" :icon="['fas', 'paper-plane']" />
-            </button>
-          </div>
-          <div class="mt-10 rounded-lg p-5 bg-gray-200">
-            <span class="text-xs">Inbox is empty</span>
-          </div>
           <div class="my-10">
             <span class="inline-block mb-2">Assigned Layer</span>
             <select @change="taskasignlayer" styleHeight="mini">

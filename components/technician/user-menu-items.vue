@@ -31,7 +31,7 @@
           <div @click="toggleServiceProviderMenu">
             <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'fort-awesome']" /> Service Provider
           </div>
-          <div class="childs" v-show="serviceProviderMenu">
+          <div :class="{ childs: !serviceProviderMenu }">
             <nuxt-link to="/technician/management/service-provider/process" class="block ml-12 text-gray-700 text-base mt-2">
               <font-awesome-icon class="mr-3 h-6 inline text-md text-gray-700" :icon="['fab', 'pinterest-p']" /> Process</nuxt-link>
             <nuxt-link to="/technician/management/service-provider/machines" class="block ml-12 text-gray-700 text-base mt-2">
