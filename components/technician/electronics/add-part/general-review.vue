@@ -27,22 +27,18 @@
         </h1>
         <div class="my-2 pb-2 flex">
           <div class="font-semibold text-gray-600 w-32">Name</div>
-          <div class="font-semibold ">ATMEGA32AU-AM</div>
+          <div class="font-semibold ">{{part.name}}</div>
 
         </div>
         <div class="my-2 pb-2 flex">
           <div class="font-semibold text-gray-600 w-32">Category</div>
-          <div class="font-semibold ">Electronics/ATMEGA</div>
+          <div class="font-semibold ">{{part.category}}</div>
 
         </div>
         <div class="my-2 pb-2 flex">
           <div class="font-semibold text-gray-600 w-32">Description</div>
           <div class="text-xs text-gray-600">
-            <div>AVR Microcontroller</div>
-            <div>EPROM: 32KB</div>
-            <div>SRAM: 10KB</div>
-            <div>Flash: 32KB</div>
-            <div>TQFP: 25</div>
+            {{part.description}}
           </div>
 
         </div>
@@ -51,33 +47,16 @@
         <h1 class="font-semibold mb-3 pb-1 border-b border-solid border-gray-400">
           Pricing
         </h1>
-        <div class="my-2 pb-2 flex justify-between">
+        <div class="my-2 pb-2 flex justify-between" v-for="price in part.prices">
           <div class="font-semibold flex text-gray-600">
             <div class="w-20">Quantity</div>
-            <div class="text-black">1</div>
+            <div class="text-black">{{price.quantity}}</div>
           </div>
 
           <div class="font-semibold flex text-gray-600">
             <div class="w-20">Price</div>
-            <div class="text-black">30 $</div>
+            <div class="text-black">{{price.price}} $</div>
           </div>
-
-
-
-        </div>
-        <div class="my-2 pb-2 flex justify-between">
-          <div class="font-semibold flex text-gray-600">
-            <div class="w-20">Quantity</div>
-            <div class="text-black">2</div>
-          </div>
-
-          <div class="font-semibold flex text-gray-600">
-            <div class="w-20">Price</div>
-            <div class="text-black">60 $</div>
-          </div>
-
-
-
         </div>
       </div>
     </div>
@@ -86,8 +65,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
     export default {
-        name: "general-review"
+        name: "general-review",
+        computed: {
+          ...mapState({
+            part: state => state.part.selected_part
+          })
+        }
     }
 </script>
 

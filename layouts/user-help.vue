@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-full">
+  <div class="flex flex-col h-full user-content">
     <navigation class="flex-shrink"></navigation>
     <nuxt class="flex-grow" />
   </div>
@@ -30,5 +30,8 @@ export default {
 }
 #__layout {
   height: 100%;
+}
+.user-content .main-contents{
+  margin-left: 300px;
 }
 </style>

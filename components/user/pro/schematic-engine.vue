@@ -2,6 +2,7 @@
   <div class="w-full h-full relative">
     <client-only>
       <engine
+        ref="engine"
         :init-data="initDataForEngine"
         :visibleGrid="visibleGrid"
         :group-button="doAction"
@@ -11,6 +12,7 @@
       />
       <spinner slot="placeholder" />
     </client-only>
+    <button @click="save" class="p-3 bg-ideeza">save</button>
   </div>
 </template>
 
@@ -23,7 +25,12 @@
         return {
           step: 0,
           visibleGrid: true,        // show the grid
-          initDataForEngine: {},    // the entire object need to init the engine, at the begining is empty
+          initDataForEngine: {
+            "nets":[{"name":"Net 0","path":[[{"x":3.0500001907348633,"y":0.009999999776482582,"z":0.4000000059604645},{"x":3.0500001907348633,"y":0.009999999776482582,"z":0.75},{"x":2.0999999046325684,"y":0.009999999776482582,"z":0.75}]],"pins":[[0,2],[1,2]]}],
+            "routing":[],
+            "assets":[{"nets":[{"name":"Net 0","path":[[{"x":0.7999999523162842,"y":0.009999999776482582,"z":-0.3499999940395355},{"x":0.7999999523162842,"y":0.009999999776482582,"z":-0.25},{"x":-1.3999998569488525,"y":0.009999999776482582,"z":-0.25}]],"pins":[[1,25],[0,9]]},{"name":"Net 1","path":[[{"x":0.7999999523162842,"y":0.009999999776482582,"z":-1.850000023841858},{"x":0.7999999523162842,"y":0.009999999776482582,"z":-1.75},{"x":-1.3999998569488525,"y":0.009999999776482582,"z":-1.75}]],"pins":[[1,28],[0,12]]}],"routing_data":[],"assets":[{"transform":{"best_p":[1.0299999999999985,0.7300000000000004,0,0],"best_sc":[-2.6000000000000005,0,0],"position":[4.300000000000002,0,4.6],"rotation":[0,0,0],"pivot":[-4.67,-4.67]},"name":"ATmega328","name2d":"AT","url":"user-e71413056a4049e399aad42118410e87.babylon","design":"user-0e1383d25be244a08f024106d03ac8ae.babylon","schematic":"user-6cb573279715425db9fec438d44c73b8.babylon"},{"transform":{"best_p":[10.329999999999998,9.73,0,0],"best_sc":[2,-0.10000000000000009,0],"position":[-4.999999999999999,0,-4.3999999999999995],"rotation":[0,0,0],"pivot":[-4.67,-4.67]},"name":"ATmega328","name2d":"AT","url":"user-e71413056a4049e399aad42118410e87.babylon","design":"user-0e1383d25be244a08f024106d03ac8ae.babylon","schematic":"user-6cb573279715425db9fec438d44c73b8.babylon"}],"compSize":[20,20],"electData":{"ComponentParts":["ATmega328","AT","ATmega328","AT"],"ComponentToParts":[],"PartToPart":[[1,25,0,9],[1,28,0,12]],"PartToPartNames":["Net 0","Net 1"],"need":{"pin":["1/vcc","2/gnd"],"vcc":false,"gnd":false},"pass":{"pin":["3/ac1"],"ac1":false}},"transform":{"pos_sc":[4,0.5,0],"pos_d":[0,0,0,0]}},{"name":"Comp2","transform":{"pos_sc":[1.5,0.5,0],"pos_d":[0,0,0,0]},"assets":[{"transform":{"best_p":[3.1499999999999986,0.9500000000000002,0,0],"best_sc":[2.6,-0.1,0],"rotation":[0,0,0],"pivot":[-1.05,-0.65],"position":[5.800000000000001,0,5.8999999999999995],"mirror":false,"display":0,"coverPos":[0,0,0],"coverRot":[0,0,0]},"name":"cap0805","name2d":"C","url":"user-be5e1cc3a341462690fd8d8db0dac77e.babylon","design":"user-3119100f41da4b3a8efc9e8a8cf85984.babylon","schematic":"user-fedb78707a30463396684b40590e0759.babylon"},{"transform":{"best_p":[0.7299999999999995,4.329999999999998,0,0],"best_sc":[-0.8,0.30000000000000004,0],"position":[4.6000000000000005,0,-1.4999999999999987],"rotation":[0,0,0],"pivot":[-4.67,-4.67]},"name":"ATmega328","name2d":"AT","url":"user-e71413056a4049e399aad42118410e87.babylon","design":"user-0e1383d25be244a08f024106d03ac8ae.babylon","schematic":"user-6cb573279715425db9fec438d44c73b8.babylon"}],"nets":[{"name":"Net 0","path":[[{"x":2.049999952316284,"y":0.009999999776482582,"z":-0.10000000149011612},{"x":2.049999952316284,"y":0.009999999776482582,"z":-0.44999998807907104},{"x":0.40000003576278687,"y":0.009999999776482582,"z":-0.44999998807907104}]],"pins":[[0,2],[1,10]]}],"routing_data":[{"pins":[[1,10],[0,2]],"path":[[{"x":6.599999904632568,"y":0.019999999552965164,"z":2.9749999046325684},{"x":7.7,"y":0,"z":4.7},{"x":6.550000190734863,"y":0.019999999552965164,"z":5.900000095367432}]],"width":[[0.1,0.1]],"mirror":[[false,false]]}],"compSize":[20,15],"electData":{"ComponentParts":["ATmega328","AT"],"ComponentToParts":[[1,0,11],[2,0,6],[3,0,25]],"PartToPart":[[0,11],[0,6],[0,25]],"PartToPartNames":["Net 0","Net 1","Net 2"],"need":{"pin":["1/vcc","2/gnd"],"vcc":false,"gnd":false},"pass":{"pin":["3/ac1"],"ac1":false}}}],
+            "compSize":[50,50],
+            "electData":{"ComponentToParts":[],"PartToPart":[[0,2,1,2]],"PartToPartNames":["Net 0"]}},    // the entire object need to init the engine, at the begining is empty
           doAction: "move",         // move, rotate, copy, delete, label, route, highlight
           resolution: 10,           // min: 1, max: 100.
           partDataForImport: {},    // the entire object need to import a part
@@ -53,6 +60,9 @@
           this.showTech = true
           /* eslint-disable no-console */
           console.log('data of this comp ',JSON.stringify(param))
+        },
+        save() {
+          console.log(this.$refs.engine.getData())
         }
       }
     }

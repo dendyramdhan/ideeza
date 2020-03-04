@@ -3,17 +3,35 @@
     <div class="w-full shadow-md bg-white relative">
 
       <div class="p-5 md:flex justify-between items-center">
-        <div class="md:flex items-center">
+        <div class="md:flex items-center justify-between">
 
           <div class="flex items-center mr-5 mb-2 md:mb-0">
             <check-box :checked="true" @onChange="toggleGrid">Grid</check-box>
           </div>
 
-          <div class="flex items-center mb-2 md:mb-0">
+          <div class="flex items-center mb-2 md:mb-0 mr-3">
+            <span class="mr-1">Name</span>
+            <input class="w-32 bg-white p-1 border border-solid border-gray-400" type="text" />
+          </div>
+          
+          <div class="flex items-center mb-2 md:mb-0 mr-3">
             <span class="mr-1">Category</span>
             <select class="w-32 bg-white p-1 border border-solid border-gray-400">
               <option></option>
             </select>
+          </div>
+
+          <div class="flex items-center mb-2 md:mb-0 mr-3">
+            <span class="mr-1">Function</span>
+            <input class="w-32 bg-white p-1 border border-solid border-gray-400" type="text" />
+          </div>
+
+          <div class="flex items-center mr-3">
+            <file-field label="Upload 3D" @input="upload3dModel" />
+          </div>
+
+          <div class="flex items-center mr-3">
+            <button class="rounded-full border border-gray p-3" @click="clear()">Clear</button>
           </div>
         </div>
         
@@ -39,7 +57,6 @@
                   :apiPlatform="apiPlatform"
                   :searchFor="searchFor"
                   @selectObject="selectedObject"
-
                   ref="engine"
           />
           <spinner slot="placeholder" />
@@ -86,6 +103,8 @@
         </div>
       </div>
     </div>
+
+    <button class="bg-ideeza p-3" @click="save">save</button>
 
     <div class="w-full mt-10 lg:flex justify-end">
       <!-- <button class="btn pill-button py-0 px-20 mr-5 mb-2 md:mb-0" >+ Add new part</button> -->
@@ -148,7 +167,15 @@
         },
 
         methods: {
-
+          save() {
+            console.log(JSON.stringify(this.$refs.engine.getData()))
+          },
+          clear(){
+            this.uploadData = null;
+          },
+          upload3dModel(e){
+            this.uploadData = e
+          },
           toggleGrid(state){
             this.visibleGrid = state;
           },

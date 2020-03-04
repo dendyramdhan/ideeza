@@ -30,4 +30,7 @@ export default function({ route, redirect }) {
   if (route.fullPath === "/technician/cover") {
     return redirect('/technician/cover/add-part')
   }
+  if (route.fullPath === "/technician/management") {
+    return redirect('/technician/management/user-service-providers')
+  }
 }

@@ -4,7 +4,7 @@
     </div>
     <img src="~/assets/images/new.gif" v-if="loaderFlag" style="position:absolute;top:40%;left:40%; z-index:1000" width="15%" />
     <navigation class="flex-shrink"></navigation>
-    <nuxt class="flex-grow center-content" />
+    <nuxt class="flex-grow center-content technician-content" />
   </div>
 </template>
 <script>
@@ -50,9 +50,9 @@ export default {
   overflow-y: auto;
   height: calc(100vh - 55px);
 }
-
-.center-content>.flex-grow {
+.technician-content .main-contents{
   margin-left: 300px;
 }
+ 
 
 </style>

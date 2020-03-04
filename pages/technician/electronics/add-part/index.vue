@@ -40,27 +40,31 @@
         ref="addPartSearch"
         class="mt-10"
         v-if="step === 0 && !addPartSelect && !addPartSelectType"
+        @next="onNext"
       />
 
-      <AddPart @next="onNext" class="mt-10" v-if="step === 1" />
+      <AddPart @next="step=3" class="mt-10" v-if="step === 1" @notSupported="step=2" />
 
-      <AddSelectPart @selectType="onNext" class="mt-10" v-if="step === 2" />
+      <!-- <AddSelectPart @selectType="saveType" class="mt-10" v-if="step === 2" /> -->
       
+      <not-supported v-if="step==2" />
+
       <AddConfigure @back="step=1" @next="onNext" class="mt-32" v-if="step === 3" />
 
-      <AddGeneral @back="step=2" @next="onNext" class="mt-32" v-if="step === 4" />
-      <general-review class="mt-32" v-if="step === 5" />
-      <AddFinish class="mt-32" v-if="step === 6" />
+      <AddElectronics v-if="step === 4" @back="step=3" @next="onNext"/>
+      <AddGeneral @back="step=4" class="mt-32" v-if="step === 5" />
+      <general-review class="mt-32" @next="onNext" v-if="step === 6" />
+      <AddFinish class="mt-32" v-if="step === 7" />
 
       <!--Bot Buttons-->
-      <div v-if="step === 0 || (step >= 3 && step !== 6)" class="mt-10 w-full flex">
+      <div v-if="(step >= 1 && step !== 7 && step !== 4)" class="mt-10 w-full flex">
         <div class="w-1/2 text-left">
           <button v-if="step > 0" @click="onBack" class="btn pill-button px-16 py-0">Back</button>          
         </div>
         <div class="w-1/2 text-right">
-          <button v-if="step <= 4" @click="onNext" class="btn pill-button px-16 py-0">Next</button>
+          <button v-if="step <= 5&&(step >= 3 && step !== 7&& step !== 4 && step !== 3)" @click="onNext" class="btn pill-button px-16 py-0">Next</button>
           <button
-            v-if="step === 5"
+            v-if="step === 6"
             @click="onNext"
             class="btn pill-button pill-button--ideeza px-16 py-1"
           >
@@ -74,6 +78,7 @@
 
 <script>
 import TextField from "~/components/form/text-field.vue";
+import NotSupported from "~/components/technician/electronics/add-part/not-supported.vue"
 import TextArea from "~/components/form/text-area.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
 import AddPartSearch from "~/components/technician/electronics/add-part/add-part-search.vue";
@@ -112,7 +117,8 @@ export default {
     AddCode,
     AddGeneral,
     "general-review": GeneralReview,
-    AddFinish
+    AddFinish,
+    NotSupported
   },
   computed: {
     overlayWidth() {
@@ -125,11 +131,16 @@ export default {
     }
   },
   methods: {
+    saveType(data) {
+      this.$store.commit('part/savePackageType',data)
+      this.onNext()
+    },
     onBack() {
       if (this.step > 0) this.step -= 1;
     },
     onNext() {
       // alert(this.step);
+      console.log(this.step)
       if(this.step==0){
          var selPart = this.$refs.addPartSearch.selectedPart
         console.log("selected part : ", selPart)
@@ -138,7 +149,7 @@ export default {
       }
       
 
-       if (this.step < 6) this.step += 1;
+       if (this.step < 7) this.step += 1;
     },
     onFinish(){
       console.log("finish")

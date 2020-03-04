@@ -240,9 +240,7 @@ export default {
 </script>
 
 <style scoped>
-.settings-privacy {
-  max-width: 950px;
-}
+ 
 input[type="checkbox"] {
   /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */
@@ -252,5 +250,8 @@ input[type="checkbox"] {
   transform: scale(2);
   padding: 10px;
   margin: 5px;
+}
+.flex-grow.bg-settings{
+    margin-left: 0 !important;
 }
 </style>

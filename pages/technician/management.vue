@@ -4,7 +4,7 @@
     <LeftMenu />
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
-      <div class="main-contents">
+      <div class="">
         <!-- <div class="header-bar lg:flex items-center">
           <nuxt-link class="header-menu block mb-2" to="/technician/management/user-service-providers">
             <font-awesome-icon class="mr-5 h-6 inline text-xl" :icon="['fas', 'users-cog']" /> User & Service Providers & Technician

@@ -131,7 +131,6 @@ import Services from "~/data/TechnicianProjectApi.json";
 import apiService from "~/apiService/have_token.js";
 
 export default {
-  layout: "user",
   name: "projects-index",
   components: {
     LeftMenu,

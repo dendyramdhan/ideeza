@@ -17,9 +17,12 @@
         :scanRes="scanRes"
         :scanView="scanView"
         @selectObject="selectedObject"
+        ref="engine"
       />
       <spinner slot="placeholder" />
     </client-only>
+    <button class="p-3 bg-ideeza text-white" @click="add">add</button>
+    <button class="p-3 bg-ideeza text-white" @click="save">save</button>
   </div>
 </template>
 
@@ -54,6 +57,12 @@
           this.import3dModel({'transform':{'position':[0,0,0],'rotation':[0,0,0],'scale':[1,1,1],'color':'#1f1f1f'},'url':'user-5272f6574e9b4c2b955bb3a6dbc45795.glb'})
       },
       methods: {
+        add() {
+          this.import3dModel({'transform':{'position':[0,0,0],'rotation':[0,0,0],'scale':[1,1,1],'color':'#1f1f1f'},'url':'user-5272f6574e9b4c2b955bb3a6dbc45795.glb'})
+        },
+        save() {
+          console.log(this.$refs.engine.getData())
+        },
         toggleGrid() {
           this.visibleGrid = !this.visibleGrid
         },
@@ -61,6 +70,7 @@
           this.transform = param
         },
         import3dModel(param){
+          console.log('hoa')
           this.objectData = param;
         },
         upload3dModel(param){

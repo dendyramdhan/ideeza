@@ -1,3 +1,12 @@
+.flex.main-panel{
+	padding-top: 56px;
+}
+.header-bar.gradient-bg.flex-shrink {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+}
 .curve-bg{
   background: url(~static/images/curve-bg-1.png) no-repeat;
   background-size: 101%;
@@ -200,6 +209,7 @@
 	top:-160px;
 	z-index: -1;
 }
+
 @media (max-width: 767px){
 	.succe_box-w{
 		width: 100%;
@@ -233,3 +243,24 @@
   }
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ff00c7; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff00c7; 
+}

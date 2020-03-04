@@ -262,6 +262,7 @@
 
     export default {
         name: "detail",
+        layout: "technician",
       components: {
         'new-project': AddNewProject,
         'new-task': AddNewTask,

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar">
+  <div class="flex flex-wrap items-start bg-white h-full shadow relative left-side-bar overflow-scroll">
     <!--Left Menu-->
     <div class="left-main-menu p-10 relative w-full">
       <CommonMenuItems />

@@ -33,10 +33,10 @@
         <input placeholder="Add more components" class="bg-white flex-grow outline-none h-8 text-gray-800 pr-3">
       </div>
       <div v-if="step === 0" class="w-full relative bg-gray-400 mt-10 components-container">
-        <Schematic />
+        <Schematic @next="importmodel"/>
       </div>
       <div v-if="step === 1" class="w-full relative bg-gray-400 mt-10 components-container">
-        <Design />
+        <Design :model="model"/>
       </div>
 
       <div v-if="step === 2" class="w-full ">
@@ -281,7 +281,8 @@
         data: function () {
             return {
                 activeDrawer: null,
-                step: 0
+                step: 0,
+                model: null
             }
         },
       components: {
@@ -304,6 +305,9 @@
         }
       },
         methods: {
+            importmodel(e){
+              this.model = e
+            },
             back() {
                 if(this.step > 0)
                     this.step -= 1;
