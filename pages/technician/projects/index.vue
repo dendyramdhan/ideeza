@@ -1,21 +1,12 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
-
+  <div class="flex main-panel">
     <!-- Main Contents -->
     <div class="flex-grow">
       <div class="main-contents">
         <h1 class="text-2xl border-b-4 border-solid border-ideeza pb-5 mt-8">Projects</h1>
         <div class="mt-5 mb-10 lg:flex justify-between">
           <div class="flex">
-            <select
-              class="w-32 mr-10"
-              selected="All"
-              @change="selectkindman"
-              v-model="kindman"
-              style="height:40px;font-size:20px "
-            >
+            <select class="w-32 mr-10" selected="All" @change="selectkindman" v-model="kindman" style="height:40px;font-size:20px ">
               <option>All</option>
               <option>Active</option>
               <option>completed</option>
@@ -24,25 +15,14 @@
             </select>
             <!-- <drop-down class="w-32 mr-10" :data="dataDropDown" selected="All" /> -->
             <!-- <search-field placeholder="Search Project..." /> -->
-            <input
-              placeholder="search Project..."
-              class="bg-white outline-none h-8 text-gray-800 pr-3"
-              v-model="searchTerm"
-              v-on:input="search"
-            />
+            <input placeholder="search Project..." class="bg-white outline-none h-8 text-gray-800 pr-3" v-model="searchTerm" v-on:input="search" />
           </div>
           <div>
             <!-- <button
               @click.self="addNewProject=true"
               class="btn btn-normal btn--ideeza px-5 py-3"
             >Create New +</button> -->
-            <select
-              class="w-48 block mt-5"
-              placeholder="Sort By"
-              style="height:40px;font-size:20px "
-              v-model="kindmanworkinfo"
-              @change="selectkindmanworkinfo"
-            >
+            <select class="w-48 block mt-5" placeholder="Sort By" style="height:40px;font-size:20px " v-model="kindmanworkinfo" @change="selectkindmanworkinfo">
               <option>None</option>
               <option>Due Date First</option>
               <option>Starting Day First</option>
@@ -57,30 +37,23 @@
             />-->
           </div>
         </div>
-
         <table class="mt-10 shadow-md">
           <thead>
             <tr class="text-white h16 gradient-bg">
-              <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-white"
-                  :icon="['fas', 'sort']"
-                />Projects</th>
+              <th class="text-left">
+                <font-awesome-icon class="mr-1 text-lg text-white" :icon="['fas', 'sort']" />Projects</th>
               <!-- <th class="text-left">Assigned to</th> -->
-              <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-white"
-                  :icon="['fas', 'sort']"
-                />Due Date</th>
-              <th class="text-left"><font-awesome-icon
-                  class="mr-1 text-lg text-white"
-                  :icon="['fas', 'sort']"
-                />Task Status</th>
+              <th class="text-left">
+                <font-awesome-icon class="mr-1 text-lg text-white" :icon="['fas', 'sort']" />Due Date</th>
+              <th class="text-left">
+                <font-awesome-icon class="mr-1 text-lg text-white" :icon="['fas', 'sort']" />Task Status</th>
               <th class="text-left">Notification</th>
             </tr>
           </thead>
           <tbody v-for="(Service, index) in articleArray">
             <tr class="bg-ideeza-100" v-if="start < index && index < end ">
               <td>
-                <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}" >{{Service.title}}</nuxt-link>
+                <nuxt-link :to="{ path: '/technician/projects/detail', query: { id: Service.id}}">{{Service.title}}</nuxt-link>
               </td>
               <!-- <td>
                 <span v-for="image in Service.assigned_users">
@@ -90,21 +63,20 @@
               <td>{{ts.toLocaleDateString(Service.end - Service.start)}}</td>
               <td class="status status--completed">
                 <p v-if="Service.status == 'Active' ">
-                <span class="text-green-500 font-semibold">{{Service.status}}</span>
-              </p>
-              <p v-else-if="Service.status == 'Completed'|| Service.status == 'Completed' ">
-                <span class="font-semibold text-gray-700">{{Service.status}}</span>
-              </p>
-              <p v-else-if="Service.status == 'Waiting'||Service.status == 'Wating'">
-                <span class="text-red-500 font-semibold">{{Service.status}}</span>
-              </p>
-              <span v-else class="text-green-500 font-semibold">{{Service.status}}</span>
+                  <span class="text-green-500 font-semibold">{{Service.status}}</span>
+                </p>
+                <p v-else-if="Service.status == 'Completed'|| Service.status == 'Completed' ">
+                  <span class="font-semibold text-gray-700">{{Service.status}}</span>
+                </p>
+                <p v-else-if="Service.status == 'Waiting'||Service.status == 'Wating'">
+                  <span class="text-red-500 font-semibold">{{Service.status}}</span>
+                </p>
+                <span v-else class="text-green-500 font-semibold">{{Service.status}}</span>
               </td>
               <td class="notifications">2 new notification</td>
             </tr>
           </tbody>
         </table>
-
         <!--Table Stats-->
         <!-- <div class="mt-10 lg:flex justify-center">
           <div class="flex items-center">
@@ -118,13 +90,11 @@
             />
           </div>
         </div>-->
-
         <!--Paging-->
         <div class="mx-auto w-content">
           <span class="inline-block mr-4 cursor-pointer" @click="decreasekey">
             <font-awesome-icon class="mr-1 h-4" :icon="['fas', 'angle-double-left']" />Previous
           </span>
-
           <span v-for="inde in counterarray " :key="inde">
             <span v-if="currentviewpoint == inde " class="text-lg text-ideeza">
               <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
@@ -133,13 +103,11 @@
               <button style="width:35px;" @click="selectedkey(inde)">{{inde}}</button>
             </span>
           </span>
-
           <span class="inline-block ml-4 cursor-pointer" @click="increasekey">
             Next
             <font-awesome-icon class="ml-2 h-4" :icon="['fas', 'angle-double-right']" />
           </span>
         </div>
-
         <!--Add new project-->
         <new-project @onClose="addNewProject=false" v-if="addNewProject" />
       </div>
@@ -151,24 +119,16 @@
     <!-- {{articleArray}} -->
   </div>
 </template>
-
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
 import DropDownField from "~/components/form/dropdown-field.vue";
 import SearchField from "~/components/form/search.vue";
 import AddNewProject from "~/components/technician/management/new-project.vue";
-
 import Services from "~/data/TechnicianProjectApi.json";
-
 import apiService from "~/apiService/have_token.js";
 
-
-
 export default {
-  layout: "technician",
   name: "projects-index",
   components: {
-    LeftMenu,
     "drop-down": DropDownField,
     "search-field": SearchField,
     "new-project": AddNewProject
@@ -188,11 +148,11 @@ export default {
       start: this.$store.state.TechnicianProjectStore.offset * 5 - 1,
       end: this.$store.state.TechnicianProjectStore.offset * 5 + 5,
       counterarray: [],
-       articleArrayaxios: [],
+      articleArrayaxios: [],
       articleArrayrout: [],
       randomNumber: [],
       geturl: "/api/project/technician/get_all",
-      avata_img_url:process.env.avatar_base_url,
+      avata_img_url: process.env.avatar_base_url,
       addNewProject: false,
       dataDropDown: ["All", "Active", "Completed", "Priority", "Over Due"],
       sortDropDown: [
@@ -219,13 +179,8 @@ export default {
     //   this.articleArray.push(item);
     // });
   },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
   mounted() {
-     this.$store.commit("TechnicianProjectStore/viewflagchange2");
+    this.$store.commit("TechnicianProjectStore/viewflagchange2");
     let sendData = {
       method: "get",
       url: this.geturl,
@@ -244,9 +199,9 @@ export default {
 
       this.length = this.articleArrayrout.length / 5 - 1;
       this.counter = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale;
-  
+
       let i = 1;
-      let endd = this.articleArrayrout.length /this.$store.state.TechnicianProjectStore.scale + 1;
+      let endd = this.articleArrayrout.length / this.$store.state.TechnicianProjectStore.scale + 1;
       //  alert( this.Services.length);
       for (i = 1; i <= endd; i++) {
         this.counterarray.push(i);
@@ -394,8 +349,7 @@ export default {
       if (
         this.currentviewpoint == this.counter ||
         this.currentviewpoint > this.counter
-      ) {
-      } else {
+      ) {} else {
         this.$store.commit("TechnicianProjectStore/increasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -409,8 +363,7 @@ export default {
       }
     },
     decreasekey() {
-      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {
-      } else {
+      if (this.currentviewpoint == 1 || this.currentviewpoint < 1) {} else {
         this.$store.commit("TechnicianProjectStore/decreasekeyChange");
         this.currentviewpoint =
           this.$store.state.TechnicianProjectStore.offset + 1;
@@ -425,61 +378,78 @@ export default {
     }
   }
 };
-</script>
 
+</script>
 <style scoped>
 .avatar {
   @apply w-8 rounded-full -ml-5 shadow inline cursor-pointer;
 }
+
 .avatar:hover {
   @apply shadow-md;
 }
+
 .avatar:first-child {
   @apply ml-0;
 }
+
 .status {
   @apply uppercase;
 }
+
 .status--completed {
   @apply text-green-500;
 }
+
 .status--progress {
   @apply text-orange-500;
 }
+
 .status--over {
   @apply text-red-500;
 }
+
 .notifications {
   @apply text-sm text-ideeza;
 }
+
 @screen lg {
   table {
     @apply mb-5 w-full table-fixed border-collapse text-gray-600;
   }
+
   thead tr {
     @apply bg-white px-6 pl-16;
   }
+
   thead th {
     @apply p-6;
   }
+
   thead th:first-child {
     @apply pl-16;
   }
+
   tbody td {
     @apply p-6 border-r border-solid border-gray-300;
   }
+
   tbody tr:even {
     @apply bg-white;
   }
+
   tbody td:first-child {
     @apply pl-16;
   }
+
   tbody td:last-child {
     @apply border-r-0;
   }
 }
+
 @media only screen and (max-width: 760px),
-  (min-device-width: 768px) and (max-device-width: 1024px) {
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
   /* Force table to not be like tables anymore */
   table,
   thead,
@@ -528,20 +498,26 @@ export default {
   td:nth-of-type(1):before {
     content: "Products";
   }
+
   td:nth-of-type(2):before {
     content: "Color";
   }
+
   td:nth-of-type(3):before {
     content: "Price";
   }
+
   td:nth-of-type(4):before {
     content: "Quantity";
   }
+
   td:nth-of-type(5):before {
     content: "Cost";
   }
+
   td:nth-of-type(6):before {
     content: "Action";
   }
 }
+
 </style>

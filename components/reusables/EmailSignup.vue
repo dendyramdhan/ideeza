@@ -52,7 +52,8 @@
 <script>
 import Modal from "~/components/reusables/Modal.vue";
 import firebase from "firebase";
-import apiService from "~/apiService";
+import apiService from "~/apiService/have_data";
+import apiService3 from "~/apiService";
 import apiService2 from "~/apiService/get_param.js";
 import VueJwtDecode from 'vue-jwt-decode'
 import moment from 'moment'
@@ -159,7 +160,7 @@ export default {
               data: signupFormData
             };
 
-            apiService(Data, response2 => {
+            apiService3(Data, response2 => {
               if (response2.status === 200) {
                 var access = response2.data.access;
                 var refresh = response2.data.refresh;

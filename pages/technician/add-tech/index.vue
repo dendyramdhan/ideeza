@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
+  <div class="flex main-panel">
     <div class="w-full px-4">
       <div class="py-4">
         <nuxt-link to="" class="text-gray-600 px-5 py-3 bg-white inline-block mb-2">
@@ -89,26 +87,13 @@
   </div>
 </template>
 <script>
-import LeftMenu from '~/components/technician/common-left-side-menu.vue'
 import AddCode from '~/components/technician/add-code.vue'
 
 export default {
-  layout: 'technician',
   name: "code-index",
   components: {
-    LeftMenu,
     AddCode
   },
-
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
-  },
-  mounted() {
-
-  },
-
 }
 
 </script>

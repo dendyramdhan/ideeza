@@ -23,7 +23,10 @@ export default {
 .left-side-bar {
   width: 300px;
   min-width: 300px;
-  position: fixed;
+  /*position: fixed;*/
+  position: relative;
+  overflow-y: auto;
+  height: 100%;
 }
 .left-main-menu {
 }

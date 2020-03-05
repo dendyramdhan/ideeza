@@ -1,23 +1,19 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex builder-panel main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu/>
+  <div class="flex builder-panel main-panel">
     <!-- Main Contents -->
     <div class="flex-grow lg:p-10">
       <div class="main-contents lg:flex p-2 lg:p-5 xl:p-20 bg-white shadow-md">
         <div class="left-panel">
           <img class="w-full" src="https://i.pravatar.cc/400?img=12" alt="">
-
           <div class="mt-10 mb-5 semi-border  relative">
             <span class="font-semibold text-gray-500 pr-3 bg-white">SOCIAL MEDIA</span>
           </div>
           <div class="">
-            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'facebook-square']"/>
-            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'linkedin']"/>
-            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'behance-square']"/>
-            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'dribbble-square']"/>
+            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'facebook-square']" />
+            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'linkedin']" />
+            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'behance-square']" />
+            <font-awesome-icon class="mr-2 h-6 text-gray-500 text-4xl hover:text-gray-800 cursor-pointer" :icon="['fab', 'dribbble-square']" />
           </div>
-
           <div class="mt-10 mb-5 semi-border  relative">
             <span class="font-semibold text-gray-500 pr-3 bg-white">SKILLS</span>
           </div>
@@ -50,7 +46,7 @@
                 <span class="block font-semibold text-xl text-ideeza-dark">Product Designer</span>
               </div>
               <div class="lg:ml-10 text-gray-500 font-semibold text-xl">
-                <font-awesome-icon class="mr-3 h-6" :icon="['fas', 'map-marker-alt']"/>
+                <font-awesome-icon class="mr-3 h-6" :icon="['fas', 'map-marker-alt']" />
                 New york, NY
               </div>
             </div>
@@ -71,11 +67,12 @@
           </div>
           <div class="lg:mt-20 lg:flex items-center">
             <div class=" flex items-center cursor-pointer text-gray-600 text-xl hover:text-gray-800 font-semibold">
-              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'envelope']"/>
+              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'envelope']" />
               <span>Send message</span>
             </div>
             <div class="lg:mx-10">
-              <button class="btn btn-normal btn-text-bold text-gray-600 px-10 py-4"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'check']"/> Contacts</button>
+              <button class="btn btn-normal btn-text-bold text-gray-600 px-10 py-4">
+                <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'check']" /> Contacts</button>
             </div>
             <div class="lg:mx-10 hidden">
               <button class="btn btn-normal btn-text-bold text-gray-600 px-10 py-4">Add to Contacts</button>
@@ -84,45 +81,43 @@
               <button class="btn btn-normal btn-text-bold text-gray-600 px-10 py-4">Send Agency Invitation</button>
             </div>
           </div>
-
           <!--Tabs-->
           <div class="tabs-container z-10 relative flex lg:mt-20">
-            <div @click="tabItem='timeline'" class="tab-item" :class="{active: tabItem === 'timeline', 'border-bot': tabItem !== 'timeline'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'eye']"/> Timeline</div>
-            <div @click="tabItem='about'" class="tab-item" :class="{active: tabItem === 'about', 'border-bot': tabItem !== 'about'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'user']"/> About</div>
-            <div @click="tabItem='projects'" class="tab-item" :class="{active: tabItem === 'projects', 'border-bot': tabItem !== 'projects'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'lightbulb']"/> Projects</div>
-            <div @click="tabItem='reviews'" class="tab-item" :class="{active: tabItem === 'reviews', 'border-bot': tabItem !== 'reviews'}"><font-awesome-icon class="mr-3 h-5" :icon="['fas', 'star']"/> Reviews</div>
+            <div @click="tabItem='timeline'" class="tab-item" :class="{active: tabItem === 'timeline', 'border-bot': tabItem !== 'timeline'}">
+              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'eye']" /> Timeline</div>
+            <div @click="tabItem='about'" class="tab-item" :class="{active: tabItem === 'about', 'border-bot': tabItem !== 'about'}">
+              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'user']" /> About</div>
+            <div @click="tabItem='projects'" class="tab-item" :class="{active: tabItem === 'projects', 'border-bot': tabItem !== 'projects'}">
+              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'lightbulb']" /> Projects</div>
+            <div @click="tabItem='reviews'" class="tab-item" :class="{active: tabItem === 'reviews', 'border-bot': tabItem !== 'reviews'}">
+              <font-awesome-icon class="mr-3 h-5" :icon="['fas', 'star']" /> Reviews</div>
           </div>
           <!--Time line-->
           <div v-if="tabItem === 'timeline'" class="mt-5">
             <!--New Feed-->
             <div class="mb-10">
-
               <div class="flex-grow bg-white border border-solid border-gray-700 p-5">
                 <div class="text-ideeza font-semibold text-lg mb-5">
-                  <font-awesome-icon class="mr-1 h-4 inline-block" :icon="['fas', 'pen']"/>
+                  <font-awesome-icon class="mr-1 h-4 inline-block" :icon="['fas', 'pen']" />
                   Share Project
                 </div>
                 <div class="bg-gray-200 py-5 px-3 flex justify-center items-center">
                   <div class="flex-grow">
-                    <input class="w-full px-1 bg-gray-200 text-lg text-gray-600 font-semibold outline-none" placeholder="Lorem ipsum dolores sit ?" >
+                    <input class="w-full px-1 bg-gray-200 text-lg text-gray-600 font-semibold outline-none" placeholder="Lorem ipsum dolores sit ?">
                   </div>
                   <div>
-                    <font-awesome-icon class="mr-1 h-4 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'paperclip']"/>
-                    <font-awesome-icon class="mr-1 h-4 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'camera']"/>
+                    <font-awesome-icon class="mr-1 h-4 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'paperclip']" />
+                    <font-awesome-icon class="mr-1 h-4 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'camera']" />
                   </div>
-
                 </div>
               </div>
             </div>
-
-
             <div class="flex mb-10 ">
-
               <div class="flex-grow bg-white border border-solid border-gray-700 p-5">
                 <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between">
                   <div>John Doe <span class="font-normal">likes a project</span> • <span class="font-normal text-xs">2 hours ago</span></div>
                   <div>
-                    <font-awesome-icon class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
+                    <font-awesome-icon class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
                   </div>
                 </div>
                 <div class="bg-gray-200">
@@ -135,14 +130,12 @@
                 </div>
               </div>
             </div>
-
             <div class="flex mb-10">
-
               <div class="flex-grow bg-white border border-solid border-gray-700 py-5">
                 <div class="text-gray-600 font-semibold text-lg mb-5 flex justify-between mx-5">
                   <div>Sarah Doe <span class="font-normal">add a new project</span> <span class="text-gray-800">Retro Headphones</span> • <span class="font-normal text-xs">3 weeks ago</span></div>
                   <div>
-                    <font-awesome-icon class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'ellipsis-h']"/>
+                    <font-awesome-icon class="mr-1 h-6 text-lg inline-block text-gray-500 hover:text-gray-600 cursor-pointer" :icon="['fas', 'ellipsis-h']" />
                   </div>
                 </div>
                 <div class="bg-gray-200 mx-5">
@@ -157,18 +150,16 @@
                   <button class="btn pill-button px-3 lg:px-6 mr-1 lg:mr-3">Share</button>
                   <button class="btn pill-button px-3 lg:px-6 mr-1 lg:mr-3">Comment</button>
                 </div>
-
                 <div class="text-gray-600 text-lg border-t border-b border-solid border-gray-300 py-5 px-5">
                   <span class="font-semibold">You</span> and <span class="font-semibold">35 others</span> like this
                 </div>
-
                 <!--Comments-->
                 <div class="border-b border-solid border-gray-300 py-5 px-5">
                   <div class="flex">
                     <div class="mr-10 w-16">
                       <img class="feed-comment-avatar rounded-full" src="https://randomuser.me/api/portraits/men/15.jpg" alt="">
                     </div>
-                    <div >
+                    <div>
                       <div class="text-gray-600 text-lg">
                         <span class="mr-10 inline-block font-semibold">William Doe</span> Great product, love the design and function of it,
                         <br>
@@ -180,16 +171,13 @@
                     </div>
                   </div>
                 </div>
-
                 <!--Write Comments-->
                 <div class="mt-10 mx-5 bg-gray-200 p-10">
                   <input class="bg-gray-200 text-gray-600 text-semibold text-lg outline-none" placeholder="Write your comment...">
                 </div>
-
               </div>
             </div>
           </div>
-
           <!--About-->
           <div class="mt-5" v-if="tabItem === 'about'">
             <h1 class="text-gray-500 font-semibold txt-xl my-10">CONTACT INFORMATION</h1>
@@ -209,7 +197,6 @@
               <div class="heading-contact">Website:</div>
               <div class="text-ideeza-dark">www.johndoe.com</div>
             </div>
-
             <h1 class="text-gray-500 font-semibold txt-xl my-10">BASIC INFORMATION</h1>
             <div class="flex mb-5 font-semibold text-lg">
               <div class="heading-contact">Birthday:</div>
@@ -220,14 +207,12 @@
               <div class="">Male</div>
             </div>
           </div>
-
           <!--Projects-->
           <div class="mt-5 flex flex-wrap" v-if="tabItem === 'projects'">
             <img class="project-image" src="~/static/images/dron-8.png" alt="">
             <img class="project-image" src="~/static/images/dron-8.png" alt="">
             <img class="project-image" src="~/static/images/dron-8.png" alt="">
           </div>
-
           <!--Reviews-->
           <div class="mt-5" v-if="tabItem === 'reviews'">
             <div class="mb-10 mt-5">
@@ -237,10 +222,9 @@
                   <div class=""><span class="font-semibold text-ideeza-dark inline-block mr-5">Jane Doe</span> <span class="font-sm text-gray-500">Reviewed 30 days ago</span></div>
                 </div>
                 <div class="flex items-center text-gray-500 text-sm hover:text-gray-800 cursor-pointer">
-                  <font-awesome-icon class="mr-2 h-4" :icon="['fas', 'flag']"/>
+                  <font-awesome-icon class="mr-2 h-4" :icon="['fas', 'flag']" />
                   Report
                 </div>
-
               </div>
               <div class="mt-5 border rounded-lg border-solid border-gray-500 p-5 text-sm">
                 <div class="flex justify-between">
@@ -258,7 +242,6 @@
                 </p>
               </div>
             </div>
-
             <div class="mb-10 mt-5">
               <div class="flex justify-between items-center w-full">
                 <div class="flex items-center">
@@ -266,10 +249,9 @@
                   <div class=""><span class="font-semibold text-ideeza-dark inline-block mr-5">Shane Doe</span> <span class="font-sm text-gray-500">Reviewed 30 days ago</span></div>
                 </div>
                 <div class="flex items-center text-gray-500 text-sm hover:text-gray-800 cursor-pointer">
-                  <font-awesome-icon class="mr-2 h-4" :icon="['fas', 'flag']"/>
+                  <font-awesome-icon class="mr-2 h-4" :icon="['fas', 'flag']" />
                   Report
                 </div>
-
               </div>
               <div class="mt-5 border rounded-lg border-solid border-gray-500 p-5 text-sm">
                 <div class="flex justify-between">
@@ -293,81 +275,88 @@
     </div>
   </div>
 </template>
-
 <script>
-  import LeftMenu from '~/components/technician/common-left-side-menu.vue'
-    export default {
-      layout: 'technician',
-      name: "profile-index",
-      components: {
-        LeftMenu,
-      },
-      data: function() {
-        return {
-          tabItem: 'timeline'
-        }
-      },
-      computed: {
-        leftMenu () {
-          return this.$store.state.usermenu.openLeftMenu;
-        }
-      }
+export default {
+  name: "profile-index",
+  data: function() {
+    return {
+      tabItem: 'timeline'
     }
+  },
+}
+
 </script>
-
 <style scoped>
+.profile-panel {
+  width: 100%;
+  max-width: 1533px;
+}
 
-  .profile-panel{
-    width: 100%;
-    max-width: 1533px;
-  }
-  .left-panel{
-    width: 100%;
-  }
-  .semi-border{
-    @apply z-10;
-  }
+.left-panel {
+  width: 100%;
+}
 
-  .semi-border:before {
-    @apply border-t-4 border-solid border-gray-200;
-    content:"";
-    margin: 0 auto; /* this centers the line to the full width specified */
-    position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
-    left: 0; right: 0; bottom: 4px;
-    z-index: -1;
+.semi-border {
+  @apply z-10;
+}
+
+.semi-border:before {
+  @apply border-t-4 border-solid border-gray-200;
+  content: "";
+  margin: 0 auto;
+  /* this centers the line to the full width specified */
+  position: absolute;
+  /* positioning must be absolute here, and relative positioning must be applied to the parent */
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  z-index: -1;
+}
+
+.rating-star {
+  @apply inline ml-3;
+  width: 28px;
+  height: 28px;
+}
+
+.tab-item {
+  @apply cursor-pointer z-50 bg-white px-5 py-5 font-semibold text-xl text-gray-500 flex items-center;
+}
+
+.tab-item.border-bot {
+  border-bottom: 4px solid #edf2f7;
+}
+
+.tab-item.active {
+  @apply border-t-4 border-l-4 border-r-4 border-solid border-gray-200 text-ideeza;
+}
+
+.tabs-container:before {
+  @apply border-t-4 border-solid border-gray-200;
+  content: "";
+  margin: 0 auto;
+  /* this centers the line to the full width specified */
+  position: absolute;
+  /* positioning must be absolute here, and relative positioning must be applied to the parent */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.heading-contact {
+  width: 150px;
+}
+
+.project-image {
+  @apply mr-2 mb-2;
+  max-width: 285px;
+}
+
+@screen lg {
+  .left-panel {
+    max-width: 366px;
   }
-  .rating-star{
-    @apply inline ml-3;
-    width: 28px;
-    height: 28px;
-  }
-  .tab-item{
-    @apply cursor-pointer z-50 bg-white px-5 py-5 font-semibold text-xl text-gray-500 flex items-center;
-  }
-  .tab-item.border-bot{
-    border-bottom: 4px solid #edf2f7;
-  }
-  .tab-item.active{
-    @apply border-t-4 border-l-4 border-r-4 border-solid border-gray-200 text-ideeza;
-  }
-  .tabs-container:before {
-    @apply border-t-4 border-solid border-gray-200;
-    content:"";
-    margin: 0 auto; /* this centers the line to the full width specified */
-    position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
-    left: 0; right: 0; bottom: 0;
-    z-index: -1;
-  }
-  .heading-contact{
-    width: 150px;
-  }
-  .project-image{
-    @apply mr-2 mb-2;
-    max-width: 285px;
-  }
-  @screen lg{
-    .left-panel{
-      max-width: 366px;
-    }
-  }
+}
+
 </style>

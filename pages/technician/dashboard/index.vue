@@ -1,7 +1,5 @@
 <template>
-  <div :class="{'hide-left-bar':!leftMenu}" class="flex main-panel">
-    <!--  Left Side Bar  -->
-    <LeftMenu />
+  <div>
     <!-- Main Contents -->
     <div class="flex-grow mb-20">
       <div class="main-contents">
@@ -17,7 +15,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/opened-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2337.png" class="w-12 object-center object-right mr-5" alt />
               </div>
             </div>
           </div>
@@ -28,7 +26,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/un-opened-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2338.png" class="w-12 object-center object-right mr-5" alt />
               </div>
             </div>
           </div>
@@ -39,7 +37,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/on-hold-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2339.png" class="w-12 object-center object-right mr-5" alt />
               </div>
             </div>
           </div>
@@ -50,7 +48,7 @@
                 <div class="text-gray-800 text-bold text-xl lg:text-3xl">
                   <div>56</div>
                 </div>
-                <img src="~/static/images/finished-tickets.png" class="w-12 object-center object-right mr-5" alt />
+                <img src="~/static/images/icon_ref_2340.png" class="w-12 object-center object-right mr-5" alt /> 
               </div>
             </div>
           </div>
@@ -414,18 +412,14 @@
   </div>
 </template>
 <script>
-import LeftMenu from "~/components/technician/common-left-side-menu.vue";
-
 import articles from "~/json/messageCenter.json";
 import projects from "~/data/TechnicianProjectApi.json";
 import tasklists from "~/json/tasklist.json";
 import apiServiceWithToken from "~/apiService/have_token.js";
 import DetailTask from "~/components/technician/management/detail-task.vue";
 export default {
-  layout: "technician",
   name: "dashboard-index",
   components: {
-    LeftMenu,
     DetailTask
   },
   data: function() {
@@ -526,11 +520,6 @@ export default {
     this.articles.map(item => {
       this.articleArray.push(item);
     });
-  },
-  computed: {
-    leftMenu() {
-      return this.$store.state.usermenu.openLeftMenu;
-    }
   },
   mounted() {
     let firstname = window.$nuxt.$cookies.get("firstname");
