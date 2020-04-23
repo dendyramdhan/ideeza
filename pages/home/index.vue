@@ -2,7 +2,8 @@
     <div class="landingBanner-bg">
         <top-header />
         <nuxt />
-        <div class="w-full pb-32">
+        <div class="w-full pb-32" id="landing-ouy">
+            <h1 id="element">Hi. I'm element</h1>
             <div class="container lg m-auto text-white px-5 py-8">
                 <div class="pb-5 mb-5 px-5 md:w-8/12 w-full">
                     <h2 class="md:text-3xl sm:text-2xl mt-5 font-bold text-gray-700">
@@ -112,6 +113,7 @@
                 </div>
             </div>
         </div>
+        <a href="#" v-scroll-to="'#element'">Scroll</a>
         <div class="footer-bg bg-cover clearfix mt-24">
             <div class="curve-bg-gradient-new pt-8 clearfix">
                 <div class="container lg m-auto text-white">

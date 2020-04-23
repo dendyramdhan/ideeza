@@ -122,6 +122,7 @@ export default {
    */
   modules: ['@nuxtjs/pwa',
     '@nuxtjs/device',
+    'vue-scrollto/nuxt',
     ['nuxt-fontawesome',
       {
         imports: [{
